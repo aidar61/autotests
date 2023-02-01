@@ -3,18 +3,22 @@ package com.ts.common.request;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ts.common.application.controllers.AuthToken;
+import com.github.dockerjava.core.MediaType;
+import com.ts.common.application.AuthToken;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.internal.mapping.Jackson2Mapper;
 import io.restassured.response.Response;
+import io.restassured.specification.ProxySpecification;
 import io.restassured.specification.RequestSpecification;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.specification.ProxySpecification.host;
 
 /**
  * @author Aidar Askeev
@@ -32,24 +36,19 @@ public abstract class ApiRequest {
     protected Map<String, String> headers;
     protected RequestSpecification requestSpec;
     protected Response response;
-    public AuthToken authToken;
+    protected AuthToken authToken;
 
-
-    public ApiRequest(String url, Map<String, String> headers, AuthToken authToken) {
+    public ApiRequest(String url, Map<String, String> headers) {
+        ProxySpecification spec = host("http://tsdev4.dev.colvir.ru/TrackStudio/rest")
+                .withPort(8080);
         this.objectMapper = initObjectMapper();
         this.headers = headers;
         this.url = url;
-        this.authToken = authToken;
-//        PreemptiveBasicAuthScheme authScheme = new PreemptiveBasicAuthScheme();
-//        authScheme.setUserName(this.authToken.getUser());
-//        authScheme.setPassword(this.authToken.getPassword());
-        this.requestSpec = new RequestSpecBuilder()
-//                .setAuth(authScheme)
+        requestSpec = new RequestSpecBuilder()
                 .setBaseUri(url)
                 .addHeaders(headers)
                 .setRelaxedHTTPSValidation()
                 .build();
-        this.requestSpec.log();
     }
 
     private static Jackson2Mapper initObjectMapper() {
@@ -89,11 +88,7 @@ public abstract class ApiRequest {
 
     public Response get(String endpoint) {
         log.info("performed GET {}", endpoint);
-        log.info("User is {}", authToken.getUser());
         this.response = given()
-                .auth()
-                .preemptive()
-                .basic(authToken.getUser(), authToken.getPassword())
                 .spec(requestSpec)
                 .get(endpoint);
         logResponse();
@@ -103,7 +98,7 @@ public abstract class ApiRequest {
     public Response delete(String endpoint) {
         log.info("performed DELETE {}", endpoint);
         this.response = given()
-                .spec(this.requestSpec)
+                .spec(requestSpec)
                 .delete(endpoint);
         logResponse();
         return this.response;
@@ -113,7 +108,7 @@ public abstract class ApiRequest {
         log.info("performed POST {}", endpoint);
         log.info("Body is {}", request);
         this.response = given()
-                .spec(this.requestSpec)
+                .spec(requestSpec)
                 .body(request, objectMapper)
                 .post(endpoint);
         logResponse();
@@ -123,11 +118,7 @@ public abstract class ApiRequest {
     public Response post(String endpoint, String body) {
         log.info("performed POST {}", endpoint);
         log.info("Body is {}", body);
-        log.info("User is {}", authToken.getUser());
         this.response = given()
-                .auth()
-                .preemptive()
-                .basic(authToken.getUser(), authToken.getPassword())
                 .spec(requestSpec)
                 .body(body)
                 .post(endpoint);
@@ -135,11 +126,21 @@ public abstract class ApiRequest {
         return this.response;
     }
 
+    public Response postMultipart(String endpoint, File file) {
+        log.info("performed multipart POST {}", endpoint);
+        this.response = given()
+                .multiPart(file)
+                .spec(requestSpec)
+                .post(endpoint);
+        return this.response;
+    }
+
     public Response put(String endpoint, Object body) {
         log.info("performed PUT {}", endpoint);
         log.info("Body is {}", body);
         this.response = given()
-                .spec(this.requestSpec)
+                .spec(requestSpec)
+                //TODO
                 .body(body, objectMapper)
                 .put(endpoint);
         logResponse();
@@ -150,7 +151,7 @@ public abstract class ApiRequest {
         log.info("performed PUT {}", endpoint);
         log.info("Body is {}", body);
         this.response = given()
-                .spec(this.requestSpec)
+                .spec(requestSpec)
                 .body(body)
                 .put(endpoint);
         logResponse();
@@ -161,7 +162,7 @@ public abstract class ApiRequest {
         log.info("performed PATCH {}", endpoint);
         log.info("Body is {}", request);
         this.response = given()
-                .spec(this.requestSpec)
+                .spec(requestSpec)
                 .body(request)
                 .patch(endpoint);
         return this.response;
@@ -179,6 +180,4 @@ public abstract class ApiRequest {
             return null;
         }
     }
-
-
 }
