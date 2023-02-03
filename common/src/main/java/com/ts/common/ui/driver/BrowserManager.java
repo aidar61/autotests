@@ -1,6 +1,5 @@
 package com.ts.common.ui.driver;
 
-import lombok.Getter;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -10,7 +9,6 @@ import java.util.Set;
 
 public class BrowserManager {
 
-    @Getter
     protected WebDriver driver;
 
     public BrowserManager() {
@@ -26,12 +24,22 @@ public class BrowserManager {
     }
 
     public void navigateTo(String urlPart) {
-
+        getCookies();
+        setCookies();
         driver.navigate().to(urlPart);
+    }
+
+    public Cookie getCookies() {
+        return driver.manage().getCookieNamed("JSESSIONID");
     }
 
     public Set<Cookie> getAllCookies() {
         return driver.manage().getCookies();
+    }
+
+
+    public void setCookies() {
+        driver.manage().addCookie(getCookies());
     }
 
     public void clearCookies() {

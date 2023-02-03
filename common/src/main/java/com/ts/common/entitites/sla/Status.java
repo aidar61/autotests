@@ -1,7 +1,6 @@
 package com.ts.common.entitites.sla;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ts.common.entitites.BaseEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -17,6 +16,14 @@ import lombok.extern.slf4j.Slf4j;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Udfs extends BaseEntity {
-    UdfSdModule module;
+public class Status {
+    String id;
+    String color;
+    String name;
+    String workflowId;
+    boolean defaultStart;
+    String image;
+    int order;
+    boolean start;
+    boolean finish;
 }
