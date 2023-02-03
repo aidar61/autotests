@@ -17,6 +17,12 @@ import lombok.extern.slf4j.Slf4j;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Udfs extends BaseEntity {
-    UdfSdModule module;
+public class Category extends BaseEntity {
+    String id;
+    String name;
+    String workFlowId;
+    String icon;
+    boolean handlerRequired;
+    boolean groupHandlerAllowed;
+    boolean canManage;
 }

@@ -5,18 +5,18 @@ import com.ts.common.entitites.BaseEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 @Builder
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Udfs extends BaseEntity {
-    UdfSdModule module;
+public class SlaTask extends BaseEntity {
+    Category category;
+    String name;
+    String description;
+    Udfs udfs;
 }
