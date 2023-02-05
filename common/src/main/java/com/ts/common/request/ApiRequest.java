@@ -39,8 +39,6 @@ public abstract class ApiRequest {
     protected AuthToken authToken;
 
     public ApiRequest(String url, Map<String, String> headers) {
-        ProxySpecification spec = host("http://tsdev4.dev.colvir.ru/TrackStudio/rest")
-                .withPort(8080);
         this.objectMapper = initObjectMapper();
         this.headers = headers;
         this.url = url;

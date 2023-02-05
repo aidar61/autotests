@@ -24,22 +24,12 @@ public class BrowserManager {
     }
 
     public void navigateTo(String urlPart) {
-        getCookies();
-        setCookies();
-        driver.navigate().to(urlPart);
-    }
 
-    public Cookie getCookies() {
-        return driver.manage().getCookieNamed("JSESSIONID");
+        driver.navigate().to(urlPart);
     }
 
     public Set<Cookie> getAllCookies() {
         return driver.manage().getCookies();
-    }
-
-
-    public void setCookies() {
-        driver.manage().addCookie(getCookies());
     }
 
     public void clearCookies() {

@@ -1,0 +1,43 @@
+{
+  "udfid": "UDF_BDKU_CONFIGURATION",
+  "type": "TASK",
+  "taskValue": [
+    {
+      "id": "818181df581d378801581f74aad8098a",
+      "abudget": 0,
+      "actualBudget": 0,
+      "name": "МТБанк",
+      "number": "589152",
+      "shortname": "MTB",
+      "category": {
+        "id": "CAT_BDKU_INSTALLATION",
+        "name": "Инсталляция",
+        "workflowId": "PROC_BDKU_INSTALLATION",
+        "icon": "default_task.png",
+        "handlerRequired": false,
+        "groupHandlerAllowed": false,
+        "canManage": false
+      },
+      "status": {
+        "id": "STATUS_INSTALLATION_INSTALL",
+        "color": "#0000FF",
+        "name": "Внедрение",
+        "workflowId": "PROC_BDKU_INSTALLATION",
+        "defaultStart": true,
+        "image": "startstate.png",
+        "order": 10,
+        "start": true,
+        "finish": false
+      },
+      "childrenCount": 0,
+      "hasChildren": false,
+      "messageCount": 0,
+      "hasAttachments": false,
+      "onSight": false,
+      "udfs": {},
+      "sortMessageAsc": false,
+      "selectable": true,
+      "canEditHandler": false
+    }
+  ]
+}
