@@ -1,11 +1,14 @@
-package com.ts.common.entitites.sla;
+package com.ts.common.entitites.commonEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.BaseEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
 
 @Slf4j
 @Builder
@@ -17,12 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Category extends BaseEntity {
-    String id;
-    String name;
-    String workFlowId;
-    String icon;
-    boolean handlerRequired;
-    boolean groupHandlerAllowed;
-    boolean canManage;
+public class UdfSdModule extends BaseEntity {
+    @JsonProperty("udfid")
+    String udfId;
+    String type;
+    List<TaskValue> taskValue;
 }

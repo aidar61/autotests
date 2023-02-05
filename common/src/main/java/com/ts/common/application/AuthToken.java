@@ -7,7 +7,6 @@ import lombok.Data;
  */
 @Data
 public class AuthToken {
-    private String token;
-    private String expirationTime;
-    private String refreshToken;
+    private String user;
+    private String password;
 }

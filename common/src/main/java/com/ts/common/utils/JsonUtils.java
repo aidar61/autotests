@@ -11,12 +11,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
-
 @Slf4j
 public class JsonUtils {
     private final static ObjectMapper objectMapper = new ObjectMapper();
 
-    public static <T extends BaseEntity> T convertJsonToObject(File json, Class<T> tClass) {
+    public static <T extends BaseEntity> T convertJsonToObject(File json, Class<T> tClass){
         try {
             return objectMapper.readValue(json, tClass);
         } catch (IOException e) {
@@ -24,7 +23,6 @@ public class JsonUtils {
         }
         return null;
     }
-
     public static String convertToString(Object obj) {
         ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json = StringUtils.EMPTY;
@@ -36,7 +34,6 @@ public class JsonUtils {
         }
         return json;
     }
-
     public static ObjectNode convertToJson(String body) {
         try {
             return (ObjectNode) objectMapper.readTree(body);
@@ -45,7 +42,6 @@ public class JsonUtils {
         }
         return null;
     }
-
     public static <T> T deserialize(Response response, Class<T> clazz) {
         try {
             return response
@@ -57,14 +53,5 @@ public class JsonUtils {
             log.error("Can not parse object", e);
             return null;
         }
-    }
-
-    public static <T> T deserialize(String json, Class<T> tClass) {
-        try {
-            return objectMapper.readValue(json, tClass);
-        } catch (IOException e) {
-            log.error("Can not convert json to OBJECT: ", e);
-        }
-        return null;
     }
 }

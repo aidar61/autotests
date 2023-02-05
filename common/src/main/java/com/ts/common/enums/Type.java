@@ -6,7 +6,5 @@ public enum Type {
     MULTILIST,
     TASK,
     STRING,
-    DOUBLE,
-    MEMO,
-    DATE
+    DOUBLE
 }
