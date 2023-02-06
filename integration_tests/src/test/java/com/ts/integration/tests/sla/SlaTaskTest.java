@@ -15,6 +15,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         slaHelpController = apiController.getSlaHelpController();
+        System.out.println(slaHelpController);
     }
 
     @BeforeMethod(alwaysRun = true)
