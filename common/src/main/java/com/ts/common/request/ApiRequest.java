@@ -45,7 +45,6 @@ public abstract class ApiRequest {
         requestSpec = new RequestSpecBuilder()
                 .setBaseUri(url)
                 .addHeaders(headers)
-                .setRelaxedHTTPSValidation()
                 .build();
     }
 
@@ -75,7 +74,7 @@ public abstract class ApiRequest {
 
     public ApiRequest logResponse() {
         log.warn("Response is:");
-        log.warn(getResponse().getBody().asString());
+        log.warn(getResponse().getBody().asPrettyString());
         log.warn(String.valueOf(getResponse().getStatusCode()));
         return this;
     }

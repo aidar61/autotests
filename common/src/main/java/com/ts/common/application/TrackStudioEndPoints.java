@@ -2,12 +2,10 @@ package com.ts.common.application;
 
 import org.apache.commons.lang3.StringUtils;
 
-import javax.ws.rs.core.MediaType;
 import java.util.HashMap;
 import java.util.Map;
 
-
-import static com.ts.common.config.AppConfigProvider.BASE_URL;
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static org.apache.http.HttpHeaders.*;
 
 /**
@@ -16,12 +14,12 @@ import static org.apache.http.HttpHeaders.*;
 public class TrackStudioEndPoints {
 
     public static final Map<String, String> HEADERS_BASE_CONTROLLER = new HashMap<>() {{
-        put(CONTENT_TYPE, MediaType.APPLICATION_JSON);
-        put(HOST, getDomainName(BASE_URL));
+        put(AUTHORIZATION, "Basic cm9vdDpwYXNzd29yZA==");
+        put(ACCEPT, "*/*");
     }};
 
     public static final Map<String, String> HEADERS_RESPONSE = new HashMap<>() {{
-        put(CONTENT_TYPE, MediaType.APPLICATION_JSON);
+        put(CONTENT_TYPE, APPLICATION_JSON);
         put(DATE, StringUtils.EMPTY);
         put(VARY, StringUtils.EMPTY);
     }};
