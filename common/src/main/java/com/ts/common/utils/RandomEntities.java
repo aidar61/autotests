@@ -1,11 +1,14 @@
 package com.ts.common.utils;
 
 import com.ts.common.entitites.commonEntities.*;
+import com.ts.common.entitites.commonEntities.udfs.UdfSdHelpkoef;
 import com.ts.common.entitites.commonEntities.udfs.UdfSdModule;
+import com.ts.common.entitites.commonEntities.udfs.UdfSdTrustedWatcher;
 import com.ts.common.entitites.commonEntities.udfs.UdfsBdkuConfiguration;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.Categories;
 import com.ts.common.enums.Parents;
+import org.testng.annotations.Test;
 
 import java.io.File;
 
@@ -28,6 +31,7 @@ public class RandomEntities {
                 .bdku(getBdkuThrowsJson())
                 .build();
     }
+
     public static Udfs getFullUdfs() {
         return Udfs.builder()
                 .module(getUdfsModuleThrowsJson())
@@ -43,6 +47,12 @@ public class RandomEntities {
         return JsonUtils.convertJsonToObject(bdkuJsonFile, UdfsBdkuConfiguration.class);
     }
 
+    public static UdfSdTrustedWatcher getUdfSdTrustedWatcher(com.ts.common.enums.Udfs udfs) {
+        return UdfSdTrustedWatcher.builder()
+                .udfId(udfs.UDF_SD_TRUSTEDWATCHER.udfId)
+                .type(udfs.)
+    }
+
     public static Parent getParent(Parents parent) {
         return Parent.builder()
                 .id(parent.id)
@@ -50,8 +60,8 @@ public class RandomEntities {
                 .build();
     }
 
-    public static Category getCategory(Categories category) {
-        return Category.builder()
+    public static CategoryId getCategory(Categories category) {
+        return CategoryId.builder()
                 .id(category.id)
                 .build();
     }
@@ -65,4 +75,11 @@ public class RandomEntities {
                 .udfs(getUdfsWithAkkModuleAndBdkuMTBank())
                 .build();
     }
+
+    @Test
+    public void test() {
+        com.ts.common.enums.Udfs[] values = com.ts.common.enums.Udfs.values();
+
+    }
+
 }
