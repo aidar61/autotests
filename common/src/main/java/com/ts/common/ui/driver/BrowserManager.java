@@ -1,5 +1,6 @@
 package com.ts.common.ui.driver;
 
+import lombok.Getter;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,6 +10,7 @@ import java.util.Set;
 
 public class BrowserManager {
 
+    @Getter
     protected WebDriver driver;
 
     public BrowserManager() {

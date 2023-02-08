@@ -1,9 +1,10 @@
-package com.ts.common.entitites.sla;
+package com.ts.common.controllers.sla;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ts.common.entitites.commonEntities.Category;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.Udfs;
+import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.request.RequestBody;
 import lombok.*;
 import lombok.experimental.FieldDefaults;

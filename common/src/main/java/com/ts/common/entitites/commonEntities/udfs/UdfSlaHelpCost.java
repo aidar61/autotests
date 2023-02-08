@@ -1,20 +1,22 @@
-package com.ts.common.entitites.sla;
+package com.ts.common.entitites.commonEntities.udfs;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ts.common.entitites.BaseEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Builder
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 @Jacksonized
-@JsonIgnoreProperties(ignoreUnknown = false)
+@JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CreateSlaResponseBody extends BaseEntity {
-    String number;
-    String id;
+public class UdfSlaHelpCost {
+    String udfId;
+    String type;
 }

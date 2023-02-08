@@ -1,6 +1,8 @@
 package com.ts.common.utils;
 
 import com.ts.common.entitites.commonEntities.*;
+import com.ts.common.entitites.commonEntities.udfs.UdfSdModule;
+import com.ts.common.entitites.commonEntities.udfs.UdfsBdkuConfiguration;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.Categories;
 import com.ts.common.enums.Parents;
@@ -21,6 +23,12 @@ public class RandomEntities {
     }
 
     public static Udfs getUdfsWithAkkModuleAndBdkuMTBank() {
+        return Udfs.builder()
+                .module(getUdfsModuleThrowsJson())
+                .bdku(getBdkuThrowsJson())
+                .build();
+    }
+    public static Udfs getFullUdfs() {
         return Udfs.builder()
                 .module(getUdfsModuleThrowsJson())
                 .bdku(getBdkuThrowsJson())

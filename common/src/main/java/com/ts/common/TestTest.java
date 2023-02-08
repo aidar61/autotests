@@ -1,7 +1,7 @@
 package com.ts.common;
 
 import com.ts.common.application.TrackStudioApiControllers;
-import com.ts.common.services.SlaHelpController;
+import com.ts.common.controllers.sla.SlaHelpController;
 import com.ts.common.tests.AbstractBaseTest;
 
 public class TestTest extends AbstractBaseTest {

@@ -1,8 +1,7 @@
-package com.ts.common.entitites.commonEntities;
+package com.ts.common.entitites.commonEntities.udfs;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ts.common.entitites.BaseEntity;
+import com.ts.common.entitites.commonEntities.UserValue;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -20,9 +19,8 @@ import java.util.List;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UdfSdModule extends BaseEntity {
-    @JsonProperty("udfid")
+public class UdfSdTrustedWatcher {
     String udfId;
     String type;
-    List<TaskValue> taskValue;
+    List<UserValue> userValue;
 }

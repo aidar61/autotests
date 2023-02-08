@@ -1,6 +1,6 @@
 package com.ts.common.application;
 
-import com.ts.common.services.SlaHelpController;
+import com.ts.common.controllers.sla.SlaHelpController;
 import io.restassured.response.Response;
 import lombok.Getter;
 import lombok.Setter;
