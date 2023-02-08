@@ -2,7 +2,7 @@ package com.ts.integration.tests.sla;
 
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.entitites.sla.SlaTask;
-import com.ts.common.services.SlaHelpController;
+import com.ts.common.controllers.sla.SlaHelpController;
 import com.ts.common.utils.RandomEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;

@@ -1,8 +1,6 @@
-package com.ts.common.services;
+package com.ts.common.controllers.sla;
 
 import com.ts.common.application.AuthToken;
-import com.ts.common.entitites.sla.CreateSlaRequestBody;
-import com.ts.common.entitites.sla.CreateSlaResponseBody;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.request.ApiRequest;
 import com.ts.common.utils.JsonUtils;
