@@ -1,4 +1,4 @@
-package com.ts.common.entitites.sla;
+package com.ts.common.controllers.sla;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ts.common.entitites.BaseEntity;
