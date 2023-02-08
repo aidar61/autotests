@@ -16,7 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UdfSdHelpkoef extends BaseUdfs{
+public class UdfSdHelpkoef {
     String udfId;
     String type;
 }

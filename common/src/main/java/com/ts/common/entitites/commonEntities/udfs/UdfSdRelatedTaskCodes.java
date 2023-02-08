@@ -1,11 +1,13 @@
 package com.ts.common.entitites.commonEntities.udfs;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ts.common.entitites.commonEntities.List;
+import com.ts.common.entitites.commonEntities.ListValue;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 import lombok.extern.slf4j.Slf4j;
+
+import java.util.List;
 
 @Slf4j
 @Builder
@@ -17,8 +19,8 @@ import lombok.extern.slf4j.Slf4j;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UdfSdRelatedTaskCodes extends BaseUdfs{
+public class UdfSdRelatedTaskCodes {
     String udfId;
     String type;
-    List[] listValue;
+    List<ListValue> listValue;
 }
