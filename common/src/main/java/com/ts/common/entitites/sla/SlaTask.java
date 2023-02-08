@@ -1,8 +1,10 @@
 package com.ts.common.entitites.sla;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.Category;
+import com.ts.common.entitites.commonEntities.CategoryId;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.Udfs;
 import lombok.*;
@@ -21,7 +23,8 @@ import lombok.extern.jackson.Jacksonized;
 public class SlaTask extends BaseEntity {
     String id;
     String number;
-    Category category;
+    @JsonProperty("category")
+    CategoryId category;
     Parent parent;
     String name;
     String description;

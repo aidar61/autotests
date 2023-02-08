@@ -5,7 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbe61259-b4b8-4abe-802a-11c9fa449380" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/CategoryId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/CreateSlaRequestBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/CreateSlaRequestBody.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/ListValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/ListValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/UserValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/UserValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/sla/SlaTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/sla/SlaTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/RandomEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/RandomEntities.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,12 +49,12 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "jdk.selected.JAVA_MODULE": "11",
-    "project.structure.last.edited": "Project",
+    "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2505747"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="TestNG.RandomEntities.createUdfs">
     <configuration name="TestTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ts.common.TestTest" />
       <module name="common" />
@@ -60,8 +68,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RandomEntities.createUdfs" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.common.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.common.utils" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.common.utils.RandomEntities" />
+      <option name="METHOD_NAME" value="createUdfs" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.RandomEntities.createUdfs" />
         <item itemvalue="Application.TestTest" />
       </list>
     </recent_temporary>
