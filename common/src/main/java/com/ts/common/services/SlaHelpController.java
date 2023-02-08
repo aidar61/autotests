@@ -7,7 +7,6 @@ import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.request.ApiRequest;
 import com.ts.common.utils.JsonUtils;
 import io.restassured.response.Response;
-import org.testng.annotations.Test;
 
 import static com.ts.common.application.TrackStudioEndPoints.*;
 

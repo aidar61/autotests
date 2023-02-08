@@ -28,7 +28,19 @@ public class SlaTaskTest extends BaseIntegrationTest {
     @Test
     public void receiveTaskConsulTation() {
         slaHelpController.receiveTaskConsultation("1405500");
+        slaHelpController.createSlaTaskConsultation(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK);
+    }
+
+    @Test
+    public void createAndReceiveSlaConsultation() {
+        slaHelpController.createSlaTaskConsultation(slaTask);
+        ApiAsserts.assertThat(slaHelpController.getResponse())
+                .isCorrectResponseCode(HTTP_OK);
+        slaHelpController.receiveTaskConsultation(slaTask.getNumber());
+        ApiAsserts.assertThat(slaHelpController.getResponse())
+                .isCorrectResponseCode(HTTP_OK);
+        var obj = new Object();
     }
 }
