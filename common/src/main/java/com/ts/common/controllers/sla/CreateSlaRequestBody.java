@@ -1,7 +1,7 @@
 package com.ts.common.controllers.sla;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ts.common.entitites.commonEntities.Category;
+import com.ts.common.entitites.commonEntities.CategoryId;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.sla.SlaTask;
@@ -19,7 +19,7 @@ import lombok.extern.jackson.Jacksonized;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CreateSlaRequestBody extends RequestBody {
-    Category category;
+    CategoryId category;
     Parent parent;
     String name;
     String description;

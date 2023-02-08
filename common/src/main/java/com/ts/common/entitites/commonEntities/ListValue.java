@@ -13,7 +13,6 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
