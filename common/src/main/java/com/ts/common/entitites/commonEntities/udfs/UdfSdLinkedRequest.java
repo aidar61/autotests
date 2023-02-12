@@ -1,13 +1,11 @@
 package com.ts.common.entitites.commonEntities.udfs;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ts.common.entitites.commonEntities.TaskValue;
+import com.ts.common.entitites.commonEntities.Task;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.List;
 
 @Slf4j
 @Builder
@@ -22,5 +20,5 @@ import java.util.List;
 public class UdfSdLinkedRequest {
     String udfId;
     String type;
-    List<TaskValue> taskValue;
+    Task[] taskValue;
 }

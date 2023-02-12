@@ -22,5 +22,5 @@ import java.util.List;
 public class UdfSdFeatureGenuse {
     String udfId;
     String type;
-    List<ListValue> listValue;
+    ListValue[] listValue;
 }

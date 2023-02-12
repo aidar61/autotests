@@ -56,5 +56,4 @@ public class Udfs extends BaseEntity {
     UdfWorkTaskSourceType udfWorkTaskSourceType;
     @JsonProperty("UDF_REGPROJECT")
     UdfRegProject udfRegProject;
-
 }

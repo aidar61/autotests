@@ -3,7 +3,7 @@ package com.ts.common.entitites.commonEntities.udfs;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.BaseEntity;
-import com.ts.common.entitites.commonEntities.TaskValue;
+import com.ts.common.entitites.commonEntities.Task;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -25,5 +25,5 @@ public class UdfSdModule extends BaseEntity {
     @JsonProperty("udfid")
     String udfId;
     String type;
-    List<TaskValue> taskValue;
+    List<Task> taskValue;
 }

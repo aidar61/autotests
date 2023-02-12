@@ -7,8 +7,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-
 @Slf4j
 @Builder
 @Getter
@@ -22,5 +20,5 @@ import java.util.List;
 public class UdfWorkTaskSourceType {
     String udfId;
     String type;
-    List<ListValue> listValue;
+    ListValue[] listValue;
 }

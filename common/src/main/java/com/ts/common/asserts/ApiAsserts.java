@@ -2,14 +2,17 @@ package com.ts.common.asserts;
 
 import com.ts.common.application.TrackStudioHttpStatusCodes;
 import com.ts.common.request.ResponseBody;
+import com.ts.common.utils.JsonUtils;
 import io.restassured.response.Response;
 import org.assertj.core.api.Assertions;
 
+import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertTrue;
 
 public class ApiAsserts {
     private Response response;
     private ResponseBody responseBody;
+
     public ApiAsserts(Response response) {
         this.response = response;
     }
@@ -24,6 +27,13 @@ public class ApiAsserts {
         Assertions.assertThat(this.response.getStatusCode())
                 .isEqualTo(code.getValue())
                 .withFailMessage("Response code is incorrect. Expected: %s , Actual: %s", code.getValue(), this.response.getStatusCode());
+        return this;
+    }
+
+    public <T> ApiAsserts isParseableBody(Class<T> clazz) {
+        Object obj = JsonUtils.deserialize(response, clazz);
+        assertNotNull(obj, "Response body is not parseable");
+        this.responseBody = (ResponseBody) obj;
         return this;
     }
 }

@@ -1,10 +1,15 @@
 package com.ts.common.request;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.ts.common.annotations.Mandatory;
+import com.ts.common.annotations.TypeId;
 import com.ts.common.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -34,8 +39,37 @@ public abstract class RequestBody {
         return jsonNode.toString();
     }
 
-
-    public String convertToString() {
-        return JsonUtils.convertToString(this);
+    public List<String> receiveMandatoryFields() {
+        List<Field> fields = Arrays.asList(this.getClass().getDeclaredFields());
+        return fields.stream().filter(s -> s.isAnnotationPresent(Mandatory.class)).map(Field::getName).collect(Collectors.toList());
     }
+
+    public List<String> receiveOptionalFields() {
+        List<Field> fields = Arrays.asList(this.getClass().getDeclaredFields());
+        return fields.stream().filter(s -> !s.isAnnotationPresent(Mandatory.class)).map(Field::getName).collect(Collectors.toList());
+    }
+
+    private List<Field> receiveChangeableFields() {
+        List<Field> fields = Arrays.asList(this.getClass().getDeclaredFields());
+        return fields.stream().filter(f -> f.isAnnotationPresent(TypeId.class)).collect(Collectors.toList());
+    }
+
+    private List<String> receiveTypesFieldWithName(String annotValue) {
+        List<Field> changeableFields = receiveChangeableFields();
+        return changeableFields.stream().filter(cf -> cf.getAnnotation(TypeId.class).type().equals(annotValue)).map(Field::getName).collect(Collectors.toList());
+    }
+
+    public String removeOptionalAndTypeFieldWithName(String annotName) {
+        List<String> optionalFields = receiveOptionalFields();
+        List<String> typeFields = receiveTypesFieldWithName(annotName);
+        typeFields.addAll(optionalFields);
+        return removeFields(typeFields);
+    }
+
+    public String removeTypeFieldWithName(String annotName) {
+        List<String> typeFields = receiveTypesFieldWithName(annotName);
+        return removeFields(typeFields);
+    }
+
+
 }
