@@ -1,7 +1,6 @@
 package com.ts.common.controllers.sla;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.commonEntities.Category;
 import com.ts.common.entitites.commonEntities.Status;
 import com.ts.common.request.ResponseBody;
@@ -23,6 +22,5 @@ public class SlaResponseBody extends ResponseBody {
     String name;
     String number;
     Category category;
-    @JsonProperty("status")
-    Status finishStatus;
+    Status status;
 }

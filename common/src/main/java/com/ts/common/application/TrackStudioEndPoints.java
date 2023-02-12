@@ -1,21 +1,29 @@
 package com.ts.common.application;
 
+import com.ts.common.config.AppConfigProvider;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+import static javax.ws.rs.core.MediaType.WILDCARD;
 import static org.apache.http.HttpHeaders.*;
 
 /**
  * @author Aidar Askeev
  */
+@Slf4j
 public class TrackStudioEndPoints {
 
     public static final Map<String, String> HEADERS_BASE_CONTROLLER = new HashMap<>() {{
         put(AUTHORIZATION, "Basic cm9vdDpwYXNzd29yZA==");
-        put(ACCEPT, "*/*");
+        put(CONTENT_TYPE, APPLICATION_JSON);
+        put(CACHE_CONTROL, "no-cache");
+        put(HOST, getDomainName(AppConfigProvider.BASE_URL));
+        put(ACCEPT_ENCODING, "gzip, deflate, br");
+        put(ACCEPT, WILDCARD);
     }};
 
     public static final Map<String, String> HEADERS_RESPONSE = new HashMap<>() {{
@@ -46,6 +54,9 @@ public class TrackStudioEndPoints {
     public static final String ID = "";
 
     private static String getDomainName(String url) {
-        return url.split("//")[1];
+        String s = url.split("//")[1];
+        String spl = s.split("/")[0];
+        log.info("Host is: {}", spl);
+        return spl;
     }
 }

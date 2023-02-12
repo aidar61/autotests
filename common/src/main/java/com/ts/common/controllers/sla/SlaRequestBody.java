@@ -1,12 +1,13 @@
 package com.ts.common.controllers.sla;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ts.common.annotations.Create;
 import com.ts.common.annotations.Mandatory;
 import com.ts.common.annotations.TypeId;
-import com.ts.common.entitites.commonEntities.*;
-import com.ts.common.entitites.tasks.Task;
+import com.ts.common.entitites.commonEntities.GeneralSlaId;
+import com.ts.common.entitites.commonEntities.Parent;
+import com.ts.common.entitites.commonEntities.Status;
+import com.ts.common.entitites.commonEntities.Udfs;
+import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.request.RequestBody;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -22,51 +23,34 @@ import lombok.extern.jackson.Jacksonized;
 @JsonIgnoreProperties(ignoreUnknown = false)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SlaRequestBody extends RequestBody {
-    @TypeId(type = "operation")
-    String id;
-    @Create
+    @Mandatory
+    @TypeId(type = "category")
     GeneralSlaId category;
+    @Mandatory
     @TypeId(type = "operation")
     GeneralSlaId operation;
-    @Create
     Parent parent;
-    @Create
     String name;
     @Mandatory
-    @JsonProperty("description")
     String description;
-    @TypeId(type = "operation")
-    User handlerUser;
-    @Mandatory
     Udfs udfs;
     Status finishStatus;
-    @TypeId(type = "operation")
-    @Create
+    @Mandatory
     String[] attachments;
 
-    public SlaRequestBody(Task slaTask) {
-        this.id = slaTask.getId();
+    public SlaRequestBody(SlaTask slaTask) {
         this.category = slaTask.getCategory();
         this.operation = slaTask.getOperation();
         this.parent = slaTask.getParent();
         this.name = slaTask.getName();
         this.description = slaTask.getDescription();
-        this.handlerUser = slaTask.getHandlerUser();
         this.udfs = slaTask.getUdfs();
         this.attachments = slaTask.getAttachments();
     }
 
     public enum Fields {
-        ID("id"),
         CATEGORY("category"),
-        OPERATION("operation"),
-        PARENT("parent"),
-        NAME("name"),
-        DESCRIPTION("description"),
-        HANDLER_USER("handlerUser"),
-        UDFS("udfs"),
-        FINISH_STATUS("finishStatus"),
-        ATTACHMENTS("attachments");
+        OPERATION("operation");
         public final String field;
 
         Fields(String field) {

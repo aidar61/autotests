@@ -8,4 +8,7 @@ public class RandomUtils {
     public static String generateName() {
         return faker.name().firstName();
     }
+    public static String generateComment(){
+        return faker.commerce().productName();
+    }
 }

@@ -3,12 +3,10 @@ package com.ts.common.request;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.dockerjava.core.MediaType;
 import com.ts.common.application.AuthToken;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.internal.mapping.Jackson2Mapper;
 import io.restassured.response.Response;
-import io.restassured.specification.ProxySpecification;
 import io.restassured.specification.RequestSpecification;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
-import static io.restassured.specification.ProxySpecification.host;
 
 /**
  * @author Aidar Askeev
@@ -46,6 +43,7 @@ public abstract class ApiRequest {
                 .setBaseUri(url)
                 .addHeaders(headers)
                 .build();
+        requestSpec.log();
     }
 
     private static Jackson2Mapper initObjectMapper() {

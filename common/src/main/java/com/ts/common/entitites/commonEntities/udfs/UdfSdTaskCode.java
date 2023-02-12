@@ -21,6 +21,6 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UdfSdTaskCode {
     String udfId;
-    String value;
-    List<ListValue> listValue;
+    String type;
+    ListValue[] listValue;
 }

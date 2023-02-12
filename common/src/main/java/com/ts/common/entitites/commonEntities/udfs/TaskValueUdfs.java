@@ -1,6 +1,7 @@
-package com.ts.common.entitites.commonEntities;
+package com.ts.common.entitites.commonEntities.udfs;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ts.common.entitites.BaseEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -12,10 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 @Setter
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class CategoryId {
-    String id;
+public class TaskValueUdfs extends BaseEntity {
 }

@@ -1,9 +1,14 @@
 package com.ts.common.entitites;
 
+import com.ts.common.annotations.TypeId;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 
 import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author Aidar Askeev
@@ -61,4 +66,10 @@ public abstract class BaseEntity implements Serializable {
             return false;
         }
     }
+
+    private List<String> receiveChangeableFields() {
+        List<Field> declaredFields = Arrays.asList(this.getClass().getDeclaredFields());
+        return declaredFields.stream().filter(f -> f.isAnnotationPresent(TypeId.class)).map(Field::getName).collect(Collectors.toList());
+    }
+
 }
