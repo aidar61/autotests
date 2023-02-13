@@ -24,6 +24,8 @@ import lombok.extern.jackson.Jacksonized;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SlaRequestBody extends RequestBody {
     @Mandatory
+    String id;
+    @Mandatory
     @TypeId(type = "category")
     GeneralSlaId category;
     @Mandatory
@@ -39,6 +41,7 @@ public class SlaRequestBody extends RequestBody {
     String[] attachments;
 
     public SlaRequestBody(SlaTask slaTask) {
+        this.id = slaTask.getId();
         this.category = slaTask.getCategory();
         this.operation = slaTask.getOperation();
         this.parent = slaTask.getParent();

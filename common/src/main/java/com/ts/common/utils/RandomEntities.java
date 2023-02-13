@@ -34,29 +34,37 @@ public class RandomEntities {
 
     public static Udfs getFullUdfs() {
         return Udfs.builder()
-                .udfSdTrustedWatcher(getUdfSdTrustedWatcher())
-                .udfWatcher(getUdfWatcher())
-                .udfSdTaskCode(getUdfTaskCode())
-                .udfSdRelatedTaskCodes(getUdfSdRelatedTaskCode())
-                .module(getUdfsModuleThrowsJson())
-                .udfSlaHelpCost(getUdfSlaHelpCost())
-                .udfSdFeatureGenuse(getUdfSdFeatureGenuse())
-                .udfSlaUrgancyHelp(getUdfSlaUrgancyHelp())
-                .udfSdHelpkoef(getUdfSdHelpkoef())
-                .udfSdLinkedRequest(getUdfSdLinkedRequest())
-                .udfSdRepeatRequest(getUdfSdRepeatRequest())
-                .udfSdClientWatchers(getUdfSdClientWatchers())
-                .bdku(getBdkuThrowsJson())
-                .udfSdRemoteId(getUdfSdRemoteId())
-                .udfSdInitPerson(getUdfSdInitPerson())
-                .udfSdNotLimitedWork(getUdfSdNotLimitedWork())
-                .udfWorkTaskSourceType(getUdfWorkTaskSourceType())
-                .udfRegProject(getUdfRegProject())
+                .UDF_SD_TRUSTEDWATCHER(getUdfSdTrustedWatcher())
+                .UDF_WATCHER(getUdfWatcher())
+                .UDF_SD_TASK_CODE(getUdfTaskCode())
+                .UDF_SD_RELATED_TASK_CODES(getUdfSdRelatedTaskCode())
+                .UDF_SD_MODULE(getUdfsModuleThrowsJson())
+                .UDF_SLAHELP_COST(getUdfSlaHelpCost())
+                .UDF_SDFEATURE_GENUSE(getUdfSdFeatureGenuse())
+                .UDF_SLA_URGANCYHELP(getUdfSlaUrgancyHelp())
+                .UDF_SD_HELPKOEF(getUdfSdHelpkoef())
+                .UDF_SD_LINKEDREQUEST(getUdfSdLinkedRequest())
+                .UDF_SD_REPEATREQUEST(getUdfSdRepeatRequest())
+                .UDF_SD_CLIENTWATCHERS(getUdfSdClientWatchers())
+                .UDF_BDKU_CONFIGURATION(getBdkuThrowsJson())
+                .UDF_SD_REMOTEID(getUdfSdRemoteId())
+                .UDF_SD_INITPERSON(getUdfSdInitPerson())
+                .UDF_SD_NOTLIMITEDWORK(getUdfSdNotLimitedWork())
+                .UDF_WORKTASK_SOURCETYPE(getUdfWorkTaskSourceType())
+                .UDF_REGPROJECT(getUdfRegProject())
                 .build();
     }
 
     public static UdfSdModule getUdfsModuleThrowsJson() {
         return JsonUtils.convertJsonToObject(moduleJsonFile, UdfSdModule.class);
+    }
+
+    public static UdfSdModule getUdfSdModule(String id) {
+        return UdfSdModule.builder()
+                .udfId(UDF_SD_MODULE.udfId)
+                .type(UDF_SD_MODULE.type.name())
+                .taskValue(new Task[]{new Task(id)})
+                .build();
     }
 
     public static UdfsBdkuConfiguration getBdkuThrowsJson() {
@@ -84,6 +92,14 @@ public class RandomEntities {
                 .udfId(UDF_SD_TASK_CODE.udfId)
                 .type(UDF_SD_TASK_CODE.type.name())
                 .listValue(new ListValue[]{})
+                .build();
+    }
+
+    public static UdfSdTaskCode getUdfTaskCode(String id) {
+        return UdfSdTaskCode.builder()
+                .udfId(UDF_SD_TASK_CODE.udfId)
+                .type(UDF_SD_TASK_CODE.type.name())
+                .listValue(new ListValue[]{new ListValue(id)})
                 .build();
     }
 
