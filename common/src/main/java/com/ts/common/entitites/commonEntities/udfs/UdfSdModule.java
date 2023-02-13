@@ -9,8 +9,6 @@ import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-
 @Slf4j
 @Builder
 @Getter
@@ -25,5 +23,15 @@ public class UdfSdModule extends BaseEntity {
     @JsonProperty("udfid")
     String udfId;
     String type;
-    List<Task> taskValue;
+    Task[] taskValue;
+
+    public enum Constants {
+        ACCREDITIVES("818181b03c7fc013013c7fca7130041d"),
+        NOTIFICATION_SERVICE("818181df62efd8e80162f1d00d3b5c41");
+        public final String moduleIds;
+
+        Constants(String moduleIds) {
+            this.moduleIds = moduleIds;
+        }
+    }
 }

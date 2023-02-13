@@ -1,6 +1,7 @@
 package com.ts.common.entitites.commonEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ts.common.annotations.Mandatory;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.udfs.TaskValueUdfs;
 import lombok.*;
@@ -19,6 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Task extends BaseEntity {
+    @Mandatory
     String id;
     int abudget;
     int actualBudget;
@@ -46,4 +48,8 @@ public class Task extends BaseEntity {
     boolean $firstInGroup;
     boolean $selected;
     boolean invalid;
+
+    public Task(String id) {
+        this.id = id;
+    }
 }

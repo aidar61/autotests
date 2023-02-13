@@ -23,4 +23,12 @@ public class UdfSdTaskCode {
     String udfId;
     String type;
     ListValue[] listValue;
+    public enum Constants{
+        ABNATTR("818181df7d730063017d7302e40e0075");
+        public final String taskCodesId;
+
+        Constants(String taskCodesId) {
+            this.taskCodesId = taskCodesId;
+        }
+    }
 }
