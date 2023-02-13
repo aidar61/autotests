@@ -63,9 +63,9 @@ public class SlaHelpController extends ApiRequest {
         Udfs udfs = slaTask.getUdfs();
         UdfSdTaskCode udfSdTaskCode = RandomEntities.getUdfTaskCode(UdfSdTaskCode.Constants.ABNATTR.taskCodesId);
         UdfSdModule udfSdModule = RandomEntities.getUdfSdModule(UdfSdModule.Constants.NOTIFICATION_SERVICE.moduleIds);
-        udfs.setUDF_SD_TASK_CODE(udfSdTaskCode);
-        udfs.setUDF_SD_MODULE(udfSdModule);
-        udfs.removeAllFieldsExcept();
+        udfs.setUdfSdTaskCode(udfSdTaskCode);
+        udfs.setUdfSdModule(udfSdModule);
+//        udfs.removeAllFieldsExcept();
         slaTask.setUdfs(udfs);
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         editModule(slaTask, slaRequestBody.removeFields());
