@@ -12,10 +12,11 @@ import com.ts.common.utils.JsonUtils;
 import com.ts.common.utils.RandomEntities;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
-import org.openqa.selenium.json.Json;
 
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -91,8 +92,10 @@ public abstract class BaseEntity implements Serializable {
     public String removeFields(List<String> fieldNames) {
         ObjectNode jsonNode = JsonUtils.convertToJson(JsonUtils.convertToString(this));
         fieldNames.forEach(s -> {
+            assert jsonNode != null;
             jsonNode.remove(s);
         });
+        assert jsonNode != null;
         return jsonNode.toString();
     }
 
@@ -109,23 +112,35 @@ public abstract class BaseEntity implements Serializable {
         return allFields.stream().map(Field::getName).collect(Collectors.toList());
     }
 
-    public String removeAllFieldsExcept(String... fields) {
+    public String removeAllFieldsExcept(List<String> fieldsName) {
         List<String> allFields = receiveAllFields();
         log.info("all fields: {}", allFields.toString());
-        List<String> acceptFields = Arrays.asList(fields);
-        List<String> removedFields = allFields.stream().filter(a -> !acceptFields.contains(a)).collect(Collectors.toList());
-        log.info(removedFields.toString());
-        return removeFields(removedFields);
+        allFields.forEach(f -> {
+            if (!fieldsName.contains(f)) allFields.remove(f);
+        });
+        return removeFields(allFields);
+    }
+
+    public List<Annotation[]> receiveFieldsAnnotation() {
+        List<Field> fields = Arrays.asList(this.getClass().getDeclaredFields());
+        return fields.stream().filter(f -> f.isAnnotationPresent(JsonProperty.class)).map(Field::getAnnotations).collect(Collectors.toList());
     }
 
     public static void main(String[] args) {
+
         SlaTask slaTask = RandomEntities.getSlaTask(GeneralSlaId.Fields.CHANGE_SD_MODULE);
         Udfs udfs = slaTask.getUdfs();
         UdfSdTaskCode udfSdTaskCode = RandomEntities.getUdfTaskCode(UdfSdTaskCode.Constants.ABNATTR.taskCodesId);
         UdfSdModule udfSdModule = RandomEntities.getUdfSdModule(UdfSdModule.Constants.NOTIFICATION_SERVICE.moduleIds);
-        udfs.setUDF_SD_TASK_CODE(udfSdTaskCode);
-        udfs.setUDF_SD_MODULE(udfSdModule);
-        log.info(udfs.removeAllFieldsExcept("UDF_SD_TASK_CODE", "UDF_SD_MODULE"));
+        udfs.setUdfSdTaskCode(udfSdTaskCode);
+        udfs.setUdfSdModule(udfSdModule);
+        List<String> list = new ArrayList<>();
+        list.add("udfSdTaskCode");
+        list.add("udfSdModule");
+        log.info(udfs.removeAllFieldsExcept(list));
+
+//        String s = udfs.removeAllFieldsExcept("UDF_SD_TASK_CODE", "UDF_SD_MODULE");
+//        log.info(s);
     }
 
 }

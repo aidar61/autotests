@@ -14,6 +14,9 @@ public interface AppConfig extends Config {
 
     @Key("default.implicitly.sleep")
     int implicitlySleep();
+
     @Key("headless")
     String headless();
+    @Key("retry.number")
+    int retriesNumber();
 }

@@ -12,8 +12,8 @@ import static com.ts.common.enums.Udfs.*;
 import static com.ts.common.utils.RandomUtils.generateName;
 
 public class RandomEntities {
-    private static final String BDKU_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/mtbankBdkuConf.json";
-    private static final String MODULE_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/moduleAkkConf.json";
+    private static final String BDKU_JSON_PATH = "common/src/main/resources/data/mtbankBdkuConf.json";
+    private static final String MODULE_JSON_PATH = "common/src/main/resources/data/moduleAkkConf.json";
     private static final File bdkuJsonFile = new File(BDKU_JSON_PATH);
     private static final File moduleJsonFile = new File(MODULE_JSON_PATH);
 
@@ -34,24 +34,24 @@ public class RandomEntities {
 
     public static Udfs getFullUdfs() {
         return Udfs.builder()
-                .UDF_SD_TRUSTEDWATCHER(getUdfSdTrustedWatcher())
-                .UDF_WATCHER(getUdfWatcher())
-                .UDF_SD_TASK_CODE(getUdfTaskCode())
-                .UDF_SD_RELATED_TASK_CODES(getUdfSdRelatedTaskCode())
-                .UDF_SD_MODULE(getUdfsModuleThrowsJson())
-                .UDF_SLAHELP_COST(getUdfSlaHelpCost())
-                .UDF_SDFEATURE_GENUSE(getUdfSdFeatureGenuse())
-                .UDF_SLA_URGANCYHELP(getUdfSlaUrgancyHelp())
-                .UDF_SD_HELPKOEF(getUdfSdHelpkoef())
-                .UDF_SD_LINKEDREQUEST(getUdfSdLinkedRequest())
-                .UDF_SD_REPEATREQUEST(getUdfSdRepeatRequest())
-                .UDF_SD_CLIENTWATCHERS(getUdfSdClientWatchers())
-                .UDF_BDKU_CONFIGURATION(getBdkuThrowsJson())
-                .UDF_SD_REMOTEID(getUdfSdRemoteId())
-                .UDF_SD_INITPERSON(getUdfSdInitPerson())
-                .UDF_SD_NOTLIMITEDWORK(getUdfSdNotLimitedWork())
-                .UDF_WORKTASK_SOURCETYPE(getUdfWorkTaskSourceType())
-                .UDF_REGPROJECT(getUdfRegProject())
+                .udfSdTrustedWatcher(getUdfSdTrustedWatcher())
+                .udfWatcher(getUdfWatcher())
+                .udfSdTaskCode(getUdfTaskCode())
+                .udfSdRelatedTaskCodes(getUdfSdRelatedTaskCode())
+                .udfSdModule(getUdfsModuleThrowsJson())
+                .udfSlaHelpCost(getUdfSlaHelpCost())
+                .udfSdFeatureGenuse(getUdfSdFeatureGenuse())
+                .udfSlaUrgancyHelp(getUdfSlaUrgancyHelp())
+                .udfSdHelpkoef(getUdfSdHelpkoef())
+                .udfSdLinkedRequest(getUdfSdLinkedRequest())
+                .udfSdRepeatRequest(getUdfSdRepeatRequest())
+                .udfSdClientWatchers(getUdfSdClientWatchers())
+                .udfsBdkuConfiguration(getBdkuThrowsJson())
+                .udfSdRemoteId(getUdfSdRemoteId())
+                .udfSdInitPerson(getUdfSdInitPerson())
+                .udfSdNotLimitedWork(getUdfSdNotLimitedWork())
+                .udfWorkTaskSourceType(getUdfWorkTaskSourceType())
+                .udfRegProject(getUdfRegProject())
                 .build();
     }
 
