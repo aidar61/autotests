@@ -1,6 +1,7 @@
 package com.ts.integration.tests;
 
-import com.ts.common.application.TrackStudioApiControllers;
+import com.ts.common.application.controllers.TrackStudioApiControllers;
+import com.ts.common.application.database.DbHelper;
 import com.ts.common.listeners.TestListener;
 import com.ts.common.tests.AbstractBaseTest;
 import io.restassured.response.Response;
@@ -14,5 +15,6 @@ public class BaseIntegrationTest extends AbstractBaseTest {
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
         apiController = new TrackStudioApiControllers();
+        dbHelper = new DbHelper();
     }
 }

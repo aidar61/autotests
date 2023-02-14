@@ -1,4 +1,4 @@
-package com.ts.common.application;
+package com.ts.common.application.controllers;
 
 import com.ts.common.controllers.sla.SlaHelpController;
 import io.restassured.response.Response;

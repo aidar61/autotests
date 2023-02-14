@@ -1,8 +1,9 @@
 package com.ts.common.asserts;
 
-import com.ts.common.application.TrackStudioHttpStatusCodes;
+import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.request.ResponseBody;
 import com.ts.common.utils.JsonUtils;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
@@ -18,12 +19,11 @@ public class ApiAsserts {
     public ApiAsserts(Response response) {
         this.response = response;
     }
-
+    @Step("[Assert] Response is: {0}")
     public static ApiAsserts assertThat(Response response) {
-        log.info("Checking following actual response: \n{}", response);
         return new ApiAsserts(response);
     }
-
+    @Step("Checking expected code: {0}")
     public ApiAsserts isCorrectResponseCode(TrackStudioHttpStatusCodes code) {
         if (this.response == null)
             assertTrue(false);

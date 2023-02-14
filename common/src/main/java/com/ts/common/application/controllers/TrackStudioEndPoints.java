@@ -1,4 +1,4 @@
-package com.ts.common.application;
+package com.ts.common.application.controllers;
 
 import com.ts.common.config.AppConfigProvider;
 import lombok.extern.slf4j.Slf4j;

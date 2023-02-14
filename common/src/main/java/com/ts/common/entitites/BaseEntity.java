@@ -126,21 +126,4 @@ public abstract class BaseEntity implements Serializable {
         return fields.stream().filter(f -> f.isAnnotationPresent(JsonProperty.class)).map(Field::getAnnotations).collect(Collectors.toList());
     }
 
-    public static void main(String[] args) {
-
-        SlaTask slaTask = RandomEntities.getSlaTask(GeneralSlaId.Fields.CHANGE_SD_MODULE);
-        Udfs udfs = slaTask.getUdfs();
-        UdfSdTaskCode udfSdTaskCode = RandomEntities.getUdfTaskCode(UdfSdTaskCode.Constants.ABNATTR.taskCodesId);
-        UdfSdModule udfSdModule = RandomEntities.getUdfSdModule(UdfSdModule.Constants.NOTIFICATION_SERVICE.moduleIds);
-        udfs.setUdfSdTaskCode(udfSdTaskCode);
-        udfs.setUdfSdModule(udfSdModule);
-        List<String> list = new ArrayList<>();
-        list.add("udfSdTaskCode");
-        list.add("udfSdModule");
-        log.info(udfs.removeAllFieldsExcept(list));
-
-//        String s = udfs.removeAllFieldsExcept("UDF_SD_TASK_CODE", "UDF_SD_MODULE");
-//        log.info(s);
-    }
-
 }

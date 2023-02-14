@@ -1,4 +1,4 @@
-package com.ts.common.application;
+package com.ts.common.application.controllers;
 
 import lombok.Getter;
 import org.apache.http.HttpStatus;

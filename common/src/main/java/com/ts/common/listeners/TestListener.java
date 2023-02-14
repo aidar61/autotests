@@ -14,6 +14,12 @@ public class TestListener extends TestListenerAdapter {
     public TestListener() {
     }
 
+    @SuppressWarnings("UnusedReturnValue")
+    @Attachment(value = "Test Log", type = "text/plain")
+    public String stopCatch() {
+        return consoleOutputCapturer.stop();
+    }
+
     @Override
     public void beforeConfiguration(ITestResult tr) {
         consoleOutputCapturer.start();
@@ -27,26 +33,23 @@ public class TestListener extends TestListenerAdapter {
     }
 
 
-    @SuppressWarnings("UnusedReturnValue")
-    @Attachment(value = "Test Log", type = "text/plain")
-    public String stopCatch() {
-        return consoleOutputCapturer.stop();
-    }
-
     @Override
     public void onTestSuccess(ITestResult tr) {
+        stopCatch();
         printTestResult(tr);
         super.onTestSuccess(tr);
     }
 
     @Override
     public void onTestFailure(ITestResult tr) {
+        stopCatch();
         printTestResult(tr);
         super.onTestFailure(tr);
     }
 
     @Override
     public void onTestSkipped(ITestResult tr) {
+        stopCatch();
         printTestResult(tr);
         super.onTestSkipped(tr);
     }
@@ -87,7 +90,6 @@ public class TestListener extends TestListenerAdapter {
     }
 
     private void printTestResult(ITestResult testResult) {
-        stopCatch();
         log.warn("Test is " + getExecutionStatus(testResult));
         log.warn("Test method name: " + testResult.getMethod().getMethodName());
     }

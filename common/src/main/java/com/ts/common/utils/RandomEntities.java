@@ -12,8 +12,8 @@ import static com.ts.common.enums.Udfs.*;
 import static com.ts.common.utils.RandomUtils.generateName;
 
 public class RandomEntities {
-    private static final String BDKU_JSON_PATH = "common/src/main/resources/data/mtbankBdkuConf.json";
-    private static final String MODULE_JSON_PATH = "common/src/main/resources/data/moduleAkkConf.json";
+    private static final String BDKU_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/mtbankBdkuConf.json";
+    private static final String MODULE_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/moduleAkkConf.json";
     private static final File bdkuJsonFile = new File(BDKU_JSON_PATH);
     private static final File moduleJsonFile = new File(MODULE_JSON_PATH);
 
