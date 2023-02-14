@@ -1,9 +1,9 @@
 package com.ts.common.asserts;
 
 import com.ts.common.entitites.BaseEntity;
-import com.ts.common.entitites.commonEntities.Status;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.assertNull;
 
 public class EntityAssert {
     protected BaseEntity entity;
@@ -18,11 +18,5 @@ public class EntityAssert {
 
     public void isNotExist() {
         assertNull(entity, "Object is not exist");
-    }
-    public void isEquals(BaseEntity actualEntity) {
-        assertTrue(entity.isEquals(actualEntity), entity.getClass().getName() + " parameters is match: " + entity);
-    }
-    public <T extends BaseEntity> void isCorrectStatus(Status expectedStatus) {
-        assertEquals(expectedStatus, entity.receiveTaskStatus());
     }
 }

@@ -7,15 +7,17 @@ import com.ts.common.enums.Parents;
 
 import java.io.File;
 
+import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.enums.Parents.MTB;
-import static com.ts.common.enums.Udfs.*;
 import static com.ts.common.utils.RandomUtils.generateName;
 
 public class RandomEntities {
     private static final String BDKU_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/mtbankBdkuConf.json";
     private static final String MODULE_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/moduleAkkConf.json";
+    private static final String USER_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/user.json";
     private static final File bdkuJsonFile = new File(BDKU_JSON_PATH);
     private static final File moduleJsonFile = new File(MODULE_JSON_PATH);
+    private static final File userJsonFile = new File(USER_JSON_PATH);
 
     private RandomEntities() {
     }
@@ -29,6 +31,7 @@ public class RandomEntities {
                 .description(generateName() + " description")
                 .udfs(getFullUdfs())
                 .attachments(new String[]{})
+                .handlerUser(getUserThrowsJson())
                 .build();
     }
 
@@ -52,6 +55,7 @@ public class RandomEntities {
                 .udfSdNotLimitedWork(getUdfSdNotLimitedWork())
                 .udfWorkTaskSourceType(getUdfWorkTaskSourceType())
                 .udfRegProject(getUdfRegProject())
+                .udfSdProvidedHelpDeadline(getUdfSdProvidedHelpDeadline())
                 .build();
     }
 
@@ -75,7 +79,7 @@ public class RandomEntities {
         return UdfSdTrustedWatcher.builder()
                 .udfId(UDF_SD_TRUSTEDWATCHER.udfId)
                 .type(UDF_SD_TRUSTEDWATCHER.type.name())
-                .userValue(new UserValue[]{})
+                .userValue(new User[]{})
                 .build();
     }
 
@@ -83,7 +87,7 @@ public class RandomEntities {
         return UdfWatcher.builder()
                 .udfId(UDF_WATCHER.udfId)
                 .type(UDF_WATCHER.type.name())
-                .userValue(new UserValue[]{})
+                .userValue(new User[]{})
                 .build();
     }
 
@@ -91,7 +95,7 @@ public class RandomEntities {
         return UdfSdTaskCode.builder()
                 .udfId(UDF_SD_TASK_CODE.udfId)
                 .type(UDF_SD_TASK_CODE.type.name())
-                .listValue(new ListValue[]{})
+                .listValue(new List[]{})
                 .build();
     }
 
@@ -99,7 +103,7 @@ public class RandomEntities {
         return UdfSdTaskCode.builder()
                 .udfId(UDF_SD_TASK_CODE.udfId)
                 .type(UDF_SD_TASK_CODE.type.name())
-                .listValue(new ListValue[]{new ListValue(id)})
+                .listValue(new List[]{new List(id)})
                 .build();
     }
 
@@ -107,7 +111,7 @@ public class RandomEntities {
         return UdfSdRelatedTaskCodes.builder()
                 .udfId(UDF_SD_RELATED_TASK_CODES.udfId)
                 .type(UDF_SD_RELATED_TASK_CODES.type.name())
-                .listValue(new ListValue[]{})
+                .listValue(new List[]{})
                 .build();
     }
 
@@ -122,7 +126,7 @@ public class RandomEntities {
         return UdfSdFeatureGenuse.builder()
                 .udfId(UDF_SDFEATURE_GENUSE.udfId)
                 .type(UDF_SDFEATURE_GENUSE.type.name())
-                .listValue(new ListValue[]{})
+                .listValue(new List[]{})
                 .build();
     }
 
@@ -130,7 +134,7 @@ public class RandomEntities {
         return UdfSlaUrgancyHelp.builder()
                 .udfId(UDF_SLA_URGANCYHELP.udfId)
                 .type(UDF_SLA_URGANCYHELP.type.name())
-                .listValue(new ListValue[]{})
+                .listValue(new List[]{})
                 .build();
     }
 
@@ -182,7 +186,7 @@ public class RandomEntities {
         return UdfSdNotLimitedWork.builder()
                 .udfId(UDF_SD_NOTLIMITEDWORK.udfId)
                 .type(UDF_SD_NOTLIMITEDWORK.type.name())
-                .listValue(new ListValue[]{})
+                .listValue(new List[]{})
                 .build();
     }
 
@@ -190,7 +194,7 @@ public class RandomEntities {
         return UdfWorkTaskSourceType.builder()
                 .udfId(UDF_WORKTASK_SOURCETYPE.udfId)
                 .type(UDF_WORKTASK_SOURCETYPE.type.name())
-                .listValue(new ListValue[]{})
+                .listValue(new List[]{})
                 .build();
     }
 
@@ -199,6 +203,13 @@ public class RandomEntities {
                 .udfId(UDF_REGPROJECT.udfId)
                 .type(UDF_REGPROJECT.type.name())
                 .taskValue(new Task[]{})
+                .build();
+    }
+
+    public static UdfSdProvidedHelpDeadline getUdfSdProvidedHelpDeadline() {
+        return UdfSdProvidedHelpDeadline.builder()
+                .udfId(UDF_SD_PROVIDEDHELPDEADLINE.udfId)
+                .type(UDF_SD_PROVIDEDHELPDEADLINE.type.name())
                 .build();
     }
 
@@ -213,6 +224,10 @@ public class RandomEntities {
         return GeneralSlaId.builder()
                 .id(category.id)
                 .build();
+    }
+
+    public static User getUserThrowsJson() {
+        return JsonUtils.convertJsonToObject(userJsonFile, User.class);
     }
 
 }
