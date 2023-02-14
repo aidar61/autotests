@@ -12,7 +12,6 @@ import lombok.experimental.FieldDefaults;
 @ToString
 public class GrTaskDbEntity extends DbEntity {
     String task_id;
-    String task_shortname;
     String task_name;
     String task_status;
 }

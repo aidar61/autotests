@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
+
 /**
  * @author Dennis Tikhomirov
  */
@@ -68,5 +69,6 @@ public abstract class AbstractDbTable {
     public <T extends BaseEntity> T getEntityWhere(Class clazz, String... parameters) {
         return (T) queryForObject(String.format(SELECT_WHERE_QUERY, this.name, parameters[0], parameters[1]), new BeanPropertyRowMapper<>(clazz));
     }
+
 
 }

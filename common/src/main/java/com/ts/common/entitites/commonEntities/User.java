@@ -10,12 +10,21 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Getter
 @Setter
+@Builder
 @ToString
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ListValue extends BaseEntity {
+public class User extends BaseEntity {
     String id;
+    String login;
+    String name;
+    boolean active;
+    String status;
+    int childrenCount;
+    int wrongAuthAttempt;
+    boolean authBlocked;
+    boolean freelancer;
 }

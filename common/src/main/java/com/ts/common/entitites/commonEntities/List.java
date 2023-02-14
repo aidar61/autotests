@@ -1,4 +1,4 @@
-package com.ts.common.entitites.commonEntities.udfs;
+package com.ts.common.entitites.commonEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ts.common.entitites.BaseEntity;
@@ -8,13 +8,14 @@ import lombok.extern.jackson.Jacksonized;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Builder
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 @NoArgsConstructor
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class TaskValueUdfs extends BaseEntity {
+public class List extends BaseEntity {
+    String id;
 }

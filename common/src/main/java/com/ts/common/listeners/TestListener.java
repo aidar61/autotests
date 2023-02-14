@@ -22,7 +22,7 @@ public class TestListener extends TestListenerAdapter {
 
     @Override
     public void beforeConfiguration(ITestResult tr) {
-        consoleOutputCapturer.start();
+
         super.beforeConfiguration(tr);
     }
 
@@ -60,7 +60,7 @@ public class TestListener extends TestListenerAdapter {
         //Before class
         String className = testContext.getAllTestMethods().length > 0 ? testContext.getAllTestMethods()[0].getInstance().getClass().toString() : "UNDEFINED";
         log.warn("START CLASS: {}", className);
-
+        consoleOutputCapturer.start();
         super.onStart(testContext);
     }
 

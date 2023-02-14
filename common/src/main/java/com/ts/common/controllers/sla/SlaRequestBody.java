@@ -1,12 +1,10 @@
 package com.ts.common.controllers.sla;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.ts.common.annotations.Create;
 import com.ts.common.annotations.Mandatory;
 import com.ts.common.annotations.TypeId;
-import com.ts.common.entitites.commonEntities.GeneralSlaId;
-import com.ts.common.entitites.commonEntities.Parent;
-import com.ts.common.entitites.commonEntities.Status;
-import com.ts.common.entitites.commonEntities.Udfs;
+import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.request.RequestBody;
 import lombok.*;
@@ -23,21 +21,24 @@ import lombok.extern.jackson.Jacksonized;
 @JsonIgnoreProperties(ignoreUnknown = false)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class SlaRequestBody extends RequestBody {
-    @Mandatory
+    @TypeId(type = "operation")
     String id;
-    @Mandatory
-    @TypeId(type = "category")
+    @Create
     GeneralSlaId category;
-    @Mandatory
     @TypeId(type = "operation")
     GeneralSlaId operation;
+    @Create
     Parent parent;
+    @Create
     String name;
     @Mandatory
     String description;
+    @TypeId(type = "operation")
+    User handlerUser;
+    @Mandatory
     Udfs udfs;
     Status finishStatus;
-    @Mandatory
+    @TypeId(type = "operation")
     String[] attachments;
 
     public SlaRequestBody(SlaTask slaTask) {
@@ -47,13 +48,22 @@ public class SlaRequestBody extends RequestBody {
         this.parent = slaTask.getParent();
         this.name = slaTask.getName();
         this.description = slaTask.getDescription();
+        this.handlerUser = slaTask.getHandlerUser();
         this.udfs = slaTask.getUdfs();
         this.attachments = slaTask.getAttachments();
     }
 
     public enum Fields {
+        ID("id"),
         CATEGORY("category"),
-        OPERATION("operation");
+        OPERATION("operation"),
+        PARENT("parent"),
+        NAME("name"),
+        DESCRIPTION("description"),
+        HANDLER_USER("handlerUser"),
+        UDFS("udfs"),
+        FINISH_STATUS("finishStatus"),
+        ATTACHMENTS("attachments");
         public final String field;
 
         Fields(String field) {

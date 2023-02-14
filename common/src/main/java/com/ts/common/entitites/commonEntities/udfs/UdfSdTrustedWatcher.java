@@ -1,7 +1,7 @@
 package com.ts.common.entitites.commonEntities.udfs;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.ts.common.entitites.commonEntities.UserValue;
+import com.ts.common.entitites.commonEntities.User;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -20,5 +20,5 @@ import lombok.extern.slf4j.Slf4j;
 public class UdfSdTrustedWatcher {
     String udfId;
     String type;
-    UserValue[] userValue;
+    User[] userValue;
 }

@@ -19,7 +19,7 @@ public class ApiAsserts {
     public ApiAsserts(Response response) {
         this.response = response;
     }
-    @Step("[Assert] Response is: {0}")
+    @Step("[Assert] Response")
     public static ApiAsserts assertThat(Response response) {
         return new ApiAsserts(response);
     }

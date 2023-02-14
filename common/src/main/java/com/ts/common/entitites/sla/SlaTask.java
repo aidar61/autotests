@@ -1,12 +1,8 @@
 package com.ts.common.entitites.sla;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.BaseEntity;
-import com.ts.common.entitites.commonEntities.GeneralSlaId;
-import com.ts.common.entitites.commonEntities.Parent;
-import com.ts.common.entitites.commonEntities.Status;
-import com.ts.common.entitites.commonEntities.Udfs;
+import com.ts.common.entitites.commonEntities.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -28,6 +24,7 @@ public class SlaTask extends BaseEntity {
     Parent parent;
     String name;
     String description;
+    User handlerUser;
     Udfs udfs;
     Status status;
     String[] attachments;

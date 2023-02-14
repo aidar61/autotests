@@ -121,21 +121,11 @@ public abstract class ApiRequest {
         return this.response;
     }
 
-    public Response postMultipart(String endpoint, File file) {
-        log.info("performed multipart POST {}", endpoint);
-        this.response = given()
-                .multiPart(file)
-                .spec(requestSpec)
-                .post(endpoint);
-        return this.response;
-    }
-
     public Response put(String endpoint, Object body) {
         log.info("performed PUT {}", endpoint);
         log.info("Body is {}", body);
         this.response = given()
                 .spec(requestSpec)
-                //TODO
                 .body(body, objectMapper)
                 .put(endpoint);
         logResponse();

@@ -1,22 +1,13 @@
 package com.ts.common.entitites;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ts.common.annotations.TypeId;
-import com.ts.common.entitites.commonEntities.GeneralSlaId;
-import com.ts.common.entitites.commonEntities.Udfs;
-import com.ts.common.entitites.commonEntities.udfs.UdfSdModule;
-import com.ts.common.entitites.commonEntities.udfs.UdfSdTaskCode;
-import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.utils.JsonUtils;
-import com.ts.common.utils.RandomEntities;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 
 import java.io.Serializable;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -78,10 +69,6 @@ public abstract class BaseEntity implements Serializable {
         }
     }
 
-    private List<String> receiveChangeableFields() {
-        List<Field> declaredFields = Arrays.asList(this.getClass().getDeclaredFields());
-        return declaredFields.stream().filter(f -> f.isAnnotationPresent(TypeId.class)).map(Field::getName).collect(Collectors.toList());
-    }
 
     public String removeField(String field) {
         ObjectNode jsonNode = JsonUtils.convertToJson(JsonUtils.convertToString(this));
@@ -112,18 +99,46 @@ public abstract class BaseEntity implements Serializable {
         return allFields.stream().map(Field::getName).collect(Collectors.toList());
     }
 
-    public String removeAllFieldsExcept(List<String> fieldsName) {
+    public List<String> receiveOptionalFields() {
+        List<Field> fields = Arrays.asList(this.getClass().getDeclaredFields());
+        return fields.stream().filter(s -> !s.isAnnotationPresent(TypeId.class)).map(Field::getName).collect(Collectors.toList());
+    }
+
+    private List<Field> receiveChangeableFields() {
+        List<Field> fields = Arrays.asList(this.getClass().getDeclaredFields());
+        return fields.stream().filter(f -> f.isAnnotationPresent(TypeId.class)).collect(Collectors.toList());
+    }
+
+    private List<String> receiveTypesFieldWithName(String annotValue) {
+        List<Field> changeableFields = receiveChangeableFields();
+        return changeableFields.stream().filter(cf -> cf.getAnnotation(TypeId.class).type().equals(annotValue)).map(Field::getName).collect(Collectors.toList());
+    }
+
+    public String removeOptionalAndTypeFieldWithName(String annotName) {
+        List<String> optionalFields = receiveOptionalFields();
+        List<String> typeFields = receiveTypesFieldWithName(annotName);
+        typeFields.addAll(optionalFields);
+        return removeFields(typeFields);
+    }
+
+    public String keepTypeFieldWithName(String annotName) {
+        List<String> typeFields = receiveTypesFieldWithName(annotName);
         List<String> allFields = receiveAllFields();
-        log.info("all fields: {}", allFields.toString());
-        allFields.forEach(f -> {
-            if (!fieldsName.contains(f)) allFields.remove(f);
-        });
+        allFields.removeAll(typeFields);
         return removeFields(allFields);
     }
 
-    public List<Annotation[]> receiveFieldsAnnotation() {
-        List<Field> fields = Arrays.asList(this.getClass().getDeclaredFields());
-        return fields.stream().filter(f -> f.isAnnotationPresent(JsonProperty.class)).map(Field::getAnnotations).collect(Collectors.toList());
-    }
+//    public static void main(String[] args) {
+//        SlaTask slaTask = RandomEntities.getSlaTask(GeneralSlaId.Fields.CHANGE_SD_MODULE);
+//        Udfs udfs = slaTask.getUdfs();
+//        UdfSdTaskCode udfSdTaskCode = RandomEntities.getUdfTaskCode(UdfSdTaskCode.Constants.ABNATTR.taskCodesId);
+//        UdfSdModule udfSdModule = RandomEntities.getUdfSdModule(UdfSdModule.Constants.NOTIFICATION_SERVICE.moduleIds);
+//        udfs.setUdfSdTaskCode(udfSdTaskCode);
+//        udfs.setUdfSdModule(udfSdModule);
+//        Udfs module = JsonUtils.deserialize(udfs.keepTypeFieldWithName("module"), Udfs.class);
+//        slaTask.setUdfs(module);
+//        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+//        System.out.println(slaRequestBody.removeTypeFieldWithName(CATEGORY.field));
+//    }
 
 }

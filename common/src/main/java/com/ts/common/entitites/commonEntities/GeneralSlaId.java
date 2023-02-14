@@ -28,6 +28,7 @@ public class GeneralSlaId {
         CHANGE_AUTHOR("MSG_SLAHELP_CHANGEAUTHOR", "operation"),
         CHANGE_ATTRS("MSG_SLAHELP_CHANGEATTRS", "operation"),
         ADD_COMMENT("MSG_SLAHELP_OURCOMMENT", "operation"),
+        PROVIDE_INFO("MSG_SLAHELP_PROVIDEINFO", "operation"),
         CLOSE_SLAHELP("MSG_SLAHELP_CLOSE", "operation");
         public final String id;
         public final String type;

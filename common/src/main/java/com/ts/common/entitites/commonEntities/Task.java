@@ -1,9 +1,9 @@
 package com.ts.common.entitites.commonEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ts.common.annotations.Mandatory;
 import com.ts.common.entitites.BaseEntity;
-import com.ts.common.entitites.commonEntities.udfs.TaskValueUdfs;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -17,6 +17,7 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @AllArgsConstructor
 @Jacksonized
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Task extends BaseEntity {
@@ -36,7 +37,6 @@ public class Task extends BaseEntity {
     int messageCount;
     boolean hasAttachments;
     boolean onSight;
-    TaskValueUdfs udfs;
     String stateLink;
     String statusColor;
     String taskLink;
