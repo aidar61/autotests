@@ -2,9 +2,11 @@
 <suite name="TrackStudio integration tests">
     <listeners>
         <listener class-name="com.ts.tests.runners.RetryTransformer"/>
+        <listener class-name="com.ts.common.listeners.TestListener"/>
     </listeners>
-    <test name="com.ts.integration.tests.sla.SlaTaskTest">
+    <test name="Ts tests">
         <classes>
+            <class name="com.ts.integration.tests.sla.SlaTaskTest"/>
         </classes>
     </test>
 </suite>

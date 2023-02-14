@@ -18,7 +18,7 @@ import static org.apache.http.HttpHeaders.*;
 public class TrackStudioEndPoints {
 
     public static final Map<String, String> HEADERS_BASE_CONTROLLER = new HashMap<>() {{
-//        put(AUTHORIZATION, "Basic cm9vdDpwYXNzd29yZA==");
+        put(AUTHORIZATION, "Basic cm9vdDpwYXNzd29yZA==");
         put(CONTENT_TYPE, APPLICATION_JSON);
         put(CACHE_CONTROL, "no-cache");
         put(HOST, getDomainName(AppConfigProvider.BASE_URL));
@@ -52,8 +52,6 @@ public class TrackStudioEndPoints {
     public static final String OPERATION = "operation";
     public static final String NUMBER = "";
     public static final String ID = "";
-    public static final String MSG = "MSG_";
-    public static final String TEST = "TEST";
 
     private static String getDomainName(String url) {
         String s = url.split("//")[1];

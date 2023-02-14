@@ -1,7 +1,6 @@
 package com.ts.common.application.database;
 
 import com.ts.common.application.database.dbTables.GrTaskTable;
-import com.ts.common.application.database.dbTables.GrUserTable;
 import com.ts.common.config.AppConfigProvider;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +14,6 @@ import java.util.Locale;
 public class DbHelper {
     private JdbcTemplate template;
     private GrTaskTable grTaskTable;
-    private GrUserTable grUserTable;
 
     public DbHelper() {
         Locale.setDefault(Locale.ENGLISH);
@@ -26,6 +24,5 @@ public class DbHelper {
         dataSource.setPassword(AppConfigProvider.getDbConfig().password());
         this.template = new JdbcTemplate(dataSource);
         this.grTaskTable = new GrTaskTable(template);
-        this.grUserTable = new GrUserTable(template);
     }
 }

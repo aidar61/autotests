@@ -3,7 +3,7 @@ package com.ts.common.request;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ts.common.application.AuthToken;
+import com.ts.common.application.controllers.AuthToken;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.internal.mapping.Jackson2Mapper;
 import io.restassured.response.Response;

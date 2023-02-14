@@ -1,6 +1,6 @@
 package com.ts.common.controllers.sla;
 
-import com.ts.common.application.AuthToken;
+import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.commonEntities.udfs.UdfSdModule;
 import com.ts.common.entitites.commonEntities.udfs.UdfSdTaskCode;
@@ -8,9 +8,10 @@ import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.request.ApiRequest;
 import com.ts.common.utils.JsonUtils;
 import com.ts.common.utils.RandomEntities;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
-import static com.ts.common.application.TrackStudioEndPoints.*;
+import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.controllers.sla.SlaRequestBody.Fields.CATEGORY;
 import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.ADD_COMMENT;
 import static com.ts.common.utils.RandomEntities.getGeneralId;
@@ -31,6 +32,7 @@ public class SlaHelpController extends ApiRequest {
         return super.get(getEndpoint(TASK, INFO, taskNumber));
     }
 
+    @Step("Create following sla task consultation: {0}")
     public Response createSlaTaskConsultation(SlaTask slaTask) {
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         this.response = createSlaTaskConsultation(slaRequestBody.removeTypeFieldWithName(OPERATION));
@@ -43,6 +45,7 @@ public class SlaHelpController extends ApiRequest {
         return this.response;
     }
 
+    @Step("Adding comment to slaTask: {0}, with following request body {0}")
     private Response addComment(SlaTask slaTask, String requestBody) {
         return super.post(getEndpoint(OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }

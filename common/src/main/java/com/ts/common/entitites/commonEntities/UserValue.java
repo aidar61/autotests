@@ -8,7 +8,6 @@ import lombok.extern.jackson.Jacksonized;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Builder
 @Getter
 @Setter
 @ToString
@@ -17,4 +16,14 @@ import lombok.extern.slf4j.Slf4j;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UserValue extends BaseEntity {
+    String id;
+    String login;
+    String name;
+    boolean active;
+    String status;
+    int childrenCount;
+    int wrongAuthAttempt;
+    boolean authBlocked;
+    boolean freelancer;
+    String $$hashKey;
 }
