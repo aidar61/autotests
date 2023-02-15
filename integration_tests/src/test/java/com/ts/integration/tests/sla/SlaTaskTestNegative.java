@@ -1,42 +1,40 @@
 package com.ts.integration.tests.sla;
 
+import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.errors.ErrorResponseBody;
 import com.ts.common.application.errors.TrackStudioErrors;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.TaskAsserts;
+import com.ts.common.controllers.sla.SlaHelpController;
 import com.ts.common.controllers.sla.SlaResponseBody;
-import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
 import com.ts.common.entitites.commonEntities.List;
-import com.ts.common.entitites.tasks.Task;
-import com.ts.common.enums.ComSlaOperations;
-import com.ts.common.enums.SlaType;
-import com.ts.common.listeners.TestListener;
+import com.ts.common.entitites.sla.SlaTask;
+import com.ts.common.request.ResponseBody;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import jdk.jfr.Description;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST;
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
+import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.CAT_SLA_HELP;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CLOSED;
 
-@Listeners({TestListener.class})
 public class SlaTaskTestNegative extends BaseIntegrationTest {
     private static SlaHelpController slaHelpController;
-    private Task slaTask;
+    private SlaTask slaTask;
     private GrTaskDbEntity actualTask;
     private List slaTasks;
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
+        slaTask = InitEntities.getSlaTask(CAT_SLA_HELP);
         slaHelpController = apiController.getSlaHelpController();
-        slaTask = InitEntities.getSlaTask(SlaType.SLA_HElP, ComSlaOperations.CAT);
-        slaHelpController.createTask(slaTask);
+        slaHelpController.createSlaTaskConsultation(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);

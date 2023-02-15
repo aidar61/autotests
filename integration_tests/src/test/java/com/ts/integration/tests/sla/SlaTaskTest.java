@@ -8,7 +8,7 @@ import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.TaskStatuses;
-import com.ts.common.utils.RandomEntities;
+import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import jdk.jfr.Description;
 import org.assertj.core.api.Assertions;
@@ -30,7 +30,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
-        slaTask = RandomEntities.getSlaTask(CAT_SLA_HELP);
+        slaTask = InitEntities.getSlaTask(CAT_SLA_HELP);
         slaHelpController = apiController.getSlaHelpController();
         slaHelpController.createSlaTaskConsultation(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())

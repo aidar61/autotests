@@ -32,11 +32,11 @@ public abstract class BaseEntity implements Serializable {
         }
     }
 
-    public boolean isEquals(Object obj, String... ignoringFileds) {
+    public boolean isEquals(Object obj, String... ignoringFields) {
         try {
             Assertions.assertThat(this)
                     .usingRecursiveComparison()
-                    .ignoringFields(ignoringFileds)
+                    .ignoringFields(ignoringFields)
                     .isEqualTo(obj);
             return true;
         } catch (AssertionError e) {

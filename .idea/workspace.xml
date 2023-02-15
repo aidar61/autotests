@@ -5,21 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbe61259-b4b8-4abe-802a-11c9fa449380" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/listeners/ConsoleOutputCapturer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/listeners/TestListener.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/main/java/com/ts/tests/runners/RetryTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/main/java/com/ts/tests/runners/RetryTransformer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/errors/TrackStudioError.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/errors/TrackStudioErrors.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sla/SlaTaskTestNegative.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/SlaHelpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/SlaHelpController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/BaseEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/RandomEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/RandomEntities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/RandomEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sla/SlaTaskTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sla/SlaTaskTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +24,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Enum" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -87,7 +81,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RandomEntities.createUdfs" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="InitEntities.createUdfs" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="common" />
       <extension name="coverage">
         <pattern>
@@ -96,7 +90,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.common.utils" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.common.utils.RandomEntities" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.common.utils.InitEntities" />
       <option name="METHOD_NAME" value="createUdfs" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
@@ -108,7 +102,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.BaseEntity" />
-        <item itemvalue="TestNG.RandomEntities.createUdfs" />
+        <item itemvalue="TestNG.InitEntities.createUdfs" />
         <item itemvalue="Application.TestTest" />
       </list>
     </recent_temporary>

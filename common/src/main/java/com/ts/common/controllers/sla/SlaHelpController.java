@@ -8,7 +8,7 @@ import com.ts.common.entitites.commonEntities.udfs.UdfSdTaskCode;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.request.ApiRequest;
 import com.ts.common.utils.JsonUtils;
-import com.ts.common.utils.RandomEntities;
+import com.ts.common.utils.InitEntities;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
@@ -16,7 +16,7 @@ import static com.ts.common.application.controllers.TrackStudioEndPoints.OPERATI
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
 import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.*;
-import static com.ts.common.utils.RandomEntities.getGeneralId;
+import static com.ts.common.utils.InitEntities.getGeneralId;
 import static com.ts.common.utils.RandomUtils.generateComment;
 
 public class SlaHelpController extends ApiRequest {
@@ -68,8 +68,8 @@ public class SlaHelpController extends ApiRequest {
     public Response editModule(SlaTask slaTask) {
         slaTask.setOperation(getGeneralId(CHANGE_SD_MODULE));
         Udfs udfs = slaTask.getUdfs();
-        UdfSdTaskCode udfSdTaskCode = RandomEntities.getUdfTaskCode(UdfSdTaskCode.Constants.ABNATTR.taskCodesId);
-        UdfSdModule udfSdModule = RandomEntities.getUdfSdModule(UdfSdModule.Constants.NOTIFICATION_SERVICE.moduleIds);
+        UdfSdTaskCode udfSdTaskCode = InitEntities.getUdfTaskCode(UdfSdTaskCode.Constants.ABNATTR.taskCodesId);
+        UdfSdModule udfSdModule = InitEntities.getUdfSdModule(UdfSdModule.Constants.NOTIFICATION_SERVICE.moduleIds);
         udfs.setUdfSdTaskCode(udfSdTaskCode);
         udfs.setUdfSdModule(udfSdModule);
         Udfs module = JsonUtils.deserialize(udfs.keepTypeFieldWithName("module"), Udfs.class);
@@ -86,7 +86,7 @@ public class SlaHelpController extends ApiRequest {
 
     public Response receiveAnalysis(SlaTask slaTask) {
         Udfs udfs = slaTask.getUdfs();
-        UdfSdProvidedHelpDeadline deadline = RandomEntities.getUdfSdProvidedHelpDeadline();
+        UdfSdProvidedHelpDeadline deadline = InitEntities.getUdfSdProvidedHelpDeadline();
         deadline.setDateValue("2023-02-15");
         udfs.setUdfSdProvidedHelpDeadline(deadline);
         Udfs module = JsonUtils.deserialize(udfs.keepTypeFieldWithName("date"), Udfs.class);
