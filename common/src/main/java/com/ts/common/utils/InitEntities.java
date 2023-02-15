@@ -11,7 +11,7 @@ import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.enums.Parents.MTB;
 import static com.ts.common.utils.RandomUtils.generateName;
 
-public class RandomEntities {
+public class InitEntities {
     private static final String BDKU_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/mtbankBdkuConf.json";
     private static final String MODULE_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/moduleAkkConf.json";
     private static final String USER_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/user.json";
@@ -19,7 +19,7 @@ public class RandomEntities {
     private static final File moduleJsonFile = new File(MODULE_JSON_PATH);
     private static final File userJsonFile = new File(USER_JSON_PATH);
 
-    private RandomEntities() {
+    private InitEntities() {
     }
 
     public static SlaTask getSlaTask(GeneralSlaId.Fields iDs) {

@@ -1,6 +1,8 @@
 package com.ts.common.asserts;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
+import com.ts.common.application.errors.ErrorResponseBody;
+import com.ts.common.application.errors.TrackStudioErrors;
 import com.ts.common.request.ResponseBody;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
@@ -8,8 +10,7 @@ import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 
-import static org.testng.Assert.assertNotNull;
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 @Slf4j
 public class ApiAsserts {
@@ -19,10 +20,12 @@ public class ApiAsserts {
     public ApiAsserts(Response response) {
         this.response = response;
     }
+
     @Step("[Assert] Response")
     public static ApiAsserts assertThat(Response response) {
         return new ApiAsserts(response);
     }
+
     @Step("Checking expected code: {0}")
     public ApiAsserts isCorrectResponseCode(TrackStudioHttpStatusCodes code) {
         if (this.response == null)
@@ -39,6 +42,14 @@ public class ApiAsserts {
         assertNotNull(obj, "Response body is not parseable");
         this.responseBody = (ResponseBody) obj;
         log.info("Response body is correct");
+        return this;
+    }
+
+    @Step("Checking expected error: {0}")
+    public ApiAsserts isCorrectError(String expectedError) {
+        ErrorResponseBody errorResponseBody = (ErrorResponseBody) this.responseBody;
+        assertEquals(errorResponseBody.getMessage(), expectedError, "Error is correct");
+        log.info("Error is correct");
         return this;
     }
 }
