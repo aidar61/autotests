@@ -5,15 +5,62 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fbe61259-b4b8-4abe-802a-11c9fa449380" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/errors/TrackStudioError.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/errors/TrackStudioErrors.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sla/SlaTaskTestNegative.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dbnavigator.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/allure-report/data/attachments/f129afa1eadf2ec2.bin" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/allure-report/data/test-cases/2e4af6fd3d6d624e.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/allure-report/data/test-cases/41168fba1221163b.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/allure-report/data/test-cases/7a8d43b18d9ec4fe.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/errors/Stack.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/listeners/LogCatchListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/SlaHelpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/SlaHelpController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/BaseEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/RandomEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/56bfce1ef7d86c53.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/6b7ec72cc2814eb6.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/9614d2da4f917d71.bin" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/attachments/2e2bc429c1999fd7.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/b1eb50cf34c5cbb1.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/c0c749f47602b6d9.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/c9d4fa56fa940174.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/d11a8f98c58cb2b9.bin" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/attachments/72e0b65cabab7ce5.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/fbc9b715889d7a0.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/behaviors.csv" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/behaviors.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/behaviors.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/behaviors.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/categories.csv" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/categories.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/categories.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/categories.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/packages.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/packages.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/suites.csv" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/suites.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/suites.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/suites.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/21b3a1a2ff5fa35.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/2bdceb38f48ed763.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/46e48ffd6f93e52a.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/485436c0f8232517.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/96960d552df33737.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/b91d5aecb9259360.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/e094f0ed6ae3da7f.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/f231d58ef13ecb99.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/data/timeline.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/data/timeline.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/export/influxDbData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/export/influxDbData.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/export/prometheusData.txt" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/export/prometheusData.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/history/categories-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/history/categories-trend.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/history/duration-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/history/duration-trend.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/history/history-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/history/history-trend.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/history/history.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/history/history.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/history/retry-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/history/retry-trend.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/widgets/behaviors.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/behaviors.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/widgets/categories-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/categories-trend.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/widgets/categories.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/categories.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/widgets/duration-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/duration-trend.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/widgets/duration.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/duration.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/widgets/history-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/history-trend.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/widgets/retry-trend.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/retry-trend.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/widgets/severity.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/severity.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/widgets/status-chart.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/status-chart.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/widgets/suites.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/suites.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/allure-report/widgets/summary.json" beforeDir="false" afterPath="$PROJECT_DIR$/allure-report/widgets/summary.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/errors/ErrorResponseBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/errors/ErrorResponseBody.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/ApiAsserts.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/ApiAsserts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/listeners/TestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/listeners/TestListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sla/SlaTaskTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sla/SlaTaskTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sla/SlaTaskTestNegative.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sla/SlaTaskTestNegative.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,10 +71,13 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Rebase.Settings">
+    <option name="NEW_BASE" value="origin/master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,18 +93,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2505747&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "jdk.selected.JAVA_MODULE": "11",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2505747"
   }
-}</component>
-  <component name="RunManager" selected="Application.BaseEntity">
+}]]></component>
+  <component name="RunManager" selected="TestNG./Users/aidarka61/IdeaProjects/trackstudio-test/integration_tests/src/test/resources/suite.xml">
     <configuration name="BaseEntity" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ts.common.entitites.BaseEntity" />
       <module name="common" />
@@ -81,7 +132,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InitEntities.createUdfs" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="RandomEntities.createUdfs" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="common" />
       <extension name="coverage">
         <pattern>
@@ -90,7 +141,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.common.utils" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.common.utils.InitEntities" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.common.utils.RandomEntities" />
       <option name="METHOD_NAME" value="createUdfs" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
@@ -99,10 +150,40 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="SlaTaskTestNegative.tryToRequestInfoWithoutReceiveAnalyze" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.sla.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.sla" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.sla.SlaTaskTestNegative" />
+      <option name="METHOD_NAME" value="tryToRequestInfoWithoutReceiveAnalyze" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="/Users/aidarka61/IdeaProjects/trackstudio-test/integration_tests/src/test/resources/suite.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/trackstudio-test/integration_tests/src/test/resources/suite.xml" />
+        <item itemvalue="TestNG.SlaTaskTestNegative.tryToRequestInfoWithoutReceiveAnalyze" />
         <item itemvalue="Application.BaseEntity" />
-        <item itemvalue="TestNG.InitEntities.createUdfs" />
+        <item itemvalue="TestNG.RandomEntities.createUdfs" />
         <item itemvalue="Application.TestTest" />
       </list>
     </recent_temporary>
@@ -128,5 +209,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
