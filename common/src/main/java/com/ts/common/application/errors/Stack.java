@@ -1,8 +1,7 @@
 package com.ts.common.application.errors;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ts.common.request.ResponseBody;
+import com.ts.common.entitites.BaseEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -15,8 +14,11 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ErrorResponseBody extends ResponseBody {
-    String exception;
-    Stack[] stack;
-    String message;
+public class Stack extends BaseEntity {
+    String methodName;
+    String moduleVersion;
+    String fileName;
+    int lineNumber;
+    String className;
+    boolean nativeMethod;
 }

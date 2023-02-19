@@ -8,20 +8,19 @@ import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.TaskStatuses;
+import com.ts.common.listeners.LogCatchListener;
+import com.ts.common.listeners.TestListener;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import jdk.jfr.Description;
 import org.assertj.core.api.Assertions;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
 import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.CAT_SLA_HELP;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CLOSED;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CONSULTED;
-
+@Listeners({LogCatchListener.class})
 public class SlaTaskTest extends BaseIntegrationTest {
     private static SlaHelpController slaHelpController;
     private SlaTask slaTask;
