@@ -11,8 +11,6 @@ import org.testng.TestListenerAdapter;
 public class TestListener extends TestListenerAdapter {
     private final ConsoleOutputCapturer consoleOutputCapturer = new ConsoleOutputCapturer();
 
-    public TestListener() {
-    }
 
     @SuppressWarnings("UnusedReturnValue")
     @Attachment(value = "Test Log", type = "text/plain")
@@ -22,7 +20,7 @@ public class TestListener extends TestListenerAdapter {
 
     @Override
     public void beforeConfiguration(ITestResult tr) {
-
+        consoleOutputCapturer.start();
         super.beforeConfiguration(tr);
     }
 
@@ -60,7 +58,6 @@ public class TestListener extends TestListenerAdapter {
         //Before class
         String className = testContext.getAllTestMethods().length > 0 ? testContext.getAllTestMethods()[0].getInstance().getClass().toString() : "UNDEFINED";
         log.warn("START CLASS: {}", className);
-        consoleOutputCapturer.start();
         super.onStart(testContext);
     }
 

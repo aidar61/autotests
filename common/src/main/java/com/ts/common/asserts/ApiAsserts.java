@@ -2,7 +2,6 @@ package com.ts.common.asserts;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.errors.ErrorResponseBody;
-import com.ts.common.application.errors.TrackStudioErrors;
 import com.ts.common.request.ResponseBody;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
@@ -38,7 +37,7 @@ public class ApiAsserts {
     }
 
     public <T> ApiAsserts isParseableBody(Class<T> clazz) {
-        Object obj = JsonUtils.deserialize(response, clazz);
+        Object obj = JsonUtils.deserialize(this.response, clazz);
         assertNotNull(obj, "Response body is not parseable");
         this.responseBody = (ResponseBody) obj;
         log.info("Response body is correct");
@@ -47,6 +46,7 @@ public class ApiAsserts {
 
     @Step("Checking expected error: {0}")
     public ApiAsserts isCorrectError(String expectedError) {
+        log.warn("Error is: {}", expectedError);
         ErrorResponseBody errorResponseBody = (ErrorResponseBody) this.responseBody;
         assertEquals(errorResponseBody.getMessage(), expectedError, "Error is correct");
         log.info("Error is correct");
