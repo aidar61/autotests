@@ -14,8 +14,4 @@ public class RandomDataUtils {
         GrUserDbEntity user = (GrUserDbEntity) dbHelper.getGrUserTable().receiveRandomPerson();
         return user.mapTo();
     }
-
-    public static String getRandomUserID() {
-        return getRandomUser().getId();
-    }
 }

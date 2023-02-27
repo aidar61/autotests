@@ -9,6 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 
 import java.util.List;
 
+import static com.ts.common.utils.RandomUtils.generateRandomNumberBetween;
+
 
 /**
  * @author Dennis Tikhomirov
@@ -19,6 +21,7 @@ public abstract class AbstractDbTable {
     public static final String SELECT_QUERY = "SELECT * FROM %s";
     public static final String SELECT_WHERE_QUERY = SELECT_QUERY + " WHERE %s=%s";
     public static final String SELECT_WHERE_ID = SELECT_QUERY + " WHERE id=%s";
+    public static final String SELECT_OFFSET_NEXT = SELECT_QUERY + " OFFSET %s ROWS FETCH NEXT %s ROWS ONLY";
 
     protected JdbcTemplate template;
     protected String name;
@@ -70,5 +73,8 @@ public abstract class AbstractDbTable {
         return (T) queryForObject(String.format(SELECT_WHERE_QUERY, this.name, parameters[0], parameters[1]), new BeanPropertyRowMapper<>(clazz));
     }
 
+    public List<BaseEntity> receiveEntitiesWithOffset(Class clazz) {
+        return query(String.format(SELECT_OFFSET_NEXT, this.name, generateRandomNumberBetween(0, 1000), 50), new BeanPropertyRowMapper<>(clazz));
+    }
 
 }
