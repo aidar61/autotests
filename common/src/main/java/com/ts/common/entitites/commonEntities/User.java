@@ -21,10 +21,10 @@ public class User extends BaseEntity {
     String id;
     String login;
     String name;
-    boolean active;
-    String status;
-    int childrenCount;
-    int wrongAuthAttempt;
-    boolean authBlocked;
-    boolean freelancer;
+//    boolean active;
+//    String status;
+//    int childrenCount;
+//    int wrongAuthAttempt;
+//    boolean authBlocked;
+//    boolean freelancer;
 }
