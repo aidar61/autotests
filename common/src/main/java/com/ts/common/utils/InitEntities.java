@@ -9,9 +9,11 @@ import java.io.File;
 
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.enums.Parents.MTB;
+import static com.ts.common.utils.RandomDataUtils.getRandomUser;
 import static com.ts.common.utils.RandomUtils.generateName;
 
 public class InitEntities {
+    private static final String TABLE_DESCRIPTION = "<table border=\\\"1px\\\" cellpadding=\\\"0\\\" cellspacing=\\\"0\\\" class=\\\"general\\\">\\n\\t<tbody>\\n\\t\\t<tr>\\n\\t\\t\\t<th style=\\\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: left;\\\">Вид доработки (выбрать верное)*:\\n\\t\\t\\t<ul>\\n\\t\\t\\t\\t<li>доработка действующего стандартного функционала</li>\\n\\t\\t\\t\\t<li>доработка действующего кастомизированного функционала</li>\\n\\t\\t\\t\\t<li>разработка нового функционала.</li>\\n\\t\\t\\t</ul>\\n\\t\\t\\t</th>\\n\\t\\t\\t<td data-required=\\\"true\\\" style=\\\"text-align:left\\\" width=\\\"50%\\\">&nbsp; &nbsp; &nbsp;разработка нового функционала</td>\\n\\t\\t</tr>\\n\\t\\t<tr>\\n\\t\\t\\t<th style=\\\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: left;\\\">Основание для доработки (выбрать верное)*:\\n\\t\\t\\t<ul>\\n\\t\\t\\t\\t<li>Требования регуляторных органов. В данном случае документ-основание обязателен. Заключение банка (мнение /толкования) о том, каким образом данные требования должны быть реализованы желательно.</li>\\n\\t\\t\\t\\t<li>Собственные требования банка, направленные на развитие или оптимизацию бизнеса. В данном случае, описать какие преимущества будут получены в результате доработки.</li>\\n\\t\\t\\t</ul>\\n\\t\\t\\t</th>\\n\\t\\t\\t<td data-required=\\\"true\\\" style=\\\"text-align:left\\\" width=\\\"50%\\\">&nbsp; &nbsp; &nbsp;Собственный</td>\\n\\t\\t</tr>\\n\\t\\t<tr>\\n\\t\\t\\t<th style=\\\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: left;\\\">Указать, влияют ли требования запроса на другие модули, если да, то указать на какие*</th>\\n\\t\\t\\t<td data-required=\\\"true\\\" style=\\\"text-align:left\\\" width=\\\"50%\\\">&nbsp; &nbsp; &nbsp;да</td>\\n\\t\\t</tr>\\n\\t\\t<tr>\\n\\t\\t\\t<th style=\\\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: left;\\\">Описание дорабатываемого бизнес-процесса, описание предполагаемых изменений, если существуют (операции, клиентские формы)*</th>\\n\\t\\t\\t<td data-required=\\\"true\\\" style=\\\"text-align:left\\\" width=\\\"50%\\\">&nbsp; &nbsp; &nbsp;да</td>\\n\\t\\t</tr>\\n\\t\\t<tr>\\n\\t\\t\\t<th style=\\\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: left;\\\">Скриншоты, предполагаемые макеты экранных форм</th>\\n\\t\\t\\t<td style=\\\"text-align:left\\\" width=\\\"50%\\\">&nbsp; &nbsp; &nbsp;1</td>\\n\\t\\t</tr>\\n\\t\\t<tr>\\n\\t\\t\\t<th style=\\\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: left;\\\">Как в данный момент обеспечен бизнес процесс (необходимо описать средства автоматизации и ручные операции). Если бизнес процесса не существует, то необходимо это указать явно.</th>\\n\\t\\t\\t<td style=\\\"text-align:left\\\" width=\\\"50%\\\">&nbsp; &nbsp; &nbsp;1укеуке</td>\\n\\t\\t</tr>\\n\\t\\t<tr>\\n\\t\\t\\t<th style=\\\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: left;\\\">Описание бухгалтерских моделей</th>\\n\\t\\t\\t<td style=\\\"text-align:left\\\" width=\\\"50%\\\">&nbsp; &nbsp; &nbsp;1укеуке</td>\\n\\t\\t</tr>\\n\\t\\t<tr>\\n\\t\\t\\t<th style=\\\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: left;\\\">Алгоритмы расчета, описание расчетов, примеры</th>\\n\\t\\t\\t<td style=\\\"text-align:left\\\" width=\\\"50%\\\">&nbsp; &nbsp; &nbsp;112313укеуке</td>\\n\\t\\t</tr>\\n\\t\\t<tr>\\n\\t\\t\\t<th style=\\\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: left;\\\">Форматы электронных сообщений</th>\\n\\t\\t\\t<td style=\\\"text-align:left\\\" width=\\\"50%\\\">&nbsp; &nbsp; &nbsp;1123123укеуке</td>\\n\\t\\t</tr>\\n\\t\\t<tr>\\n\\t\\t\\t<th style=\\\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: left;\\\">Формы отчетов — шаблоны и по возможности примеры заполнения с описанием параметров</th>\\n\\t\\t\\t<td style=\\\"text-align:left\\\" width=\\\"50%\\\">&nbsp; &nbsp; &nbsp;123укеуку</td>\\n\\t\\t</tr>\\n\\t\\t<tr>\\n\\t\\t\\t<th style=\\\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: left;\\\">Описание контрольных примеров*</th>\\n\\t\\t\\t<td data-required=\\\"true\\\" style=\\\"text-align:left\\\" width=\\\"50%\\\">&nbsp; &nbsp; &nbsp;123уке ук е ку</td>\\n\\t\\t</tr>\\n\\t</tbody>\\n</table>\\n\\n<p>&nbsp;</p>\\n";
     private static final String BDKU_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/mtbankBdkuConf.json";
     private static final String MODULE_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/moduleAkkConf.json";
     private static final String USER_JSON_PATH = "/Users/aidarka61/IdeaProjects/trackstudio-test/common/src/main/resources/data/user.json";
@@ -31,9 +33,25 @@ public class InitEntities {
                 .description(generateName() + " description")
                 .udfs(getFullUdfs())
                 .attachments(new String[]{})
-                .handlerUser(getUserThrowsJson())
+                .handlerUser(getRandomUser())
                 .build();
     }
+
+    public static SlaTask getSlaTask(GeneralSlaId.Fields iDs, Udfs udfs, boolean... addTable) {
+        SlaTask build = SlaTask.builder()
+                .category(getGeneralId(iDs))
+                .operation(getGeneralId(iDs))
+                .parent(getParent(MTB))
+                .name(generateName())
+                .description(generateName() + "description")
+                .udfs(udfs)
+                .attachments(new String[]{})
+                .handlerUser(getRandomUser())
+                .build();
+        if (addTable[0]) build.setDescription(TABLE_DESCRIPTION);
+        return build;
+    }
+
 
     public static Udfs getFullUdfs() {
         return Udfs.builder()
@@ -79,7 +97,7 @@ public class InitEntities {
         return UdfSdTrustedWatcher.builder()
                 .udfId(UDF_SD_TRUSTEDWATCHER.udfId)
                 .type(UDF_SD_TRUSTEDWATCHER.type.name())
-                .userValue(new User[]{})
+                .userValue(new User[]{getRandomUser()})
                 .build();
     }
 
@@ -87,7 +105,7 @@ public class InitEntities {
         return UdfWatcher.builder()
                 .udfId(UDF_WATCHER.udfId)
                 .type(UDF_WATCHER.type.name())
-                .userValue(new User[]{})
+                .userValue(new User[]{getRandomUser()})
                 .build();
     }
 

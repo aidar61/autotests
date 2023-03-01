@@ -1,4 +1,4 @@
-package com.ts.common.controllers.sla;
+package com.ts.common.controllers.sla.slaHelp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ts.common.annotations.Create;
