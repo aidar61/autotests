@@ -1,4 +1,4 @@
-package com.ts.common.controllers.sla;
+package com.ts.common.controllers.sla.slaHelp;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.entitites.commonEntities.Udfs;
@@ -14,7 +14,7 @@ import io.restassured.response.Response;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.OPERATION;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
-import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
+import static com.ts.common.controllers.sla.slaHelp.SlaRequestBody.Fields.*;
 import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.*;
 import static com.ts.common.utils.InitEntities.getGeneralId;
 import static com.ts.common.utils.RandomUtils.generateComment;
