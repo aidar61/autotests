@@ -23,6 +23,61 @@ public class SlaFeatureController extends BaseSlaController {
         return super.createTask(requestBody);
     }
 
+    @Override
+    protected Response changeAuthor(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response changeAttributes(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response changeResPerson(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response changeCurrentRole(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response changeLinkedTasks(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response addTrustedWatchers(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response addClientWatchers(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response addWatchers(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response comment(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response privateComment(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response removeRequest(SlaTask slaTask) {
+        return null;
+    }
+
     public Response createSlaFeatureTask(SlaTask slaTask) {
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         this.response = createTask(slaRequestBody.keepMandatoryAndCreateFields());

@@ -18,7 +18,7 @@ import static com.ts.common.application.controllers.TrackStudioEndPoints.OPERATI
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
 import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.*;
-import static com.ts.common.entitites.commonEntities.Udfs.Fields.*;
+import static com.ts.common.entitites.commonEntities.Udfs.Fields.UDF_SD_PROVIDEDHELPDEADLINE;
 import static com.ts.common.utils.InitEntities.getGeneralId;
 import static com.ts.common.utils.RandomUtils.generateComment;
 
@@ -29,18 +29,74 @@ public class SlaHelpController extends BaseSlaController {
         this.authToken = authToken;
     }
 
-    @Step("Create following sla task consultation: {0}")
+    @Step("Создание консультации: {0}")
     public Response createTask(String requestBody) {
         return super.post(getEndpoint(TASK, UPDATE), requestBody);
     }
 
-    @Step("Выполнение операциии SlaHelp Task")
+    @Step("Выполнение операциии SlaHelp Task: {0}")
     public Response performOperation(SlaTask slaTask, String requestBody) {
         return super.post(getEndpoint(OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
+    @Step("Получить запрос консультации: {0}")
+    public Response receiveSlaTask(String taskNumber) {
+        return super.get(getEndpoint(TASK, INFO, taskNumber));
+    }
+
     @Override
     protected Response changeAuthor(SlaTask slaTask) {
+        return null;
+    }
+
+
+    @Override
+    protected Response changeAttributes(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response changeResPerson(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response changeCurrentRole(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response changeLinkedTasks(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response addTrustedWatchers(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response addClientWatchers(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response addWatchers(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response comment(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response privateComment(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response removeRequest(SlaTask slaTask) {
         return null;
     }
 
@@ -54,10 +110,6 @@ public class SlaHelpController extends BaseSlaController {
             slaTask.setStatus(slaResponseBody.getStatus());
         }
         return this.response;
-    }
-
-    public Response receiveTaskConsultation(String taskNumber) {
-        return super.get(getEndpoint(TASK, INFO, taskNumber));
     }
 
     public Response addComment(SlaTask slaTask) {

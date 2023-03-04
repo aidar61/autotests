@@ -1,6 +1,5 @@
 package com.ts.common.controllers.sla;
 
-import com.ts.common.entitites.commonEntities.GeneralSlaId;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.request.ApiRequest;
 import io.qameta.allure.Step;
@@ -19,8 +18,8 @@ public abstract class BaseSlaController extends ApiRequest {
         return super.post(getEndpoint(TASK, UPDATE), requestBody);
     }
 
-    protected Response performOperation(SlaTask slaTask, String requestBody, GeneralSlaId.Fields operation) {
-        return super.post(getEndpoint(OPERATION, slaTask.getNumber(), CREATE), requestBody);
+    protected Response receiveSlaTask(String taskNumber) {
+        return super.get(getEndpoint(TASK, INFO, taskNumber));
     }
 
     protected Response performOperation(SlaTask slaTask, String requestBody) {
@@ -29,4 +28,24 @@ public abstract class BaseSlaController extends ApiRequest {
 
     @Step("Изменение автора: {0}")
     protected abstract Response changeAuthor(SlaTask slaTask);
+
+    protected abstract Response changeAttributes(SlaTask slaTask);
+
+    protected abstract Response changeResPerson(SlaTask slaTask);
+
+    protected abstract Response changeCurrentRole(SlaTask slaTask);
+
+    protected abstract Response changeLinkedTasks(SlaTask slaTask);
+
+    protected abstract Response addTrustedWatchers(SlaTask slaTask);
+
+    protected abstract Response addClientWatchers(SlaTask slaTask);
+
+    protected abstract Response addWatchers(SlaTask slaTask);
+
+    protected abstract Response comment(SlaTask slaTask);
+
+    protected abstract Response privateComment(SlaTask slaTask);
+
+    protected abstract Response removeRequest(SlaTask slaTask);
 }
