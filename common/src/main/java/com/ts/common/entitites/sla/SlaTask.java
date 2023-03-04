@@ -3,6 +3,7 @@ package com.ts.common.entitites.sla;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
+import com.ts.common.enums.SlaType;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -17,6 +18,7 @@ import lombok.extern.jackson.Jacksonized;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
 public class SlaTask extends BaseEntity {
+    SlaType slaType;
     String id;
     String number;
     GeneralSlaId category;
