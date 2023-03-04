@@ -4,10 +4,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ts.common.annotations.Create;
 import com.ts.common.annotations.Mandatory;
 import com.ts.common.annotations.TypeId;
+import com.ts.common.controllers.sla.SlaRequestBody;
 import com.ts.common.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -105,6 +107,14 @@ public abstract class RequestBody {
     public String keepFields(String... fields) {
         List<String> allFields = receiveAllFields();
         allFields.removeAll(Arrays.asList(fields));
+        return removeFields(allFields);
+    }
+
+    public String keepFields(SlaRequestBody.Fields... fields) {
+        List<String> slaFields = new ArrayList<>();
+        Arrays.stream(fields).forEach(f -> slaFields.add(f.field));
+        List<String> allFields = receiveAllFields();
+        allFields.removeAll(slaFields);
         return removeFields(allFields);
     }
 }

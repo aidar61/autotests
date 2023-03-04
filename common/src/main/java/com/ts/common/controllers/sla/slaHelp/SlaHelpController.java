@@ -2,6 +2,8 @@ package com.ts.common.controllers.sla.slaHelp;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.controllers.sla.BaseSlaController;
+import com.ts.common.controllers.sla.SlaRequestBody;
+import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.commonEntities.udfs.UdfSdModule;
 import com.ts.common.entitites.commonEntities.udfs.UdfSdProvidedHelpDeadline;
@@ -14,7 +16,7 @@ import io.restassured.response.Response;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.OPERATION;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
-import static com.ts.common.controllers.sla.slaHelp.SlaRequestBody.Fields.*;
+import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
 import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.*;
 import static com.ts.common.entitites.commonEntities.Udfs.Fields.*;
 import static com.ts.common.utils.InitEntities.getGeneralId;
@@ -35,6 +37,11 @@ public class SlaHelpController extends BaseSlaController {
     @Step("Выполнение операциии SlaHelp Task")
     public Response performOperation(SlaTask slaTask, String requestBody) {
         return super.post(getEndpoint(OPERATION, slaTask.getNumber(), CREATE), requestBody);
+    }
+
+    @Override
+    protected Response changeAuthor(SlaTask slaTask) {
+        return null;
     }
 
     public Response createTask(SlaTask slaTask) {

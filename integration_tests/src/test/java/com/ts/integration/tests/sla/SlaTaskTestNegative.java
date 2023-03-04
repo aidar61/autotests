@@ -6,7 +6,7 @@ import com.ts.common.application.errors.TrackStudioErrors;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.TaskAsserts;
 import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
-import com.ts.common.controllers.sla.slaHelp.SlaResponseBody;
+import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.listeners.LogCatchListener;
