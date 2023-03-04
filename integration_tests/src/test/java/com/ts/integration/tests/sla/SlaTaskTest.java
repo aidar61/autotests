@@ -61,7 +61,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
     @Test(priority = 1, dependsOnMethods = "createSlaTaskConsultation")
     @Description("Test description: Receive sla task consultation")
     public void receiveSlaTaskConsultation() {
-        slaHelpController.receiveTaskConsultation(slaTask.getNumber());
+        slaHelpController.receiveSlaTask(slaTask.getNumber());
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);

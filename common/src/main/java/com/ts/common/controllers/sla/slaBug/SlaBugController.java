@@ -43,6 +43,56 @@ public class SlaBugController extends BaseSlaController {
     protected Response changeAuthor(SlaTask slaTask) {
         slaTask.setOperation(generateOperationID(SLA_BUG, CHANGE_AUTHOR));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
-        return super.performOperation(slaTask, slaRequestBody.keepFields(ID, OPERATION, DESCRIPTION));
+        return super.performOperation(slaTask, slaRequestBody.keepFields(ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS));
+    }
+
+    @Override
+    protected Response changeAttributes(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response changeResPerson(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response changeCurrentRole(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response changeLinkedTasks(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response addTrustedWatchers(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response addClientWatchers(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response addWatchers(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response comment(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response privateComment(SlaTask slaTask) {
+        return null;
+    }
+
+    @Override
+    protected Response removeRequest(SlaTask slaTask) {
+        return null;
     }
 }

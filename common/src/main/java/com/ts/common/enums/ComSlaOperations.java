@@ -10,7 +10,9 @@ public enum ComSlaOperations {
     ADD_CLIENT_WATCHERS("%S__APPOINTCLIWATCHERS"),// назначить наблюдателей клиента
     ADD_WATCHERS("%S_APPOINTWATCHER"),// назначить наблюдателей
     COMMENT("%S_OURCOMMENT"), // сообщить информацию(комментарий)
-    PRIVATE_COMENT("%S_PRIVATECOMMENT"), // приватный комментарий
+    PRIVATE_COMMENT("%S_PRIVATECOMMENT"), // приватный комментарий
+    CHANGE_MODULE("%S_CHANGE_SD_MODULE"), // изменить модуль системы
+    ANALIZE("%S_ANALIZE"), // принять на анализ
     REMOVE_REQUEST("%S_REMOVEREQUEST");
     public final String id;
 
