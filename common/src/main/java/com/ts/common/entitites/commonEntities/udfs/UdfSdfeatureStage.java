@@ -1,4 +1,4 @@
 package com.ts.common.entitites.commonEntities.udfs;
 
-public class UdfSdfeatureStage {
+public class UdfSdfeatureStage extends BaseUdfs {
 }

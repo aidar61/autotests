@@ -16,7 +16,7 @@ import org.assertj.core.api.Assertions;
 import org.testng.annotations.*;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
-import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.CAT_SLA_HELP;
+import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.CAT;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CLOSED;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CONSULTED;
 @Listeners({LogCatchListener.class})
@@ -28,9 +28,9 @@ public class SlaTaskTest extends BaseIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
-        slaTask = InitEntities.getSlaTask(CAT_SLA_HELP);
+        slaTask = InitEntities.getSlaTask(CAT);
         slaHelpController = apiController.getSlaHelpController();
-        slaHelpController.createSlaTaskConsultation(slaTask);
+        slaHelpController.createTask(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);

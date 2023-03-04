@@ -20,7 +20,7 @@ import org.testng.annotations.Test;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST;
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
-import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.CAT_SLA_HELP;
+import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.CAT;
 
 @Listeners({LogCatchListener.class})
 public class SlaTaskTestNegative extends BaseIntegrationTest {
@@ -31,9 +31,9 @@ public class SlaTaskTestNegative extends BaseIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
-        slaTask = InitEntities.getSlaTask(CAT_SLA_HELP);
+        slaTask = InitEntities.getSlaTask(CAT);
         slaHelpController = apiController.getSlaHelpController();
-        slaHelpController.createSlaTaskConsultation(slaTask);
+        slaHelpController.createTask(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);

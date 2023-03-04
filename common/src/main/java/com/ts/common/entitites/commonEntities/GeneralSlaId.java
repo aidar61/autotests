@@ -20,8 +20,7 @@ public class GeneralSlaId {
     String id;
 
     public enum Fields {
-        CAT_SLA_HELP("CAT_SLAHELP", "update"),
-        CAT_SLAFEATURE("CAT_SLAFEATURE", "update"),
+        CAT("CAT_%S", "update"),
         RECEIVE_ANALIZE("MSG_SLAHELP_ANALIZE", "operation"),
         REQUEST_INFORMATION("MSG_SLAHELP_REQUESTINFO", "operation"),
         PROVIDE_CONSULT("MSG_SLAHELP_CONSULT", "operation"),
