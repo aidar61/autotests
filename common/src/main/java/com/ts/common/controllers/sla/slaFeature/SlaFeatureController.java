@@ -5,11 +5,14 @@ import com.ts.common.controllers.sla.BaseSlaController;
 import com.ts.common.controllers.sla.SlaRequestBody;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.entitites.sla.SlaTask;
+import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.HEADERS_BASE_CONTROLLER;
+import static com.ts.common.enums.ComSlaOperations.CAT;
+import static com.ts.common.enums.SlaType.SLA_FEATURE;
 
 public class SlaFeatureController extends BaseSlaController {
     public SlaFeatureController(String url, AuthToken authToken) {
@@ -79,6 +82,7 @@ public class SlaFeatureController extends BaseSlaController {
     }
 
     public Response createSlaFeatureTask(SlaTask slaTask) {
+        slaTask.setCategory(InitEntities.generateOperationID(SLA_FEATURE, CAT));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         this.response = createTask(slaRequestBody.keepMandatoryAndCreateFields());
         SlaResponseBody slaResponseBody = JsonUtils.deserialize(this.response, SlaResponseBody.class);

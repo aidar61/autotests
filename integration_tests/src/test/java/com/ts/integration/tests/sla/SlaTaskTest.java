@@ -3,8 +3,9 @@ package com.ts.integration.tests.sla;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.TaskAsserts;
-import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
 import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
+import com.ts.common.entitites.commonEntities.GeneralSlaId;
 import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.TaskStatuses;
@@ -19,6 +20,7 @@ import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.H
 import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.CAT;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CLOSED;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CONSULTED;
+
 @Listeners({LogCatchListener.class})
 public class SlaTaskTest extends BaseIntegrationTest {
     private static SlaHelpController slaHelpController;

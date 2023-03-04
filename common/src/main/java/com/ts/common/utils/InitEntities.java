@@ -41,6 +41,20 @@ public class InitEntities {
                 .build();
     }
 
+    public static SlaTask getSlaTask(SlaType slaType, ComSlaOperations id) {
+        return SlaTask.builder()
+                .slaType(slaType)
+                .category(generateOperationID(slaType, id))
+                .operation(generateOperationID(slaType, id))
+                .parent(getParent(MTB))
+                .name(generateName())
+                .description(generateName() + " description")
+                .udfs(getFullUdfs())
+                .attachments(new String[]{})
+                .handlerUser(getRandomUser())
+                .build();
+    }
+
     public static SlaTask getSlaTask(GeneralSlaId.Fields iDs, Udfs udfs, boolean... addTable) {
         SlaTask build = SlaTask.builder()
                 .category(getGeneralId(iDs))
