@@ -19,6 +19,7 @@ import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
 import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.*;
 import static com.ts.common.entitites.commonEntities.Udfs.Fields.UDF_SD_PROVIDEDHELPDEADLINE;
+import static com.ts.common.utils.DateUtils.getCurrentDate;
 import static com.ts.common.utils.InitEntities.getGeneralId;
 import static com.ts.common.utils.RandomUtils.generateComment;
 
@@ -139,13 +140,13 @@ public class SlaHelpController extends BaseSlaController {
     public Response receiveAnalysis(SlaTask slaTask) {
         Udfs udfs = slaTask.getUdfs();
         UdfSdProvidedHelpDeadline deadline = InitEntities.getUdfSdProvidedHelpDeadline();
-        deadline.setDateValue("2023-02-15");
+        deadline.setDateValue(getCurrentDate());
         udfs.setUdfSdProvidedHelpDeadline(deadline);
         Udfs module = JsonUtils.deserialize(udfs.keepFields(UDF_SD_PROVIDEDHELPDEADLINE.field), Udfs.class);
         slaTask.setOperation(getGeneralId(RECEIVE_ANALIZE));
         slaTask.setUdfs(module);
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
-        this.response = performOperation(slaTask, slaRequestBody.keepFields(SlaRequestBody.Fields.OPERATION.field, ATTACHMENTS.field, HANDLER_USER.field, UDFS.field));
+        this.response = performOperation(slaTask, slaRequestBody.keepFields(SlaRequestBody.Fields.OPERATION.field, DESCRIPTION.field, ATTACHMENTS.field, HANDLER_USER.field, UDFS.field));
         return this.response;
     }
 
