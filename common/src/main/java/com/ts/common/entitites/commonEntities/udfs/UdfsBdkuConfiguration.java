@@ -21,7 +21,7 @@ import java.util.List;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UdfsBdkuConfiguration extends BaseEntity {
+public class UdfsBdkuConfiguration extends BaseUdfs{
     @JsonProperty("udfid")
     String udfId;
     String type;

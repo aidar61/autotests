@@ -4,6 +4,7 @@ import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.controllers.sla.BaseSlaController;
 import com.ts.common.controllers.sla.slaHelp.SlaRequestBody;
 import com.ts.common.controllers.sla.slaHelp.SlaResponseBody;
+import com.ts.common.entitites.commonEntities.GeneralSlaId;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
@@ -33,5 +34,11 @@ public class SlaFeatureController extends BaseSlaController {
             slaTask.setStatus(slaResponseBody.getStatus());
         }
         return this.response;
+    }
+
+    @Override
+    protected Response performOperation(SlaTask slaTask, String requestBody, GeneralSlaId.Fields operation) {
+        SlaRequestBody slaRequestBody = new SlaRequestBody();
+        return super.performOperation(slaTask, requestBody, operation);
     }
 }

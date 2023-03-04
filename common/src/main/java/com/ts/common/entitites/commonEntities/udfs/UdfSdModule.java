@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UdfSdModule extends BaseEntity {
+public class UdfSdModule extends BaseUdfs {
     @JsonProperty("udfid")
     String udfId;
     String type;

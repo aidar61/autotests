@@ -127,6 +127,11 @@ public abstract class BaseEntity implements Serializable {
         allFields.removeAll(typeFields);
         return removeFields(allFields);
     }
+    public String keepFields(String... fields) {
+        List<String> allFields = receiveAllFields();
+        allFields.removeAll(Arrays.asList(fields));
+        return removeFields(allFields);
+    }
 
 //    public static void main(String[] args) {
 //        SlaTask slaTask = RandomEntities.getSlaTask(GeneralSlaId.Fields.CHANGE_SD_MODULE);

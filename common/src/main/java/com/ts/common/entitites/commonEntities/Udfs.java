@@ -2,7 +2,6 @@ package com.ts.common.entitites.commonEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.annotations.TypeId;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.udfs.*;
@@ -26,65 +25,92 @@ import static com.ts.common.enums.Type.*;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SD_TRUSTEDWATCHER")
+//    @JsonProperty(defaultValue = "UDF_SD_TRUSTEDWATCHER")
     UdfSdTrustedWatcher udfSdTrustedWatcher;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_WATCHER")
+//    @JsonProperty(defaultValue = "UDF_WATCHER")
     UdfWatcher udfWatcher;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SD_TASK_CODE")
+//    @JsonProperty(defaultValue = "UDF_SD_TASK_CODE")
     @TypeId(type = "module")
     UdfSdTaskCode udfSdTaskCode;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SD_RELATED_TASK_CODES")
+//    @JsonProperty(defaultValue = "UDF_SD_RELATED_TASK_CODES")
     UdfSdRelatedTaskCodes udfSdRelatedTaskCodes;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SD_MODULE")
+//    @JsonProperty(defaultValue = "UDF_SD_MODULE")
     @TypeId(type = "module")
     UdfSdModule udfSdModule;
-    @JsonProperty(defaultValue = "UDF_SLAHELP_COST")
+    //    @JsonProperty(defaultValue = "UDF_SLAHELP_COST")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfSlaHelpCost udfSlaHelpCost;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SDFEATURE_GENUSE")
+//    @JsonProperty(defaultValue = "UDF_SDFEATURE_GENUSE")
     UdfSdFeatureGenuse udfSdFeatureGenuse;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SLA_URGANCYHELP")
+//    @JsonProperty(defaultValue = "UDF_SLA_URGANCYHELP")
     UdfSlaUrgancyHelp udfSlaUrgancyHelp;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SD_HELPKOEF")
+//    @JsonProperty(defaultValue = "UDF_SD_HELPKOEF")
     UdfSdHelpkoef udfSdHelpkoef;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SD_LINKEDREQUEST")
+//    @JsonProperty(defaultValue = "UDF_SD_LINKEDREQUEST")
     UdfSdLinkedRequest udfSdLinkedRequest;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SD_REPEATREQUEST")
+//    @JsonProperty(defaultValue = "UDF_SD_REPEATREQUEST")
     UdfSdRepeatRequest udfSdRepeatRequest;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SD_CLIENTWATCHERS")
+//    @JsonProperty(defaultValue = "UDF_SD_CLIENTWATCHERS")
     UdfSdClientWatchers udfSdClientWatchers;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_BDKU_CONFIGURATION")
+//    @JsonProperty(defaultValue = "UDF_BDKU_CONFIGURATION")
     UdfsBdkuConfiguration udfsBdkuConfiguration;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SD_REMOTEID")
+//    @JsonProperty(defaultValue = "UDF_SD_REMOTEID")
     UdfSdRemoteId udfSdRemoteId;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SD_INITPERSON")
+//    @JsonProperty(defaultValue = "UDF_SD_INITPERSON")
     UdfSdInitPerson udfSdInitPerson;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SD_NOTLIMITEDWORK")
+//    @JsonProperty(defaultValue = "UDF_SD_NOTLIMITEDWORK")
     UdfSdNotLimitedWork udfSdNotLimitedWork;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_WORKTASK_SOURCETYPE")
+//    @JsonProperty(defaultValue = "UDF_WORKTASK_SOURCETYPE")
     UdfWorkTaskSourceType udfWorkTaskSourceType;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_REGPROJECT")
-    UdfRegProject udfRegProject;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty(defaultValue = "UDF_SD_PROVIDEDHELPDEADLINE")
+//    @JsonProperty(defaultValue = "UDF_SD_PROVIDEDHELPDEADLINE")
     @TypeId(type = "date")
     UdfSdProvidedHelpDeadline udfSdProvidedHelpDeadline;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+//    @JsonProperty(defaultValue = "UDF_REGPROJECT")
+    UdfRegProject udfRegProject;
+
+    public enum Fields {
+        UDF_SD_TRUSTEDWATCHER("udfSdTrustedWatcher"),
+        UDF_WATCHER("udfWatcher"),
+        UDF_SD_TASK_CODE("udfSdTaskCode"),
+        UDF_SD_RELATED_TASK_CODES("udfSdRelatedTaskCodes"),
+        UDF_SD_MODULE("udfSdModule"),
+        UDF_SLAHELP_COST("udfSlaHelpCost"),
+        UDF_SDFEATURE_GENUSE("udfSdFeatureGenuse"),
+        UDF_SLA_URGANCYHELP("udfSlaUrgancyHelp"),
+        UDF_SD_HELPKOEF("udfSdHelpkoef"),
+        UDF_SD_LINKEDREQUEST("udfSdLinkedRequest"),
+        UDF_SD_REPEATREQUEST("udfSdRepeatRequest"),
+        UDF_SD_CLIENTWATCHERS("udfSdClientWatchers"),
+        UDF_BDKU_CONFIGURATION("udfsBdkuConfiguration"),
+        UDF_SD_REMOTEID("udfSdRemoteId"),
+        UDF_SD_INITPERSON("udfSdInitPerson"),
+        UDF_SD_NOTLIMITEDWORK("udfSdNotLimitedWork"),
+        UDF_WORKTASK_SOURCETYPE("udfWorkTaskSourceType"),
+        UDF_SD_PROVIDEDHELPDEADLINE("udfSdProvidedHelpDeadline"),
+        UDF_REGPROJECT("udfRegProject");
+        public final String field;
+
+        Fields(String field) {
+            this.field = field;
+        }
+    }
 
     public enum UdfSd {
         UDF_SD_TRUSTEDWATCHER("UDF_SD_TRUSTEDWATCHER", USER),
