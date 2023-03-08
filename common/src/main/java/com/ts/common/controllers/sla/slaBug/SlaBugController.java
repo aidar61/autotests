@@ -4,20 +4,22 @@ import com.ts.common.controllers.sla.BaseSlaController;
 import com.ts.common.controllers.sla.SlaRequestBody;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.entitites.sla.SlaTask;
+import com.ts.common.enums.SlaType;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 import java.util.Map;
 
-import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
-import static com.ts.common.enums.ComSlaOperations.CHANGE_AUTHOR;
+import static com.ts.common.enums.ComSlaOperations.*;
 import static com.ts.common.enums.SlaType.SLA_BUG;
 import static com.ts.common.utils.InitEntities.generateOperationID;
 
 public class SlaBugController extends BaseSlaController {
+    private static final SlaType SLA_TYPE = SLA_BUG;
+
     public SlaBugController(String url, Map<String, String> headersBaseController) {
-        super(url, headersBaseController);
+        super(url, headersBaseController, SLA_TYPE);
     }
 
     @Step("Создание извещения об ошибке: {0}")
@@ -41,19 +43,23 @@ public class SlaBugController extends BaseSlaController {
 
     @Override
     protected Response changeAuthor(SlaTask slaTask) {
-        slaTask.setOperation(generateOperationID(SLA_BUG, CHANGE_AUTHOR));
+        slaTask.setOperation(generateOperationID(SLA_TYPE, CHANGE_AUTHOR));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
-        return super.performOperation(slaTask, slaRequestBody.keepFields(ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS));
+        return super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS));
     }
 
     @Override
     protected Response changeAttributes(SlaTask slaTask) {
-        return null;
+        slaTask.setOperation(generateOperationID(SLA_TYPE, CHANGE_ATTR));
+        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+        return super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS));
     }
 
     @Override
     protected Response changeResPerson(SlaTask slaTask) {
-        return null;
+        slaTask.setOperation(generateOperationID(SLA_TYPE, CHANGE_RES_PERSON));
+        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+        return super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS));
     }
 
     @Override
@@ -95,4 +101,5 @@ public class SlaBugController extends BaseSlaController {
     protected Response removeRequest(SlaTask slaTask) {
         return null;
     }
+
 }

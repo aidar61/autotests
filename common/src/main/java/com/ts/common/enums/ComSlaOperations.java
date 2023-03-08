@@ -6,6 +6,7 @@ public enum ComSlaOperations {
     CHANGE_RES_PERSON("%S_REASSIGN"),//изменить ответственного
     CHANGE_CURRENT_ROLE("%S_CHANGECURRENTROLE"),//изменить ответственную роль
     CHANGE_LINKED_TASKS("%S_CHANGELINKEDTASKS"),// изменить список связанных задач
+    CHANGE_ATTR("%S_CHANGEATTRS"), // изменить аттрибуты задачи
     ADD_TRUST_WATCHER("%S_CHANGELINKEDTASKS"),// назначить доверенного наблюдателя
     ADD_CLIENT_WATCHERS("%S__APPOINTCLIWATCHERS"),// назначить наблюдателей клиента
     ADD_WATCHERS("%S_APPOINTWATCHER"),// назначить наблюдателей

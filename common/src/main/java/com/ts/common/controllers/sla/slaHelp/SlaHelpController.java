@@ -13,6 +13,7 @@ import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import org.jetbrains.annotations.NotNull;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.OPERATION;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
@@ -36,7 +37,7 @@ public class SlaHelpController extends BaseSlaController {
     }
 
     @Step("Выполнение операциии SlaHelp Task: {0}")
-    public Response performOperation(SlaTask slaTask, String requestBody) {
+    public Response performOperation(@NotNull SlaTask slaTask, String requestBody) {
         return super.post(getEndpoint(OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
