@@ -37,7 +37,7 @@ public class InitEntities {
                 .description(generateName() + " description")
                 .udfs(getFullUdfs())
                 .attachments(new String[]{})
-                .handlerUser(getRandomUser())
+                .handlerUser(getUserThrowsJson())
                 .build();
     }
 
@@ -51,7 +51,7 @@ public class InitEntities {
                 .description(generateName() + " description")
                 .udfs(getFullUdfs())
                 .attachments(new String[]{})
-                .handlerUser(getRandomUser())
+                .handlerUser(getUserThrowsJson())
                 .build();
     }
 
@@ -64,7 +64,7 @@ public class InitEntities {
                 .description(generateName() + "description")
                 .udfs(udfs)
                 .attachments(new String[]{})
-                .handlerUser(getRandomUser())
+                .handlerUser(getUserThrowsJson())
                 .build();
         if (addTable[0]) build.setDescription(FEATURE_TABLE);
         return build;
