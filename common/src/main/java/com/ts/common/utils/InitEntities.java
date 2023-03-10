@@ -1,11 +1,13 @@
 package com.ts.common.utils;
 
 import com.ts.common.entitites.commonEntities.*;
+import com.ts.common.entitites.commonEntities.udf.UdfUser;
 import com.ts.common.entitites.commonEntities.udfs.*;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.Parents;
 import com.ts.common.enums.SlaType;
+import com.ts.common.enums.Type;
 
 import java.io.File;
 
@@ -70,7 +72,6 @@ public class InitEntities {
         return build;
     }
 
-
     public static Udfs getFullUdfs() {
         return Udfs.builder()
                 .udfSdTrustedWatcher(getUdfSdTrustedWatcher())
@@ -93,6 +94,10 @@ public class InitEntities {
                 .udfRegProject(getUdfRegProject())
                 .udfSdProvidedHelpDeadline(getUdfSdProvidedHelpDeadline())
                 .build();
+    }
+
+    public static Udfs getUdfs() {
+        return Udfs.builder().build();
     }
 
     public static UdfSdModule getUdfsModuleThrowsJson() {
@@ -268,11 +273,15 @@ public class InitEntities {
                 .build();
     }
 
-    public static User getUserThrowsJson() {
-        return JsonUtils.convertJsonToObject(userJsonFile, User.class);
+    public static UdfUser generateUdfUser(Udfs.UdfSd udfSdType) {
+        return UdfUser.builder()
+                .udfId(udfSdType.udfId)
+                .type(Type.USER.name())
+                .userValue(new User[]{getUserThrowsJson()})
+                .build();
     }
 
-    public static void main(String[] args) {
-        System.out.println(generateOperationID(SlaType.SLA_HElP, ComSlaOperations.REMOVE_REQUEST));
+    public static User getUserThrowsJson() {
+        return JsonUtils.convertJsonToObject(userJsonFile, User.class);
     }
 }

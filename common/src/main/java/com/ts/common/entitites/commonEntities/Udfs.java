@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ts.common.annotations.TypeId;
 import com.ts.common.entitites.BaseEntity;
+import com.ts.common.entitites.commonEntities.udf.UdfUser;
 import com.ts.common.entitites.commonEntities.udfs.*;
 import com.ts.common.enums.Type;
 import lombok.*;
@@ -84,6 +85,8 @@ public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
 //    @JsonProperty(defaultValue = "UDF_REGPROJECT")
     UdfRegProject udfRegProject;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfUser udfUser;
 
     public enum Fields {
         UDF_SD_TRUSTEDWATCHER("udfSdTrustedWatcher"),
@@ -115,6 +118,7 @@ public class Udfs extends BaseEntity {
     public enum UdfSd {
         UDF_SD_TRUSTEDWATCHER("UDF_SD_TRUSTEDWATCHER", USER),
         UDF_WATCHER("UDF_WATCHER", USER),
+        UDF_ROLE_CURRENT("UDF_ROLE_CURRENT", USER),
         UDF_SD_TASK_CODE("UDF_SD_TASK_CODE", LIST),
         UDF_SD_RELATED_TASK_CODES("UDF_SD_RELATED_TASK_CODES", MULTILIST),
         UDF_SD_MODULE("UDF_SD_MODULE", TASK),
@@ -131,6 +135,7 @@ public class Udfs extends BaseEntity {
         UDF_SD_NOTLIMITEDWORK("UDF_SD_NOTLIMITEDWORK", LIST),
         UDF_WORKTASK_SOURCETYPE("UDF_WORKTASK_SOURCETYPE", LIST),
         UDF_SD_PROVIDEDHELPDEADLINE("UDF_SD_PROVIDEDHELPDEADLINE", DATE),
+        UDF_SD_AUTHORCLIENT_MSG("UDF_SD_AUTHORCLIENT_MSG", USER),
         UDF_REGPROJECT("UDF_REGPROJECT", TASK);
 
         public final String udfId;
