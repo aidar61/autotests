@@ -42,9 +42,9 @@ public abstract class BaseSlaController extends ApiRequest {
         return super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
-    protected Response performCommonOperation(SlaTask slaTask, ComSlaOperations operation) {
+    public Response performCommonOperation(SlaTask slaTask, ComSlaOperations operation) {
         slaTask.setOperation(InitEntities.generateOperationID(this.slaType, operation));
-        SlaRequestBody slaRequestBody = new SlaRequestBody();
+        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         return performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS));
     }
 

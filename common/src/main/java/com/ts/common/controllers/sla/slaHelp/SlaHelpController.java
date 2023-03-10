@@ -9,6 +9,7 @@ import com.ts.common.entitites.commonEntities.udfs.UdfSdModule;
 import com.ts.common.entitites.commonEntities.udfs.UdfSdProvidedHelpDeadline;
 import com.ts.common.entitites.commonEntities.udfs.UdfSdTaskCode;
 import com.ts.common.entitites.sla.SlaTask;
+import com.ts.common.enums.SlaType;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
@@ -26,8 +27,10 @@ import static com.ts.common.utils.RandomUtils.generateComment;
 
 public class SlaHelpController extends BaseSlaController {
 
+    public static final SlaType slaType = SlaType.SLA_HElP;
+
     public SlaHelpController(String url, AuthToken authToken) {
-        super(url, HEADERS_BASE_CONTROLLER);
+        super(url, HEADERS_BASE_CONTROLLER, slaType);
         this.authToken = authToken;
     }
 
