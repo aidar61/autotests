@@ -127,23 +127,10 @@ public abstract class BaseEntity implements Serializable {
         allFields.removeAll(typeFields);
         return removeFields(allFields);
     }
+
     public String keepFields(String... fields) {
         List<String> allFields = receiveAllFields();
         allFields.removeAll(Arrays.asList(fields));
         return removeFields(allFields);
     }
-
-//    public static void main(String[] args) {
-//        SlaTask slaTask = RandomEntities.getSlaTask(GeneralSlaId.Fields.CHANGE_SD_MODULE);
-//        Udfs udfs = slaTask.getUdfs();
-//        UdfSdTaskCode udfSdTaskCode = RandomEntities.getUdfTaskCode(UdfSdTaskCode.Constants.ABNATTR.taskCodesId);
-//        UdfSdModule udfSdModule = RandomEntities.getUdfSdModule(UdfSdModule.Constants.NOTIFICATION_SERVICE.moduleIds);
-//        udfs.setUdfSdTaskCode(udfSdTaskCode);
-//        udfs.setUdfSdModule(udfSdModule);
-//        Udfs module = JsonUtils.deserialize(udfs.keepTypeFieldWithName("module"), Udfs.class);
-//        slaTask.setUdfs(module);
-//        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
-//        System.out.println(slaRequestBody.removeTypeFieldWithName(CATEGORY.field));
-//    }
-
 }

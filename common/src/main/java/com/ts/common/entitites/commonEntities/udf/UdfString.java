@@ -1,6 +1,7 @@
 package com.ts.common.entitites.commonEntities.udf;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.commonEntities.udfs.BaseUdfs;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -18,6 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class UdfString extends BaseUdfs {
+    @JsonProperty("udfid")
     String udfId;
     String type;
     String stringValue;

@@ -1,6 +1,7 @@
 package com.ts.common.controllers.sla;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.annotations.Create;
 import com.ts.common.annotations.Mandatory;
 import com.ts.common.annotations.TypeId;
@@ -32,6 +33,7 @@ public class SlaRequestBody extends RequestBody {
     @Create
     String name;
     @Mandatory
+    @JsonProperty("description")
     String description;
     @TypeId(type = "operation")
     User handlerUser;
@@ -39,6 +41,7 @@ public class SlaRequestBody extends RequestBody {
     Udfs udfs;
     Status finishStatus;
     @TypeId(type = "operation")
+    @Create
     String[] attachments;
 
     public SlaRequestBody(SlaTask slaTask) {
