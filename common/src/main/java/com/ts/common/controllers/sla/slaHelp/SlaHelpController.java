@@ -44,11 +44,6 @@ public class SlaHelpController extends BaseSlaController {
         return super.post(getEndpoint(OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
-    @Step("Получить запрос консультации: {0}")
-    public Response receiveSlaTask(String taskNumber) {
-        return super.get(getEndpoint(TASK, INFO, taskNumber));
-    }
-
     @Override
     protected Response changeAuthor(SlaTask slaTask) {
         return null;

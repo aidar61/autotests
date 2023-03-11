@@ -1,5 +1,6 @@
 package com.ts.common.controllers.sla.slaBug;
 
+import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.controllers.sla.BaseSlaController;
 import com.ts.common.controllers.sla.SlaRequestBody;
 import com.ts.common.controllers.sla.SlaResponseBody;
@@ -9,8 +10,7 @@ import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
-import java.util.Map;
-
+import static com.ts.common.application.controllers.TrackStudioEndPoints.HEADERS_BASE_CONTROLLER;
 import static com.ts.common.enums.ComSlaOperations.*;
 import static com.ts.common.enums.SlaType.SLA_BUG;
 import static com.ts.common.utils.InitEntities.generateOperationID;
@@ -18,8 +18,8 @@ import static com.ts.common.utils.InitEntities.generateOperationID;
 public class SlaBugController extends BaseSlaController {
     private static final SlaType SLA_TYPE = SLA_BUG;
 
-    public SlaBugController(String url, Map<String, String> headersBaseController) {
-        super(url, headersBaseController, SLA_TYPE);
+    public SlaBugController(String url, AuthToken authToken) {
+        super(url, HEADERS_BASE_CONTROLLER, SLA_TYPE);
     }
 
     @Step("Создание извещения об ошибке: {0}")

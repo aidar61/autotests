@@ -34,7 +34,8 @@ public abstract class BaseSlaController extends ApiRequest {
         return super.post(getEndpoint(TASK, UPDATE), requestBody);
     }
 
-    protected Response receiveSlaTask(String taskNumber) {
+    @Step("Получить SLA task, Номер задачи: {0}")
+    public Response receiveSlaTask(String taskNumber) {
         return super.get(getEndpoint(TASK, INFO, taskNumber));
     }
 
@@ -42,6 +43,7 @@ public abstract class BaseSlaController extends ApiRequest {
         return super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
+    @Step("Выполнение общей операции: {1}")
     public Response performCommonOperation(SlaTask slaTask, ComSlaOperations operation) {
         slaTask.setOperation(InitEntities.generateOperationID(this.slaType, operation));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);

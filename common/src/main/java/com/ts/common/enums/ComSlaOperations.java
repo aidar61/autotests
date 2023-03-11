@@ -15,6 +15,7 @@ public enum ComSlaOperations {
     CHANGE_MODULE("%S_CHANGE_SD_MODULE"), // изменить модуль системы
     ANALIZE("%S_ANALIZE"), // принять на анализ
     REMOVE_REQUEST("%S_REMOVEREQUEST");
+
     public final String id;
 
     ComSlaOperations(String id) {

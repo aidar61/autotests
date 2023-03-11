@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ts.common.annotations.TypeId;
 import com.ts.common.entitites.BaseEntity;
+import com.ts.common.entitites.commonEntities.udf.UdfList;
 import com.ts.common.entitites.commonEntities.udf.UdfUser;
 import com.ts.common.entitites.commonEntities.udfs.*;
 import com.ts.common.enums.Type;
@@ -87,6 +88,10 @@ public class Udfs extends BaseEntity {
     UdfRegProject udfRegProject;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfUser udfUser;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfList udfList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfList secondUdfList;
 
     public enum Fields {
         UDF_SD_TRUSTEDWATCHER("udfSdTrustedWatcher"),
@@ -136,6 +141,10 @@ public class Udfs extends BaseEntity {
         UDF_WORKTASK_SOURCETYPE("UDF_WORKTASK_SOURCETYPE", LIST),
         UDF_SD_PROVIDEDHELPDEADLINE("UDF_SD_PROVIDEDHELPDEADLINE", DATE),
         UDF_SD_AUTHORCLIENT_MSG("UDF_SD_AUTHORCLIENT_MSG", USER),
+        UDF_SDBUG_PRIORITYBUG("UDF_SDBUG_PRIORITYBUG", LIST),
+        UDF_SD_REMOTEACCESS("UDF_SD_REMOTEACCESS", LIST),
+        UDF_SDFEATURE_TYPE("UDF_SDFEATURE_TYPE", LIST),
+        UDF_SDFEATURE_PAYDCS("UDF_SDFEATURE_PAYDCS", LIST),
         UDF_REGPROJECT("UDF_REGPROJECT", TASK);
 
         public final String udfId;
