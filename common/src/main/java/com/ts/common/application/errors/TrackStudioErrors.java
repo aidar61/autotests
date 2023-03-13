@@ -6,7 +6,7 @@ public enum TrackStudioErrors {
     REQUEST_INFO("Operation MSG_SLAHELP_REQUESTINFO not allowed for task #%s in state STATUS_SLAHELP_NEW by @root.");
 
     @Getter
-    public String value;
+    public final String value;
 
     TrackStudioErrors(String value) {
         this.value = value;

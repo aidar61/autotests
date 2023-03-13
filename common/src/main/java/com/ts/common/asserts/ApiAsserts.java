@@ -22,6 +22,7 @@ public class ApiAsserts {
 
     @Step("[Assert] Response")
     public static ApiAsserts assertThat(Response response) {
+        logResponse(response.getBody());
         return new ApiAsserts(response);
     }
 
@@ -34,6 +35,11 @@ public class ApiAsserts {
                 .withFailMessage("Response code is incorrect. Expected: %s , Actual: %s", code.getValue(), this.response.getStatusCode());
         log.info("Status code is correct: Actual {}, Expected {}", this.response.getStatusCode(), code);
         return this;
+    }
+
+    @Step("Response body is: {0}")
+    private static void logResponse(io.restassured.response.ResponseBody responseBody) {
+        log.info("Response body is : " + responseBody.asPrettyString());
     }
 
     public <T> ApiAsserts isParseableBody(Class<T> clazz) {

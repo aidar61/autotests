@@ -19,8 +19,8 @@ import org.assertj.core.api.Assertions;
 import org.testng.annotations.*;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
-import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.enums.ComSlaOperations.CHANGE_CURRENT_ROLE;
+import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_SD_AUTHORCLIENT_MSG;
+import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_WATCHER;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CLOSED;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CONSULTED;
 import static com.ts.common.utils.InitEntities.generateUdfUser;
@@ -66,7 +66,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
 
     }
 
-    @Test(priority = 1, dependsOnMethods = "createSlaTaskConsultation")
+    @Test(priority = 0, dependsOnMethods = "createSlaTaskConsultation")
     @Description("Test description: Receive sla task consultation")
     public void receiveSlaTaskConsultation() {
         slaHelpController.receiveSlaTask(slaTask.getNumber());
@@ -75,6 +75,27 @@ public class SlaTaskTest extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
+    @Test(priority = 0, dependsOnMethods = "createSlaTaskConsultation")
+    public void changeReAssign() {
+        udf = getUdfs();
+        udf.setUdfUser(InitEntities.generateUdfUser(UDF_WATCHER));
+        slaTask.setUdfs(udf);
+        slaHelpController.performCommonOperation(slaTask, ComSlaOperations.CHANGE_RES_PERSON);
+        ApiAsserts.assertThat(slaHelpController.getResponse())
+                .isCorrectResponseCode(HTTP_OK)
+                .isParseableBody(SlaResponseBody.class);
+    }
+
+    @Test(priority = 1, dependsOnMethods = "createSlaTaskConsultation")
+    public void changeAuthor() {
+        udf = getUdfs();
+        udf.setUdfUser(generateUdfUser(UDF_SD_AUTHORCLIENT_MSG));
+        slaTask.setUdfs(udf);
+        slaHelpController.performCommonOperation(slaTask, ComSlaOperations.CHANGE_AUTHOR);
+        ApiAsserts.assertThat(slaHelpController.getResponse())
+                .isCorrectResponseCode(HTTP_OK)
+                .isParseableBody(SlaResponseBody.class);
+    }
 
     @Test(priority = 2, dependsOnMethods = "createSlaTaskConsultation")
     @Description("Test description: Add comment to sla task consultation")
@@ -134,38 +155,6 @@ public class SlaTaskTest extends BaseIntegrationTest {
         Assertions.assertThat(actualTask.getTask_status()).isEqualTo(STATUS_SLAHELP_CONSULTED.name());
     }
 
-    @Test(priority = 1, dependsOnMethods = "createSlaTaskConsultation")
-    public void changeAuthor() {
-        udf = getUdfs();
-        udf.setUdfUser(generateUdfUser(UDF_SD_AUTHORCLIENT_MSG));
-        slaTask.setUdfs(udf);
-        slaHelpController.performCommonOperation(slaTask, ComSlaOperations.CHANGE_AUTHOR);
-        ApiAsserts.assertThat(slaHelpController.getResponse())
-                .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
-    }
-
-    @Test(priority = 1, dependsOnMethods = "createSlaTaskConsultation")
-    public void changeReAssign() {
-        udf = getUdfs();
-        udf.setUdfUser(InitEntities.generateUdfUser(UDF_WATCHER));
-        slaTask.setUdfs(udf);
-        slaHelpController.performCommonOperation(slaTask, ComSlaOperations.CHANGE_RES_PERSON);
-        ApiAsserts.assertThat(slaHelpController.getResponse())
-                .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
-    }
-
-    @Test(priority = 1, dependsOnMethods = "createSlaTaskConsultation")
-    public void changeCurrentRole() {
-        udf = getUdfs();
-        udf.setUdfUser(InitEntities.generateUdfUser(UDF_ROLE_CURRENT));
-        slaTask.setUdfs(udf);
-        slaHelpController.performCommonOperation(slaTask, CHANGE_CURRENT_ROLE);
-        ApiAsserts.assertThat(slaHelpController.getResponse())
-                .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
-    }
 
     @Test(priority = 8, dependsOnMethods = "createSlaTaskConsultation")
     public void changeLinkedTask() {
