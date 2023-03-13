@@ -61,6 +61,6 @@ public class SlaTaskTestNegative extends BaseIntegrationTest {
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_BAD_REQUEST)
                 .isParseableBody(ErrorResponseBody.class)
-                .isCorrectError(String.format(TrackStudioErrors.REQUEST_INFO.getValue(), "123"));
+                .isCorrectError(String.format(TrackStudioErrors.REQUEST_INFO.getValue(), slaTask.getNumber()));
     }
 }

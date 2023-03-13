@@ -14,7 +14,7 @@ public enum ComSlaOperations {
     PRIVATE_COMMENT("%S_PRIVATECOMMENT"), // приватный комментарий
     CHANGE_MODULE("%S_CHANGE_SD_MODULE"), // изменить модуль системы
     ANALIZE("%S_ANALIZE"), // принять на анализ
-    REMOVE_REQUEST("%S_REMOVEREQUEST");
+    REMOVE_REQUEST("%S_REMOVEREQUEST"); // снять запрос
 
     public final String id;
 

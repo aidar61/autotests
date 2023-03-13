@@ -5,9 +5,12 @@ import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.sla.SlaTask;
+import com.ts.common.listeners.LogCatchListener;
 import com.ts.integration.tests.BaseIntegrationTest;
 import jdk.jfr.Description;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
@@ -19,6 +22,7 @@ import static com.ts.common.enums.ComSlaOperations.CHANGE_AUTHOR;
 import static com.ts.common.enums.SlaType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.*;
 
+@Listeners({LogCatchListener.class})
 public class SlaFeatureTest extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
     private SlaTask slaTask;
@@ -38,6 +42,11 @@ public class SlaFeatureTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void afterClass() {
+
     }
 
     @Test(priority = 0)

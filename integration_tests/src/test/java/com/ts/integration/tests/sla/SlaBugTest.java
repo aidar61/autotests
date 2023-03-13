@@ -7,10 +7,13 @@ import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
+import com.ts.common.listeners.LogCatchListener;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import jdk.jfr.Description;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
@@ -20,6 +23,7 @@ import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.utils.InitEntities.generateUdfUser;
 import static com.ts.common.utils.InitEntities.getUdfs;
 
+@Listeners({LogCatchListener.class})
 public class SlaBugTest extends BaseIntegrationTest {
     private static SlaBugController slaBugController;
     private SlaTask slaTask;
@@ -39,6 +43,11 @@ public class SlaBugTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
+    }
+
+    @AfterClass(alwaysRun = true)
+    public void afterClass() {
+        slaBugController.performCommonOperation(slaTask, ComSlaOperations.REMOVE_REQUEST);
     }
 
     @Test(priority = 0)
