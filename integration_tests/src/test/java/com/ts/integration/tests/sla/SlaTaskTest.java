@@ -159,6 +159,5 @@ public class SlaTaskTest extends BaseIntegrationTest {
     @Test(priority = 8, dependsOnMethods = "createSlaTaskConsultation")
     public void changeLinkedTask() {
         udf = getUdfs();
-
     }
 }

@@ -13,7 +13,7 @@ import static com.ts.common.utils.RandomUtils.generateRandomNumberBetween;
 
 
 /**
- * @author Dennis Tikhomirov
+ * @author Aidar Askeev
  */
 @Getter
 @Slf4j
