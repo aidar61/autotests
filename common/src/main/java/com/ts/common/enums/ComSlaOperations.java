@@ -14,6 +14,27 @@ public enum ComSlaOperations {
     PRIVATE_COMMENT("%S_PRIVATECOMMENT"), // приватный комментарий
     CHANGE_MODULE("%S_CHANGE_SD_MODULE"), // изменить модуль системы
     ANALIZE("%S_ANALIZE"), // принять на анализ
+    TOPRECOST("%S_TOPRECOST"),//начать предварительный анализ
+    REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
+    PROVIDEREQINFO("%S_PROVIDEREQINFO"), // сообщить уточнение требований
+    BEGINCOST_PRE("%S_BEGINCOST_PRE"), // передать на предварительную оценку аккаунт-менеджеру
+    SENDCOST_PRE("%S_SENDCOST_PRE"), // Сообщить предварительные условия реализации
+    ALTERNATECOST("%S_ALTERNATECOST"), // Задать вопрос или предложить альтернативные вопросы реализации
+    ACCEPTPRECOST("%S_ACCEPTPRECOST"), // Принять предварительные условия реализации
+    SENDCOST_FINAL("%S_SENDCOST_FINAL"), // Сообщить окончательные условия реализации
+    ACCEPTCONDITIONS("%S_ACCEPTCONDITIONS"), // Принять окончательные условия реализации
+    START("%S_START"), // Передать в разработку
+    REQUESTINFO("%S_REQUESTINFO"), // запросить информацию
+    PROVIDEINFO("%S_PROVIDEINFO"), // предоставить информацию
+    UNDOREQUESTINFO("%S_UNDOREQUESTINFO"), // отменить запрос информацию
+    FINISH("%S_FINISH"), // завершить выполнение работы
+    TOCLIENTTEST("%S_TOCLIENTTEST"), // передать на проверку клиента
+    BUGONACCEPT("%S_BUGONACCEPT"), // сообщить о замечании
+    ACCEPTFEATURE("%S_ACCEPTFEATURE"), // утвердить дорабтку
+    SEND("%S_SEND"), // отправить в патч
+    READYTOPATCH("%S_READYTOPATCH"), // передать на включение в патч
+    INSTALL("%S_INSTALL"), // установить в производственную среду
+    CLOSE("%S_CLOSE"), // закрыть(поставщик)
     REMOVE_REQUEST("%S_REMOVEREQUEST"); // снять запрос
 
     public final String id;

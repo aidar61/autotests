@@ -6,6 +6,7 @@ import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.listeners.LogCatchListener;
+import com.ts.common.utils.RandomUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
 import jdk.jfr.Description;
 import org.testng.annotations.AfterClass;
@@ -17,8 +18,8 @@ import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.H
 import static com.ts.common.entitites.commonEntities.List.Constants.FREE_LAW;
 import static com.ts.common.entitites.commonEntities.List.Constants.OWN;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.enums.ComSlaOperations.CAT;
-import static com.ts.common.enums.ComSlaOperations.CHANGE_AUTHOR;
+import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
+import static com.ts.common.enums.ComSlaOperations.*;
 import static com.ts.common.enums.SlaType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.*;
 
@@ -30,7 +31,7 @@ public class SlaFeatureTest extends BaseIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
-        udf = getUdfs();
+        udf = refreshUdf();
         udf.setUdfSdModule(getUdfsModuleThrowsJson());
         udf.setUdfsBdkuConfiguration(getBdkuThrowsJson());
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
@@ -58,13 +59,44 @@ public class SlaFeatureTest extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
+//    @Test(priority = 1)
+//    @Description("Test description: Perform operation to change author")
+//    public void commonOperation() {
+//        udf = refreshUdf();
+//        udf.setUdfUser(generateUdfUser(UDF_SD_AUTHORCLIENT_MSG));
+//        slaTask.setUdfs(udf);
+//        slaFeatureController.performCommonOperation(slaTask, CHANGE_AUTHOR);
+//        ApiAsserts.assertThat(slaFeatureController.getResponse())
+//                .isCorrectResponseCode(HTTP_OK)
+//                .isParseableBody(SlaResponseBody.class);
+//    }
+
     @Test(priority = 1)
-    @Description("Test description: Perform operation to change author")
-    public void commonOperation() {
-        udf = getUdfs();
-        udf.setUdfUser(generateUdfUser(UDF_SD_AUTHORCLIENT_MSG));
+    public void msgSlaFeatureTopreCost() { // начать предварительную оценку
+        udf = refreshUdf();
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
         slaTask.setUdfs(udf);
-        slaFeatureController.performCommonOperation(slaTask, CHANGE_AUTHOR);
+        slaTask.setHandlerUser(generateUser(ABDULLAEV_BAHODIR));
+        slaFeatureController.msgToprecost(slaTask);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(HTTP_OK)
+                .isParseableBody(SlaResponseBody.class);
+    }
+
+    @Test(priority = 2, dependsOnMethods = "msgSlaFeatureTopreCost")
+    public void msgSlaFeatureRequestReqInfo() throws InterruptedException {
+        Thread.sleep(5000);
+        slaTask.refreshUdf();
+        slaFeatureController.performCommonOperation(slaTask, REQUESTREQINFO);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(HTTP_OK)
+                .isParseableBody(SlaResponseBody.class);
+    }
+
+    @Test(priority = 3)
+    public void msgSlaFeatureProvideReqInfo() {
+        slaTask.refreshUdf();
+        slaFeatureController.performCommonOperation(slaTask, PROVIDEREQINFO);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);

@@ -110,7 +110,8 @@ public abstract class RequestBody {
         return removeFields(allFields);
     }
 
-    public String keepFields(SlaRequestBody.Fields... fields) {
+    public String
+    keepFields(SlaRequestBody.Fields... fields) {
         List<String> slaFields = new ArrayList<>();
         Arrays.stream(fields).forEach(f -> slaFields.add(f.field));
         List<String> allFields = receiveAllFields();

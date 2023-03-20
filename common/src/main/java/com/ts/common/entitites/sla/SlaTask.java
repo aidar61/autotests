@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.enums.SlaType;
+import com.ts.common.utils.InitEntities;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -30,4 +31,12 @@ public class SlaTask extends BaseEntity {
     Udfs udfs;
     Status status;
     String[] attachments;
+
+    public void refreshUdf() {
+        this.udfs = InitEntities.refreshUdf();
+    }
+
+    public void refreshUdf(Udfs udf) {
+        setUdfs(udf);
+    }
 }
