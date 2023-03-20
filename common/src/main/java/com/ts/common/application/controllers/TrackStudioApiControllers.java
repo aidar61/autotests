@@ -21,7 +21,7 @@ public class TrackStudioApiControllers {
     private SlaFeatureController slaFeatureController;
 
     public TrackStudioApiControllers() {
-        this.authToken = new AuthToken();
+        this.authToken = new AuthToken("root", "password");
         this.slaHelpController = new SlaHelpController(BASE_URL, authToken);
         this.slaBugController = new SlaBugController(BASE_URL, authToken);
         this.slaFeatureController = new SlaFeatureController(BASE_URL, authToken);

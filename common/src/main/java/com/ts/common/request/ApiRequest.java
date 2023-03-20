@@ -4,6 +4,7 @@ package com.ts.common.request;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ts.common.application.controllers.AuthToken;
+import io.restassured.authentication.PreemptiveBasicAuthScheme;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.internal.mapping.Jackson2Mapper;
 import io.restassured.response.Response;
@@ -34,11 +35,16 @@ public abstract class ApiRequest {
     protected Response response;
     protected AuthToken authToken;
 
-    public ApiRequest(String url, Map<String, String> headers) {
+    public ApiRequest(String url, Map<String, String> headers, AuthToken authToken) {
         this.objectMapper = initObjectMapper();
         this.headers = headers;
         this.url = url;
+        this.authToken = authToken;
+        PreemptiveBasicAuthScheme auth = new PreemptiveBasicAuthScheme();
+        auth.setUserName(this.authToken.getUser());
+        auth.setPassword(this.authToken.getPassword());
         requestSpec = new RequestSpecBuilder()
+                .setAuth(auth)
                 .setBaseUri(url)
                 .addHeaders(headers)
                 .build();

@@ -145,6 +145,7 @@ public class Udfs extends BaseEntity {
         UDF_SD_REMOTEACCESS("UDF_SD_REMOTEACCESS", LIST),
         UDF_SDFEATURE_TYPE("UDF_SDFEATURE_TYPE", LIST),
         UDF_SDFEATURE_PAYDCS("UDF_SDFEATURE_PAYDCS", LIST),
+        STDT_HANDLER("STDT_HANDLER", USER),
         UDF_REGPROJECT("UDF_REGPROJECT", TASK);
 
         public final String udfId;

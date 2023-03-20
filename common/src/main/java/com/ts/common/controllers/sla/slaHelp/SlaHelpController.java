@@ -30,8 +30,8 @@ public class SlaHelpController extends BaseSlaController {
     public static final SlaType slaType = SlaType.SLA_HElP;
 
     public SlaHelpController(String url, AuthToken authToken) {
-        super(url, HEADERS_BASE_CONTROLLER, slaType);
-        this.authToken = authToken;
+        super(url, HEADERS_BASE_CONTROLLER, slaType, authToken);
+        super.authToken = authToken;
     }
 
     @Step("Создание консультации: {0}")

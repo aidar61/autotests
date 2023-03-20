@@ -1,11 +1,13 @@
 package com.ts.common.controllers.sla;
 
+import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.application.controllers.TrackStudioEndPoints;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
 import com.ts.common.request.ApiRequest;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.RandomUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.jetbrains.annotations.NotNull;
@@ -20,13 +22,14 @@ import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
 public abstract class BaseSlaController extends ApiRequest {
     protected SlaType slaType;
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS = {ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
+    protected SlaRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {ID, OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
 
-    public BaseSlaController(String url, Map<String, String> headersBaseController) {
-        super(url, headersBaseController);
+    public BaseSlaController(String url, Map<String, String> headersBaseController, AuthToken authToken) {
+        super(url, headersBaseController, authToken);
     }
 
-    public BaseSlaController(String url, Map<String, String> headersBaseController, SlaType slaType) {
-        super(url, headersBaseController);
+    public BaseSlaController(String url, Map<String, String> headersBaseController, SlaType slaType, AuthToken authToken) {
+        super(url, headersBaseController, authToken);
         this.slaType = slaType;
     }
 
@@ -46,9 +49,11 @@ public abstract class BaseSlaController extends ApiRequest {
     @Step("Выполнение общей операции: {1}")
     public Response performCommonOperation(SlaTask slaTask, ComSlaOperations operation) {
         slaTask.setOperation(InitEntities.generateOperationID(this.slaType, operation));
+        slaTask.setDescription(RandomUtils.generateDescriptionForOperation(operation));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         return performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS));
     }
+
 
     @Step("Изменение автора: {0}")
     protected abstract Response changeAuthor(SlaTask slaTask);

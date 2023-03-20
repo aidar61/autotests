@@ -13,14 +13,16 @@ import io.restassured.response.Response;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.HEADERS_BASE_CONTROLLER;
 import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
 import static com.ts.common.enums.ComSlaOperations.CHANGE_AUTHOR;
+import static com.ts.common.enums.ComSlaOperations.TOPRECOST;
 import static com.ts.common.enums.SlaType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.generateOperationID;
+import static com.ts.common.utils.RandomUtils.generateDescriptionForOperation;
 
 public class SlaFeatureController extends BaseSlaController {
     private static final SlaType SLA_TYPE = SLA_FEATURE;
 
     public SlaFeatureController(String url, AuthToken authToken) {
-        super(url, HEADERS_BASE_CONTROLLER, SLA_TYPE);
+        super(url, HEADERS_BASE_CONTROLLER, SLA_TYPE, authToken);
         this.authToken = authToken;
     }
 
@@ -97,6 +99,13 @@ public class SlaFeatureController extends BaseSlaController {
             slaTask.setStatus(slaResponseBody.getStatus());
         }
         return this.response;
+    }
+
+    public Response msgToprecost(SlaTask slaTask) {
+        slaTask.setOperation(generateOperationID(this.slaType, TOPRECOST));
+        slaTask.setDescription(generateDescriptionForOperation(TOPRECOST));
+        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+        return this.response = super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_CONDITION));
     }
 
 }

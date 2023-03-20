@@ -112,7 +112,7 @@ public class InitEntities {
                 .build();
     }
 
-    public static Udfs getUdfs() {
+    public static Udfs refreshUdf() {
         return Udfs.builder().build();
     }
 
@@ -303,6 +303,15 @@ public class InitEntities {
                 .build();
     }
 
+    public static UdfUser generateUdfUser(Udfs.UdfSd udfSdType, User.Constants user) {
+        return UdfUser.builder()
+                .udfId(udfSdType.udfId)
+                .type(Type.USER.name())
+                .userValue(new User[]{generateUser(user)})
+                .build();
+    }
+
+
     public static UdfList generateUdfList(Udfs.UdfSd udfSdType, List.Constants udfList) {
         return UdfList.builder()
                 .udfId(udfSdType.udfId)
@@ -322,5 +331,13 @@ public class InitEntities {
 
     public static Descriptions getTableDescriptions() {
         return JsonUtils.convertJsonToObject(tableDescriptionJsonFile, Descriptions.class);
+    }
+
+    public static User generateUser(User.Constants user) {
+        return User.builder()
+                .id(user.getId())
+                .login(user.getLogin())
+                .name(user.getName())
+                .build();
     }
 }

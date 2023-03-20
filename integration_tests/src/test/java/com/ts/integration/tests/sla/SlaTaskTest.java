@@ -23,8 +23,8 @@ import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_SD_AUTHORCLI
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_WATCHER;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CLOSED;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CONSULTED;
-import static com.ts.common.utils.InitEntities.generateUdfUser;
-import static com.ts.common.utils.InitEntities.getUdfs;
+import static com.ts.common.utils.InitEntities.*;
+import static com.ts.common.utils.InitEntities.refreshUdf;
 
 @Listeners({LogCatchListener.class})
 public class SlaTaskTest extends BaseIntegrationTest {
@@ -77,8 +77,8 @@ public class SlaTaskTest extends BaseIntegrationTest {
 
     @Test(priority = 0, dependsOnMethods = "createSlaTaskConsultation")
     public void changeReAssign() {
-        udf = getUdfs();
-        udf.setUdfUser(InitEntities.generateUdfUser(UDF_WATCHER));
+        udf = refreshUdf();
+        udf.setUdfUser(generateUdfUser(UDF_WATCHER));
         slaTask.setUdfs(udf);
         slaHelpController.performCommonOperation(slaTask, ComSlaOperations.CHANGE_RES_PERSON);
         ApiAsserts.assertThat(slaHelpController.getResponse())
@@ -88,7 +88,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
 
     @Test(priority = 1, dependsOnMethods = "createSlaTaskConsultation")
     public void changeAuthor() {
-        udf = getUdfs();
+        udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_AUTHORCLIENT_MSG));
         slaTask.setUdfs(udf);
         slaHelpController.performCommonOperation(slaTask, ComSlaOperations.CHANGE_AUTHOR);
@@ -158,6 +158,6 @@ public class SlaTaskTest extends BaseIntegrationTest {
 
     @Test(priority = 8, dependsOnMethods = "createSlaTaskConsultation")
     public void changeLinkedTask() {
-        udf = getUdfs();
+        udf = refreshUdf();
     }
 }

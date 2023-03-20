@@ -19,7 +19,7 @@ public class SlaBugController extends BaseSlaController {
     private static final SlaType SLA_TYPE = SLA_BUG;
 
     public SlaBugController(String url, AuthToken authToken) {
-        super(url, HEADERS_BASE_CONTROLLER, SLA_TYPE);
+        super(url, HEADERS_BASE_CONTROLLER, SLA_TYPE, authToken);
     }
 
     @Step("Создание извещения об ошибке: {0}")

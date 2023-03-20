@@ -20,8 +20,8 @@ import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.H
 import static com.ts.common.entitites.commonEntities.List.Constants.CRITICAL;
 import static com.ts.common.entitites.commonEntities.List.Constants.REMOTE_ACCESS;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.utils.InitEntities.generateUdfUser;
-import static com.ts.common.utils.InitEntities.getUdfs;
+import static com.ts.common.utils.InitEntities.*;
+import static com.ts.common.utils.InitEntities.refreshUdf;
 
 @Listeners({LogCatchListener.class})
 public class SlaBugTest extends BaseIntegrationTest {
@@ -31,7 +31,7 @@ public class SlaBugTest extends BaseIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
-        udf = getUdfs();
+        udf = refreshUdf();
         udf.setUdfSdModule(InitEntities.getUdfsModuleThrowsJson());
         udf.setUdfList(InitEntities.generateUdfList(UDF_SDBUG_PRIORITYBUG, CRITICAL));
         udf.setUdfsBdkuConfiguration(InitEntities.getBdkuThrowsJson());
@@ -62,7 +62,7 @@ public class SlaBugTest extends BaseIntegrationTest {
     @Test(priority = 1)
     @Description("Test description: Perform operation to change author")
     public void commonOperations() {
-        udf = getUdfs();
+        udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_AUTHORCLIENT_MSG));
         slaTask.setUdfs(udf);
         slaBugController.performCommonOperation(slaTask, ComSlaOperations.CHANGE_AUTHOR);
