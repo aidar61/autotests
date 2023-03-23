@@ -4,8 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ts.common.annotations.TypeId;
 import com.ts.common.entitites.BaseEntity;
-import com.ts.common.entitites.commonEntities.udf.UdfList;
-import com.ts.common.entitites.commonEntities.udf.UdfUser;
+import com.ts.common.entitites.commonEntities.udf.*;
 import com.ts.common.entitites.commonEntities.udfs.*;
 import com.ts.common.enums.Type;
 import lombok.*;
@@ -92,6 +91,19 @@ public class Udfs extends BaseEntity {
     UdfList udfList;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfList secondUdfList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfString udfString;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfString secondUdfString;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfString thirdUdfString;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfDouble udfDouble;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfDouble secondUdfDouble;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfDate udfDate;
+
 
     public enum Fields {
         UDF_SD_TRUSTEDWATCHER("udfSdTrustedWatcher"),
@@ -145,8 +157,23 @@ public class Udfs extends BaseEntity {
         UDF_SD_REMOTEACCESS("UDF_SD_REMOTEACCESS", LIST),
         UDF_SDFEATURE_TYPE("UDF_SDFEATURE_TYPE", LIST),
         UDF_SDFEATURE_PAYDCS("UDF_SDFEATURE_PAYDCS", LIST),
+        UDF_SLA_CLIENTGENUSE("UDF_SLA_CLIENTGENUSE", LIST),
         STDT_HANDLER("STDT_HANDLER", USER),
-        UDF_REGPROJECT("UDF_REGPROJECT", TASK);
+        UDF_SDFEATURE_CANCELREASON("UDF_SDFEATURE_CANCELREASON", LIST),
+
+        UDF_SDFEATURE_AGREEDDECISION("UDF_SDFEATURE_AGREEDDECISION", MEMO),
+        UDF_SLA_AWAITCOST("UDF_SLA_AWAITCOST", STRING),
+        UDF_SLA_IMPLPLANTD_PRE("UDF_SLA_IMPLPLANTD_PRE", STRING),
+        UDF_SLA_FINALESTIMATIONDATE("UDF_SLA_FINALESTIMATIONDATE", DATE),
+
+        UDF_SDFEATURE_IMPLBUDGET("UDF_SDFEATURE_IMPLBUDGET",DOUBLE),
+
+        UDF_SDFEATURE_DETAILBUDGET("UDF_SDFEATURE_DETAILBUDGET",DOUBLE),
+        UDF_SDFEATUREPLANTD("UDF_SDFEATUREPLANTD", DATE),
+        UDF_SLA_IMPLDEADLINE("UDF_SLA_IMPLDEADLINE", STRING),
+        UDF_SLA_RESULTCOST("UDF_SLA_RESULTCOST", STRING),
+
+        UDF_REGPROJECT("UDF_REGPROJECT",TASK);
 
         public final String udfId;
         public final Type type;
@@ -155,5 +182,5 @@ public class Udfs extends BaseEntity {
             this.udfId = udfId;
             this.type = type;
         }
-    }
+        }
 }

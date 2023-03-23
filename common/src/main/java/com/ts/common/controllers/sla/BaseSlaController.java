@@ -22,6 +22,7 @@ import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
 public abstract class BaseSlaController extends ApiRequest {
     protected SlaType slaType;
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS = {ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
+    protected SlaRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {ID, OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
 
     public BaseSlaController(String url, Map<String, String> headersBaseController, AuthToken authToken) {
@@ -43,7 +44,7 @@ public abstract class BaseSlaController extends ApiRequest {
     }
 
     protected Response performOperation(@NotNull SlaTask slaTask, String requestBody) {
-        return super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE), requestBody);
+        return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
     @Step("Выполнение общей операции: {1}")
@@ -51,7 +52,7 @@ public abstract class BaseSlaController extends ApiRequest {
         slaTask.setOperation(InitEntities.generateOperationID(this.slaType, operation));
         slaTask.setDescription(RandomUtils.generateDescriptionForOperation(operation));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
-        return performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS));
+        return this.response = performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
     }
 
 

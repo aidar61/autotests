@@ -7,5 +7,6 @@ public enum Type {
     TASK,
     STRING,
     DOUBLE,
+    MEMO,
     DATE
 }

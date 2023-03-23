@@ -21,5 +21,5 @@ public class UdfDate {
     @JsonProperty("udfid")
     String udfId;
     String type;
-    String stringValue;
+    String dateValue;
 }

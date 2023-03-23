@@ -23,4 +23,14 @@ public class UdfString extends BaseUdfs {
     String udfId;
     String type;
     String stringValue;
+
+    public enum Constants {
+        COST("{\"cost\":100,\"budget1cat\":4,\"budget2cat\":4,\"budget3cat\":4}");
+        @Getter
+        public final String value;
+
+        Constants(String value) {
+            this.value = value;
+        }
+    }
 }
