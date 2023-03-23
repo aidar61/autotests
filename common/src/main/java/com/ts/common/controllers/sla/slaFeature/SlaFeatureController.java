@@ -5,6 +5,7 @@ import com.ts.common.application.controllers.TrackStudioEndPoints;
 import com.ts.common.controllers.sla.BaseSlaController;
 import com.ts.common.controllers.sla.SlaRequestBody;
 import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.SlaType;
 import com.ts.common.utils.JsonUtils;
@@ -19,6 +20,7 @@ import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
 import static com.ts.common.enums.ComSlaOperations.*;
 import static com.ts.common.enums.SlaType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.generateOperationID;
+import static com.ts.common.utils.InitEntities.generateUser;
 import static com.ts.common.utils.RandomUtils.generateDescriptionForOperation;
 
 public class SlaFeatureController extends BaseSlaController {
@@ -138,6 +140,15 @@ public class SlaFeatureController extends BaseSlaController {
         slaTask.setDescription(generateDescriptionForOperation(BEGINCOST_PRE));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         return this.response = super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_CONDITION));
+    }
+
+    public Response msgStart(SlaTask slaTask) {
+        slaTask.setOperation(generateOperationID(this.slaType, START));
+        slaTask.setDescription(generateDescriptionForOperation(START));
+        slaTask.setHandlerUser(generateUser(User.Constants.BABUSHKIN_IVAN));
+        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+        return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE)
+                , slaRequestBody.keepFields(DEFAULT_FIELDS_CONDITION));
     }
 
 }

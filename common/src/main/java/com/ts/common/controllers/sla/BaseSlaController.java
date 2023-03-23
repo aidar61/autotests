@@ -12,6 +12,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
@@ -47,12 +48,20 @@ public abstract class BaseSlaController extends ApiRequest {
         return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
+    protected Response performOperationWithQueryParam(@NotNull SlaTask slaTask, String requestBody) {
+        HashMap<String, String> params = new HashMap<>() {{
+            put(ID.field, slaTask.getId());
+        }};
+        return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE
+                , formatParameters(params)), requestBody);
+    }
+
     @Step("Выполнение общей операции: {1}")
     public Response performCommonOperation(SlaTask slaTask, ComSlaOperations operation) {
         slaTask.setOperation(InitEntities.generateOperationID(this.slaType, operation));
         slaTask.setDescription(RandomUtils.generateDescriptionForOperation(operation));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
-        return this.response = performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
+        return this.response = performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
     }
 
 
