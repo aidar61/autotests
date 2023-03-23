@@ -30,6 +30,7 @@ public class User extends BaseEntity {
 //    boolean freelancer;
     @Getter
     public enum Constants {
+        ARUTYANIN_YURIY("818181df6936d3710169388776323be0", "yarutyunyan", "Арутюнян Юрий"),
         ABDULLAEV_BAHODIR("818181df7edb763f017ee28d995a3ba6", "babdullayev", "Абдуллаев Баходир");
         public final String id;
         public final String login;

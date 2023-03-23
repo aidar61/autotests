@@ -17,9 +17,9 @@ import lombok.extern.slf4j.Slf4j;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UdfDate {
+public class UdfDouble {
     @JsonProperty("udfid")
     String udfId;
     String type;
-    String dateValue;
+    Integer numberValue;
 }

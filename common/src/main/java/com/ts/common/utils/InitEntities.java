@@ -1,8 +1,7 @@
 package com.ts.common.utils;
 
 import com.ts.common.entitites.commonEntities.*;
-import com.ts.common.entitites.commonEntities.udf.UdfList;
-import com.ts.common.entitites.commonEntities.udf.UdfUser;
+import com.ts.common.entitites.commonEntities.udf.*;
 import com.ts.common.entitites.commonEntities.udfs.*;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.ComSlaOperations;
@@ -317,6 +316,30 @@ public class InitEntities {
                 .udfId(udfSdType.udfId)
                 .type(Type.LIST.name())
                 .listValue(new List[]{new List(udfList.id)})
+                .build();
+    }
+
+    public static UdfString generateUdfString(Udfs.UdfSd udfSdType, String udfStringValue) {
+        return UdfString.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .stringValue(udfStringValue)
+                .build();
+    }
+
+    public static UdfDouble generateUdfDouble(Udfs.UdfSd udfsdType, Integer doubleValue) {
+        return UdfDouble.builder()
+                .udfId(udfsdType.udfId)
+                .type(udfsdType.type.name())
+                .numberValue(doubleValue)
+                .build();
+    }
+
+    public static UdfDate generateUdfDate(Udfs.UdfSd udfSdType) {
+        return UdfDate.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .dateValue(DateUtils.getCurrentDate())
                 .build();
     }
 

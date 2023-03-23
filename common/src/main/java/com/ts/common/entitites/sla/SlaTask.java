@@ -37,6 +37,7 @@ public class SlaTask extends BaseEntity {
     }
 
     public void refreshUdf(Udfs udf) {
+        this.udfs = InitEntities.refreshUdf();
         setUdfs(udf);
     }
 }
