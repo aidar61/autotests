@@ -113,6 +113,7 @@ public class SlaFeatureController extends BaseSlaController {
         return this.response = super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_CONDITION));
     }
 
+    @Step("Выполнение операции: REQUESTREQINFO ")
     public Response msgRequestReqInfo(SlaTask slaTask) {
         HashMap<String, String> queryParams = new HashMap<>() {{
             put(ID.field, slaTask.getId());
@@ -124,7 +125,7 @@ public class SlaFeatureController extends BaseSlaController {
                 , formatParameters(queryParams)), slaRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
         return this.response;
     }
-
+    @Step("Выполнение операции PROVIDEREQINFO: ")
     public Response msgProvideReqInfo(SlaTask slaTask) {
         slaTask.refreshUdf();
         slaTask.setOperation(generateOperationID(this.slaType, PROVIDEREQINFO));

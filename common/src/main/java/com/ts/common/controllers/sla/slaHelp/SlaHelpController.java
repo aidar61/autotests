@@ -34,12 +34,12 @@ public class SlaHelpController extends BaseSlaController {
         super.authToken = authToken;
     }
 
-    @Step("Создание консультации: {0}")
+    @Step("Создание консультации: ")
     public Response createTask(String requestBody) {
         return super.post(getEndpoint(TASK, UPDATE), requestBody);
     }
 
-    @Step("Выполнение операциии SlaHelp Task: {0}")
+    @Step("Выполнение операциии SlaHelp Task: ")
     public Response performOperation(@NotNull SlaTask slaTask, String requestBody) {
         return super.post(getEndpoint(OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
@@ -135,7 +135,7 @@ public class SlaHelpController extends BaseSlaController {
         return this.response;
     }
 
-    @Step("Принятие на анализ slaTask: {0}")
+    @Step("Принятие на анализ slaTask: ")
     public Response receiveAnalysis(SlaTask slaTask) {
         Udfs udfs = slaTask.getUdfs();
         UdfSdProvidedHelpDeadline deadline = InitEntities.getUdfSdProvidedHelpDeadline();
