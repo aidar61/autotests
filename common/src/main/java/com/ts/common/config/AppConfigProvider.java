@@ -5,6 +5,7 @@ import org.aeonbits.owner.ConfigFactory;
 public class AppConfigProvider {
     private static AppConfig config;
     private static AppDb db;
+    private static AppUserConfig userConfig;
     public static final String BASE_URL = get().baseUrl();
     public static final int IMPLICITLY_WAIT_SEC = get().implicitlyWait();
     public static final int IMPLICITLY_SLEEP_MS = get().implicitlySleep();
@@ -25,5 +26,12 @@ public class AppConfigProvider {
             db = ConfigFactory.create(AppDb.class, System.getProperties());
         }
         return db;
+    }
+
+    public static AppUserConfig getUserConfig() {
+        if (userConfig == null) {
+            userConfig = ConfigFactory.create(AppUserConfig.class, System.getProperties());
+        }
+        return userConfig;
     }
 }

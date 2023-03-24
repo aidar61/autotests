@@ -1,5 +1,6 @@
 package com.ts.common.application.controllers;
 
+import com.ts.common.config.AppConfigProvider;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
 import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
@@ -21,7 +22,7 @@ public class TrackStudioApiControllers {
     private SlaFeatureController slaFeatureController;
 
     public TrackStudioApiControllers() {
-        this.authToken = new AuthToken("root", "password");
+        this.authToken = new AuthToken(AppConfigProvider.getUserConfig().username(), AppConfigProvider.getUserConfig().password());
         this.slaHelpController = new SlaHelpController(BASE_URL, authToken);
         this.slaBugController = new SlaBugController(BASE_URL, authToken);
         this.slaFeatureController = new SlaFeatureController(BASE_URL, authToken);

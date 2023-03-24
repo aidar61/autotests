@@ -28,6 +28,7 @@ public class List extends BaseEntity {
         CLIENTIGNOREANL("818181b03ce8a434013cec9c3058513c"),
         NOTCUSTOM("402889da5ec3af21015ec3d025ac02b3"),
         USERDATA_WIKI("{\"username\":\"wiki\",\"name\":\"wiki\"}"),
+        NO("ff8081813874cb21013875e34e910b7c"),
         CRITICAL("818182de541395b101541399d2120001");
         public final String id;
 

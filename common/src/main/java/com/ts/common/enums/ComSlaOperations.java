@@ -18,6 +18,7 @@ public enum ComSlaOperations {
     REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
     PROVIDEREQINFO("%S_PROVIDEREQINFO"), // сообщить уточнение требований
     BEGINCOST_PRE("%S_BEGINCOST_PRE"), // передать на предварительную оценку аккаунт-менеджеру
+    BEGINCOST_FINAL("%S_BEGINCOST_FINAL"), // передать на окончательную оценку аккаунт-менеджеру
     SENDCOST_PRE("%S_SENDCOST_PRE"), // Сообщить предварительные условия реализации
     ALTERNATECOST("%S_ALTERNATECOST"), // Задать вопрос или предложить альтернативные вопросы реализации
     ACCEPTPRECOST("%S_ACCEPTPRECOST"), // Принять предварительные условия реализации
