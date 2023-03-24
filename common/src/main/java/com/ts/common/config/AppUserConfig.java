@@ -13,4 +13,6 @@ public interface AppUserConfig extends Config {
     @Key("clientUsername")
     String clientUsername();
 
+    @Key("clientPassword")
+    String clientPassword();
 }

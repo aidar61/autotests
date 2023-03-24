@@ -1,5 +1,6 @@
 package com.ts.integration.tests;
 
+import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.application.controllers.TrackStudioApiControllers;
 import com.ts.common.application.database.DbHelper;
 import com.ts.common.listeners.LogCatchListener;
@@ -13,6 +14,7 @@ import org.testng.annotations.Listeners;
 @Listeners({LogCatchListener.class})
 public class BaseIntegrationTest extends AbstractBaseTest {
     protected Response response;
+    protected AuthToken authToken;
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() {

@@ -1,13 +1,14 @@
 package com.ts.integration.tests.sla;
 
 import com.ts.common.asserts.ApiAsserts;
+import com.ts.common.config.AppConfigProvider;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
-import com.ts.common.listeners.LogCatchListener;
+import com.ts.common.enums.Users;
 import com.ts.common.listeners.TestListener;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
@@ -21,8 +22,8 @@ import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.H
 import static com.ts.common.entitites.commonEntities.List.Constants.CRITICAL;
 import static com.ts.common.entitites.commonEntities.List.Constants.REMOTE_ACCESS;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
+import static com.ts.common.enums.Users.*;
 import static com.ts.common.utils.InitEntities.*;
-import static com.ts.common.utils.InitEntities.refreshUdf;
 
 @Listeners({TestListener.class})
 public class SlaBugTest extends BaseIntegrationTest {
@@ -66,6 +67,7 @@ public class SlaBugTest extends BaseIntegrationTest {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_AUTHORCLIENT_MSG));
         slaTask.setUdfs(udf);
+        slaBugController.setAuthToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(slaTask, ComSlaOperations.CHANGE_AUTHOR);
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)

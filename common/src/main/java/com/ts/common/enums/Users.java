@@ -4,8 +4,7 @@ import com.ts.common.config.AppConfigProvider;
 
 public enum Users {
     EMPLOYEE(AppConfigProvider.getUserConfig().username(), AppConfigProvider.getUserConfig().password()),
-    CLIENT(AppConfigProvider.getUserConfig().clientUsername(), AppConfigProvider.getUserConfig().password()),
-    ROOT("root", "password");
+    CLIENT(AppConfigProvider.getUserConfig().clientUsername(), AppConfigProvider.getUserConfig().clientPassword());
     public final String username;
     public final String password;
 

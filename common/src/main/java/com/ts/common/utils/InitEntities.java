@@ -1,13 +1,11 @@
 package com.ts.common.utils;
 
+import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.*;
 import com.ts.common.entitites.commonEntities.udfs.*;
 import com.ts.common.entitites.sla.SlaTask;
-import com.ts.common.enums.ComSlaOperations;
-import com.ts.common.enums.Parents;
-import com.ts.common.enums.SlaType;
-import com.ts.common.enums.Type;
+import com.ts.common.enums.*;
 
 import java.io.File;
 
@@ -370,6 +368,13 @@ public class InitEntities {
                 .id(user.getId())
                 .login(user.getLogin())
                 .name(user.getName())
+                .build();
+    }
+
+    public static AuthToken generateAuthToken(Users users) {
+        return AuthToken.builder()
+                .user(users.username)
+                .password(users.password)
                 .build();
     }
 }

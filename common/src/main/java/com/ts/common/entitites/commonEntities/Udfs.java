@@ -92,6 +92,8 @@ public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfList secondUdfList;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfList thirdUdfList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfString udfString;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfString secondUdfString;
@@ -166,14 +168,18 @@ public class Udfs extends BaseEntity {
         UDF_SLA_IMPLPLANTD_PRE("UDF_SLA_IMPLPLANTD_PRE", STRING),
         UDF_SLA_FINALESTIMATIONDATE("UDF_SLA_FINALESTIMATIONDATE", DATE),
 
-        UDF_SDFEATURE_IMPLBUDGET("UDF_SDFEATURE_IMPLBUDGET",DOUBLE),
+        UDF_SDFEATURE_IMPLBUDGET("UDF_SDFEATURE_IMPLBUDGET", DOUBLE),
 
-        UDF_SDFEATURE_DETAILBUDGET("UDF_SDFEATURE_DETAILBUDGET",DOUBLE),
+        UDF_SDFEATURE_DETAILBUDGET("UDF_SDFEATURE_DETAILBUDGET", DOUBLE),
+        UDF_SDFEATURE_DOCREVISION("UDF_SDFEATURE_DOCREVISION", LIST),
+
         UDF_SDFEATUREPLANTD("UDF_SDFEATUREPLANTD", DATE),
+
         UDF_SLA_IMPLDEADLINE("UDF_SLA_IMPLDEADLINE", STRING),
+
         UDF_SLA_RESULTCOST("UDF_SLA_RESULTCOST", STRING),
 
-        UDF_REGPROJECT("UDF_REGPROJECT",TASK);
+        UDF_REGPROJECT("UDF_REGPROJECT", TASK);
 
         public final String udfId;
         public final Type type;
@@ -182,5 +188,5 @@ public class Udfs extends BaseEntity {
             this.udfId = udfId;
             this.type = type;
         }
-        }
+    }
 }

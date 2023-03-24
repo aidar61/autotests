@@ -1,4 +1,4 @@
-package com.ts.integration.tests.sla;
+package com.ts.integration.tests.sla.slaFeatureScenaries;
 
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.sla.SlaResponseBody;
@@ -24,7 +24,7 @@ import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateComment;
 
 @Listeners({TestListener.class})
-public class SlaFeatureTest extends BaseIntegrationTest {
+public class SlaFeatureFirstScenarioTest extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
     private SlaTask slaTask;
     private Udfs udf;
@@ -116,7 +116,6 @@ public class SlaFeatureTest extends BaseIntegrationTest {
     public void msgSlaFeatureBeginCostPre() {
         udf = refreshUdf();
         udf.setUdfDouble(generateUdfDouble(UDF_SDFEATURE_IMPLBUDGET, 4));
-        udf.setSecondUdfDouble(generateUdfDouble(UDF_SDFEATURE_DETAILBUDGET, 4));
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
         udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, GENERAL, USERDATA_WIKI.id));
         udf.setUdfString(generateUdfString(UDF_SDFEATURE_AGREEDDECISION, generateComment()));

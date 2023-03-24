@@ -26,7 +26,6 @@ public class TestListener extends TestListenerAdapter {
 
     @Override
     public void onConfigurationSkip(ITestResult itr) {
-        stopCatch();
         super.onConfigurationSkip(itr);
     }
 
