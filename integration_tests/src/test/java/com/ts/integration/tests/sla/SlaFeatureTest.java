@@ -1,12 +1,12 @@
 package com.ts.integration.tests.sla;
 
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.controllers.sla.SlaRequestBody;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.listeners.LogCatchListener;
+import com.ts.common.listeners.TestListener;
 import com.ts.integration.tests.BaseIntegrationTest;
 import jdk.jfr.Description;
 import org.testng.annotations.AfterClass;
@@ -24,7 +24,7 @@ import static com.ts.common.enums.SlaType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateComment;
 
-@Listeners({LogCatchListener.class})
+@Listeners({TestListener.class})
 public class SlaFeatureTest extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
     private SlaTask slaTask;
@@ -119,7 +119,7 @@ public class SlaFeatureTest extends BaseIntegrationTest {
         udf.setUdfDouble(generateUdfDouble(UDF_SDFEATURE_IMPLBUDGET, 4));
         udf.setSecondUdfDouble(generateUdfDouble(UDF_SDFEATURE_DETAILBUDGET, 4));
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
-        udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, GENERAL));
+        udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, GENERAL, USERDATA_WIKI.id));
         udf.setUdfString(generateUdfString(UDF_SDFEATURE_AGREEDDECISION, generateComment()));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ARUTYANIN_YURIY));
         slaTask.refreshUdf(udf);
@@ -236,6 +236,7 @@ public class SlaFeatureTest extends BaseIntegrationTest {
         udf = refreshUdf();
         udf.setUdfDate(generateUdfDate(UDF_SDFEATUREPLANTD));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, BABUSHKIN_IVAN));
+        slaTask.refreshUdf(udf);
         slaFeatureController.msgStart(slaTask);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
@@ -269,7 +270,7 @@ public class SlaFeatureTest extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(slaTask, REQUESTINFO);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaRequestBody.class);
+                .isParseableBody(SlaResponseBody.class);
     }
 
     @Test(priority = 17, dependsOnMethods = "msgSlaFeatureRequestInfoRetry")
@@ -279,7 +280,7 @@ public class SlaFeatureTest extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(slaTask, UNDOREQUESTINFO);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaRequestBody.class);
+                .isParseableBody(SlaResponseBody.class);
     }
 
     @Test(priority = 18, dependsOnMethods = "msgSlaFeatureUndoRequestInfo")
@@ -313,6 +314,16 @@ public class SlaFeatureTest extends BaseIntegrationTest {
     }
 
     @Test(priority = 21, dependsOnMethods = "msgSlaFeatureBuGonAccept")
+    @Description("Передать на проверку клиента")
+    public void msgSlaFeatureToClientTestRetry() {
+        slaTask.refreshUdf();
+        slaFeatureController.performCommonOperation(slaTask, TOCLIENTTEST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(HTTP_OK)
+                .isParseableBody(SlaResponseBody.class);
+    }
+
+    @Test(priority = 22, dependsOnMethods = "msgSlaFeatureToClientTestRetry")
     @Description("Утвердить доработку")
     public void msgSlaFeatureAcceptFeature() {
         slaFeatureController.performCommonOperation(slaTask, ACCEPTFEATURE);
@@ -321,7 +332,7 @@ public class SlaFeatureTest extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 22, dependsOnMethods = "msgSlaFeatureAcceptFeature")
+    @Test(priority = 23, dependsOnMethods = "msgSlaFeatureAcceptFeature")
     @Description("Отправить патч")
     public void msgSlaFeatureSend() {
         slaFeatureController.performCommonOperation(slaTask, SEND);
@@ -330,7 +341,17 @@ public class SlaFeatureTest extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 23, dependsOnMethods = "msgSlaFeatureSend")
+    @Test(priority = 24, dependsOnMethods = "msgSlaFeatureSend")
+    @Description("Сообщить о замечании")
+    public void msgSlaFeatureBuGonAcceptRetry() {
+        slaTask.refreshUdf();
+        slaFeatureController.performCommonOperation(slaTask, BUGONACCEPT);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(HTTP_OK)
+                .isParseableBody(SlaResponseBody.class);
+    }
+
+    @Test(priority = 25, dependsOnMethods = "msgSlaFeatureBuGonAcceptRetry")
     @Description("Передать на включение в патч")
     public void msgSlaFeatureReadyPatch() {
         slaFeatureController.performCommonOperation(slaTask, READYTOPATCH);
@@ -339,7 +360,17 @@ public class SlaFeatureTest extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 23, dependsOnMethods = "msgSlaFeatureReadyPatch")
+    @Test(priority = 26, dependsOnMethods = "msgSlaFeatureReadyPatch")
+    @Description("Отправить в патч")
+    public void msgSlaFeatureSendRetry() {
+        slaTask.refreshUdf();
+        slaFeatureController.performCommonOperation(slaTask, SEND);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(HTTP_OK)
+                .isParseableBody(SlaResponseBody.class);
+    }
+
+    @Test(priority = 27, dependsOnMethods = "msgSlaFeatureSendRetry")
     @Description("Установить в производственную среду")
     public void msgSlaFeatureInstall() {
         slaFeatureController.performCommonOperation(slaTask, INSTALL);
@@ -348,7 +379,7 @@ public class SlaFeatureTest extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 24, dependsOnMethods = "msgSlaFeatureInstall")
+    @Test(priority = 28, dependsOnMethods = "msgSlaFeatureInstall")
     @Description("Закрыть(поставщик)")
     public void msgSlaFeatureClose() {
         slaFeatureController.performCommonOperation(slaTask, CLOSE);

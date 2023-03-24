@@ -25,6 +25,7 @@ public abstract class BaseSlaController extends ApiRequest {
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS = {ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {ID, OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
+    protected SlaRequestBody.Fields[] DEFAULT_FIELDS_USER = {OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
 
     public BaseSlaController(String url, Map<String, String> headersBaseController, AuthToken authToken) {
         super(url, headersBaseController, authToken);
@@ -48,6 +49,7 @@ public abstract class BaseSlaController extends ApiRequest {
         return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
+    @Step("Выполнение операции: {0}")
     protected Response performOperationWithQueryParam(@NotNull SlaTask slaTask, String requestBody) {
         HashMap<String, String> params = new HashMap<>() {{
             put(ID.field, slaTask.getId());

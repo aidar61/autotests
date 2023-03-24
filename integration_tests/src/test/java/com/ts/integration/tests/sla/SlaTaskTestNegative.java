@@ -12,6 +12,7 @@ import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
 import com.ts.common.listeners.LogCatchListener;
+import com.ts.common.listeners.TestListener;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import jdk.jfr.Description;
@@ -25,7 +26,7 @@ import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.H
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CLOSED;
 
-@Listeners({LogCatchListener.class})
+@Listeners({TestListener.class})
 public class SlaTaskTestNegative extends BaseIntegrationTest {
     private static SlaHelpController slaHelpController;
     private SlaTask slaTask;
