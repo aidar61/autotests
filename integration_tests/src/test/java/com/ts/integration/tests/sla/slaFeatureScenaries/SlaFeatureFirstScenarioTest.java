@@ -116,6 +116,7 @@ public class SlaFeatureFirstScenarioTest extends BaseIntegrationTest {
     public void msgSlaFeatureBeginCostPre() {
         udf = refreshUdf();
         udf.setUdfDouble(generateUdfDouble(UDF_SDFEATURE_IMPLBUDGET, 4));
+        udf.setSecondUdfDouble(generateUdfDouble(UDF_SDFEATURE_DETAILBUDGET, 4));
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
         udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, GENERAL, USERDATA_WIKI.id));
         udf.setUdfString(generateUdfString(UDF_SDFEATURE_AGREEDDECISION, generateComment()));

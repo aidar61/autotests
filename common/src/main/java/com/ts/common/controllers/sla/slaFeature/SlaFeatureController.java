@@ -31,7 +31,7 @@ public class SlaFeatureController extends BaseSlaController {
         this.authToken = authToken;
     }
 
-    @Step("Создание запроса на доработку ЛПО (new) : {0}")
+    @Step("Создание запроса на доработку ЛПО (new) ")
     @Override
     protected Response createTask(String requestBody) {
         return super.createTask(requestBody);
