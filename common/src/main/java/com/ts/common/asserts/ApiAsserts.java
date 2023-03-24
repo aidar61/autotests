@@ -22,7 +22,7 @@ public class ApiAsserts {
 
     @Step("[Assert] Response")
     public static ApiAsserts assertThat(Response response) {
-//        logResponse(response.getBody());
+        logResponse(response.getBody());
         return new ApiAsserts(response);
     }
 
