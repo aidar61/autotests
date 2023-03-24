@@ -27,6 +27,7 @@ public class List extends BaseEntity {
         REMOTE_ACCESS("818182de5414dc32015418f1fc8e07cf"),
         CLIENTIGNOREANL("818181b03ce8a434013cec9c3058513c"),
         NOTCUSTOM("402889da5ec3af21015ec3d025ac02b3"),
+        USERDATA_WIKI("{\"username\":\"wiki\",\"name\":\"wiki\"}"),
         CRITICAL("818182de541395b101541399d2120001");
         public final String id;
 

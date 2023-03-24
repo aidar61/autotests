@@ -8,6 +8,7 @@ import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
 import com.ts.common.listeners.LogCatchListener;
+import com.ts.common.listeners.TestListener;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import jdk.jfr.Description;
@@ -23,7 +24,7 @@ import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.InitEntities.refreshUdf;
 
-@Listeners({LogCatchListener.class})
+@Listeners({TestListener.class})
 public class SlaBugTest extends BaseIntegrationTest {
     private static SlaBugController slaBugController;
     private SlaTask slaTask;

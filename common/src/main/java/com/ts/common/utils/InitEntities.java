@@ -319,6 +319,15 @@ public class InitEntities {
                 .build();
     }
 
+    public static UdfList generateUdfList(Udfs.UdfSd udfSdType, List.Constants udfList, String value) {
+        return UdfList.builder()
+                .udfId(udfSdType.udfId)
+                .type(Type.LIST.name())
+                .listValue(new List[]{new List(udfList.id)})
+                .userData(value)
+                .build();
+    }
+
     public static UdfString generateUdfString(Udfs.UdfSd udfSdType, String udfStringValue) {
         return UdfString.builder()
                 .udfId(udfSdType.udfId)

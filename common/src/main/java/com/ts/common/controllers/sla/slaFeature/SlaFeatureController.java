@@ -139,16 +139,20 @@ public class SlaFeatureController extends BaseSlaController {
         slaTask.setOperation(generateOperationID(this.slaType, BEGINCOST_PRE));
         slaTask.setDescription(generateDescriptionForOperation(BEGINCOST_PRE));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
-        return this.response = super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_CONDITION));
+        return this.response = super.performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_USER));
     }
 
     public Response msgStart(SlaTask slaTask) {
+        HashMap<String, String> params = new HashMap<>() {{
+            put(ID.field, slaTask.getId());
+        }};
         slaTask.setOperation(generateOperationID(this.slaType, START));
         slaTask.setDescription(generateDescriptionForOperation(START));
         slaTask.setHandlerUser(generateUser(User.Constants.BABUSHKIN_IVAN));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
-        return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE)
-                , slaRequestBody.keepFields(DEFAULT_FIELDS_CONDITION));
+        return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE
+                        , formatParameters(params))
+                , slaRequestBody.keepFields(DEFAULT_FIELDS_USER));
     }
 
 }
