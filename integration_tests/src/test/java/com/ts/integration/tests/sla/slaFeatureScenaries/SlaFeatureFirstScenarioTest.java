@@ -8,10 +8,7 @@ import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.listeners.TestListener;
 import com.ts.integration.tests.BaseIntegrationTest;
 import jdk.jfr.Description;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
@@ -65,7 +62,7 @@ public class SlaFeatureFirstScenarioTest extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-//    @Test(priority = 1)
+    //    @Test(priority = 1)
 //    @Description("Test description: Perform operation to change author")
 //    public void commonOperation() {
 //        udf = refreshUdf();
@@ -76,6 +73,12 @@ public class SlaFeatureFirstScenarioTest extends BaseIntegrationTest {
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(SlaResponseBody.class);
 //    }
+    @AfterMethod
+    public void afterMethod() {
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(HTTP_OK)
+                .isParseableBody(SlaResponseBody.class);
+    }
 
     @Test(priority = 1, description = "Начать предварительную оценку")
     @Description("Начать предварительную оценку")
