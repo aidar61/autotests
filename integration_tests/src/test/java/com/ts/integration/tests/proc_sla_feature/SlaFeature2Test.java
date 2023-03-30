@@ -18,7 +18,7 @@ import static com.ts.common.enums.ComSlaOperations.*;
 import static com.ts.common.enums.SlaType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.*;
 
-public class SlaFeatureSecondScenario extends BaseIntegrationTest {
+public class SlaFeature2Test extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
     private SlaTask slaTask;
     private Udfs udf;

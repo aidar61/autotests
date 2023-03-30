@@ -22,7 +22,7 @@ import static com.ts.common.enums.Users.EMPLOYEE;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateComment;
 
-public class SlaFeatureThirdScenarioTest extends BaseIntegrationTest {
+public class SlaFeature3Test extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
     private SlaTask slaTask;
     private Udfs udf;

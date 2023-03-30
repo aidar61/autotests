@@ -23,7 +23,7 @@ import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateComment;
 
 @Listeners({TestListener.class})
-public class SlaFeatureFirstScenarioTest extends BaseIntegrationTest {
+public class SlaFeature1Test extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
     private SlaTask slaTask;
     private Udfs udf;
