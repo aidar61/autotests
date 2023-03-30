@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public abstract class BaseEntity implements Serializable {
-    private static String[] IGNORING_FIELDS = {""};
+    private static String[] IGNORING_FIELDS = {"slaType, category, operation, parent, handlerUser, udfs, attachments, description , finishStatus"};
 
     public boolean isEquals(Object obj) {
         try {
@@ -133,4 +133,9 @@ public abstract class BaseEntity implements Serializable {
         allFields.removeAll(Arrays.asList(fields));
         return removeFields(allFields);
     }
+
+    public Object receiveTaskStatus() {
+        return null;
+    }
+
 }

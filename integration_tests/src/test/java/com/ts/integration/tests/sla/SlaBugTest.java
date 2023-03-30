@@ -1,14 +1,12 @@
 package com.ts.integration.tests.sla;
 
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.config.AppConfigProvider;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
-import com.ts.common.enums.Users;
 import com.ts.common.listeners.TestListener;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
@@ -55,7 +53,7 @@ public class SlaBugTest extends BaseIntegrationTest {
     @Test(priority = 0)
     @Description("Test description: Receive task")
     public void receiveTask() {
-        slaBugController.receiveSlaTask(slaTask.getNumber());
+        slaBugController.receiveActualTask(slaTask.getNumber());
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);

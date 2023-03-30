@@ -29,6 +29,8 @@ public class List extends BaseEntity {
         NOTCUSTOM("402889da5ec3af21015ec3d025ac02b3"),
         USERDATA_WIKI("{\"username\":\"wiki\",\"name\":\"wiki\"}"),
         NO("ff8081813874cb21013875e34e910b7c"),
+        YES("8181817e3e0c780d013e0cf949df0250"),
+        ANALYST("8181817e3da7928a013dac470a303c1e"),
         CRITICAL("818182de541395b101541399d2120001");
         public final String id;
 

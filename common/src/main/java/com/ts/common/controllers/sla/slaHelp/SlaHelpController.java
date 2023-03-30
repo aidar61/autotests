@@ -44,62 +44,6 @@ public class SlaHelpController extends BaseSlaController {
         return super.post(getEndpoint(OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
-    @Override
-    protected Response changeAuthor(SlaTask slaTask) {
-        return null;
-    }
-
-
-    @Override
-    protected Response changeAttributes(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response changeResPerson(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response changeCurrentRole(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response changeLinkedTasks(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response addTrustedWatchers(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response addClientWatchers(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response addWatchers(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response comment(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response privateComment(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response removeRequest(SlaTask slaTask) {
-        return null;
-    }
-
     public Response createTask(SlaTask slaTask) {
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         this.response = createTask(slaRequestBody.keepMandatoryAndCreateFields());
@@ -107,7 +51,7 @@ public class SlaHelpController extends BaseSlaController {
         if (slaResponseBody != null) {
             slaTask.setId(slaResponseBody.getId());
             slaTask.setNumber(slaResponseBody.getNumber());
-            slaTask.setStatus(slaResponseBody.getStatus());
+            slaTask.setFinishStatus(slaResponseBody.getFinishStatus());
         }
         return this.response;
     }
