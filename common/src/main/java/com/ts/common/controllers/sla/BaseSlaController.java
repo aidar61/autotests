@@ -20,15 +20,15 @@ import static com.ts.common.controllers.sla.SlaRequestBody.Fields.ID;
 import static com.ts.common.controllers.sla.SlaRequestBody.Fields.OPERATION;
 import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
 
-public abstract class BaseSlaController extends ApiRequest {
+public class BaseSlaController extends ApiRequest {
     protected SlaType slaType;
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS = {ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {ID, OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS_USER = {OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
 
-    public BaseSlaController(String url, Map<String, String> headersBaseController, AuthToken authToken) {
-        super(url, headersBaseController, authToken);
+    public BaseSlaController(String url, AuthToken authToken) {
+        super(url, HEADERS_BASE_CONTROLLER, authToken);
     }
 
     public BaseSlaController(String url, Map<String, String> headersBaseController, SlaType slaType, AuthToken authToken) {
@@ -41,7 +41,7 @@ public abstract class BaseSlaController extends ApiRequest {
     }
 
     @Step("Получить SLA task, Номер задачи: {0}")
-    public Response receiveSlaTask(String taskNumber) {
+    public Response receiveActualTask(String taskNumber) {
         return super.get(getEndpoint(TASK, INFO, taskNumber));
     }
 
@@ -66,27 +66,4 @@ public abstract class BaseSlaController extends ApiRequest {
         return this.response = performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
     }
 
-
-    @Step("Изменение автора: {0}")
-    protected abstract Response changeAuthor(SlaTask slaTask);
-
-    protected abstract Response changeAttributes(SlaTask slaTask);
-
-    protected abstract Response changeResPerson(SlaTask slaTask);
-
-    protected abstract Response changeCurrentRole(SlaTask slaTask);
-
-    protected abstract Response changeLinkedTasks(SlaTask slaTask);
-
-    protected abstract Response addTrustedWatchers(SlaTask slaTask);
-
-    protected abstract Response addClientWatchers(SlaTask slaTask);
-
-    protected abstract Response addWatchers(SlaTask slaTask);
-
-    protected abstract Response comment(SlaTask slaTask);
-
-    protected abstract Response privateComment(SlaTask slaTask);
-
-    protected abstract Response removeRequest(SlaTask slaTask);
 }

@@ -1,6 +1,8 @@
 package com.ts.common.entitites.sla;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.enums.SlaType;
@@ -29,8 +31,17 @@ public class SlaTask extends BaseEntity {
     String description;
     User handlerUser;
     Udfs udfs;
-    Status status;
+    @JsonProperty("status")
+    Status finishStatus;
     String[] attachments;
+
+    public SlaTask(SlaResponseBody slaResponseBody) {
+        this.id = slaResponseBody.getId();
+        this.number = slaResponseBody.getNumber();
+        this.name = slaResponseBody.getName();
+        this.description = slaResponseBody.getDescription();
+        this.finishStatus = slaResponseBody.getFinishStatus();
+    }
 
     public void refreshUdf() {
         this.udfs = InitEntities.refreshUdf();
@@ -39,5 +50,10 @@ public class SlaTask extends BaseEntity {
     public void refreshUdf(Udfs udf) {
         this.udfs = InitEntities.refreshUdf();
         setUdfs(udf);
+    }
+
+    @Override
+    public Object receiveTaskStatus() {
+        return getFinishStatus();
     }
 }

@@ -88,6 +88,8 @@ public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfUser udfUser;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfUser secondUdfUser;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfList udfList;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfList secondUdfList;
@@ -137,7 +139,7 @@ public class Udfs extends BaseEntity {
     public enum UdfSd {
         UDF_SD_TRUSTEDWATCHER("UDF_SD_TRUSTEDWATCHER", USER),
         UDF_WATCHER("UDF_WATCHER", USER),
-        UDF_ROLE_CURRENT("UDF_ROLE_CURRENT", USER),
+        UDF_ROLE_CURRENT("UDF_ROLE_CURRENT", LIST),
         UDF_SD_TASK_CODE("UDF_SD_TASK_CODE", LIST),
         UDF_SD_RELATED_TASK_CODES("UDF_SD_RELATED_TASK_CODES", MULTILIST),
         UDF_SD_MODULE("UDF_SD_MODULE", TASK),
@@ -178,6 +180,8 @@ public class Udfs extends BaseEntity {
         UDF_SLA_IMPLDEADLINE("UDF_SLA_IMPLDEADLINE", STRING),
 
         UDF_SLA_RESULTCOST("UDF_SLA_RESULTCOST", STRING),
+        UDF_ROLE_WORKER("UDF_ROLE_WORKER", USER),
+        UDF_ROLE_RESET("UDF_ROLE_RESET", LIST),
 
         UDF_REGPROJECT("UDF_REGPROJECT", TASK);
 

@@ -1,5 +1,6 @@
 package com.ts.common.enums;
 
+
 public enum ComSlaOperations {
     CAT("CAT_%S"),
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
@@ -24,6 +25,7 @@ public enum ComSlaOperations {
     ACCEPTPRECOST("%S_ACCEPTPRECOST"), // Принять предварительные условия реализации
     SENDCOST_FINAL("%S_SENDCOST_FINAL"), // Сообщить окончательные условия реализации
     ACCEPTCONDITIONS("%S_ACCEPTCONDITIONS"), // Принять окончательные условия реализации
+    CHANGE_DECISION("%S_CHANGE_DECISION"), // Изменить решение и постановку на реализацию
     START("%S_START"), // Передать в разработку
     REQUESTINFO("%S_REQUESTINFO"), // запросить информацию
     PROVIDEINFO("%S_PROVIDEINFO"), // предоставить информацию
@@ -39,6 +41,7 @@ public enum ComSlaOperations {
     REMOVE_REQUEST("%S_REMOVEREQUEST"); // снять запрос
 
     public final String id;
+
 
     ComSlaOperations(String id) {
         this.id = id;

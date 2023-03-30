@@ -37,61 +37,10 @@ public class SlaFeatureController extends BaseSlaController {
         return super.createTask(requestBody);
     }
 
-    @Override
     protected Response changeAuthor(SlaTask slaTask) {
         slaTask.setOperation(generateOperationID(SLA_FEATURE, CHANGE_AUTHOR));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         return super.performOperation(slaTask, slaRequestBody.keepFields(ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS));
-    }
-
-    @Override
-    protected Response changeAttributes(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response changeResPerson(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response changeCurrentRole(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response changeLinkedTasks(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response addTrustedWatchers(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response addClientWatchers(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response addWatchers(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response comment(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response privateComment(SlaTask slaTask) {
-        return null;
-    }
-
-    @Override
-    protected Response removeRequest(SlaTask slaTask) {
-        return null;
     }
 
     public Response createSlaFeatureTask(SlaTask slaTask) {
@@ -101,7 +50,7 @@ public class SlaFeatureController extends BaseSlaController {
         if (slaResponseBody != null) {
             slaTask.setId(slaResponseBody.getId());
             slaTask.setNumber(slaResponseBody.getNumber());
-            slaTask.setStatus(slaResponseBody.getStatus());
+            slaTask.setFinishStatus(slaResponseBody.getFinishStatus());
         }
         return this.response;
     }

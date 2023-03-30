@@ -15,4 +15,11 @@ public interface AppUserConfig extends Config {
 
     @Key("clientPassword")
     String clientPassword();
+
+    @Key("clientUsernameFirst")
+    String firstClientUserName();
+
+    @Key("clientPassWordFirst")
+    String firstClientPassword();
+
 }

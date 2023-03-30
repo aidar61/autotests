@@ -9,7 +9,9 @@
             <class name="com.ts.integration.tests.sla.SlaTaskTest"/>
             <class name="com.ts.integration.tests.sla.SlaBugTest"/>
             <class name="com.ts.integration.tests.sla.SlaTaskTestNegative"/>
-            <class name="com.ts.integration.tests.sla.slaFeatureScenaries.SlaFeatureFirstScenarioTest"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureFirstScenarioTest"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureSecondScenario"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureThirdScenarioTest"/>
         </classes>
     </test>
 </suite>

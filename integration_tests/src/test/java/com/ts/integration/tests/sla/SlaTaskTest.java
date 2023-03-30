@@ -11,7 +11,6 @@ import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
 import com.ts.common.enums.TaskStatuses;
-import com.ts.common.listeners.LogCatchListener;
 import com.ts.common.listeners.TestListener;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
@@ -70,7 +69,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
     @Test(priority = 0, dependsOnMethods = "createSlaTaskConsultation")
     @Description("Test description: Receive sla task consultation")
     public void receiveSlaTaskConsultation() {
-        slaHelpController.receiveSlaTask(slaTask.getNumber());
+        slaHelpController.receiveActualTask(slaTask.getNumber());
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
