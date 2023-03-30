@@ -27,7 +27,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
     private SlaTask slaTask;
     private Udfs udf;
-
+    //TODO нужно добавить в каждом тесте в контроллер пользователя, который выполняет операции (КЛИЕНТ, СОТРУДНИК)
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         udf = refreshUdf();
@@ -47,6 +47,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
 
     @AfterClass(alwaysRun = false)
     public void afterClass() {
+
 //        udf = refreshUdf();
 //        udf.setUdfList(generateUdfList(UDF_SDFEATURE_CANCELREASON, CLIENTIGNOREANL));
 //        slaTask.refreshUdf(udf);
