@@ -19,6 +19,7 @@ import static com.ts.common.entitites.commonEntities.udf.UdfString.Constants.COS
 import static com.ts.common.enums.ComSlaOperations.*;
 import static com.ts.common.enums.SlaType.SLA_FEATURE;
 import static com.ts.common.enums.Users.CLIENT;
+import static com.ts.common.enums.Users.EMPLOYEE;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateComment;
 
@@ -27,6 +28,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
     private SlaTask slaTask;
     private Udfs udf;
+
     //TODO нужно добавить в каждом тесте в контроллер пользователя, который выполняет операции (КЛИЕНТ, СОТРУДНИК)
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
@@ -37,7 +39,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_PAYDCS, FREE_LAW));
         slaTask = getSlaTask(SLA_FEATURE, CAT);
         slaTask.setUdfs(udf);
-        slaFeatureController.setAuthToken(generateAuthToken(CLIENT));
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController = apiController.getSlaFeatureController();
         slaFeatureController.createSlaFeatureTask(slaTask);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
@@ -91,7 +93,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
         slaTask.setUdfs(udf);
         slaTask.setHandlerUser(generateUser(ABDULLAEV_BAHODIR));
-        slaFeatureController.setAuthToken(generateAuthToken(Users.EMPLOYEE));
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.msgToprecost(slaTask);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)

@@ -15,7 +15,6 @@ import io.restassured.response.Response;
 import java.util.HashMap;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.CREATE;
-import static com.ts.common.application.controllers.TrackStudioEndPoints.HEADERS_BASE_CONTROLLER;
 import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
 import static com.ts.common.enums.ComSlaOperations.*;
 import static com.ts.common.enums.SlaType.SLA_FEATURE;
@@ -27,8 +26,8 @@ public class SlaFeatureController extends BaseSlaController {
     private static final SlaType SLA_TYPE = SLA_FEATURE;
 
     public SlaFeatureController(String url, AuthToken authToken) {
-        super(url, HEADERS_BASE_CONTROLLER, SLA_TYPE, authToken);
-        this.authToken = authToken;
+        super(url, authToken);
+        this.slaType = SLA_TYPE;
     }
 
     @Step("Создание запроса на доработку ЛПО (new) ")
@@ -74,6 +73,7 @@ public class SlaFeatureController extends BaseSlaController {
                 , formatParameters(queryParams)), slaRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
         return this.response;
     }
+
     @Step("Выполнение операции PROVIDEREQINFO: ")
     public Response msgProvideReqInfo(SlaTask slaTask) {
         slaTask.refreshUdf();

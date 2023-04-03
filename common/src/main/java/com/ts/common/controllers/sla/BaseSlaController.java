@@ -31,10 +31,10 @@ public class BaseSlaController extends ApiRequest {
         super(url, HEADERS_BASE_CONTROLLER, authToken);
     }
 
-    public BaseSlaController(String url, Map<String, String> headersBaseController, SlaType slaType, AuthToken authToken) {
-        super(url, headersBaseController, authToken);
-        this.slaType = slaType;
+    public void updateAuthToken(AuthToken authToken) {
+        setAuthToken(authToken);
     }
+
 
     protected Response createTask(String requestBody) {
         return super.post(getEndpoint(TASK, UPDATE), requestBody);

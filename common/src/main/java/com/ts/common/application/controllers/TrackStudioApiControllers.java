@@ -1,6 +1,5 @@
 package com.ts.common.application.controllers;
 
-import com.ts.common.config.AppConfigProvider;
 import com.ts.common.controllers.sla.BaseSlaController;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
@@ -26,13 +25,14 @@ public class TrackStudioApiControllers {
     private SlaFeatureController slaFeatureController;
     private BaseSlaController slaController;
 
-    public TrackStudioApiControllers() {
-        this.authToken = new AuthToken(AppConfigProvider.getUserConfig().username(), AppConfigProvider.getUserConfig().password());
+
+    public TrackStudioApiControllers(AuthToken authToken) {
         this.slaHelpController = new SlaHelpController(BASE_URL, authToken);
         this.slaBugController = new SlaBugController(BASE_URL, authToken);
         this.slaFeatureController = new SlaFeatureController(BASE_URL, authToken);
         this.slaController = new BaseSlaController(BASE_URL, authToken);
     }
+
 
     public SlaTask receiveSlaTask(String slaTaskNumber) {
         this.response = this.slaController.receiveActualTask(slaTaskNumber);
@@ -42,4 +42,12 @@ public class TrackStudioApiControllers {
         }
         return null;
     }
+
+    public void updateToken(AuthToken authToken) {
+        this.slaController.setAuthToken(authToken);
+        this.slaFeatureController.setAuthToken(authToken);
+        this.slaBugController.setAuthToken(authToken);
+        this.slaHelpController.setAuthToken(authToken);
+    }
+
 }

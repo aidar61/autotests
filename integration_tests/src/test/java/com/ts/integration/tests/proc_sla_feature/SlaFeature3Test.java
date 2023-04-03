@@ -38,7 +38,6 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         slaTask = getSlaTask(SLA_FEATURE, CAT);
         slaTask.setUdfs(udf);
         slaFeatureController = apiController.getSlaFeatureController();
-        slaFeatureController.setAuthToken(generateAuthToken(CLIENT));
         slaFeatureController.createSlaFeatureTask(slaTask);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
@@ -60,7 +59,7 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
         slaTask.setUdfs(udf);
         slaTask.setHandlerUser(generateUser(ABDULLAEV_BAHODIR));
-        slaFeatureController.setAuthToken(generateAuthToken(EMPLOYEE));
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.msgToprecost(slaTask);
 //        TaskAsserts.assertThat(actualSlaTask.getFinishStatus())
 //                .isCorrectStatus();
@@ -73,7 +72,6 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         udf.setUdfUser(generateUdfUser(UDF_ROLE_WORKER, ABDULLAEV_BAHODIR));
         udf.setSecondUdfList(generateUdfList(UDF_ROLE_RESET, YES));
         slaTask.refreshUdf(udf);
-        slaFeatureController.setAuthToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(slaTask, CHANGE_CURRENT_ROLE);
         actualSlaTask = apiController.receiveSlaTask(slaTask.getNumber());
 //        TaskAsserts.assertThat(slaTask).isEquals(actualSlaTask);
@@ -89,14 +87,13 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         udf.setThirdUdfString(generateUdfString(UDF_SLA_IMPLPLANTD_PRE, "12"));
         udf.setUdfDate(generateUdfDate(UDF_SLA_FINALESTIMATIONDATE));
         slaTask.refreshUdf(udf);
-        slaFeatureController.setAuthToken(generateAuthToken(EMPLOYEE)); // Сотрудник
         slaFeatureController.performCommonOperation(slaTask, SENDCOST_PRE);
     }
 
     @Test(priority = 3, description = "Принять предварительные условия реализации")
     public void msgSlaFeatureAcceptPreCost() {
         slaTask.refreshUdf();
-        slaFeatureController.setAuthToken(generateAuthToken(CLIENT));
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(slaTask, ACCEPTPRECOST);
     }
 
@@ -109,20 +106,21 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         udf.setUdfString(generateUdfString(UDF_SLA_IMPLDEADLINE, "12"));
         udf.setSecondUdfString(generateUdfString(UDF_SLA_RESULTCOST, COST.value));
         slaTask.refreshUdf(udf);
-        slaFeatureController.setAuthToken(generateAuthToken(EMPLOYEE));
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(slaTask, SENDCOST_FINAL);
     }
 
     @Test(priority = 5, description = "Принять окончательные условия реализации")
     public void msgSlaFeatureAcceptConditions() {
         slaTask.refreshUdf();
-        slaFeatureController.setAuthToken(generateAuthToken(CLIENT));
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(slaTask, ACCEPTCONDITIONS);
     }
 
     @Test(priority = 6, description = "Изменить решение и постановку на реализацию")
     public void msgSlaFeatureChangeDesicion() {
         slaTask.refreshUdf();
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(slaTask, CHANGE_DECISION);
     }
 }
