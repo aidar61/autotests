@@ -27,11 +27,11 @@ import static com.ts.common.utils.RandomUtils.generateComment;
 
 public class SlaHelpController extends BaseSlaController {
 
-    public static final SlaType slaType = SlaType.SLA_HElP;
+    public final SlaType SLA_TYPE = SlaType.SLA_HElP;
 
     public SlaHelpController(String url, AuthToken authToken) {
-        super(url, HEADERS_BASE_CONTROLLER, slaType, authToken);
-        super.authToken = authToken;
+        super(url, authToken);
+        super.slaType = SLA_TYPE;
     }
 
     @Step("Создание консультации: ")

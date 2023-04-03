@@ -10,7 +10,15 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder
-public class AuthToken {
+public class AuthToken implements Cloneable {
     private String user;
     private String password;
+
+    public AuthToken clone() {
+        try {
+            return (AuthToken) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

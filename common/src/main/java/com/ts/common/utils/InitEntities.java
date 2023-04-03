@@ -6,6 +6,7 @@ import com.ts.common.entitites.commonEntities.udf.*;
 import com.ts.common.entitites.commonEntities.udfs.*;
 import com.ts.common.entitites.sla.SlaTask;
 import com.ts.common.enums.*;
+import io.restassured.authentication.PreemptiveBasicAuthScheme;
 
 import java.io.File;
 
@@ -376,5 +377,19 @@ public class InitEntities {
                 .user(users.username)
                 .password(users.password)
                 .build();
+    }
+
+    public static PreemptiveBasicAuthScheme generateAuth(Users users) {
+        PreemptiveBasicAuthScheme preemptiveBasicAuthScheme = new PreemptiveBasicAuthScheme();
+        preemptiveBasicAuthScheme.setUserName(users.username);
+        preemptiveBasicAuthScheme.setPassword(users.password);
+        return preemptiveBasicAuthScheme;
+    }
+
+    public static PreemptiveBasicAuthScheme generateAuth(AuthToken users) {
+        PreemptiveBasicAuthScheme preemptiveBasicAuthScheme = new PreemptiveBasicAuthScheme();
+        preemptiveBasicAuthScheme.setUserName(users.getUser());
+        preemptiveBasicAuthScheme.setPassword(users.getPassword());
+        return preemptiveBasicAuthScheme;
     }
 }
