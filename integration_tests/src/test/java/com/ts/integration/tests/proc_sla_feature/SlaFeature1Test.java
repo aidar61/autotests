@@ -3,9 +3,6 @@ package com.ts.integration.tests.proc_sla_feature;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
-import com.ts.common.entitites.commonEntities.Udfs;
-import com.ts.common.entitites.sla.SlaTask;
-import com.ts.common.enums.Users;
 import com.ts.common.listeners.TestListener;
 import com.ts.integration.tests.BaseIntegrationTest;
 import jdk.jfr.Description;
@@ -26,8 +23,6 @@ import static com.ts.common.utils.RandomUtils.generateComment;
 @Listeners({TestListener.class})
 public class SlaFeature1Test extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
-    private SlaTask slaTask;
-    private Udfs udf;
 
     //TODO нужно добавить в каждом тесте в контроллер пользователя, который выполняет операции (КЛИЕНТ, СОТРУДНИК)
     @BeforeClass(alwaysRun = true)

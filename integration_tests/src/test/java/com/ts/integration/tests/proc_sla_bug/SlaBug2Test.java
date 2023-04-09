@@ -4,7 +4,6 @@ import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
-import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
 import com.ts.common.utils.InitEntities;
@@ -24,7 +23,6 @@ import static com.ts.common.utils.InitEntities.*;
 
 public class SlaBug2Test extends BaseIntegrationTest {
     private SlaBugController slaBugController;
-    private Task task;
 
     @BeforeClass
     public void beforeClass() {
@@ -38,91 +36,91 @@ public class SlaBug2Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 0, description = "создание задачи")
+    @Test(priority = 0)
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfSdModule(InitEntities.getUdfsModuleThrowsJson());
         udf.setUdfList(InitEntities.generateUdfList(UDF_SDBUG_PRIORITYBUG, CRITICAL));
         udf.setUdfsBdkuConfiguration(InitEntities.getBdkuThrowsJson());
         udf.setSecondUdfList(InitEntities.generateUdfList(UDF_SD_REMOTEACCESS, REMOTE_ACCESS));
-        task = InitEntities.getSlaTask(SlaType.SLA_BUG, ComSlaOperations.CAT);
-        task.refreshUdf(udf);
+        slaTask = InitEntities.getSlaTask(SlaType.SLA_BUG, ComSlaOperations.CAT);
+        slaTask.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(CLIENT));
-        slaBugController.createSlaBugTask(task);
+        slaBugController.createSlaBugTask(slaTask);
     }
 
-    @Test(priority = 1, description = "принятие на анализ")
+    @Test(priority = 1)
     public void slaBugMsgAnalize() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ABDULLAEV_BAHODIR));
         udf.setSecondUdfUser(generateUdfUser(UDF_WATCHER, ABDULLAEV_BAHODIR));
         udf.setThirdUdfUser(generateUdfUser(STDT_HANDLER, ALTUNIN_NIKOLAY));
-        task.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
-        task.refreshUdf(udf);
+        slaTask.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
+        slaTask.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(EMPLOYEE));
-        slaBugController.msgAnalize(task);
+        slaBugController.performCommonOperation(slaTask, ANALIZE);
     }
 
-    @Test(priority = 2, description = "запросить информацию")
+    @Test(priority = 2)
     public void slaBugMsgRequestInfo() {
-        task.refreshUdf();
-        slaBugController.performCommonOperation(task, REQUESTINFO);
+        slaTask.refreshUdf();
+        slaBugController.performCommonOperation(slaTask, REQUESTINFO);
     }
 
-    @Test(priority = 3, description = "предоставить информацию")
+    @Test(priority = 3)
     public void slaBugMsgProvideInfo() {
-        task.refreshUdf();
+        slaTask.refreshUdf();
         apiController.updateToken(generateAuthToken(CLIENT));
-        slaBugController.performCommonOperation(task, PROVIDEINFO);
+        slaBugController.performCommonOperation(slaTask, PROVIDEINFO);
     }
 
-    @Test(priority = 4, description = "запросить информацию")
+    @Test(priority = 4)
     public void slaBugMsgRequestInfoRetry() {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
-        slaBugController.performCommonOperation(task, REQUESTINFO);
+        slaBugController.performCommonOperation(slaTask, REQUESTINFO);
     }
 
-    @Test(priority = 5, description = "отменить запрос информации")
+    @Test(priority = 5)
     public void slaBugMsgUndoRequestInfo() {
-        slaBugController.performCommonOperation(task, UNDOREQUESTINFO);
+        slaBugController.performCommonOperation(slaTask, UNDOREQUESTINFO);
     }
 
-    @Test(priority = 6, description = "начать работу")
+    @Test(priority = 6)
     public void slaBugMsgStart() {
-        slaBugController.performCommonOperation(task, START);
+        slaBugController.performCommonOperation(slaTask, START);
     }
 
-    @Test(priority = 7, description = "вернуть на анализ")
+    @Test(priority = 7)
     public void slaBugMsgUndoStart() {
-        slaBugController.performCommonOperation(task, UNDOSTART);
+        slaBugController.performCommonOperation(slaTask, UNDOSTART);
     }
 
-    @Test(priority = 8, description = "начать работу")
+    @Test(priority = 8)
     public void slaBugMsgStartRetry() {
-        slaBugController.performCommonOperation(task, START);
+        slaBugController.performCommonOperation(slaTask, START);
     }
 
-    @Test(priority = 9, description = "предоставить решение")
+    @Test(priority = 9)
     public void slaBugMsgStHotFix() {
-        slaBugController.performCommonOperation(task, HOTFIX);
+        slaBugController.performCommonOperation(slaTask, HOTFIX);
     }
 
-    @Test(priority = 10, description = "вернуть в работу")
+    @Test(priority = 10)
     public void slaBugMsgReturn() {
         apiController.updateToken(generateAuthToken(CLIENT));
-        slaBugController.performCommonOperation(task, RETURN);
+        slaBugController.performCommonOperation(slaTask, RETURN);
     }
 
-    @Test(priority = 11, description = "предоставить решение")
+    @Test(priority = 11)
     public void slaBugMsgProvideInfoRetry() {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
-        slaBugController.performCommonOperation(task, HOTFIX);
+        slaBugController.performCommonOperation(slaTask, PROVIDEINFO);
     }
 
-    @Test(priority = 12, description = "ошибка устранена")
+    @Test(priority = 12)
     public void slaBugMsgAcceptSolution() {
         udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));
         apiController.updateToken(generateAuthToken(CLIENT));
-        slaBugController.performCommonOperation(task, ACCEPTSOLUTION);
+        slaBugController.performCommonOperation(slaTask, ACCEPTSOLUTION);
     }
 }
