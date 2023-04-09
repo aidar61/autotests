@@ -24,8 +24,7 @@ import static com.ts.common.utils.RandomUtils.generateComment;
 
 public class SlaFeature3Test extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
-    private SlaTask slaTask;
-    private Udfs udf;
+
     private SlaTask actualSlaTask;
 
     @BeforeClass(alwaysRun = true)

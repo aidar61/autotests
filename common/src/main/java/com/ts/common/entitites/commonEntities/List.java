@@ -30,7 +30,9 @@ public class List extends BaseEntity {
         USERDATA_WIKI("{\"username\":\"wiki\",\"name\":\"wiki\"}"),
         NO("ff8081813874cb21013875e34e910b7c"),
         YES("8181817e3e0c780d013e0cf949df0250"),
+        FIVE("8181850d7a9f01d3017a9f17ca29001e"),
         ANALYST("8181817e3da7928a013dac470a303c1e"),
+        SOLVED("81818284552b295701552b4d425e0015"),
         CRITICAL("818182de541395b101541399d2120001");
         public final String id;
 

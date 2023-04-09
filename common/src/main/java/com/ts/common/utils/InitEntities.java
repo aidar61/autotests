@@ -379,17 +379,4 @@ public class InitEntities {
                 .build();
     }
 
-    public static PreemptiveBasicAuthScheme generateAuth(Users users) {
-        PreemptiveBasicAuthScheme preemptiveBasicAuthScheme = new PreemptiveBasicAuthScheme();
-        preemptiveBasicAuthScheme.setUserName(users.username);
-        preemptiveBasicAuthScheme.setPassword(users.password);
-        return preemptiveBasicAuthScheme;
-    }
-
-    public static PreemptiveBasicAuthScheme generateAuth(AuthToken users) {
-        PreemptiveBasicAuthScheme preemptiveBasicAuthScheme = new PreemptiveBasicAuthScheme();
-        preemptiveBasicAuthScheme.setUserName(users.getUser());
-        preemptiveBasicAuthScheme.setPassword(users.getPassword());
-        return preemptiveBasicAuthScheme;
-    }
 }

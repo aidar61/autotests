@@ -23,7 +23,6 @@ public class SlaBugController extends BaseSlaController {
     }
 
     @Step("Создание извещения об ошибке: {0}")
-
     protected Response createTask(String requestBody) {
         return super.createTask(requestBody);
     }
