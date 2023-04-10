@@ -13,6 +13,7 @@ import io.restassured.response.Response;
 import static com.ts.common.enums.ComSlaOperations.*;
 import static com.ts.common.enums.SlaType.SLA_BUG;
 import static com.ts.common.utils.InitEntities.generateOperationID;
+import static com.ts.common.utils.RandomUtils.generateDescriptionForOperation;
 
 public class SlaBugController extends BaseSlaController {
     private static final SlaType SLA_TYPE = SLA_BUG;
@@ -39,6 +40,12 @@ public class SlaBugController extends BaseSlaController {
         return this.response;
     }
 
+    public Response msgAnalize(SlaTask slaTask) {
+        slaTask.setOperation(generateOperationID(this.slaType, ANALIZE));
+        slaTask.setDescription(generateDescriptionForOperation(ANALIZE));
+        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+        return this.response = super.performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_USER));
+    }
 
     protected Response changeAuthor(SlaTask slaTask) {
         slaTask.setOperation(generateOperationID(SLA_TYPE, CHANGE_AUTHOR));
