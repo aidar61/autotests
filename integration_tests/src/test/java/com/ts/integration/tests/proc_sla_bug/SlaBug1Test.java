@@ -75,7 +75,7 @@ public class SlaBug1Test extends BaseIntegrationTest {
         slaTask.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
         slaTask.refreshUdf(udf);
         slaBugController.performCommonOperation(slaTask, UNDOSTART);
-    }
+    } //
 
     @Test(priority = 4)
     public void slaBugMsgCloseUnfixable() {
