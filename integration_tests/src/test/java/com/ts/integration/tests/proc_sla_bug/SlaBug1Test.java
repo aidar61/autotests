@@ -59,7 +59,7 @@ public class SlaBug1Test extends BaseIntegrationTest {
         slaTask.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
         slaTask.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(EMPLOYEE));
-        slaBugController.performCommonOperation(slaTask, ANALIZE);
+        slaBugController.msgAnalize(slaTask);
     }
 
     @Test(priority = 2)
@@ -70,7 +70,10 @@ public class SlaBug1Test extends BaseIntegrationTest {
 
     @Test(priority = 3)
     public void slaBugMsgUndoStart() {
-        slaTask.refreshUdf();
+        udf = refreshUdf();
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ALTUNIN_NIKOLAY));
+        slaTask.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
+        slaTask.refreshUdf(udf);
         slaBugController.performCommonOperation(slaTask, UNDOSTART);
     }
 

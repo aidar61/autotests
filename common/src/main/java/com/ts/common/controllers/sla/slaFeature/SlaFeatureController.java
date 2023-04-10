@@ -89,7 +89,7 @@ public class SlaFeatureController extends BaseSlaController {
         slaTask.setOperation(generateOperationID(this.slaType, BEGINCOST_PRE));
         slaTask.setDescription(generateDescriptionForOperation(BEGINCOST_PRE));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
-        return this.response = super.performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_USER));
+        return this.response = super.performOperationWithQueryParam(slaTask, slaRequestBody.keepFields( DEFAULT_FIELDS_USER));
     }
 
     public Response msgStart(SlaTask slaTask) {

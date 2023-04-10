@@ -58,7 +58,7 @@ public class SlaBug3Test extends BaseIntegrationTest {
         slaTask.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
         slaTask.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(EMPLOYEE));
-        slaBugController.performCommonOperation(slaTask, ANALIZE);
+        slaBugController.msgAnalize(slaTask);
     }
 
     @Test(priority = 2)

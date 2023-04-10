@@ -13,7 +13,6 @@ import io.restassured.response.Response;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
-import java.util.Map;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.controllers.sla.SlaRequestBody.Fields.ID;
@@ -29,10 +28,6 @@ public class BaseSlaController extends ApiRequest {
 
     public BaseSlaController(String url, AuthToken authToken) {
         super(url, HEADERS_BASE_CONTROLLER, authToken);
-    }
-
-    public void updateAuthToken(AuthToken authToken) {
-        setAuthToken(authToken);
     }
 
 
@@ -63,7 +58,10 @@ public class BaseSlaController extends ApiRequest {
         slaTask.setOperation(InitEntities.generateOperationID(this.slaType, operation));
         slaTask.setDescription(RandomUtils.generateDescriptionForOperation(operation));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
-        return this.response = performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
+        if (slaTask.getHandlerUser() == null) {
+            return this.response = performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
+        }
+        return this.response = performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_USER));
     }
 
 }
