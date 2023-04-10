@@ -4,7 +4,6 @@ import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
-import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
 import com.ts.common.utils.InitEntities;
@@ -20,7 +19,7 @@ import static com.ts.common.utils.InitEntities.*;
 
 public class SlaBug6Test extends BaseIntegrationTest {
     private SlaBugController slaBugController;
-    private Task task;
+
     @BeforeClass
     public void beforeClass() {
         slaBugController = apiController.getSlaBugController();
@@ -33,25 +32,25 @@ public class SlaBug6Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 0,description = "создание задачи")
+    @Test(priority = 0)
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfSdModule(InitEntities.getUdfsModuleThrowsJson());
         udf.setUdfList(InitEntities.generateUdfList(UDF_SDBUG_PRIORITYBUG, CRITICAL));
         udf.setUdfsBdkuConfiguration(InitEntities.getBdkuThrowsJson());
         udf.setSecondUdfList(InitEntities.generateUdfList(UDF_SD_REMOTEACCESS, REMOTE_ACCESS));
-        task = InitEntities.getSlaTask(SlaType.SLA_BUG, ComSlaOperations.CAT);
-        task.refreshUdf(udf);
+        slaTask = InitEntities.getSlaTask(SlaType.SLA_BUG, ComSlaOperations.CAT);
+        slaTask.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(CLIENT));
-        slaBugController.createSlaBugTask(task);
+        slaBugController.createSlaBugTask(slaTask);
     }
 
-    @Test(priority = 1,description = "закрыть задачу")
+    @Test(priority = 1)
     public void slaBugMsgClose() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));
         udf.setSecondUdfList(generateUdfList(UDF_SD_CLOSEREASON, SOLVED));
-        task.refreshUdf(udf);
-        slaBugController.performCommonOperation(task, ComSlaOperations.CLOSE);
+        slaTask.refreshUdf(udf);
+        slaBugController.performCommonOperation(slaTask, ComSlaOperations.CLOSE);
     }
 }
