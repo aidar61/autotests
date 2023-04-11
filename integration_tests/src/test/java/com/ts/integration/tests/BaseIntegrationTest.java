@@ -7,7 +7,7 @@ import com.ts.common.controllers.sla.BaseSlaController;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.Users;
-import com.ts.common.listeners.LogCatchListener;
+import com.ts.common.listeners.TestListener;
 import com.ts.common.tests.AbstractBaseTest;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
@@ -17,12 +17,11 @@ import org.testng.annotations.Listeners;
 import static com.ts.common.utils.InitEntities.generateAuthToken;
 
 @Slf4j
-@Listeners({LogCatchListener.class})
+@Listeners({TestListener.class})
 public class BaseIntegrationTest extends AbstractBaseTest {
     protected Response response;
     protected AuthToken authToken;
     protected BaseSlaController slaController;
-    protected Task task;
     protected Udfs udf;
 
     @BeforeSuite(alwaysRun = true)
