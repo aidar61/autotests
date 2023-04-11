@@ -37,48 +37,48 @@ public class SlaBug1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 0)
+    @Test(priority = 0, description = "Создание извещения об ошибке")
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfSdModule(InitEntities.getUdfsModuleThrowsJson());
         udf.setUdfList(InitEntities.generateUdfList(UDF_SDBUG_PRIORITYBUG, CRITICAL));
         udf.setUdfsBdkuConfiguration(InitEntities.getBdkuThrowsJson());
         udf.setSecondUdfList(InitEntities.generateUdfList(UDF_SD_REMOTEACCESS, REMOTE_ACCESS));
-        slaTask = InitEntities.getSlaTask(SlaType.SLA_BUG, ComSlaOperations.CAT);
-        slaTask.refreshUdf(udf);
+        task = InitEntities.getSlaTask(SlaType.SLA_BUG, ComSlaOperations.CAT);
+        task.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(CLIENT));
-        slaBugController.createSlaBugTask(slaTask);
+        slaBugController.createSlaBugTask(task);
     }
 
-    @Test(priority = 1)
+    @Test(priority = 1, description = "принять на анализ")
     public void slaBugMsgAnalize() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ABDULLAEV_BAHODIR));
         udf.setSecondUdfUser(generateUdfUser(UDF_WATCHER, ABDULLAEV_BAHODIR));
         udf.setThirdUdfUser(generateUdfUser(STDT_HANDLER, ALTUNIN_NIKOLAY));
-        slaTask.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
-        slaTask.refreshUdf(udf);
+        task.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
+        task.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(EMPLOYEE));
-        slaBugController.msgAnalize(slaTask);
+        slaBugController.msgAnalize(task);
     }
 
-    @Test(priority = 2)
+    @Test(priority = 2, description = "отклонить")
     public void slaBugMsgDecline() {
-        slaTask.refreshUdf();
-        slaBugController.performCommonOperation(slaTask, DECLINE);
+        task.refreshUdf();
+        slaBugController.performCommonOperation(task, DECLINE);
     }
 
-    @Test(priority = 3)
+    @Test(priority = 3, description = "вернуть на анализ")
     public void slaBugMsgUndoStart() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ALTUNIN_NIKOLAY));
-        slaTask.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
-        slaTask.refreshUdf(udf);
-        slaBugController.performCommonOperation(slaTask, UNDOSTART);
-    } //
+        task.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
+        task.refreshUdf(udf);
+        slaBugController.performCommonOperation(task, UNDOSTART);
+    }
 
-    @Test(priority = 4)
+    @Test(priority = 4, description = "закрыть как неустраненную")
     public void slaBugMsgCloseUnfixable() {
-        slaBugController.performCommonOperation(slaTask, CLOSEUNFIXABLE);
+        slaBugController.performCommonOperation(task, CLOSEUNFIXABLE);
     }
 }

@@ -5,6 +5,7 @@ import io.qameta.allure.Attachment;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
+import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
 
 @Slf4j
@@ -15,7 +16,12 @@ public class TestListener extends TestListenerAdapter {
     @SuppressWarnings("UnusedReturnValue")
     @Attachment(value = "Test Log", type = "text/plain")
     public String stopCatch() {
-        return consoleOutputCapturer.stop();
+        ITestResult testResult = Reporter.getCurrentTestResult();
+        if (testResult != null && testResult.getMethod() != null) {
+            return consoleOutputCapturer.stop();
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -32,22 +38,22 @@ public class TestListener extends TestListenerAdapter {
 
     @Override
     public void onTestSuccess(ITestResult tr) {
-        stopCatch();
         printTestResult(tr);
+        stopCatch();
         super.onTestSuccess(tr);
     }
 
     @Override
     public void onTestFailure(ITestResult tr) {
-        stopCatch();
         printTestResult(tr);
+        stopCatch();
         super.onTestFailure(tr);
     }
 
     @Override
     public void onTestSkipped(ITestResult tr) {
-        stopCatch();
         printTestResult(tr);
+        stopCatch();
         super.onTestSkipped(tr);
     }
 

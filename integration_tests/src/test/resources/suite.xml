@@ -4,14 +4,21 @@
         <listener class-name="com.ts.tests.runners.RetryTransformer"/>
         <listener class-name="com.ts.common.listeners.LogCatchListener"/>
     </listeners>
-    <test name="Ts tests">
-        <classes>
-            <class name="com.ts.integration.tests.sla.SlaTaskTest"/>
-            <class name="com.ts.integration.tests.sla.SlaBugTest"/>
-            <class name="com.ts.integration.tests.sla.SlaTaskTestNegative"/>
-            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature1Test"/>
-            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature2Test"/>
-            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature3Test"/>
-        </classes>
+    <test name="Integration_Tests">
+        <packages>
+            <package name="com.ts.integration.tests.sla"/>
+            <package name="com.ts.integration.tests.proc_sla_bug"/>
+            <package name="com.ts.integration.tests.proc_sla_feature"/>
+        </packages>
     </test>
+<!--    <test name="Sla_Bug">-->
+<!--        <packages>-->
+<!--            <package name="com.ts.integration.tests.proc_sla_bug"/>-->
+<!--        </packages>-->
+<!--    </test>-->
+<!--    <test name="Sla_Feature">-->
+<!--        <packages>-->
+<!--            <package name="com.ts.integration.tests.proc_sla_feature"/>-->
+<!--        </packages>-->
+<!--    </test>-->
 </suite>

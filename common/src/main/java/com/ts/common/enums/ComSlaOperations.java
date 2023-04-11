@@ -43,7 +43,7 @@ public enum ComSlaOperations {
     SEND("%S_SEND"), // отправить в патч
     READYTOPATCH("%S_READYTOPATCH"), // передать на включение в патч
     INSTALL("%S_INSTALL"), // установить в производственную среду
-    UNDOSTART("%S_UNDOSTAR"), // вернуть на анализ
+    UNDOSTART("%S_UNDOSTART"), // вернуть на анализ
     CLOSEUNFIXABLE("%S_CLOSEUNFIXABLE"), // закрыть как неустраненную
     CLOSE("%S_CLOSE"), // закрыть(поставщик)
     ACCEPTSOLUTION("%S_ACCEPTSOLUTION"), // ошибка устранена

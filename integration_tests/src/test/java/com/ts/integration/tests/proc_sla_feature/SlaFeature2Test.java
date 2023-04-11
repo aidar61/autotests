@@ -3,8 +3,6 @@ package com.ts.integration.tests.proc_sla_feature;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
-import com.ts.common.entitites.commonEntities.Udfs;
-import com.ts.common.entitites.sla.SlaTask;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -29,10 +27,10 @@ public class SlaFeature2Test extends BaseIntegrationTest {
         udf.setUdfsBdkuConfiguration(getBdkuThrowsJson());
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
         udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_PAYDCS, FREE_LAW));
-        slaTask = getSlaTask(SLA_FEATURE, CAT);
-        slaTask.setUdfs(udf);
+        task = getSlaTask(SLA_FEATURE, CAT);
+        task.setUdfs(udf);
         slaFeatureController = apiController.getSlaFeatureController();
-        slaFeatureController.createSlaFeatureTask(slaTask);
+        slaFeatureController.createSlaFeatureTask(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
@@ -42,9 +40,9 @@ public class SlaFeature2Test extends BaseIntegrationTest {
     public void msgSlaFeatureTopreCost() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
-        slaTask.setUdfs(udf);
-        slaTask.setHandlerUser(generateUser(ABDULLAEV_BAHODIR));
-        slaFeatureController.msgToprecost(slaTask);
+        task.setUdfs(udf);
+        task.setHandlerUser(generateUser(ABDULLAEV_BAHODIR));
+        slaFeatureController.msgToprecost(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
@@ -58,8 +56,8 @@ public class SlaFeature2Test extends BaseIntegrationTest {
         udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
         udf.setThirdUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, GENERAL, USERDATA_WIKI.id));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ARUTYANIN_YURIY));
-        slaTask.refreshUdf(udf);
-        slaFeatureController.performCommonOperation(slaTask, BEGINCOST_FINAL);
+        task.refreshUdf(udf);
+        slaFeatureController.performCommonOperation(task, BEGINCOST_FINAL);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
@@ -67,8 +65,8 @@ public class SlaFeature2Test extends BaseIntegrationTest {
 
     @Test(priority = 2, description = "Снять запрос")
     public void msgSLaFeatureRemoveRequest() {
-        slaTask.refreshUdf();
-        slaFeatureController.performCommonOperation(slaTask, REMOVE_REQUEST);
+        task.refreshUdf();
+        slaFeatureController.performCommonOperation(task, REMOVE_REQUEST);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
