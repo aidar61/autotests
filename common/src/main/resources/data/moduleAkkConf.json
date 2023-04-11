@@ -1,0 +1,53 @@
+{
+  "udfid": "UDF_SD_MODULE",
+  "type": "TASK",
+  "taskValue": [
+    {
+      "id": "818181b03c7fc013013c7fca7130041d",
+      "abudget": 0,
+      "actualBudget": 0,
+      "name": "Аккредитивы",
+      "number": "186616",
+      "shortname": "161",
+      "categoryLink": "http://tsdev4.dev.colvir.ru/TrackStudio/cssimages/categories/functionality-module.png",
+      "category": {
+        "id": "CAT_MODULE",
+        "name": "Модуль системы",
+        "workflowId": "PROC_MODULE",
+        "icon": "functionality-module.png",
+        "handlerRequired": false,
+        "groupHandlerAllowed": false,
+        "canManage": false
+      },
+      "status": {
+        "id": "PROC_MODULE_NEW",
+        "color": "#FFFFFF",
+        "name": "Новый",
+        "workflowId": "PROC_MODULE",
+        "defaultStart": true,
+        "image": "startstate.png",
+        "order": 0,
+        "start": true,
+        "finish": false
+      },
+      "statusName": "Новый",
+      "childrenCount": 0,
+      "hasChildren": false,
+      "messageCount": 0,
+      "hasAttachments": false,
+      "onSight": true,
+      "udfs": {},
+      "stateLink": "http://tsdev4.dev.colvir.ru/TrackStudio/cssimages/startstate.png",
+      "statusColor": "#FFFFFF",
+      "taskLink": "http://tsdev4.dev.colvir.ru/TrackStudio/app/task/186616",
+      "sortMessageAsc": false,
+      "selectable": true,
+      "canEditHandler": false,
+      "$$key": "186616",
+      "$visible": true,
+      "$firstInGroup": true,
+      "$selected": true,
+      "invalid": false
+    }
+  ]
+}

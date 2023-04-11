@@ -1,0 +1,8 @@
+package com.ts.common.enums;
+
+public enum TaskStatuses {
+    STATUS_SLAHELP_ANALIZING,
+    STATUS_SLAHELP_WAITANALIZING,
+    STATUS_SLAHELP_CONSULTED,
+    STATUS_SLAHELP_CLOSED;
+}
