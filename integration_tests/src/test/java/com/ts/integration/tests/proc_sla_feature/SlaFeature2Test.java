@@ -3,6 +3,7 @@ package com.ts.integration.tests.proc_sla_feature;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -19,7 +20,7 @@ import static com.ts.common.utils.InitEntities.*;
 public class SlaFeature2Test extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
 
-
+    private Task task;
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         udf = refreshUdf();

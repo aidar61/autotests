@@ -4,6 +4,7 @@ import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
 import com.ts.common.utils.InitEntities;
@@ -23,6 +24,7 @@ import static com.ts.common.utils.InitEntities.*;
 
 public class SlaBug2Test extends BaseIntegrationTest {
     private SlaBugController slaBugController;
+    private Task task;
 
     @BeforeClass
     public void beforeClass() {
@@ -114,7 +116,7 @@ public class SlaBug2Test extends BaseIntegrationTest {
     @Test(priority = 11, description = "предоставить решение")
     public void slaBugMsgProvideInfoRetry() {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
-        slaBugController.performCommonOperation(task, PROVIDEINFO);
+        slaBugController.performCommonOperation(task, HOTFIX);
     }
 
     @Test(priority = 12, description = "ошибка устранена")

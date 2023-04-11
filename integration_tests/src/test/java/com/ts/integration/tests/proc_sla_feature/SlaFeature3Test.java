@@ -23,7 +23,7 @@ import static com.ts.common.utils.RandomUtils.generateComment;
 
 public class SlaFeature3Test extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
-
+    private Task task;
     private Task actualSlaTask;
 
     @BeforeClass(alwaysRun = true)
