@@ -6,7 +6,7 @@ import com.ts.common.annotations.Create;
 import com.ts.common.annotations.Mandatory;
 import com.ts.common.annotations.TypeId;
 import com.ts.common.entitites.commonEntities.*;
-import com.ts.common.entitites.sla.SlaTask;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.common.request.RequestBody;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -44,7 +44,7 @@ public class SlaRequestBody extends RequestBody {
     @Create
     String[] attachments;
 
-    public SlaRequestBody(SlaTask slaTask) {
+    public SlaRequestBody(Task slaTask) {
         this.id = slaTask.getId();
         this.category = slaTask.getCategory();
         this.operation = slaTask.getOperation();

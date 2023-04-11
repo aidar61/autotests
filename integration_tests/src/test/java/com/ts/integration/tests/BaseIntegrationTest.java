@@ -5,7 +5,7 @@ import com.ts.common.application.controllers.TrackStudioApiControllers;
 import com.ts.common.application.database.DbHelper;
 import com.ts.common.controllers.sla.BaseSlaController;
 import com.ts.common.entitites.commonEntities.Udfs;
-import com.ts.common.entitites.sla.SlaTask;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.Users;
 import com.ts.common.listeners.LogCatchListener;
 import com.ts.common.tests.AbstractBaseTest;
@@ -22,7 +22,7 @@ public class BaseIntegrationTest extends AbstractBaseTest {
     protected Response response;
     protected AuthToken authToken;
     protected BaseSlaController slaController;
-    protected SlaTask slaTask;
+    protected Task task;
     protected Udfs udf;
 
     @BeforeSuite(alwaysRun = true)

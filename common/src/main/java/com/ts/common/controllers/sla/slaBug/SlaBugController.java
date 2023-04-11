@@ -4,7 +4,7 @@ import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.controllers.sla.BaseSlaController;
 import com.ts.common.controllers.sla.SlaRequestBody;
 import com.ts.common.controllers.sla.SlaResponseBody;
-import com.ts.common.entitites.sla.SlaTask;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.SlaType;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
@@ -28,7 +28,7 @@ public class SlaBugController extends BaseSlaController {
         return super.createTask(requestBody);
     }
 
-    public Response createSlaBugTask(SlaTask slaTask) {
+    public Response createSlaBugTask(Task slaTask) {
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         this.response = createTask(slaRequestBody.keepMandatoryAndCreateFields());
         SlaResponseBody slaResponseBody = JsonUtils.deserialize(this.response, SlaResponseBody.class);
@@ -40,28 +40,28 @@ public class SlaBugController extends BaseSlaController {
         return this.response;
     }
 
-    public Response msgAnalize(SlaTask slaTask) {
+    public Response msgAnalize(Task slaTask) {
         slaTask.setOperation(generateOperationID(this.slaType, ANALIZE));
         slaTask.setDescription(generateDescriptionForOperation(ANALIZE));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         return this.response = super.performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_USER));
     }
 
-    protected Response changeAuthor(SlaTask slaTask) {
+    protected Response changeAuthor(Task slaTask) {
         slaTask.setOperation(generateOperationID(SLA_TYPE, CHANGE_AUTHOR));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         return super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS));
     }
 
 
-    protected Response changeAttributes(SlaTask slaTask) {
+    protected Response changeAttributes(Task slaTask) {
         slaTask.setOperation(generateOperationID(SLA_TYPE, CHANGE_ATTR));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         return super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS));
     }
 
 
-    protected Response changeResPerson(SlaTask slaTask) {
+    protected Response changeResPerson(Task slaTask) {
         slaTask.setOperation(generateOperationID(SLA_TYPE, CHANGE_RES_PERSON));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         return super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS));

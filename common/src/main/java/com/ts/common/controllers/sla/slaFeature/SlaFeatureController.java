@@ -6,7 +6,7 @@ import com.ts.common.controllers.sla.BaseSlaController;
 import com.ts.common.controllers.sla.SlaRequestBody;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.entitites.commonEntities.User;
-import com.ts.common.entitites.sla.SlaTask;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.SlaType;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
@@ -36,13 +36,13 @@ public class SlaFeatureController extends BaseSlaController {
         return super.createTask(requestBody);
     }
 
-    protected Response changeAuthor(SlaTask slaTask) {
+    protected Response changeAuthor(Task slaTask) {
         slaTask.setOperation(generateOperationID(SLA_FEATURE, CHANGE_AUTHOR));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         return super.performOperation(slaTask, slaRequestBody.keepFields(ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS));
     }
 
-    public Response createSlaFeatureTask(SlaTask slaTask) {
+    public Response createSlaFeatureTask(Task slaTask) {
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         this.response = createTask(slaRequestBody.keepMandatoryAndCreateFields());
         SlaResponseBody slaResponseBody = JsonUtils.deserialize(this.response, SlaResponseBody.class);
@@ -54,7 +54,7 @@ public class SlaFeatureController extends BaseSlaController {
         return this.response;
     }
 
-    public Response msgToprecost(SlaTask slaTask) {
+    public Response msgToprecost(Task slaTask) {
         slaTask.setOperation(generateOperationID(this.slaType, TOPRECOST));
         slaTask.setDescription(generateDescriptionForOperation(TOPRECOST));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
@@ -62,7 +62,7 @@ public class SlaFeatureController extends BaseSlaController {
     }
 
     @Step("Выполнение операции: REQUESTREQINFO ")
-    public Response msgRequestReqInfo(SlaTask slaTask) {
+    public Response msgRequestReqInfo(Task slaTask) {
         HashMap<String, String> queryParams = new HashMap<>() {{
             put(ID.field, slaTask.getId());
         }};
@@ -75,7 +75,7 @@ public class SlaFeatureController extends BaseSlaController {
     }
 
     @Step("Выполнение операции PROVIDEREQINFO: ")
-    public Response msgProvideReqInfo(SlaTask slaTask) {
+    public Response msgProvideReqInfo(Task slaTask) {
         slaTask.refreshUdf();
         slaTask.setOperation(generateOperationID(this.slaType, PROVIDEREQINFO));
         slaTask.setDescription(generateDescriptionForOperation(PROVIDEREQINFO));
@@ -85,14 +85,14 @@ public class SlaFeatureController extends BaseSlaController {
         return this.response;
     }
 
-    public Response msgBeginCostPre(SlaTask slaTask) {
+    public Response msgBeginCostPre(Task slaTask) {
         slaTask.setOperation(generateOperationID(this.slaType, BEGINCOST_PRE));
         slaTask.setDescription(generateDescriptionForOperation(BEGINCOST_PRE));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         return this.response = super.performOperationWithQueryParam(slaTask, slaRequestBody.keepFields( DEFAULT_FIELDS_USER));
     }
 
-    public Response msgStart(SlaTask slaTask) {
+    public Response msgStart(Task slaTask) {
         HashMap<String, String> params = new HashMap<>() {{
             put(ID.field, slaTask.getId());
         }};

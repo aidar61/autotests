@@ -4,9 +4,8 @@ import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.*;
 import com.ts.common.entitites.commonEntities.udfs.*;
-import com.ts.common.entitites.sla.SlaTask;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.*;
-import io.restassured.authentication.PreemptiveBasicAuthScheme;
 
 import java.io.File;
 
@@ -33,8 +32,8 @@ public class InitEntities {
     private InitEntities() {
     }
 
-    public static SlaTask getSlaTask(ComSlaOperations iDs) {
-        return SlaTask.builder()
+    public static Task getSlaTask(ComSlaOperations iDs) {
+        return Task.builder()
                 .category(getGeneralId(iDs))
                 .operation(getGeneralId(iDs))
                 .parent(getParent(MTB))
@@ -46,8 +45,8 @@ public class InitEntities {
                 .build();
     }
 
-    public static SlaTask getSlaTask(SlaType slaType, ComSlaOperations id) {
-        SlaTask build = SlaTask.builder()
+    public static Task getSlaTask(SlaType slaType, ComSlaOperations id) {
+        Task build = Task.builder()
                 .slaType(slaType)
                 .category(generateCategory(slaType))
                 .operation(generateOperationID(slaType, id))
@@ -71,8 +70,8 @@ public class InitEntities {
                 .build();
     }
 
-    public static SlaTask getSlaTask(GeneralSlaId.Fields iDs, Udfs udfs, boolean... addTable) {
-        SlaTask build = SlaTask.builder()
+    public static Task getSlaTask(GeneralSlaId.Fields iDs, Udfs udfs, boolean... addTable) {
+        Task build = Task.builder()
                 .category(getGeneralId(iDs))
                 .operation(getGeneralId(iDs))
                 .parent(getParent(MTB))
@@ -122,7 +121,7 @@ public class InitEntities {
         return UdfSdModule.builder()
                 .udfId(UDF_SD_MODULE.udfId)
                 .type(UDF_SD_MODULE.type.name())
-                .taskValue(new Task[]{new Task(id)})
+                .taskValue(new com.ts.common.entitites.commonEntities.Task[]{new com.ts.common.entitites.commonEntities.Task(id)})
                 .build();
     }
 
@@ -204,7 +203,7 @@ public class InitEntities {
         return UdfSdLinkedRequest.builder()
                 .udfId(UDF_SD_LINKEDREQUEST.udfId)
                 .type(UDF_SD_LINKEDREQUEST.type.name())
-                .taskValue(new Task[]{})
+                .taskValue(new com.ts.common.entitites.commonEntities.Task[]{})
                 .build();
     }
 
@@ -212,7 +211,7 @@ public class InitEntities {
         return UdfSdRepeatRequest.builder()
                 .udfId(UDF_SD_REPEATREQUEST.udfId)
                 .type(UDF_SD_REPEATREQUEST.type.name())
-                .taskValue(new Task[]{})
+                .taskValue(new com.ts.common.entitites.commonEntities.Task[]{})
                 .build();
     }
 
@@ -257,7 +256,7 @@ public class InitEntities {
         return UdfRegProject.builder()
                 .udfId(UDF_REGPROJECT.udfId)
                 .type(UDF_REGPROJECT.type.name())
-                .taskValue(new Task[]{})
+                .taskValue(new com.ts.common.entitites.commonEntities.Task[]{})
                 .build();
     }
 

@@ -5,8 +5,9 @@ import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
 import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
-import com.ts.common.entitites.sla.SlaTask;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.common.utils.JsonUtils;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import lombok.Getter;
 import lombok.Setter;
@@ -34,15 +35,16 @@ public class TrackStudioApiControllers {
     }
 
 
-    public SlaTask receiveSlaTask(String slaTaskNumber) {
+    public Task receiveSlaTask(String slaTaskNumber) {
         this.response = this.slaController.receiveActualTask(slaTaskNumber);
         SlaResponseBody slaResponseBody = JsonUtils.deserialize(this.response, SlaResponseBody.class);
         if (slaResponseBody != null) {
-            return new SlaTask(slaResponseBody);
+            return new Task(slaResponseBody);
         }
         return null;
     }
 
+    @Step("Пользователь: {0}")
     public void updateToken(AuthToken authToken) {
         this.slaController.setAuthToken(authToken);
         this.slaFeatureController.setAuthToken(authToken);

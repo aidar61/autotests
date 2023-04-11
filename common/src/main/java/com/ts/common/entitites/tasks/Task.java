@@ -1,4 +1,4 @@
-package com.ts.common.entitites.sla;
+package com.ts.common.entitites.tasks;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,7 +20,7 @@ import lombok.extern.jackson.Jacksonized;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
-public class SlaTask extends BaseEntity {
+public class Task extends BaseEntity {
     SlaType slaType;
     String id;
     String number;
@@ -35,7 +35,7 @@ public class SlaTask extends BaseEntity {
     Status finishStatus;
     String[] attachments;
 
-    public SlaTask(SlaResponseBody slaResponseBody) {
+    public Task(SlaResponseBody slaResponseBody) {
         this.id = slaResponseBody.getId();
         this.number = slaResponseBody.getNumber();
         this.name = slaResponseBody.getName();

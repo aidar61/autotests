@@ -8,10 +8,9 @@ import com.ts.common.asserts.TaskAsserts;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
 import com.ts.common.entitites.commonEntities.List;
-import com.ts.common.entitites.sla.SlaTask;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
-import com.ts.common.listeners.LogCatchListener;
 import com.ts.common.listeners.TestListener;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
@@ -29,7 +28,7 @@ import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CLOSED;
 @Listeners({TestListener.class})
 public class SlaTaskTestNegative extends BaseIntegrationTest {
     private static SlaHelpController slaHelpController;
-    private SlaTask slaTask;
+    private Task slaTask;
     private GrTaskDbEntity actualTask;
     private List slaTasks;
 
