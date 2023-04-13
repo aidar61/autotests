@@ -17,7 +17,8 @@ import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
 import static com.ts.common.entitites.commonEntities.User.Constants.ALTUNIN_NIKOLAY;
-import static com.ts.common.enums.ComSlaOperations.*;
+import static com.ts.common.enums.ComSlaOperations.CLOSE;
+import static com.ts.common.enums.ComSlaOperations.REQUESTINFO;
 import static com.ts.common.enums.Users.CLIENT;
 import static com.ts.common.enums.Users.EMPLOYEE;
 import static com.ts.common.utils.InitEntities.*;
@@ -25,6 +26,7 @@ import static com.ts.common.utils.InitEntities.*;
 public class SlaBug8Test extends BaseIntegrationTest {
     private SlaBugController slaBugController;
     private Task task;
+
     @BeforeClass
     public void beforeClass() {
         slaBugController = apiController.getSlaBugController();
