@@ -19,8 +19,8 @@ import static com.ts.common.utils.InitEntities.*;
 
 public class SlaFeature2Test extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
-
     private Task task;
+
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         udf = refreshUdf();
