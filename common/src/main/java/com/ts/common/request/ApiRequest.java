@@ -4,6 +4,7 @@ package com.ts.common.request;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ts.common.application.controllers.AuthToken;
+import io.qameta.allure.Step;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.internal.mapping.Jackson2Mapper;
 import io.restassured.response.Response;
@@ -40,16 +41,16 @@ public abstract class ApiRequest {
         this.headers = headers;
         this.url = url;
         this.authToken = authToken;
-//        PreemptiveBasicAuthScheme authScheme = new PreemptiveBasicAuthScheme();
-//        authScheme.setUserName(this.authToken.getUser());
-//        authScheme.setPassword(this.authToken.getPassword());
         this.requestSpec = new RequestSpecBuilder()
-//                .setAuth(authScheme)
                 .setBaseUri(url)
                 .addHeaders(headers)
                 .setRelaxedHTTPSValidation()
                 .build();
         this.requestSpec.log();
+    }
+
+    @Step("Response is: {0}")
+    public void setResponseToAllure(String response) {
     }
 
     private static Jackson2Mapper initObjectMapper() {
@@ -80,6 +81,7 @@ public abstract class ApiRequest {
         log.warn("Response is:");
         log.warn(getResponse().getBody().asString());
         log.warn(String.valueOf(getResponse().getStatusCode()));
+        setResponseToAllure(getResponse().getBody().asPrettyString());
         return this;
     }
 

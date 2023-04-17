@@ -22,7 +22,7 @@ public class ApiAsserts {
 
     @Step("[Assert] Response")
     public static ApiAsserts assertThat(Response response) {
-//        logResponse(response.getBody());
+        logResponse(response.getBody().asPrettyString());
         return new ApiAsserts(response);
     }
 
@@ -38,8 +38,8 @@ public class ApiAsserts {
     }
 
     @Step("Response body is: {0}")
-    private static void logResponse(io.restassured.response.ResponseBody responseBody) {
-        log.info("Response body is : " + responseBody.asPrettyString());
+    private static void logResponse(String responseBody) {
+//        log.info("Response body is : " + responseBody);
     }
 
     public <T> ApiAsserts isParseableBody(Class<T> clazz) {

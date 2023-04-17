@@ -4,13 +4,10 @@ import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.controllers.sla.BaseSlaController;
 import com.ts.common.controllers.sla.SlaRequestBody;
 import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.commonEntities.Udfs;
-import com.ts.common.entitites.commonEntities.udfs.UdfSdModule;
-import com.ts.common.entitites.commonEntities.udfs.UdfSdProvidedHelpDeadline;
-import com.ts.common.entitites.commonEntities.udfs.UdfSdTaskCode;
 import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.SlaType;
-import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -20,9 +17,11 @@ import static com.ts.common.application.controllers.TrackStudioEndPoints.OPERATI
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.controllers.sla.SlaRequestBody.Fields.*;
 import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.*;
-import static com.ts.common.entitites.commonEntities.Udfs.Fields.UDF_SD_PROVIDEDHELPDEADLINE;
+import static com.ts.common.entitites.commonEntities.Task.Constants.NOTIFICATION_SERVICE;
+import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_SD_MODULE;
+import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_SD_TASK_CODE;
 import static com.ts.common.utils.DateUtils.getCurrentDate;
-import static com.ts.common.utils.InitEntities.getGeneralId;
+import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateComment;
 
 public class SlaHelpController extends BaseSlaController {
@@ -68,10 +67,8 @@ public class SlaHelpController extends BaseSlaController {
     public Response editModule(Task slaTask) {
         slaTask.setOperation(getGeneralId(CHANGE_SD_MODULE));
         Udfs udfs = slaTask.getUdfs();
-        UdfSdTaskCode udfSdTaskCode = InitEntities.getUdfTaskCode(UdfSdTaskCode.Constants.ABNATTR.taskCodesId);
-        UdfSdModule udfSdModule = InitEntities.getUdfSdModule(UdfSdModule.Constants.NOTIFICATION_SERVICE.moduleIds);
-        udfs.setUdfSdTaskCode(udfSdTaskCode);
-        udfs.setUdfSdModule(udfSdModule);
+        udfs.setUdfList(generateUdfList(UDF_SD_TASK_CODE, List.Constants.ABNATTR));
+        udfs.setUdfTask(generateUdfTask(UDF_SD_MODULE, NOTIFICATION_SERVICE));
         Udfs module = JsonUtils.deserialize(udfs.keepTypeFieldWithName("module"), Udfs.class);
         slaTask.setUdfs(module);
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
@@ -82,12 +79,9 @@ public class SlaHelpController extends BaseSlaController {
     @Step("Принятие на анализ slaTask: ")
     public Response receiveAnalysis(Task slaTask) {
         Udfs udfs = slaTask.getUdfs();
-        UdfSdProvidedHelpDeadline deadline = InitEntities.getUdfSdProvidedHelpDeadline();
-        deadline.setDateValue(getCurrentDate());
-        udfs.setUdfSdProvidedHelpDeadline(deadline);
-        Udfs module = JsonUtils.deserialize(udfs.keepFields(UDF_SD_PROVIDEDHELPDEADLINE.field), Udfs.class);
+        udfs.setUdfString(generateUdfString(Udfs.UdfSd.UDF_SD_PROVIDEDHELPDEADLINE, getCurrentDate()));
         slaTask.setOperation(getGeneralId(RECEIVE_ANALIZE));
-        slaTask.setUdfs(module);
+        slaTask.refreshUdf(udfs);
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         this.response = performOperation(slaTask, slaRequestBody.keepFields(SlaRequestBody.Fields.OPERATION.field, DESCRIPTION.field, ATTACHMENTS.field, HANDLER_USER.field, UDFS.field));
         return this.response;

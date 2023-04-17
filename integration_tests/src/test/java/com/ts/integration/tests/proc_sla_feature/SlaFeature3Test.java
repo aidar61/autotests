@@ -4,6 +4,7 @@ import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
 import com.ts.common.entitites.tasks.Task;
+import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -11,8 +12,11 @@ import org.testng.annotations.Test;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
+import static com.ts.common.entitites.commonEntities.Task.Constants.AKKREDITIVES;
+import static com.ts.common.entitites.commonEntities.Task.Constants.MTBANK;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
+import static com.ts.common.entitites.commonEntities.User.Constants.ALTUNIN_NIKOLAY;
 import static com.ts.common.entitites.commonEntities.udf.UdfString.Constants.COST;
 import static com.ts.common.enums.ComSlaOperations.*;
 import static com.ts.common.enums.SlaType.SLA_FEATURE;
@@ -28,19 +32,8 @@ public class SlaFeature3Test extends BaseIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
-        udf = refreshUdf();
-        udf.setUdfSdModule(getUdfsModuleThrowsJson());
-        udf.setUdfsBdkuConfiguration(getBdkuThrowsJson());
-        udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
-        udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_PAYDCS, FREE_LAW));
-        task = getSlaTask(SLA_FEATURE, CAT);
-        task.setUdfs(udf);
         slaFeatureController = apiController.getSlaFeatureController();
-        slaFeatureController.createSlaFeatureTask(task);
-        ApiAsserts.assertThat(slaFeatureController.getResponse())
-                .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
-        actualSlaTask = apiController.receiveSlaTask(task.getNumber());
+
 //        TaskAsserts.assertThat(actualSlaTask).isEquals(slaTask);
     }
 
@@ -49,9 +42,24 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
+        actualSlaTask = apiController.receiveSlaTask(task.getNumber());
     }
 
-    @Test(priority = 0, description = "Начать предварительную оценку")
+    @Test(description = "Создание задачи")
+    public void msgSlaFeatureCat() {
+        udf = refreshUdf();
+        udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
+        udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
+        udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
+        udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_PAYDCS, FREE_LAW));
+        task = getSlaTask(SLA_FEATURE, CAT);
+        task.setUdfs(udf);
+        task.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
+        apiController.updateToken(generateAuthToken(CLIENT));
+        slaFeatureController.createSlaFeatureTask(task);
+    }
+
+    @Test(description = "Начать предварительную оценку", dependsOnMethods = "msgSlaFeatureCat")
     public void msgSlaFeatureTopreCost() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
@@ -63,19 +71,20 @@ public class SlaFeature3Test extends BaseIntegrationTest {
 //                .isCorrectStatus();
     }
 
-    @Test(priority = 1, description = "изменить ответственную роль")
+    @Test(description = "изменить ответственную роль", dependsOnMethods = "msgSlaFeatureTopreCost")
     public void msgSlaFeatureChangeCurrentRole() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_ROLE_CURRENT, ANALYST));
         udf.setUdfUser(generateUdfUser(UDF_ROLE_WORKER, ABDULLAEV_BAHODIR));
         udf.setSecondUdfList(generateUdfList(UDF_ROLE_RESET, YES));
         task.refreshUdf(udf);
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, CHANGE_CURRENT_ROLE);
         actualSlaTask = apiController.receiveSlaTask(task.getNumber());
 //        TaskAsserts.assertThat(slaTask).isEquals(actualSlaTask);
     }
 
-    @Test(priority = 2, description = "Сообщить предварительные условия реализации")
+    @Test(description = "Сообщить предварительные условия реализации", dependsOnMethods = "msgSlaFeatureChangeCurrentRole")
     public void msgSlaFeatureSendCostPre() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_PAYDCS, FREE_LAW));
@@ -85,17 +94,18 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         udf.setThirdUdfString(generateUdfString(UDF_SLA_IMPLPLANTD_PRE, "12"));
         udf.setUdfDate(generateUdfDate(UDF_SLA_FINALESTIMATIONDATE));
         task.refreshUdf(udf);
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, SENDCOST_PRE);
     }
 
-    @Test(priority = 3, description = "Принять предварительные условия реализации")
+    @Test(description = "Принять предварительные условия реализации", dependsOnMethods = "msgSlaFeatureSendCostPre")
     public void msgSlaFeatureAcceptPreCost() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(task, ACCEPTPRECOST);
     }
 
-    @Test(priority = 4, description = "Сообщить окончательные условия реализации")
+    @Test(description = "Сообщить окончательные условия реализации", dependsOnMethods = "msgSlaFeatureAcceptPreCost")
     public void msgSlaFeatureSendCostFinal() {
         udf = refreshUdf();
         udf.setUdfDate(generateUdfDate(UDF_SDFEATUREPLANTD));
@@ -108,15 +118,17 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, SENDCOST_FINAL);
     }
 
-    @Test(priority = 5, description = "Принять окончательные условия реализации")
+    @Test(description = "Принять окончательные условия реализации", dependsOnMethods = "msgSlaFeatureSendCostFinal")
     public void msgSlaFeatureAcceptConditions() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(task, ACCEPTCONDITIONS);
     }
 
-    @Test(priority = 6, description = "Изменить решение и постановку на реализацию")
+    @Test(description = "Изменить решение и постановку на реализацию", dependsOnMethods = "msgSlaFeatureAcceptConditions")
     public void msgSlaFeatureChangeDesicion() {
+        udf = refreshUdf();
+        udf.setUdfString(generateUdfString(UDF_SDFEATURE_IMPLSTATEMENT, ""));
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, CHANGE_DECISION);

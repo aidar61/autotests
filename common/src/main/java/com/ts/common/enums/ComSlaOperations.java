@@ -21,7 +21,7 @@ public enum ComSlaOperations {
     REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
     PROVIDEREQINFO("%S_PROVIDEREQINFO"), // сообщить уточнение требований
     PROVIDETEMPORARYFIXED("%S_PROVIDETEMPORARYFIXED"), // предоставить временное решение
-    ACCEPTHOTFIX("%S_ACCEPTHOTFIX") , // подтвердить исправление
+    ACCEPTHOTFIX("%S_ACCEPTHOTFIX"), // подтвердить исправление
     BEGINCOST_PRE("%S_BEGINCOST_PRE"), // передать на предварительную оценку аккаунт-менеджеру
     BEGINCOST_FINAL("%S_BEGINCOST_FINAL"), // передать на окончательную оценку аккаунт-менеджеру
     SENDCOST_PRE("%S_SENDCOST_PRE"), // Сообщить предварительные условия реализации

@@ -14,6 +14,8 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
+import static com.ts.common.entitites.commonEntities.Task.Constants.AKKREDITIVES;
+import static com.ts.common.entitites.commonEntities.Task.Constants.MTBANK;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
 import static com.ts.common.entitites.commonEntities.User.Constants.ALTUNIN_NIKOLAY;
@@ -38,20 +40,21 @@ public class SlaBug2Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 0, description = "создание задачи")
+    @Test(description = "создание задачи")
     public void slaBugCat() {
         udf = refreshUdf();
-        udf.setUdfSdModule(InitEntities.getUdfsModuleThrowsJson());
+        udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
+        udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
         udf.setUdfList(InitEntities.generateUdfList(UDF_SDBUG_PRIORITYBUG, CRITICAL));
-        udf.setUdfsBdkuConfiguration(InitEntities.getBdkuThrowsJson());
         udf.setSecondUdfList(InitEntities.generateUdfList(UDF_SD_REMOTEACCESS, REMOTE_ACCESS));
         task = InitEntities.getSlaTask(SlaType.SLA_BUG, ComSlaOperations.CAT);
         task.refreshUdf(udf);
+        task.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
         apiController.updateToken(generateAuthToken(CLIENT));
         slaBugController.createSlaBugTask(task);
     }
 
-    @Test(priority = 1, description = "принятие на анализ")
+    @Test(description = "принятие на анализ", dependsOnMethods = "slaBugCat")
     public void slaBugMsgAnalize() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ABDULLAEV_BAHODIR));
@@ -63,63 +66,69 @@ public class SlaBug2Test extends BaseIntegrationTest {
         slaBugController.msgAnalize(task);
     }
 
-    @Test(priority = 2, description = "запросить информацию")
+    @Test(description = "запросить информацию", dependsOnMethods = "slaBugMsgAnalize")
     public void slaBugMsgRequestInfo() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, REQUESTINFO);
     }
 
-    @Test(priority = 3, description = "предоставить информацию")
+    @Test(description = "предоставить информацию", dependsOnMethods = "slaBugMsgRequestInfo")
     public void slaBugMsgProvideInfo() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(CLIENT));
         slaBugController.performCommonOperation(task, PROVIDEINFO);
     }
 
-    @Test(priority = 4, description = "запросить информацию")
+    @Test(description = "запросить информацию", dependsOnMethods = "slaBugMsgProvideInfo")
     public void slaBugMsgRequestInfoRetry() {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, REQUESTINFO);
     }
 
-    @Test(priority = 5, description = "отменить запрос информации")
+    @Test(description = "отменить запрос информации", dependsOnMethods = "slaBugMsgRequestInfoRetry")
     public void slaBugMsgUndoRequestInfo() {
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, UNDOREQUESTINFO);
     }
 
-    @Test(priority = 6, description = "начать работу")
+    @Test(description = "начать работу", dependsOnMethods = "slaBugMsgUndoRequestInfo")
     public void slaBugMsgStart() {
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, START);
     }
 
-    @Test(priority = 7, description = "вернуть на анализ")
+    @Test(description = "вернуть на анализ", dependsOnMethods = "slaBugMsgStart")
     public void slaBugMsgUndoStart() {
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, UNDOSTART);
     }
 
-    @Test(priority = 8, description = "начать работу")
+    @Test(description = "начать работу", dependsOnMethods = "slaBugMsgUndoStart")
     public void slaBugMsgStartRetry() {
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, START);
     }
 
-    @Test(priority = 9, description = "предоставить решение")
+    @Test(description = "предоставить решение", dependsOnMethods = "slaBugMsgStartRetry")
     public void slaBugMsgStHotFix() {
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, HOTFIX);
     }
 
-    @Test(priority = 10, description = "вернуть в работу")
+    @Test(description = "вернуть в работу", dependsOnMethods = "slaBugMsgStHotFix")
     public void slaBugMsgReturn() {
         apiController.updateToken(generateAuthToken(CLIENT));
         slaBugController.performCommonOperation(task, RETURN);
     }
 
-    @Test(priority = 11, description = "предоставить решение")
+    @Test(description = "предоставить решение", dependsOnMethods = "slaBugMsgReturn")
     public void slaBugMsgProvideInfoRetry() {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, HOTFIX);
     }
 
-    @Test(priority = 12, description = "ошибка устранена")
+    @Test(description = "ошибка устранена", dependsOnMethods = "slaBugMsgProvideInfoRetry")
     public void slaBugMsgAcceptSolution() {
         udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));
         apiController.updateToken(generateAuthToken(CLIENT));

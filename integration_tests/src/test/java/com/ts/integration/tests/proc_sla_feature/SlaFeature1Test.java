@@ -5,12 +5,18 @@ import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
 import com.ts.common.entitites.tasks.Task;
 import com.ts.common.listeners.TestListener;
+import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import jdk.jfr.Description;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
+import static com.ts.common.entitites.commonEntities.Task.Constants.AKKREDITIVES;
+import static com.ts.common.entitites.commonEntities.Task.Constants.MTBANK;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.*;
 import static com.ts.common.entitites.commonEntities.udf.UdfString.Constants.COST;
@@ -28,15 +34,20 @@ public class SlaFeature1Test extends BaseIntegrationTest {
     //TODO нужно добавить в каждом тесте в контроллер пользователя, который выполняет операции (КЛИЕНТ, СОТРУДНИК)
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
+        slaFeatureController = apiController.getSlaFeatureController();
+    }
+
+    @Test(description = "Создание задачи")
+    public void msgSlaFeatureCat() {
         udf = refreshUdf();
-        udf.setUdfSdModule(getUdfsModuleThrowsJson());
-        udf.setUdfsBdkuConfiguration(getBdkuThrowsJson());
+        udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
+        udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
         udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_PAYDCS, FREE_LAW));
         task = getSlaTask(SLA_FEATURE, CAT);
         task.setUdfs(udf);
+        task.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
         apiController.updateToken(generateAuthToken(CLIENT));
-        slaFeatureController = apiController.getSlaFeatureController();
         slaFeatureController.createSlaFeatureTask(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
@@ -55,7 +66,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
 //                .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 0)
+    @Test(description = "get запрос", dependsOnMethods = "msgSlaFeatureCat")
     @Description("Test description: Receive task")
     public void receiveTask() {
         apiController.updateToken(generateAuthToken(ROOT));
@@ -76,14 +87,8 @@ public class SlaFeature1Test extends BaseIntegrationTest {
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(SlaResponseBody.class);
 //    }
-    @AfterMethod
-    public void afterMethod() {
-        ApiAsserts.assertThat(slaFeatureController.getResponse())
-                .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
-    }
 
-    @Test(priority = 1, description = "Начать предварительную оценку")
+    @Test(description = "Начать предварительную оценку", dependsOnMethods = "receiveTask")
     @Description("Начать предварительную оценку")
     public void msgSlaFeatureTopreCost() { // начать предварительную оценку
         udf = refreshUdf();
@@ -97,20 +102,22 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 2, dependsOnMethods = "msgSlaFeatureTopreCost", description = "Запросить уточненные требования")
+    @Test(dependsOnMethods = "msgSlaFeatureTopreCost", description = "Запросить уточненные требования")
     @Description("Запросить уточненные требования")
     public void msgSlaFeatureRequestReqInfo() { // запросить уточненные требования
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.msgRequestReqInfo(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 3, dependsOnMethods = "msgSlaFeatureRequestReqInfo", description = "Сообщить уточненные требования")
+    @Test(dependsOnMethods = "msgSlaFeatureRequestReqInfo", description = "Сообщить уточненные требования")
     @Description("Сообщить уточненные требования")
     public void msgSlaFeatureProvideReqInfo() { // сообщить уточненные требования
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.msgProvideReqInfo(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
@@ -118,7 +125,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
     }
 
 
-    @Test(priority = 4, dependsOnMethods = "msgSlaFeatureProvideReqInfo", description = "Передать на предварительную оценку аккаунт менеджеру")
+    @Test(dependsOnMethods = "msgSlaFeatureProvideReqInfo", description = "Передать на предварительную оценку аккаунт менеджеру")
     @Description("Передать на предварительную оценку аккаунт менеджеру")
     public void msgSlaFeatureBeginCostPre() {
         udf = refreshUdf();
@@ -130,13 +137,14 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ARUTYANIN_YURIY));
         task.refreshUdf(udf);
         task.setHandlerUser(generateUser(ARUTYANIN_YURIY));
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.msgBeginCostPre(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 5, dependsOnMethods = "msgSlaFeatureBeginCostPre", description = "Сообщить предварительные условия реализации")
+    @Test(dependsOnMethods = "msgSlaFeatureBeginCostPre", description = "Сообщить предварительные условия реализации")
     @Description("Сообщить предварительные условия реализации")
     public void msgSlaFeatureSendCostPre() {
         udf = refreshUdf();
@@ -147,23 +155,25 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         udf.setThirdUdfString(generateUdfString(UDF_SLA_IMPLPLANTD_PRE, "4"));
         udf.setUdfDate(generateUdfDate(UDF_SLA_FINALESTIMATIONDATE));
         task.refreshUdf(udf);
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, SENDCOST_PRE);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 6, dependsOnMethods = "msgSlaFeatureSendCostPre", description = "Задать вопрос или предложить альтернативные вопросы реализации")
+    @Test(dependsOnMethods = "msgSlaFeatureSendCostPre", description = "Задать вопрос или предложить альтернативные вопросы реализации")
     @Description("Задать вопрос или предложить альтернативные вопросы реализации")
     public void msgSlaFeatureAlternateCost() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(task, ALTERNATECOST);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 7, dependsOnMethods = "msgSlaFeatureAlternateCost", description = "Сообщить повторно предварительные условия реализации")
+    @Test(dependsOnMethods = "msgSlaFeatureAlternateCost", description = "Сообщить повторно предварительные условия реализации")
     @Description("Сообщить повторно предварительные условия реализации")
     public void msgSlaFeatureSendCostPreRetry() {
         udf = refreshUdf();
@@ -174,43 +184,47 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         udf.setThirdUdfString(generateUdfString(UDF_SLA_IMPLPLANTD_PRE, "4"));
         udf.setUdfDate(generateUdfDate(UDF_SLA_FINALESTIMATIONDATE));
         task.refreshUdf(udf);
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, SENDCOST_PRE);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 8, dependsOnMethods = "msgSlaFeatureSendCostPreRetry", description = "Принять предварительные условия реализации")
+    @Test(dependsOnMethods = "msgSlaFeatureSendCostPreRetry", description = "Принять предварительные условия реализации")
     @Description("Принять предварительные условия реализации")
     public void msgSlaFeatureAcceptPreCost() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(task, ACCEPTPRECOST);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 9, dependsOnMethods = "msgSlaFeatureAcceptPreCost", description = "Запросить уточнение требований")
+    @Test(dependsOnMethods = "msgSlaFeatureAcceptPreCost", description = "Запросить уточнение требований")
     @Description("Запросить уточнение требований")
     public void msgSlaFeatureRequestReqInfoRetry() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.msgRequestReqInfo(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 10, dependsOnMethods = "msgSlaFeatureRequestReqInfoRetry", description = "Сообщить уточненные требования")
+    @Test(dependsOnMethods = "msgSlaFeatureRequestReqInfoRetry", description = "Сообщить уточненные требования")
     @Description("Сообщить уточненные требования")
     public void msgSlaFeatureProvideReqInfoRetry() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.msgProvideReqInfo(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 11, dependsOnMethods = "msgSlaFeatureProvideReqInfoRetry", description = "Сообщить окончательные условия реализации")
+    @Test(dependsOnMethods = "msgSlaFeatureProvideReqInfoRetry", description = "Сообщить окончательные условия реализации")
     @Description("Сообщить окончательные условия реализации")
     public void msgSlaFeatureSenCostFinal() {
         udf = refreshUdf();
@@ -220,174 +234,192 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         udf.setUdfString(generateUdfString(UDF_SLA_IMPLDEADLINE, "12"));
         udf.setSecondUdfString(generateUdfString(UDF_SLA_RESULTCOST, COST.value));
         task.refreshUdf(udf);
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, SENDCOST_FINAL);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 12, dependsOnMethods = "msgSlaFeatureSenCostFinal", description = "Принять окончательные условия реализации")
+    @Test(dependsOnMethods = "msgSlaFeatureSenCostFinal", description = "Принять окончательные условия реализации")
     @Description("Принять окончательные условия реализации")
     public void msgSlaFeatureAcceptConditions() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(task, ACCEPTCONDITIONS);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 13, dependsOnMethods = "msgSlaFeatureAcceptConditions", description = "Передать в разработку")
+    @Test(dependsOnMethods = "msgSlaFeatureAcceptConditions", description = "Передать в разработку")
     @Description("Передать в разработку")
     public void msgSlaFeatureStart() {
         udf = refreshUdf();
         udf.setUdfDate(generateUdfDate(UDF_SDFEATUREPLANTD));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, BABUSHKIN_IVAN));
         task.refreshUdf(udf);
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.msgStart(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 14, dependsOnMethods = "msgSlaFeatureStart", description = "Запросить информацию")
+    @Test(dependsOnMethods = "msgSlaFeatureStart", description = "Запросить информацию")
     @Description("Запросить информацию")
     public void msgSlaFeatureRequestInfo() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, REQUESTINFO);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 15, dependsOnMethods = "msgSlaFeatureRequestInfo", description = "Предоставить информацию")
+    @Test(dependsOnMethods = "msgSlaFeatureRequestInfo", description = "Предоставить информацию")
     @Description("Предоставить информацию")
     public void msgSlaFeatureProvideInfo() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(task, PROVIDEINFO);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 16, dependsOnMethods = "msgSlaFeatureProvideInfo", description = "Запросить информацию")
+    @Test(dependsOnMethods = "msgSlaFeatureProvideInfo", description = "Запросить информацию")
     @Description("Запросить информацию")
     public void msgSlaFeatureRequestInfoRetry() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, REQUESTINFO);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 17, dependsOnMethods = "msgSlaFeatureRequestInfoRetry", description = "Отменить запрос информации")
+    @Test(dependsOnMethods = "msgSlaFeatureRequestInfoRetry", description = "Отменить запрос информации")
     @Description("Отменить запрос информации")
     public void msgSlaFeatureUndoRequestInfo() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, UNDOREQUESTINFO);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 18, dependsOnMethods = "msgSlaFeatureUndoRequestInfo", description = "Завершить выполнение работы")
+    @Test(dependsOnMethods = "msgSlaFeatureUndoRequestInfo", description = "Завершить выполнение работы")
     @Description("Завершить выполнение работы")
     public void msgSlaFeatureFinish() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, FINISH);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 19, dependsOnMethods = "msgSlaFeatureFinish", description = "Передать на проверку клиенту")
+    @Test(dependsOnMethods = "msgSlaFeatureFinish", description = "Передать на проверку клиенту")
     @Description("Передать на проверку клиенту")
     public void msgSlaFeatureToClientTest() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, TOCLIENTTEST);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 20, dependsOnMethods = "msgSlaFeatureToClientTest", description = "Сообщить о замечании")
+    @Test(dependsOnMethods = "msgSlaFeatureToClientTest", description = "Сообщить о замечании")
     @Description("Сообщить о замечании")
     public void msgSlaFeatureBuGonAccept() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(task, BUGONACCEPT);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 21, dependsOnMethods = "msgSlaFeatureBuGonAccept", description = "Передать на проверку клиента")
+    @Test(dependsOnMethods = "msgSlaFeatureBuGonAccept", description = "Передать на проверку клиента")
     @Description("Передать на проверку клиента")
     public void msgSlaFeatureToClientTestRetry() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, TOCLIENTTEST);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 22, dependsOnMethods = "msgSlaFeatureToClientTestRetry", description = "Утвердить доработку")
+    @Test(dependsOnMethods = "msgSlaFeatureToClientTestRetry", description = "Утвердить доработку")
     @Description("Утвердить доработку")
     public void msgSlaFeatureAcceptFeature() {
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(task, ACCEPTFEATURE);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 23, dependsOnMethods = "msgSlaFeatureAcceptFeature", description = "Отправить патч")
+    @Test(dependsOnMethods = "msgSlaFeatureAcceptFeature", description = "Отправить патч")
     @Description("Отправить патч")
     public void msgSlaFeatureSend() {
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, SEND);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 24, dependsOnMethods = "msgSlaFeatureSend", description = "Сообщить о замечании")
+    @Test(dependsOnMethods = "msgSlaFeatureSend", description = "Сообщить о замечании")
     @Description("Сообщить о замечании")
     public void msgSlaFeatureBuGonAcceptRetry() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(task, BUGONACCEPT);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 25, dependsOnMethods = "msgSlaFeatureBuGonAcceptRetry", description = "Передать на включение в патч")
+    @Test(dependsOnMethods = "msgSlaFeatureBuGonAcceptRetry", description = "Передать на включение в патч")
     @Description("Передать на включение в патч")
     public void msgSlaFeatureReadyPatch() {
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, READYTOPATCH);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 26, dependsOnMethods = "msgSlaFeatureReadyPatch", description = "Отправить в патч")
+    @Test(dependsOnMethods = "msgSlaFeatureReadyPatch", description = "Отправить в патч")
     @Description("Отправить в патч")
     public void msgSlaFeatureSendRetry() {
         task.refreshUdf();
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, SEND);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 27, dependsOnMethods = "msgSlaFeatureSendRetry", description = "Установить в производственную среду")
+    @Test(dependsOnMethods = "msgSlaFeatureSendRetry", description = "Установить в производственную среду")
     @Description("Установить в производственную среду")
     public void msgSlaFeatureInstall() {
+        apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(task, INSTALL);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 28, dependsOnMethods = "msgSlaFeatureInstall", description = "Закрыть(поставщик)")
+    @Test(dependsOnMethods = "msgSlaFeatureInstall", description = "Закрыть(поставщик)")
     @Description("Закрыть(поставщик)")
     public void msgSlaFeatureClose() {
+        apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, CLOSE);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
