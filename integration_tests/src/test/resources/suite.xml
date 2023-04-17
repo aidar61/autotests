@@ -4,21 +4,21 @@
         <listener class-name="com.ts.tests.runners.RetryTransformer"/>
         <listener class-name="com.ts.common.listeners.TestListener"/>
     </listeners>
-    <test name="Integration_Tests">
-        <packages>
-            <package name="com.ts.integration.tests.sla"/>
-            <package name="com.ts.integration.tests.proc_sla_bug"/>
-            <package name="com.ts.integration.tests.proc_sla_feature"/>
-        </packages>
-    </test>
-    <test name="Sla_Bug">
-        <packages>
-            <package name="com.ts.integration.tests.proc_sla_bug"/>
-        </packages>
-    </test>
-    <test name="Sla_Feature">
-        <packages>
-            <package name="com.ts.integration.tests.proc_sla_feature"/>
-        </packages>
+    <test name="Integration_Tests" preserve-order="true">
+        <classes>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBug1Test"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBug2Test"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBug3Test"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBug4Test"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBug5Test"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBug6Test"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBug7Test"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBug8Test"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBug9Test"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBug10Test"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature1Test"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature2Test"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature3Test"/>
+        </classes>
     </test>
 </suite>
