@@ -15,7 +15,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh "mvn properties:set -Dproperty=ts.stand -Dnewvalue=${params.stend} -Dfile=app.properties"
+                sh "mvn properties:set -Dproperty=ts.stand -Dnewvalue=${params.Stand} -Dfile=app.properties"
             }
         }
         stage('Test') {
