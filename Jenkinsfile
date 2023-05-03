@@ -8,8 +8,7 @@ pipeline {
     choice(
             name:"Stand",
             choices: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
-            description: 'Number of the stend to use',
-            defaultValue: '4'
+            description: 'Number of the Stand'
     )
     }
     stages {
