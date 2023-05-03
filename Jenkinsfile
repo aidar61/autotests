@@ -21,17 +21,17 @@ pipeline {
             steps {
                 sh 'mvn test'
             }
-        }
-        stage('Publish Results') {
-          steps {
-            sh 'mvn allure:report'
-            allure([
-                includeProperties: true,
-                jdk: '11',
-                properties: [[key: 'environment', value: 'dev']],
-                results: [[path: 'target/allure-results']]
-            ])
-          }
+            post {
+               always {
+                        allure([
+                            includeProperties: false,
+                            jdk: '11.0.18',
+                            properties: [],
+                            reportBuildPolicy: 'ALWAYS',
+                            results: [[path: 'target/allure-results']]
+                      ])
+               }
+           }
         }
     }
 }
