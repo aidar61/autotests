@@ -22,7 +22,12 @@ pipeline {
     stage('Publish Results') {
       steps {
         sh 'mvn allure:report'
-        allure includeProperties: true, jdk: '11', properties: [[key: 'environment', value: 'dev']]
+        allure([
+            includeProperties: true,
+            jdk: '11',
+            properties: [[key: 'environment', value: 'dev']],
+            results: [[path: 'target/allure-results']]
+        ])
       }
     }
   }
