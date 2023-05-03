@@ -13,7 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import static com.ts.common.config.AppConfigProvider.BASE_URL;
+import static com.ts.common.config.AppConfigProvider.STAND_URL;
 
 @Getter
 @Setter
@@ -28,10 +28,10 @@ public class TrackStudioApiControllers {
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
-        this.slaHelpController = new SlaHelpController(BASE_URL, authToken);
-        this.slaBugController = new SlaBugController(BASE_URL, authToken);
-        this.slaFeatureController = new SlaFeatureController(BASE_URL, authToken);
-        this.slaController = new BaseSlaController(BASE_URL, authToken);
+        this.slaHelpController = new SlaHelpController(STAND_URL, authToken);
+        this.slaBugController = new SlaBugController(STAND_URL, authToken);
+        this.slaFeatureController = new SlaFeatureController(STAND_URL, authToken);
+        this.slaController = new BaseSlaController(STAND_URL, authToken);
     }
 
 

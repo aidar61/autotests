@@ -155,6 +155,11 @@
                     </configuration>
                 </plugin>
                 <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>properties-maven-plugin</artifactId>
+                    <version>1.2.0</version> <!-- новая версия плагина -->
+                </plugin>
+                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${maven-clean-plugin.version}</version>
@@ -163,6 +168,30 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-resources-plugin</artifactId>
                     <version>${maven-resources-plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <id>replace-property</id>
+                            <goals>
+                                <goal>resources</goal>
+                            </goals>
+                            <configuration>
+                                <delimiters>
+                                    <delimiter>${*}</delimiter>
+                                </delimiters>
+                                <useDefaultDelimiters>false</useDefaultDelimiters>
+                                <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                                <resources>
+                                    <resource>
+                                        <directory>${basedir}/common/src/main/resources</directory>
+                                        <filtering>true</filtering>
+                                        <includes>
+                                            <include>app.properties</include>
+                                        </includes>
+                                    </resource>
+                                </resources>
+                            </configuration>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
