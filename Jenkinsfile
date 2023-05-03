@@ -5,11 +5,6 @@ pipeline {
         jdk 'jdk11'
     }
     stages {
-        stage('Checkout') {
-            steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/master']], userRemoteConfigs: [[url: 'https://gitlab.colvir.ru/trackstudio/autotests']]])
-            }
-        }
         stage('Build') {
             steps {
                 sh 'mvn clean install -Dmaven.test.failure.ignore=true'
