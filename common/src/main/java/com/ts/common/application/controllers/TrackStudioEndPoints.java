@@ -21,7 +21,7 @@ public class TrackStudioEndPoints {
 //        put(AUTHORIZATION, "Basic cm9vdDpwYXNzd29yZA==");
         put(CONTENT_TYPE, APPLICATION_JSON);
         put(CACHE_CONTROL, "no-cache");
-        put(HOST, getDomainName(AppConfigProvider.BASE_URL));
+        put(HOST, getDomainName(AppConfigProvider.STAND_URL));
         put(ACCEPT_ENCODING, "gzip, deflate, br");
         put(ACCEPT, WILDCARD);
     }};
