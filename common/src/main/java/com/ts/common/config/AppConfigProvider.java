@@ -13,7 +13,6 @@ public class AppConfigProvider {
     public static final int IMPLICITLY_SLEEP_MS = get().implicitlySleep();
 
     public static void main(String[] args) {
-        System.out.println(STAND_URL);
     }
 
     private AppConfigProvider() {

@@ -8,4 +8,6 @@ import com.ts.common.utils.RandomDataUtils;
 public class TestTest extends AbstractBaseTest {
     private static SlaHelpController slaHelpController;
 
+    public static void main(String[] args) {
+    }
 }
