@@ -20,7 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
         <maven-clean-plugin.version>3.1.0</maven-clean-plugin.version>
-        <maven-resources-plugin.version>3.1.0</maven-resources-plugin.version>
+        <maven-resources-plugin.version>3.2.0</maven-resources-plugin.version>
         <selenium.version>4.1.1</selenium.version>
         <testng.version>6.9.10</testng.version>
         <lombok.version>1.18.20</lombok.version>
@@ -89,8 +89,6 @@
             <artifactId>spring-jdbc</artifactId>
             <version>${jdbc.template.version}</version>
         </dependency>
-
-        <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc8 -->
         <dependency>
             <groupId>com.oracle.database.jdbc</groupId>
             <artifactId>ojdbc8</artifactId>
@@ -108,6 +106,29 @@
     <build>
         <pluginManagement>
             <plugins>
+<!--                <plugin>-->
+<!--                    <groupId>com.googlecode.maven-plugins</groupId>-->
+<!--                    <artifactId>maven-replacer-plugin</artifactId>-->
+<!--                    <version>1.5.3</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <id>replace-properties</id>-->
+<!--                            <phase>prepare-package</phase>-->
+<!--                            <goals>-->
+<!--                                <goal>replace</goal>-->
+<!--                            </goals>-->
+<!--                            <configuration>-->
+<!--                                <file>${project.basedir}/common/src/main/resources/app.properties</file>-->
+<!--                                <replacements>-->
+<!--                                    <replacement>-->
+<!--                                        &lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
+<!--                                        <value>${propertyValue}</value>-->
+<!--                                    </replacement>-->
+<!--                                </replacements>-->
+<!--                            </configuration>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -155,44 +176,37 @@
                     </configuration>
                 </plugin>
                 <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>properties-maven-plugin</artifactId>
-                    <version>1.2.0</version> <!-- новая версия плагина -->
-                </plugin>
-                <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${maven-clean-plugin.version}</version>
                 </plugin>
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>${maven-resources-plugin.version}</version>
-                    <executions>
-                        <execution>
-                            <id>replace-property</id>
-                            <goals>
-                                <goal>resources</goal>
-                            </goals>
-                            <configuration>
-                                <delimiters>
-                                    <delimiter>${*}</delimiter>
-                                </delimiters>
-                                <useDefaultDelimiters>false</useDefaultDelimiters>
-                                <outputDirectory>${project.build.directory}/classes</outputDirectory>
-                                <resources>
-                                    <resource>
-                                        <directory>${basedir}/common/src/main/resources</directory>
-                                        <filtering>true</filtering>
-                                        <includes>
-                                            <include>app.properties</include>
-                                        </includes>
-                                    </resource>
-                                </resources>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
+<!--                <plugin>-->
+<!--                    <groupId>org.apache.maven.plugins</groupId>-->
+<!--                    <artifactId>maven-resources-plugin</artifactId>-->
+<!--                    <version>3.2.0</version>-->
+<!--                    <executions>-->
+<!--                        <execution>-->
+<!--                            <id>replace-properties</id>-->
+<!--                            <goals>-->
+<!--                                <goal>copy-resources</goal>-->
+<!--                            </goals>-->
+<!--                            <phase>prepare-package</phase>-->
+<!--                            <configuration>-->
+<!--                                <resources>-->
+<!--                                    <resource>-->
+<!--                                        <directory>${project.basedir}/common/src/main/resources</directory>-->
+<!--                                        <filtering>true</filtering>-->
+<!--                                        <includes>-->
+<!--                                            <include>**/*/properties</include>-->
+<!--                                        </includes>-->
+<!--                                    </resource>-->
+<!--                                </resources>-->
+<!--                                <outputDirectory>${project.build.outputDirectory}</outputDirectory>-->
+<!--                                <overwrite>true</overwrite>-->
+<!--                            </configuration>-->
+<!--                        </execution>-->
+<!--                    </executions>-->
+<!--                </plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
@@ -204,4 +218,11 @@
             </plugins>
         </pluginManagement>
     </build>
+    <repositories>
+        <repository>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
 </project>
