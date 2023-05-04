@@ -16,17 +16,17 @@ pipeline {
             steps {
                 sh 'mvn clean test -Dts.stand=${params.Stand}'
             }
-            post {
-               always {
-                        allure([
-                            includeProperties: false,
-                            jdk: '11.0.18',
-                            properties: [],
-                            reportBuildPolicy: 'ALWAYS',
-                            results: [[path: 'target/allure-results']]
-                      ])
-               }
-           }
+            post{
+                always{
+                allure([
+                                            includeProperties: false,
+                                            jdk: '11.0.18',
+                                            properties: [],
+                                            reportBuildPolicy: 'ALWAYS',
+                                            results: [[path: 'target/allure-results']]
+                                      ])
+                }
+            }
         }
     }
 }
