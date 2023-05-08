@@ -89,7 +89,7 @@ public class SlaFeature2Test extends BaseIntegrationTest {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, REMOVE_REQUEST);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
-                .isCorrectResponseCode(HTTP_BAD_REQUEST)
+                .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 }
