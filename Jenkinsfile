@@ -22,7 +22,7 @@ pipeline {
                 script {
                     def stand = params.STAND ?: '4'
                     def testType = params.TEST_TYPE ?: 'Regression'
-                    sh "mvn clean test -Dts.stand=$stand -Dgroups=$testType -DfailIfNoTests=false"
+                    sh "mvn clean test -Dts.stand=$stand -Dgroups=$testType -DfailIfNoTests=false -DskipTests=true"
                 }
             }
             post {

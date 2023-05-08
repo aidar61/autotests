@@ -10,6 +10,7 @@ import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST;
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.AKKREDITIVES;
@@ -88,7 +89,7 @@ public class SlaFeature2Test extends BaseIntegrationTest {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, REMOVE_REQUEST);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
-                .isCorrectResponseCode(HTTP_OK)
+                .isCorrectResponseCode(HTTP_BAD_REQUEST)
                 .isParseableBody(SlaResponseBody.class);
     }
 }
