@@ -10,13 +10,19 @@ pipeline {
             choices: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
             description: 'Number of the Stand'
         )
+        choice(
+            name:"TEST_TYPE",
+            choice:['Regression','SlaFeature', 'SlaBug'],
+            description: 'Choose type test'
+        )
     }
     stages {
         stage('Test') {
             steps {
                 script {
                     def stand = params.STAND ?: '4'
-                    sh "mvn clean test -Dts.stand=$stand"
+                    def testType = params.TEST_TYPE ?: 'Regression'
+                    sh "mvn clean test -Dts.stand=$stand -Dgroups=$testType"
                 }
             }
             post {
