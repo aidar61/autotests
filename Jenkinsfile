@@ -35,7 +35,7 @@ pipeline {
                         results: [[path: 'target/allure-results']]
                     ])
                 }
-                success {
+                unstable {
                         env.BUILD_STATUS = 'SUCCESS'
                 }
             }
