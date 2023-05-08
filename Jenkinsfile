@@ -35,9 +35,9 @@ pipeline {
                         results: [[path: 'target/allure-results']]
                     ])
                 }
-                unstable {
-                        env.BUILD_STATUS = 'SUCCESS'
-                }
+//                 unstable {
+//                         env.BUILD_STATUS = 'SUCCESS'
+//                 }
             }
         }
     }
