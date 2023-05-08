@@ -5,26 +5,29 @@ pipeline {
         jdk 'jdk11'
     }
     parameters {
-    choice(
-            name:"STAND",
+        choice(
+            name: "STAND",
             choices: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
             description: 'Number of the Stand'
-    )
+        )
     }
     stages {
         stage('Test') {
             steps {
-                sh "mvn clean test -Dts.stand=$parameters"
+                script {
+                    def stand = params.STAND ?: '4'
+                    sh "mvn clean test -Dts.stand=$stand"
+                }
             }
-            post{
-                always{
-                allure([
-                includeProperties: false,
-                jdk: '11.0.18',
-                properties: [],
-                reportBuildPolicy: 'ALWAYS',
-                results: [[path: 'target/allure-results']]
-                ])
+            post {
+                always {
+                    allure([
+                        includeProperties: false,
+                        jdk: '11.0.18',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: 'target/allure-results']]
+                    ])
                 }
             }
         }
