@@ -9,6 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>common</artifactId>
+
+    <profiles>
+        <profile>
+            <id>common_tests_noTest</id>
+            <activation>
+                <property>
+                    <name>common_tests_noTest</name>
+                    <value>true</value>
+                </property>
+            </activation>
+        </profile>
+    </profiles>
+
     <dependencies>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>

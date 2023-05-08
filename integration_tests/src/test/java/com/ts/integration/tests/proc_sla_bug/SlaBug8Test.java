@@ -29,19 +29,19 @@ public class SlaBug8Test extends BaseIntegrationTest {
     private SlaBugController slaBugController;
     private Task task;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         slaBugController = apiController.getSlaBugController();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod() {
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(description = "создание задачи")
+    @Test(groups = {"SlaBug", "Regression"},description = "создание задачи")
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -55,7 +55,7 @@ public class SlaBug8Test extends BaseIntegrationTest {
         slaBugController.createSlaBugTask(task);
     }
 
-    @Test(description = "принятие на анализ", dependsOnMethods = "slaBugCat")
+    @Test(groups = {"SlaBug", "Regression"},description = "принятие на анализ", dependsOnMethods = "slaBugCat")
     public void slaBugMsgAnalize() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ABDULLAEV_BAHODIR));
@@ -67,14 +67,14 @@ public class SlaBug8Test extends BaseIntegrationTest {
         slaBugController.msgAnalize(task);
     }
 
-    @Test(description = "запросить информацию", dependsOnMethods = "slaBugMsgAnalize")
+    @Test(groups = {"SlaBug", "Regression"},description = "запросить информацию", dependsOnMethods = "slaBugMsgAnalize")
     public void slaBugMsgRequestInfo() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, REQUESTINFO);
     }
 
-    @Test(description = "закрыть", dependsOnMethods = "slaBugMsgRequestInfo")
+    @Test(groups = {"SlaBug", "Regression"},description = "закрыть", dependsOnMethods = "slaBugMsgRequestInfo")
     public void slaBugMsgClose() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));

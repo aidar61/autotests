@@ -28,19 +28,19 @@ public class SlaBug10Test extends BaseIntegrationTest {
     private SlaBugController slaBugController;
     private Task task;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         slaBugController = apiController.getSlaBugController();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod() {
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(description = "создание задачи")
+    @Test(groups = {"SlaBug", "Regression"},description = "создание задачи")
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -54,7 +54,7 @@ public class SlaBug10Test extends BaseIntegrationTest {
         slaBugController.createSlaBugTask(task);
     }
 
-    @Test(description = "принятие на анализ", dependsOnMethods = "slaBugCat")
+    @Test(groups = {"SlaBug", "Regression"},description = "принятие на анализ", dependsOnMethods = "slaBugCat")
     public void slaBugMsgAnalize() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ABDULLAEV_BAHODIR));
@@ -66,14 +66,14 @@ public class SlaBug10Test extends BaseIntegrationTest {
         slaBugController.msgAnalize(task);
     }
 
-    @Test(description = "начать работу", dependsOnMethods = "slaBugMsgAnalize")
+    @Test(groups = {"SlaBug", "Regression"},description = "начать работу", dependsOnMethods = "slaBugMsgAnalize")
     public void slaBugMsgStart() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, START);
     }
 
-    @Test(description = "предоставить временное решение", dependsOnMethods = "slaBugMsgStart")
+    @Test(groups = {"SlaBug", "Regression"},description = "предоставить временное решение", dependsOnMethods = "slaBugMsgStart")
     public void slaBugMsgProvidedTemporaryFixed() {
         udf = refreshUdf();
         udf.setUdfString(generateUdfString(UDF_SLABUG_TEMPPROVIDEDATE, null));
@@ -82,7 +82,7 @@ public class SlaBug10Test extends BaseIntegrationTest {
         slaBugController.performCommonOperation(task, PROVIDETEMPORARYFIXED);
     }
 
-    @Test(description = "закрыть", dependsOnMethods = "slaBugMsgProvidedTemporaryFixed")
+    @Test(groups = {"SlaBug", "Regression"},description = "закрыть", dependsOnMethods = "slaBugMsgProvidedTemporaryFixed")
     public void slaBugMsgClose() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));

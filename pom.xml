@@ -106,29 +106,6 @@
     <build>
         <pluginManagement>
             <plugins>
-<!--                <plugin>-->
-<!--                    <groupId>com.googlecode.maven-plugins</groupId>-->
-<!--                    <artifactId>maven-replacer-plugin</artifactId>-->
-<!--                    <version>1.5.3</version>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>replace-properties</id>-->
-<!--                            <phase>prepare-package</phase>-->
-<!--                            <goals>-->
-<!--                                <goal>replace</goal>-->
-<!--                            </goals>-->
-<!--                            <configuration>-->
-<!--                                <file>${project.basedir}/common/src/main/resources/app.properties</file>-->
-<!--                                <replacements>-->
-<!--                                    <replacement>-->
-<!--                                        &lt;!&ndash;suppress UnresolvedMavenProperty &ndash;&gt;-->
-<!--                                        <value>${propertyValue}</value>-->
-<!--                                    </replacement>-->
-<!--                                </replacements>-->
-<!--                            </configuration>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -155,9 +132,6 @@
                             </property>
                         </systemProperties>
                         <reportsDirectory>${basedir}/../target/allure-report</reportsDirectory>
-                        <includes>
-                            <include>**/com.ts.integration.tests.proc_sla_bug/*Test.java</include>
-                        </includes>
                     </configuration>
                     <dependencies>
                         <dependency>
@@ -180,33 +154,6 @@
                     <artifactId>maven-clean-plugin</artifactId>
                     <version>${maven-clean-plugin.version}</version>
                 </plugin>
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-resources-plugin</artifactId>-->
-<!--                    <version>3.2.0</version>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>replace-properties</id>-->
-<!--                            <goals>-->
-<!--                                <goal>copy-resources</goal>-->
-<!--                            </goals>-->
-<!--                            <phase>prepare-package</phase>-->
-<!--                            <configuration>-->
-<!--                                <resources>-->
-<!--                                    <resource>-->
-<!--                                        <directory>${project.basedir}/common/src/main/resources</directory>-->
-<!--                                        <filtering>true</filtering>-->
-<!--                                        <includes>-->
-<!--                                            <include>**/*/properties</include>-->
-<!--                                        </includes>-->
-<!--                                    </resource>-->
-<!--                                </resources>-->
-<!--                                <outputDirectory>${project.build.outputDirectory}</outputDirectory>-->
-<!--                                <overwrite>true</overwrite>-->
-<!--                            </configuration>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
