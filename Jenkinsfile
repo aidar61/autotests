@@ -22,7 +22,7 @@ pipeline {
                 script {
                     def stand = params.STAND ?: '4'
                     def testType = params.TEST_TYPE ?: 'Regression'
-                    sh "mvn clean test -Dts.stand=$stand -Dgroups=$testType -DfailIfNoTests=false -DskipTests=true"
+                    sh "mvn clean test -Dts.stand=$stand -Dgroups=$testType -DfailIfNoTests=false"
                 }
             }
             post {
@@ -34,6 +34,9 @@ pipeline {
                         reportBuildPolicy: 'ALWAYS',
                         results: [[path: 'target/allure-results']]
                     ])
+                }
+                success {
+                        env.BUILD_STATUS = 'SUCCESS'
                 }
             }
         }
