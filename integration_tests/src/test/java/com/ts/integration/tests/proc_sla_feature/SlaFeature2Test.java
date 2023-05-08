@@ -31,7 +31,7 @@ public class SlaFeature2Test extends BaseIntegrationTest {
         slaFeatureController = apiController.getSlaFeatureController();
     }
 
-    @Test(description = "Создание задачи")
+    @Test(groups = {"SlaFeature", "Regression"},description = "Создание задачи")
     public void msgSlaFeatureCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -48,7 +48,7 @@ public class SlaFeature2Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(description = "Начать предварительную оценку", dependsOnMethods = "msgSlaFeatureCat")
+    @Test(groups = {"SlaFeature", "Regression"},description = "Начать предварительную оценку", dependsOnMethods = "msgSlaFeatureCat")
     public void msgSlaFeatureTopreCost() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
@@ -61,7 +61,7 @@ public class SlaFeature2Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(description = "Передать на окончательную оценку аккаунт менеджеру", dependsOnMethods = "msgSlaFeatureTopreCost")
+    @Test(groups = {"SlaFeature", "Regression"},description = "Передать на окончательную оценку аккаунт менеджеру", dependsOnMethods = "msgSlaFeatureTopreCost")
     public void msgSlaFeatureBeginCostFinal() {
         udf = refreshUdf();
         udf.setUdfDouble(generateUdfDouble(UDF_SDFEATURE_IMPLBUDGET, 4));
@@ -80,7 +80,7 @@ public class SlaFeature2Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(description = "Снять запрос", dependsOnMethods = "msgSlaFeatureBeginCostFinal")
+    @Test(groups = {"SlaFeature", "Regression"},description = "Снять запрос", dependsOnMethods = "msgSlaFeatureBeginCostFinal")
     public void msgSLaFeatureRemoveRequest() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_CANCELREASON, CLIENTIGNORECOST));

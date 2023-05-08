@@ -25,19 +25,19 @@ public class SlaBug6Test extends BaseIntegrationTest {
     private SlaBugController slaBugController;
     private Task task;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         slaBugController = apiController.getSlaBugController();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod() {
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(description = "создание задачи")
+    @Test(groups = {"SlaBug", "Regression"},description = "создание задачи")
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -51,7 +51,7 @@ public class SlaBug6Test extends BaseIntegrationTest {
         slaBugController.createSlaBugTask(task);
     }
 
-    @Test(description = "закрыть задачу", dependsOnMethods = "slaBugCat")
+    @Test(groups = {"SlaBug", "Regression"},description = "закрыть задачу", dependsOnMethods = "slaBugCat")
     public void slaBugMsgClose() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));

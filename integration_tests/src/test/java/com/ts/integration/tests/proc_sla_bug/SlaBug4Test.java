@@ -29,19 +29,19 @@ public class SlaBug4Test extends BaseIntegrationTest {
     private SlaBugController slaBugController;
     private Task task;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         slaBugController = apiController.getSlaBugController();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod() {
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(description = "создание задачи")
+    @Test( groups = {"SlaBug", "Regression"},description = "создание задачи")
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -55,7 +55,7 @@ public class SlaBug4Test extends BaseIntegrationTest {
         slaBugController.createSlaBugTask(task);
     }
 
-    @Test(description = "принятие на анализ", dependsOnMethods = "slaBugCat")
+    @Test( groups = {"SlaBug", "Regression"},description = "принятие на анализ", dependsOnMethods = "slaBugCat")
     public void slaBugMsgAnalize() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ABDULLAEV_BAHODIR));
@@ -67,21 +67,21 @@ public class SlaBug4Test extends BaseIntegrationTest {
         slaBugController.msgAnalize(task);
     }
 
-    @Test(description = "отклонить", dependsOnMethods = "slaBugMsgAnalize")
+    @Test( groups = {"SlaBug", "Regression"},description = "отклонить", dependsOnMethods = "slaBugMsgAnalize")
     public void slaBugMsgDecline() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, DECLINE);
     }
 
-    @Test(description = "отменить заказ", dependsOnMethods = "slaBugMsgDecline")
+    @Test( groups = {"SlaBug", "Regression"},description = "отменить заказ", dependsOnMethods = "slaBugMsgDecline")
     public void slaBugMsgUndoDecline() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, UNDODECLINE);
     }
 
-    @Test(description = "закрыть как неустраненную", dependsOnMethods = "slaBugMsgUndoDecline")
+    @Test( groups = {"SlaBug", "Regression"},description = "закрыть как неустраненную", dependsOnMethods = "slaBugMsgUndoDecline")
     public void slaBugMsgCloseUnfixable() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));

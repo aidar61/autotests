@@ -37,7 +37,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController = apiController.getSlaFeatureController();
     }
 
-    @Test(description = "Создание задачи")
+    @Test(groups = {"SlaFeature", "Regression"},description = "Создание задачи")
     public void msgSlaFeatureCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -66,7 +66,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
 //                .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(description = "get запрос", dependsOnMethods = "msgSlaFeatureCat")
+    @Test(groups = {"SlaFeature", "Regression"},description = "get запрос", dependsOnMethods = "msgSlaFeatureCat")
     @Description("Test description: Receive task")
     public void receiveTask() {
         apiController.updateToken(generateAuthToken(ROOT));
@@ -76,7 +76,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    //    @Test(priority = 1)
+    //    @Test(groups = {"SlaFeature", "Regression"},priority = 1)
 //    @Description("Test description: Perform operation to change author")
 //    public void commonOperation() {
 //        udf = refreshUdf();
@@ -88,7 +88,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
 //                .isParseableBody(SlaResponseBody.class);
 //    }
 
-    @Test(description = "Начать предварительную оценку", dependsOnMethods = "receiveTask")
+    @Test(groups = {"SlaFeature", "Regression"},description = "Начать предварительную оценку", dependsOnMethods = "receiveTask")
     @Description("Начать предварительную оценку")
     public void msgSlaFeatureTopreCost() { // начать предварительную оценку
         udf = refreshUdf();
@@ -102,7 +102,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureTopreCost", description = "Запросить уточненные требования")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureTopreCost", description = "Запросить уточненные требования")
     @Description("Запросить уточненные требования")
     public void msgSlaFeatureRequestReqInfo() { // запросить уточненные требования
         task.refreshUdf();
@@ -113,7 +113,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureRequestReqInfo", description = "Сообщить уточненные требования")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureRequestReqInfo", description = "Сообщить уточненные требования")
     @Description("Сообщить уточненные требования")
     public void msgSlaFeatureProvideReqInfo() { // сообщить уточненные требования
         task.refreshUdf();
@@ -125,7 +125,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
     }
 
 
-    @Test(dependsOnMethods = "msgSlaFeatureProvideReqInfo", description = "Передать на предварительную оценку аккаунт менеджеру")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureProvideReqInfo", description = "Передать на предварительную оценку аккаунт менеджеру")
     @Description("Передать на предварительную оценку аккаунт менеджеру")
     public void msgSlaFeatureBeginCostPre() {
         udf = refreshUdf();
@@ -144,7 +144,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureBeginCostPre", description = "Сообщить предварительные условия реализации")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureBeginCostPre", description = "Сообщить предварительные условия реализации")
     @Description("Сообщить предварительные условия реализации")
     public void msgSlaFeatureSendCostPre() {
         udf = refreshUdf();
@@ -162,7 +162,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureSendCostPre", description = "Задать вопрос или предложить альтернативные вопросы реализации")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureSendCostPre", description = "Задать вопрос или предложить альтернативные вопросы реализации")
     @Description("Задать вопрос или предложить альтернативные вопросы реализации")
     public void msgSlaFeatureAlternateCost() {
         task.refreshUdf();
@@ -173,7 +173,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureAlternateCost", description = "Сообщить повторно предварительные условия реализации")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureAlternateCost", description = "Сообщить повторно предварительные условия реализации")
     @Description("Сообщить повторно предварительные условия реализации")
     public void msgSlaFeatureSendCostPreRetry() {
         udf = refreshUdf();
@@ -191,7 +191,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureSendCostPreRetry", description = "Принять предварительные условия реализации")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureSendCostPreRetry", description = "Принять предварительные условия реализации")
     @Description("Принять предварительные условия реализации")
     public void msgSlaFeatureAcceptPreCost() {
         task.refreshUdf();
@@ -202,7 +202,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureAcceptPreCost", description = "Запросить уточнение требований")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureAcceptPreCost", description = "Запросить уточнение требований")
     @Description("Запросить уточнение требований")
     public void msgSlaFeatureRequestReqInfoRetry() {
         task.refreshUdf();
@@ -213,7 +213,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureRequestReqInfoRetry", description = "Сообщить уточненные требования")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureRequestReqInfoRetry", description = "Сообщить уточненные требования")
     @Description("Сообщить уточненные требования")
     public void msgSlaFeatureProvideReqInfoRetry() {
         task.refreshUdf();
@@ -224,7 +224,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureProvideReqInfoRetry", description = "Сообщить окончательные условия реализации")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureProvideReqInfoRetry", description = "Сообщить окончательные условия реализации")
     @Description("Сообщить окончательные условия реализации")
     public void msgSlaFeatureSenCostFinal() {
         udf = refreshUdf();
@@ -241,7 +241,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureSenCostFinal", description = "Принять окончательные условия реализации")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureSenCostFinal", description = "Принять окончательные условия реализации")
     @Description("Принять окончательные условия реализации")
     public void msgSlaFeatureAcceptConditions() {
         task.refreshUdf();
@@ -252,7 +252,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureAcceptConditions", description = "Передать в разработку")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureAcceptConditions", description = "Передать в разработку")
     @Description("Передать в разработку")
     public void msgSlaFeatureStart() {
         udf = refreshUdf();
@@ -266,7 +266,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureStart", description = "Запросить информацию")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureStart", description = "Запросить информацию")
     @Description("Запросить информацию")
     public void msgSlaFeatureRequestInfo() {
         task.refreshUdf();
@@ -277,7 +277,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureRequestInfo", description = "Предоставить информацию")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureRequestInfo", description = "Предоставить информацию")
     @Description("Предоставить информацию")
     public void msgSlaFeatureProvideInfo() {
         task.refreshUdf();
@@ -288,7 +288,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureProvideInfo", description = "Запросить информацию")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureProvideInfo", description = "Запросить информацию")
     @Description("Запросить информацию")
     public void msgSlaFeatureRequestInfoRetry() {
         task.refreshUdf();
@@ -299,7 +299,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureRequestInfoRetry", description = "Отменить запрос информации")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureRequestInfoRetry", description = "Отменить запрос информации")
     @Description("Отменить запрос информации")
     public void msgSlaFeatureUndoRequestInfo() {
         task.refreshUdf();
@@ -310,7 +310,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureUndoRequestInfo", description = "Завершить выполнение работы")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureUndoRequestInfo", description = "Завершить выполнение работы")
     @Description("Завершить выполнение работы")
     public void msgSlaFeatureFinish() {
         task.refreshUdf();
@@ -321,7 +321,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureFinish", description = "Передать на проверку клиенту")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureFinish", description = "Передать на проверку клиенту")
     @Description("Передать на проверку клиенту")
     public void msgSlaFeatureToClientTest() {
         task.refreshUdf();
@@ -332,7 +332,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureToClientTest", description = "Сообщить о замечании")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureToClientTest", description = "Сообщить о замечании")
     @Description("Сообщить о замечании")
     public void msgSlaFeatureBuGonAccept() {
         task.refreshUdf();
@@ -343,7 +343,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureBuGonAccept", description = "Передать на проверку клиента")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureBuGonAccept", description = "Передать на проверку клиента")
     @Description("Передать на проверку клиента")
     public void msgSlaFeatureToClientTestRetry() {
         task.refreshUdf();
@@ -354,7 +354,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureToClientTestRetry", description = "Утвердить доработку")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureToClientTestRetry", description = "Утвердить доработку")
     @Description("Утвердить доработку")
     public void msgSlaFeatureAcceptFeature() {
         apiController.updateToken(generateAuthToken(CLIENT));
@@ -364,7 +364,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureAcceptFeature", description = "Отправить патч")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureAcceptFeature", description = "Отправить патч")
     @Description("Отправить патч")
     public void msgSlaFeatureSend() {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
@@ -374,7 +374,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureSend", description = "Сообщить о замечании")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureSend", description = "Сообщить о замечании")
     @Description("Сообщить о замечании")
     public void msgSlaFeatureBuGonAcceptRetry() {
         task.refreshUdf();
@@ -385,7 +385,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureBuGonAcceptRetry", description = "Передать на включение в патч")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureBuGonAcceptRetry", description = "Передать на включение в патч")
     @Description("Передать на включение в патч")
     public void msgSlaFeatureReadyPatch() {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
@@ -395,7 +395,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureReadyPatch", description = "Отправить в патч")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureReadyPatch", description = "Отправить в патч")
     @Description("Отправить в патч")
     public void msgSlaFeatureSendRetry() {
         task.refreshUdf();
@@ -406,7 +406,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureSendRetry", description = "Установить в производственную среду")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureSendRetry", description = "Установить в производственную среду")
     @Description("Установить в производственную среду")
     public void msgSlaFeatureInstall() {
         apiController.updateToken(generateAuthToken(CLIENT));
@@ -416,7 +416,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(dependsOnMethods = "msgSlaFeatureInstall", description = "Закрыть(поставщик)")
+    @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureInstall", description = "Закрыть(поставщик)")
     @Description("Закрыть(поставщик)")
     public void msgSlaFeatureClose() {
         apiController.updateToken(generateAuthToken(EMPLOYEE));

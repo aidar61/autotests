@@ -12,10 +12,10 @@
     <artifactId>integration_tests</artifactId>
     <profiles>
         <profile>
-            <id>ui_tests_noTest</id>
+            <id>integration_tests</id>
             <activation>
                 <property>
-                    <name>ui_tests_noTest</name>
+                    <name>integration_tests_noTest</name>
                     <value>false</value>
                 </property>
             </activation>
@@ -27,6 +27,9 @@
                         <version>${surefire.version}</version>
                         <configuration>
                             <skipTests>true</skipTests>
+                            <suiteXmlFiles>
+                                <suiteXmlFile>suite.xml</suiteXmlFile>
+                            </suiteXmlFiles>
                         </configuration>
                     </plugin>
                 </plugins>

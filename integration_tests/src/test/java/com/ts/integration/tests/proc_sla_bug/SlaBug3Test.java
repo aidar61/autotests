@@ -28,19 +28,19 @@ public class SlaBug3Test extends BaseIntegrationTest {
     private SlaBugController slaBugController;
     private Task task;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         slaBugController = apiController.getSlaBugController();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod() {
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(description = "создание задачи")
+    @Test( groups = {"SlaBug", "Regression"},description = "создание задачи")
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -54,7 +54,7 @@ public class SlaBug3Test extends BaseIntegrationTest {
         slaBugController.createSlaBugTask(task);
     }
 
-    @Test(description = "принятие на анализ", dependsOnMethods = "slaBugCat")
+    @Test( groups = {"SlaBug", "Regression"},description = "принятие на анализ", dependsOnMethods = "slaBugCat")
     public void slaBugMsgAnalize() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ABDULLAEV_BAHODIR));
@@ -66,26 +66,26 @@ public class SlaBug3Test extends BaseIntegrationTest {
         slaBugController.msgAnalize(task);
     }
 
-    @Test(description = "начать работу", dependsOnMethods = "slaBugMsgAnalize")
+    @Test( groups = {"SlaBug", "Regression"},description = "начать работу", dependsOnMethods = "slaBugMsgAnalize")
     public void slaBugMsgStart() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, START);
     }
 
-    @Test(description = "запросить информацию", dependsOnMethods = "slaBugMsgStart")
+    @Test( groups = {"SlaBug", "Regression"},description = "запросить информацию", dependsOnMethods = "slaBugMsgStart")
     public void slaBugMsgRequestInfo() {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, REQUESTINFO);
     }
 
-    @Test(description = "предоставить решение", dependsOnMethods = "slaBugMsgRequestInfo")
+    @Test( groups = {"SlaBug", "Regression"},description = "предоставить решение", dependsOnMethods = "slaBugMsgRequestInfo")
     public void slaBugMsgHotFix() {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, HOTFIX);
     }
 
-    @Test(description = "закрыть", dependsOnMethods = "slaBugMsgHotFix")
+    @Test( groups = {"SlaBug", "Regression"},description = "закрыть", dependsOnMethods = "slaBugMsgHotFix")
     public void slaBugMsgClose() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));

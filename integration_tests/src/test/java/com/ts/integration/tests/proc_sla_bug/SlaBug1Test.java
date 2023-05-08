@@ -34,14 +34,14 @@ public class SlaBug1Test extends BaseIntegrationTest {
         slaBugController = apiController.getSlaBugController();
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void afterMethod() {
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);
     }
 
-    @Test(priority = 0, description = "Создание извещения об ошибке")
+    @Test(priority = 0, groups = {"SlaBug", "Regression"}, description = "Создание извещения об ошибке")
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -55,7 +55,7 @@ public class SlaBug1Test extends BaseIntegrationTest {
         slaBugController.createSlaBugTask(task);
     }
 
-    @Test(priority = 0, description = "принять на анализ", dependsOnMethods = "slaBugCat")
+    @Test(priority = 0, groups = {"SlaBug", "Regression"}, description = "принять на анализ", dependsOnMethods = "slaBugCat")
     public void slaBugMsgAnalize() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ABDULLAEV_BAHODIR));
@@ -67,14 +67,14 @@ public class SlaBug1Test extends BaseIntegrationTest {
         slaBugController.msgAnalize(task);
     }
 
-    @Test(priority = 0, description = "отклонить", dependsOnMethods = "slaBugMsgAnalize")
+    @Test(priority = 0, groups = {"SlaBug", "Regression"}, description = "отклонить", dependsOnMethods = "slaBugMsgAnalize")
     public void slaBugMsgDecline() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, DECLINE);
     }
 
-    @Test(priority = 0, description = "вернуть на анализ", dependsOnMethods = "slaBugMsgDecline")
+    @Test(priority = 0, groups = {"SlaBug", "Regression"}, description = "вернуть на анализ", dependsOnMethods = "slaBugMsgDecline")
     public void slaBugMsgUndoStart() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ALTUNIN_NIKOLAY));
@@ -84,7 +84,7 @@ public class SlaBug1Test extends BaseIntegrationTest {
         slaBugController.performCommonOperation(task, UNDOSTART);
     }
 
-    @Test(priority = 0, description = "закрыть как неустраненную", dependsOnMethods = "slaBugMsgUndoStart")
+    @Test(priority = 0, groups = {"SlaBug", "Regression"}, description = "закрыть как неустраненную", dependsOnMethods = "slaBugMsgUndoStart")
     public void slaBugMsgCloseUnfixable() {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, CLOSEUNFIXABLE);
