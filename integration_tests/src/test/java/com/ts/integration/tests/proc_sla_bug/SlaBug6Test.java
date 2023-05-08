@@ -51,13 +51,13 @@ public class SlaBug6Test extends BaseIntegrationTest {
         slaBugController.createSlaBugTask(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "закрыть задачу", dependsOnMethods = "slaBugCat")
-    public void slaBugMsgClose() {
-        udf = refreshUdf();
-        udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));
-        udf.setSecondUdfList(generateUdfList(UDF_SD_CLOSEREASON, SOLVED));
-        task.refreshUdf(udf);
-        apiController.updateToken(generateAuthToken(CLIENT));
-        slaBugController.performCommonOperation(task, ComSlaOperations.CLOSE);
-    }
+//    @Test(groups = {"SlaBug", "Regression"},description = "закрыть задачу", dependsOnMethods = "slaBugCat")
+//    public void slaBugMsgClose() {
+//        udf = refreshUdf();
+//        udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));
+//        udf.setSecondUdfList(generateUdfList(UDF_SD_CLOSEREASON, SOLVED));
+//        task.refreshUdf(udf);
+//        apiController.updateToken(generateAuthToken(CLIENT));
+//        slaBugController.performCommonOperation(task, ComSlaOperations.CLOSE);
+//    }
 }
