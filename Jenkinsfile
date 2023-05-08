@@ -14,7 +14,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                "mvn clean test -Dts.stand=params.STAND"
+                sh "mvn clean test -Dts.stand=$parameters"
             }
             post{
                 always{
