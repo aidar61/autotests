@@ -20,7 +20,7 @@ import lombok.extern.jackson.Jacksonized;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
-public class Task extends BaseEntity {
+public class GeneralTask extends BaseEntity {
     SlaType slaType;
     String id;
     String number;
@@ -35,7 +35,7 @@ public class Task extends BaseEntity {
     Status finishStatus;
     String[] attachments;
 
-    public Task(SlaResponseBody slaResponseBody) {
+    public GeneralTask(SlaResponseBody slaResponseBody) {
         this.id = slaResponseBody.getId();
         this.number = slaResponseBody.getNumber();
         this.name = slaResponseBody.getName();
@@ -56,4 +56,5 @@ public class Task extends BaseEntity {
     public Object receiveTaskStatus() {
         return getFinishStatus();
     }
+
 }

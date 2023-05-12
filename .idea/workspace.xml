@@ -4,174 +4,374 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fbe61259-b4b8-4abe-802a-11c9fa449380" name="Changes" comment="commit">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/01e2fa81-9e7a-4aee-938b-bf1a6c233d96-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/03320079-b2c2-452c-ad93-e5bcd1dc8968-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/047d3c46-8c05-4b1f-8143-6c19856c7b81-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/0c914a8e-50a6-47fb-8b8b-08f47d1bd164-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/0f0734e2-0db6-4df6-8b77-5e1acb4dfe60-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/0ffa5b97-b3cd-41dd-b66e-e1a67621990c-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/19760eed-e03a-49ac-8910-5c76b22e8e5b-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/1d2009af-5d13-43cc-8c1d-d0f2e19ed8f4-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/29dc8a22-daba-49d7-851c-0fc41746d3f9-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/2bb2ecc2-78d3-47df-8ec8-02dbd8ccd35d-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/2f92dccb-eb6f-40c7-bfc5-8521d6bcb2b8-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/37e3d5c6-1e60-431d-9e4b-78365f199d03-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/39f5d672-e7c2-4070-b741-c8e0a7863e3f-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/3bb7d1d7-b031-4533-b4c2-b4a938cd67a7-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/3c87e24f-fb31-4764-9b86-8acaa8c7570e-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/47209c32-191b-4dad-97dc-997b61046f6a-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/4a580ee1-d157-426a-a0f1-5e10533bda94-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/4ade0cc4-f37a-4be9-b893-f42e64c0102e-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/5058db5a-1e8b-45dc-87bc-8e9df06313aa-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/594d2bdd-9438-4cd5-a2c1-1b18c984e6c8-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/5caff00d-77d4-47b8-a025-f90ad4bbd3ac-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/6e1560d2-d053-4ca1-a4f4-655ec342dcc7-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/71313ca0-be9e-4bf6-9e70-f36be75cdcb6-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/7337c7c7-b9a2-4b7b-9eac-f6adf2e119e9-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/75ca3dbe-3821-4d8f-880d-aff8e396f78a-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/76f8070d-3e2a-4764-bc37-344187aa2c3d-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/79d9b50a-94a6-4901-9586-24199219d070-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/7dc1a8e9-2628-42cf-b90c-4166f51532ff-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/80479902-2bc6-4f89-a74c-2d9359d65f18-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/84c85f21-fef5-46da-b328-189950f803f1-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/876c8d5e-85eb-4853-8312-ad348870a6e4-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/88b725fc-1d11-4664-bd0c-78724c0b27e6-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/88e66b9c-a497-438e-af0e-86344bf77a08-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/92b9c1b3-1e20-440e-b77f-3c9cad9514c9-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/92ec3a06-7a41-46c7-bdf7-87df542ad0c3-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/963100e7-bdd6-4687-86ac-ad6df12e1c6f-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/9ca24926-8b54-4aba-be34-4b429b7962e9-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/9df894fc-f458-464d-9683-1ba31a2faa1c-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/9e557460-4f8f-490d-a9e7-66394eaac77f-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/9e929822-7e5b-407c-a0f9-92e9fde516fb-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/9f6059e2-86aa-45c8-b579-eb1e3f9a2f65-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/a9a40d6b-b1bd-4949-b29d-c5ca6417cc18-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/ac52ee06-46c5-4b45-b331-d174e0042327-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/b07db195-56f4-4b33-90a8-2b61eb0dbb05-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/b665e672-22e3-4cda-8c6c-691450e015f8-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/b760f2bc-fcf8-474c-bc46-d98bd71ee498-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/b806183c-34fc-42e4-ae2e-8514d0d0cd2b-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/b8bcea38-d5cf-4b2d-bc87-76e0229fac94-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/bb1c4026-90a6-42c2-9021-004b1a26c08f-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/bcdd2f09-9645-48a8-bcb2-cfe39cc5fd1a-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/bee4b737-5afe-4c47-9e63-7ea34e7c7cbc-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/c0d23f4f-0f0d-42c6-b206-a758ec1c370c-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/c35bb8a4-2ad9-4789-bb53-ef85d7b2b4da-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/c51dd8fe-7afe-49f2-89b1-5e1eccc187eb-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/c9207d27-51b5-4d4f-848a-c2412df464b9-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/c962f998-048f-427c-bc6f-cd83a23dd12b-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/c9824e1a-b2fd-413f-94be-366ca7ea917f-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/c987f4b5-de76-4ee2-98cb-52de55db51e0-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/d467b9dc-2792-40c8-9184-7cf68482bc20-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/d5d66466-d4ff-440b-bb2c-749a31dc701b-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/d6def74a-8188-4095-ac64-7020bafca92a-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/d8f1123f-9c01-4429-bcaf-8c3bf7ed2eea-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/da25427d-7913-4b2a-8af7-13899e49b714-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/e2e90884-6cdc-4b96-a5b1-79c7c99b82db-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/efa38d7f-dbb4-4a66-a90e-140e83433b37-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/f1082547-fa2d-47da-9084-64dc0a2d84df-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/f331335b-d983-415a-84e0-8a066e67986d-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/f7472692-0719-46f7-85a3-36064216b447-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/faa4d928-34ab-4470-b876-37b34f3017e1-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/fb938853-bfb0-416d-be23-f34641966479-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/fcdab320-2fa9-4ca8-b3d0-11d93585358a-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/fedca048-722d-46a5-9faa-53003829ecf4-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelp1Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gitlab.ci.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/TestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/TestTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/ApiAsserts.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/ApiAsserts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/BaseSlaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/BaseSlaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/SlaRequestBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/SlaRequestBody.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/slaBug/SlaBugController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/slaBug/SlaBugController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/slaFeature/SlaFeatureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/slaFeature/SlaFeatureController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/slaHelp/SlaHelpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/slaHelp/SlaHelpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/ComSlaOperations.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/ComSlaOperations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/RandomUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/RandomUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/main/java/com/ts/tests/runners/RetryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/main/java/com/ts/tests/runners/RetryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug10Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug10Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug1Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug2Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug2Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug3Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug3Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug4Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug4Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug5Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug5Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug6Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug6Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug7Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug7Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug8Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug8Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug9Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBug9Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeature1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeature1Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeature2Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeature2Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeature3Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeature3Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sla/SlaBugTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sla/SlaBugTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sla/SlaTaskTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sla/SlaTaskTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Enum" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
-  <component name="Git.Rebase.Settings">
-    <option name="NEW_BASE" value="origin/master" />
-  </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="activity-tests" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="2L7Zf1mRvyeDZTRIs40pd1E1dLw" />
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
+  <component name="ProjectId" id="2EVrpqXECvwZmBVnpzXQYsksh68" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2505747&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.fonts.default&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/aidarka61/IdeaProjects/trackstudio-test",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.1025641",
+    "project.structure.side.proportion": "0.2505747",
+    "settings.editor.selected.configurable": "preferences.fileTypes",
+    "settings.editor.splitter.proportion": "0.39143732",
+    "spring.configuration.checksum": "f0a48e2334f1b84f98a2595c6f1cd1ef",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="TestNG.SlaFeature2Test">
-    <configuration name="SlaBug10Test" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
+  <component name="RunManager" selected="TestNG.SlaHelp1Test.msgSlaHelpAnalize (1)">
+    <configuration name="DateHelpe" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.allyz.common.entities.flight.DateHelpe" />
+      <module name="common" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_bug.*" />
+          <option name="PATTERN" value="com.allyz.common.entities.flight.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_bug" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_bug.SlaBug10Test" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SlaHelp1Test" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="trackstudio-test.integration_tests" />
+      <shortenClasspath name="NONE" />
+      <useClassPathOnly />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_help.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="ALTERNATIVE_JRE_PATH" value="11" />
+      <option name="SUITE_NAME" value="" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_help" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_help.SlaHelp1Test" />
+      <option name="METHOD_NAME" value="" />
+      <option name="GROUP_NAME" value="" />
       <option name="TEST_OBJECT" value="CLASS" />
+      <option name="PARAMETERS" value="" />
+      <option name="OUTPUT_DIRECTORY" value="" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="PROPERTIES_FILE" value="" />
       <properties />
       <listeners />
       <method v="2">
-        <option name="Make" enabled="true" />
+        <option name="MakeProject" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SlaFeature1Test" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
+    <configuration name="SlaHelp1Test.catSlaHelp" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="trackstudio-test.integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_feature.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_help.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_feature" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_feature.SlaFeature1Test" />
-      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_help" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_help.SlaHelp1Test" />
+      <option name="METHOD_NAME" value="catSlaHelp" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SlaFeature2Test" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SlaHelp1Test.msgSlaHelpAnalize (1)" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_feature.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_help.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_feature" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_feature.SlaFeature2Test" />
-      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_help" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_help.SlaHelp1Test" />
+      <option name="METHOD_NAME" value="msgSlaHelpAnalize" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="/Users/aidarka61/IdeaProjects/trackstudio-test/integration_tests/src/test/resources/suite.xml" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <option name="SUITE_NAME" value="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" />
-      <option name="TEST_OBJECT" value="SUITE" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="com.ts.integration.tests.proc_sla_bug" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
+    <configuration name="SlaHelp1Test.msgSlaHelpAnalize" type="TestNG" nameIsGenerated="true">
+      <module name="trackstudio-test.integration_tests" />
+      <shortenClasspath name="NONE" />
+      <useClassPathOnly />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_bug.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_help.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_bug" />
+      <option name="SUITE_NAME" value="" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_help" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_help.SlaHelp1Test" />
+      <option name="METHOD_NAME" value="msgSlaHelpAnalize" />
+      <option name="GROUP_NAME" value="" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="PARAMETERS" value="" />
+      <option name="OUTPUT_DIRECTORY" value="" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="PROPERTIES_FILE" value="" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TemplateTest.justTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="ui_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.allyz.ui.test.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.allyz.ui.test" />
+      <option name="MAIN_CLASS_NAME" value="com.allyz.ui.test.TemplateTest" />
+      <option name="METHOD_NAME" value="justTest" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="TestNG" nameIsGenerated="true">
+      <shortenClasspath name="NONE" />
+      <option name="SUITE_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="GROUP_NAME" value="" />
       <option name="TEST_OBJECT" value="PACKAGE" />
+      <option name="PARAMETERS" value="" />
+      <option name="OUTPUT_DIRECTORY" value="" />
+      <option name="PROPERTIES_FILE" value="" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Application.DateHelpe" />
+      <item itemvalue="TestNG.Unnamed" />
+      <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize (1)" />
+      <item itemvalue="TestNG.SlaHelp1Test.catSlaHelp" />
+      <item itemvalue="TestNG.TemplateTest.justTest" />
+      <item itemvalue="TestNG.SlaHelp1Test" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.SlaFeature2Test" />
-        <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/trackstudio-test/integration_tests/src/test/resources/suite.xml" />
-        <item itemvalue="TestNG.SlaFeature1Test" />
-        <item itemvalue="TestNG.com.ts.integration.tests.proc_sla_bug" />
-        <item itemvalue="TestNG.SlaBug10Test" />
+        <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize (1)" />
+        <item itemvalue="TestNG.SlaHelp1Test.catSlaHelp" />
+        <item itemvalue="TestNG.SlaHelp1Test" />
+        <item itemvalue="Application.DateHelpe" />
+        <item itemvalue="TestNG.TemplateTest.justTest" />
       </list>
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="fbe61259-b4b8-4abe-802a-11c9fa449380" name="Changes" comment="" />
-      <created>1675224181981</created>
+      <changelist id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="" />
+      <created>1662691779046</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1675224181981</updated>
+      <updated>1662691779046</updated>
+      <workItem from="1683881304883" duration="96000" />
+      <workItem from="1683881520118" duration="458000" />
+      <workItem from="1683881985389" duration="453000" />
+      <workItem from="1683882525179" duration="35000" />
+      <workItem from="1683882567352" duration="7000" />
+      <workItem from="1683882580922" duration="509000" />
     </task>
-    <task id="LOCAL-00001" summary="commit">
-      <created>1676788964368</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1676788964368</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="CUSTOM_BOOLEAN_PROPERTIES">
-                <map>
-                  <entry key="Show.Git.Branches" value="false" />
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -179,8 +379,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -5,7 +5,6 @@ import com.ts.common.application.controllers.TrackStudioApiControllers;
 import com.ts.common.application.database.DbHelper;
 import com.ts.common.controllers.sla.BaseSlaController;
 import com.ts.common.entitites.commonEntities.Udfs;
-import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.Users;
 import com.ts.common.listeners.TestListener;
 import com.ts.common.tests.AbstractBaseTest;
@@ -26,6 +25,7 @@ public class BaseIntegrationTest extends AbstractBaseTest {
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
+        log.info("test");
         this.authToken = generateAuthToken(Users.CLIENT);
         apiController = new TrackStudioApiControllers(authToken);
         slaController = apiController.getSlaController();

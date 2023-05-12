@@ -2,7 +2,7 @@ package com.ts.common.controllers.sla;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.application.controllers.TrackStudioEndPoints;
-import com.ts.common.entitites.tasks.Task;
+import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
 import com.ts.common.request.ApiRequest;
@@ -40,12 +40,12 @@ public class BaseSlaController extends ApiRequest {
         return super.get(getEndpoint(TASK, INFO, taskNumber));
     }
 
-    protected Response performOperation(@NotNull Task slaTask, String requestBody) {
+    protected Response  performOperation(@NotNull GeneralTask slaTask, String requestBody) {
         return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
     @Step("Выполнение операции: {0}")
-    protected Response performOperationWithQueryParam(@NotNull Task slaTask, String requestBody) {
+    protected Response performOperationWithQueryParam(@NotNull GeneralTask slaTask, String requestBody) {
         HashMap<String, String> params = new HashMap<>() {{
             put(ID.field, slaTask.getId());
         }};
@@ -54,7 +54,7 @@ public class BaseSlaController extends ApiRequest {
     }
 
     @Step("Выполнение общей операции: {1}")
-    public Response performCommonOperation(Task slaTask, ComSlaOperations operation) {
+    public Response performCommonOperation(GeneralTask slaTask, ComSlaOperations operation) {
         slaTask.setOperation(InitEntities.generateOperationID(this.slaType, operation));
         slaTask.setDescription(RandomUtils.generateDescriptionForOperation(operation));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
