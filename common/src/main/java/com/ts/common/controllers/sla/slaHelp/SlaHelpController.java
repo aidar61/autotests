@@ -6,7 +6,7 @@ import com.ts.common.controllers.sla.SlaRequestBody;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.commonEntities.Udfs;
-import com.ts.common.entitites.tasks.Task;
+import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.SlaType;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
@@ -39,11 +39,11 @@ public class SlaHelpController extends BaseSlaController {
     }
 
     @Step("Выполнение операциии SlaHelp Task: ")
-    public Response performOperation(@NotNull Task slaTask, String requestBody) {
+    public Response performOperation(@NotNull GeneralTask slaTask, String requestBody) {
         return super.post(getEndpoint(OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
-    public Response createTask(Task slaTask) {
+    public Response createTask(GeneralTask slaTask) {
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         this.response = createTask(slaRequestBody.keepMandatoryAndCreateFields());
         SlaResponseBody slaResponseBody = JsonUtils.deserialize(this.response, SlaResponseBody.class);
@@ -55,7 +55,7 @@ public class SlaHelpController extends BaseSlaController {
         return this.response;
     }
 
-    public Response addComment(Task slaTask) {
+    public Response addComment(GeneralTask slaTask) {
         slaTask.setOperation(getGeneralId(ADD_COMMENT));
         slaTask.setDescription(generateComment());
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
@@ -64,7 +64,7 @@ public class SlaHelpController extends BaseSlaController {
         return this.response;
     }
 
-    public Response editModule(Task slaTask) {
+    public Response editModule(GeneralTask slaTask) {
         slaTask.setOperation(getGeneralId(CHANGE_SD_MODULE));
         Udfs udfs = slaTask.getUdfs();
         udfs.setUdfList(generateUdfList(UDF_SD_TASK_CODE, List.Constants.ABNATTR));
@@ -77,7 +77,7 @@ public class SlaHelpController extends BaseSlaController {
     }
 
     @Step("Принятие на анализ slaTask: ")
-    public Response receiveAnalysis(Task slaTask) {
+    public Response receiveAnalysis(GeneralTask slaTask) {
         Udfs udfs = slaTask.getUdfs();
         udfs.setUdfString(generateUdfString(Udfs.UdfSd.UDF_SD_PROVIDEDHELPDEADLINE, getCurrentDate()));
         slaTask.setOperation(getGeneralId(RECEIVE_ANALIZE));
@@ -87,7 +87,7 @@ public class SlaHelpController extends BaseSlaController {
         return this.response;
     }
 
-    public Response requestInformation(Task slaTask) {
+    public Response requestInformation(GeneralTask slaTask) {
         slaTask.setOperation(getGeneralId(REQUEST_INFORMATION));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         this.response = performOperation(slaTask, slaRequestBody.keepFields(OPERATION, DESCRIPTION.field, ATTACHMENTS.field));
@@ -95,14 +95,14 @@ public class SlaHelpController extends BaseSlaController {
     }
 
 
-    public Response provideInformation(Task slaTask) {
+    public Response provideInformation(GeneralTask slaTask) {
         slaTask.setOperation(getGeneralId(PROVIDE_INFO));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         this.response = performOperation(slaTask, slaRequestBody.keepFields(OPERATION, DESCRIPTION.field, ATTACHMENTS.field));
         return this.response;
     }
 
-    public Response provideConsultation(Task slaTask) {
+    public Response provideConsultation(GeneralTask slaTask) {
         slaTask.setOperation(getGeneralId(PROVIDE_CONSULT));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         this.response = performOperation(slaTask, slaRequestBody.keepFields(OPERATION, DESCRIPTION.field, ATTACHMENTS.field));
@@ -110,11 +110,11 @@ public class SlaHelpController extends BaseSlaController {
     }
 
     @Step("Close task")
-    private Response closeSLaTask(Task slaTask, String requestBody) {
+    private Response closeSLaTask(GeneralTask slaTask, String requestBody) {
         return super.post(getEndpoint(OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
-    public Response closeSlaTask(Task slaTask) {
+    public Response closeSlaTask(GeneralTask slaTask) {
         slaTask.setOperation(getGeneralId(CLOSE_SLAHELP));
         SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
         this.response = closeSLaTask(slaTask, slaRequestBody.keepFields(OPERATION, DESCRIPTION.field, ATTACHMENTS.field));

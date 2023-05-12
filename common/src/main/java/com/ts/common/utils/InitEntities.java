@@ -3,7 +3,7 @@ package com.ts.common.utils;
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.*;
-import com.ts.common.entitites.tasks.Task;
+import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.*;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.MSG;
@@ -17,8 +17,8 @@ public class InitEntities {
     private InitEntities() {
     }
 
-    public static Task getSlaTask(SlaType slaType, ComSlaOperations id) {
-        Task build = Task.builder()
+    public static GeneralTask getSlaTask(SlaType slaType, ComSlaOperations id) {
+        GeneralTask build = GeneralTask.builder()
                 .slaType(slaType)
                 .category(generateCategory(slaType))
                 .operation(generateOperationID(slaType, id))

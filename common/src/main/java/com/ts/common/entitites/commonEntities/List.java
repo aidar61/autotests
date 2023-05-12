@@ -36,7 +36,7 @@ public class List extends BaseEntity {
         SOLVED("81818284552b295701552b4d425e0015"),
         ABNATTR("818181df7d730063017d7302e40e0075"),
         CLIENTIGNORECOST("818181b03ce8a434013cecdf85f47acf"),
-
+        ACCUPDLST("818181df7d730063017d7302f45b03f7"),
         CRITICAL("818182de541395b101541399d2120001");
 
         public final String id;

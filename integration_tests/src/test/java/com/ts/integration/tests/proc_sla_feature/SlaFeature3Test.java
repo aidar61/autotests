@@ -3,7 +3,7 @@ package com.ts.integration.tests.proc_sla_feature;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
-import com.ts.common.entitites.tasks.Task;
+import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.AfterMethod;
@@ -27,8 +27,8 @@ import static com.ts.common.utils.RandomUtils.generateComment;
 
 public class SlaFeature3Test extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
-    private Task task;
-    private Task actualSlaTask;
+    private GeneralTask task;
+    private GeneralTask actualSlaTask;
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {

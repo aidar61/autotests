@@ -5,7 +5,7 @@ import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
 import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
-import com.ts.common.entitites.tasks.Task;
+import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -35,11 +35,11 @@ public class TrackStudioApiControllers {
     }
 
 
-    public Task receiveSlaTask(String slaTaskNumber) {
+    public GeneralTask receiveSlaTask(String slaTaskNumber) {
         this.response = this.slaController.receiveActualTask(slaTaskNumber);
         SlaResponseBody slaResponseBody = JsonUtils.deserialize(this.response, SlaResponseBody.class);
         if (slaResponseBody != null) {
-            return new Task(slaResponseBody);
+            return new GeneralTask(slaResponseBody);
         }
         return null;
     }

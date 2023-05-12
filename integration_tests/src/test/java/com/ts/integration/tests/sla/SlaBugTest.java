@@ -5,7 +5,7 @@ import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.commonEntities.User;
-import com.ts.common.entitites.tasks.Task;
+import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
 import com.ts.common.listeners.TestListener;
@@ -30,7 +30,7 @@ import static com.ts.common.utils.InitEntities.*;
 @Listeners({TestListener.class})
 public class SlaBugTest extends BaseIntegrationTest {
     private static SlaBugController slaBugController;
-    private Task task;
+    private GeneralTask task;
     private Udfs udf;
 
     @BeforeClass(alwaysRun = true)
