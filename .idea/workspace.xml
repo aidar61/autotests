@@ -5,20 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Merge.Settings">
     <option name="BRANCH" value="master" />
@@ -52,43 +52,46 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
+    <option name="compactDirectories" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/aidarka61/IdeaProjects/trackstudio-test&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.1025641&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2505747&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.fileTypes&quot;,
-    &quot;settings.editor.splitter.proportion&quot;: &quot;0.39143732&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;f0a48e2334f1b84f98a2595c6f1cd1ef&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "/Users/aidarka61/IdeaProjects/trackstudio-test",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.09375",
+    "project.structure.side.proportion": "0.17515099",
+    "settings.editor.selected.configurable": "preferences.fileTypes",
+    "settings.editor.splitter.proportion": "0.39143732",
+    "spring.configuration.checksum": "f0a48e2334f1b84f98a2595c6f1cd1ef",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.SlaHelp1Test.msgSlaHelpAnalize (1)">
-    <configuration name="DateHelpe" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.allyz.common.entities.flight.DateHelpe" />
+  <component name="RunManager" selected="TestNG.SlaHelp2Test">
+    <configuration name="InitEntities" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ts.common.utils.InitEntities" />
       <module name="common" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.allyz.common.entities.flight.*" />
+          <option name="PATTERN" value="com.ts.common.utils.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -96,33 +99,21 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SlaHelp1Test" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="trackstudio-test.integration_tests" />
-      <shortenClasspath name="NONE" />
-      <useClassPathOnly />
+    <configuration name="SlaHelp1Test (1)" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.ts.integration.tests.proc_sla_help.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="ALTERNATIVE_JRE_PATH" value="11" />
-      <option name="SUITE_NAME" value="" />
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_help" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_help.SlaHelp1Test" />
-      <option name="METHOD_NAME" value="" />
-      <option name="GROUP_NAME" value="" />
       <option name="TEST_OBJECT" value="CLASS" />
-      <option name="PARAMETERS" value="" />
-      <option name="OUTPUT_DIRECTORY" value="" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <option name="PROPERTIES_FILE" value="" />
       <properties />
       <listeners />
       <method v="2">
-        <option name="MakeProject" enabled="true" />
+        <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="SlaHelp1Test.catSlaHelp" type="TestNG" temporary="true" nameIsGenerated="true">
@@ -189,18 +180,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TemplateTest.justTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="ui_tests" />
+    <configuration name="SlaHelp2Test" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.allyz.ui.test.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_help.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.allyz.ui.test" />
-      <option name="MAIN_CLASS_NAME" value="com.allyz.ui.test.TemplateTest" />
-      <option name="METHOD_NAME" value="justTest" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_help" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_help.SlaHelp2Test" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
       <method v="2">
@@ -225,21 +215,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.DateHelpe" />
+      <item itemvalue="Application.InitEntities" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.SlaHelp1Test (1)" />
+      <item itemvalue="TestNG.SlaHelp2Test" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize (1)" />
       <item itemvalue="TestNG.SlaHelp1Test.catSlaHelp" />
-      <item itemvalue="TestNG.TemplateTest.justTest" />
-      <item itemvalue="TestNG.SlaHelp1Test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.SlaHelp2Test" />
+        <item itemvalue="TestNG.SlaHelp1Test (1)" />
+        <item itemvalue="Application.InitEntities" />
         <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize (1)" />
         <item itemvalue="TestNG.SlaHelp1Test.catSlaHelp" />
-        <item itemvalue="TestNG.SlaHelp1Test" />
-        <item itemvalue="Application.DateHelpe" />
-        <item itemvalue="TestNG.TemplateTest.justTest" />
       </list>
     </recent_temporary>
   </component>
@@ -257,6 +247,7 @@
       <workItem from="1683882525179" duration="35000" />
       <workItem from="1683882567352" duration="7000" />
       <workItem from="1683882580922" duration="509000" />
+      <workItem from="1683974748683" duration="4038000" />
     </task>
     <servers />
   </component>
