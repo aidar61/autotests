@@ -4,13 +4,15 @@ package com.ts.common.enums;
 public enum ComSlaOperations {
     CAT("CAT_%S"),
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
+    CLI_COMMENT("%S_CLICOMMENT"), // задать вопрос
+    CHANGE_STATUS("%S_CHANGESTATUS"), // изменить состояние
     CHANGE_RES_PERSON("%S_REASSIGN"),//изменить ответственного
     CHANGE_CURRENT_ROLE("%S_CHANGECURRENTROLE"),//изменить ответственную роль
     CHANGE_LINKED_TASKS("%S_CHANGELINKEDTASKS"),// изменить список связанных задач
     CORRECT_SLA_DATES("%S_CORRECTSLADATES"), // корректировка SLA дат
     CHANGE_ATTR("%S_CHANGEATTRS"), // изменить аттрибуты задачи
-    ADD_TRUST_WATCHER("%S_CHANGELINKEDTASKS"),// назначить доверенного наблюдателя
-    ADD_CLIENT_WATCHERS("%S__APPOINTCLIWATCHERS"),// назначить наблюдателей клиента
+    ADD_TRUST_WATCHER("%S_ADDTRUSTEDWATCHER"),// назначить доверенного наблюдателя
+    ADD_CLIENT_WATCHERS("%S_APPOINTCLIWATCHERS"),// назначить наблюдателей клиента
     ADD_WATCHERS("%S_APPOINTWATCHER"),// назначить наблюдателей
     COMMENT("%S_OURCOMMENT"), // сообщить информацию(комментарий)
     PRIVATE_COMMENT("%S_PRIVATECOMMENT"), // приватный комментарий

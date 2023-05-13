@@ -1,8 +1,11 @@
 package com.ts.integration.tests.proc_sla_bug;
 
 import com.ts.common.asserts.ApiAsserts;
+import com.ts.common.asserts.EntityAssert;
+import com.ts.common.asserts.TaskAsserts;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
+import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
@@ -28,6 +31,7 @@ import static com.ts.common.utils.InitEntities.*;
 public class SlaBug1Test extends BaseIntegrationTest {
     private SlaBugController slaBugController;
     private GeneralTask task;
+
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {

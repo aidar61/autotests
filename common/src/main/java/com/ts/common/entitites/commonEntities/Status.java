@@ -19,17 +19,25 @@ import lombok.extern.slf4j.Slf4j;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Status extends BaseEntity {
     String id;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     String color;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     String name;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     String workflowId;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     boolean defaultStart;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     String image;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     int order;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     boolean start;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     boolean finish;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("trname")
     String trName;
 }

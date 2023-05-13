@@ -148,4 +148,14 @@ public class InitEntities {
                 .build();
     }
 
+    public static Status generateStatus(TaskStatuses status) {
+        return Status.builder()
+                .id(status.name())
+                .build();
+    }
+
+    public static void main(String[] args) {
+        System.out.println(generateStatus(TaskStatuses.STATUS_SLAHELP_CONSULTED));
+    }
+
 }
