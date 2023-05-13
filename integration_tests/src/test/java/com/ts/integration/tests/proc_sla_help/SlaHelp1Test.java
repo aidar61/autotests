@@ -2,12 +2,15 @@ package com.ts.integration.tests.proc_sla_help;
 
 
 import com.ts.common.asserts.ApiAsserts;
+import com.ts.common.controllers.sla.SlaRequestBody;
 import com.ts.common.controllers.sla.SlaResponseBody;
 import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
+import com.ts.common.enums.TaskStatuses;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.RandomUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -16,9 +19,9 @@ import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.H
 import static com.ts.common.entitites.commonEntities.List.Constants.ACCUPDLST;
 import static com.ts.common.entitites.commonEntities.Task.Constants.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.entitites.commonEntities.User.Constants.AKSENOV_ANDREY;
-import static com.ts.common.entitites.commonEntities.User.Constants.ALTUNIN_NIKOLAY;
+import static com.ts.common.entitites.commonEntities.User.Constants.*;
 import static com.ts.common.enums.ComSlaOperations.*;
+import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CONSULTED;
 import static com.ts.common.enums.Users.EMPLOYEE;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateString;
@@ -99,6 +102,41 @@ public class SlaHelp1Test extends BaseIntegrationTest {
         udf.setUdfString(generateUdfString(UDF_SLA_CONSULTPROVIDEDATE, "1683797653000"));
         slaTask.refreshUdf(udf);
         slaHelpController.performCommonOperation(slaTask, CORRECT_SLA_DATES);
+        ApiAsserts.assertThat(slaHelpController.getResponse())
+                .isCorrectResponseCode(HTTP_OK)
+                .isParseableBody(SlaResponseBody.class);
+    }
+
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Назначить доверенного наблюдателя", dependsOnMethods = "msgSlaHelpCorrectSlaDates")
+    public void msgSlaHelpAddTrustedWatcher() {
+        udf = refreshUdf();
+        udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ALTUNIN_NIKOLAY));
+        slaTask.refreshUdf(udf);
+        slaHelpController.performCommonOperation(slaTask, ADD_TRUST_WATCHER);
+        ApiAsserts.assertThat(slaHelpController.getResponse())
+                .isCorrectResponseCode(HTTP_OK)
+                .isParseableBody(SlaResponseBody.class);
+    }
+
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "msgSlaHelpAddTrustedWatcher")
+    public void msgSlaHelpAppointWatcher() {
+        udf = refreshUdf();
+        udf.setUdfUser(generateUdfUser(UDF_WATCHER, ABDULLAEV_BAHODIR));
+        slaTask.refreshUdf(udf);
+        slaHelpController.performCommonOperation(slaTask, ADD_WATCHERS);
+        ApiAsserts.assertThat(slaHelpController.getResponse())
+                .isCorrectResponseCode(HTTP_OK)
+                .isParseableBody(SlaResponseBody.class);
+    }
+
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить состояние", dependsOnMethods = "msgSlaHelpAppointWatcher")
+    public void msgSlaHelpChangeStatus() {
+        slaTask.refreshUdf();
+        slaTask.setFinishStatus(generateStatus(STATUS_SLAHELP_CONSULTED));
+        slaTask.setOperation(generateOperationID(slaTask.getSlaType(), CHANGE_STATUS));
+        slaTask.setDescription(RandomUtils.generateDescriptionForOperation(CHANGE_STATUS));
+        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+        slaHelpController.performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(slaHelpController.DEFAULT_FIELDS_WITH_STATUS));
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(SlaResponseBody.class);

@@ -26,6 +26,10 @@ public class RandomUtils {
         return faker.chuckNorris().fact();
     }
 
+    public static String generateEmail() {
+        return faker.internet().emailAddress();
+    }
+
     public static int generateRandomNumberBetween(int min, int max) {
         return faker.number().numberBetween(min, max);
     }

@@ -12,6 +12,7 @@ import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
@@ -25,6 +26,7 @@ public class BaseSlaController extends ApiRequest {
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {ID, OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
     protected SlaRequestBody.Fields[] DEFAULT_FIELDS_USER = {OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
+    public SlaRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS};
 
     public BaseSlaController(String url, AuthToken authToken) {
         super(url, HEADERS_BASE_CONTROLLER, authToken);
@@ -40,12 +42,12 @@ public class BaseSlaController extends ApiRequest {
         return super.get(getEndpoint(TASK, INFO, taskNumber));
     }
 
-    protected Response  performOperation(@NotNull GeneralTask slaTask, String requestBody) {
+    protected Response performOperation(@NotNull GeneralTask slaTask, String requestBody) {
         return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
     @Step("Выполнение операции: {0}")
-    protected Response performOperationWithQueryParam(@NotNull GeneralTask slaTask, String requestBody) {
+    public Response performOperationWithQueryParam(@NotNull GeneralTask slaTask, String requestBody) {
         HashMap<String, String> params = new HashMap<>() {{
             put(ID.field, slaTask.getId());
         }};

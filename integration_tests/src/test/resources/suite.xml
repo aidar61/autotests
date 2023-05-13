@@ -20,6 +20,7 @@
             <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature2Test"/>
             <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature3Test"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelp1Test"/>
+            <class name="com.ts.integration.tests.proc_sla_help.SlaHelp2Test"/>
         </classes>
     </test>
 </suite>
