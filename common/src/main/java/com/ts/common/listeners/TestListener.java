@@ -10,23 +10,9 @@ import org.testng.TestListenerAdapter;
 
 @Slf4j
 public class TestListener extends TestListenerAdapter {
-    private final ConsoleOutputCapturer consoleOutputCapturer = new ConsoleOutputCapturer();
-
-
-    @SuppressWarnings("UnusedReturnValue")
-    @Attachment(value = "Test Log", type = "text/plain")
-    public String stopCatch() {
-        ITestResult testResult = Reporter.getCurrentTestResult();
-        if (testResult != null && testResult.getMethod() != null) {
-            return consoleOutputCapturer.stop();
-        } else {
-            return null;
-        }
-    }
-
+    
     @Override
     public void beforeConfiguration(ITestResult tr) {
-        consoleOutputCapturer.start();
         super.beforeConfiguration(tr);
     }
 
@@ -39,21 +25,21 @@ public class TestListener extends TestListenerAdapter {
     @Override
     public void onTestSuccess(ITestResult tr) {
         printTestResult(tr);
-        stopCatch();
+        
         super.onTestSuccess(tr);
     }
 
     @Override
     public void onTestFailure(ITestResult tr) {
         printTestResult(tr);
-        stopCatch();
+        
         super.onTestFailure(tr);
     }
 
     @Override
     public void onTestSkipped(ITestResult tr) {
         printTestResult(tr);
-        stopCatch();
+        
         super.onTestSkipped(tr);
     }
 
