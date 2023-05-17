@@ -13,6 +13,7 @@ public enum ComSlaOperations {
     CORRECT_SLA_DATES("%S_CORRECTSLADATES"), // корректировка SLA дат
     CHANGE_ATTR("%S_CHANGEATTRS"), // изменить аттрибуты задачи
     CHANGE_ANALYST("%S_CHANGEANALYST"), // изменить аналитика
+    CONFIRM("%S_CONFIRM"), // подтвердить и опубликовать
     ADD_TRUST_WATCHER("%S_ADDTRUSTEDWATCHER"),// назначить доверенного наблюдателя
     ADD_CLIENT_WATCHERS("%S_APPOINTCLIWATCHERS"),// назначить наблюдателей клиента
     ADD_WATCHERS("%S_APPOINTWATCHER"),// назначить наблюдателей
@@ -20,6 +21,7 @@ public enum ComSlaOperations {
     LINK("%S_LINK"), // установить связь с GAP
     PRIVATE_COMMENT("%S_PRIVATECOMMENT"), // приватный комментарий
     PASS_FOR_APPROVAL("%S_PASSFORAPPROVAL"), // передать на согласование
+    CONFIRM_HIDDEN("%S_CONFIRMHIDDEN"), // подтвердить скрытый GAP
     CHANGE_MODULE("%S_CHANGE_SD_MODULE"), // изменить модуль системы
     ANALIZE("%S_ANALIZE"), // принять на анализ
     DECLINE("%S_DECLINE"), // отклонить
@@ -41,6 +43,7 @@ public enum ComSlaOperations {
     START("%S_START"), // Передать в разработку
     HOTFIX("%S_HOTFIX"), // Предоставить решение
     RETURN("%S_RETURN"), // Вернуть в работу
+    RETURN_TO_ANAL("%S_RETURNTOANAL"), // вернуть на анализ
     REQUESTINFO("%S_REQUESTINFO"), // запросить информацию
     PROVIDEINFO("%S_PROVIDEINFO"), // предоставить информацию
     UNDOREQUESTINFO("%S_UNDOREQUESTINFO"), // отменить запрос информацию
