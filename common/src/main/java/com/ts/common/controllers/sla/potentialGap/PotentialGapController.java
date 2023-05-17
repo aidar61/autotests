@@ -12,8 +12,6 @@ import io.restassured.response.Response;
 
 import static com.ts.common.controllers.sla.TaskRequestBody.Fields.*;
 import static com.ts.common.enums.SlaType.GAP;
-import static com.ts.common.enums.SlaType.POTENTIAL_GAP;
-
 public class PotentialGapController extends BaseController {
     private static final SlaType SLA_TYPE = GAP;
 
