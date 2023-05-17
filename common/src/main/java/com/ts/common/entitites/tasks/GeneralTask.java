@@ -2,7 +2,7 @@ package com.ts.common.entitites.tasks;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.controllers.sla.TaskResponseBody;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.enums.SlaType;
@@ -35,12 +35,12 @@ public class GeneralTask extends BaseEntity {
     Status finishStatus;
     String[] attachments;
 
-    public GeneralTask(SlaResponseBody slaResponseBody) {
-        this.id = slaResponseBody.getId();
-        this.number = slaResponseBody.getNumber();
-        this.name = slaResponseBody.getName();
-        this.description = slaResponseBody.getDescription();
-        this.finishStatus = slaResponseBody.getFinishStatus();
+    public GeneralTask(TaskResponseBody taskResponseBody) {
+        this.id = taskResponseBody.getId();
+        this.number = taskResponseBody.getNumber();
+        this.name = taskResponseBody.getName();
+        this.description = taskResponseBody.getDescription();
+        this.finishStatus = taskResponseBody.getFinishStatus();
     }
 
     public void refreshUdf() {

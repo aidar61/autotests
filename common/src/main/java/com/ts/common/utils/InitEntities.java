@@ -8,6 +8,7 @@ import com.ts.common.enums.*;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.MSG;
 import static com.ts.common.enums.Parents.MTB;
+import static com.ts.common.enums.Parents.RYSGAL_BANK;
 import static com.ts.common.utils.RandomUtils.generateName;
 
 public class InitEntities {
@@ -24,7 +25,7 @@ public class InitEntities {
                 .operation(generateOperationID(slaType, id))
                 .parent(getParent(MTB))
                 .name(generateName())
-                .description(generateName() + " description")
+                .description(generateName() + " CAT description")
                 .udfs(refreshUdf())
                 .attachments(new String[]{})
 //                .handlerUser(generateUser(User.Constants.ALTUNIN_NIKOLAY))
@@ -32,6 +33,7 @@ public class InitEntities {
         if (id == ComSlaOperations.CAT) {
             if (slaType == SlaType.SLA_BUG) build.setDescription(slaBugDescription);
             if (slaType == SlaType.SLA_FEATURE) build.setDescription(slaFeatureDescription);
+            if (slaType == SlaType.POTENTIAL_GAP) build.setParent(getParent(RYSGAL_BANK));
         }
         return build;
     }

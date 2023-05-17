@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ts.common.annotations.Create;
 import com.ts.common.annotations.Mandatory;
 import com.ts.common.annotations.TypeId;
-import com.ts.common.controllers.sla.SlaRequestBody;
+import com.ts.common.controllers.sla.TaskRequestBody;
 import com.ts.common.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,21 +52,9 @@ public abstract class RequestBody {
         return allFields.stream().map(Field::getName).collect(Collectors.toList());
     }
 
-    public List<String> receiveOptionalFields() {
-        List<Field> fields = Arrays.asList(this.getClass().getDeclaredFields());
-        return fields.stream().filter(s -> !s.isAnnotationPresent(Mandatory.class)).map(Field::getName).collect(Collectors.toList());
-    }
-
     public List<String> receiveCreateFields() {
         List<Field> fields = Arrays.asList(this.getClass().getDeclaredFields());
         return fields.stream().filter(s -> s.isAnnotationPresent(Create.class)).map(Field::getName).collect(Collectors.toList());
-    }
-
-    public String removeOptionalAndTypeFieldWithName(String annotName) {
-        List<String> optionalFields = receiveOptionalFields();
-        List<String> typeFields = receiveTypesFieldWithName(annotName);
-        typeFields.addAll(optionalFields);
-        return removeFields(typeFields);
     }
 
     private List<Field> receiveChangeableFields() {
@@ -79,22 +67,6 @@ public abstract class RequestBody {
         return changeableFields.stream().filter(cf -> cf.getAnnotation(TypeId.class).type().equals(annotValue)).map(Field::getName).collect(Collectors.toList());
     }
 
-    public String removeTypeFieldWithName(String annotName) {
-        List<String> optionalFields = receiveOptionalFields();
-        List<String> typeFields = receiveTypesFieldWithName(annotName);
-        typeFields.addAll(optionalFields);
-        return removeFields(typeFields);
-    }
-
-    public String keepOnlyTypeFieldWithNameWithMandatoryFields(String annotName) {
-        List<String> allFields = receiveAllFields();
-        List<String> optionalFields = receiveOptionalFields();
-        List<String> keepingTypeFields = receiveTypesFieldWithName(annotName);
-        keepingTypeFields.addAll(optionalFields);
-        allFields.removeAll(keepingTypeFields);
-        return removeFields(allFields);
-    }
-
     public String keepMandatoryAndCreateFields() {
         List<String> createFields = receiveCreateFields();
         List<String> mandatoryFields = receiveMandatoryFields();
@@ -104,18 +76,29 @@ public abstract class RequestBody {
         return removeFields(allFields);
     }
 
+    public String keepMandatoryAndCreateFieldsAnd(TaskRequestBody.Fields... extraFields) {
+        List<String> createFields = receiveCreateFields();
+        List<String> mandatoryFields = receiveMandatoryFields();
+        List<String> allFields = receiveAllFields();
+        allFields.removeAll(createFields);
+        allFields.removeAll(mandatoryFields);
+        List<String> extraFieldsList = new ArrayList<>();
+        Arrays.stream(extraFields).forEach(f -> extraFieldsList.add(f.field));
+        allFields.removeAll(extraFieldsList);
+        return removeFields(allFields);
+    }
+
     public String keepFields(String... fields) {
         List<String> allFields = receiveAllFields();
         allFields.removeAll(Arrays.asList(fields));
         return removeFields(allFields);
     }
 
-    public String
-    keepFields(SlaRequestBody.Fields... fields) {
-        List<String> slaFields = new ArrayList<>();
-        Arrays.stream(fields).forEach(f -> slaFields.add(f.field));
+    public String keepFields(TaskRequestBody.Fields... fields) {
+        List<String> fieldsList = new ArrayList<>();
+        Arrays.stream(fields).forEach(f -> fieldsList.add(f.field));
         List<String> allFields = receiveAllFields();
-        allFields.removeAll(slaFields);
+        allFields.removeAll(fieldsList);
         return removeFields(allFields);
     }
 }

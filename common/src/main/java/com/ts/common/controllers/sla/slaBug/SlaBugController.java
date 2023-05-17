@@ -1,9 +1,9 @@
 package com.ts.common.controllers.sla.slaBug;
 
 import com.ts.common.application.controllers.AuthToken;
-import com.ts.common.controllers.sla.BaseSlaController;
-import com.ts.common.controllers.sla.SlaRequestBody;
-import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.controllers.sla.BaseController;
+import com.ts.common.controllers.sla.TaskRequestBody;
+import com.ts.common.controllers.sla.TaskResponseBody;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.SlaType;
 import com.ts.common.utils.JsonUtils;
@@ -15,7 +15,7 @@ import static com.ts.common.enums.SlaType.SLA_BUG;
 import static com.ts.common.utils.InitEntities.generateOperationID;
 import static com.ts.common.utils.RandomUtils.generateDescriptionForOperation;
 
-public class SlaBugController extends BaseSlaController {
+public class SlaBugController extends BaseController {
     private static final SlaType SLA_TYPE = SLA_BUG;
 
     public SlaBugController(String url, AuthToken authToken) {
@@ -29,9 +29,9 @@ public class SlaBugController extends BaseSlaController {
     }
 
     public Response createSlaBugTask(GeneralTask slaTask) {
-        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+        TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         this.response = createTask(slaRequestBody.keepMandatoryAndCreateFields());
-        SlaResponseBody slaResponseBody = JsonUtils.deserialize(this.response, SlaResponseBody.class);
+        TaskResponseBody slaResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
         if (slaResponseBody != null) {
             slaTask.setId(slaResponseBody.getId());
             slaTask.setNumber(slaResponseBody.getNumber());
@@ -43,27 +43,27 @@ public class SlaBugController extends BaseSlaController {
     public Response msgAnalize(GeneralTask slaTask) {
         slaTask.setOperation(generateOperationID(this.slaType, ANALIZE));
         slaTask.setDescription(generateDescriptionForOperation(ANALIZE));
-        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+        TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         return this.response = super.performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_USER));
     }
 
     protected Response changeAuthor(GeneralTask slaTask) {
         slaTask.setOperation(generateOperationID(SLA_TYPE, CHANGE_AUTHOR));
-        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+        TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         return super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS));
     }
 
 
     protected Response changeAttributes(GeneralTask slaTask) {
         slaTask.setOperation(generateOperationID(SLA_TYPE, CHANGE_ATTR));
-        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+        TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         return super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS));
     }
 
 
     protected Response changeResPerson(GeneralTask slaTask) {
         slaTask.setOperation(generateOperationID(SLA_TYPE, CHANGE_RES_PERSON));
-        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+        TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         return super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS));
     }
 

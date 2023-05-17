@@ -2,13 +2,12 @@ package com.ts.integration.tests.proc_sla_help;
 
 
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.controllers.sla.SlaRequestBody;
-import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.controllers.sla.TaskRequestBody;
+import com.ts.common.controllers.sla.TaskResponseBody;
 import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
-import com.ts.common.enums.TaskStatuses;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.RandomUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
@@ -47,7 +46,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
         slaHelpController.createTask(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaHelp", "Regression"}, description = "Принять на анализ", dependsOnMethods = "catSlaHelp")
@@ -61,7 +60,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
         slaHelpController.performCommonOperation(slaTask, ANALIZE);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить модуль системы", dependsOnMethods = "msgSlaHelpAnalize")
@@ -74,7 +73,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
         slaHelpController.performCommonOperation(slaTask, CHANGE_MODULE);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить модуль системы", dependsOnMethods = "msgSlaHelpChangeSdModule")
@@ -87,7 +86,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
         slaHelpController.performCommonOperation(slaTask, CHANGE_AUTHOR);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "msgSlaHelpChangeAuthor")
@@ -99,7 +98,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
         slaHelpController.performCommonOperation(slaTask, CHANGE_LINKED_TASKS);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaHelp", "Regression"}, description = "Корректировка сорков SLA", dependsOnMethods = "msgSlaHelpChangeLinkedTasks")
@@ -111,7 +110,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
         slaHelpController.performCommonOperation(slaTask, CORRECT_SLA_DATES);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaHelp", "Regression"}, description = "Назначить доверенного наблюдателя", dependsOnMethods = "msgSlaHelpCorrectSlaDates")
@@ -123,7 +122,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
         slaHelpController.performCommonOperation(slaTask, ADD_TRUST_WATCHER);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaHelp", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "msgSlaHelpAddTrustedWatcher")
@@ -135,7 +134,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
         slaHelpController.performCommonOperation(slaTask, ADD_WATCHERS);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить состояние", dependsOnMethods = "msgSlaHelpAppointWatcher")
@@ -144,11 +143,11 @@ public class SlaHelp1Test extends BaseIntegrationTest {
         slaTask.setFinishStatus(generateStatus(STATUS_SLAHELP_CONSULTED));
         slaTask.setOperation(generateOperationID(slaTask.getSlaType(), CHANGE_STATUS));
         slaTask.setDescription(RandomUtils.generateDescriptionForOperation(CHANGE_STATUS));
-        SlaRequestBody slaRequestBody = new SlaRequestBody(slaTask);
+        TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaHelpController.performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(slaHelpController.DEFAULT_FIELDS_WITH_STATUS));
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 }

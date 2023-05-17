@@ -4,6 +4,7 @@ package com.ts.common.enums;
 public enum ComSlaOperations {
     CAT("CAT_%S"),
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
+
     CLI_COMMENT("%S_CLICOMMENT"), // задать вопрос
     CHANGE_STATUS("%S_CHANGESTATUS"), // изменить состояние
     CHANGE_RES_PERSON("%S_REASSIGN"),//изменить ответственного
@@ -11,11 +12,16 @@ public enum ComSlaOperations {
     CHANGE_LINKED_TASKS("%S_CHANGELINKEDTASKS"),// изменить список связанных задач
     CORRECT_SLA_DATES("%S_CORRECTSLADATES"), // корректировка SLA дат
     CHANGE_ATTR("%S_CHANGEATTRS"), // изменить аттрибуты задачи
+    CHANGE_ANALYST("%S_CHANGEANALYST"), // изменить аналитика
+    CONFIRM("%S_CONFIRM"), // подтвердить и опубликовать
     ADD_TRUST_WATCHER("%S_ADDTRUSTEDWATCHER"),// назначить доверенного наблюдателя
     ADD_CLIENT_WATCHERS("%S_APPOINTCLIWATCHERS"),// назначить наблюдателей клиента
     ADD_WATCHERS("%S_APPOINTWATCHER"),// назначить наблюдателей
     COMMENT("%S_OURCOMMENT"), // сообщить информацию(комментарий)
+    LINK("%S_LINK"), // установить связь с GAP
     PRIVATE_COMMENT("%S_PRIVATECOMMENT"), // приватный комментарий
+    PASS_FOR_APPROVAL("%S_PASSFORAPPROVAL"), // передать на согласование
+    CONFIRM_HIDDEN("%S_CONFIRMHIDDEN"), // подтвердить скрытый GAP
     CHANGE_MODULE("%S_CHANGE_SD_MODULE"), // изменить модуль системы
     ANALIZE("%S_ANALIZE"), // принять на анализ
     DECLINE("%S_DECLINE"), // отклонить
@@ -24,6 +30,7 @@ public enum ComSlaOperations {
     REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
     PROVIDEREQINFO("%S_PROVIDEREQINFO"), // сообщить уточнение требований
     PROVIDETEMPORARYFIXED("%S_PROVIDETEMPORARYFIXED"), // предоставить временное решение
+    SD_QUESTION_LINK("SDQUESTION_LINK"), // привязать вопрос клиенту
     ACCEPTHOTFIX("%S_ACCEPTHOTFIX"), // подтвердить исправление
     BEGINCOST_PRE("%S_BEGINCOST_PRE"), // передать на предварительную оценку аккаунт-менеджеру
     BEGINCOST_FINAL("%S_BEGINCOST_FINAL"), // передать на окончательную оценку аккаунт-менеджеру
@@ -36,11 +43,13 @@ public enum ComSlaOperations {
     START("%S_START"), // Передать в разработку
     HOTFIX("%S_HOTFIX"), // Предоставить решение
     RETURN("%S_RETURN"), // Вернуть в работу
+    RETURN_TO_ANAL("%S_RETURNTOANAL"), // вернуть на анализ
     REQUESTINFO("%S_REQUESTINFO"), // запросить информацию
     PROVIDEINFO("%S_PROVIDEINFO"), // предоставить информацию
     UNDOREQUESTINFO("%S_UNDOREQUESTINFO"), // отменить запрос информацию
     FINISH("%S_FINISH"), // завершить выполнение работы
     TOCLIENTTEST("%S_TOCLIENTTEST"), // передать на проверку клиента
+    WATCH("%S_WATCH"), // назначить наблюдателя
     BUGONACCEPT("%S_BUGONACCEPT"), // сообщить о замечании
     ACCEPTFEATURE("%S_ACCEPTFEATURE"), // утвердить дорабтку
     SEND("%S_SEND"), // отправить в патч

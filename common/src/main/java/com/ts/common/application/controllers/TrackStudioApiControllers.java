@@ -1,7 +1,8 @@
 package com.ts.common.application.controllers;
 
-import com.ts.common.controllers.sla.BaseSlaController;
-import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.controllers.sla.BaseController;
+import com.ts.common.controllers.sla.TaskResponseBody;
+import com.ts.common.controllers.sla.potentialGap.PotentialGapController;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
 import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
@@ -24,20 +25,22 @@ public class TrackStudioApiControllers {
     private SlaHelpController slaHelpController;
     private SlaBugController slaBugController;
     private SlaFeatureController slaFeatureController;
-    private BaseSlaController slaController;
+    private PotentialGapController potentialGapController;
+    private BaseController slaController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
         this.slaHelpController = new SlaHelpController(STAND_URL, authToken);
         this.slaBugController = new SlaBugController(STAND_URL, authToken);
         this.slaFeatureController = new SlaFeatureController(STAND_URL, authToken);
-        this.slaController = new BaseSlaController(STAND_URL, authToken);
+        this.potentialGapController = new PotentialGapController(STAND_URL, authToken);
+        this.slaController = new BaseController(STAND_URL, authToken);
     }
 
 
     public GeneralTask receiveSlaTask(String slaTaskNumber) {
         this.response = this.slaController.receiveActualTask(slaTaskNumber);
-        SlaResponseBody slaResponseBody = JsonUtils.deserialize(this.response, SlaResponseBody.class);
+        TaskResponseBody slaResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
         if (slaResponseBody != null) {
             return new GeneralTask(slaResponseBody);
         }
@@ -50,6 +53,7 @@ public class TrackStudioApiControllers {
         this.slaFeatureController.setAuthToken(authToken);
         this.slaBugController.setAuthToken(authToken);
         this.slaHelpController.setAuthToken(authToken);
+        this.potentialGapController.setAuthToken(authToken);
     }
 
 }

@@ -3,7 +3,7 @@ package com.ts.integration.tests.sla;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.TaskAsserts;
-import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.controllers.sla.TaskResponseBody;
 import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
 import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.commonEntities.Udfs;
@@ -42,7 +42,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
         slaHelpController.createTask(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
         actualTask = (GrTaskDbEntity) dbHelper.getGrTaskTable().receiveByTaskNumber(slaTask.getNumber());
         TaskAsserts.assertThat(actualTask).isExist();
     }
@@ -52,7 +52,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
         slaHelpController.closeSlaTask(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
         actualTask = (GrTaskDbEntity) dbHelper.getGrTaskTable().receiveByTaskNumber(slaTask.getNumber());
         Assertions.assertThat(actualTask.getTask_status()).isEqualTo(STATUS_SLAHELP_CLOSED.name());
     }
@@ -73,7 +73,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
         slaHelpController.receiveActualTask(slaTask.getNumber());
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(priority = 0, dependsOnMethods = "createSlaTaskConsultation")
@@ -84,7 +84,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
         slaHelpController.performCommonOperation(slaTask, ComSlaOperations.CHANGE_RES_PERSON);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(priority = 1, dependsOnMethods = "createSlaTaskConsultation")
@@ -95,7 +95,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
         slaHelpController.performCommonOperation(slaTask, ComSlaOperations.CHANGE_AUTHOR);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(priority = 2, dependsOnMethods = "createSlaTaskConsultation")
@@ -104,7 +104,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
         slaHelpController.addComment(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(priority = 3, dependsOnMethods = "createSlaTaskConsultation")
@@ -113,7 +113,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
         slaHelpController.editModule(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(priority = 4, dependsOnMethods = "createSlaTaskConsultation")
@@ -122,7 +122,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
         slaHelpController.receiveAnalysis(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
         actualTask = (GrTaskDbEntity) dbHelper.getGrTaskTable().receiveByTaskNumber(slaTask.getNumber());
         Assertions.assertThat(actualTask.getTask_status()).isEqualTo(TaskStatuses.STATUS_SLAHELP_ANALIZING.name());
     }
@@ -133,7 +133,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
         slaHelpController.requestInformation(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
         actualTask = (GrTaskDbEntity) dbHelper.getGrTaskTable().receiveByTaskNumber(slaTask.getNumber());
         Assertions.assertThat(actualTask.getTask_status()).isEqualTo(TaskStatuses.STATUS_SLAHELP_WAITANALIZING.name());
     }
@@ -143,7 +143,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
         slaHelpController.provideInformation(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(priority = 7, dependsOnMethods = "createSlaTaskConsultation")
@@ -151,7 +151,7 @@ public class SlaTaskTest extends BaseIntegrationTest {
         slaHelpController.provideConsultation(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
         actualTask = (GrTaskDbEntity) dbHelper.getGrTaskTable().receiveByTaskNumber(slaTask.getNumber());
         Assertions.assertThat(actualTask.getTask_status()).isEqualTo(STATUS_SLAHELP_CONSULTED.name());
     }

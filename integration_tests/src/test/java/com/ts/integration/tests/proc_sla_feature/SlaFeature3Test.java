@@ -1,7 +1,7 @@
 package com.ts.integration.tests.proc_sla_feature;
 
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.controllers.sla.TaskResponseBody;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.utils.InitEntities;
@@ -41,7 +41,7 @@ public class SlaFeature3Test extends BaseIntegrationTest {
     public void afterMethod() {
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
         actualSlaTask = apiController.receiveSlaTask(task.getNumber());
     }
 

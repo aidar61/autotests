@@ -2,7 +2,7 @@ package com.ts.integration.tests.proc_sla_bug;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.controllers.sla.TaskResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
@@ -36,7 +36,7 @@ public class SlaBug7Test extends BaseIntegrationTest {
     public void afterMethod() {
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaBug", "Regression"},description = "создание задачи")
