@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.commonEntities.Category;
 import com.ts.common.entitites.commonEntities.Status;
-import com.ts.common.request.ResponseBody;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -17,7 +16,7 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SlaResponseBody extends ResponseBody {
+public class TaskResponseBody extends com.ts.common.request.ResponseBody {
     String id;
     String description;
     String name;

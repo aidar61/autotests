@@ -1,11 +1,8 @@
 package com.ts.integration.tests.proc_sla_bug;
 
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.asserts.EntityAssert;
-import com.ts.common.asserts.TaskAsserts;
-import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.controllers.sla.TaskResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
-import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;
@@ -42,7 +39,7 @@ public class SlaBug1Test extends BaseIntegrationTest {
     public void afterMethod() {
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(priority = 0, groups = {"SlaBug", "Regression"}, description = "Создание извещения об ошибке")

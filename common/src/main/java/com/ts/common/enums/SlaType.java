@@ -6,7 +6,9 @@ public enum SlaType {
 
     SLA_BUG("SLABUG"),
 
-    SLA_FEATURE("SLAFEATURE");
+    SLA_FEATURE("SLAFEATURE"),
+    POTENTIAL_GAP("POTENTIALGAP"),
+    GAP("GAP");
     public final String type;
 
     SlaType(String type) {

@@ -1,7 +1,7 @@
 package com.ts.integration.tests.proc_sla_feature;
 
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.controllers.sla.TaskResponseBody;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.listeners.TestListener;
@@ -51,7 +51,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.createSlaFeatureTask(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @AfterClass(alwaysRun = false)
@@ -73,7 +73,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.receiveActualTask(task.getNumber());
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     //    @Test(groups = {"SlaFeature", "Regression"},priority = 1)
@@ -99,7 +99,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.msgToprecost(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureTopreCost", description = "Запросить уточненные требования")
@@ -110,7 +110,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.msgRequestReqInfo(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureRequestReqInfo", description = "Сообщить уточненные требования")
@@ -121,7 +121,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.msgProvideReqInfo(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
 
@@ -141,7 +141,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.msgBeginCostPre(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureBeginCostPre", description = "Сообщить предварительные условия реализации")
@@ -159,7 +159,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, SENDCOST_PRE);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureSendCostPre", description = "Задать вопрос или предложить альтернативные вопросы реализации")
@@ -170,7 +170,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, ALTERNATECOST);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureAlternateCost", description = "Сообщить повторно предварительные условия реализации")
@@ -188,7 +188,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, SENDCOST_PRE);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureSendCostPreRetry", description = "Принять предварительные условия реализации")
@@ -199,7 +199,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, ACCEPTPRECOST);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureAcceptPreCost", description = "Запросить уточнение требований")
@@ -210,7 +210,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.msgRequestReqInfo(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureRequestReqInfoRetry", description = "Сообщить уточненные требования")
@@ -221,7 +221,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.msgProvideReqInfo(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureProvideReqInfoRetry", description = "Сообщить окончательные условия реализации")
@@ -238,7 +238,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, SENDCOST_FINAL);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureSenCostFinal", description = "Принять окончательные условия реализации")
@@ -249,7 +249,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, ACCEPTCONDITIONS);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureAcceptConditions", description = "Передать в разработку")
@@ -263,7 +263,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.msgStart(task);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureStart", description = "Запросить информацию")
@@ -274,7 +274,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, REQUESTINFO);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureRequestInfo", description = "Предоставить информацию")
@@ -285,7 +285,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, PROVIDEINFO);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureProvideInfo", description = "Запросить информацию")
@@ -296,7 +296,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, REQUESTINFO);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureRequestInfoRetry", description = "Отменить запрос информации")
@@ -307,7 +307,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, UNDOREQUESTINFO);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureUndoRequestInfo", description = "Завершить выполнение работы")
@@ -318,7 +318,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, FINISH);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureFinish", description = "Передать на проверку клиенту")
@@ -329,7 +329,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, TOCLIENTTEST);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureToClientTest", description = "Сообщить о замечании")
@@ -340,7 +340,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, BUGONACCEPT);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureBuGonAccept", description = "Передать на проверку клиента")
@@ -351,7 +351,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, TOCLIENTTEST);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureToClientTestRetry", description = "Утвердить доработку")
@@ -361,7 +361,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, ACCEPTFEATURE);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureAcceptFeature", description = "Отправить патч")
@@ -371,7 +371,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, SEND);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureSend", description = "Сообщить о замечании")
@@ -382,7 +382,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, BUGONACCEPT);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureBuGonAcceptRetry", description = "Передать на включение в патч")
@@ -392,7 +392,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, READYTOPATCH);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureReadyPatch", description = "Отправить в патч")
@@ -403,7 +403,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, SEND);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureSendRetry", description = "Установить в производственную среду")
@@ -413,7 +413,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, INSTALL);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(groups = {"SlaFeature", "Regression"},dependsOnMethods = "msgSlaFeatureInstall", description = "Закрыть(поставщик)")
@@ -423,6 +423,6 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, CLOSE);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 }

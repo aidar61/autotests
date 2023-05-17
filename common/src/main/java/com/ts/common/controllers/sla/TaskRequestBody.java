@@ -7,7 +7,6 @@ import com.ts.common.annotations.Mandatory;
 import com.ts.common.annotations.TypeId;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.request.RequestBody;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -21,7 +20,7 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = false)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class SlaRequestBody extends RequestBody {
+public class TaskRequestBody extends com.ts.common.request.RequestBody {
     @TypeId(type = "operation")
     String id;
     @Create
@@ -44,7 +43,7 @@ public class SlaRequestBody extends RequestBody {
     @Create
     String[] attachments;
 
-    public SlaRequestBody(GeneralTask slaTask) {
+    public TaskRequestBody(GeneralTask slaTask) {
         this.id = slaTask.getId();
         this.category = slaTask.getCategory();
         this.operation = slaTask.getOperation();

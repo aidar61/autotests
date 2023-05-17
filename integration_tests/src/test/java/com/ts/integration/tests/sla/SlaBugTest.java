@@ -1,7 +1,7 @@
 package com.ts.integration.tests.sla;
 
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.controllers.sla.TaskResponseBody;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.commonEntities.User;
@@ -47,7 +47,7 @@ public class SlaBugTest extends BaseIntegrationTest {
         slaBugController.createSlaBugTask(task);
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @AfterClass(alwaysRun = true)
@@ -62,7 +62,7 @@ public class SlaBugTest extends BaseIntegrationTest {
         slaBugController.receiveActualTask(task.getNumber());
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 
     @Test(priority = 1)
@@ -75,6 +75,6 @@ public class SlaBugTest extends BaseIntegrationTest {
         slaBugController.performCommonOperation(task, ComSlaOperations.CHANGE_AUTHOR);
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
     }
 }

@@ -5,7 +5,7 @@ import com.ts.common.application.errors.ErrorResponseBody;
 import com.ts.common.application.errors.TrackStudioErrors;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.TaskAsserts;
-import com.ts.common.controllers.sla.SlaResponseBody;
+import com.ts.common.controllers.sla.TaskResponseBody;
 import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
 import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.tasks.GeneralTask;
@@ -39,7 +39,7 @@ public class SlaTaskTestNegative extends BaseIntegrationTest {
         slaHelpController.createTask(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
         actualTask = (GrTaskDbEntity) dbHelper.getGrTaskTable().receiveByTaskNumber(slaTask.getNumber());
         TaskAsserts.assertThat(actualTask).isExist();
     }
@@ -49,7 +49,7 @@ public class SlaTaskTestNegative extends BaseIntegrationTest {
         slaHelpController.closeSlaTask(slaTask);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(SlaResponseBody.class);
+                .isParseableBody(TaskResponseBody.class);
         actualTask = (GrTaskDbEntity) dbHelper.getGrTaskTable().receiveByTaskNumber(slaTask.getNumber());
         Assertions.assertThat(actualTask.getTask_status()).isEqualTo(STATUS_SLAHELP_CLOSED.name());
     }
