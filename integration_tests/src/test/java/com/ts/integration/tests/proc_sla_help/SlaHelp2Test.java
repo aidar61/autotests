@@ -2,7 +2,7 @@ package com.ts.integration.tests.proc_sla_help;
 
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
+import com.ts.common.controllers.sla.SlaHelpController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;

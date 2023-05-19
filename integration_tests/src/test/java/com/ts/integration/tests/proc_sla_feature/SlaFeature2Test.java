@@ -2,7 +2,7 @@ package com.ts.integration.tests.proc_sla_feature;
 
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
+import com.ts.common.controllers.sla.SlaFeatureController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.RandomUtils;

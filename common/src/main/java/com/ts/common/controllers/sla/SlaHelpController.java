@@ -1,4 +1,4 @@
-package com.ts.common.controllers.sla.slaHelp;
+package com.ts.common.controllers.sla;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.controllers.BaseController;

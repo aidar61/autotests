@@ -1,6 +1,6 @@
 package com.ts.common;
 
-import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
+import com.ts.common.controllers.sla.SlaHelpController;
 import com.ts.common.tests.AbstractBaseTest;
 import com.ts.common.utils.RandomUtils;
 

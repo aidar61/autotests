@@ -1,4 +1,4 @@
-package com.ts.common.controllers.gap.gapSolution;
+package com.ts.common.controllers.gap;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.controllers.BaseController;

@@ -2,7 +2,7 @@ package com.ts.integration.tests.proc_potential_gap;
 
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.gap.potentialGap.PotentialGapController;
+import com.ts.common.controllers.gap.PotentialGapController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;

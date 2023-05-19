@@ -2,7 +2,7 @@ package com.ts.integration.tests.proc_sla_bug;
 
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.sla.slaBug.SlaBugController;
+import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
 import com.ts.common.enums.SlaType;

@@ -2,10 +2,10 @@ package com.ts.common.application.controllers;
 
 import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.gap.potentialGap.PotentialGapController;
-import com.ts.common.controllers.sla.slaBug.SlaBugController;
-import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
-import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
+import com.ts.common.controllers.gap.PotentialGapController;
+import com.ts.common.controllers.sla.SlaBugController;
+import com.ts.common.controllers.sla.SlaFeatureController;
+import com.ts.common.controllers.sla.SlaHelpController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
