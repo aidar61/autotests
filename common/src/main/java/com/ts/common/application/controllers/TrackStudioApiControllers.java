@@ -1,8 +1,8 @@
 package com.ts.common.application.controllers;
 
-import com.ts.common.controllers.sla.BaseController;
-import com.ts.common.controllers.sla.TaskResponseBody;
-import com.ts.common.controllers.sla.potentialGap.PotentialGapController;
+import com.ts.common.controllers.BaseController;
+import com.ts.common.controllers.TaskResponseBody;
+import com.ts.common.controllers.gap.potentialGap.PotentialGapController;
 import com.ts.common.controllers.sla.slaBug.SlaBugController;
 import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
 import com.ts.common.controllers.sla.slaHelp.SlaHelpController;

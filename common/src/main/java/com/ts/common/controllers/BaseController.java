@@ -1,4 +1,4 @@
-package com.ts.common.controllers.sla;
+package com.ts.common.controllers;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.application.controllers.TrackStudioEndPoints;
@@ -15,17 +15,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
-import static com.ts.common.controllers.sla.TaskRequestBody.Fields.ID;
-import static com.ts.common.controllers.sla.TaskRequestBody.Fields.OPERATION;
-import static com.ts.common.controllers.sla.TaskRequestBody.Fields.*;
+import static com.ts.common.controllers.TaskRequestBody.Fields.OPERATION;
 
 public class BaseController extends ApiRequest {
     protected SlaType slaType;
-    protected TaskRequestBody.Fields[] DEFAULT_FIELDS = {ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
-    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
-    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {ID, OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
-    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_USER = {OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
-    public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS};
+    protected TaskRequestBody.Fields[] DEFAULT_FIELDS = {TaskRequestBody.Fields.ID, TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};
+    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};
+    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {TaskRequestBody.Fields.ID, TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.HANDLER_USER, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};
+    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_USER = {TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.HANDLER_USER, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};
+    public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS = {TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS, TaskRequestBody.Fields.FINISH_STATUS};
 
     public BaseController(String url, AuthToken authToken) {
         super(url, HEADERS_BASE_CONTROLLER, authToken);
@@ -48,7 +46,7 @@ public class BaseController extends ApiRequest {
     @Step("Выполнение операции: {0}")
     public Response performOperationWithQueryParam(@NotNull GeneralTask task, String requestBody) {
         HashMap<String, String> params = new HashMap<>() {{
-            put(ID.field, task.getId());
+            put(TaskRequestBody.Fields.ID.field, task.getId());
         }};
         return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE
                 , formatParameters(params)), requestBody);

@@ -2,9 +2,9 @@ package com.ts.common.controllers.sla.slaFeature;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.application.controllers.TrackStudioEndPoints;
-import com.ts.common.controllers.sla.BaseController;
-import com.ts.common.controllers.sla.TaskRequestBody;
-import com.ts.common.controllers.sla.TaskResponseBody;
+import com.ts.common.controllers.BaseController;
+import com.ts.common.controllers.TaskRequestBody;
+import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.SlaType;
@@ -15,7 +15,7 @@ import io.restassured.response.Response;
 import java.util.HashMap;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.CREATE;
-import static com.ts.common.controllers.sla.TaskRequestBody.Fields.*;
+import static com.ts.common.controllers.TaskRequestBody.Fields.*;
 import static com.ts.common.enums.ComSlaOperations.*;
 import static com.ts.common.enums.SlaType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.generateOperationID;

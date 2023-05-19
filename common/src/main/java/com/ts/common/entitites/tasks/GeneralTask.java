@@ -2,7 +2,7 @@ package com.ts.common.entitites.tasks;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ts.common.controllers.sla.TaskResponseBody;
+import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.enums.SlaType;

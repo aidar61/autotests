@@ -3,7 +3,7 @@ package com.ts.integration.tests.sla;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.TaskAsserts;
-import com.ts.common.controllers.sla.TaskResponseBody;
+import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
 import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.commonEntities.Udfs;

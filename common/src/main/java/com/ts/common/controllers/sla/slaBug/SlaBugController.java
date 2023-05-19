@@ -1,9 +1,9 @@
 package com.ts.common.controllers.sla.slaBug;
 
 import com.ts.common.application.controllers.AuthToken;
-import com.ts.common.controllers.sla.BaseController;
-import com.ts.common.controllers.sla.TaskRequestBody;
-import com.ts.common.controllers.sla.TaskResponseBody;
+import com.ts.common.controllers.BaseController;
+import com.ts.common.controllers.TaskRequestBody;
+import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.SlaType;
 import com.ts.common.utils.JsonUtils;

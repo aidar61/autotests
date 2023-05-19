@@ -1,9 +1,9 @@
 package com.ts.common.controllers.sla.slaHelp;
 
 import com.ts.common.application.controllers.AuthToken;
-import com.ts.common.controllers.sla.BaseController;
-import com.ts.common.controllers.sla.TaskRequestBody;
-import com.ts.common.controllers.sla.TaskResponseBody;
+import com.ts.common.controllers.BaseController;
+import com.ts.common.controllers.TaskRequestBody;
+import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.tasks.GeneralTask;
@@ -15,7 +15,7 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.OPERATION;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
-import static com.ts.common.controllers.sla.TaskRequestBody.Fields.*;
+import static com.ts.common.controllers.TaskRequestBody.Fields.*;
 import static com.ts.common.entitites.commonEntities.GeneralSlaId.Fields.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.NOTIFICATION_SERVICE;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_SD_MODULE;
