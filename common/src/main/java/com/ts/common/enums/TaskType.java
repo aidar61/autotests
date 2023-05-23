@@ -1,6 +1,6 @@
 package com.ts.common.enums;
 
-public enum SlaType {
+public enum TaskType {
 
     SLA_HElP("SLAHELP"),
 
@@ -8,10 +8,12 @@ public enum SlaType {
 
     SLA_FEATURE("SLAFEATURE"),
     POTENTIAL_GAP("POTENTIALGAP"),
+    SOL_SELECTED("SOLSELECTED"),
+    GAP_SOLUTION("GAPSOLUTION"),
     GAP("GAP");
     public final String type;
 
-    SlaType(String type) {
+    TaskType(String type) {
         this.type = type;
     }
 

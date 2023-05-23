@@ -17,7 +17,7 @@ import static com.ts.common.entitites.commonEntities.Task.Constants.MTBANK;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.*;
 import static com.ts.common.enums.ComSlaOperations.*;
-import static com.ts.common.enums.SlaType.SLA_FEATURE;
+import static com.ts.common.enums.TaskType.SLA_FEATURE;
 import static com.ts.common.enums.Users.CLIENT;
 import static com.ts.common.enums.Users.EMPLOYEE;
 import static com.ts.common.utils.InitEntities.*;

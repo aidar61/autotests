@@ -2,6 +2,7 @@ package com.ts.common.application.controllers;
 
 import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.TaskResponseBody;
+import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
 import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.controllers.sla.SlaFeatureController;
@@ -26,6 +27,7 @@ public class TrackStudioApiControllers {
     private SlaBugController slaBugController;
     private SlaFeatureController slaFeatureController;
     private PotentialGapController potentialGapController;
+    private GapSolutionController gapSolutionController;
     private BaseController slaController;
 
 
@@ -35,6 +37,7 @@ public class TrackStudioApiControllers {
         this.slaFeatureController = new SlaFeatureController(STAND_URL, authToken);
         this.potentialGapController = new PotentialGapController(STAND_URL, authToken);
         this.slaController = new BaseController(STAND_URL, authToken);
+        this.gapSolutionController = new GapSolutionController(STAND_URL, authToken);
     }
 
 
@@ -54,6 +57,7 @@ public class TrackStudioApiControllers {
         this.slaBugController.setAuthToken(authToken);
         this.slaHelpController.setAuthToken(authToken);
         this.potentialGapController.setAuthToken(authToken);
+        this.gapSolutionController.setAuthToken(authToken);
     }
 
 }

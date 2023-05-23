@@ -5,7 +5,7 @@ import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.gap.PotentialGapController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
-import com.ts.common.enums.SlaType;
+import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
@@ -32,7 +32,7 @@ public class PotentialGap2Test extends BaseIntegrationTest {
     public void catPotentialGap() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
-        task = InitEntities.getSlaTask(SlaType.POTENTIAL_GAP, ComSlaOperations.CAT);
+        task = InitEntities.getSlaTask(TaskType.POTENTIAL_GAP, ComSlaOperations.CAT);
         task.setHandlerUser(generateUser(ARTEMEVA_MARINA));
         task.refreshUdf(udf);
         potentialGapController.createPotentialGap(task);

@@ -4,7 +4,7 @@ import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.application.controllers.TrackStudioEndPoints;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
-import com.ts.common.enums.SlaType;
+import com.ts.common.enums.TaskType;
 import com.ts.common.request.ApiRequest;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.RandomUtils;
@@ -15,10 +15,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
-import static com.ts.common.controllers.TaskRequestBody.Fields.OPERATION;
 
 public class BaseController extends ApiRequest {
-    protected SlaType slaType;
+    protected TaskType taskType;
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS = {TaskRequestBody.Fields.ID, TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {TaskRequestBody.Fields.ID, TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.HANDLER_USER, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};
@@ -54,7 +53,7 @@ public class BaseController extends ApiRequest {
 
     @Step("Выполнение общей операции: {1}")
     public Response performCommonOperation(GeneralTask task, ComSlaOperations operation) {
-        task.setOperation(InitEntities.generateOperationID(this.slaType, operation));
+        task.setOperation(InitEntities.generateOperationID(this.taskType, operation));
         task.setDescription(RandomUtils.generateDescriptionForOperation(operation));
         TaskRequestBody slaRequestBody = new TaskRequestBody(task);
         if (task.getHandlerUser() == null) {

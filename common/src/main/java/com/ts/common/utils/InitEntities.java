@@ -18,11 +18,11 @@ public class InitEntities {
     private InitEntities() {
     }
 
-    public static GeneralTask getSlaTask(SlaType slaType, ComSlaOperations id) {
+    public static GeneralTask getSlaTask(TaskType taskType, ComSlaOperations id) {
         GeneralTask build = GeneralTask.builder()
-                .slaType(slaType)
-                .category(generateCategory(slaType))
-                .operation(generateOperationID(slaType, id))
+                .taskType(taskType)
+                .category(generateCategory(taskType))
+                .operation(generateOperationID(taskType, id))
                 .parent(getParent(MTB))
                 .name(generateName())
                 .description(generateName() + " CAT description")
@@ -31,16 +31,36 @@ public class InitEntities {
 //                .handlerUser(generateUser(User.Constants.ALTUNIN_NIKOLAY))
                 .build();
         if (id == ComSlaOperations.CAT) {
-            if (slaType == SlaType.SLA_BUG) build.setDescription(slaBugDescription);
-            if (slaType == SlaType.SLA_FEATURE) build.setDescription(slaFeatureDescription);
-            if (slaType == SlaType.POTENTIAL_GAP) build.setParent(getParent(RYSGAL_BANK));
+            if (taskType == TaskType.SLA_BUG) build.setDescription(slaBugDescription);
+            if (taskType == TaskType.SLA_FEATURE) build.setDescription(slaFeatureDescription);
+            if (taskType == TaskType.POTENTIAL_GAP) build.setParent(getParent(RYSGAL_BANK));
+        }
+        return build;
+    }
+    public static GeneralTask getSlaTask(TaskType taskType, ComSlaOperations id, Parent parent) {
+        GeneralTask build = GeneralTask.builder()
+                .taskType(taskType)
+                .category(generateCategory(taskType))
+                .operation(generateOperationID(taskType, id))
+                .parent(getParent(MTB))
+                .name(generateName())
+                .description(generateName() + " CAT description")
+                .udfs(refreshUdf())
+                .attachments(new String[]{})
+//                .handlerUser(generateUser(User.Constants.ALTUNIN_NIKOLAY))
+                .build();
+        if (id == ComSlaOperations.CAT) {
+            if (taskType == TaskType.SLA_BUG) build.setDescription(slaBugDescription);
+            if (taskType == TaskType.SLA_FEATURE) build.setDescription(slaFeatureDescription);
+            if (taskType == TaskType.POTENTIAL_GAP) build.setParent(getParent(RYSGAL_BANK));
+            if (taskType == TaskType.SOL_SELECTED) build.setParent(parent);
         }
         return build;
     }
 
-    public static GeneralSlaId generateCategory(SlaType slaType) {
+    public static GeneralSlaId generateCategory(TaskType taskType) {
         return GeneralSlaId.builder()
-                .id(String.format(ComSlaOperations.CAT.id, slaType.type))
+                .id(String.format(ComSlaOperations.CAT.id, taskType.type))
                 .build();
     }
 
@@ -56,6 +76,14 @@ public class InitEntities {
                 .build();
     }
 
+    public static Parent generateParent(String id, String number) {
+        return Parent.builder()
+                .id(id)
+                .number(number)
+                .build();
+    }
+
+
     public static GeneralSlaId getGeneralId(ComSlaOperations category) {
         return GeneralSlaId.builder()
                 .id(category.id)
@@ -68,9 +96,9 @@ public class InitEntities {
                 .build();
     }
 
-    public static GeneralSlaId generateOperationID(SlaType slaType, ComSlaOperations operations) {
+    public static GeneralSlaId generateOperationID(TaskType taskType, ComSlaOperations operations) {
         return GeneralSlaId.builder()
-                .id(MSG + String.format(operations.id, slaType.type))
+                .id(MSG + String.format(operations.id, taskType.type))
                 .build();
     }
 

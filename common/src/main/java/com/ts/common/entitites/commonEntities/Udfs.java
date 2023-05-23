@@ -36,6 +36,10 @@ public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfList thirdUdfList;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfList fourthUdfList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfList fifthUdfList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfString udfString;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfString secondUdfString;
@@ -57,8 +61,14 @@ public class Udfs extends BaseEntity {
         UDF_SLA_CONSULTPROVIDEDATE("UDF_SLA_CONSULTPROVIDEDATE", STRING),
         UDF_WATCHER("UDF_WATCHER", USER),
         UDF_SDQUESTION_LINK("UDF_SDQUESTION_LINK", TASK),
+        UDF_REALIZATION_DECISION("UDF_REALIZATION_DECISION", STRING),
         UDF_REQ_LINKED("UDF_REQ_LINKED", TASK),
         UDF_SDFEATURE_IMPLSTATEMENT("UDF_SDFEATURE_IMPLSTATEMENT", STRING),
+        UDF_SOLUTION_PERIOD("UDF_SOLUTION_PERIOD", LIST),
+        UDF_CUSTOMIZATION_FLAG("UDF_CUSTOMIZATION_FLAG", LIST),
+        UDF_LOCALIZATION_FLAG("UDF_LOCALIZATION_FLAG", LIST),
+        UDF_WORKTASK_GENUSEFUTAG("UDF_WORKTASK_GENUSEFUTAG", LIST),
+        UDF_SOLUTION_IMPLTYPE("UDF_SOLUTION_IMPLTYPE", LIST),
         UDF_ROLE_CURRENT("UDF_ROLE_CURRENT", LIST),
         UDF_SD_TASK_CODE("UDF_SD_TASK_CODE", LIST),
         UDF_SD_RELATED_TASK_CODES("UDF_SD_RELATED_TASK_CODES", MULTILIST),

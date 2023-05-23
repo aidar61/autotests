@@ -5,22 +5,22 @@ import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.TaskRequestBody;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.SlaType;
+import com.ts.common.enums.TaskType;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
 import static com.ts.common.enums.ComSlaOperations.*;
-import static com.ts.common.enums.SlaType.SLA_BUG;
+import static com.ts.common.enums.TaskType.SLA_BUG;
 import static com.ts.common.utils.InitEntities.generateOperationID;
 import static com.ts.common.utils.RandomUtils.generateDescriptionForOperation;
 
 public class SlaBugController extends BaseController {
-    private static final SlaType SLA_TYPE = SLA_BUG;
+    private static final TaskType SLA_TYPE = SLA_BUG;
 
     public SlaBugController(String url, AuthToken authToken) {
         super(url, authToken);
-        this.slaType = SLA_TYPE;
+        this.taskType = SLA_TYPE;
     }
 
     @Step("Создание извещения об ошибке: {0}")
@@ -41,7 +41,7 @@ public class SlaBugController extends BaseController {
     }
 
     public Response msgAnalize(GeneralTask slaTask) {
-        slaTask.setOperation(generateOperationID(this.slaType, ANALIZE));
+        slaTask.setOperation(generateOperationID(this.taskType, ANALIZE));
         slaTask.setDescription(generateDescriptionForOperation(ANALIZE));
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         return this.response = super.performOperationWithQueryParam(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_USER));

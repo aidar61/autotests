@@ -6,7 +6,7 @@ import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
-import com.ts.common.enums.SlaType;
+import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.AfterMethod;
@@ -47,7 +47,7 @@ public class SlaBug5Test extends BaseIntegrationTest {
         udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
         udf.setUdfList(InitEntities.generateUdfList(UDF_SDBUG_PRIORITYBUG, CRITICAL));
         udf.setSecondUdfList(InitEntities.generateUdfList(UDF_SD_REMOTEACCESS, REMOTE_ACCESS));
-        task = InitEntities.getSlaTask(SlaType.SLA_BUG, ComSlaOperations.CAT);
+        task = InitEntities.getSlaTask(TaskType.SLA_BUG, ComSlaOperations.CAT);
         task.refreshUdf(udf);
         task.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
         apiController.updateToken(generateAuthToken(CLIENT));

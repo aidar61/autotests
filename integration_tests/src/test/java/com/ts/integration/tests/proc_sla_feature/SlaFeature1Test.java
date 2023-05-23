@@ -21,7 +21,7 @@ import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.*;
 import static com.ts.common.entitites.commonEntities.udf.UdfString.Constants.COST;
 import static com.ts.common.enums.ComSlaOperations.*;
-import static com.ts.common.enums.SlaType.SLA_FEATURE;
+import static com.ts.common.enums.TaskType.SLA_FEATURE;
 import static com.ts.common.enums.Users.*;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateComment;

@@ -5,7 +5,7 @@ import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.sla.SlaHelpController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.ComSlaOperations;
-import com.ts.common.enums.SlaType;
+import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.RandomUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
@@ -34,7 +34,7 @@ public class SlaHelp2Test extends BaseIntegrationTest {
         udf = refreshUdf();
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
         udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
-        slaTask = InitEntities.getSlaTask(SlaType.SLA_HElP, ComSlaOperations.CAT);
+        slaTask = InitEntities.getSlaTask(TaskType.SLA_HElP, ComSlaOperations.CAT);
         slaTask.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(CLIENT));
         slaHelpController.createTask(slaTask);

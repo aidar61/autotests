@@ -7,7 +7,7 @@ import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.SlaType;
+import com.ts.common.enums.TaskType;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -26,11 +26,11 @@ import static com.ts.common.utils.RandomUtils.generateComment;
 
 public class SlaHelpController extends BaseController {
 
-    public final SlaType SLA_TYPE = SlaType.SLA_HElP;
+    public final TaskType SLA_TYPE = TaskType.SLA_HElP;
 
     public SlaHelpController(String url, AuthToken authToken) {
         super(url, authToken);
-        super.slaType = SLA_TYPE;
+        super.taskType = SLA_TYPE;
     }
 
     @Step("Создание консультации: ")

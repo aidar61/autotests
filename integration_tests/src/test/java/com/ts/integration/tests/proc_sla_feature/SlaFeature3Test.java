@@ -19,7 +19,7 @@ import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BA
 import static com.ts.common.entitites.commonEntities.User.Constants.ALTUNIN_NIKOLAY;
 import static com.ts.common.entitites.commonEntities.udf.UdfString.Constants.COST;
 import static com.ts.common.enums.ComSlaOperations.*;
-import static com.ts.common.enums.SlaType.SLA_FEATURE;
+import static com.ts.common.enums.TaskType.SLA_FEATURE;
 import static com.ts.common.enums.Users.CLIENT;
 import static com.ts.common.enums.Users.EMPLOYEE;
 import static com.ts.common.utils.InitEntities.*;

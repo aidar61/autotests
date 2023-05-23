@@ -7,7 +7,7 @@ import com.ts.common.controllers.TaskRequestBody;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.SlaType;
+import com.ts.common.enums.TaskType;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -17,17 +17,17 @@ import java.util.HashMap;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.CREATE;
 import static com.ts.common.controllers.TaskRequestBody.Fields.*;
 import static com.ts.common.enums.ComSlaOperations.*;
-import static com.ts.common.enums.SlaType.SLA_FEATURE;
+import static com.ts.common.enums.TaskType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.generateOperationID;
 import static com.ts.common.utils.InitEntities.generateUser;
 import static com.ts.common.utils.RandomUtils.generateDescriptionForOperation;
 
 public class SlaFeatureController extends BaseController {
-    private static final SlaType SLA_TYPE = SLA_FEATURE;
+    private static final TaskType SLA_TYPE = SLA_FEATURE;
 
     public SlaFeatureController(String url, AuthToken authToken) {
         super(url, authToken);
-        this.slaType = SLA_TYPE;
+        this.taskType = SLA_TYPE;
     }
 
     @Step("Создание запроса на доработку ЛПО (new) ")
@@ -55,7 +55,7 @@ public class SlaFeatureController extends BaseController {
     }
 
     public Response msgToprecost(GeneralTask slaTask) {
-        slaTask.setOperation(generateOperationID(this.slaType, TOPRECOST));
+        slaTask.setOperation(generateOperationID(this.taskType, TOPRECOST));
         slaTask.setDescription(generateDescriptionForOperation(TOPRECOST));
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         return this.response = super.performOperation(slaTask, slaRequestBody.keepFields(DEFAULT_FIELDS_CONDITION));
@@ -66,7 +66,7 @@ public class SlaFeatureController extends BaseController {
         HashMap<String, String> queryParams = new HashMap<>() {{
             put(ID.field, slaTask.getId());
         }};
-        slaTask.setOperation(generateOperationID(this.slaType, REQUESTREQINFO));
+        slaTask.setOperation(generateOperationID(this.taskType, REQUESTREQINFO));
         slaTask.setDescription(generateDescriptionForOperation(REQUESTREQINFO));
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE
@@ -77,7 +77,7 @@ public class SlaFeatureController extends BaseController {
     @Step("Выполнение операции PROVIDEREQINFO: ")
     public Response msgProvideReqInfo(GeneralTask slaTask) {
         slaTask.refreshUdf();
-        slaTask.setOperation(generateOperationID(this.slaType, PROVIDEREQINFO));
+        slaTask.setOperation(generateOperationID(this.taskType, PROVIDEREQINFO));
         slaTask.setDescription(generateDescriptionForOperation(PROVIDEREQINFO));
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE)
@@ -86,7 +86,7 @@ public class SlaFeatureController extends BaseController {
     }
 
     public Response msgBeginCostPre(GeneralTask slaTask) {
-        slaTask.setOperation(generateOperationID(this.slaType, BEGINCOST_PRE));
+        slaTask.setOperation(generateOperationID(this.taskType, BEGINCOST_PRE));
         slaTask.setDescription(generateDescriptionForOperation(BEGINCOST_PRE));
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         return this.response = super.performOperationWithQueryParam(slaTask, slaRequestBody.keepFields( DEFAULT_FIELDS_USER));
@@ -96,7 +96,7 @@ public class SlaFeatureController extends BaseController {
         HashMap<String, String> params = new HashMap<>() {{
             put(ID.field, slaTask.getId());
         }};
-        slaTask.setOperation(generateOperationID(this.slaType, START));
+        slaTask.setOperation(generateOperationID(this.taskType, START));
         slaTask.setDescription(generateDescriptionForOperation(START));
         slaTask.setHandlerUser(generateUser(User.Constants.BABUSHKIN_IVAN));
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
