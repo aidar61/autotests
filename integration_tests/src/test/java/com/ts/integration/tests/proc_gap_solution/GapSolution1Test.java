@@ -30,7 +30,7 @@ public class GapSolution1Test extends BaseIntegrationTest {
     private GapSolutionController gapSolutionController;
     private GeneralTask task;
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         potentialGapController = apiController.getPotentialGapController();
         gapSolutionController = apiController.getGapSolutionController();
