@@ -30,16 +30,16 @@ public class BaseController extends ApiRequest {
 
 
     protected Response createTask(String requestBody) {
-        return super.post(getEndpoint(TASK, UPDATE), requestBody);
+        return super.post(getEndpoint(REST,TASK, UPDATE), requestBody);
     }
 
     @Step("Получить SLA task, Номер задачи: {0}")
     public Response receiveActualTask(String taskNumber) {
-        return super.get(getEndpoint(TASK, INFO, taskNumber));
+        return super.get(getEndpoint(REST,TASK, INFO, taskNumber));
     }
 
     protected Response performOperation(@NotNull GeneralTask task, String requestBody) {
-        return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE), requestBody);
+        return this.response = super.post(getEndpoint(REST,TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE), requestBody);
     }
 
     @Step("Выполнение операции: {0}")
@@ -47,7 +47,7 @@ public class BaseController extends ApiRequest {
         HashMap<String, String> params = new HashMap<>() {{
             put(TaskRequestBody.Fields.ID.field, task.getId());
         }};
-        return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE
+        return this.response = super.post(getEndpoint(REST,TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE
                 , formatParameters(params)), requestBody);
     }
 

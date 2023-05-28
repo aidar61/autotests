@@ -54,6 +54,8 @@ public class TrackStudioEndPoints {
     public static final String ID = "";
     public static final String MSG = "MSG_";
     public static final String TEST = "TEST";
+    public static final String REST = "rest";
+    public static final String APP = "app";
 
     private static String getDomainName(String url) {
         String s = url.split("//")[1];

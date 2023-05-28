@@ -15,6 +15,7 @@ import io.restassured.response.Response;
 import java.util.HashMap;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.CREATE;
+import static com.ts.common.application.controllers.TrackStudioEndPoints.REST;
 import static com.ts.common.controllers.TaskRequestBody.Fields.*;
 import static com.ts.common.enums.ComSlaOperations.*;
 import static com.ts.common.enums.TaskType.SLA_FEATURE;
@@ -69,7 +70,7 @@ public class SlaFeatureController extends BaseController {
         slaTask.setOperation(generateOperationID(this.taskType, REQUESTREQINFO));
         slaTask.setDescription(generateDescriptionForOperation(REQUESTREQINFO));
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
-        this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE
+        this.response = super.post(getEndpoint(REST,TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE
                 , formatParameters(queryParams)), slaRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
         return this.response;
     }
@@ -80,7 +81,7 @@ public class SlaFeatureController extends BaseController {
         slaTask.setOperation(generateOperationID(this.taskType, PROVIDEREQINFO));
         slaTask.setDescription(generateDescriptionForOperation(PROVIDEREQINFO));
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
-        this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE)
+        this.response = super.post(getEndpoint(REST,TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE)
                 , slaRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
         return this.response;
     }
@@ -100,7 +101,7 @@ public class SlaFeatureController extends BaseController {
         slaTask.setDescription(generateDescriptionForOperation(START));
         slaTask.setHandlerUser(generateUser(User.Constants.BABUSHKIN_IVAN));
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
-        return this.response = super.post(getEndpoint(TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE
+        return this.response = super.post(getEndpoint(REST,TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE
                         , formatParameters(params))
                 , slaRequestBody.keepFields(DEFAULT_FIELDS_USER));
     }

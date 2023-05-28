@@ -35,12 +35,12 @@ public class SlaHelpController extends BaseController {
 
     @Step("Создание консультации: ")
     public Response createTask(String requestBody) {
-        return super.post(getEndpoint(TASK, UPDATE), requestBody);
+        return super.post(getEndpoint(REST,TASK, UPDATE), requestBody);
     }
 
     @Step("Выполнение операциии SlaHelp Task: ")
     public Response performOperation(@NotNull GeneralTask slaTask, String requestBody) {
-        return super.post(getEndpoint(OPERATION, slaTask.getNumber(), CREATE), requestBody);
+        return super.post(getEndpoint(REST,OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
     public Response createTask(GeneralTask slaTask) {
@@ -111,7 +111,7 @@ public class SlaHelpController extends BaseController {
 
     @Step("Close task")
     private Response closeSLaTask(GeneralTask slaTask, String requestBody) {
-        return super.post(getEndpoint(OPERATION, slaTask.getNumber(), CREATE), requestBody);
+        return super.post(getEndpoint(REST,OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
     public Response closeSlaTask(GeneralTask slaTask) {
