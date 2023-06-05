@@ -57,7 +57,7 @@ public class SlaHelp2Test extends BaseIntegrationTest {
     public void msgSlaHelpOurComment() {
         slaTask.refreshUdf();
         apiController.updateToken(generateAuthToken(CLIENT));
-        slaHelpController.performCommonOperation(slaTask, COMMENT);
+        slaHelpController.performCommonOperation(slaTask, OUR_COMMENT);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(TaskResponseBody.class);

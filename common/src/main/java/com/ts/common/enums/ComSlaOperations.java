@@ -2,9 +2,12 @@ package com.ts.common.enums;
 
 
 public enum ComSlaOperations {
+
     CAT("CAT_%S"),
+
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
     CHANGE("%S_CHANGE"), // изменить аттрибуты решения
+    COMMENT("%S_COMMENT"), // коментарий
     CLI_COMMENT("%S_CLICOMMENT"), // задать вопрос
     CHANGE_STATUS("%S_CHANGESTATUS"), // изменить состояние
     CHANGE_RES_PERSON("%S_REASSIGN"),//изменить ответственного
@@ -19,7 +22,8 @@ public enum ComSlaOperations {
     ADD_TRUST_WATCHER("%S_ADDTRUSTEDWATCHER"),// назначить доверенного наблюдателя
     ADD_CLIENT_WATCHERS("%S_APPOINTCLIWATCHERS"),// назначить наблюдателей клиента
     ADD_WATCHERS("%S_APPOINTWATCHER"),// назначить наблюдателей
-    COMMENT("%S_OURCOMMENT"), // сообщить информацию(комментарий)
+    APPROVE("%S_APPROVE"), // согласовать решение
+    OUR_COMMENT("%S_OURCOMMENT"), // сообщить информацию(комментарий)
     LINK("%S_LINK"), // установить связь с GAP
     PRIVATE_COMMENT("%S_PRIVATECOMMENT"), // приватный комментарий
     PASS_FOR_APPROVAL("%S_PASSFORAPPROVAL"), // передать на согласование
@@ -44,19 +48,23 @@ public enum ComSlaOperations {
     CHANGE_DECISION("%S_CHANGE_DECISION"), // Изменить решение и постановку на реализацию
     START("%S_START"), // Передать в разработку
     HOTFIX("%S_HOTFIX"), // Предоставить решение
+    PASS_TO_REALIZE("%S_PASSTOREALIZE"), // передать на реализацию
     RETURN("%S_RETURN"), // Вернуть в работу
     RETURN_TO_ANAL("%S_RETURNTOANAL"), // вернуть на анализ
+    RETURN_TO_CLIENT("%S_RETURNTOCLIENT"), // вернуть на анализ
     REQUESTINFO("%S_REQUESTINFO"), // запросить информацию
     PROVIDEINFO("%S_PROVIDEINFO"), // предоставить информацию
     UNDOREQUESTINFO("%S_UNDOREQUESTINFO"), // отменить запрос информацию
     FINISH("%S_FINISH"), // завершить выполнение работы
     TOCLIENTTEST("%S_TOCLIENTTEST"), // передать на проверку клиента
+    TO_CONS_LIST("%S_TOCONSLIST"), //
     WATCH("%S_WATCH"), // назначить наблюдателя
     BUGONACCEPT("%S_BUGONACCEPT"), // сообщить о замечании
     ACCEPTFEATURE("%S_ACCEPTFEATURE"), // утвердить дорабтку
     SEND("%S_SEND"), // отправить в патч
     READYTOPATCH("%S_READYTOPATCH"), // передать на включение в патч
     INSTALL("%S_INSTALL"), // установить в производственную среду
+    IN_CLIENT_GAP_LIST("%S_INCLIENTGAPLIST"), // включить GAP лист по модулю
     UNDOSTART("%S_UNDOSTART"), // вернуть на анализ
     CLOSEUNFIXABLE("%S_CLOSEUNFIXABLE"), // закрыть как неустраненную
     CLOSE("%S_CLOSE"), // закрыть(поставщик)

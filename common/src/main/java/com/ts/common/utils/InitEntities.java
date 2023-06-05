@@ -1,6 +1,8 @@
 package com.ts.common.utils;
 
 import com.ts.common.application.controllers.AuthToken;
+import com.ts.common.config.AppConfigProvider;
+import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.*;
 import com.ts.common.entitites.tasks.GeneralTask;
@@ -37,6 +39,7 @@ public class InitEntities {
         }
         return build;
     }
+
     public static GeneralTask getSlaTask(TaskType taskType, ComSlaOperations id, Parent parent) {
         GeneralTask build = GeneralTask.builder()
                 .taskType(taskType)
@@ -98,12 +101,22 @@ public class InitEntities {
 
     public static GeneralSlaId generateOperationID(TaskType taskType, ComSlaOperations operations) {
         return GeneralSlaId.builder()
-                .id(MSG + String.format(operations.id, taskType.type))
+                .id(generateOperationIDHelper(taskType, operations))
                 .build();
     }
 
+    public static String generateOperationIDHelper(TaskType taskType, ComSlaOperations operations) {
+        return MSG + String.format(operations.id, taskType.type);
+    }
 
     public static UdfUser generateUdfUser(Udfs.UdfSd udfSdType, User.Constants user) {
+        return UdfUser.builder()
+                .udfId(udfSdType.udfId)
+                .type(Type.USER.name())
+                .userValue(new User[]{generateUser(user)})
+                .build();
+    }
+    public static UdfUser generateUdfUser(Udfs.UdfSd udfSdType, User user) {
         return UdfUser.builder()
                 .udfId(udfSdType.udfId)
                 .type(Type.USER.name())
@@ -146,6 +159,7 @@ public class InitEntities {
                 .build();
     }
 
+
     public static UdfDouble generateUdfDouble(Udfs.UdfSd udfsdType, Integer doubleValue) {
         return UdfDouble.builder()
                 .udfId(udfsdType.udfId)
@@ -171,10 +185,25 @@ public class InitEntities {
                 .build();
     }
 
+    public static User generateUser(User user) {
+        return User.builder()
+                .id(user.getId())
+                .login(user.getLogin())
+                .name(user.getName())
+                .build();
+    }
+
     public static AuthToken generateAuthToken(Users users) {
         return AuthToken.builder()
                 .user(users.username)
                 .password(users.password)
+                .build();
+    }
+
+    public static AuthToken generateAuthToken(User user) {
+        return AuthToken.builder()
+                .user(user.getLogin())
+                .password(AppConfigProvider.getUserConfig().password())
                 .build();
     }
 

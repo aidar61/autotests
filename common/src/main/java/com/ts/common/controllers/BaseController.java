@@ -10,6 +10,7 @@ import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.RandomUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import java.util.HashMap;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 
 public class BaseController extends ApiRequest {
+    @Getter
     protected TaskType taskType;
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS = {TaskRequestBody.Fields.ID, TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};

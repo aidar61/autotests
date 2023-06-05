@@ -2,6 +2,7 @@ package com.ts.common.application.controllers;
 
 import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.TaskResponseBody;
+import com.ts.common.controllers.UserController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
 import com.ts.common.controllers.sla.SlaBugController;
@@ -23,6 +24,7 @@ import static com.ts.common.config.AppConfigProvider.STAND_URL;
 public class TrackStudioApiControllers {
     private Response response;
     private AuthToken authToken;
+    private UserController userController;
     private SlaHelpController slaHelpController;
     private SlaBugController slaBugController;
     private SlaFeatureController slaFeatureController;
@@ -32,6 +34,7 @@ public class TrackStudioApiControllers {
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
+        this.userController = new UserController(STAND_URL, authToken);
         this.slaHelpController = new SlaHelpController(STAND_URL, authToken);
         this.slaBugController = new SlaBugController(STAND_URL, authToken);
         this.slaFeatureController = new SlaFeatureController(STAND_URL, authToken);
@@ -49,6 +52,7 @@ public class TrackStudioApiControllers {
         }
         return null;
     }
+
 
     @Step("Пользователь: {0}")
     public void updateToken(AuthToken authToken) {

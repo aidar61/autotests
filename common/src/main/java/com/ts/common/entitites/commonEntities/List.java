@@ -46,6 +46,7 @@ public class List extends BaseEntity {
         KP("8181817e3fbe6a52013fbe6f1c6b0001"),
         NO_GENESEFU("918181872d0a2973012d0d4f48911515"),
         ACCUPDLST("818181df7d730063017d7302f45b03f7"),
+        NKP("8181817e3fbe6a52013fbe6f38560002"),
         CRITICAL("818182de541395b101541399d2120001");
 
         public final String id;

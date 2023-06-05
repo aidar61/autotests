@@ -9,6 +9,7 @@ import com.ts.common.enums.TaskType;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
+import lombok.Getter;
 
 import static com.ts.common.enums.TaskType.GAP_SOLUTION;
 
