@@ -1,7 +1,7 @@
 package com.ts.common.enums;
 
 
-public enum ComSlaOperations {
+public enum Operations {
 
     CAT("CAT_%S"),
 
@@ -74,7 +74,7 @@ public enum ComSlaOperations {
     public final String id;
 
 
-    ComSlaOperations(String id) {
+    Operations(String id) {
         this.id = id;
     }
 }

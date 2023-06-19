@@ -27,15 +27,15 @@ public class Status extends BaseEntity {
     String name;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     String workflowId;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     boolean defaultStart;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     String image;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     int order;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     boolean start;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     boolean finish;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("trname")

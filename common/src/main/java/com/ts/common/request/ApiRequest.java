@@ -4,10 +4,6 @@ package com.ts.common.request;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ts.common.application.controllers.AuthToken;
-import com.ts.common.entitites.commonEntities.Udfs;
-import com.ts.common.entitites.commonEntities.User;
-import com.ts.common.enums.ComSlaOperations;
-import com.ts.common.utils.InitEntities;
 import io.qameta.allure.Step;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.internal.mapping.Jackson2Mapper;
@@ -17,11 +13,8 @@ import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static com.ts.common.application.controllers.TrackStudioEndPoints.TASK;
-import static com.ts.common.application.controllers.TrackStudioEndPoints.UDF_VAL;
 import static io.restassured.RestAssured.given;
 
 /**
@@ -77,9 +70,9 @@ public abstract class ApiRequest {
     }
 
     public static String formatParameters(HashMap<String, String> parameters) {
-        StringBuilder query = new StringBuilder(QUESTION_MARK);
+        StringBuilder query = new StringBuilder("?");
         for (Map.Entry<String, String> entry : parameters.entrySet()) {
-            query.append(entry.getKey() + EQUAL_MARK + entry.getValue() + AMPERSAND_MARK);
+            query.append(entry.getKey() + "=" + entry.getValue() + "&");
         }
         return query.deleteCharAt(query.length() - 1).toString();
     }

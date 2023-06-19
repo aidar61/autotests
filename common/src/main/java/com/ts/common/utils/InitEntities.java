@@ -2,7 +2,6 @@ package com.ts.common.utils;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.config.AppConfigProvider;
-import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.*;
 import com.ts.common.entitites.tasks.GeneralTask;
@@ -11,6 +10,7 @@ import com.ts.common.enums.*;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.MSG;
 import static com.ts.common.enums.Parents.MTB;
 import static com.ts.common.enums.Parents.RYSGAL_BANK;
+import static com.ts.common.utils.RandomUtils.generateCodeShortName;
 import static com.ts.common.utils.RandomUtils.generateName;
 
 public class InitEntities {
@@ -20,7 +20,7 @@ public class InitEntities {
     private InitEntities() {
     }
 
-    public static GeneralTask getSlaTask(TaskType taskType, ComSlaOperations id) {
+    public static GeneralTask getGeneralTask(TaskType taskType, Operations id) {
         GeneralTask build = GeneralTask.builder()
                 .taskType(taskType)
                 .category(generateCategory(taskType))
@@ -28,11 +28,12 @@ public class InitEntities {
                 .parent(getParent(MTB))
                 .name(generateName())
                 .description(generateName() + " CAT description")
+//                .shortName(generateCodeShortName())
                 .udfs(refreshUdf())
                 .attachments(new String[]{})
 //                .handlerUser(generateUser(User.Constants.ALTUNIN_NIKOLAY))
                 .build();
-        if (id == ComSlaOperations.CAT) {
+        if (id == Operations.CAT) {
             if (taskType == TaskType.SLA_BUG) build.setDescription(slaBugDescription);
             if (taskType == TaskType.SLA_FEATURE) build.setDescription(slaFeatureDescription);
             if (taskType == TaskType.POTENTIAL_GAP) build.setParent(getParent(RYSGAL_BANK));
@@ -40,7 +41,7 @@ public class InitEntities {
         return build;
     }
 
-    public static GeneralTask getSlaTask(TaskType taskType, ComSlaOperations id, Parent parent) {
+    public static GeneralTask getGeneralTask(TaskType taskType, Operations id, Parent parent) {
         GeneralTask build = GeneralTask.builder()
                 .taskType(taskType)
                 .category(generateCategory(taskType))
@@ -48,11 +49,12 @@ public class InitEntities {
                 .parent(getParent(MTB))
                 .name(generateName())
                 .description(generateName() + " CAT description")
+//                .shortName(RandomUtils.generateCodeShortName())
                 .udfs(refreshUdf())
                 .attachments(new String[]{})
 //                .handlerUser(generateUser(User.Constants.ALTUNIN_NIKOLAY))
                 .build();
-        if (id == ComSlaOperations.CAT) {
+        if (id == Operations.CAT) {
             if (taskType == TaskType.SLA_BUG) build.setDescription(slaBugDescription);
             if (taskType == TaskType.SLA_FEATURE) build.setDescription(slaFeatureDescription);
             if (taskType == TaskType.POTENTIAL_GAP) build.setParent(getParent(RYSGAL_BANK));
@@ -63,7 +65,7 @@ public class InitEntities {
 
     public static GeneralSlaId generateCategory(TaskType taskType) {
         return GeneralSlaId.builder()
-                .id(String.format(ComSlaOperations.CAT.id, taskType.type))
+                .id(String.format(Operations.CAT.id, taskType.type))
                 .build();
     }
 
@@ -87,7 +89,7 @@ public class InitEntities {
     }
 
 
-    public static GeneralSlaId getGeneralId(ComSlaOperations category) {
+    public static GeneralSlaId getGeneralId(Operations category) {
         return GeneralSlaId.builder()
                 .id(category.id)
                 .build();
@@ -99,13 +101,13 @@ public class InitEntities {
                 .build();
     }
 
-    public static GeneralSlaId generateOperationID(TaskType taskType, ComSlaOperations operations) {
+    public static GeneralSlaId generateOperationID(TaskType taskType, Operations operations) {
         return GeneralSlaId.builder()
                 .id(generateOperationIDHelper(taskType, operations))
                 .build();
     }
 
-    public static String generateOperationIDHelper(TaskType taskType, ComSlaOperations operations) {
+    public static String generateOperationIDHelper(TaskType taskType, Operations operations) {
         return MSG + String.format(operations.id, taskType.type);
     }
 
@@ -116,6 +118,7 @@ public class InitEntities {
                 .userValue(new User[]{generateUser(user)})
                 .build();
     }
+
     public static UdfUser generateUdfUser(Udfs.UdfSd udfSdType, User user) {
         return UdfUser.builder()
                 .udfId(udfSdType.udfId)
@@ -139,6 +142,15 @@ public class InitEntities {
                 .type(Type.TASK.name())
                 .taskValue(new com.ts.common.entitites.commonEntities.Task[]
                         {new com.ts.common.entitites.commonEntities.Task(udfTask.id, udfTask.number)})
+                .build();
+    }
+
+    public static UdfTask generateUdfTask(Udfs.UdfSd udfSdType, com.ts.common.entitites.commonEntities.Task udfTask) {
+        return UdfTask.builder()
+                .udfId(udfSdType.udfId)
+                .type(Type.TASK.name())
+                .taskValue(new com.ts.common.entitites.commonEntities.Task[]
+                        {udfTask})
                 .build();
     }
 
@@ -176,6 +188,20 @@ public class InitEntities {
                 .build();
     }
 
+    public static UdfLink generateUdfLink(Udfs.UdfSd udfSdType) {
+        return UdfLink.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .linkValue(generateLink())
+                .build();
+    }
+
+    public static Link generateLink() {
+        return Link.builder()
+                .description("")
+                .url(RandomUtils.generateUrl())
+                .build();
+    }
 
     public static User generateUser(User.Constants user) {
         return User.builder()
@@ -210,6 +236,12 @@ public class InitEntities {
     public static Status generateStatus(TaskStatuses status) {
         return Status.builder()
                 .id(status.name())
+                .build();
+    }
+
+    public static Status generatePriority(int priority) {
+        return Status.builder()
+                .id(String.valueOf(priority))
                 .build();
     }
 

@@ -10,7 +10,7 @@ import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
-import static com.ts.common.enums.ComSlaOperations.*;
+import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.TaskType.SLA_BUG;
 import static com.ts.common.utils.InitEntities.generateOperationID;
 import static com.ts.common.utils.RandomUtils.generateDescriptionForOperation;

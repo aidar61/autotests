@@ -10,7 +10,9 @@ public enum TaskType {
     POTENTIAL_GAP("POTENTIALGAP"),
     SOL_SELECTED("SOLSELECTED"),
     GAP_SOLUTION("GAPSOLUTION"),
-    GAP("GAP");
+    GAP("GAP"),
+    RELEASE_MODULE("RELEASEMODULE"),
+    RELEASE("RELEASE");
     public final String type;
 
     TaskType(String type) {

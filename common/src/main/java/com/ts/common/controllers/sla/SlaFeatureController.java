@@ -17,7 +17,7 @@ import java.util.HashMap;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.CREATE;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.REST;
 import static com.ts.common.controllers.TaskRequestBody.Fields.*;
-import static com.ts.common.enums.ComSlaOperations.*;
+import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.TaskType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.generateOperationID;
 import static com.ts.common.utils.InitEntities.generateUser;

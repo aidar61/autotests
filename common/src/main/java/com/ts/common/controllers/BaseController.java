@@ -2,8 +2,9 @@ package com.ts.common.controllers;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.application.controllers.TrackStudioEndPoints;
+import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.ComSlaOperations;
+import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.request.ApiRequest;
 import com.ts.common.utils.InitEntities;
@@ -32,16 +33,16 @@ public class BaseController extends ApiRequest {
 
 
     protected Response createTask(String requestBody) {
-        return super.post(getEndpoint(REST,TASK, UPDATE), requestBody);
+        return super.post(getEndpoint(REST, TASK, UPDATE), requestBody);
     }
 
-    @Step("Получить SLA task, Номер задачи: {0}")
+    @Step("Получить task, Номер задачи: {0}")
     public Response receiveActualTask(String taskNumber) {
-        return super.get(getEndpoint(REST,TASK, INFO, taskNumber));
+        return super.get(getEndpoint(REST, TASK, INFO, taskNumber));
     }
 
     protected Response performOperation(@NotNull GeneralTask task, String requestBody) {
-        return this.response = super.post(getEndpoint(REST,TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE), requestBody);
+        return this.response = super.post(getEndpoint(REST, TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE), requestBody);
     }
 
     @Step("Выполнение операции: {0}")
@@ -49,12 +50,12 @@ public class BaseController extends ApiRequest {
         HashMap<String, String> params = new HashMap<>() {{
             put(TaskRequestBody.Fields.ID.field, task.getId());
         }};
-        return this.response = super.post(getEndpoint(REST,TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE
+        return this.response = super.post(getEndpoint(REST, TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE
                 , formatParameters(params)), requestBody);
     }
 
     @Step("Выполнение общей операции: {1}")
-    public Response performCommonOperation(GeneralTask task, ComSlaOperations operation) {
+    public Response performCommonOperation(GeneralTask task, Operations operation) {
         task.setOperation(InitEntities.generateOperationID(this.taskType, operation));
         task.setDescription(RandomUtils.generateDescriptionForOperation(operation));
         TaskRequestBody slaRequestBody = new TaskRequestBody(task);
@@ -62,6 +63,13 @@ public class BaseController extends ApiRequest {
             return this.response = performOperationWithQueryParam(task, slaRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
         }
         return this.response = performOperationWithQueryParam(task, slaRequestBody.keepFields(DEFAULT_FIELDS_USER));
+    }
+
+    public Response receiveDaughterTasksForUdfFields(Udfs.UdfSd udfSd, String taskNumber, String parentNumber) {
+        HashMap<String, String> params = new HashMap<>() {{
+            put(TaskRequestBody.Fields.PARENT.field, parentNumber);
+        }};
+        return this.response = super.get(getEndpoint(REST, UDF_VAL, udfSd.udfId, TASK, taskNumber, TASK, LIST, formatParameters(params)));
     }
 
 }

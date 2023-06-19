@@ -6,7 +6,7 @@ import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.ComSlaOperations;
+import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.RandomUtils;
@@ -20,7 +20,7 @@ import static com.ts.common.entitites.commonEntities.Task.Constants.FRONT_OFFICE
 import static com.ts.common.entitites.commonEntities.Task.Constants.SERVICE_DESK;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.*;
-import static com.ts.common.enums.ComSlaOperations.*;
+import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.TaskType.SOL_SELECTED;
 import static com.ts.common.enums.Users.SECOND_EMPLOYEE;
 import static com.ts.common.utils.InitEntities.*;
@@ -41,7 +41,7 @@ public class GapSolution1Test extends BaseIntegrationTest {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, FRONT_OFFICE));
-        task = InitEntities.getSlaTask(TaskType.POTENTIAL_GAP, ComSlaOperations.CAT);
+        task = InitEntities.getGeneralTask(TaskType.POTENTIAL_GAP, Operations.CAT);
         task.setHandlerUser(generateUser(ARTEMEVA_MARINA));
         task.refreshUdf(udf);
         potentialGapController.createPotentialGap(task);
@@ -80,7 +80,7 @@ public class GapSolution1Test extends BaseIntegrationTest {
     public void catSolSelected() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         Parent parent = generateParent(task.getId(), task.getNumber());
-        task = InitEntities.getSlaTask(SOL_SELECTED, CAT, parent);
+        task = InitEntities.getGeneralTask(SOL_SELECTED, CAT, parent);
         task.setHandlerUser(generateUser(ARTEMEVA_MARINA));
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_WATCHER, ABDULLAEV_BAHODIR));

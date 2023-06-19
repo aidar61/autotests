@@ -18,7 +18,7 @@ import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
 import static com.ts.common.entitites.commonEntities.User.Constants.ALTUNIN_NIKOLAY;
 import static com.ts.common.entitites.commonEntities.udf.UdfString.Constants.COST;
-import static com.ts.common.enums.ComSlaOperations.*;
+import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.TaskType.SLA_FEATURE;
 import static com.ts.common.enums.Users.CLIENT;
 import static com.ts.common.enums.Users.EMPLOYEE;
@@ -42,7 +42,7 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(TaskResponseBody.class);
-        actualSlaTask = apiController.receiveSlaTask(task.getNumber());
+        actualSlaTask = apiController.receiveGeneralTask(task.getNumber());
     }
 
     @Test(groups = {"SlaFeature", "Regression"},description = "Создание задачи")
@@ -52,7 +52,7 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
         udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_PAYDCS, FREE_LAW));
-        task = getSlaTask(SLA_FEATURE, CAT);
+        task = getGeneralTask(SLA_FEATURE, CAT);
         task.setUdfs(udf);
         task.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
         apiController.updateToken(generateAuthToken(CLIENT));
@@ -80,7 +80,7 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         task.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, CHANGE_CURRENT_ROLE);
-        actualSlaTask = apiController.receiveSlaTask(task.getNumber());
+        actualSlaTask = apiController.receiveGeneralTask(task.getNumber());
 //        TaskAsserts.assertThat(slaTask).isEquals(actualSlaTask);
     }
 

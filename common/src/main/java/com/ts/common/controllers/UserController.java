@@ -1,11 +1,10 @@
 package com.ts.common.controllers;
 
 import com.ts.common.application.controllers.AuthToken;
-import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.commonEntities.UserRole;
-import com.ts.common.enums.ComSlaOperations;
+import com.ts.common.enums.Operations;
 import com.ts.common.enums.Parents;
 import com.ts.common.enums.TaskType;
 import com.ts.common.enums.Users;
@@ -55,7 +54,7 @@ public class UserController extends ApiRequest {
     }
 
 
-    public User receiveRandomUser(String taskNumber, Udfs.UdfSd udfSd, ComSlaOperations field, TaskType taskType) {
+    public User receiveRandomUser(String taskNumber, Udfs.UdfSd udfSd, Operations field, TaskType taskType) {
         LinkedHashMap<String, String> params = new LinkedHashMap<>() {{
             put("active", "true");
             put("operationId", InitEntities.generateOperationIDHelper(taskType, field));

@@ -4,7 +4,7 @@ import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.gap.PotentialGapController;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.ComSlaOperations;
+import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
@@ -15,7 +15,7 @@ import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.H
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.STDT_HANDLER;
 import static com.ts.common.entitites.commonEntities.User.Constants.ARTEMEVA_MARINA;
 import static com.ts.common.entitites.commonEntities.User.Constants.ARUTYANIN_YURIY;
-import static com.ts.common.enums.ComSlaOperations.*;
+import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.Users.SECOND_EMPLOYEE;
 import static com.ts.common.utils.InitEntities.*;
 
@@ -33,7 +33,7 @@ public class PotentialGap1Test extends BaseIntegrationTest {
     public void catPotentialGap() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
-        task = InitEntities.getSlaTask(TaskType.POTENTIAL_GAP, ComSlaOperations.CAT);
+        task = InitEntities.getGeneralTask(TaskType.POTENTIAL_GAP, Operations.CAT);
         task.setHandlerUser(generateUser(ARTEMEVA_MARINA));
         task.refreshUdf(udf);
         potentialGapController.createPotentialGap(task);

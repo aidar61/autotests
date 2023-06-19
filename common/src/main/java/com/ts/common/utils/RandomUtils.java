@@ -1,9 +1,7 @@
 package com.ts.common.utils;
 
 import com.github.javafaker.Faker;
-import com.ts.common.enums.ComSlaOperations;
-
-import java.util.Random;
+import com.ts.common.enums.Operations;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.TEST;
 
@@ -18,12 +16,24 @@ public class RandomUtils {
         return faker.commerce().productName();
     }
 
-    public static String generateDescriptionForOperation(ComSlaOperations comSlaOperations) {
-        return String.format(comSlaOperations.id, TEST);
+    public static String generateDescriptionForOperation(Operations operations) {
+        return String.format(operations.id, TEST);
+    }
+
+    public static String generateCodeShortName() {
+        return faker.number().digits(7);
+    }
+
+    public static String generateUrl() {
+        return "htps://" + faker.internet().domainSuffix() + faker.internet().domainName() + "." + faker.internet().domainWord();
     }
 
     public static String generateString() {
         return faker.chuckNorris().fact();
+    }
+
+    public static String generatePrefix() {
+        return faker.name().prefix().replace(".", "_").toUpperCase() + faker.name().firstName().toUpperCase();
     }
 
     public static String generateEmail() {
@@ -35,6 +45,6 @@ public class RandomUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(generateString());
+        System.out.println(generateUrl());
     }
 }

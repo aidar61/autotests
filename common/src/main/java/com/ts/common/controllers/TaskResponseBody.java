@@ -20,8 +20,12 @@ public class TaskResponseBody extends com.ts.common.request.ResponseBody {
     String id;
     String description;
     String name;
+    @JsonProperty("shortname")
+    String shortName;
     String number;
     Category category;
     @JsonProperty("status")
     Status finishStatus;
+    String statusName;
+    String priorityName;
 }

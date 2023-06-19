@@ -5,6 +5,7 @@ import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.UserController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
+import com.ts.common.controllers.release.ReleaseModuleController;
 import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.controllers.sla.SlaFeatureController;
 import com.ts.common.controllers.sla.SlaHelpController;
@@ -30,7 +31,8 @@ public class TrackStudioApiControllers {
     private SlaFeatureController slaFeatureController;
     private PotentialGapController potentialGapController;
     private GapSolutionController gapSolutionController;
-    private BaseController slaController;
+    private ReleaseModuleController releaseModuleController;
+    private BaseController baseController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
@@ -39,13 +41,14 @@ public class TrackStudioApiControllers {
         this.slaBugController = new SlaBugController(STAND_URL, authToken);
         this.slaFeatureController = new SlaFeatureController(STAND_URL, authToken);
         this.potentialGapController = new PotentialGapController(STAND_URL, authToken);
-        this.slaController = new BaseController(STAND_URL, authToken);
+        this.baseController = new BaseController(STAND_URL, authToken);
         this.gapSolutionController = new GapSolutionController(STAND_URL, authToken);
+        this.releaseModuleController = new ReleaseModuleController(STAND_URL, authToken);
     }
 
 
-    public GeneralTask receiveSlaTask(String slaTaskNumber) {
-        this.response = this.slaController.receiveActualTask(slaTaskNumber);
+    public GeneralTask receiveGeneralTask(String slaTaskNumber) {
+        this.response = this.baseController.receiveActualTask(slaTaskNumber);
         TaskResponseBody slaResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
         if (slaResponseBody != null) {
             return new GeneralTask(slaResponseBody);
@@ -56,12 +59,13 @@ public class TrackStudioApiControllers {
 
     @Step("Пользователь: {0}")
     public void updateToken(AuthToken authToken) {
-        this.slaController.setAuthToken(authToken);
+        this.baseController.setAuthToken(authToken);
         this.slaFeatureController.setAuthToken(authToken);
         this.slaBugController.setAuthToken(authToken);
         this.slaHelpController.setAuthToken(authToken);
         this.potentialGapController.setAuthToken(authToken);
         this.gapSolutionController.setAuthToken(authToken);
+        this.releaseModuleController.setAuthToken(authToken);
     }
 
 }

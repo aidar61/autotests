@@ -25,6 +25,7 @@
             <class name="com.ts.integration.tests.proc_potential_gap.PotentialGap2Test"/>
             <class name="com.ts.integration.tests.proc_potential_gap.PotentialGap3Test"/>
             <class name="com.ts.integration.tests.proc_gap_solution.GapSolution1Test"/>
+            <class name="com.ts.integration.tests.proc_release_module.Release1Test"/>
         </classes>
     </test>
 </suite>

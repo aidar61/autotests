@@ -8,5 +8,6 @@ public enum Type {
     STRING,
     DOUBLE,
     MEMO,
-    DATE
+    DATE,
+    LINK
 }

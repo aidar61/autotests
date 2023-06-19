@@ -29,10 +29,14 @@ public class GeneralTask extends BaseEntity {
     Parent parent;
     String name;
     String description;
+    String shortName;
     User handlerUser;
     Udfs udfs;
     @JsonProperty("status")
     Status finishStatus;
+    Status priority;
+    String statusName;
+    String priorityName;
     String[] attachments;
 
     public GeneralTask(TaskResponseBody taskResponseBody) {
@@ -55,6 +59,14 @@ public class GeneralTask extends BaseEntity {
     @Override
     public Object receiveTaskStatus() {
         return getFinishStatus();
+    }
+
+    public Object receiveShortName() {
+        return getShortName();
+    }
+
+    public Object receiveName() {
+        return getName();
     }
 
 }

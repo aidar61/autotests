@@ -34,6 +34,9 @@ public class TaskRequestBody extends com.ts.common.request.RequestBody {
     @Mandatory
     @JsonProperty("description")
     String description;
+    @JsonProperty("shortname")
+    String shortName;
+    Status priority;
     @TypeId(type = "operation")
     User handlerUser;
     @Mandatory
@@ -53,6 +56,8 @@ public class TaskRequestBody extends com.ts.common.request.RequestBody {
         this.handlerUser = slaTask.getHandlerUser();
         this.udfs = slaTask.getUdfs();
         this.attachments = slaTask.getAttachments();
+        this.priority = slaTask.getPriority();
+        this.shortName = slaTask.getShortName();
     }
 
     public enum Fields {
@@ -62,6 +67,8 @@ public class TaskRequestBody extends com.ts.common.request.RequestBody {
         PARENT("parent"),
         NAME("name"),
         DESCRIPTION("description"),
+        SHORT_NAME("shortName"),
+        PRIORITY("priority"),
         HANDLER_USER("handlerUser"),
         UDFS("udfs"),
         FINISH_STATUS("finishStatus"),

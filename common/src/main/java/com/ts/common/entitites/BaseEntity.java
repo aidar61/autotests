@@ -138,4 +138,10 @@ public abstract class BaseEntity implements Serializable {
         return null;
     }
 
+    public Object receiveShortName() {
+        return null;
+    }
+    public Object receiveName() {
+        return null;
+    }
 }
