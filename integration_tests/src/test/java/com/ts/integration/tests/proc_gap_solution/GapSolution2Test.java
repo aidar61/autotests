@@ -1,54 +1,52 @@
-//package com.ts.integration.tests.proc_gap_solution;
-//
-//import com.ts.common.asserts.ApiAsserts;
-//import com.ts.common.controllers.TaskResponseBody;
-//import com.ts.common.controllers.UserController;
-//import com.ts.common.controllers.gap.GapSolutionController;
-//import com.ts.common.controllers.gap.PotentialGapController;
-//import com.ts.common.entitites.commonEntities.Parent;
-//import com.ts.common.entitites.commonEntities.User;
-//import com.ts.common.entitites.tasks.GeneralTask;
-//import com.ts.common.enums.ComSlaOperations;
-//import com.ts.common.enums.Parents;
-//import com.ts.common.enums.TaskType;
-//import com.ts.common.enums.Users;
-//import com.ts.common.utils.InitEntities;
-//import com.ts.common.utils.RandomUtils;
-//import com.ts.integration.tests.BaseIntegrationTest;
-//import org.testng.annotations.BeforeClass;
-//import org.testng.annotations.Test;
-//
-//import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
-//import static com.ts.common.entitites.commonEntities.List.Constants.*;
-//import static com.ts.common.entitites.commonEntities.List.Constants.YES_GAP_SECOND;
-//import static com.ts.common.entitites.commonEntities.Task.Constants.FRONT_OFFICE;
-//import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-//import static com.ts.common.entitites.commonEntities.User.Constants.*;
-//import static com.ts.common.enums.ComSlaOperations.*;
-//import static com.ts.common.enums.TaskType.SOL_SELECTED;
-//import static com.ts.common.enums.Users.CLIENT;
-//import static com.ts.common.enums.Users.SECOND_EMPLOYEE;
-//import static com.ts.common.utils.InitEntities.*;
-//import static com.ts.common.utils.InitEntities.generateUdfList;
-//
-//public class GapSolution2Test extends BaseIntegrationTest {
-//    private PotentialGapController potentialGapController;
-//    private GapSolutionController gapSolutionController;
-//    private GeneralTask task;
-//
-////    protected User SECOND_EMPLOYEE;
-////    protected User CLIENT;
-//
-//    @BeforeClass(alwaysRun = true)
-//    public void beforeClass() {
-////        SECOND_EMPLOYEE = userController.receiveRandomSECOND_EMPLOYEEs(Parents.RYSGAL_BANK).getForUser();
-////        CLIENT = userController.receiveRandomSECOND_EMPLOYEEs(Parents.RYSGAL_BANK).getForUser();
-//        potentialGapController = apiController.getPotentialGapController();
-//        gapSolutionController = apiController.getGapSolutionController();
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Создание потенциального Gap")
-//    public void catPotentialGap() {
+package com.ts.integration.tests.proc_gap_solution;
+
+import com.ts.common.asserts.ApiAsserts;
+import com.ts.common.controllers.TaskResponseBody;
+import com.ts.common.controllers.UserController;
+import com.ts.common.controllers.gap.GapSolutionController;
+import com.ts.common.controllers.gap.PotentialGapController;
+import com.ts.common.entitites.commonEntities.Parent;
+import com.ts.common.entitites.commonEntities.User;
+import com.ts.common.entitites.tasks.GeneralTask;
+import com.ts.common.enums.Parents;
+import com.ts.common.enums.TaskType;
+import com.ts.common.enums.Users;
+import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.RandomUtils;
+import com.ts.integration.tests.BaseIntegrationTest;
+import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
+
+import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
+import static com.ts.common.entitites.commonEntities.List.Constants.*;
+import static com.ts.common.entitites.commonEntities.List.Constants.YES_GAP_SECOND;
+import static com.ts.common.entitites.commonEntities.Task.Constants.FRONT_OFFICE;
+import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
+import static com.ts.common.entitites.commonEntities.User.Constants.*;
+import static com.ts.common.enums.TaskType.SOL_SELECTED;
+import static com.ts.common.enums.Users.CLIENT;
+import static com.ts.common.enums.Users.SECOND_EMPLOYEE;
+import static com.ts.common.utils.InitEntities.*;
+import static com.ts.common.utils.InitEntities.generateUdfList;
+
+public class GapSolution2Test extends BaseIntegrationTest {
+    private PotentialGapController potentialGapController;
+    private GapSolutionController gapSolutionController;
+    private GeneralTask task;
+
+//    protected User SECOND_EMPLOYEE;
+//    protected User CLIENT;
+
+    @BeforeClass(alwaysRun = true)
+    public void beforeClass() {
+//        SECOND_EMPLOYEE = userController.receiveRandomSECOND_EMPLOYEEs(Parents.RYSGAL_BANK).getForUser();
+//        CLIENT = userController.receiveRandomSECOND_EMPLOYEEs(Parents.RYSGAL_BANK).getForUser();
+        potentialGapController = apiController.getPotentialGapController();
+        gapSolutionController = apiController.getGapSolutionController();
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Создание потенциального Gap")
+    public void catPotentialGap() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        udf = refreshUdf();
 //        udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, FRONT_OFFICE));
@@ -59,10 +57,10 @@
 //        ApiAsserts.assertThat(potentialGapController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Передать на согласование", dependsOnMethods = "catPotentialGap")
-//    public void msgGapPassForApproval() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Передать на согласование", dependsOnMethods = "catPotentialGap")
+    public void msgGapPassForApproval() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        udf = refreshUdf();
 //        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ARUTYANIN_YURIY));
@@ -72,10 +70,10 @@
 //        ApiAsserts.assertThat(potentialGapController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Подтвердить и опубликовать", dependsOnMethods = "msgGapPassForApproval")
-//    public void msgGapConfirm() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Подтвердить и опубликовать", dependsOnMethods = "msgGapPassForApproval")
+    public void msgGapConfirm() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        udf = refreshUdf();
 //        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ARTEMEVA_MARINA));
@@ -85,10 +83,10 @@
 //        ApiAsserts.assertThat(potentialGapController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Создать решение GAP", dependsOnMethods = "msgGapConfirm")
-//    public void catSolSelected() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Создать решение GAP", dependsOnMethods = "msgGapConfirm")
+    public void catSolSelected() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        Parent parent = generateParent(task.getId(), task.getNumber());
 //        task = InitEntities.getSlaTask(SOL_SELECTED, CAT, parent);
@@ -106,10 +104,10 @@
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Передать на внутреннее согласование", dependsOnMethods = "catSolSelected")
-//    public void passForApproval() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Передать на внутреннее согласование", dependsOnMethods = "catSolSelected")
+    public void passForApproval() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        udf = refreshUdf();
 //        udf.setUdfString(generateUdfString(UDF_REALIZATION_DECISION, RandomUtils.generateString()));
@@ -124,10 +122,10 @@
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Изменить решение на постановку реализацию", dependsOnMethods = "passForApproval")
-//    public void changeDecision() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Изменить решение на постановку реализацию", dependsOnMethods = "passForApproval")
+    public void changeDecision() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        udf = refreshUdf();
 //        udf.setUdfString(generateUdfString(UDF_REALIZATION_DECISION, RandomUtils.generateString()));
@@ -137,10 +135,10 @@
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Включить GAP лист по модулю", dependsOnMethods = "changeDecision")
-//    public void inClientGapList() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Включить GAP лист по модулю", dependsOnMethods = "changeDecision")
+    public void inClientGapList() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        udf = refreshUdf();
 //        udf.setUdfList(generateUdfList(UDF_SOLUTION_PERIOD, MEDIUM_TERM));
@@ -150,10 +148,10 @@
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Вернуть на анализ", dependsOnMethods = "inCLIENTGapList")
-//    public void returnToClient() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Вернуть на анализ", dependsOnMethods = "inCLIENTGapList")
+    public void returnToClient() {
 //        apiController.updateToken(generateAuthToken(CLIENT));
 //        udf = refreshUdf();
 //        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ARTEMEVA_MARINA));
@@ -163,10 +161,10 @@
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "returnToCLIENT")
-//    public void watch() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "returnToCLIENT")
+    public void watch() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        udf = refreshUdf();
 //        udf.setUdfUser(generateUdfUser(UDF_WATCHER, ABDULLAEV_BAHODIR));
@@ -175,10 +173,10 @@
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Передать на внутреннее согласование", dependsOnMethods = "watch")
-//    public void passForApprovalRetry() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Передать на внутреннее согласование", dependsOnMethods = "watch")
+    public void passForApprovalRetry() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        udf = refreshUdf();
 //        udf.setUdfString(generateUdfString(UDF_REALIZATION_DECISION, RandomUtils.generateString()));
@@ -193,10 +191,10 @@
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Включить GAP лист по модулю", dependsOnMethods = "passForApprovalRetry")
-//    public void inClientGapListRetry() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Включить GAP лист по модулю", dependsOnMethods = "passForApprovalRetry")
+    public void inClientGapListRetry() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        udf = refreshUdf();
 //        udf.setUdfList(generateUdfList(UDF_SOLUTION_PERIOD, MEDIUM_TERM));
@@ -206,47 +204,47 @@
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Согласовать решение", dependsOnMethods = "passForApprovalRetry")
-//    public void approve() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Согласовать решение", dependsOnMethods = "passForApprovalRetry")
+    public void approve() {
 //        apiController.updateToken(generateAuthToken(CLIENT));
 //        task.refreshUdf();
 //        gapSolutionController.performCommonOperation(task, APPROVE);
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Комментарии", dependsOnMethods = "approve")
-//    public void comment() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Комментарии", dependsOnMethods = "approve")
+    public void comment() {
 //        apiController.updateToken(generateAuthToken(CLIENT));
 //        task.refreshUdf();
 //        gapSolutionController.performCommonOperation(task, COMMENT);
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Включить в сводный GAP лист", dependsOnMethods = "comment")
-//    public void toConList() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Включить в сводный GAP лист", dependsOnMethods = "comment")
+    public void toConList() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        User user = userController.receiveRandomUser(task.getNumber(), STDT_HANDLER, TO_CONS_LIST, gapSolutionController.getTaskType());
 //        task.setHandlerUser(generateUser(user));
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Приватный комментарий", dependsOnMethods = "toConList")
-//    public void privateComment() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Приватный комментарий", dependsOnMethods = "toConList")
+    public void privateComment() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        task.refreshUdf();
 //        gapSolutionController.performCommonOperation(task, PRIVATE_COMMENT);
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Передать на реализацию", dependsOnMethods = "privateComment")
-//    public void passToRealize() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Передать на реализацию", dependsOnMethods = "privateComment")
+    public void passToRealize() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        udf = refreshUdf();
 //        User user = userController.receiveRandomUser(task.getNumber(), STDT_HANDLER, TO_CONS_LIST, gapSolutionController.getTaskType());
@@ -256,10 +254,10 @@
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//
-//    @Test(groups = {"GapSolution", "Regression"}, description = "Завершить реализацию", dependsOnMethods = "toConList")
-//    public void finish() {
+    }
+
+    @Test(groups = {"GapSolution", "Regression"}, description = "Завершить реализацию", dependsOnMethods = "toConList")
+    public void finish() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        udf = refreshUdf();
 //        User user = userController.receiveRandomUser(task.getNumber(), STDT_HANDLER, TO_CONS_LIST, gapSolutionController.getTaskType());
@@ -269,5 +267,5 @@
 //        ApiAsserts.assertThat(gapSolutionController.getResponse())
 //                .isCorrectResponseCode(HTTP_OK)
 //                .isParseableBody(TaskResponseBody.class);
-//    }
-//}
+    }
+}
