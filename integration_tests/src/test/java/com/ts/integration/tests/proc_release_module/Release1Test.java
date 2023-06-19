@@ -38,7 +38,7 @@ public class Release1Test extends BaseIntegrationTest {
         releaseModuleController = apiController.getReleaseModuleController();
     }
 
-    @Test(groups = {"Release"}, description = "Создать CAT_RELEASEMODULE")
+    @Test(groups = {"Release", "Regression"}, description = "Создать CAT_RELEASEMODULE")
     public void catReleaseModule() {
         apiController.updateToken(generateAuthToken(Users.ROOT));
         task = InitEntities.getGeneralTask(RELEASE_MODULE, CAT);
@@ -60,7 +60,7 @@ public class Release1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"Release"}, description = "Получить форму", dependsOnMethods = "catReleaseModule")
+    @Test(groups = {"Release", "Regression"}, description = "Получить форму", dependsOnMethods = "catReleaseModule")
     public void receiveForm() {
         apiController.updateToken(generateAuthToken(Users.ROOT));
         releaseModuleController.receiveForm(task);
