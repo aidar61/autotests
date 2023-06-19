@@ -150,7 +150,7 @@ public class GapSolution2Test extends BaseIntegrationTest {
 //                .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"GapSolution", "Regression"}, description = "Вернуть на анализ", dependsOnMethods = "inCLIENTGapList")
+    @Test(groups = {"GapSolution", "Regression"}, description = "Вернуть на анализ", dependsOnMethods = "inClientGapList")
     public void returnToClient() {
 //        apiController.updateToken(generateAuthToken(CLIENT));
 //        udf = refreshUdf();
@@ -163,7 +163,7 @@ public class GapSolution2Test extends BaseIntegrationTest {
 //                .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"GapSolution", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "returnToCLIENT")
+    @Test(groups = {"GapSolution", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "returnToClient")
     public void watch() {
 //        apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
 //        udf = refreshUdf();
@@ -206,7 +206,7 @@ public class GapSolution2Test extends BaseIntegrationTest {
 //                .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"GapSolution", "Regression"}, description = "Согласовать решение", dependsOnMethods = "passForApprovalRetry")
+    @Test(groups = {"GapSolution", "Regression"}, description = "Согласовать решение", dependsOnMethods = "inClientGapListRetry")
     public void approve() {
 //        apiController.updateToken(generateAuthToken(CLIENT));
 //        task.refreshUdf();
