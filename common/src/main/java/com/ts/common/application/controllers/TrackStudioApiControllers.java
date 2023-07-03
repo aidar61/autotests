@@ -6,6 +6,7 @@ import com.ts.common.controllers.UserController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
 import com.ts.common.controllers.release.ReleaseModuleController;
+import com.ts.common.controllers.sdhelp.SdHelpController;
 import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.controllers.sla.SlaFeatureController;
 import com.ts.common.controllers.sla.SlaHelpController;
@@ -32,6 +33,7 @@ public class TrackStudioApiControllers {
     private PotentialGapController potentialGapController;
     private GapSolutionController gapSolutionController;
     private ReleaseModuleController releaseModuleController;
+    private SdHelpController sdHelpController;
     private BaseController baseController;
 
 
@@ -44,6 +46,7 @@ public class TrackStudioApiControllers {
         this.baseController = new BaseController(STAND_URL, authToken);
         this.gapSolutionController = new GapSolutionController(STAND_URL, authToken);
         this.releaseModuleController = new ReleaseModuleController(STAND_URL, authToken);
+        this.sdHelpController = new SdHelpController(STAND_URL, authToken);
     }
 
 
@@ -66,6 +69,7 @@ public class TrackStudioApiControllers {
         this.potentialGapController.setAuthToken(authToken);
         this.gapSolutionController.setAuthToken(authToken);
         this.releaseModuleController.setAuthToken(authToken);
+        this.sdHelpController.setAuthToken(authToken);
     }
 
 }
