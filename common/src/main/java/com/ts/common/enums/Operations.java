@@ -20,12 +20,15 @@ public enum Operations {
     CHANGE_ANALYST("%S_CHANGEANALYST"), // изменить аналитика
     CONFIRM("%S_CONFIRM"), // подтвердить и опубликовать
     ADD_TRUST_WATCHER("%S_ADDTRUSTEDWATCHER"),// назначить доверенного наблюдателя
+    ASK_EXTRA_CONSULT("%S_ASKEXTRACONSULT"), // запросить консультацию повторно
     ADD_CLIENT_WATCHERS("%S_APPOINTCLIWATCHERS"),// назначить наблюдателей клиента
     ADD_WATCHERS("%S_APPOINTWATCHER"),// назначить наблюдателей
     APPROVE("%S_APPROVE"), // согласовать решение
     OUR_COMMENT("%S_OURCOMMENT"), // сообщить информацию(комментарий)
     LINK("%S_LINK"), // установить связь с GAP
     PRIVATE_COMMENT("%S_PRIVATECOMMENT"), // приватный комментарий
+    PROVIDE_CONSULT("%S_PROVIDECONSULT"), // предоставить консультацию
+    ASK_FURTHER("%S_ASKFURTHER"), // задать дополнительный вопрос
     PASS_FOR_APPROVAL("%S_PASSFORAPPROVAL"), // передать на согласование
     CONFIRM_HIDDEN("%S_CONFIRMHIDDEN"), // подтвердить скрытый GAP
     CHANGE_MODULE("%S_CHANGE_SD_MODULE"), // изменить модуль системы
@@ -52,6 +55,7 @@ public enum Operations {
     RETURN("%S_RETURN"), // Вернуть в работу
     RETURN_TO_ANAL("%S_RETURNTOANAL"), // вернуть на анализ
     RETURN_TO_CLIENT("%S_RETURNTOCLIENT"), // вернуть на анализ
+    REJECT("%S_REJECT"), // отклонить
     REQUESTINFO("%S_REQUESTINFO"), // запросить информацию
     PROVIDEINFO("%S_PROVIDEINFO"), // предоставить информацию
     UNDOREQUESTINFO("%S_UNDOREQUESTINFO"), // отменить запрос информацию

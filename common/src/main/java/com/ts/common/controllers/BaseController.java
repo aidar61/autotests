@@ -8,6 +8,7 @@ import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.request.ApiRequest;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
 import com.ts.common.utils.RandomUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -17,12 +18,15 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
+import static com.ts.common.controllers.TaskRequestBody.Fields.HANDLER_USER;
+import static com.ts.common.controllers.TaskRequestBody.Fields.RESOLUTION;
 
 public class BaseController extends ApiRequest {
     @Getter
     protected TaskType taskType;
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS = {TaskRequestBody.Fields.ID, TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};
+    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_RESOLUTION = {TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS, RESOLUTION};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {TaskRequestBody.Fields.ID, TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.HANDLER_USER, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_USER = {TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.HANDLER_USER, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS};
     public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS = {TaskRequestBody.Fields.OPERATION, TaskRequestBody.Fields.DESCRIPTION, TaskRequestBody.Fields.ATTACHMENTS, TaskRequestBody.Fields.UDFS, TaskRequestBody.Fields.FINISH_STATUS};
@@ -34,6 +38,18 @@ public class BaseController extends ApiRequest {
 
     protected Response createTask(String requestBody) {
         return super.post(getEndpoint(REST, TASK, UPDATE), requestBody);
+    }
+
+    protected Response createTask(GeneralTask generalTask) {
+        TaskRequestBody requestBody = new TaskRequestBody(generalTask);
+        this.response = createTask(requestBody.keepMandatoryAndCreateFieldsAnd(HANDLER_USER));
+        TaskResponseBody gapResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
+        if (gapResponseBody != null) {
+            generalTask.setId(gapResponseBody.getId());
+            generalTask.setNumber(gapResponseBody.getNumber());
+            generalTask.setFinishStatus(gapResponseBody.getFinishStatus());
+        }
+        return this.response;
     }
 
     @Step("Получить task, Номер задачи: {0}")
@@ -57,12 +73,15 @@ public class BaseController extends ApiRequest {
     @Step("Выполнение общей операции: {1}")
     public Response performCommonOperation(GeneralTask task, Operations operation) {
         task.setOperation(InitEntities.generateOperationID(this.taskType, operation));
-        task.setDescription(RandomUtils.generateDescriptionForOperation(operation));
-        TaskRequestBody slaRequestBody = new TaskRequestBody(task);
-        if (task.getHandlerUser() == null) {
-            return this.response = performOperationWithQueryParam(task, slaRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
+        if (task.getDescription() == null) task.setDescription(RandomUtils.generateDescriptionForOperation(operation));
+        TaskRequestBody taskRequestBody = new TaskRequestBody(task);
+        if (task.getHandlerUser() != null) {
+            return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_USER));
         }
-        return this.response = performOperationWithQueryParam(task, slaRequestBody.keepFields(DEFAULT_FIELDS_USER));
+        if (task.getResolution() != null) {
+            return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITH_RESOLUTION));
+        }
+        return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
     }
 
     public Response receiveDaughterTasksForUdfFields(Udfs.UdfSd udfSd, String taskNumber, String parentNumber) {

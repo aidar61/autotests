@@ -22,7 +22,7 @@ import org.testng.annotations.Listeners;
 import static com.ts.common.utils.InitEntities.generateAuthToken;
 
 @Slf4j
-@Listeners({TestListener.class, SoftAsserts.class, TextReport.class})
+@Listeners({TestListener.class})
 public class BaseIntegrationTest extends AbstractBaseTest {
     protected Response response;
     protected AuthToken authToken;

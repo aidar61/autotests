@@ -2,6 +2,8 @@ package com.ts.common.asserts;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.errors.ErrorResponseBody;
+import com.ts.common.controllers.TaskResponseBody;
+import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.request.ResponseBody;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
@@ -48,6 +50,13 @@ public class ApiAsserts {
         this.responseBody = (ResponseBody) obj;
         log.info("Response body is correct");
         return this;
+    }
+
+    @Step("Checking task is correct")
+    public TaskAsserts assertTask() {
+        TaskResponseBody task = JsonUtils.deserialize(this.response, TaskResponseBody.class);
+        log.warn("Parsed to JAVA Object: {}", task.toString());
+        return TaskAsserts.assertThat(task);
     }
 
     @Step("Checking expected error: {0}")

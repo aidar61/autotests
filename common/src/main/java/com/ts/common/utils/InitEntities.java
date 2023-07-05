@@ -245,6 +245,13 @@ public class InitEntities {
                 .build();
     }
 
+    public static Resolution generateResolution(Resolutions resolution) {
+        return Resolution.builder()
+                .id(resolution.getId())
+                .build();
+    }
+
+
     public static void main(String[] args) {
         System.out.println(generateStatus(TaskStatuses.STATUS_SLAHELP_CONSULTED));
     }

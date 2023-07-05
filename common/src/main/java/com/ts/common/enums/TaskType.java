@@ -11,6 +11,7 @@ public enum TaskType {
     SOL_SELECTED("SOLSELECTED"),
     GAP_SOLUTION("GAPSOLUTION"),
     GAP("GAP"),
+    ADVICE("ADVICE"),
     RELEASE_MODULE("RELEASEMODULE"),
     RELEASE("RELEASE");
     public final String type;
