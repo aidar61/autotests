@@ -27,6 +27,9 @@
             <class name="com.ts.integration.tests.proc_gap_solution.GapSolution1Test"/>
             <class name="com.ts.integration.tests.proc_gap_solution.GapSolution2Test"/>
             <class name="com.ts.integration.tests.proc_release_module.Release1Test"/>
+            <class name="com.ts.integration.tests.proc_advice.cat_advice.CatAdvice1Test"/>
+            <class name="com.ts.integration.tests.proc_advice.cat_sanction.CatSanction1Test"/>
+            <class name="com.ts.integration.tests.proc_advice.cat_confirmation.CatConfirmation1Test"/>
         </classes>
     </test>
 </suite>

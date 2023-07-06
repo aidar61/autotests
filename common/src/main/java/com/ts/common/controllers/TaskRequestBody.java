@@ -1,6 +1,7 @@
 package com.ts.common.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.annotations.Create;
 import com.ts.common.annotations.Mandatory;
@@ -20,6 +21,7 @@ import lombok.extern.jackson.Jacksonized;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = false)
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class TaskRequestBody extends com.ts.common.request.RequestBody {
     @TypeId(type = "operation")
     String id;
@@ -39,6 +41,7 @@ public class TaskRequestBody extends com.ts.common.request.RequestBody {
     Status priority;
     @TypeId(type = "operation")
     User handlerUser;
+    Resolution resolution;
     @Mandatory
     Udfs udfs;
     Status finishStatus;
@@ -46,18 +49,20 @@ public class TaskRequestBody extends com.ts.common.request.RequestBody {
     @Create
     String[] attachments;
 
-    public TaskRequestBody(GeneralTask slaTask) {
-        this.id = slaTask.getId();
-        this.category = slaTask.getCategory();
-        this.operation = slaTask.getOperation();
-        this.parent = slaTask.getParent();
-        this.name = slaTask.getName();
-        this.description = slaTask.getDescription();
-        this.handlerUser = slaTask.getHandlerUser();
-        this.udfs = slaTask.getUdfs();
-        this.attachments = slaTask.getAttachments();
-        this.priority = slaTask.getPriority();
-        this.shortName = slaTask.getShortName();
+    public TaskRequestBody(GeneralTask generalTask) {
+        this.id = generalTask.getId();
+        this.category = generalTask.getCategory();
+        this.operation = generalTask.getOperation();
+        this.parent = generalTask.getParent();
+        this.name = generalTask.getName();
+        this.description = generalTask.getDescription();
+        this.handlerUser = generalTask.getHandlerUser();
+        this.udfs = generalTask.getUdfs();
+        this.attachments = generalTask.getAttachments();
+        this.priority = generalTask.getPriority();
+        this.shortName = generalTask.getShortName();
+        this.resolution = generalTask.getResolution();
+        this.finishStatus = generalTask.getFinishStatus();
     }
 
     public enum Fields {
@@ -69,6 +74,7 @@ public class TaskRequestBody extends com.ts.common.request.RequestBody {
         DESCRIPTION("description"),
         SHORT_NAME("shortName"),
         PRIORITY("priority"),
+        RESOLUTION("resolution"),
         HANDLER_USER("handlerUser"),
         UDFS("udfs"),
         FINISH_STATUS("finishStatus"),

@@ -31,7 +31,9 @@ public abstract class RequestBody {
         fieldNames.forEach(s -> {
             jsonNode.remove(s);
         });
-        return jsonNode.toString();
+        String string = jsonNode.toString();
+//        log.error("Fields to generate json is: {}", string);
+        return string;
     }
 
     public String removeFields(String... fieldNames) {

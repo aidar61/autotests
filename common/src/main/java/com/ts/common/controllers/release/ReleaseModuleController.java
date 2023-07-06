@@ -5,7 +5,6 @@ import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.TaskRequestBody;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;

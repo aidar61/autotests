@@ -4,23 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/test-support">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sdhelp/SdHelpController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/068a11e0-67ca-4e30-92bd-c7572fe8389e-result.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/7d8337dc-080b-4b9b-a565-3906b8d6742d-container.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/a89ab92c-08f2-4e81-9d29-33d0bd5062b2-container.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/afbee159-b43c-4722-9b76-5bdb07566ce1-result.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/bdccdd75-d998-4508-8f89-8aa53ac291fe-container.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sdhelp/SdHelp1Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/JsonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/JsonUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelp1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelp1Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/UiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/UiTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/CatSanction and CatConfirmation Tests" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,7 +13,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="spring-beans.schema" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -39,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="feature/Hibernate" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -58,7 +44,7 @@
     </option>
   </component>
   <component name="ProblemsViewState">
-    <option name="selectedTabId" value="ProjectErrors" />
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectId" id="2EVrpqXECvwZmBVnpzXQYsksh68" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -69,64 +55,56 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/aidarka61/IdeaProjects/trackstudio-test&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.09375&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.17515099&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
-    &quot;settings.editor.splitter.proportion&quot;: &quot;0.39143732&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;77eb7acb45023b5c2285e592b7b52170&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "feature/pro__advice",
+    "last_opened_file_path": "/Users/turdukhodzhaevs/Projects/colvir/common/src/main/java/domain",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.09375",
+    "project.structure.side.proportion": "0.32876712",
+    "settings.editor.selected.configurable": "terminal",
+    "settings.editor.splitter.proportion": "0.39143732",
+    "spring.configuration.checksum": "f0a48e2334f1b84f98a2595c6f1cd1ef",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "oracle"
+    ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/common/src/main/java/domain" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.SdHelp1Test">
-    <configuration name="Release1Test.receiveForm" type="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml">
+    <configuration name="CatAdvice1Test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_release_module.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_advice.cat_advice.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_release_module" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_release_module.Release1Test" />
-      <option name="METHOD_NAME" value="receiveForm" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SdHelp1Test" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sdhelp.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sdhelp" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sdhelp.SdHelp1Test" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_advice.cat_advice" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_advice.cat_advice.CatAdvice1Test" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -134,16 +112,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SlaHelp1Test" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CatConfirmation1Test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_help.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_advice.cat_confirmation.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_help" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_help.SlaHelp1Test" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_advice.cat_sanction" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_advice.cat_confirmation.CatConfirmation1Test" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CatSanction1Test" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_advice.cat_sanction.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_advice.cat_confirmation" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_advice.cat_sanction.CatSanction1Test" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -179,24 +174,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UiTest.uiLoginTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.ui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.UiTest" />
-      <option name="METHOD_NAME" value="uiLoginTest" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Unnamed" type="TestNG" nameIsGenerated="true">
       <shortenClasspath name="NONE" />
       <option name="SUITE_NAME" value="" />
@@ -224,22 +201,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="com.ts.integration.tests" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests" />
+      <option name="TEST_OBJECT" value="PACKAGE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.SdHelp1Test" />
-      <item itemvalue="TestNG.UiTest.uiLoginTest" />
-      <item itemvalue="TestNG.Release1Test.receiveForm" />
-      <item itemvalue="TestNG.SlaHelp1Test" />
       <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
+      <item itemvalue="TestNG.CatConfirmation1Test" />
+      <item itemvalue="TestNG.CatSanction1Test" />
+      <item itemvalue="TestNG.com.ts.integration.tests" />
+      <item itemvalue="TestNG.CatAdvice1Test" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.SdHelp1Test" />
-        <item itemvalue="TestNG.UiTest.uiLoginTest" />
-        <item itemvalue="TestNG.SlaHelp1Test" />
         <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
-        <item itemvalue="TestNG.Release1Test.receiveForm" />
+        <item itemvalue="TestNG.com.ts.integration.tests" />
+        <item itemvalue="TestNG.CatConfirmation1Test" />
+        <item itemvalue="TestNG.CatSanction1Test" />
+        <item itemvalue="TestNG.CatAdvice1Test" />
       </list>
     </recent_temporary>
   </component>
@@ -286,13 +279,12 @@
       <workItem from="1686644809583" duration="12042000" />
       <workItem from="1686827831018" duration="2460000" />
       <workItem from="1686894094090" duration="12154000" />
-      <workItem from="1687094556806" duration="5314000" />
-      <workItem from="1687424757444" duration="11026000" />
-      <workItem from="1687775719578" duration="15000" />
-      <workItem from="1687862148735" duration="599000" />
-      <workItem from="1687864098203" duration="31000" />
-      <workItem from="1687864141961" duration="6000" />
-      <workItem from="1688127765334" duration="2641000" />
+      <workItem from="1687094556806" duration="2031000" />
+      <workItem from="1688193106063" duration="3739000" />
+      <workItem from="1688448967420" duration="14741000" />
+      <workItem from="1688552672765" duration="6542000" />
+      <workItem from="1688559258178" duration="771000" />
+      <workItem from="1688560039844" duration="13828000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -308,21 +300,14 @@
       <option name="project" value="LOCAL" />
       <updated>1687150359151</updated>
     </task>
-    <task id="LOCAL-00003" summary="feature/ReleaseProc">
-      <created>1687150565877</created>
+    <task id="LOCAL-00003" summary="feature/CatSanction and CatConfirmation Tests">
+      <created>1688634531358</created>
       <option name="number" value="00003" />
       <option name="presentableId" value="LOCAL-00003" />
       <option name="project" value="LOCAL" />
-      <updated>1687150565877</updated>
+      <updated>1688634531358</updated>
     </task>
-    <task id="LOCAL-00004" summary="fix/test-support">
-      <created>1687152574406</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1687152574406</updated>
-    </task>
-    <option name="localTasksCounter" value="5" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,9 +328,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="fix/tests-support" />
     <MESSAGE value="feature/ReleaseProc-Asserts" />
-    <MESSAGE value="feature/ReleaseProc" />
-    <MESSAGE value="fix/test-support" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix/test-support" />
+    <MESSAGE value="feature/CatSanction and CatConfirmation Tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/CatSanction and CatConfirmation Tests" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

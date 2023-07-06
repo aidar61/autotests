@@ -20,12 +20,17 @@ public enum Operations {
     CHANGE_ANALYST("%S_CHANGEANALYST"), // изменить аналитика
     CONFIRM("%S_CONFIRM"), // подтвердить и опубликовать
     ADD_TRUST_WATCHER("%S_ADDTRUSTEDWATCHER"),// назначить доверенного наблюдателя
+    ALLOW_KPO("%S_ALLOWKPO"), // санкцинировать привязку КПО
+    ASSIGN_CONSTRUCTOR("%S_ASSIGNCONSTRUCTOR"), // изменить ответственного констуктора
+    ASK_EXTRA_CONSULT("%S_ASKEXTRACONSULT"), // запросить консультацию повторно
     ADD_CLIENT_WATCHERS("%S_APPOINTCLIWATCHERS"),// назначить наблюдателей клиента
     ADD_WATCHERS("%S_APPOINTWATCHER"),// назначить наблюдателей
     APPROVE("%S_APPROVE"), // согласовать решение
     OUR_COMMENT("%S_OURCOMMENT"), // сообщить информацию(комментарий)
     LINK("%S_LINK"), // установить связь с GAP
     PRIVATE_COMMENT("%S_PRIVATECOMMENT"), // приватный комментарий
+    PROVIDE_CONSULT("%S_PROVIDECONSULT"), // предоставить консультацию
+    ASK_FURTHER("%S_ASKFURTHER"), // задать дополнительный вопрос
     PASS_FOR_APPROVAL("%S_PASSFORAPPROVAL"), // передать на согласование
     CONFIRM_HIDDEN("%S_CONFIRMHIDDEN"), // подтвердить скрытый GAP
     CHANGE_MODULE("%S_CHANGE_SD_MODULE"), // изменить модуль системы
@@ -45,14 +50,19 @@ public enum Operations {
     ACCEPTPRECOST("%S_ACCEPTPRECOST"), // Принять предварительные условия реализации
     SENDCOST_FINAL("%S_SENDCOST_FINAL"), // Сообщить окончательные условия реализации
     ACCEPTCONDITIONS("%S_ACCEPTCONDITIONS"), // Принять окончательные условия реализации
-    CHANGE_DECISION("%S_CHANGE_DECISION"), // Изменить решение и постановку на реализацию
+    CHANGE_DECISION("%S_CHANGEDECISION"), // Изменить решение и постановку на реализацию
+    CLEAR_DECISION("%S_CLEARDECISION"), // Уточнить решение
     START("%S_START"), // Передать в разработку
     HOTFIX("%S_HOTFIX"), // Предоставить решение
     PASS_TO_REALIZE("%S_PASSTOREALIZE"), // передать на реализацию
     RETURN("%S_RETURN"), // Вернуть в работу
     RETURN_TO_ANAL("%S_RETURNTOANAL"), // вернуть на анализ
     RETURN_TO_CLIENT("%S_RETURNTOCLIENT"), // вернуть на анализ
+    REJECT("%S_REJECT"), // отклонить
     REQUESTINFO("%S_REQUESTINFO"), // запросить информацию
+    REPEAT_REQUEST("%S_REPEATREQUEST"), // повторить запрос
+    SCORE_CONFIRM("%S_SCORECONFIRM"), // Подтвердить с оценкой запроса
+    CLOSE_CONFIRM("%S_CLOSECONFIRM"), // Закрыть подтверждения решения
     PROVIDEINFO("%S_PROVIDEINFO"), // предоставить информацию
     UNDOREQUESTINFO("%S_UNDOREQUESTINFO"), // отменить запрос информацию
     FINISH("%S_FINISH"), // завершить выполнение работы

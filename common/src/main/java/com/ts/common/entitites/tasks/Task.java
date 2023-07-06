@@ -54,6 +54,6 @@ public class Task extends BaseEntity {
 
     @Override
     public Object receiveTaskStatus() {
-        return getFinishStatus();
+        return getFinishStatus().getId();
     }
 }

@@ -12,6 +12,9 @@ public enum TaskType {
     GAP_SOLUTION("GAPSOLUTION"),
     SD_HELP("SDHELP"),
     GAP("GAP"),
+    ADVICE("ADVICE"),
+    SANCTION("SANCTION"),
+    CONFIRMATION("CONFIRMATION"),
     RELEASE_MODULE("RELEASEMODULE"),
     RELEASE("RELEASE");
     public final String type;
