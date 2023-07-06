@@ -46,13 +46,13 @@ public class JsonUtils {
         return null;
     }
 
-    public static <T> T deserialize(Response response, Class<T> clazz) {
+    public static <T> T deserialize(Response response, Class<T> type) {
         try {
             return response
                     .then()
                     .extract()
                     .body()
-                    .as(clazz);
+                    .as(type);
         } catch (Exception e) {
             log.error("Can not parse object", e);
             return null;

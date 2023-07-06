@@ -38,8 +38,8 @@ public class SlaHelp1Test extends BaseIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         slaHelpController = apiController.getSlaHelpController();
-//        EMPLOYEE = userController.receiveRandomEMPLOYEEs(Parents.MTB).getForUser();
-//        CLIENT = userController.receiveRandomEMPLOYEEs(Parents.MTB).getForUser();
+//        EMPLOYEE = userController.receiveRandomEmployees(Parents.MTB).getForUser();
+//        CLIENT = userController.receiveRandomClient(Parents.MTB).getForUser();
     }
 
     @Test(groups = {"SlaHelp", "Regression"}, description = "Создание запроса на консультацию")

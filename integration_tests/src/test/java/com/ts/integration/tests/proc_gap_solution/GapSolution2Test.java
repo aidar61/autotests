@@ -206,7 +206,7 @@ public class GapSolution2Test extends BaseIntegrationTest {
 //                .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"GapSolution", "Regression"}, description = "Согласовать решение", dependsOnMethods = "passForApprovalRetry")
+    @Test(groups = {"GapSolution", "Regression"}, description = "Согласовать решение", dependsOnMethods = "inClientGapListRetry")
     public void approve() {
 //        apiController.updateToken(generateAuthToken(CLIENT));
 //        task.refreshUdf();
