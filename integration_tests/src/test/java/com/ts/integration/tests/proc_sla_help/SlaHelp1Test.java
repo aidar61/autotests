@@ -2,12 +2,14 @@ package com.ts.integration.tests.proc_sla_help;
 
 
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.controllers.sla.TaskRequestBody;
-import com.ts.common.controllers.sla.TaskResponseBody;
-import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
+import com.ts.common.controllers.TaskRequestBody;
+import com.ts.common.controllers.TaskResponseBody;
+import com.ts.common.controllers.sla.SlaHelpController;
+import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.ComSlaOperations;
-import com.ts.common.enums.SlaType;
+import com.ts.common.enums.Operations;
+import com.ts.common.enums.Parents;
+import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.RandomUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
@@ -19,7 +21,7 @@ import static com.ts.common.entitites.commonEntities.List.Constants.ACCUPDLST;
 import static com.ts.common.entitites.commonEntities.Task.Constants.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.*;
-import static com.ts.common.enums.ComSlaOperations.*;
+import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_CONSULTED;
 import static com.ts.common.enums.Users.CLIENT;
 import static com.ts.common.enums.Users.EMPLOYEE;
@@ -30,9 +32,14 @@ public class SlaHelp1Test extends BaseIntegrationTest {
     private SlaHelpController slaHelpController;
     private GeneralTask slaTask;
 
+//    protected User EMPLOYEE;
+//    protected User CLIENT;
+
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         slaHelpController = apiController.getSlaHelpController();
+//        EMPLOYEE = userController.receiveRandomEmployees(Parents.MTB).getForUser();
+//        CLIENT = userController.receiveRandomClient(Parents.MTB).getForUser();
     }
 
     @Test(groups = {"SlaHelp", "Regression"}, description = "Создание запроса на консультацию")
@@ -40,7 +47,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
         udf = refreshUdf();
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
         udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
-        slaTask = InitEntities.getSlaTask(SlaType.SLA_HElP, ComSlaOperations.CAT);
+        slaTask = InitEntities.getGeneralTask(TaskType.SLA_HElP, Operations.CAT);
         slaTask.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(CLIENT));
         slaHelpController.createTask(slaTask);
@@ -141,7 +148,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
     public void msgSlaHelpChangeStatus() {
         slaTask.refreshUdf();
         slaTask.setFinishStatus(generateStatus(STATUS_SLAHELP_CONSULTED));
-        slaTask.setOperation(generateOperationID(slaTask.getSlaType(), CHANGE_STATUS));
+        slaTask.setOperation(generateOperationID(slaTask.getTaskType(), CHANGE_STATUS));
         slaTask.setDescription(RandomUtils.generateDescriptionForOperation(CHANGE_STATUS));
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         apiController.updateToken(generateAuthToken(EMPLOYEE));

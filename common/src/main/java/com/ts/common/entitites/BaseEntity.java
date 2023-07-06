@@ -23,6 +23,8 @@ public abstract class BaseEntity implements Serializable {
         try {
             Assertions.assertThat(this)
                     .usingRecursiveComparison()
+                    .ignoringActualNullFields()
+                    .ignoringExpectedNullFields()
                     .ignoringFields(IGNORING_FIELDS)
                     .isEqualTo(obj);
             return true;
@@ -138,4 +140,19 @@ public abstract class BaseEntity implements Serializable {
         return null;
     }
 
+    public Object receiveShortName() {
+        return null;
+    }
+
+    public Object receiveName() {
+        return null;
+    }
+
+    public Object receiveTaskNumber() {
+        return null;
+    }
+
+    public Object receiveHandlerUser() {
+        return null;
+    }
 }

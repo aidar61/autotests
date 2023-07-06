@@ -19,8 +19,10 @@ import static com.ts.common.utils.RandomUtils.generateRandomNumberBetween;
 @Slf4j
 public abstract class AbstractDbTable {
     public static final String SELECT_QUERY = "SELECT * FROM %s";
-    public static final String SELECT_WHERE_QUERY = SELECT_QUERY + " WHERE %s=%s";
-    public static final String SELECT_WHERE_ID = SELECT_QUERY + " WHERE id=%s";
+    public static final String SELECT_WHERE_QUERY = SELECT_QUERY + " WHERE %s = '%s'";
+    public static final String SELECT_WHERE_AND = SELECT_WHERE_QUERY + " AND %s = '%s'";
+    public static final String SELECT_WHERE_ID = SELECT_QUERY + " WHERE id = '%s'";
+    public static final String SELECT_WHERE_AND_OFFSET = SELECT_WHERE_AND + " OFFSET %s ROWS FETCH NEXT %s ROWS ONLY";
     public static final String SELECT_OFFSET_NEXT = SELECT_QUERY + " OFFSET %s ROWS FETCH NEXT %s ROWS ONLY";
 
     protected JdbcTemplate template;
@@ -70,11 +72,18 @@ public abstract class AbstractDbTable {
     }
 
     public <T extends BaseEntity> T getEntityWhere(Class clazz, String... parameters) {
+        if (parameters.length > 2) {
+            return (T) queryForObject(String
+                            .format(SELECT_WHERE_AND_OFFSET, this.name
+                                    , parameters[0], parameters[1], parameters[2], parameters[3]
+                                    , generateRandomNumberBetween(0, 620), 1)
+                    , new BeanPropertyRowMapper<>(clazz));
+        }
         return (T) queryForObject(String.format(SELECT_WHERE_QUERY, this.name, parameters[0], parameters[1]), new BeanPropertyRowMapper<>(clazz));
     }
 
     public List<BaseEntity> receiveEntitiesWithOffset(Class clazz) {
-        return query(String.format(SELECT_OFFSET_NEXT, this.name, generateRandomNumberBetween(0, 1000), 50), new BeanPropertyRowMapper<>(clazz));
+        return query(String.format(SELECT_OFFSET_NEXT, this.name, generateRandomNumberBetween(0, 350), 50), new BeanPropertyRowMapper<>(clazz));
     }
 
 }

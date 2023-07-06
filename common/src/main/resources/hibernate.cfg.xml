@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+
+<hibernate-configuration>
+    <session-factory>
+        <!-- Database connection settings -->
+        <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+        <property name="hibernate.connection.url">jdbc:oracle:thin:@//tsdev4.dev.colvir.ru:1521/colvirdb</property>
+        <property name="hibernate.connection.username">trackstudio</property>
+        <property name="hibernate.connection.password">password</property>
+        <!-- JDBC connection pool settings -->
+        <property name="hibernate.connection.pool_size">10</property>
+        <!-- SQL dialect for Oracle -->
+        <property name="hibernate.dialect">org.hibernate.dialect.Oracle12cDialect</property>
+        <!-- Enable Hibernate's automatic session context management -->
+        <property name="hibernate.current_session_context_class">thread</property>
+        <!-- Mapping files -->
+        <!-- Add your entity mappings here -->
+        <!-- Enable automatic SQL schema generation -->
+        <property name="hibernate.hbm2ddl.auto">update</property>
+        <!-- Enable logging -->
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.format_sql">true</property>
+    </session-factory>
+</hibernate-configuration>

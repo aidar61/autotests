@@ -1,0 +1,100 @@
+package com.ts.common.controllers;
+
+import com.ts.common.application.controllers.AuthToken;
+import com.ts.common.application.controllers.TrackStudioEndPoints;
+import com.ts.common.entitites.commonEntities.Udfs;
+import com.ts.common.entitites.tasks.GeneralTask;
+import com.ts.common.enums.Operations;
+import com.ts.common.enums.TaskType;
+import com.ts.common.request.ApiRequest;
+import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
+import com.ts.common.utils.RandomUtils;
+import io.qameta.allure.Step;
+import io.restassured.response.Response;
+import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+
+import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
+import static com.ts.common.controllers.TaskRequestBody.Fields.*;
+import static com.ts.common.controllers.TaskRequestBody.Fields.ID;
+import static com.ts.common.controllers.TaskRequestBody.Fields.OPERATION;
+
+public class BaseController extends ApiRequest {
+    @Getter
+    protected TaskType taskType;
+    protected TaskRequestBody.Fields[] DEFAULT_FIELDS = {ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
+    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
+    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_RESOLUTION = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, RESOLUTION};
+    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {ID, OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
+    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_USER = {OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
+    public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS};
+    public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS_AND_RESOLUTION = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS, RESOLUTION};
+
+    public BaseController(String url, AuthToken authToken) {
+        super(url, HEADERS_BASE_CONTROLLER, authToken);
+    }
+
+
+    protected Response createTask(String requestBody) {
+        return super.post(getEndpoint(REST, TASK, UPDATE), requestBody);
+    }
+
+    protected Response createTask(GeneralTask generalTask) {
+        TaskRequestBody requestBody = new TaskRequestBody(generalTask);
+        this.response = createTask(requestBody.keepMandatoryAndCreateFieldsAnd(HANDLER_USER));
+        TaskResponseBody gapResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
+        if (gapResponseBody != null) {
+            generalTask.setId(gapResponseBody.getId());
+            generalTask.setNumber(gapResponseBody.getNumber());
+            generalTask.setFinishStatus(gapResponseBody.getFinishStatus());
+        }
+        return this.response;
+    }
+
+    @Step("Получить task, Номер задачи: {0}")
+    public Response receiveActualTask(String taskNumber) {
+        return super.get(getEndpoint(REST, TASK, INFO, taskNumber));
+    }
+
+    protected Response performOperation(@NotNull GeneralTask task, String requestBody) {
+        return this.response = super.post(getEndpoint(REST, TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE), requestBody);
+    }
+
+    @Step("Выполнение операции: {0}")
+    public Response performOperationWithQueryParam(@NotNull GeneralTask task, String requestBody) {
+        HashMap<String, String> params = new HashMap<>() {{
+            put(ID.field, task.getId());
+        }};
+        return this.response = super.post(getEndpoint(REST, TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE
+                , formatParameters(params)), requestBody);
+    }
+
+    @Step("Выполнение общей операции: {1}")
+    public Response performCommonOperation(GeneralTask task, Operations operation) {
+        task.setOperation(InitEntities.generateOperationID(this.taskType, operation));
+        if (task.getDescription() == null) task.setDescription(RandomUtils.generateDescriptionForOperation(operation));
+        TaskRequestBody taskRequestBody = new TaskRequestBody(task);
+        if (task.getHandlerUser() != null) {
+            return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_USER));
+        }
+        if (task.getResolution() != null) {
+            if (task.getFinishStatus() != null) {
+                return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITH_STATUS_AND_RESOLUTION));
+            }
+            return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITH_RESOLUTION));
+        }
+
+        return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));
+    }
+
+    public Response receiveDaughterTasksForUdfFields(Udfs.UdfSd udfSd, String taskNumber, String parentNumber) {
+        HashMap<String, String> params = new HashMap<>() {{
+            put(TaskRequestBody.Fields.PARENT.field, parentNumber);
+        }};
+        return this.response = super.get(getEndpoint(REST, UDF_VAL, udfSd.udfId, TASK, taskNumber, TASK, LIST, formatParameters(params)));
+    }
+
+}

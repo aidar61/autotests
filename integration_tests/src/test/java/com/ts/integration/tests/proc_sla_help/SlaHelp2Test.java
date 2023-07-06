@@ -1,11 +1,11 @@
 package com.ts.integration.tests.proc_sla_help;
 
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.controllers.sla.TaskResponseBody;
-import com.ts.common.controllers.sla.slaHelp.SlaHelpController;
+import com.ts.common.controllers.TaskResponseBody;
+import com.ts.common.controllers.sla.SlaHelpController;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.ComSlaOperations;
-import com.ts.common.enums.SlaType;
+import com.ts.common.enums.Operations;
+import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.RandomUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
@@ -16,7 +16,7 @@ import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.H
 import static com.ts.common.entitites.commonEntities.Task.Constants.AKKREDITIVES;
 import static com.ts.common.entitites.commonEntities.Task.Constants.MTBANK;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.enums.ComSlaOperations.*;
+import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.Users.CLIENT;
 import static com.ts.common.utils.InitEntities.*;
 
@@ -34,7 +34,7 @@ public class SlaHelp2Test extends BaseIntegrationTest {
         udf = refreshUdf();
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
         udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
-        slaTask = InitEntities.getSlaTask(SlaType.SLA_HElP, ComSlaOperations.CAT);
+        slaTask = InitEntities.getGeneralTask(TaskType.SLA_HElP, Operations.CAT);
         slaTask.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(CLIENT));
         slaHelpController.createTask(slaTask);
@@ -57,7 +57,7 @@ public class SlaHelp2Test extends BaseIntegrationTest {
     public void msgSlaHelpOurComment() {
         slaTask.refreshUdf();
         apiController.updateToken(generateAuthToken(CLIENT));
-        slaHelpController.performCommonOperation(slaTask, COMMENT);
+        slaHelpController.performCommonOperation(slaTask, OUR_COMMENT);
         ApiAsserts.assertThat(slaHelpController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)
                 .isParseableBody(TaskResponseBody.class);

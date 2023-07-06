@@ -2,10 +2,10 @@ package com.ts.common.entitites.tasks;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ts.common.controllers.sla.TaskResponseBody;
+import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
-import com.ts.common.enums.SlaType;
+import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -21,7 +21,7 @@ import lombok.extern.jackson.Jacksonized;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
 public class Task extends BaseEntity {
-    SlaType slaType;
+    TaskType taskType;
     String id;
     String number;
     GeneralSlaId category;
@@ -54,6 +54,6 @@ public class Task extends BaseEntity {
 
     @Override
     public Object receiveTaskStatus() {
-        return getFinishStatus();
+        return getFinishStatus().getId();
     }
 }

@@ -2,11 +2,12 @@ package com.ts.common.entitites.tasks;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ts.common.controllers.sla.TaskResponseBody;
+import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
-import com.ts.common.enums.SlaType;
+import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
+import io.restassured.response.Response;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -21,7 +22,7 @@ import lombok.extern.jackson.Jacksonized;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
 public class GeneralTask extends BaseEntity {
-    SlaType slaType;
+    TaskType taskType;
     String id;
     String number;
     GeneralSlaId category;
@@ -29,10 +30,15 @@ public class GeneralTask extends BaseEntity {
     Parent parent;
     String name;
     String description;
+    String shortName;
     User handlerUser;
     Udfs udfs;
     @JsonProperty("status")
     Status finishStatus;
+    Status priority;
+    Resolution resolution;
+    String statusName;
+    String priorityName;
     String[] attachments;
 
     public GeneralTask(TaskResponseBody taskResponseBody) {
@@ -41,7 +47,9 @@ public class GeneralTask extends BaseEntity {
         this.name = taskResponseBody.getName();
         this.description = taskResponseBody.getDescription();
         this.finishStatus = taskResponseBody.getFinishStatus();
+        this.handlerUser = taskResponseBody.getHandlerUser();
     }
+
 
     public void refreshUdf() {
         this.udfs = InitEntities.refreshUdf();
@@ -52,9 +60,22 @@ public class GeneralTask extends BaseEntity {
         setUdfs(udf);
     }
 
+    public void refreshTask() {
+
+    }
+
     @Override
     public Object receiveTaskStatus() {
-        return getFinishStatus();
+        return getFinishStatus().getId();
     }
+
+    public Object receiveShortName() {
+        return getShortName();
+    }
+
+    public Object receiveName() {
+        return getName();
+    }
+
 
 }

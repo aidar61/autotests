@@ -70,9 +70,9 @@ public abstract class ApiRequest {
     }
 
     public static String formatParameters(HashMap<String, String> parameters) {
-        StringBuilder query = new StringBuilder(QUESTION_MARK);
+        StringBuilder query = new StringBuilder("?");
         for (Map.Entry<String, String> entry : parameters.entrySet()) {
-            query.append(entry.getKey() + EQUAL_MARK + entry.getValue() + AMPERSAND_MARK);
+            query.append(entry.getKey() + "=" + entry.getValue() + "&");
         }
         return query.deleteCharAt(query.length() - 1).toString();
     }

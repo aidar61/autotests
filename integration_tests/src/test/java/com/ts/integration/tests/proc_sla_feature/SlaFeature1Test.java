@@ -1,8 +1,8 @@
 package com.ts.integration.tests.proc_sla_feature;
 
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.controllers.sla.TaskResponseBody;
-import com.ts.common.controllers.sla.slaFeature.SlaFeatureController;
+import com.ts.common.controllers.TaskResponseBody;
+import com.ts.common.controllers.sla.SlaFeatureController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.listeners.TestListener;
 import com.ts.common.utils.InitEntities;
@@ -20,8 +20,8 @@ import static com.ts.common.entitites.commonEntities.Task.Constants.MTBANK;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.*;
 import static com.ts.common.entitites.commonEntities.udf.UdfString.Constants.COST;
-import static com.ts.common.enums.ComSlaOperations.*;
-import static com.ts.common.enums.SlaType.SLA_FEATURE;
+import static com.ts.common.enums.Operations.*;
+import static com.ts.common.enums.TaskType.SLA_FEATURE;
 import static com.ts.common.enums.Users.*;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateComment;
@@ -44,7 +44,7 @@ public class SlaFeature1Test extends BaseIntegrationTest {
         udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
         udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_PAYDCS, FREE_LAW));
-        task = getSlaTask(SLA_FEATURE, CAT);
+        task = getGeneralTask(SLA_FEATURE, CAT);
         task.setUdfs(udf);
         task.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
         apiController.updateToken(generateAuthToken(CLIENT));

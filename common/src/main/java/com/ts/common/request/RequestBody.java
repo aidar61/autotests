@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ts.common.annotations.Create;
 import com.ts.common.annotations.Mandatory;
 import com.ts.common.annotations.TypeId;
-import com.ts.common.controllers.sla.TaskRequestBody;
+import com.ts.common.controllers.TaskRequestBody;
 import com.ts.common.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,7 +31,9 @@ public abstract class RequestBody {
         fieldNames.forEach(s -> {
             jsonNode.remove(s);
         });
-        return jsonNode.toString();
+        String string = jsonNode.toString();
+//        log.error("Fields to generate json is: {}", string);
+        return string;
     }
 
     public String removeFields(String... fieldNames) {

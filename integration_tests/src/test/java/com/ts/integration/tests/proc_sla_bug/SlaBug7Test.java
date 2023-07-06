@@ -2,11 +2,11 @@ package com.ts.integration.tests.proc_sla_bug;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.controllers.sla.TaskResponseBody;
-import com.ts.common.controllers.sla.slaBug.SlaBugController;
+import com.ts.common.controllers.TaskResponseBody;
+import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.ComSlaOperations;
-import com.ts.common.enums.SlaType;
+import com.ts.common.enums.Operations;
+import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.AfterMethod;
@@ -46,7 +46,7 @@ public class SlaBug7Test extends BaseIntegrationTest {
         udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
         udf.setUdfList(InitEntities.generateUdfList(UDF_SDBUG_PRIORITYBUG, CRITICAL));
         udf.setSecondUdfList(InitEntities.generateUdfList(UDF_SD_REMOTEACCESS, REMOTE_ACCESS));
-        task = InitEntities.getSlaTask(SlaType.SLA_BUG, ComSlaOperations.CAT);
+        task = InitEntities.getGeneralTask(TaskType.SLA_BUG, Operations.CAT);
         task.refreshUdf(udf);
         task.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
         apiController.updateToken(generateAuthToken(CLIENT));
@@ -72,6 +72,6 @@ public class SlaBug7Test extends BaseIntegrationTest {
         udf.setSecondUdfList(generateUdfList(UDF_SD_CLOSEREASON, SOLVED));
         task.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(EMPLOYEE));
-        slaBugController.performCommonOperation(task, ComSlaOperations.REMOVE_REQUEST);
+        slaBugController.performCommonOperation(task, Operations.REMOVE_REQUEST);
     }
 }

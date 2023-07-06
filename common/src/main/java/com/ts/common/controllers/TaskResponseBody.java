@@ -1,0 +1,52 @@
+package com.ts.common.controllers;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ts.common.entitites.commonEntities.Category;
+import com.ts.common.entitites.commonEntities.Status;
+import com.ts.common.entitites.commonEntities.User;
+import com.ts.common.entitites.tasks.GeneralTask;
+import lombok.*;
+import lombok.experimental.FieldDefaults;
+import lombok.extern.jackson.Jacksonized;
+
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Jacksonized
+@JsonIgnoreProperties(ignoreUnknown = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
+@ToString
+public class TaskResponseBody extends com.ts.common.request.ResponseBody {
+    String id;
+    String description;
+    String name;
+    @JsonProperty("shortname")
+    String shortName;
+    String number;
+    Category category;
+    @JsonProperty("status")
+    Status finishStatus;
+    String statusName;
+    User handlerUser;
+    String priorityName;
+    @JsonProperty("task")
+    GeneralTask task;
+    @JsonProperty("message")
+    GeneralTask message;
+
+    @Override
+    public Object receiveTaskStatus() {
+        if (this.task != null) {
+            return task.getFinishStatus().getId();
+        }
+        return getFinishStatus().getId();
+    }
+
+    @Override
+    public Object receiveHandlerUser() {
+        return this.message.getHandlerUser();
+    }
+}

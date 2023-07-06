@@ -19,10 +19,15 @@ public class EntityAssert {
     public void isNotExist() {
         assertNull(entity, "Object is not exist");
     }
-    public void isEquals(BaseEntity actualEntity) {
-        assertTrue(entity.isEquals(actualEntity), entity.getClass().getName() + " parameters is match: " + entity);
+
+
+    public void isEquals(BaseEntity expectedEntity) {
+        assertTrue(entity.isEquals(expectedEntity), entity.getClass().getName() + " parameters is match: " + entity);
     }
+
     public <T extends BaseEntity> void isCorrectStatus(Status expectedStatus) {
-        assertEquals(expectedStatus, entity.receiveTaskStatus());
+//        assertEquals(expectedStatus, entity.receiveTaskStatus());
+        assertTrue(expectedStatus.isEquals(entity.receiveTaskStatus()), entity.getClass().getName() + " parameters is match: " + entity);
     }
+
 }

@@ -1,14 +1,8 @@
 package com.ts.common.ui.pages;
 
-import com.ts.common.ui.driver.BrowserManager;
-import com.ts.common.ui.driver.WebElementActions;
+import com.ts.common.ui.driver.ElementActions;
 
 public abstract class AbstractBasePage {
-    private WebElementActions actions;
-    protected BrowserManager browser;
+    protected ElementActions elActions = new ElementActions();
 
-    public WebElementActions actions() {
-        if (actions == null) actions = new WebElementActions();
-        return actions;
-    }
 }
