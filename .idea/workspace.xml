@@ -67,7 +67,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature/pro__advice",
+    "git-widget-placeholder": "master",
     "last_opened_file_path": "/Users/turdukhodzhaevs/Projects/colvir/common/src/main/java/domain",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -94,8 +94,8 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml">
-    <configuration name="CatAdvice1Test" type="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.CatAdvice1Test.comment">
+    <configuration name="CatAdvice1Test.comment" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
@@ -105,7 +105,8 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_advice.cat_advice" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_advice.cat_advice.CatAdvice1Test" />
-      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="METHOD_NAME" value="comment" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -220,19 +221,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.CatAdvice1Test.comment" />
       <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
       <item itemvalue="TestNG.CatConfirmation1Test" />
       <item itemvalue="TestNG.CatSanction1Test" />
       <item itemvalue="TestNG.com.ts.integration.tests" />
-      <item itemvalue="TestNG.CatAdvice1Test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.CatAdvice1Test.comment" />
         <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
         <item itemvalue="TestNG.com.ts.integration.tests" />
         <item itemvalue="TestNG.CatConfirmation1Test" />
         <item itemvalue="TestNG.CatSanction1Test" />
-        <item itemvalue="TestNG.CatAdvice1Test" />
       </list>
     </recent_temporary>
   </component>
