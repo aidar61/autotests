@@ -27,7 +27,7 @@ public class InitEntities {
                 .operation(generateOperationID(taskType, id))
                 .parent(getParent(MTB))
                 .name(generateName())
-                .description(generateName() + " CAT description")
+                .description(generateName() + " CAT description ")
 //                .shortName(generateCodeShortName())
                 .udfs(refreshUdf())
                 .attachments(new String[]{})
@@ -131,7 +131,7 @@ public class InitEntities {
     public static UdfList generateUdfList(Udfs.UdfSd udfSdType, List.Constants udfList) {
         return UdfList.builder()
                 .udfId(udfSdType.udfId)
-                .type(Type.LIST.name())
+                .type(udfSdType.type.name())
                 .listValue(new List[]{new List(udfList.id)})
                 .build();
     }
@@ -155,10 +155,11 @@ public class InitEntities {
     }
 
     public static UdfList generateUdfList(Udfs.UdfSd udfSdType, List.Constants udfList, String value) {
+
         return UdfList.builder()
                 .udfId(udfSdType.udfId)
-                .type(Type.LIST.name())
-                .listValue(new List[]{new List(udfList.id)})
+                .type(udfSdType.type.name())
+                .listValue(new List[]{new List(udfList.id, value)})
                 .userData(value)
                 .build();
     }

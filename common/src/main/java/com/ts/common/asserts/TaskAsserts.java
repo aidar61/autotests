@@ -1,6 +1,7 @@
 package com.ts.common.asserts;
 
 import com.ts.common.entitites.BaseEntity;
+import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.TaskStatuses;
 import io.qameta.allure.Step;
@@ -61,6 +62,14 @@ public class TaskAsserts extends EntityAssert {
                 , expectedTaskStatus.name(), "Task Status is not valid");
         log.info("Task status is correct Actual: {}, Expected: {}"
                 , super.entity.receiveTaskStatus(), expectedTaskStatus.name());
+        return this;
+    }
+
+    public TaskAsserts isCorrectHandlerUser(User expectedHandlerUser) {
+        assertTrue(expectedHandlerUser.isEquals(super.entity.receiveHandlerUser())
+                , "Handler user is not correct");
+        log.info("Handler user is correct Actual: {}, Expected: {}",
+                super.entity.receiveHandlerUser(), expectedHandlerUser);
         return this;
     }
 //    public TaskAsserts isCorrectTaskValues(GeneralTask expectedTask) {

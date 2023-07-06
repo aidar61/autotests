@@ -60,6 +60,10 @@ public class GeneralTask extends BaseEntity {
         setUdfs(udf);
     }
 
+    public void refreshTask() {
+
+    }
+
     @Override
     public Object receiveTaskStatus() {
         return getFinishStatus().getId();

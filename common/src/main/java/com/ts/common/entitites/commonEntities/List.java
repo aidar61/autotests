@@ -1,6 +1,8 @@
 package com.ts.common.entitites.commonEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.BaseEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,6 +21,13 @@ import lombok.extern.slf4j.Slf4j;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class List extends BaseEntity {
     String id;
+    @JsonProperty("userdata0")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    String userData;
+
+    public List(String id) {
+        this.id = id;
+    }
 
     public enum Constants {
         OWN("ff8081813874cb210138752a757f0243"),
@@ -49,6 +58,8 @@ public class List extends BaseEntity {
         ACCUPDLST("818181df7d730063017d7302f45b03f7"),
         NKP("8181817e3fbe6a52013fbe6f38560002"),
         LESSONS_PRACTICE("a7264df2b0911c4fe040007f01000d2c"),
+        B("653DCD851491460AA75355A235B1FB18"),
+
         CRITICAL("818182de541395b101541399d2120001");
 
         public final String id;

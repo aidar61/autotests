@@ -34,9 +34,19 @@ public class TaskResponseBody extends com.ts.common.request.ResponseBody {
     String priorityName;
     @JsonProperty("task")
     GeneralTask task;
+    @JsonProperty("message")
+    GeneralTask message;
 
     @Override
     public Object receiveTaskStatus() {
-        return task.getFinishStatus().getId();
+        if (this.task != null) {
+            return task.getFinishStatus().getId();
+        }
+        return getFinishStatus().getId();
+    }
+
+    @Override
+    public Object receiveHandlerUser() {
+        return this.message.getHandlerUser();
     }
 }

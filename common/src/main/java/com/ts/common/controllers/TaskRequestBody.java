@@ -62,6 +62,7 @@ public class TaskRequestBody extends com.ts.common.request.RequestBody {
         this.priority = generalTask.getPriority();
         this.shortName = generalTask.getShortName();
         this.resolution = generalTask.getResolution();
+        this.finishStatus = generalTask.getFinishStatus();
     }
 
     public enum Fields {

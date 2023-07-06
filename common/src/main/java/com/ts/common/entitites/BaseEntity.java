@@ -151,4 +151,8 @@ public abstract class BaseEntity implements Serializable {
     public Object receiveTaskNumber() {
         return null;
     }
+
+    public Object receiveHandlerUser() {
+        return null;
+    }
 }
