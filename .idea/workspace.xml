@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/TestsSupport">
-      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/DbHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/DbHelper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppConfigProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppConfigProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/db.properties" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Dynamic Database URL">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -335,7 +332,21 @@
       <option name="project" value="LOCAL" />
       <updated>1688635179928</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="feature/Dynamic Database URL">
+      <created>1688635515348</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1688635515348</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feature/Dynamic Database URL">
+      <created>1688635519041</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1688635519041</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -358,7 +369,8 @@
     <MESSAGE value="feature/ReleaseProc-Asserts" />
     <MESSAGE value="feature/CatSanction and CatConfirmation Tests" />
     <MESSAGE value="fix/TestsSupport" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix/TestsSupport" />
+    <MESSAGE value="feature/Dynamic Database URL" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/Dynamic Database URL" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
