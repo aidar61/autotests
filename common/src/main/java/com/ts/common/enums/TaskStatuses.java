@@ -1,6 +1,7 @@
 package com.ts.common.enums;
 
 public enum TaskStatuses {
+    STATUS_PROJECT_PLANNED,
     STATUS_SLAHELP_ANALIZING,
     STATUS_SLAHELP_WAITANALIZING,
     STATUS_SLAHELP_CONSULTED,

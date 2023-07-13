@@ -6,6 +6,7 @@ import com.ts.common.controllers.UserController;
 import com.ts.common.controllers.advice.AdviceController;
 import com.ts.common.controllers.advice.ConfirmationController;
 import com.ts.common.controllers.advice.SanctionController;
+import com.ts.common.controllers.dev.DevTaskController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
 import com.ts.common.controllers.release.ReleaseModuleController;
@@ -39,6 +40,7 @@ public class TrackStudioApiControllers {
     private AdviceController adviceController;
     private ConfirmationController confirmationController;
     private SanctionController sanctionController;
+    private DevTaskController devTaskController;
     private BaseController baseController;
 
 
@@ -54,13 +56,15 @@ public class TrackStudioApiControllers {
         this.adviceController = new AdviceController(STAND_URL, authToken);
         this.confirmationController = new ConfirmationController(STAND_URL, authToken);
         this.sanctionController = new SanctionController(STAND_URL, authToken);
+        this.devTaskController = new DevTaskController(STAND_URL, authToken);
     }
 
 
     public GeneralTask receiveGeneralTask(String slaTaskNumber) {
         this.response = this.baseController.receiveActualTask(slaTaskNumber);
         TaskResponseBody taskResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
-        if (taskResponseBody != null) {
+        if (taskResponseBody != null)
+        {
             return new GeneralTask(taskResponseBody);
         }
         return null;

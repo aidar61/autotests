@@ -5,7 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Dynamic Database URL">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/dev/DevController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/17f643b0-f0da-4279-b3d9-bf51adade449-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/4c2df546-50bb-40d1-9e21-3a925647fd9f-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/7523ef52-195f-44c3-96ca-1ea028729ecf-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/allure-results/f7eecfe1-79ec-4dd3-a8f7-f0f262263a29-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task/DevTask1Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/TaskResponseBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/TaskResponseBody.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,8 +26,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="spring-beans.schema" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Kotlin Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -27,7 +38,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/Hibernate" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -57,46 +68,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Git.Branch.Popup.ShowAllRemotes": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/Users/turdukhodzhaevs/Projects/colvir/common/src/main/java/domain",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.09375",
-    "project.structure.side.proportion": "0.32876712",
-    "settings.editor.selected.configurable": "terminal",
-    "settings.editor.splitter.proportion": "0.39143732",
-    "spring.configuration.checksum": "f0a48e2334f1b84f98a2595c6f1cd1ef",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/turdukhodzhaevs/Projects/colvir/common/src/main/java/domain&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.09375&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.32876712&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;terminal&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.39143732&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;f0a48e2334f1b84f98a2595c6f1cd1ef&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "oracle"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;oracle&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/common/src/main/java/domain" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.CatAdvice1Test">
+  <component name="RunManager" selected="TestNG.CatAdvice1Test.catAdvice">
     <configuration name="CatAdvice1Test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -108,6 +119,24 @@
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_advice.cat_advice" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_advice.cat_advice.CatAdvice1Test" />
       <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CatAdvice1Test.catAdvice" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_advice.cat_advice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_advice.cat_advice" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_advice.cat_advice.CatAdvice1Test" />
+      <option name="METHOD_NAME" value="catAdvice" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -205,38 +234,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.ts.integration.tests" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests" />
-      <option name="TEST_OBJECT" value="PACKAGE" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.CatAdvice1Test.catAdvice" />
       <item itemvalue="TestNG.CatAdvice1Test.close" />
       <item itemvalue="TestNG.CatAdvice1Test.comment" />
       <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
-      <item itemvalue="TestNG.com.ts.integration.tests" />
       <item itemvalue="TestNG.CatAdvice1Test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.CatAdvice1Test.catAdvice" />
         <item itemvalue="TestNG.CatAdvice1Test" />
         <item itemvalue="TestNG.CatAdvice1Test.close" />
         <item itemvalue="TestNG.CatAdvice1Test.comment" />
         <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
-        <item itemvalue="TestNG.com.ts.integration.tests" />
       </list>
     </recent_temporary>
   </component>
@@ -357,7 +370,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="feature/CatAdviceTest" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

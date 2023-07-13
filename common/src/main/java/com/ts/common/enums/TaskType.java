@@ -16,6 +16,7 @@ public enum TaskType {
     SANCTION("SANCTION"),
     CONFIRMATION("CONFIRMATION"),
     RELEASE_MODULE("RELEASEMODULE"),
+    DEV_TASK("DEVTASK"),
     RELEASE("RELEASE");
     public final String type;
 

@@ -32,6 +32,7 @@ public class GeneralTask extends BaseEntity {
     String description;
     String shortName;
     User handlerUser;
+    User submittedUser;
     Udfs udfs;
     @JsonProperty("status")
     Status finishStatus;
@@ -48,6 +49,7 @@ public class GeneralTask extends BaseEntity {
         this.description = taskResponseBody.getDescription();
         this.finishStatus = taskResponseBody.getFinishStatus();
         this.handlerUser = taskResponseBody.getHandlerUser();
+        this.submittedUser = taskResponseBody.getSubmittedUser();
     }
 
 
