@@ -3,6 +3,7 @@ package com.ts.common.asserts;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.tasks.GeneralTask;
+import com.ts.common.enums.Resolutions;
 import com.ts.common.enums.TaskStatuses;
 import io.qameta.allure.Step;
 import lombok.Data;
@@ -70,6 +71,13 @@ public class TaskAsserts extends EntityAssert {
                 , "Handler user is not correct");
         log.info("Handler user is correct Actual: {}, Expected: {}",
                 super.entity.receiveHandlerUser(), expectedHandlerUser);
+        return this;
+    }
+    public TaskAsserts isCorrectResolution(Resolutions expectedResolution) {
+        assertEquals(super.entity.receiveTaskResolution()
+                , expectedResolution.getId(), "Task Resolution is not valid");
+        log.info("Task resolution is correct Actual: {}, Expected: {}"
+                , super.entity.receiveTaskStatus(), expectedResolution.name());
         return this;
     }
 //    public TaskAsserts isCorrectTaskValues(GeneralTask expectedTask) {

@@ -83,6 +83,7 @@ public class TrackStudioApiControllers {
         this.adviceController.setAuthToken(authToken);
         this.confirmationController.setAuthToken(authToken);
         this.sanctionController.setAuthToken(authToken);
+        this.devTaskController.setAuthToken(authToken);
     }
 
 }

@@ -8,6 +8,7 @@ public enum Operations {
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
     CHANGE("%S_CHANGE"), // изменить аттрибуты решения
     COMMENT("%S_COMMENT"), // коментарий
+    CHANGE_PLAN("%S_CHANGEPLAN"), // коррекция плана
     CLI_COMMENT("%S_CLICOMMENT"), // задать вопрос
     CHANGE_STATUS("%S_CHANGESTATUS"), // изменить состояние
     CHANGE_RES_PERSON("%S_REASSIGN"),//изменить ответственного
@@ -53,6 +54,7 @@ public enum Operations {
     CHANGE_DECISION("%S_CHANGEDECISION"), // Изменить решение и постановку на реализацию
     CLEAR_DECISION("%S_CLEARDECISION"), // Уточнить решение
     START("%S_START"), // Передать в разработку
+    ACCEPT_IN_WORK("%S_ACCEPTINWORK"), // Передать в разработку
     HOTFIX("%S_HOTFIX"), // Предоставить решение
     PASS_TO_REALIZE("%S_PASSTOREALIZE"), // передать на реализацию
     RETURN("%S_RETURN"), // Вернуть в работу
@@ -79,6 +81,7 @@ public enum Operations {
     CLOSEUNFIXABLE("%S_CLOSEUNFIXABLE"), // закрыть как неустраненную
     CLOSE("%S_CLOSE"), // закрыть(поставщик)
     ACCEPTSOLUTION("%S_ACCEPTSOLUTION"), // ошибка устранена
+    POSTPONE("%S_POSTPONE"), // отложить задачу
     REMOVE_REQUEST("%S_REMOVEREQUEST"); // снять запрос
 
     public final String id;

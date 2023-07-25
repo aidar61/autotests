@@ -49,9 +49,4 @@ public class GrTaskDbEntity extends DbEntity {
         log.info("Parent task is {}", firstEndPoint);
         return firstEndPoint;
     }
-
-    @Override
-    public Object receiveTaskNumber() {
-        return getTask_number();
-    }
 }

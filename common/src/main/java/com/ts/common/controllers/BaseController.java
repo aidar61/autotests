@@ -27,6 +27,7 @@ public class BaseController extends ApiRequest {
     protected TaskType taskType;
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS = {ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
+    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_CONFIRM = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, CONFIRMED};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_RESOLUTION = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, RESOLUTION};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {ID, OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_USER = {OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
@@ -46,7 +47,8 @@ public class BaseController extends ApiRequest {
         TaskRequestBody requestBody = new TaskRequestBody(generalTask);
         this.response = createTask(requestBody.keepMandatoryAndCreateFieldsAnd(HANDLER_USER));
         TaskResponseBody gapResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
-        if (gapResponseBody != null) {
+        if (gapResponseBody != null)
+        {
             generalTask.setId(gapResponseBody.getId());
             generalTask.setNumber(gapResponseBody.getNumber());
             generalTask.setFinishStatus(gapResponseBody.getFinishStatus());
@@ -77,14 +79,21 @@ public class BaseController extends ApiRequest {
         task.setOperation(InitEntities.generateOperationID(this.taskType, operation));
         if (task.getDescription() == null) task.setDescription(RandomUtils.generateDescriptionForOperation(operation));
         TaskRequestBody taskRequestBody = new TaskRequestBody(task);
-        if (task.getHandlerUser() != null) {
-            return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_USER));
-        }
-        if (task.getResolution() != null) {
-            if (task.getFinishStatus() != null) {
+        if (task.getResolution() != null)
+        {
+            if (task.getFinishStatus() != null)
+            {
                 return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITH_STATUS_AND_RESOLUTION));
             }
             return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITH_RESOLUTION));
+        }
+        if (task.getConfirmed() != null)
+        {
+            return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITH_CONFIRM));
+        }
+        if (task.getHandlerUser() != null)
+        {
+            return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_USER));
         }
 
         return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));

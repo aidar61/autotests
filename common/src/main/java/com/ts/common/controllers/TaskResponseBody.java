@@ -3,6 +3,7 @@ package com.ts.common.controllers;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.commonEntities.Category;
+import com.ts.common.entitites.commonEntities.Resolution;
 import com.ts.common.entitites.commonEntities.Status;
 import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.tasks.GeneralTask;
@@ -31,17 +32,17 @@ public class TaskResponseBody extends com.ts.common.request.ResponseBody {
     Status finishStatus;
     String statusName;
     User handlerUser;
-    User submittedUser;
+    User submitterUser;
     String priorityName;
     @JsonProperty("task")
     GeneralTask task;
     @JsonProperty("message")
     GeneralTask message;
+    Resolution resolution;
 
     @Override
     public Object receiveTaskStatus() {
-        if (this.task != null)
-        {
+        if (this.task != null) {
             return task.getFinishStatus().getId();
         }
         return getFinishStatus().getId();

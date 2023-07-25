@@ -7,7 +7,6 @@ import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
-import io.restassured.response.Response;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -32,7 +31,7 @@ public class GeneralTask extends BaseEntity {
     String description;
     String shortName;
     User handlerUser;
-    User submittedUser;
+    User submitterUser;
     Udfs udfs;
     @JsonProperty("status")
     Status finishStatus;
@@ -40,6 +39,7 @@ public class GeneralTask extends BaseEntity {
     Resolution resolution;
     String statusName;
     String priorityName;
+    Boolean confirmed;
     String[] attachments;
 
     public GeneralTask(TaskResponseBody taskResponseBody) {
@@ -49,7 +49,7 @@ public class GeneralTask extends BaseEntity {
         this.description = taskResponseBody.getDescription();
         this.finishStatus = taskResponseBody.getFinishStatus();
         this.handlerUser = taskResponseBody.getHandlerUser();
-        this.submittedUser = taskResponseBody.getSubmittedUser();
+        this.submitterUser = taskResponseBody.getSubmitterUser();
     }
 
 
@@ -78,6 +78,4 @@ public class GeneralTask extends BaseEntity {
     public Object receiveName() {
         return getName();
     }
-
-
 }
