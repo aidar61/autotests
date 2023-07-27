@@ -58,6 +58,10 @@ public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfDate udfDate;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfDate secondUdfDate;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfDate thirdUdfDate;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfTask udfTask;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfTask secondUdfTask;
@@ -140,10 +144,13 @@ public class Udfs extends BaseEntity {
         UDF_CDP_NORMBUDGET("UDF_CDP_NORMBUDGET", DOUBLE),
         UDF_CDP_STEPPLAN("UDF_CDP_STEPPLAN", MEMO),
         UDF_CDP_STEPPROGRESS("UDF_CDP_STEPPROGRESS", MEMO),
+        UDF_WORKTASK_RESPFOREPLAN("UDF_WORKTASK_RESPFOREPLAN", USER),
+        UDF_WORKTASK_TASKALLOCATION("UDF_WORKTASK_TASKALLOCATION", MEMO),
 
         UDF_WORKTASK_SUPERVISER("UDF_WORKTASK_SUPERVISER", USER),
 
         UDF_CDP_BL("UDF_CDP_BL", LIST),
+        UDF_WORKTASK_REASONFOREPLAN("UDF_WORKTASK_REASONFOREPLAN", LIST),
 
         UDF_SDFEATURE_PAYDCS("UDF_SDFEATURE_PAYDCS", LIST),
 
@@ -194,6 +201,7 @@ public class Udfs extends BaseEntity {
         UDF_ROLE_RESET("UDF_ROLE_RESET", LIST),
 
         UDF_REGPROJECT("UDF_REGPROJECT", TASK),
+        UDF_WORKTASK_PLANTD("UDF_WORKTASK_PLANTD", TASK),
         UDF_WORKTASK_PLANFD("UDF_WORKTASK_PLANFD", DATE);
 
         public final String udfId;

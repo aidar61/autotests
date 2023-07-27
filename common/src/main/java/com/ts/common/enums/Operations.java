@@ -37,6 +37,7 @@ public enum Operations {
     CHANGE_MODULE("%S_CHANGE_SD_MODULE"), // изменить модуль системы
     ANALIZE("%S_ANALIZE"), // принять на анализ
     DECLINE("%S_DECLINE"), // отклонить
+    INANALYSIS("%S_INANALYSIS"), // В АНАЛИЗЕ
     UNDODECLINE("%S_UNDODECLINE"), // отменить заказ
     TOPRECOST("%S_TOPRECOST"),//начать предварительный анализ
     REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
@@ -55,6 +56,7 @@ public enum Operations {
     CLEAR_DECISION("%S_CLEARDECISION"), // Уточнить решение
     START("%S_START"), // Передать в разработку
     ACCEPT_IN_WORK("%S_ACCEPTINWORK"), // Передать в разработку
+    CHANGE_TIME("%S_CHANGETIME"), // Перепланировать
     HOTFIX("%S_HOTFIX"), // Предоставить решение
     PASS_TO_REALIZE("%S_PASSTOREALIZE"), // передать на реализацию
     RETURN("%S_RETURN"), // Вернуть в работу
@@ -82,6 +84,7 @@ public enum Operations {
     CLOSE("%S_CLOSE"), // закрыть(поставщик)
     ACCEPTSOLUTION("%S_ACCEPTSOLUTION"), // ошибка устранена
     POSTPONE("%S_POSTPONE"), // отложить задачу
+    WORKTASK_ASSIGN("%S_ASSIGN"), // передать в работу
     REMOVE_REQUEST("%S_REMOVEREQUEST"); // снять запрос
 
     public final String id;
