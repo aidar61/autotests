@@ -50,6 +50,7 @@ public class GeneralTask extends BaseEntity {
         this.finishStatus = taskResponseBody.getFinishStatus();
         this.handlerUser = taskResponseBody.getHandlerUser();
         this.submitterUser = taskResponseBody.getSubmitterUser();
+//        this.udfs=taskResponseBody.m
     }
 
 

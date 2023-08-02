@@ -63,6 +63,28 @@ public class UserController extends ApiRequest {
         return collect.get(RandomUtils.generateRandomNumberBetween(0, collect.size() - 1));
     }
 
+    private List<UserRole> receiveUsersByTaskNumber(String taskNumber) {
+        HashMap<String, String> queryParam = new LinkedHashMap<>() {{
+            put(TO_TASK, taskNumber);
+        }};
+        super.response = super.get(getEndpoint(REST, ACL, EFFECTIVE, formatParameters(queryParam)));
+        return Arrays.asList(extractObject(UserRole[].class));
+    }
+
+    public UserRole receiveUserByRole(String taskNumber, String role, String login) {
+        List<UserRole> userRoles = receiveUsersByTaskNumber(taskNumber);
+        return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(login)).findFirst().get();
+    }
+
+    public Map<String, UserRole> receiveUsersByRoles(String taskNumber, String... roles) {
+        LinkedHashMap<String, UserRole> usersByRole = new LinkedHashMap<>();
+        var userRoles = receiveUsersByTaskNumber(taskNumber);
+        for (String role : roles) {
+            UserRole users = userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role)).findFirst().get();
+            usersByRole.put(role, users);
+        }
+        return usersByRole;
+    }
 
     public static void main(String[] args) {
         UserController userController = new UserController(STAND_URL, InitEntities.generateAuthToken(Users.ROOT));

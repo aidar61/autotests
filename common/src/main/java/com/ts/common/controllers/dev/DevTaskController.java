@@ -4,7 +4,6 @@ import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.TaskRequestBody;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.commonEntities.udf.UdfList;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
@@ -52,7 +51,9 @@ public class DevTaskController extends BaseController {
         parentDetailInString = this.response.asString().replace("\\&", "\\\\&");
         var udfProductTask = new JsonPath(parentDetailInString).getObject("udfs.UDF_PRODUCT", UdfTask.class);
         var udfBDKUTask = new JsonPath(parentDetailInString).getObject("udfs.UDF_BDKU_CONFIGURATION", UdfTask.class);
+        var udfCDP_BLTask = new JsonPath(parentDetailInString).getObject("udfs.UDF_CDP_BL", UdfTask.class);
         var returnTasks = new HashMap<String, UdfTask>();
+        returnTasks.put("UDF_CDP_BL", udfCDP_BLTask);
         returnTasks.put("UDF_PRODUCT", udfProductTask);
         returnTasks.put("UDF_BDKU_CONFIGURATION", udfBDKUTask);
         return returnTasks;

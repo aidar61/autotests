@@ -125,6 +125,7 @@ public class InitEntities {
                 .stringValue(value)
                 .build();
     }
+
     public static UdfMemo generateUdfMemo(Udfs.UdfSd udfSdType, String value, String userData) {
         return UdfMemo.builder()
                 .udfId(udfSdType.udfId)
@@ -216,6 +217,14 @@ public class InitEntities {
                 .udfId(udfSdType.udfId)
                 .type(udfSdType.type.name())
                 .dateValue(DateUtils.getCurrentDate(days[0]))
+                .build();
+    }
+
+    public static UdfDate generateUdfDate(Udfs.UdfSd udfSdType, String date) {
+        return UdfDate.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .dateValue(date)
                 .build();
     }
 

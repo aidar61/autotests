@@ -46,6 +46,8 @@ public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfList eighthUdfList;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfList ninethUdfList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfString udfString;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfString secondUdfString;
@@ -76,9 +78,13 @@ public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfTask fifthUdfTask;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfTask seventhUdfTask;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfMemo udfMemo;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfMemo secondUdfMemo;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfMemo thirdUdfMemo;
 //    public BaseEntity getUdfByUdfId(String udfId, String) {
 //        this.getClass().getField()
 //    }
@@ -143,6 +149,8 @@ public class Udfs extends BaseEntity {
         UDF_WORKTASK_AWAITBUDGET("UDF_WORKTASK_AWAITBUDGET", DOUBLE),
         UDF_CDP_NORMBUDGET("UDF_CDP_NORMBUDGET", DOUBLE),
         UDF_CDP_STEPPLAN("UDF_CDP_STEPPLAN", MEMO),
+        UDF_WORKTASK_TESTPLAN("UDF_WORKTASK_TESTPLAN", MEMO),
+        UDF_WORKTASK_FILES("UDF_WORKTASK_FILES", MEMO),
         UDF_CDP_STEPPROGRESS("UDF_CDP_STEPPROGRESS", MEMO),
         UDF_WORKTASK_RESPFOREPLAN("UDF_WORKTASK_RESPFOREPLAN", USER),
         UDF_WORKTASK_TASKALLOCATION("UDF_WORKTASK_TASKALLOCATION", MEMO),

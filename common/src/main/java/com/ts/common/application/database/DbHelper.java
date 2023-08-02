@@ -3,8 +3,6 @@ package com.ts.common.application.database;
 import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.application.database.dbTables.GrUserTable;
 import com.ts.common.config.AppConfigProvider;
-import com.ts.common.entitites.BaseEntity;
-import com.ts.common.enums.TaskStatuses;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;

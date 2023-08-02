@@ -80,7 +80,4 @@ public class TaskAsserts extends EntityAssert {
                 , super.entity.receiveTaskStatus(), expectedResolution.name());
         return this;
     }
-//    public TaskAsserts isCorrectTaskValues(GeneralTask expectedTask) {
-//
-//    }
 }

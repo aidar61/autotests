@@ -156,5 +156,11 @@ public abstract class BaseEntity implements Serializable {
         return null;
     }
 
-    public  Object receiveTaskResolution(){return null;}
+    public Object receiveTaskResolution() {
+        return null;
+    }
+
+    public Object receiveUdf() {
+        return null;
+    }
 }

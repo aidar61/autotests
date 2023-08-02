@@ -28,6 +28,12 @@ public class GrTaskTable extends AbstractDbTable {
         return entityWhere;
     }
 
+    public BaseEntity receiveByCategory(String category) {
+        BaseEntity entityWhere = super.getEntityWhereV2(GrTaskDbEntity.class, "task_category", category);
+        log.warn("Found following task with number {} from Database", entityWhere.receiveTaskNumber());
+        return entityWhere;
+    }
+
     @Step("[ASSERT] Check db by taskNumber: {}")
     public void isExistByTaskNumber(String number) {
         BaseEntity baseEntity = receiveByTaskNumber(number);

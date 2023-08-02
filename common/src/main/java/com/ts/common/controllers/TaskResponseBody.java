@@ -2,10 +2,7 @@ package com.ts.common.controllers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.ts.common.entitites.commonEntities.Category;
-import com.ts.common.entitites.commonEntities.Resolution;
-import com.ts.common.entitites.commonEntities.Status;
-import com.ts.common.entitites.commonEntities.User;
+import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.tasks.GeneralTask;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -51,5 +48,11 @@ public class TaskResponseBody extends com.ts.common.request.ResponseBody {
     @Override
     public Object receiveHandlerUser() {
         return this.message.getHandlerUser();
+    }
+
+
+    @Override
+    public Object receiveTaskResolution() {
+        return this.message.getResolution().getId();
     }
 }

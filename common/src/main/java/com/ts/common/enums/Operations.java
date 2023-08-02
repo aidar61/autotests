@@ -85,6 +85,8 @@ public enum Operations {
     ACCEPTSOLUTION("%S_ACCEPTSOLUTION"), // ошибка устранена
     POSTPONE("%S_POSTPONE"), // отложить задачу
     WORKTASK_ASSIGN("%S_ASSIGN"), // передать в работу
+    WORKTASK_TO_ACCEPTANCE("%S_TOACCEPTANCE"), // передать на приёмку
+    WORKTASK_CONFORMREPLAN("%S_CONFORMREPLAN"), // передать на приёмку
     REMOVE_REQUEST("%S_REMOVEREQUEST"); // снять запрос
 
     public final String id;

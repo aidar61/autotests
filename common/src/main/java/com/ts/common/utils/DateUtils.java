@@ -15,6 +15,4 @@ public class DateUtils {
             return LocalDate.now().format(dateTimeFormatter);
         }
     }
-
-
 }
