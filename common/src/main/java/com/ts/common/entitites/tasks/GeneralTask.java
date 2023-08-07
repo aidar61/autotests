@@ -2,6 +2,7 @@ package com.ts.common.entitites.tasks;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
@@ -21,6 +22,7 @@ import lombok.extern.jackson.Jacksonized;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
 public class GeneralTask extends BaseEntity {
+    public static ApiAsserts TaskAsserts;
     TaskType taskType;
     String id;
     String number;
@@ -33,6 +35,7 @@ public class GeneralTask extends BaseEntity {
     User handlerUser;
     User submitterUser;
     Udfs udfs;
+//    String udfsString;
     @JsonProperty("status")
     Status finishStatus;
     Status priority;
@@ -50,7 +53,7 @@ public class GeneralTask extends BaseEntity {
         this.finishStatus = taskResponseBody.getFinishStatus();
         this.handlerUser = taskResponseBody.getHandlerUser();
         this.submitterUser = taskResponseBody.getSubmitterUser();
-//        this.udfs=taskResponseBody.m
+//        this.udfsString = taskResponseBody.getUdfs();
     }
 
 

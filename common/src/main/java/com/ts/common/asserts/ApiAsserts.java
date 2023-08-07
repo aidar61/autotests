@@ -44,8 +44,8 @@ public class ApiAsserts {
 //        log.info("Response body is : " + responseBody);
     }
 
-    public <T> ApiAsserts isParseableBody(Class<T> clazz) {
-        Object obj = JsonUtils.deserialize(this.response, clazz);
+    public <T> ApiAsserts isParseableBody(Class<T> type) {
+        Object obj = JsonUtils.deserialize(this.response, type);
         assertNotNull(obj, "Response body is not parseable");
         this.responseBody = (ResponseBody) obj;
         log.info("Response body is correct");

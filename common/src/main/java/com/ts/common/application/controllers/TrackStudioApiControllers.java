@@ -70,6 +70,10 @@ public class TrackStudioApiControllers {
         return null;
     }
 
+    public Response receiveTask(String slaTaskNumber) {
+        return this.baseController.receiveActualTask(slaTaskNumber);
+    }
+
 
     @Step("Пользователь: {0}")
     public void updateToken(AuthToken authToken) {

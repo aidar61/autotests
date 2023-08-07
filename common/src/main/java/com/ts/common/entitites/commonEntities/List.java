@@ -76,8 +76,10 @@ public class List extends BaseEntity {
         UDF_MIS_SERVICE_04("818181b03a0bbc53013a0bd615e20577"),
         DEVELOPMENT_ERRORS("ff80818144f9297a0144f9f1bf740031"), //Ошибки при разработке
         DOC_REVISION_YES("ff8081813874cb21013875e34e720b7b"),
+
         DOC_REVISION_NO("ff8081813874cb21013875e34e910b7c"),
         CHANGEWORKERINRQST_NO("8181817e3e0c459c013e0c627bbc0012"),
+        UDF_WORKTASK_INREPLAN_YES("8181817e47deb7ba0147deec4bac006e"), //Задача находится на согласовании перепланирования -Да
 
         CRITICAL("818182de541395b101541399d2120001");
 

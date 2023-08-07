@@ -3,8 +3,9 @@ package com.ts.integration.tests.proc_work_task.dev_task_replan;
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
+import com.ts.common.application.infrastructure.services.TaskService;
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.asserts.TaskAsserts;
+import com.ts.common.asserts.UdfAssert;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.dev.DevTaskController;
 import com.ts.common.entitites.commonEntities.Parent;
@@ -46,8 +47,11 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
     private String expectedCompletionDate3;
     private String plannedStartDate;
 
+    private UdfTask customerRequest;
     private User creator;
     private User handlerUser;
+    private Integer estimationLaborInput;
+    private Integer initialAssessmentLaborIntensity;
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
@@ -59,11 +63,12 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
         var tasks = devTaskController.getTaskForSDRequest(parent.getNumber());
         productTask = tasks.get("UDF_PRODUCT");
         bdkuTask = tasks.get("UDF_BDKU_CONFIGURATION");
-//        var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategoryAndTaskStatus("CAT_SLABUG", STATUS_SLABUG_WAITING);
-//        sdRequestTask = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
+//        var taskSlaBug = new TaskService().GetByCategory("category", "CAT_SLABUG", 3, 1).get(0);
+//        customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.id, taskSlaBug.number));
         misService = devTaskController.getMisService();
-        creator = userController.receiveUserByRole(parent.getNumber(), "Менеджер проекта", "root").getForUser();
-        handlerUser = userController.receiveUserByRole(parent.getNumber(), "Участник проекта", creator.getLogin()).getForUser();
+        var employees = userController.receiveUsersByRoles(parent.getNumber(), "Менеджер проекта", "Участник проекта");
+        creator = employees.get("Менеджер проекта").getForUser();
+        handlerUser = employees.get("Участник проекта").getForUser();
     }
 
 
@@ -95,6 +100,7 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
         udf.setFourthUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, bdkuTask.getTaskValueSelector()[0]));
         udf.setSixthUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDBF, MTBANK));
         udf.setSeventhUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES));
+//        udf.setFifthUdfTask(customerRequest);
         if (misService != null)
             udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
         task.refreshUdf(udf);
@@ -113,9 +119,11 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
         udf = refreshUdf();
 
         expectedCompletionDate = DateUtils.getCurrentDate(1);
+        estimationLaborInput = 2;
+        initialAssessmentLaborIntensity = 2;
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_AWAITTD, expectedCompletionDate));
-        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_AWAITBUDGET, 2));
-        udf.setSecondUdfDouble(generateUdfDouble(UDF_CDP_NORMBUDGET, 2));
+        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_AWAITBUDGET, estimationLaborInput));
+        udf.setSecondUdfDouble(generateUdfDouble(UDF_CDP_NORMBUDGET, initialAssessmentLaborIntensity));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPLAN,
                 "[{\"id\":\"8181816c88683b1801894f980bef6f6a\",\"name\":\"Предварительный анализ\",\"order\":0,\"taskId\":\"" + task.getId() +
                         "\",\"weight\":0,\"budget\":7200,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c2516c220101516c711ff80024\",\"workTypeNorm\":2,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0701] Иное\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true,\"orderDraft\":0,\"nameDraft\":\"Предварительный анализ\",\"descriptionDraft\":\"\",\"statusDraft\":\"ACTUAL\",\"weightDraft\":0,\"budgetDraft\":7200,\"budgetHrs\":2,\"budgetMinutes\":0,\"workTypeIdDraft\":\"402881c2516c220101516c711ff80024\",\"workTypeNormDraft\":2}]",
@@ -130,6 +138,13 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
+
+        var response = apiController.receiveTask(task.getNumber());
+        UdfAssert
+                .assertThat(response)
+                .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, 2.0)
+                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 2.0)
+                .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
@@ -175,6 +190,11 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectResolution(RESOLUTION_DEPENDS_ON_ANOTHER_TASK)
                 .isCorrectStatus(STATUS_WORKTASK_POSTPONED);
+
+        var response = apiController.receiveTask(task.getNumber());
+        UdfAssert
+                .assertThat(response)
+                .isCorrectUdfTask(UDF_WORKTASK_DEPENDBF, MTBANK.id);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskPostpone")
@@ -211,6 +231,10 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
                 .isCorrectResolution(RESOLUTION_AWAITS_UNTIL_DATE)
                 .isCorrectStatus(STATUS_WORKTASK_POSTPONED);
 
+        var response = apiController.receiveTask(task.getNumber());
+        UdfAssert
+                .assertThat(response)
+                .isCorrectUdfDate(UDF_WORKTASK_PLANFD, plannedStartDate);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskPostpone2")
@@ -229,10 +253,10 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_INWORK);
 
-        GeneralTask generalTask = apiController.receiveGeneralTask(task.getNumber());
-        TaskAsserts.assertThat(generalTask)
-                .isNotEmpty(generalTask.getDescription())
-                .isExist();
+        var response = apiController.receiveTask(task.getNumber());
+        UdfAssert
+                .assertThat(response)
+                .isCorrectUdfDate(UDF_WORKTASK_PLANFD, plannedStartDate);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Отложить", dependsOnMethods = "taskStart3")
@@ -280,6 +304,7 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
                 .isCorrectResolution(CANNOT_BE_COMPLETED_WITHIN_THE_SPECIFIED_TIME_FRAME)
+                .isCorrectHandlerUser(creator)
                 .isCorrectStatus(STATUS_WORKTASK_DECLINED);
     }
 
@@ -289,7 +314,9 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
         task.setHandlerUser(handlerUser);
         task.setDescription(generateString());
         udf = refreshUdf();
-        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, 10));
+
+        var analysisCompletionDate = DateUtils.getCurrentDate(10);
+        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, analysisCompletionDate));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{}]"));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
         task.refreshUdf(udf);
@@ -298,7 +325,13 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
+                .isCorrectHandlerUser(handlerUser)
                 .isCorrectStatus(STATUS_WORKTASK_ONANALYSIS);
+
+        var response = apiController.receiveTask(task.getNumber());
+        UdfAssert
+                .assertThat(response)
+                .isCorrectUdfDate(UDF_WORKTASK_ANALYSISFD, analysisCompletionDate);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "taskSubmitForAnalysis")
@@ -307,9 +340,10 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
         task.setDescription(generateString());
         task.setConfirmed(true);
         udf = refreshUdf();
+        var expectedAwaitedDate = DateUtils.getCurrentDate(5);
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANFD, 0));
         udf.setSecondUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, 1));
-        udf.setThirdUdfDate(generateUdfDate(UDF_WORKTASK_AWAITTD, 5));
+        udf.setThirdUdfDate(generateUdfDate(UDF_WORKTASK_AWAITTD, expectedAwaitedDate));
         udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_AWAITBUDGET, 20));
         udf.setSecondUdfDouble(generateUdfDouble(UDF_CDP_NORMBUDGET, 20));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPLAN,
@@ -322,6 +356,16 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_ANALYSISFINISHED);
+
+        var response = apiController.receiveTask(task.getNumber());
+        UdfAssert
+                .assertThat(response)
+                .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate)
+                .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, estimationLaborInput)
+                .isCorrectUdfDouble(UDF_WORKTASK_FIRSTPLANBUDGET, initialAssessmentLaborIntensity)
+                .isCorrectUdfDouble(UDF_WORKTASK_AWAITBUDGET, 20.0)
+                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 20.0)
+                .isCorrectUdfDate(UDF_WORKTASK_AWAITTD, expectedAwaitedDate);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Передать в работу", dependsOnMethods = "changePlan2")
@@ -343,6 +387,11 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
+
+        var response = apiController.receiveTask(task.getNumber());
+        UdfAssert
+                .assertThat(response)
+                .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate2);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskAssign")
@@ -393,6 +442,11 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_INWORK);
+
+        var response = apiController.receiveTask(task.getNumber());
+        UdfAssert
+                .assertThat(response)
+                .isCorrectUdfList(UDF_WORKTASK_INREPLAN, UDF_WORKTASK_INREPLAN_YES.id);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Согласовать перепланирование", dependsOnMethods = "taskChangeTime")
@@ -412,5 +466,36 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_INWORK);
+
+        var response = apiController.receiveTask(task.getNumber());
+        UdfAssert
+                .assertThat(response)
+                .isCorrectUdfDate(UDF_WORKTASK_AWAITTD, expectedCompletionDate3)
+                .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate2);
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Закончить разработку", dependsOnMethods = "taskAgreeChangeTime")
+    public void completeTask() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+
+        udf = refreshUdf();
+        var randomText = generateString();
+        udf.setUdfMemo(generateUdfMemo(UDF_WORKTASK_TESTPLAN, randomText));
+        udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_NO));
+        udf.setSecondUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{}]"));
+        task.setConfirmed(true);
+        task.refreshUdf(udf);
+        devTaskController.performCommonOperation(task, WORKTASK_FINISHDEV);
+        ApiAsserts.assertThat(devTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_CLOSED);
+
+        var response = apiController.receiveTask(task.getNumber());
+        UdfAssert
+                .assertThat(response)
+                .isCorrectUdfMemo(UDF_WORKTASK_TESTPLAN, randomText)
+                .isCorrectUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_NO.id);
     }
 }

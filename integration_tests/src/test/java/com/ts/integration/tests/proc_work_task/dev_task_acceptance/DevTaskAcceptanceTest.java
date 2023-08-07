@@ -92,6 +92,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         udf.setFourthUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, bdkuTask.getTaskValueSelector()[0]));
         udf.setSixthUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDBF, MTBANK));
         udf.setSeventhUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES));
+//        udf.setFifthUdfTask(generateUdfTask(UDF_WORKTASK_SDREQUEST, ));
         if (misService != null)
             udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
         task.refreshUdf(udf);
