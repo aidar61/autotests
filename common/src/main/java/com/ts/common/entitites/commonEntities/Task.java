@@ -89,6 +89,7 @@ public class Task extends BaseEntity {
         ONE_HUNGRED("818180a04638d7db01463db877d746a9", "287919"), // Рассчетный фронт офис
         FRONT_OFFICE("818180a04638d7db01463db877d746a9", "287919"),
         RYSGAL_BANK("818180a050c582480150c952631449fe", "463982"),
+        CUSTOMER_REQUEST("8a8181df879af7cb01879d663123091e", "1441326"), //Двойное начисление штрафа по гарантиям в первый день просрочки
         AKKREDITIVES("818181b03c7fc013013c7fca7130041d", "186616");
         public final String id;
         public final String number;

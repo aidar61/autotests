@@ -23,6 +23,7 @@ public abstract class AbstractDbTable {
     public static final String SELECT_WHERE_AND = SELECT_WHERE_QUERY + " AND %s = '%s'";
     public static final String SELECT_WHERE_ID = SELECT_QUERY + " WHERE id = '%s'";
     public static final String SELECT_WHERE_AND_OFFSET = SELECT_WHERE_AND + " OFFSET %s ROWS FETCH NEXT %s ROWS ONLY";
+    public static final String SELECT_WHERE_OFFSET = SELECT_WHERE_QUERY + " OFFSET %s ROWS FETCH NEXT %s ROWS ONLY";
     public static final String SELECT_OFFSET_NEXT = SELECT_QUERY + " OFFSET %s ROWS FETCH NEXT %s ROWS ONLY";
 
     protected JdbcTemplate template;
@@ -83,7 +84,7 @@ public abstract class AbstractDbTable {
     }
 
     public <T extends BaseEntity> T getEntityWhereV2(Class clazz, String... parameters) {
-        return (T) queryForObject(String.format(SELECT_WHERE_AND_OFFSET, this.name, parameters[0], parameters[1], generateRandomNumberBetween(0, 620), 1), new BeanPropertyRowMapper<>(clazz));
+        return (T) queryForObject(String.format(SELECT_WHERE_OFFSET, this.name, parameters[0], parameters[1], generateRandomNumberBetween(0, 620), 1), new BeanPropertyRowMapper<>(clazz));
     }
 
     public List<BaseEntity> receiveEntitiesWithOffset(Class clazz) {

@@ -76,6 +76,10 @@ public class UserController extends ApiRequest {
         return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(login)).findFirst().get();
     }
 
+    public List<UserRole> receiveUserByTask(String taskNumber) {
+        return receiveUsersByTaskNumber(taskNumber);
+    }
+
     public Map<String, UserRole> receiveUsersByRoles(String taskNumber, String... roles) {
         LinkedHashMap<String, UserRole> usersByRole = new LinkedHashMap<>();
         var userRoles = receiveUsersByTaskNumber(taskNumber);

@@ -60,6 +60,10 @@ public class BaseController extends ApiRequest {
     public Response receiveActualTask(String taskNumber) {
         return super.get(getEndpoint(REST, TASK, INFO, taskNumber));
     }
+    @Step("Получить подзадачи, Номер задачи: {0}")
+    public Response receiveSubTask(String taskNumber) {
+        return super.get(getEndpoint(REST, TASK, INFO, taskNumber, "filter/1/1/50"));
+    }
 
     protected Response performOperation(@NotNull GeneralTask task, String requestBody) {
         return this.response = super.post(getEndpoint(REST, TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE), requestBody);

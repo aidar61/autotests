@@ -63,8 +63,7 @@ public class TrackStudioApiControllers {
     public GeneralTask receiveGeneralTask(String slaTaskNumber) {
         this.response = this.baseController.receiveActualTask(slaTaskNumber);
         TaskResponseBody taskResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
-        if (taskResponseBody != null)
-        {
+        if (taskResponseBody != null) {
             return new GeneralTask(taskResponseBody);
         }
         return null;
@@ -72,6 +71,10 @@ public class TrackStudioApiControllers {
 
     public Response receiveTask(String slaTaskNumber) {
         return this.baseController.receiveActualTask(slaTaskNumber);
+    }
+
+    public Response receiveSubTask(String taskNumber) {
+        return this.baseController.receiveSubTask(taskNumber);
     }
 
 

@@ -88,6 +88,7 @@ public enum Operations {
     WORKTASK_TO_ACCEPTANCE("%S_TOACCEPTANCE"), // передать на приёмку
     WORKTASK_CONFORMREPLAN("%S_CONFORMREPLAN"), // передать на приёмку
     WORKTASK_FINISHDEV("%S_FINISHDEV"), // закончить разработку
+    WORKTASK_FINISHACCEPT("%S_FINISHACCEPT"), // закончить приёмку
     REMOVE_REQUEST("%S_REMOVEREQUEST"); // снять запрос
 
     public final String id;
