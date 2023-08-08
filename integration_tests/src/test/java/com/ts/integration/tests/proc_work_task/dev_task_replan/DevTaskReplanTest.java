@@ -36,6 +36,7 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
     public DevTaskController devTaskController;
     private GeneralTask task;
     private String misService;
+    private String cdpBl;
     private UdfTask productTask;
     private UdfTask bdkuTask;
     private Parent parent;
@@ -52,6 +53,7 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
     private Integer estimationLaborInput;
     private Integer initialAssessmentLaborIntensity;
 
+
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         devTaskController = apiController.getDevTaskController();
@@ -65,6 +67,7 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
         misService = devTaskController.getMisService();
+        cdpBl = devTaskController.getCdpBl();
         var employees = userController.receiveUserByTask(parent.getNumber());
         creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта")).findFirst().get().getForUser();
         handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();
@@ -83,7 +86,9 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
         udf.setEighthUdfList(generateUdfList(UDF_WORKTASK_COMPLEXITYLEVEL, TASK_LEVEL_7));
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR));
         udf.setSecondUdfUser(generateUdfUser(UDF_WATCHER, BABUSHKIN_IVAN));
-        udf.setUdfList(generateUdfList(UDF_CDP_BL, UDF_CDP_BL_PRODUCT));
+        if (cdpBl != null) {
+            udf.setUdfList(generateUdfList(UDF_CDP_BL, cdpBl));
+        }
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
         udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO));

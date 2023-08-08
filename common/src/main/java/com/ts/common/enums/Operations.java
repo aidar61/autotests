@@ -89,6 +89,7 @@ public enum Operations {
     WORKTASK_CONFORMREPLAN("%S_CONFORMREPLAN"), // передать на приёмку
     WORKTASK_FINISHDEV("%S_FINISHDEV"), // закончить разработку
     WORKTASK_FINISHACCEPT("%S_FINISHACCEPT"), // закончить приёмку
+    WORKTASK_SUPERVISE("%S_SUPERVISE"), // закончить приёмку
     REMOVE_REQUEST("%S_REMOVEREQUEST"); // снять запрос
 
     public final String id;

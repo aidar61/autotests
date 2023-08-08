@@ -34,6 +34,7 @@ import static com.ts.common.utils.RandomUtils.generateString;
 public class DevTaskAcceptanceTest extends BaseIntegrationTest {
 
     public DevTaskController devTaskController;
+    private String cdpBl;
     private GeneralTask task;
     private String misService;
     private UdfTask productTask;
@@ -60,6 +61,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         var tasks = devTaskController.getTaskForSDRequest(parent.getNumber());
         productTask = tasks.get("UDF_PRODUCT");
         bdkuTask = tasks.get("UDF_BDKU_CONFIGURATION");
+        cdpBl = devTaskController.getCdpBl();
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
         sdRequestTask = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
         misService = devTaskController.getMisService();
@@ -79,7 +81,9 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         udf.setEighthUdfList(generateUdfList(UDF_WORKTASK_COMPLEXITYLEVEL, TASK_LEVEL_7));
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR));
         udf.setSecondUdfUser(generateUdfUser(UDF_WATCHER, BABUSHKIN_IVAN));
-        udf.setUdfList(generateUdfList(UDF_CDP_BL, UDF_CDP_BL_PRODUCT));
+        if (cdpBl != null) {
+            udf.setUdfList(generateUdfList(UDF_CDP_BL, cdpBl));
+        }
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
         udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYCREATOR));

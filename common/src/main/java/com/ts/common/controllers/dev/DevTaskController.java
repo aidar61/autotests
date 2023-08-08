@@ -12,6 +12,7 @@ import com.ts.common.utils.JsonUtils;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -51,9 +52,7 @@ public class DevTaskController extends BaseController {
         parentDetailInString = this.response.asString().replace("\\&", "\\\\&");
         var udfProductTask = new JsonPath(parentDetailInString).getObject("udfs.UDF_PRODUCT", UdfTask.class);
         var udfBDKUTask = new JsonPath(parentDetailInString).getObject("udfs.UDF_BDKU_CONFIGURATION", UdfTask.class);
-        var udfCDP_BLTask = new JsonPath(parentDetailInString).getObject("udfs.UDF_CDP_BL", UdfTask.class);
         var returnTasks = new HashMap<String, UdfTask>();
-        returnTasks.put("UDF_CDP_BL", udfCDP_BLTask);
         returnTasks.put("UDF_PRODUCT", udfProductTask);
         returnTasks.put("UDF_BDKU_CONFIGURATION", udfBDKUTask);
         return returnTasks;
@@ -61,6 +60,20 @@ public class DevTaskController extends BaseController {
 
     public String getMisService() {
         var misService = new JsonPath(parentDetailInString).getObject("udfs.UDF_MIS_SERVICE", UdfList.class);
+        if (misService != null) {
+            if (misService.getListValue() != null && misService.getListValue().length > 0) {
+                return misService.getListValue()[0].getId();
+            }
+            if (misService.getListValueSelector() != null && misService.getListValueSelector().length > 0) {
+                return misService.getListValueSelector()[0].getId();
+            }
+        }
+
+        return null;
+    }
+
+    public String getCdpBl() {
+        var misService = new JsonPath(parentDetailInString).getObject("udfs.UDF_CDP_BL", UdfList.class);
         if (misService != null) {
             if (misService.getListValue() != null && misService.getListValue().length > 0) {
                 return misService.getListValue()[0].getId();

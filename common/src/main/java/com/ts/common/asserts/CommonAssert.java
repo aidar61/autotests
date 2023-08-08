@@ -47,6 +47,12 @@ public class CommonAssert {
         return this;
     }
 
+    public CommonAssert isTaskNotCreate(String category) {
+        var tasks = new JsonPath(response.asString()).getList("tasks", Task.class);
+        assertTrue(!tasks.stream().anyMatch(s -> s.getCategory().getId().equals(category)), category + " is not create: ");
+        return this;
+    }
+
     public CommonAssert isCorrectHandlerUser(String expectedLogin) {
         var task = response.as(Task.class);
         assertTrue(expectedLogin.equals(task.getHandlerUser().getLogin()), expectedLogin + " parameters is match: ");
@@ -95,6 +101,13 @@ public class CommonAssert {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfList.class).getListValue();
         System.out.println("actual: " + actual + ", expected: " + expected);
         assertTrue(Arrays.stream(actual).anyMatch(x -> x.getId().equals(expected)), type.udfId + " parameters is match: ");
+        return this;
+    }
+
+    public CommonAssert isCorrectUdfUSer(Udfs.UdfSd type, String expected) {
+        var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfUser.class).getUserValue();
+        System.out.println("actual: " + actual + ", expected: " + expected);
+        assertTrue(Arrays.stream(actual).anyMatch(x -> x.getLogin().equals(expected)), type.udfId + " parameters is match: ");
         return this;
     }
 

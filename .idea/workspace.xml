@@ -4,21 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="Check additional fields">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/ListAdditional.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/udf/UdfListAdditional.java" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="complete acceptance 1.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/AbstractDbTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/AbstractDbTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/ApiAsserts.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/ApiAsserts.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/UdfAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/BaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/dev/DevTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/dev/DevTaskController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance/DevTaskAcceptanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance/DevTaskAcceptanceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance2/DevTaskAcceptanceTest2.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance2/DevTaskAcceptanceTest2.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_replan/DevTaskReplanTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_replan/DevTaskReplanTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -116,7 +109,7 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.DevTaskAcceptanceTest">
+  <component name="RunManager" selected="TestNG.DevTaskAcceptanceTest2">
     <configuration name="DevTaskAcceptanceTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -134,16 +127,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DevTaskAcceptanceTest.devTask" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="DevTaskAcceptanceTest2" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance2.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance.DevTaskAcceptanceTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance2" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance2.DevTaskAcceptanceTest2" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DevTaskAcceptanceTest2.devTask" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance2.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance2" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance2.DevTaskAcceptanceTest2" />
       <option name="METHOD_NAME" value="devTask" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
@@ -163,24 +173,6 @@
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_replan.DevTaskReplanTest" />
       <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="DevTaskReplanTest.changePlan" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_replan.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_replan" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_replan.DevTaskReplanTest" />
-      <option name="METHOD_NAME" value="changePlan" />
-      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -253,19 +245,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.DevTaskReplanTest.changePlan" />
+      <item itemvalue="TestNG.DevTaskAcceptanceTest2" />
+      <item itemvalue="TestNG.DevTaskAcceptanceTest2.devTask" />
       <item itemvalue="TestNG.DevTaskAcceptanceTest" />
-      <item itemvalue="TestNG.DevTaskAcceptanceTest.devTask" />
       <item itemvalue="TestNG.DevTaskReplanTest" />
       <item itemvalue="TestNG.DevTaskReplanTest.devTask" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.DevTaskAcceptanceTest2" />
+        <item itemvalue="TestNG.DevTaskAcceptanceTest2.devTask" />
         <item itemvalue="TestNG.DevTaskAcceptanceTest" />
         <item itemvalue="TestNG.DevTaskReplanTest" />
         <item itemvalue="TestNG.DevTaskReplanTest.devTask" />
-        <item itemvalue="TestNG.DevTaskReplanTest.changePlan" />
-        <item itemvalue="TestNG.DevTaskAcceptanceTest.devTask" />
       </list>
     </recent_temporary>
   </component>
@@ -323,7 +315,7 @@
       <workItem from="1690516976569" duration="2737000" />
       <workItem from="1690712690008" duration="46360000" />
       <workItem from="1691122411071" duration="19007000" />
-      <workItem from="1691323516284" duration="45023000" />
+      <workItem from="1691323516284" duration="52142000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -421,7 +413,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691405057080</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="complete acceptance 1.">
+      <option name="closed" value="true" />
+      <created>1691482321043</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1691482321043</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -477,24 +477,25 @@
     <MESSAGE value="scenariosfeature/CatDevTask 8-16" />
     <MESSAGE value="added random user." />
     <MESSAGE value="Check additional fields" />
-    <option name="LAST_COMMIT_MESSAGE" value="Check additional fields" />
+    <MESSAGE value="complete acceptance 1." />
+    <option name="LAST_COMMIT_MESSAGE" value="complete acceptance 1." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_replan/DevTaskReplanTest.java</url>
-          <line>311</line>
+          <line>316</line>
           <option name="timeStamp" value="51" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_replan/DevTaskReplanTest.java</url>
-          <line>240</line>
+          <line>245</line>
           <option name="timeStamp" value="55" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_replan/DevTaskReplanTest.java</url>
-          <line>312</line>
+          <line>317</line>
           <option name="timeStamp" value="63" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -504,12 +505,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_replan/DevTaskReplanTest.java</url>
-          <line>140</line>
+          <line>145</line>
           <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance/DevTaskAcceptanceTest.java</url>
-          <line>198</line>
+          <line>202</line>
           <option name="timeStamp" value="84" />
         </line-breakpoint>
       </breakpoints>

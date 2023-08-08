@@ -4,11 +4,10 @@ import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
+import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.dev.DevTaskController;
-import com.ts.common.entitites.commonEntities.Parent;
-import com.ts.common.entitites.commonEntities.Task;
-import com.ts.common.entitites.commonEntities.User;
+import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
@@ -23,8 +22,7 @@ import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_CDP_WT;
-import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
-import static com.ts.common.entitites.commonEntities.User.Constants.BABUSHKIN_IVAN;
+import static com.ts.common.entitites.commonEntities.User.Constants.*;
 import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.TaskStatuses.*;
 import static com.ts.common.utils.InitEntities.*;
@@ -33,6 +31,7 @@ import static com.ts.common.utils.RandomUtils.generateString;
 public class DevTaskAcceptanceTest2 extends BaseIntegrationTest {
 
     public DevTaskController devTaskController;
+    private String cdpBl;
     private GeneralTask task;
     private String misService;
     private UdfTask productTask;
@@ -44,22 +43,24 @@ public class DevTaskAcceptanceTest2 extends BaseIntegrationTest {
     private String expectedCompletionDate2;
     private String expectedCompletionDate3;
     private String plannedStartDate;
-
+    private UdfTask sdRequestTask;
     private User creator;
     private User handlerUser;
+    private Task catAcceptTask;
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         devTaskController = apiController.getDevTaskController();
         grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByTaskNumber("1021687");
+        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByCategoryAndTaskStatus("CAT_GENPLAN", STATUS_PROJECT_PLANNED);
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.DEV_TASK, Operations.CAT);
         var tasks = devTaskController.getTaskForSDRequest(parent.getNumber());
         productTask = tasks.get("UDF_PRODUCT");
         bdkuTask = tasks.get("UDF_BDKU_CONFIGURATION");
-//        var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategoryAndTaskStatus("CAT_SLABUG", STATUS_SLABUG_WAITING);
-//        sdRequestTask = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
+        cdpBl = devTaskController.getCdpBl();
+        var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
+        sdRequestTask = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
         misService = devTaskController.getMisService();
         creator = userController.receiveUserByRole(parent.getNumber(), "Менеджер проекта", "root").getForUser();
         handlerUser = userController.receiveUserByRole(parent.getNumber(), "Участник проекта", creator.getLogin()).getForUser();
@@ -78,7 +79,9 @@ public class DevTaskAcceptanceTest2 extends BaseIntegrationTest {
         udf.setEighthUdfList(generateUdfList(UDF_WORKTASK_COMPLEXITYLEVEL, TASK_LEVEL_7));
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR));
         udf.setSecondUdfUser(generateUdfUser(UDF_WATCHER, BABUSHKIN_IVAN));
-        udf.setUdfList(generateUdfList(UDF_CDP_BL, UDF_CDP_BL_PRODUCT));
+        if (cdpBl != null) {
+            udf.setUdfList(generateUdfList(UDF_CDP_BL, cdpBl));
+        }
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
         udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYCONRTOLLER));
@@ -94,6 +97,7 @@ public class DevTaskAcceptanceTest2 extends BaseIntegrationTest {
         udf.setFourthUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, bdkuTask.getTaskValueSelector()[0]));
         udf.setSixthUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDBF, MTBANK));
         udf.setSeventhUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES));
+        System.out.println("**** MIS_SERVICE: " + misService);
         if (misService != null)
             udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
         task.refreshUdf(udf);
@@ -163,25 +167,110 @@ public class DevTaskAcceptanceTest2 extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST);
     }
 
-//    @Test(groups = {"DevTask", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "taskStart")
-//    public void taskAcceptanceWithChangeHandlerUser() {
-//        udf = refreshUdf();
-//        task.refreshTask();
-//        task.setConfirmed(true);
-//        task.setHandlerUser(SUBMITTER_USER_FROM_PARENT);
-//
-//        udf.setUdfMemo(generateUdfMemo(UDF_WORKTASK_TESTPLAN, generateString()));
-//        udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_NO));
-//        udf.setSecondUdfMemo(generateUdfMemo(UDF_WORKTASK_FILES, "le1.txt, file2.tx"));
-//        udf.setThirdUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{}]"));
-//        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
-//
-//        task.refreshUdf(udf);
-//        devTaskController.performCommonOperation(task, WORKTASK_TO_ACCEPTANCE);
-//        ApiAsserts.assertThat(devTaskController.getResponse())
-//                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-//                .isParseableBody(TaskResponseBody.class)
-//                .assertTask()
-//                .isCorrectStatus(STATUS_WORKTASK_CLOSED);
-//    }
+    @Test(groups = {"DevTask", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "taskAcceptance")
+    public void taskChangeSupervisor() {
+        udf = refreshUdf();
+        udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, ARTEMEVA_MARINA));
+        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{}]"));
+        task.refreshUdf(udf);
+        devTaskController.performCommonOperation(task, WORKTASK_SUPERVISE);
+        ApiAsserts.assertThat(devTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+
+        var responseTask = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(responseTask)
+                .isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, ARTEMEVA_MARINA.login);
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "taskChangeSupervisor")
+    public void taskAcceptance2() {
+        udf = refreshUdf();
+
+        task.setHandlerUser(generateUser(ARTEMEVA_MARINA));
+        task.setResolution(Resolution.builder().build());
+        task.setFinishStatus(Status.builder().build());
+        udf.setUdfMemo(generateUdfMemo(UDF_WORKTASK_TESTPLAN, generateString()));
+        udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_NO));
+        udf.setSecondUdfMemo(generateUdfMemo(UDF_WORKTASK_FILES, "le1.txt, file2.tx"));
+        udf.setThirdUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{}]"));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ARTEMEVA_MARINA));
+
+        task.refreshUdf(udf);
+        devTaskController.performCommonOperation(task, WORKTASK_TO_ACCEPTANCE);
+        ApiAsserts.assertThat(devTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+
+        var response = apiController.receiveSubTask(task.getNumber());
+        var subTasks = response.jsonPath()
+                .getList("tasks", com.ts.common.entitites.tasks.Task.class);
+        var acceptTask = subTasks.stream().filter(x -> x.getCategory().getId().equals("CAT_ACCEPTTASK")).findFirst().get();
+        catAcceptTask = new Task(acceptTask.getId(), acceptTask.getNumber());
+        CommonAssert
+                .assertThat(response)
+                .isCorrectTaskStatus("CAT_ACCEPTTASK", STATUS_WORKTASK_ASSIGNED)
+                .isTaskNotCreate("CAT_DOCTASK");
+    }
+
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Проверить CAT_ACCEPTTASK", dependsOnMethods = "taskAcceptance2")
+    public void checkAcceptTask() {
+        apiController.updateToken(generateAuthToken(generateUser(ARTEMEVA_MARINA)));
+        var response = apiController.receiveTask(catAcceptTask.getNumber());
+        CommonAssert
+                .assertThat(response)
+                .isCorrectTaskName("Приёмка доработки: Создание запроса на разработку")
+                .isCorrectTaskDescription("Создана автоматически при закрытии задачи", task.getNumber())
+                .isCorrectHandlerUser(ARTEMEVA_MARINA.login);
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу CAT_ACCEPTTASK", dependsOnMethods = "checkAcceptTask")
+    public void startAcceptTask() {
+        apiController.updateToken(generateAuthToken(generateUser(ARTEMEVA_MARINA)));
+        udf = refreshUdf();
+        var subTask = new GeneralTask();
+        subTask.setAttachments(new String[0]);
+        subTask.setDescription(generateString());
+        subTask.setId(catAcceptTask.getId());
+        subTask.setNumber(catAcceptTask.getNumber());
+        subTask.setHandlerUser(generateUser(ARTEMEVA_MARINA));
+        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, 1));
+        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, 8));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ARTEMEVA_MARINA));
+
+        subTask.refreshUdf(udf);
+
+        devTaskController.performCommonOperation(subTask, ACCEPT_IN_WORK);
+        ApiAsserts.assertThat(devTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_INWORK);
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Закончить приёмку CAT_ACCEPTTASK", dependsOnMethods = "startAcceptTask")
+    public void completeAcceptTask() {
+        apiController.updateToken(generateAuthToken(creator));
+        udf = refreshUdf();
+        var subTask = new GeneralTask();
+        subTask.setId(catAcceptTask.getId());
+        subTask.setNumber(catAcceptTask.getNumber());
+        subTask.setAttachments(new String[0]);
+        subTask.refreshUdf(udf);
+        devTaskController.performCommonOperation(subTask, WORKTASK_FINISHACCEPT);
+        ApiAsserts.assertThat(devTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_CLOSED);
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Проверить CAT_DEVTASK", dependsOnMethods = "completeAcceptTask")
+    public void checkCatDevTask() {
+        apiController.updateToken(generateAuthToken(creator));
+        var devTask = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(devTask)
+                .isCorrectUdfListCode(UDF_CDP_ACCEPTANCE_STATUS, "ACCEPTED");
+    }
 }
