@@ -62,8 +62,11 @@ public class DevTaskAcceptanceTest2 extends BaseIntegrationTest {
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
         sdRequestTask = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
         misService = devTaskController.getMisService();
-        creator = userController.receiveUserByRole(parent.getNumber(), "Менеджер проекта", "root").getForUser();
-        handlerUser = userController.receiveUserByRole(parent.getNumber(), "Участник проекта", creator.getLogin()).getForUser();
+
+        var taskEmployees = userController.receiveUserByTask(parent.getNumber());
+        System.out.println("********* " + taskEmployees.size());
+        creator = userController.receiveUserByRole(taskEmployees, "Менеджер проекта", "root").getForUser();
+        handlerUser = userController.receiveUserByRole(taskEmployees, "Участник проекта", creator.getLogin()).getForUser();
     }
 
 

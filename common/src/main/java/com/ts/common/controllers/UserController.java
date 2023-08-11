@@ -68,11 +68,11 @@ public class UserController extends ApiRequest {
             put(TO_TASK, taskNumber);
         }};
         super.response = super.get(getEndpoint(REST, ACL, EFFECTIVE, formatParameters(queryParam)));
+        System.out.println("@@@@@@@@@@@@@@ " + response.asPrettyString());
         return Arrays.asList(extractObject(UserRole[].class));
     }
 
-    public UserRole receiveUserByRole(String taskNumber, String role, String login) {
-        List<UserRole> userRoles = receiveUsersByTaskNumber(taskNumber);
+    public UserRole receiveUserByRole(List<UserRole> userRoles, String role, String login) {
         return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(login)).findFirst().get();
     }
 

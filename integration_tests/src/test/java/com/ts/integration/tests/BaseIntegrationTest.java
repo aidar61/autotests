@@ -35,8 +35,7 @@ public class BaseIntegrationTest extends AbstractBaseTest {
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
-        log.info("test");
-        Configuration.browserCapabilities = Driver.initBrowserCapabilities();
+        log.info("test");Configuration.browserCapabilities = Driver.initBrowserCapabilities();
         this.authToken = generateAuthToken(Users.ROOT);
         apiController = new TrackStudioApiControllers(authToken);
         trackStudioPages = new Pages();

@@ -107,7 +107,7 @@ public class CatSanction1Test extends BaseIntegrationTest {
     public void adviceReturn() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
-        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD));
+        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD,0));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
         task.refreshUdf(udf);
         task.setHandlerUser(HANDLER_USER_FROM_PARENT);
@@ -153,7 +153,7 @@ public class CatSanction1Test extends BaseIntegrationTest {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         task.setHandlerUser(HANDLER_USER_FROM_PARENT);
         udf = refreshUdf();
-        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD));
+        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD,0));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
         task.refreshUdf(udf);
         task.setDescription(task.getDescription() + generateString());
