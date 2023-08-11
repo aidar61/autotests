@@ -135,6 +135,13 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
+
+        var response = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(response)
+                .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, 2.0)
+                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 2.0)
+                .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
