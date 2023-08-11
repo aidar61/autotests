@@ -54,6 +54,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         devTaskController = apiController.getDevTaskController();
+        userController = apiController.getUserController();
         grTaskTable = dbHelper.getGrTaskTable();
         parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByCategoryAndTaskStatus("CAT_GENPLAN", STATUS_PROJECT_PLANNED);
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());

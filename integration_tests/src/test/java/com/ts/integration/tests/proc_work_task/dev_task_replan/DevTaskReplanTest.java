@@ -57,6 +57,7 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         devTaskController = apiController.getDevTaskController();
+        userController = apiController.getUserController();
         grTaskTable = dbHelper.getGrTaskTable();
         parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByCategoryAndTaskStatus("CAT_GENPLAN", STATUS_PROJECT_PLANNED);
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
@@ -68,6 +69,9 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
         misService = devTaskController.getMisService();
         cdpBl = devTaskController.getCdpBl();
+        System.out.println(parent);
+        System.out.println(parent);
+        System.out.println("@@@@" + parent.getNumber());
         var employees = userController.receiveUserByTask(parent.getNumber());
         creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта")).findFirst().get().getForUser();
         handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();
