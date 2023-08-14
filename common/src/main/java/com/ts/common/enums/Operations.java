@@ -90,6 +90,8 @@ public enum Operations {
     WORKTASK_FINISHDEV("%S_FINISHDEV"), // закончить разработку
     WORKTASK_FINISHACCEPT("%S_FINISHACCEPT"), // закончить приёмку
     WORKTASK_SUPERVISE("%S_SUPERVISE"), // закончить приёмку
+    WORKTASK_CHANGEPRGAREA("%S_CHANGEPRGAREA"), //  Связь с ККПО
+    ADVICE_ALLOWKPO("%S_ALLOWKPO"), //  Санкционировать привязку КПО
     REMOVE_REQUEST("%S_REMOVEREQUEST"); // снять запрос
 
     public final String id;

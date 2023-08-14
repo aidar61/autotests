@@ -1,9 +1,10 @@
 package com.ts.common.asserts;
 
 
-import com.ts.common.config.AppConfig;
 import com.ts.common.config.AppConfigProvider;
+import com.ts.common.entitites.commonEntities.Status;
 import com.ts.common.entitites.commonEntities.Udfs;
+import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.commonEntities.udf.*;
 import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.TaskStatuses;
@@ -18,7 +19,6 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 import static org.testng.Assert.assertTrue;
 
@@ -40,10 +40,16 @@ public class CommonAssert {
         return this;
     }
 
-    public CommonAssert isCorrectTaskStatus(String category, TaskStatuses expectedStatus) {
+    public CommonAssert isCorrectSubTaskStatus(String category, TaskStatuses expectedStatus) {
         var tasks = new JsonPath(response.asString()).getList("tasks", Task.class);
         var actual = tasks.stream().filter(s -> s.getCategory().getId().equals(category)).findFirst().get();
         assertTrue(expectedStatus.toString().equals(actual.getFinishStatus().getId()), expectedStatus + " parameters is match: ");
+        return this;
+    }
+
+    public CommonAssert isCorrectTaskStatus(TaskStatuses expectedStatus) {
+        var actualStatus = new JsonPath(response.asString()).getObject("status", Status.class);
+        assertTrue(expectedStatus.toString().equals(actualStatus.getId()), expectedStatus + " parameters is match: ");
         return this;
     }
 
@@ -59,6 +65,12 @@ public class CommonAssert {
         return this;
     }
 
+    public CommonAssert isCorrectSubmitterUser(String expectedLogin) {
+        var submitterUser = new JsonPath(response.asString()).getObject("submitterUser", User.class);
+        assertTrue(expectedLogin.equals(submitterUser.getLogin()), expectedLogin + " parameters is match: ");
+        return this;
+    }
+
     public CommonAssert isCorrectTaskName(String expectedName) {
         var task = response.as(Task.class);
         assertTrue(expectedName.equals(task.getName()), expectedName + " parameters is match: ");
@@ -69,7 +81,7 @@ public class CommonAssert {
         var task = response.as(Task.class);
         var actualLink = Jsoup.parse(task.getDescription()).select("a[href]").first().attr("href");
         var expectedLink = AppConfigProvider.STAND_URL + "/app/task/" + parentId;
-        var actualDescription = task.getDescription().substring(0, 41);
+        var actualDescription = task.getDescription().substring(0, expectedDescription.length());
         assertTrue((actualLink.equals(expectedLink) && expectedDescription.equals(actualDescription)), expectedDescription + " parameters is match: ");
         return this;
     }

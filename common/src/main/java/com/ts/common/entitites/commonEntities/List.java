@@ -29,6 +29,7 @@ public class List extends BaseEntity {
         this.id = id;
     }
 
+    @Getter
     public enum Constants {
         OWN("ff8081813874cb210138752a757f0243"),
         FREE_LAW("818181b03cd282b1013cd34780013a5d"),
@@ -82,6 +83,10 @@ public class List extends BaseEntity {
         UDF_CDP_ACCEPTANCE_STATUS_ACCEPTANCE("4028818452e166ab0152e1831e4c0057"), //Статус приёмки - На приемке
         CHANGEWORKERINRQST_NO("8181817e3e0c459c013e0c627bbc0012"),
         UDF_WORKTASK_INREPLAN_YES("8181817e47deb7ba0147deec4bac006e"), //Задача находится на согласовании перепланирования -Да
+        UDF_PRGAREA_BNK("A4932143EF244F7EBBEFD72D1A9B6493"), //Основная банковская деятельность
+        UDF_PRGAREA_CDW("42954D8A847B4E4EA1F2E692BFA232A9"), //Хранилище данных Colvir
+        UDF_PRGAREA_BNK_AML("F195416F42B948018EBB47332753AF0C"), //Противодействие легализации незаконных доходов
+        UDF_PRGAREA_ISB("4439BF33627A4BB88666D52E8E8B3C4D"), //Противодействие легализации незаконных доходов
 
         CRITICAL("818182de541395b101541399d2120001");
 

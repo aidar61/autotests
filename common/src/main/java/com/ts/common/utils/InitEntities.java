@@ -6,6 +6,10 @@ import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.*;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.*;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Arrays;
+import java.util.Map;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.MSG;
 import static com.ts.common.enums.Parents.MTB;
@@ -150,6 +154,32 @@ public class InitEntities {
                 .type(udfSdType.type.name())
                 .listValue(new List[]{new List(udfList.id)})
                 .build();
+    }
+
+    public static UdfList generateUdfList(Udfs.UdfSd udfSdType, List.Constants[] udfList) {
+        return UdfList.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .listValue(Arrays.stream(udfList).map(s -> new List(s.getId())).toArray(List[]::new))
+                .build();
+    }
+
+    public static UdfMultiList generateUdfMultiList(Udfs.UdfSd udfSdType, Map<List.Constants, String> value) {
+        return UdfMultiList.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .listValue(Arrays.stream(convertMapToArray(value)).map(s -> new MultiList(s.getId(), s.getUserData0())).toArray(MultiList[]::new))
+                .build();
+    }
+
+    private static MultiList[] convertMapToArray(Map<List.Constants, String> map) {
+        MultiList[] array = new MultiList[map.size()];
+        int index = 0;
+
+        for (Map.Entry<List.Constants, String> entry : map.entrySet()) {
+            array[index++] = new MultiList(entry.getKey().id, entry.getValue());
+        }
+        return array;
     }
 
     public static UdfTask generateUdfTask(Udfs.UdfSd udfSdType, com.ts.common.entitites.commonEntities.Task.Constants udfTask) {

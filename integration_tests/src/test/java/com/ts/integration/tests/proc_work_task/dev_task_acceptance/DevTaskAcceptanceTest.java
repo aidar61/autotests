@@ -20,6 +20,7 @@ import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.ts.common.application.database.DbQueryHelper.Operators.*;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
@@ -56,7 +57,12 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         devTaskController = apiController.getDevTaskController();
         userController = apiController.getUserController();
         grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByCategoryAndTaskStatus("CAT_GENPLAN", STATUS_PROJECT_PLANNED);
+        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
+                "task_category", EQUAL.operator, "CAT_GENPLAN",
+                AND.operator,
+                "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
+                AND.operator,
+                "task_path", LIKE.operator, "%/2405/758009%");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.DEV_TASK, Operations.CAT);
         var tasks = devTaskController.getTaskForSDRequest(parent.getNumber());
@@ -188,7 +194,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         catAcceptTask = new Task(acceptTask.getId(), acceptTask.getNumber());
         CommonAssert
                 .assertThat(response)
-                .isCorrectTaskStatus("CAT_ACCEPTTASK", STATUS_WORKTASK_ASSIGNED);
+                .isCorrectSubTaskStatus("CAT_ACCEPTTASK", STATUS_WORKTASK_ASSIGNED);
 
         var responseTask = apiController.receiveTask(task.getNumber());
         CommonAssert.assertThat(responseTask)

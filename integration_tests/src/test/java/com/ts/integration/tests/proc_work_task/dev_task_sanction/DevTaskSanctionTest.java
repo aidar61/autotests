@@ -1,15 +1,15 @@
 package com.ts.integration.tests.proc_work_task.dev_task_sanction;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
+import com.ts.common.application.database.DbQueryHelper;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
+import com.ts.common.controllers.advice.AdviceController;
 import com.ts.common.controllers.dev.DevTaskController;
-import com.ts.common.entitites.commonEntities.Parent;
-import com.ts.common.entitites.commonEntities.Task;
-import com.ts.common.entitites.commonEntities.User;
+import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
@@ -20,13 +20,16 @@ import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.ts.common.application.database.DbQueryHelper.Operators.*;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
 import static com.ts.common.entitites.commonEntities.User.Constants.BABUSHKIN_IVAN;
 import static com.ts.common.enums.Operations.*;
-import static com.ts.common.enums.Resolutions.*;
 import static com.ts.common.enums.TaskStatuses.*;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateString;
@@ -52,12 +55,22 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
     private Integer estimationLaborInput;
     private Integer initialAssessmentLaborIntensity;
 
+    private com.ts.common.entitites.tasks.Task catSanctionTask;
+    private Map<List.Constants, String> prgAreas;
+
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
+        prgAreas = new HashMap<>();
         devTaskController = apiController.getDevTaskController();
         grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByCategoryAndTaskStatus("CAT_GENPLAN", STATUS_PROJECT_PLANNED);
+        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
+                "task_category", EQUAL.operator, "CAT_GENPLAN",
+                AND.operator,
+                "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
+                AND.operator,
+                "task_path", LIKE.operator, "%/2405/758009%");
+
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.DEV_TASK, Operations.CAT);
         var tasks = devTaskController.getTaskForSDRequest(parent.getNumber());
@@ -162,5 +175,102 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_INWORK);
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "taskStart")
+    public void changePrgArea() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.refreshUdf();
+        udf.setUdfList(generateUdfList(UDF_PRGAREA, UDF_PRGAREA_BNK));
+        task.refreshUdf(udf);
+        devTaskController.performCommonOperation(task, WORKTASK_CHANGEPRGAREA);
+        ApiAsserts.assertThat(devTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_INWORK);
+
+        catSanctionTask = apiController.receiveSubTaskByCategory(task.getNumber(), "CAT_SANCTION");
+
+        var response = apiController.receiveTask(catSanctionTask.getNumber());
+        CommonAssert
+                .assertThat(response)
+                .isCorrectTaskStatus(STATUS_ADVICE_AWAIT)
+                .isCorrectSubmitterUser(handlerUser.getLogin())
+                .isCorrectUdfList(UDF_PRGAREA, UDF_PRGAREA_BNK.id)
+                .isCorrectTaskDescription("Запрос на санкционирование КПО BNK по задаче", task.getNumber());
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Санкционировать привязку КПО в CAT_SANCTION", dependsOnMethods = "changePrgArea")
+    public void allowKPO() {
+        apiController.updateToken(generateAuthToken(catSanctionTask.getHandlerUser()));
+        var subTask = new GeneralTask();
+        udf = refreshUdf();
+        prgAreas.put(UDF_PRGAREA_BNK, "{\"prgguid\":\"" + UDF_PRGAREA_BNK.id +
+                "\",\"prgcode\":\"BNK\",\"reviewfl\":false,\"reviewmode\":\"NBL\",\"construser\":[],\"subconstruser\":[],\"nearestConstruser\":[],\"nearestSubconstruser\":[],\"allowfl\":\"1\"}");
+        udf.setUdfMultiList(generateUdfMultiList(UDF_PRGAREA, prgAreas));
+
+        subTask.refreshUdf(udf);
+        subTask.setId(catSanctionTask.getId());
+        subTask.setNumber(catSanctionTask.getNumber());
+        subTask.setAttachments(new String[0]);
+        var adviceController = apiController.getAdviceController();
+        adviceController.performCommonOperation(subTask, ADVICE_ALLOWKPO);
+        ApiAsserts.assertThat(adviceController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_ADVICE_CLOSED);
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "allowKPO")
+    public void changePrgArea1() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.refreshUdf();
+        prgAreas.put(UDF_PRGAREA_CDW, "{\"longname\":\"Хранилище данных Colvir\",\"parent\":\"\",\"stdFl\":false,\"isdata\":false,\"stdt\":\"0\",\"selectable\":true,\"archive\":false,\"inheritFl\":true,\"reviewfl\":true,\"reviewFl\":false,\"groupfl\":false}");
+        prgAreas.put(UDF_PRGAREA_ISB, "{\"longname\":\"Исламский банкинг\",\"parent\":\"\",\"stdFl\":false,\"isdata\":false,\"stdt\":\"0\",\"selectable\":true,\"archive\":false,\"inheritFl\":true,\"reviewfl\":true,\"reviewFl\":false,\"groupfl\":false}");
+        udf.setUdfMultiList(generateUdfMultiList(UDF_PRGAREA, prgAreas));
+        task.refreshUdf(udf);
+        devTaskController.performCommonOperation(task, WORKTASK_CHANGEPRGAREA);
+        ApiAsserts.assertThat(devTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_INWORK);
+
+        catSanctionTask = apiController.receiveSubTaskByCategory(task.getNumber(), "CAT_SANCTION");
+
+        var response = apiController.receiveTask(catSanctionTask.getNumber());
+        CommonAssert
+                .assertThat(response)
+                .isCorrectTaskStatus(STATUS_ADVICE_AWAIT)
+                .isCorrectSubmitterUser(handlerUser.getLogin())
+                .isCorrectUdfList(UDF_PRGAREA, UDF_PRGAREA_BNK.id)
+                .isCorrectTaskDescription("Запрос на санкционирование КПО BNK по задаче", task.getNumber());
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "changePrgArea1")
+    public void changePrgArea2() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.refreshUdf();
+        prgAreas.remove(UDF_PRGAREA_ISB);
+        udf.setUdfMultiList(generateUdfMultiList(UDF_PRGAREA, prgAreas));
+        task.refreshUdf(udf);
+        devTaskController.performCommonOperation(task, WORKTASK_CHANGEPRGAREA);
+        ApiAsserts.assertThat(devTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_INWORK);
+
+        catSanctionTask = apiController.receiveSubTaskByCategory(task.getNumber(), "CAT_SANCTION");
+
+        var response = apiController.receiveTask(catSanctionTask.getNumber());
+        CommonAssert
+                .assertThat(response)
+                .isCorrectTaskStatus(STATUS_ADVICE_AWAIT)
+                .isCorrectSubmitterUser(handlerUser.getLogin())
+                .isCorrectUdfList(UDF_PRGAREA, UDF_PRGAREA_BNK.id)
+                .isCorrectTaskDescription("Запрос на санкционирование КПО BNK по задаче", task.getNumber());
     }
 }

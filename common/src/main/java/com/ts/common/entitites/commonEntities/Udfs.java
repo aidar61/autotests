@@ -30,6 +30,8 @@ public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfUser thirdUdfUser;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfMultiList udfMultiList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfList udfList;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfList secondUdfList;

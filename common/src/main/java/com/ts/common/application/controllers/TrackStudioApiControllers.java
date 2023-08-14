@@ -14,6 +14,7 @@ import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.controllers.sla.SlaFeatureController;
 import com.ts.common.controllers.sla.SlaHelpController;
 import com.ts.common.entitites.tasks.GeneralTask;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -75,6 +76,16 @@ public class TrackStudioApiControllers {
 
     public Response receiveSubTask(String taskNumber) {
         return this.baseController.receiveSubTask(taskNumber);
+    }
+
+    public Task receiveSubTaskByCategory(String taskNumber, String category) {
+        var response = baseController.receiveSubTask(taskNumber);
+        return response.jsonPath()
+                .getList("tasks", com.ts.common.entitites.tasks.Task.class)
+                .stream()
+                .filter(x -> x.getCategory().getId().equals(category))
+                .findFirst()
+                .get();
     }
 
 
