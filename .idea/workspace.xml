@@ -4,23 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="complete acceptance 2">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/DbQueryHelper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/MultiList.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/UserDataJson.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/udf/UdfMultiList.java" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="receive random task with additional field.receive random task with additional field.receive random task with additional field.receive random task with additional field.">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/UserData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/AbstractDbTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/AbstractDbTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/dbTables/GrTaskTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/dbTables/GrTaskTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/BaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/MultiList.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/MultiList.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance/DevTaskAcceptanceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance/DevTaskAcceptanceTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance2/DevTaskAcceptanceTest2.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance2/DevTaskAcceptanceTest2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_replan/DevTaskReplanTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_replan/DevTaskReplanTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_sanction/DevTaskSanctionTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_sanction/DevTaskSanctionTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -154,6 +146,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="DevTaskSanctionTest.changePrgArea1" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_sanction.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_sanction" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_sanction.DevTaskSanctionTest" />
+      <option name="METHOD_NAME" value="changePrgArea1" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SlaHelp1Test.msgSlaHelpAnalize" type="TestNG" nameIsGenerated="true">
       <module name="trackstudio-test.integration_tests" />
       <shortenClasspath name="NONE" />
@@ -226,38 +236,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.ts.integration.tests" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests" />
-      <option name="TEST_OBJECT" value="PACKAGE" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.DevTaskSanctionTest.changePrgArea1" />
       <item itemvalue="TestNG.DevTaskSanctionTest" />
       <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
       <item itemvalue="TestNG./Users/turdukhodzhaevs/Library/Caches/JetBrains/IntelliJIdea2023.1/temp-testng-customsuite.xml" />
-      <item itemvalue="TestNG.com.ts.integration.tests" />
       <item itemvalue="TestNG.DevTaskAcceptanceTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="TestNG.DevTaskSanctionTest" />
+        <item itemvalue="TestNG.DevTaskSanctionTest.changePrgArea1" />
         <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
         <item itemvalue="TestNG.DevTaskAcceptanceTest" />
         <item itemvalue="TestNG./Users/turdukhodzhaevs/Library/Caches/JetBrains/IntelliJIdea2023.1/temp-testng-customsuite.xml" />
-        <item itemvalue="TestNG.com.ts.integration.tests" />
       </list>
     </recent_temporary>
   </component>
@@ -317,6 +311,7 @@
       <workItem from="1691122411071" duration="19007000" />
       <workItem from="1691323516284" duration="58722000" />
       <workItem from="1691636890369" duration="7711000" />
+      <workItem from="1692336058224" duration="20102000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -430,7 +425,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691497786551</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="receive random task with additional field.">
+      <option name="closed" value="true" />
+      <created>1692004797185</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1692004797185</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -498,7 +501,8 @@
     <MESSAGE value="Check additional fields" />
     <MESSAGE value="complete acceptance 1." />
     <MESSAGE value="complete acceptance 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="complete acceptance 2" />
+    <MESSAGE value="receive random task with additional field." />
+    <option name="LAST_COMMIT_MESSAGE" value="receive random task with additional field." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

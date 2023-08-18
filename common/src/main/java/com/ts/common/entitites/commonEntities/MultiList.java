@@ -24,6 +24,8 @@ public class MultiList extends BaseEntity {
     @JsonProperty("userdata0")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     String userData0;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    String userData;
 //    UserDataJson userdataJson;
 
     public MultiList(String id) {

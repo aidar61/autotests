@@ -164,20 +164,20 @@ public class InitEntities {
                 .build();
     }
 
-    public static UdfMultiList generateUdfMultiList(Udfs.UdfSd udfSdType, Map<List.Constants, String> value) {
+    public static UdfMultiList generateUdfMultiList(Udfs.UdfSd udfSdType, Map<List.Constants, UserData> value) {
         return UdfMultiList.builder()
                 .udfId(udfSdType.udfId)
                 .type(udfSdType.type.name())
-                .listValue(Arrays.stream(convertMapToArray(value)).map(s -> new MultiList(s.getId(), s.getUserData0())).toArray(MultiList[]::new))
+                .listValue(Arrays.stream(convertMapToArray(value)).map(s -> new MultiList(s.getId(), s.getUserData0(), s.getUserData())).toArray(MultiList[]::new))
                 .build();
     }
 
-    private static MultiList[] convertMapToArray(Map<List.Constants, String> map) {
+    private static MultiList[] convertMapToArray(Map<List.Constants, UserData> map) {
         MultiList[] array = new MultiList[map.size()];
         int index = 0;
 
-        for (Map.Entry<List.Constants, String> entry : map.entrySet()) {
-            array[index++] = new MultiList(entry.getKey().id, entry.getValue());
+        for (Map.Entry<List.Constants, UserData> entry : map.entrySet()) {
+            array[index++] = new MultiList(entry.getKey().id, entry.getValue().getUserData0(), entry.getValue().getUserData());
         }
         return array;
     }

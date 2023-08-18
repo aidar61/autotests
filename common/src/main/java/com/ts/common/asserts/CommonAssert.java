@@ -10,6 +10,7 @@ import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.TaskStatuses;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 
 import java.text.ParseException;
@@ -19,10 +20,11 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertTrue;
 
-
+@Slf4j
 public class CommonAssert {
     private Response response;
 
@@ -30,9 +32,28 @@ public class CommonAssert {
         this.response = response;
     }
 
+
     public static CommonAssert assertThat(Response response) {
         return new CommonAssert(response);
     }
+
+    public CommonAssert isCorrectSubTasksStatus(String category, TaskStatuses expectedStatus) {
+        var tasks = new JsonPath(response.asString()).getList("tasks", Task.class).stream().filter(s -> s.getCategory().getId().equals(category)).collect(Collectors.toList());
+        assertTrue(tasks.stream().allMatch(s -> s.receiveTaskStatus().equals(expectedStatus.toString())), expectedStatus + " parameters is match: ");
+        return this;
+    }
+
+    public CommonAssert isCorrectSubTasksSubmitUser(String expectedUserLogin) {
+        var actualSubmitUsers = JsonPath.from(response.asString()).getList("tasks.submitterUser.login");
+        assertTrue(actualSubmitUsers
+                        .stream()
+                        .allMatch(s -> s.equals(expectedUserLogin)),
+                expectedUserLogin + " parameters is match: ");
+        log.info("Task status is correct Actual: {}, Expected: {}"
+                , actualSubmitUsers.stream().findFirst().get(), expectedUserLogin);
+        return this;
+    }
+
 
     public CommonAssert isCorrectUdfMemo(Udfs.UdfSd type, String expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMemo.class).getStringValue();
@@ -113,6 +134,30 @@ public class CommonAssert {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfList.class).getListValue();
         System.out.println("actual: " + actual + ", expected: " + expected);
         assertTrue(Arrays.stream(actual).anyMatch(x -> x.getId().equals(expected)), type.udfId + " parameters is match: ");
+        return this;
+    }
+
+    public CommonAssert isCorrectUdfMultiList(Udfs.UdfSd type, String expected) {
+        var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMultiList.class).getListValue();
+        System.out.println("actual: " + actual + ", expected: " + expected);
+        assertTrue(Arrays.stream(actual).anyMatch(x -> x.getId().equals(expected)), type.udfId + " parameters is match: ");
+        return this;
+    }
+
+    public CommonAssert isCorrectReviewMode(Udfs.UdfSd type, String id, String reviewMode) {
+        var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMultiList.class).getListValue();
+        var listValue = Arrays.stream(actual).filter(x -> x.getId().equals(id)).findFirst().get();
+        var actualReviewMode = new JsonPath(listValue.getUserData0()).getString("reviewmode");
+        assertTrue(actualReviewMode.equals(reviewMode), actualReviewMode + " parameters is match: ");
+        return this;
+    }
+
+
+    public CommonAssert isCorrectPrgCode(Udfs.UdfSd type, String id, String prgCode) {
+        var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMultiList.class).getListValue();
+        var listValue = Arrays.stream(actual).filter(x -> x.getId().equals(id)).findFirst().get();
+        var actualPrgCode = new JsonPath(listValue.getUserData0()).getString("prgcode");
+        assertTrue(actualPrgCode.equals(prgCode), actualPrgCode + " parameters is match: ");
         return this;
     }
 

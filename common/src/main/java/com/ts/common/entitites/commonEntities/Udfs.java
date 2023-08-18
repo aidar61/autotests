@@ -216,6 +216,7 @@ public class Udfs extends BaseEntity {
 
         UDF_REGPROJECT("UDF_REGPROJECT", TASK),
         UDF_WORKTASK_PLANTD("UDF_WORKTASK_PLANTD", TASK),
+        STDT_SUBMITTER("STDT_SUBMITTER", USER),
         UDF_WORKTASK_PLANFD("UDF_WORKTASK_PLANFD", DATE);
 
         public final String udfId;

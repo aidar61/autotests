@@ -60,8 +60,13 @@ public class BaseController extends ApiRequest {
     public Response receiveActualTask(String taskNumber) {
         return super.get(getEndpoint(REST, TASK, INFO, taskNumber));
     }
-    @Step("Получить подзадачи, Номер задачи: {0}")
-    public Response receiveSubTask(String taskNumber) {
+    @Step("Получить все подзадачи, Номер задачи: {0}")
+    public Response receiveAllSubTask(String taskNumber) {
+        return super.get(getEndpoint(REST, TASK, INFO, taskNumber, "filter/8a8181df6e1089ea016e120b41da29d8/1/100"));
+    }
+
+    @Step("Получить активные подзадачи, Номер задачи: {0}")
+    public Response receiveActiveSubTask(String taskNumber) {
         return super.get(getEndpoint(REST, TASK, INFO, taskNumber, "filter/1/1/50"));
     }
 

@@ -1,15 +1,14 @@
 package com.ts.integration.tests.proc_work_task.dev_task_sanction;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
-import com.ts.common.application.database.DbQueryHelper;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.advice.AdviceController;
 import com.ts.common.controllers.dev.DevTaskController;
 import com.ts.common.entitites.commonEntities.*;
+import com.ts.common.entitites.commonEntities.udf.UdfMultiList;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
@@ -17,9 +16,12 @@ import com.ts.common.enums.TaskType;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,7 +58,8 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
     private Integer initialAssessmentLaborIntensity;
 
     private com.ts.common.entitites.tasks.Task catSanctionTask;
-    private Map<List.Constants, String> prgAreas;
+    private java.util.List<String> catSanctionTaskNumberList;
+    private Map<List.Constants, UserData> prgAreas;
 
 
     @BeforeClass(alwaysRun = true)
@@ -82,9 +85,9 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         misService = devTaskController.getMisService();
 
         var taskEmployees = userController.receiveUserByTask(parent.getNumber());
-        System.out.println("********* " + taskEmployees.size());
         creator = userController.receiveUserByRole(taskEmployees, "Менеджер проекта", "root").getForUser();
         handlerUser = userController.receiveUserByRole(taskEmployees, "Участник проекта", creator.getLogin()).getForUser();
+        catSanctionTaskNumberList = new ArrayList<>();
     }
 
 
@@ -192,13 +195,19 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
 
         catSanctionTask = apiController.receiveSubTaskByCategory(task.getNumber(), "CAT_SANCTION");
 
-        var response = apiController.receiveTask(catSanctionTask.getNumber());
+        var catSanctionResponse = apiController.receiveTask(catSanctionTask.getNumber());
         CommonAssert
-                .assertThat(response)
+                .assertThat(catSanctionResponse)
                 .isCorrectTaskStatus(STATUS_ADVICE_AWAIT)
                 .isCorrectSubmitterUser(handlerUser.getLogin())
                 .isCorrectUdfList(UDF_PRGAREA, UDF_PRGAREA_BNK.id)
                 .isCorrectTaskDescription("Запрос на санкционирование КПО BNK по задаче", task.getNumber());
+
+        var devTaskResponse = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(devTaskResponse)
+                .isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_BNK.getId(), "OFF")
+                .isCorrectPrgCode(UDF_PRGAREA, UDF_PRGAREA_BNK.getId(), "BNK");
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Санкционировать привязку КПО в CAT_SANCTION", dependsOnMethods = "changePrgArea")
@@ -206,8 +215,9 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         apiController.updateToken(generateAuthToken(catSanctionTask.getHandlerUser()));
         var subTask = new GeneralTask();
         udf = refreshUdf();
-        prgAreas.put(UDF_PRGAREA_BNK, "{\"prgguid\":\"" + UDF_PRGAREA_BNK.id +
+        var userData = new UserData(null, "{\"prgguid\":\"" + UDF_PRGAREA_BNK.id +
                 "\",\"prgcode\":\"BNK\",\"reviewfl\":false,\"reviewmode\":\"NBL\",\"construser\":[],\"subconstruser\":[],\"nearestConstruser\":[],\"nearestSubconstruser\":[],\"allowfl\":\"1\"}");
+        prgAreas.put(UDF_PRGAREA_BNK, userData);
         udf.setUdfMultiList(generateUdfMultiList(UDF_PRGAREA, prgAreas));
 
         subTask.refreshUdf(udf);
@@ -221,14 +231,26 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
                 .isCorrectStatus(STATUS_ADVICE_CLOSED);
+
+        var devTaskResponse = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(devTaskResponse)
+                .isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_BNK.getId(), "NBL");
+
+        var catSanctionResponse = apiController.receiveTask(catSanctionTask.getNumber());
+        CommonAssert
+                .assertThat(catSanctionResponse)
+                .isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_BNK.getId(), "NBL");
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "allowKPO")
     public void changePrgArea1() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshUdf();
-        prgAreas.put(UDF_PRGAREA_CDW, "{\"longname\":\"Хранилище данных Colvir\",\"parent\":\"\",\"stdFl\":false,\"isdata\":false,\"stdt\":\"0\",\"selectable\":true,\"archive\":false,\"inheritFl\":true,\"reviewfl\":true,\"reviewFl\":false,\"groupfl\":false}");
-        prgAreas.put(UDF_PRGAREA_ISB, "{\"longname\":\"Исламский банкинг\",\"parent\":\"\",\"stdFl\":false,\"isdata\":false,\"stdt\":\"0\",\"selectable\":true,\"archive\":false,\"inheritFl\":true,\"reviewfl\":true,\"reviewFl\":false,\"groupfl\":false}");
+        prgAreas.clear();
+        prgAreas.put(UDF_PRGAREA_BNK, new UserData("{\"longname\":\"Основная банковская деятельность\",\"parent\":\"\",\"stdFl\":false,\"isdata\":false,\"stdt\":\"0\",\"selectable\":true,\"archive\":false,\"inheritFl\":true,\"reviewfl\":true,\"reviewFl\":false,\"groupfl\":false}", "{\"prgguid\":\"A4932143EF244F7EBBEFD72D1A9B6493\",\"prgcode\":\"BNK\",\"reviewfl\":false,\"allowfl\":\"1\",\"allowrequest\":\"8181816c89cef25c018a0866491f3eb4\",\"allowuser\":\"818181a81e88c49f011e96ab4bea027f\",\"reviewmode\":\"NBL\",\"construser\":[],\"subconstruser\":[],\"nearestConstruser\":[],\"nearestSubconstruser\":[]}"));
+        prgAreas.put(UDF_PRGAREA_CDW, new UserData("{\"longname\":\"Хранилище данных Colvir\",\"parent\":\"\",\"stdFl\":false,\"isdata\":false,\"stdt\":\"0\",\"selectable\":true,\"archive\":false,\"inheritFl\":true,\"reviewfl\":true,\"reviewFl\":false,\"groupfl\":false}", null));
+        prgAreas.put(UDF_PRGAREA_ISB, new UserData("{\"longname\":\"Исламский банкинг\",\"parent\":\"\",\"stdFl\":false,\"isdata\":false,\"stdt\":\"0\",\"selectable\":true,\"archive\":false,\"inheritFl\":true,\"reviewfl\":true,\"reviewFl\":false,\"groupfl\":false}", null));
         udf.setUdfMultiList(generateUdfMultiList(UDF_PRGAREA, prgAreas));
         task.refreshUdf(udf);
         devTaskController.performCommonOperation(task, WORKTASK_CHANGEPRGAREA);
@@ -238,22 +260,29 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_INWORK);
 
-        catSanctionTask = apiController.receiveSubTaskByCategory(task.getNumber(), "CAT_SANCTION");
+        var catSanctionTasksResponse = apiController.receiveActiveSubTasks(task.getNumber());
 
-        var response = apiController.receiveTask(catSanctionTask.getNumber());
+        catSanctionTaskNumberList = JsonPath.from(catSanctionTasksResponse.asString()).getList("tasks.number");
+
+        CommonAssert.assertThat(catSanctionTasksResponse)
+                .isCorrectSubTasksStatus("CAT_SANCTION", STATUS_ADVICE_AWAIT)
+                .isCorrectSubTasksSubmitUser(handlerUser.getLogin());
+
+        var currentTaskDetail = apiController.receiveTask(task.getNumber());
         CommonAssert
-                .assertThat(response)
-                .isCorrectTaskStatus(STATUS_ADVICE_AWAIT)
-                .isCorrectSubmitterUser(handlerUser.getLogin())
-                .isCorrectUdfList(UDF_PRGAREA, UDF_PRGAREA_BNK.id)
-                .isCorrectTaskDescription("Запрос на санкционирование КПО BNK по задаче", task.getNumber());
+                .assertThat(currentTaskDetail)
+                .isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_CDW.id, "OFF")
+                .isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_ISB.id, "OFF");
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "changePrgArea1")
     public void changePrgArea2() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshUdf();
-        prgAreas.remove(UDF_PRGAREA_ISB);
+        prgAreas.clear();
+        prgAreas.put(UDF_PRGAREA_BNK, new UserData("{\"longname\":\"Основная банковская деятельность\",\"parent\":\"\",\"stdFl\":false,\"isdata\":false,\"stdt\":\"0\",\"selectable\":true,\"archive\":false,\"inheritFl\":true,\"reviewfl\":true,\"reviewFl\":false,\"groupfl\":false}",
+                "{\"prgguid\":\"A4932143EF244F7EBBEFD72D1A9B6493\",\"prgcode\":\"BNK\",\"reviewfl\":false,\"allowfl\":\"1\",\"allowrequest\":\"8181816c89cef25c018a0866491f3eb4\",\"allowuser\":\"818181a81e88c49f011e96ab4bea027f\",\"reviewmode\":\"NBL\",\"construser\":[],\"subconstruser\":[],\"nearestConstruser\":[],\"nearestSubconstruser\":[]}"));
+        prgAreas.put(UDF_PRGAREA_CDW, new UserData("{\"longname\":\"Хранилище данных Colvir\",\"parent\":\"\",\"stdFl\":false,\"isdata\":false,\"stdt\":\"0\",\"selectable\":true,\"archive\":false,\"inheritFl\":true,\"reviewfl\":true,\"reviewFl\":false,\"groupfl\":false}", null));
         udf.setUdfMultiList(generateUdfMultiList(UDF_PRGAREA, prgAreas));
         task.refreshUdf(udf);
         devTaskController.performCommonOperation(task, WORKTASK_CHANGEPRGAREA);
@@ -263,14 +292,36 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_INWORK);
 
-        catSanctionTask = apiController.receiveSubTaskByCategory(task.getNumber(), "CAT_SANCTION");
-
-        var response = apiController.receiveTask(catSanctionTask.getNumber());
+        var taskDetail = apiController.receiveTask(task.getNumber());
         CommonAssert
-                .assertThat(response)
-                .isCorrectTaskStatus(STATUS_ADVICE_AWAIT)
-                .isCorrectSubmitterUser(handlerUser.getLogin())
-                .isCorrectUdfList(UDF_PRGAREA, UDF_PRGAREA_BNK.id)
-                .isCorrectTaskDescription("Запрос на санкционирование КПО BNK по задаче", task.getNumber());
+                .assertThat(taskDetail)
+                .isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_CDW.id, "OFF")
+                .isCorrectUdfMultiList(UDF_PRGAREA, UDF_PRGAREA_BNK.id)
+                .isCorrectUdfMultiList(UDF_PRGAREA, UDF_PRGAREA_CDW.id);
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "changePrgArea2")
+    public void changePrgArea3() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.refreshUdf();
+
+        prgAreas.put(UDF_PRGAREA_CDW, new UserData("{\"longname\":\"Хранилище данных Colvir\",\"parent\":\"\",\"stdFl\":false,\"isdata\":false,\"stdt\":\"0\",\"selectable\":true,\"archive\":false,\"inheritFl\":true,\"reviewfl\":true,\"reviewFl\":false,\"groupfl\":false}",
+                "{\"prgguid\":\"42954D8A847B4E4EA1F2E692BFA232A9\",\"prgcode\":\"CDW\",\"reviewfl\":false,\"allowrequest\":\"8181816c89cef25c018a08c026b44df8\",\"reviewmode\":\"BL\",\"construser\":[],\"subconstruser\":[],\"nearestConstruser\":[],\"nearestSubconstruser\":[],\"allowfl\":\"1\"}"));
+        prgAreas.put(UDF_PRGAREA_BNK, new UserData("{\"longname\":\"Основная банковская деятельность\",\"parent\":\"\",\"stdFl\":false,\"isdata\":false,\"stdt\":\"0\",\"selectable\":true,\"archive\":false,\"inheritFl\":true,\"reviewfl\":true,\"reviewFl\":false,\"groupfl\":false}",
+                "{\"prgguid\":\"A4932143EF244F7EBBEFD72D1A9B6493\",\"prgcode\":\"BNK\",\"reviewfl\":false,\"allowfl\":\"1\",\"allowrequest\":\"8181816c89cef25c018a0866491f3eb4\",\"allowuser\":\"818181a81e88c49f011e96ab4bea027f\",\"reviewmode\":\"NBL\",\"construser\":[],\"subconstruser\":[],\"nearestConstruser\":[],\"nearestSubconstruser\":[]}"));
+        udf.setUdfMultiList(generateUdfMultiList(UDF_PRGAREA, prgAreas));
+        task.refreshUdf(udf);
+        devTaskController.performCommonOperation(task, WORKTASK_CHANGEPRGAREA);
+        ApiAsserts.assertThat(devTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_INWORK);
+
+        var taskDetailResponse = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetailResponse)
+                .isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_CDW.id, "BL")
+                .isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_BNK.id, "NBL");
     }
 }

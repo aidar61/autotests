@@ -22,6 +22,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import static com.ts.common.config.AppConfigProvider.STAND;
 import static com.ts.common.config.AppConfigProvider.STAND_URL;
 
@@ -75,11 +78,11 @@ public class TrackStudioApiControllers {
     }
 
     public Response receiveSubTask(String taskNumber) {
-        return this.baseController.receiveSubTask(taskNumber);
+        return this.baseController.receiveActiveSubTask(taskNumber);
     }
 
     public Task receiveSubTaskByCategory(String taskNumber, String category) {
-        var response = baseController.receiveSubTask(taskNumber);
+        var response = baseController.receiveActiveSubTask(taskNumber);
         return response.jsonPath()
                 .getList("tasks", com.ts.common.entitites.tasks.Task.class)
                 .stream()
@@ -87,6 +90,15 @@ public class TrackStudioApiControllers {
                 .findFirst()
                 .get();
     }
+
+    public Response receiveActiveSubTasks(String taskNumber) {
+       return baseController.receiveActiveSubTask(taskNumber);
+    }
+
+    public Response receiveAllSubTasks(String taskNumber) {
+        return baseController.receiveAllSubTask(taskNumber);
+    }
+
 
 
     @Step("Пользователь: {0}")
