@@ -83,7 +83,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
         misService = devTaskController.getMisService();
-
+        userController = apiController.getUserController();
         var taskEmployees = userController.receiveUserByTask(parent.getNumber());
         creator = userController.receiveUserByRole(taskEmployees, "Менеджер проекта", "root").getForUser();
         handlerUser = userController.receiveUserByRole(taskEmployees, "Участник проекта", creator.getLogin()).getForUser();
@@ -160,8 +160,8 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         var response = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(response)
-                .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, 2.0)
-                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 2.0)
+                .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, 2)
+                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 2)
                 .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
     }
 

@@ -146,8 +146,8 @@ public class DevTaskAcceptanceTest2 extends BaseIntegrationTest {
         var response = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(response)
-                .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, 2.0)
-                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 2.0)
+                .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, 2)
+                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 2)
                 .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
     }
 

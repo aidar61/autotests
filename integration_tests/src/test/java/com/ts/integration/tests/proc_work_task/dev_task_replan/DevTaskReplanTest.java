@@ -156,8 +156,8 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
         var response = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(response)
-                .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, 2.0)
-                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 2.0)
+                .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, 2)
+                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 2)
                 .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
     }
 
@@ -378,8 +378,8 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
                 .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate)
                 .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, estimationLaborInput)
                 .isCorrectUdfDouble(UDF_WORKTASK_FIRSTPLANBUDGET, initialAssessmentLaborIntensity)
-                .isCorrectUdfDouble(UDF_WORKTASK_AWAITBUDGET, 20.0)
-                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 20.0)
+                .isCorrectUdfDouble(UDF_WORKTASK_AWAITBUDGET, 20)
+                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 20)
                 .isCorrectUdfDate(UDF_WORKTASK_AWAITTD, expectedAwaitedDate);
     }
 

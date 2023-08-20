@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 @Slf4j
@@ -57,20 +58,20 @@ public class CommonAssert {
 
     public CommonAssert isCorrectUdfMemo(Udfs.UdfSd type, String expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMemo.class).getStringValue();
-        assertTrue(actual.equals(expected), type.udfId + " parameters is match: ");
+        assertEquals(actual, expected, type.udfId + " parameters is match: ");
         return this;
     }
 
     public CommonAssert isCorrectSubTaskStatus(String category, TaskStatuses expectedStatus) {
         var tasks = new JsonPath(response.asString()).getList("tasks", Task.class);
         var actual = tasks.stream().filter(s -> s.getCategory().getId().equals(category)).findFirst().get();
-        assertTrue(expectedStatus.toString().equals(actual.getFinishStatus().getId()), expectedStatus + " parameters is match: ");
+        assertEquals(expectedStatus.toString(), actual.getFinishStatus().getId(), expectedStatus + " parameters is match: ");
         return this;
     }
 
     public CommonAssert isCorrectTaskStatus(TaskStatuses expectedStatus) {
         var actualStatus = new JsonPath(response.asString()).getObject("status", Status.class);
-        assertTrue(expectedStatus.toString().equals(actualStatus.getId()), expectedStatus + " parameters is match: ");
+        assertEquals(expectedStatus.toString(), actualStatus.getId(), expectedStatus + " parameters is match: ");
         return this;
     }
 
@@ -82,19 +83,19 @@ public class CommonAssert {
 
     public CommonAssert isCorrectHandlerUser(String expectedLogin) {
         var task = response.as(Task.class);
-        assertTrue(expectedLogin.equals(task.getHandlerUser().getLogin()), expectedLogin + " parameters is match: ");
+        assertEquals(expectedLogin, task.getHandlerUser().getLogin(), expectedLogin + " parameters is match: ");
         return this;
     }
 
     public CommonAssert isCorrectSubmitterUser(String expectedLogin) {
         var submitterUser = new JsonPath(response.asString()).getObject("submitterUser", User.class);
-        assertTrue(expectedLogin.equals(submitterUser.getLogin()), expectedLogin + " parameters is match: ");
+        assertEquals(expectedLogin, submitterUser.getLogin(), expectedLogin + " parameters is match: ");
         return this;
     }
 
     public CommonAssert isCorrectTaskName(String expectedName) {
         var task = response.as(Task.class);
-        assertTrue(expectedName.equals(task.getName()), expectedName + " parameters is match: ");
+        assertEquals(expectedName, task.getName(), expectedName + " parameters is match: ");
         return this;
     }
 
@@ -113,13 +114,13 @@ public class CommonAssert {
         var actual = getSimpleFormattedDate(udfFormattedDate);
         var expected = getSimpleFormattedDate(date);
         var result = actual.compareTo(expected);
-        assertTrue(result == 0, type.udfId + " parameters is match: ");
+        assertEquals(result, 0, type.udfId + " parameters is match: ");
         return this;
     }
 
-    public CommonAssert isCorrectUdfDouble(Udfs.UdfSd type, double expected) {
+    public CommonAssert isCorrectUdfDouble(Udfs.UdfSd type, Integer expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfDouble.class).getNumberValue();
-        assertTrue(actual == expected, type.udfId + " parameters is match: ");
+        assertEquals(actual, expected, type.udfId + " parameters is match: ");
         return this;
     }
 
@@ -148,7 +149,7 @@ public class CommonAssert {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMultiList.class).getListValue();
         var listValue = Arrays.stream(actual).filter(x -> x.getId().equals(id)).findFirst().get();
         var actualReviewMode = new JsonPath(listValue.getUserData0()).getString("reviewmode");
-        assertTrue(actualReviewMode.equals(reviewMode), actualReviewMode + " parameters is match: ");
+        assertEquals(actualReviewMode, reviewMode, actualReviewMode + " parameters is match: ");
         return this;
     }
 
@@ -157,7 +158,7 @@ public class CommonAssert {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMultiList.class).getListValue();
         var listValue = Arrays.stream(actual).filter(x -> x.getId().equals(id)).findFirst().get();
         var actualPrgCode = new JsonPath(listValue.getUserData0()).getString("prgcode");
-        assertTrue(actualPrgCode.equals(prgCode), actualPrgCode + " parameters is match: ");
+        assertEquals(actualPrgCode, prgCode, actualPrgCode + " parameters is match: ");
         return this;
     }
 
