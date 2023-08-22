@@ -27,11 +27,12 @@ public class BaseController extends ApiRequest {
     protected TaskType taskType;
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS = {ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
+    protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_CONFIRM = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, CONFIRMED};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_RESOLUTION = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, RESOLUTION};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {ID, OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_USER = {OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
     public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS};
-    public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS_AND_RESOLUTION = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS, RESOLUTION};
+    public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS_AND_RESOLUTION = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS, RESOLUTION, CONFIRMED, HANDLER_USER};
 
     public BaseController(String url, AuthToken authToken) {
         super(url, HEADERS_BASE_CONTROLLER, authToken);
@@ -46,7 +47,8 @@ public class BaseController extends ApiRequest {
         TaskRequestBody requestBody = new TaskRequestBody(generalTask);
         this.response = createTask(requestBody.keepMandatoryAndCreateFieldsAnd(HANDLER_USER));
         TaskResponseBody gapResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
-        if (gapResponseBody != null) {
+        if (gapResponseBody != null)
+        {
             generalTask.setId(gapResponseBody.getId());
             generalTask.setNumber(gapResponseBody.getNumber());
             generalTask.setFinishStatus(gapResponseBody.getFinishStatus());
@@ -57,6 +59,15 @@ public class BaseController extends ApiRequest {
     @Step("Получить task, Номер задачи: {0}")
     public Response receiveActualTask(String taskNumber) {
         return super.get(getEndpoint(REST, TASK, INFO, taskNumber));
+    }
+    @Step("Получить все подзадачи, Номер задачи: {0}")
+    public Response receiveAllSubTask(String taskNumber) {
+        return super.get(getEndpoint(REST, TASK, INFO, taskNumber, "filter/8a8181df6e1089ea016e120b41da29d8/1/100"));
+    }
+
+    @Step("Получить активные подзадачи, Номер задачи: {0}")
+    public Response receiveActiveSubTask(String taskNumber) {
+        return super.get(getEndpoint(REST, TASK, INFO, taskNumber, "filter/1/1/50"));
     }
 
     protected Response performOperation(@NotNull GeneralTask task, String requestBody) {
@@ -73,18 +84,25 @@ public class BaseController extends ApiRequest {
     }
 
     @Step("Выполнение общей операции: {1}")
-    public Response performCommonOperation(GeneralTask task, Operations operation) {
+    public Response performCommonOperation(@NotNull GeneralTask task, Operations operation) {
         task.setOperation(InitEntities.generateOperationID(this.taskType, operation));
         if (task.getDescription() == null) task.setDescription(RandomUtils.generateDescriptionForOperation(operation));
         TaskRequestBody taskRequestBody = new TaskRequestBody(task);
-        if (task.getHandlerUser() != null) {
-            return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_USER));
-        }
-        if (task.getResolution() != null) {
-            if (task.getFinishStatus() != null) {
+        if (task.getResolution() != null)
+        {
+            if (task.getFinishStatus() != null)
+            {
                 return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITH_STATUS_AND_RESOLUTION));
             }
             return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITH_RESOLUTION));
+        }
+        if (task.getConfirmed() != null)
+        {
+            return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITH_CONFIRM));
+        }
+        if (task.getHandlerUser() != null)
+        {
+            return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_USER));
         }
 
         return this.response = performOperationWithQueryParam(task, taskRequestBody.keepFields(DEFAULT_FIELDS_WITHOUT_ID));

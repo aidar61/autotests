@@ -17,6 +17,7 @@ import com.ts.common.ui.driver.Driver;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 
 import static com.ts.common.utils.InitEntities.generateAuthToken;
@@ -26,7 +27,7 @@ import static com.ts.common.utils.InitEntities.generateAuthToken;
 public class BaseIntegrationTest extends AbstractBaseTest {
     protected Response response;
     protected AuthToken authToken;
-    protected BaseController slaController;
+    protected BaseController baseController;
     protected UserController userController;
     protected Udfs udf;
 
@@ -35,17 +36,18 @@ public class BaseIntegrationTest extends AbstractBaseTest {
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
-        log.info("test");
-        Configuration.browserCapabilities = Driver.initBrowserCapabilities();
+//        log.info("test");Configuration.browserCapabilities = Driver.initBrowserCapabilities();
         this.authToken = generateAuthToken(Users.ROOT);
         apiController = new TrackStudioApiControllers(authToken);
-        trackStudioPages = new Pages();
-        slaController = apiController.getBaseController();
-        userController = apiController.getUserController();
-        dbHelper = new DbHelper();
+//        trackStudioPages = new Pages();
 //        EMPLOYEE = userController.receiveRandomEmployees(Parents.MTB).getForUser();
 //        CLIENT = userController.receiveRandomEmployees(Parents.MTB).getForUser();
         log.warn("=====================API TESTS IS STARTED=====================");
     }
 
+    @BeforeTest(alwaysRun = true)
+    public void init() {
+        userController = apiController.getUserController();
+        dbHelper = new DbHelper();
+    }
 }

@@ -42,6 +42,7 @@ public class TaskRequestBody extends com.ts.common.request.RequestBody {
     @TypeId(type = "operation")
     User handlerUser;
     Resolution resolution;
+    Boolean confirmed;
     @Mandatory
     Udfs udfs;
     Status finishStatus;
@@ -63,6 +64,7 @@ public class TaskRequestBody extends com.ts.common.request.RequestBody {
         this.shortName = generalTask.getShortName();
         this.resolution = generalTask.getResolution();
         this.finishStatus = generalTask.getFinishStatus();
+        this.confirmed = generalTask.getConfirmed();
     }
 
     public enum Fields {
@@ -77,6 +79,7 @@ public class TaskRequestBody extends com.ts.common.request.RequestBody {
         RESOLUTION("resolution"),
         HANDLER_USER("handlerUser"),
         UDFS("udfs"),
+        CONFIRMED("confirmed"),
         FINISH_STATUS("finishStatus"),
         ATTACHMENTS("attachments");
         public final String field;

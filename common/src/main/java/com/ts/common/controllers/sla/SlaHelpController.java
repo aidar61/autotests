@@ -35,19 +35,20 @@ public class SlaHelpController extends BaseController {
 
     @Step("Создание консультации: ")
     public Response createTask(String requestBody) {
-        return super.post(getEndpoint(REST,TASK, UPDATE), requestBody);
+        return super.post(getEndpoint(REST, TASK, UPDATE), requestBody);
     }
 
     @Step("Выполнение операциии SlaHelp Task: ")
     public Response performOperation(@NotNull GeneralTask slaTask, String requestBody) {
-        return super.post(getEndpoint(REST,OPERATION, slaTask.getNumber(), CREATE), requestBody);
+        return super.post(getEndpoint(REST, OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
     public Response createTask(GeneralTask slaTask) {
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         this.response = createTask(slaRequestBody.keepMandatoryAndCreateFields());
         TaskResponseBody slaResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
-        if (slaResponseBody != null) {
+        if (slaResponseBody != null)
+        {
             slaTask.setId(slaResponseBody.getId());
             slaTask.setNumber(slaResponseBody.getNumber());
             slaTask.setFinishStatus(slaResponseBody.getFinishStatus());
@@ -79,7 +80,7 @@ public class SlaHelpController extends BaseController {
     @Step("Принятие на анализ slaTask: ")
     public Response receiveAnalysis(GeneralTask slaTask) {
         Udfs udfs = slaTask.getUdfs();
-        udfs.setUdfString(generateUdfString(Udfs.UdfSd.UDF_SD_PROVIDEDHELPDEADLINE, getCurrentDate()));
+        udfs.setUdfString(generateUdfString(Udfs.UdfSd.UDF_SD_PROVIDEDHELPDEADLINE, getCurrentDate(0)));
         slaTask.setOperation(getGeneralId(RECEIVE_ANALIZE));
         slaTask.refreshUdf(udfs);
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
@@ -111,7 +112,7 @@ public class SlaHelpController extends BaseController {
 
     @Step("Close task")
     private Response closeSLaTask(GeneralTask slaTask, String requestBody) {
-        return super.post(getEndpoint(REST,OPERATION, slaTask.getNumber(), CREATE), requestBody);
+        return super.post(getEndpoint(REST, OPERATION, slaTask.getNumber(), CREATE), requestBody);
     }
 
     public Response closeSlaTask(GeneralTask slaTask) {

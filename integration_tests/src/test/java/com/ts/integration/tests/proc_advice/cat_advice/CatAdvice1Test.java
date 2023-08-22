@@ -62,7 +62,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
         udf.setUdfList(generateUdfList(UDF_CDP_BL, ANALITIK_PLATFORM));
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
-        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD));
+        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD, 0));
         udf.setSecondUdfTask(generateUdfTask(UDF_WORKTASK_SDREQUEST, parenOfParentTaskFromDb));
         udf.setThirdUdfTask(generateUdfTask(UDF_WORKTASK_WORK, parentTaskFromDb.mapTo()));
         task.refreshUdf(udf);
@@ -107,7 +107,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
     public void askFurther() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
-        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD));
+        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD,0));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
         task.refreshUdf(udf);
         task.setHandlerUser(generateUser(HANDLER_USER_FROM_PARENT));
@@ -138,7 +138,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
     public void askExtraConsult() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
-        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD));
+        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD,0));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
         task.refreshUdf(udf);
         task.setHandlerUser(generateUser(HANDLER_USER_FROM_PARENT));

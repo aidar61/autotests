@@ -30,6 +30,10 @@
             <class name="com.ts.integration.tests.proc_advice.cat_advice.CatAdvice1Test"/>
             <class name="com.ts.integration.tests.proc_advice.cat_sanction.CatSanction1Test"/>
             <class name="com.ts.integration.tests.proc_advice.cat_confirmation.CatConfirmation1Test"/>
+            <class name="com.ts.integration.tests.proc_work_task.dev_task_replan.DevTaskReplanTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.dev_task_acceptance.DevTaskAcceptanceTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.dev_task_acceptance2.DevTaskAcceptanceTest2"/>
+            <class name="com.ts.integration.tests.proc_work_task.dev_task_sanction.DevTaskSanctionTest"/>
         </classes>
     </test>
 </suite>

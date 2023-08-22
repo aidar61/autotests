@@ -23,4 +23,5 @@ public class UdfTask {
     String udfId;
     String type;
     Task[] taskValue;
+    Task[] taskValueSelector;
 }

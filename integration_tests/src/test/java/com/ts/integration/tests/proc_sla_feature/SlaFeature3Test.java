@@ -45,7 +45,7 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         actualSlaTask = apiController.receiveGeneralTask(task.getNumber());
     }
 
-    @Test(groups = {"SlaFeature", "Regression"},description = "Создание задачи")
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Создание задачи")
     public void msgSlaFeatureCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -59,7 +59,7 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         slaFeatureController.createSlaFeatureTask(task);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"},description = "Начать предварительную оценку", dependsOnMethods = "msgSlaFeatureCat")
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Начать предварительную оценку", dependsOnMethods = "msgSlaFeatureCat")
     public void msgSlaFeatureTopreCost() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
@@ -71,7 +71,7 @@ public class SlaFeature3Test extends BaseIntegrationTest {
 //                .isCorrectStatus();
     }
 
-    @Test(groups = {"SlaFeature", "Regression"},description = "изменить ответственную роль", dependsOnMethods = "msgSlaFeatureTopreCost")
+    @Test(groups = {"SlaFeature", "Regression"}, description = "изменить ответственную роль", dependsOnMethods = "msgSlaFeatureTopreCost")
     public void msgSlaFeatureChangeCurrentRole() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_ROLE_CURRENT, ANALYST));
@@ -84,7 +84,7 @@ public class SlaFeature3Test extends BaseIntegrationTest {
 //        TaskAsserts.assertThat(slaTask).isEquals(actualSlaTask);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"},description = "Сообщить предварительные условия реализации", dependsOnMethods = "msgSlaFeatureChangeCurrentRole")
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Сообщить предварительные условия реализации", dependsOnMethods = "msgSlaFeatureChangeCurrentRole")
     public void msgSlaFeatureSendCostPre() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_PAYDCS, FREE_LAW));
@@ -92,23 +92,23 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         udf.setUdfString(generateUdfString(UDF_SDFEATURE_AGREEDDECISION, generateComment()));
         udf.setSecondUdfString(generateUdfString(UDF_SLA_AWAITCOST, COST.value));
         udf.setThirdUdfString(generateUdfString(UDF_SLA_IMPLPLANTD_PRE, "12"));
-        udf.setUdfDate(generateUdfDate(UDF_SLA_FINALESTIMATIONDATE));
+        udf.setUdfDate(generateUdfDate(UDF_SLA_FINALESTIMATIONDATE, 0));
         task.refreshUdf(udf);
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaFeatureController.performCommonOperation(task, SENDCOST_PRE);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"},description = "Принять предварительные условия реализации", dependsOnMethods = "msgSlaFeatureSendCostPre")
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Принять предварительные условия реализации", dependsOnMethods = "msgSlaFeatureSendCostPre")
     public void msgSlaFeatureAcceptPreCost() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(CLIENT));
         slaFeatureController.performCommonOperation(task, ACCEPTPRECOST);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"},description = "Сообщить окончательные условия реализации", dependsOnMethods = "msgSlaFeatureAcceptPreCost")
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Сообщить окончательные условия реализации", dependsOnMethods = "msgSlaFeatureAcceptPreCost")
     public void msgSlaFeatureSendCostFinal() {
         udf = refreshUdf();
-        udf.setUdfDate(generateUdfDate(UDF_SDFEATUREPLANTD));
+        udf.setUdfDate(generateUdfDate(UDF_SDFEATUREPLANTD,0));
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_PAYDCS, FREE_LAW));
         udf.setSecondUdfList(generateUdfList(UDF_SLA_CLIENTGENUSE, NOTCUSTOM));
         udf.setUdfString(generateUdfString(UDF_SLA_IMPLDEADLINE, "12"));
@@ -118,7 +118,7 @@ public class SlaFeature3Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, SENDCOST_FINAL);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"},description = "Принять окончательные условия реализации", dependsOnMethods = "msgSlaFeatureSendCostFinal")
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Принять окончательные условия реализации", dependsOnMethods = "msgSlaFeatureSendCostFinal")
     public void msgSlaFeatureAcceptConditions() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(CLIENT));

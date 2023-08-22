@@ -10,6 +10,7 @@ import com.ts.common.enums.TaskType;
 import com.ts.common.enums.Users;
 import com.ts.common.request.ApiRequest;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
 import com.ts.common.utils.RandomUtils;
 import lombok.extern.slf4j.Slf4j;
 
@@ -63,13 +64,39 @@ public class UserController extends ApiRequest {
         return collect.get(RandomUtils.generateRandomNumberBetween(0, collect.size() - 1));
     }
 
-
-    public static void main(String[] args) {
-        UserController userController = new UserController(STAND_URL, InitEntities.generateAuthToken(Users.ROOT));
-        UserRole userRole = userController.receiveRandomClient(Parents.MTB);
-        UserRole userRole1 = userController.receiveRandomEmployees(Parents.MTB);
-        System.out.println(userRole);
-        System.out.println(userRole1);
+    private List<UserRole> receiveUsersByTaskNumber(String taskNumber) {
+        HashMap<String, String> queryParam = new LinkedHashMap<>() {{
+            put(TO_TASK, taskNumber);
+        }};
+        this.response = super.get(getEndpoint(REST, ACL, EFFECTIVE, formatParameters(queryParam)));
+//        System.out.println("@@@@@@@@@@@@@@ " + this.response.asPrettyString());
+        return Arrays.asList(Objects.requireNonNull(JsonUtils.deserialize(this.response, UserRole[].class)));
     }
+
+    public UserRole receiveUserByRole(List<UserRole> userRoles, String role, String login) {
+        return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(login)).findFirst().get();
+    }
+
+    public List<UserRole> receiveUserByTask(String taskNumber) {
+        return receiveUsersByTaskNumber(taskNumber);
+    }
+
+    public Map<String, UserRole> receiveUsersByRoles(String taskNumber, String... roles) {
+        LinkedHashMap<String, UserRole> usersByRole = new LinkedHashMap<>();
+        var userRoles = receiveUsersByTaskNumber(taskNumber);
+        for (String role : roles) {
+            UserRole users = userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role)).findFirst().get();
+            usersByRole.put(role, users);
+        }
+        return usersByRole;
+    }
+
+//    public static void main(String[] args) {
+//        UserController userController = new UserController(STAND_URL, InitEntities.generateAuthToken(Users.ROOT));
+//        UserRole userRole = userController.receiveRandomClient(Parents.MTB);
+//        UserRole userRole1 = userController.receiveRandomEmployees(Parents.MTB);
+//        System.out.println(userRole);
+//        System.out.println(userRole1);
+//    }
 
 }

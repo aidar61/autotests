@@ -2,12 +2,12 @@ package com.ts.common.entitites.tasks;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
-import io.restassured.response.Response;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
@@ -22,6 +22,7 @@ import lombok.extern.jackson.Jacksonized;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @ToString
 public class GeneralTask extends BaseEntity {
+    public static ApiAsserts TaskAsserts;
     TaskType taskType;
     String id;
     String number;
@@ -32,13 +33,16 @@ public class GeneralTask extends BaseEntity {
     String description;
     String shortName;
     User handlerUser;
+    User submitterUser;
     Udfs udfs;
+//    String udfsString;
     @JsonProperty("status")
     Status finishStatus;
     Status priority;
     Resolution resolution;
     String statusName;
     String priorityName;
+    Boolean confirmed;
     String[] attachments;
 
     public GeneralTask(TaskResponseBody taskResponseBody) {
@@ -48,6 +52,8 @@ public class GeneralTask extends BaseEntity {
         this.description = taskResponseBody.getDescription();
         this.finishStatus = taskResponseBody.getFinishStatus();
         this.handlerUser = taskResponseBody.getHandlerUser();
+        this.submitterUser = taskResponseBody.getSubmitterUser();
+//        this.udfsString = taskResponseBody.getUdfs();
     }
 
 
@@ -76,6 +82,4 @@ public class GeneralTask extends BaseEntity {
     public Object receiveName() {
         return getName();
     }
-
-
 }

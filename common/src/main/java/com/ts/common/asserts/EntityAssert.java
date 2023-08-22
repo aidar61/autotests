@@ -29,5 +29,4 @@ public class EntityAssert {
 //        assertEquals(expectedStatus, entity.receiveTaskStatus());
         assertTrue(expectedStatus.isEquals(entity.receiveTaskStatus()), entity.getClass().getName() + " parameters is match: " + entity);
     }
-
 }

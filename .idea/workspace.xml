@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Dynamic Database URL">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="Steps, DevTask" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -16,8 +14,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="spring-beans.schema" />
-        <option value="Class" />
         <option value="Enum" />
+        <option value="Kotlin Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -27,7 +26,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/Hibernate" />
+        <entry key="$PROJECT_DIR$" value="feature/DevTaskSanction" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -69,8 +68,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "/Users/turdukhodzhaevs/Projects/colvir/common/src/main/java/domain",
+    "git-widget-placeholder": "feature/CatAdviceTestTemp",
+    "last_opened_file_path": "/Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -81,7 +80,7 @@
     "project.structure.side.proportion": "0.32876712",
     "settings.editor.selected.configurable": "terminal",
     "settings.editor.splitter.proportion": "0.39143732",
-    "spring.configuration.checksum": "f0a48e2334f1b84f98a2595c6f1cd1ef",
+    "spring.configuration.checksum": "ab5477e5e36ed233bc592765cce87835",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -92,21 +91,27 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task" />
       <recent name="$PROJECT_DIR$/common/src/main/java/domain" />
       <recent name="$PROJECT_DIR$" />
     </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ts.common.entitites.commonEntities" />
+      <recent name="com.ts.common.entitites.commonEntities.udf" />
+      <recent name="com.ts.integration.tests.proc_work_task.dev_task_sanction" />
+    </key>
   </component>
-  <component name="RunManager" selected="TestNG.CatAdvice1Test">
-    <configuration name="CatAdvice1Test" type="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml">
+    <configuration name="DevTaskAcceptanceTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_advice.cat_advice.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_advice.cat_advice" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_advice.cat_advice.CatAdvice1Test" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance.DevTaskAcceptanceTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -114,35 +119,34 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CatAdvice1Test.close" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="DevTaskSanctionTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_advice.cat_advice.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_sanction.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_advice.cat_advice" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_advice.cat_advice.CatAdvice1Test" />
-      <option name="METHOD_NAME" value="close" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_sanction" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_sanction.DevTaskSanctionTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CatAdvice1Test.comment" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="DevTaskSanctionTest.changePrgArea1" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_advice.cat_advice.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_sanction.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_advice.cat_advice" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_advice.cat_advice.CatAdvice1Test" />
-      <option name="METHOD_NAME" value="comment" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_sanction" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_sanction.DevTaskSanctionTest" />
+      <option name="METHOD_NAME" value="changePrgArea1" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -205,15 +209,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.ts.integration.tests" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="com.ts.integration.tests.proc_work_task" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task" />
       <option name="TEST_OBJECT" value="PACKAGE" />
       <properties />
       <listeners />
@@ -224,19 +228,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.CatAdvice1Test.close" />
-      <item itemvalue="TestNG.CatAdvice1Test.comment" />
+      <item itemvalue="TestNG.DevTaskSanctionTest.changePrgArea1" />
+      <item itemvalue="TestNG.com.ts.integration.tests.proc_work_task" />
+      <item itemvalue="TestNG.DevTaskSanctionTest" />
       <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
-      <item itemvalue="TestNG.com.ts.integration.tests" />
-      <item itemvalue="TestNG.CatAdvice1Test" />
+      <item itemvalue="TestNG.DevTaskAcceptanceTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.CatAdvice1Test" />
-        <item itemvalue="TestNG.CatAdvice1Test.close" />
-        <item itemvalue="TestNG.CatAdvice1Test.comment" />
         <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
-        <item itemvalue="TestNG.com.ts.integration.tests" />
+        <item itemvalue="TestNG.DevTaskAcceptanceTest" />
+        <item itemvalue="TestNG.com.ts.integration.tests.proc_work_task" />
+        <item itemvalue="TestNG.DevTaskSanctionTest" />
+        <item itemvalue="TestNG.DevTaskSanctionTest.changePrgArea1" />
       </list>
     </recent_temporary>
   </component>
@@ -289,6 +293,14 @@
       <workItem from="1688552672765" duration="6542000" />
       <workItem from="1688559258178" duration="771000" />
       <workItem from="1688560039844" duration="13828000" />
+      <workItem from="1689673896579" duration="41989000" />
+      <workItem from="1690188541682" duration="70302000" />
+      <workItem from="1690516976569" duration="2737000" />
+      <workItem from="1690712690008" duration="46360000" />
+      <workItem from="1691122411071" duration="19007000" />
+      <workItem from="1691323516284" duration="58722000" />
+      <workItem from="1691636890369" duration="7711000" />
+      <workItem from="1692336058224" duration="25267000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -346,16 +358,140 @@
       <option name="project" value="LOCAL" />
       <updated>1688635519041</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feature/CatAdvice">
+      <option name="closed" value="true" />
+      <created>1689240179311</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1689240179311</updated>
+    </task>
+    <task id="LOCAL-00010" summary="feature/CatDevTask 1-7 scenarios">
+      <option name="closed" value="true" />
+      <created>1690293020285</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1690293020285</updated>
+    </task>
+    <task id="LOCAL-00011" summary="scenariosfeature/CatDevTask 8-16">
+      <option name="closed" value="true" />
+      <created>1690438255314</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1690438255314</updated>
+    </task>
+    <task id="LOCAL-00012" summary="added random user.">
+      <option name="closed" value="true" />
+      <created>1690980699750</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1690980699750</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Check additional fields">
+      <option name="closed" value="true" />
+      <created>1691405057080</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1691405057080</updated>
+    </task>
+    <task id="LOCAL-00014" summary="complete acceptance 1.">
+      <option name="closed" value="true" />
+      <created>1691482321043</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1691482321043</updated>
+    </task>
+    <task id="LOCAL-00015" summary="complete acceptance 2">
+      <option name="closed" value="true" />
+      <created>1691497786551</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1691497786551</updated>
+    </task>
+    <task id="LOCAL-00016" summary="receive random task with additional field.">
+      <option name="closed" value="true" />
+      <created>1692004797185</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1692004797185</updated>
+    </task>
+    <task id="LOCAL-00017" summary="complete sanction scenario.">
+      <option name="closed" value="true" />
+      <created>1692364787099</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1692364787099</updated>
+    </task>
+    <task id="LOCAL-00018" summary="add sanction test to Jenkins file.">
+      <option name="closed" value="true" />
+      <created>1692365018246</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1692365018246</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Steps, DevTask">
+      <created>1692689894871</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1692689894871</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="OPEN_GENERIC_TABS">
+      <map>
+        <entry key="a3617214-0463-4bb9-a828-11951a3da8d4" value="TOOL_WINDOW" />
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="HEAD" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="feature/CatAdviceTest" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+        <entry key="a3617214-0463-4bb9-a828-11951a3da8d4">
           <value>
             <State />
           </value>
@@ -370,7 +506,59 @@
     <MESSAGE value="feature/CatSanction and CatConfirmation Tests" />
     <MESSAGE value="fix/TestsSupport" />
     <MESSAGE value="feature/Dynamic Database URL" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/Dynamic Database URL" />
+    <MESSAGE value="feature/CatAdvice" />
+    <MESSAGE value="feature/CatDevTask 1-7 scenarios" />
+    <MESSAGE value="scenariosfeature/CatDevTask 8-16" />
+    <MESSAGE value="added random user." />
+    <MESSAGE value="Check additional fields" />
+    <MESSAGE value="complete acceptance 1." />
+    <MESSAGE value="complete acceptance 2" />
+    <MESSAGE value="receive random task with additional field." />
+    <MESSAGE value="complete sanction scenario." />
+    <MESSAGE value="add sanction test to Jenkins file." />
+    <MESSAGE value="Steps, DevTask" />
+    <option name="LAST_COMMIT_MESSAGE" value="Steps, DevTask" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_replan/DevTaskReplanTest.java</url>
+          <line>326</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_replan/DevTaskReplanTest.java</url>
+          <line>255</line>
+          <option name="timeStamp" value="55" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_replan/DevTaskReplanTest.java</url>
+          <line>327</line>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_replan/DevTaskReplanTest.java</url>
+          <line>155</line>
+          <option name="timeStamp" value="70" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance2/DevTaskAcceptanceTest2.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="88" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance/DevTaskAcceptanceTest.java</url>
+          <line>148</line>
+          <option name="timeStamp" value="104" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java</url>
+          <line>121</line>
+          <option name="timeStamp" value="105" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
