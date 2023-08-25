@@ -73,7 +73,7 @@ public class TrackStudioApiControllers {
     }
 
     public Response receiveTask(String slaTaskNumber) {
-        return this.baseController.receiveActualTask(slaTaskNumber);
+        return this.response = this.baseController.receiveActualTask(slaTaskNumber);
     }
 
     public Response receiveSubTask(String taskNumber) {

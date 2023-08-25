@@ -143,7 +143,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
 
-        baseController.receiveActualTask(task.getNumber());
+        apiController.receiveTask(task.getNumber());
         if (category.equals(TaskType.WorkTask.DOC_TASK)
                 || category.equals(TaskType.WorkTask.AUTOTEST)
                 || category.equals(TaskType.WorkTask.ANAL_TASK)
@@ -152,13 +152,13 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 || category.equals(TaskType.WorkTask.DEV_AUTOTEST)
                 || category.equals(TaskType.WorkTask.REG_TEST_TASK)
                 || category.equals(TaskType.WorkTask.TEST_TASK)) {
-            CommonAssert.assertThat(baseController.getResponse())
+            CommonAssert.assertThat(apiController.getResponse())
                     .isCorrectUdfDate(UDF_WORKTASK_PLANFD, DateUtils.getCurrentDate(0))
                     .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedDate)
                     .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, expectedDoubleValue)
                     .isCorrectUdfDate(UDF_WORKTASK_AWAITTD, expectedDate);
         } else {
-            CommonAssert.assertThat(baseController.getResponse())
+            CommonAssert.assertThat(apiController.getResponse())
                     .isCorrectUdfDate(UDF_WORKTASK_PLANFD, DateUtils.getCurrentDate(0))
                     .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedDate)
                     .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, expectedDoubleValue)
@@ -216,8 +216,8 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_POSTPONED).isCorrectResolution(expectedResolution);
 
-        baseController.receiveActualTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfDate(UDF_WORKTASK_PLANFD, expectedStartDate);
     }
 
@@ -244,13 +244,13 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_INWORK);
 
-        baseController.receiveActualTask(task.getNumber());
+        apiController.receiveTask(task.getNumber());
         if (category.equals(TaskType.WorkTask.AUTOTEST) || category.equals(TaskType.WorkTask.DEV_AUTOTEST)) {
-            CommonAssert.assertThat(baseController.getResponse())
+            CommonAssert.assertThat(apiController.getResponse())
                     .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedDate)
                     .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, expectedDoubleValue);
         } else {
-            CommonAssert.assertThat(baseController.getResponse())
+            CommonAssert.assertThat(apiController.getResponse())
                     .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedDate)
                     .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, expectedDoubleValue)
                     .isCorrectUdfDouble(UDF_WORKTASK_FIRSTPLANBUDGET, expectedDoubleValue);
@@ -318,8 +318,8 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(workTaskController.getResponse())
                 .isCorrectResponseCode(HTTP_OK).isParseableBody(TaskResponseBody.class);
 
-        baseController.receiveActualTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, generateUser(expectedControllerUser));
     }
 
@@ -342,8 +342,8 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(workTaskController.getResponse())
                 .isCorrectResponseCode(HTTP_OK).isParseableBody(TaskResponseBody.class);
 
-        baseController.receiveActualTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfUSer(UDF_WATCHER, generateUser(expectedWatcherUser));
     }
 
@@ -364,8 +364,8 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(workTaskController.getResponse())
                 .isCorrectResponseCode(HTTP_OK).isParseableBody(TaskResponseBody.class);
 
-        baseController.receiveActualTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_MIS_SERVICE, new com.ts.common.entitites.commonEntities.List(expectedListValue.getId()));
     }
 
