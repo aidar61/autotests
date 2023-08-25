@@ -68,6 +68,7 @@ public class TaskAsserts extends EntityAssert {
         log.info("Value is not empty {}", value);
         return (T) this;
     }
+
     @Step("Checking status of the TASK: {0}")
     public TaskAsserts isCorrectStatus(TaskStatuses expectedTaskStatus) {
         assertEquals(super.entity.receiveTaskStatus()
@@ -89,7 +90,7 @@ public class TaskAsserts extends EntityAssert {
         assertEquals(super.entity.receiveTaskResolution()
                 , expectedResolution.getId(), "Task Resolution is not valid");
         log.info("Task resolution is correct Actual: {}, Expected: {}"
-                , super.entity.receiveTaskStatus(), expectedResolution.name());
+                , super.entity.receiveTaskResolution(), expectedResolution.name());
         return this;
     }
 }

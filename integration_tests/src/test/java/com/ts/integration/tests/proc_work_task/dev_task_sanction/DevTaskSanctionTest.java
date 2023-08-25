@@ -6,9 +6,8 @@ import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.dev.DevTaskController;
+import com.ts.common.controllers.workTask.DevTaskController;
 import com.ts.common.entitites.commonEntities.*;
-import com.ts.common.entitites.commonEntities.udf.UdfMultiList;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
@@ -17,7 +16,6 @@ import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import io.restassured.path.json.JsonPath;
-import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 

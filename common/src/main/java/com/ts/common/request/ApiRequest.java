@@ -49,7 +49,7 @@ public abstract class ApiRequest {
         this.requestSpec.log();
     }
 
-    @Step("Response is: {0}")
+    @Step("Response is:")
     public void setResponseToAllure(String response) {
     }
 

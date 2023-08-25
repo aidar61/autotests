@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_work_task.dev_task_acceptance2;
+package com.ts.integration.tests.proc_work_task.dev_task_acceptance;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
@@ -6,7 +6,7 @@ import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.dev.DevTaskController;
+import com.ts.common.controllers.workTask.DevTaskController;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
@@ -29,7 +29,7 @@ import static com.ts.common.enums.TaskStatuses.*;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateString;
 
-public class DevTaskAcceptanceTest2 extends BaseIntegrationTest {
+public class DevTaskAcceptance2Test extends BaseIntegrationTest {
 
     public DevTaskController devTaskController;
     private String cdpBl;

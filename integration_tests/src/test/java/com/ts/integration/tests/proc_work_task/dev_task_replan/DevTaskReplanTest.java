@@ -6,7 +6,7 @@ import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.dev.DevTaskController;
+import com.ts.common.controllers.workTask.DevTaskController;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.entitites.commonEntities.User;

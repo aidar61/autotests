@@ -39,6 +39,7 @@ public class BaseIntegrationTest extends AbstractBaseTest {
 //        log.info("test");Configuration.browserCapabilities = Driver.initBrowserCapabilities();
         this.authToken = generateAuthToken(Users.ROOT);
         apiController = new TrackStudioApiControllers(authToken);
+        baseController = apiController.getBaseController();
 //        trackStudioPages = new Pages();
 //        EMPLOYEE = userController.receiveRandomEmployees(Parents.MTB).getForUser();
 //        CLIENT = userController.receiveRandomEmployees(Parents.MTB).getForUser();
