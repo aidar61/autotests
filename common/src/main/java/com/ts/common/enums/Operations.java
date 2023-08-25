@@ -92,7 +92,9 @@ public enum Operations {
     WORKTASK_SUPERVISE("%S_SUPERVISE"), // закончить приёмку
     WORKTASK_CHANGEPRGAREA("%S_CHANGEPRGAREA"), //  Связь с ККПО
     ADVICE_ALLOWKPO("%S_ALLOWKPO"), //  Санкционировать привязку КПО
-    REMOVE_REQUEST("%S_REMOVEREQUEST"); // снять запрос
+    REMOVE_REQUEST("%S_REMOVEREQUEST"), // снять запрос
+
+    CHANGE_SERVICE("%S_CHANGESERVICE");
 
     public final String id;
 

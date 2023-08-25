@@ -6,13 +6,14 @@ import com.ts.common.controllers.UserController;
 import com.ts.common.controllers.advice.AdviceController;
 import com.ts.common.controllers.advice.ConfirmationController;
 import com.ts.common.controllers.advice.SanctionController;
-import com.ts.common.controllers.dev.DevTaskController;
+import com.ts.common.controllers.workTask.DevTaskController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
 import com.ts.common.controllers.release.ReleaseModuleController;
 import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.controllers.sla.SlaFeatureController;
 import com.ts.common.controllers.sla.SlaHelpController;
+import com.ts.common.controllers.workTask.WorkTaskController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.entitites.tasks.Task;
 import com.ts.common.utils.JsonUtils;
@@ -22,10 +23,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static com.ts.common.config.AppConfigProvider.STAND;
 import static com.ts.common.config.AppConfigProvider.STAND_URL;
 
 @Getter
@@ -45,6 +42,7 @@ public class TrackStudioApiControllers {
     private ConfirmationController confirmationController;
     private SanctionController sanctionController;
     private DevTaskController devTaskController;
+    private WorkTaskController workTaskController;
     private BaseController baseController;
 
 
@@ -61,6 +59,7 @@ public class TrackStudioApiControllers {
         this.confirmationController = new ConfirmationController(STAND_URL, authToken);
         this.sanctionController = new SanctionController(STAND_URL, authToken);
         this.devTaskController = new DevTaskController(STAND_URL, authToken);
+        this.workTaskController = new WorkTaskController(STAND_URL, authToken);
     }
 
 
@@ -92,13 +91,12 @@ public class TrackStudioApiControllers {
     }
 
     public Response receiveActiveSubTasks(String taskNumber) {
-       return baseController.receiveActiveSubTask(taskNumber);
+        return baseController.receiveActiveSubTask(taskNumber);
     }
 
     public Response receiveAllSubTasks(String taskNumber) {
         return baseController.receiveAllSubTask(taskNumber);
     }
-
 
 
     @Step("Пользователь: {0}")
@@ -115,6 +113,7 @@ public class TrackStudioApiControllers {
         this.sanctionController.setAuthToken(authToken);
         this.devTaskController.setAuthToken(authToken);
         this.userController.setAuthToken(authToken);
+        this.workTaskController.setAuthToken(authToken);
     }
 
 }

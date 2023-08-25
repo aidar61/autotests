@@ -88,7 +88,8 @@ public class List extends BaseEntity {
         UDF_PRGAREA_BNK_AML("F195416F42B948018EBB47332753AF0C"), //Противодействие легализации незаконных доходов
         UDF_PRGAREA_ISB("4439BF33627A4BB88666D52E8E8B3C4D"), //Противодействие легализации незаконных доходов
 
-        CRITICAL("818182de541395b101541399d2120001");
+        CRITICAL("818182de541395b101541399d2120001"),
+        YES_V2("ff8080812f8cd356012f908c2c54005b"); // YES Требуется
 
         public final String id;
 
