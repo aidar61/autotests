@@ -1,16 +1,27 @@
 package com.ts.common.asserts;
 
 import com.ts.common.entitites.BaseEntity;
+import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.commonEntities.User;
+import com.ts.common.entitites.commonEntities.udf.UdfDate;
+import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
+import com.ts.common.enums.Resolutions;
 import com.ts.common.enums.TaskStatuses;
 import io.qameta.allure.Step;
+import io.restassured.path.json.JsonPath;
 import lombok.Data;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.testng.AssertJUnit;
 import org.testng.asserts.Assertion;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Locale;
 
 import static org.testng.Assert.*;
 
@@ -51,12 +62,14 @@ public class TaskAsserts extends EntityAssert {
         return this;
     }
 
+
     public <T extends EntityAssert> T isNotEmpty(Object value) {
         assertNotNull(value);
         log.info("Value is not empty {}", value);
         return (T) this;
     }
 
+    @Step("Checking status of the TASK: {0}")
     public TaskAsserts isCorrectStatus(TaskStatuses expectedTaskStatus) {
         assertEquals(super.entity.receiveTaskStatus()
                 , expectedTaskStatus.name(), "Task Status is not valid");
@@ -72,7 +85,12 @@ public class TaskAsserts extends EntityAssert {
                 super.entity.receiveHandlerUser(), expectedHandlerUser);
         return this;
     }
-//    public TaskAsserts isCorrectTaskValues(GeneralTask expectedTask) {
-//
-//    }
+
+    public TaskAsserts isCorrectResolution(Resolutions expectedResolution) {
+        assertEquals(super.entity.receiveTaskResolution()
+                , expectedResolution.getId(), "Task Resolution is not valid");
+        log.info("Task resolution is correct Actual: {}, Expected: {}"
+                , super.entity.receiveTaskResolution(), expectedResolution.name());
+        return this;
+    }
 }

@@ -40,4 +40,14 @@ public class Status extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     @JsonProperty("trname")
     String trName;
+
+    public enum Priority {
+        NORMAL("818181a81faa73ff011fad72666a0150");
+        @Getter
+        public final String id;
+
+        Priority(String id) {
+            this.id = id;
+        }
+    }
 }

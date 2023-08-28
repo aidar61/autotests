@@ -6,13 +6,16 @@ import com.ts.common.controllers.UserController;
 import com.ts.common.controllers.advice.AdviceController;
 import com.ts.common.controllers.advice.ConfirmationController;
 import com.ts.common.controllers.advice.SanctionController;
+import com.ts.common.controllers.workTask.DevTaskController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
 import com.ts.common.controllers.release.ReleaseModuleController;
 import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.controllers.sla.SlaFeatureController;
 import com.ts.common.controllers.sla.SlaHelpController;
+import com.ts.common.controllers.workTask.WorkTaskController;
 import com.ts.common.entitites.tasks.GeneralTask;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -20,7 +23,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import static com.ts.common.config.AppConfigProvider.STAND;
 import static com.ts.common.config.AppConfigProvider.STAND_URL;
 
 @Getter
@@ -39,6 +41,8 @@ public class TrackStudioApiControllers {
     private AdviceController adviceController;
     private ConfirmationController confirmationController;
     private SanctionController sanctionController;
+    private DevTaskController devTaskController;
+    private WorkTaskController workTaskController;
     private BaseController baseController;
 
 
@@ -54,6 +58,8 @@ public class TrackStudioApiControllers {
         this.adviceController = new AdviceController(STAND_URL, authToken);
         this.confirmationController = new ConfirmationController(STAND_URL, authToken);
         this.sanctionController = new SanctionController(STAND_URL, authToken);
+        this.devTaskController = new DevTaskController(STAND_URL, authToken);
+        this.workTaskController = new WorkTaskController(STAND_URL, authToken);
     }
 
 
@@ -64,6 +70,32 @@ public class TrackStudioApiControllers {
             return new GeneralTask(taskResponseBody);
         }
         return null;
+    }
+
+    public Response receiveTask(String slaTaskNumber) {
+        return this.response = this.baseController.receiveActualTask(slaTaskNumber);
+    }
+
+    public Response receiveSubTask(String taskNumber) {
+        return this.baseController.receiveActiveSubTask(taskNumber);
+    }
+
+    public Task receiveSubTaskByCategory(String taskNumber, String category) {
+        var response = baseController.receiveActiveSubTask(taskNumber);
+        return response.jsonPath()
+                .getList("tasks", com.ts.common.entitites.tasks.Task.class)
+                .stream()
+                .filter(x -> x.getCategory().getId().equals(category))
+                .findFirst()
+                .get();
+    }
+
+    public Response receiveActiveSubTasks(String taskNumber) {
+        return baseController.receiveActiveSubTask(taskNumber);
+    }
+
+    public Response receiveAllSubTasks(String taskNumber) {
+        return baseController.receiveAllSubTask(taskNumber);
     }
 
 
@@ -79,6 +111,9 @@ public class TrackStudioApiControllers {
         this.adviceController.setAuthToken(authToken);
         this.confirmationController.setAuthToken(authToken);
         this.sanctionController.setAuthToken(authToken);
+        this.devTaskController.setAuthToken(authToken);
+        this.userController.setAuthToken(authToken);
+        this.workTaskController.setAuthToken(authToken);
     }
 
 }

@@ -7,8 +7,10 @@ public class AppConfigProvider {
     private static AppDb db;
     private static AppUserConfig userConfig;
     public static final String STAND = get().stand();
-    public static final String BASE_URL = get().baseUrl();
+    private static final String BASE_URL = get().baseUrl();
     public static final String STAND_URL = BASE_URL.replace("null", STAND);
+    private static final String DB_BASE_URL = AppConfigProvider.getDbConfig().url();
+    public static final String DB_URL = DB_BASE_URL.replace("null", STAND);
     public static final int IMPLICITLY_WAIT_SEC = get().implicitlyWait();
     public static final int IMPLICITLY_SLEEP_MS = get().implicitlySleep();
 

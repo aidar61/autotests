@@ -22,5 +22,4 @@ import java.util.List;
 public class UserRole extends BaseEntity {
     User forUser;
     Role assignedRole;
-
 }

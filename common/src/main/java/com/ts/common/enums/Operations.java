@@ -8,6 +8,7 @@ public enum Operations {
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
     CHANGE("%S_CHANGE"), // изменить аттрибуты решения
     COMMENT("%S_COMMENT"), // коментарий
+    CHANGE_PLAN("%S_CHANGEPLAN"), // коррекция плана
     CLI_COMMENT("%S_CLICOMMENT"), // задать вопрос
     CHANGE_STATUS("%S_CHANGESTATUS"), // изменить состояние
     CHANGE_RES_PERSON("%S_REASSIGN"),//изменить ответственного
@@ -36,6 +37,7 @@ public enum Operations {
     CHANGE_MODULE("%S_CHANGE_SD_MODULE"), // изменить модуль системы
     ANALIZE("%S_ANALIZE"), // принять на анализ
     DECLINE("%S_DECLINE"), // отклонить
+    INANALYSIS("%S_INANALYSIS"), // В АНАЛИЗЕ
     UNDODECLINE("%S_UNDODECLINE"), // отменить заказ
     TOPRECOST("%S_TOPRECOST"),//начать предварительный анализ
     REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
@@ -53,6 +55,8 @@ public enum Operations {
     CHANGE_DECISION("%S_CHANGEDECISION"), // Изменить решение и постановку на реализацию
     CLEAR_DECISION("%S_CLEARDECISION"), // Уточнить решение
     START("%S_START"), // Передать в разработку
+    ACCEPT_IN_WORK("%S_ACCEPTINWORK"), // Передать в разработку
+    CHANGE_TIME("%S_CHANGETIME"), // Перепланировать
     HOTFIX("%S_HOTFIX"), // Предоставить решение
     PASS_TO_REALIZE("%S_PASSTOREALIZE"), // передать на реализацию
     RETURN("%S_RETURN"), // Вернуть в работу
@@ -79,7 +83,18 @@ public enum Operations {
     CLOSEUNFIXABLE("%S_CLOSEUNFIXABLE"), // закрыть как неустраненную
     CLOSE("%S_CLOSE"), // закрыть(поставщик)
     ACCEPTSOLUTION("%S_ACCEPTSOLUTION"), // ошибка устранена
-    REMOVE_REQUEST("%S_REMOVEREQUEST"); // снять запрос
+    POSTPONE("%S_POSTPONE"), // отложить задачу
+    WORKTASK_ASSIGN("%S_ASSIGN"), // передать в работу
+    WORKTASK_TO_ACCEPTANCE("%S_TOACCEPTANCE"), // передать на приёмку
+    WORKTASK_CONFORMREPLAN("%S_CONFORMREPLAN"), // передать на приёмку
+    WORKTASK_FINISHDEV("%S_FINISHDEV"), // закончить разработку
+    WORKTASK_FINISHACCEPT("%S_FINISHACCEPT"), // закончить приёмку
+    WORKTASK_SUPERVISE("%S_SUPERVISE"), // закончить приёмку
+    WORKTASK_CHANGEPRGAREA("%S_CHANGEPRGAREA"), //  Связь с ККПО
+    ADVICE_ALLOWKPO("%S_ALLOWKPO"), //  Санкционировать привязку КПО
+    REMOVE_REQUEST("%S_REMOVEREQUEST"), // снять запрос
+
+    CHANGE_SERVICE("%S_CHANGESERVICE");
 
     public final String id;
 

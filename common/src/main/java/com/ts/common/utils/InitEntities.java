@@ -6,12 +6,15 @@ import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.*;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.*;
+import org.apache.commons.lang3.tuple.Pair;
+
+import java.util.Arrays;
+import java.util.Map;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.MSG;
 import static com.ts.common.enums.Parents.MTB;
 import static com.ts.common.enums.Parents.RYSGAL_BANK;
-import static com.ts.common.utils.RandomUtils.generateCodeShortName;
-import static com.ts.common.utils.RandomUtils.generateName;
+import static com.ts.common.utils.RandomUtils.*;
 
 public class InitEntities {
     private static final String slaBugDescription = "<table border=\"1px\" cellpadding=\"0\" cellspacing=\"0\" class=\"general\">\n\t<tbody>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Дата возникновения ошибки *</th>\n\t\t\t<td data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;23.12</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Пользователь *</th>\n\t\t\t<td data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;aaskeev</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Логин *</th>\n\t\t\t<td data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Пароль *</th>\n\t\t\t<td data-nolink-after-hash=\"true\" data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Тестовая инстанция *</th>\n\t\t\t<td data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Дата операционного дня *</th>\n\t\t\t<td data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Признак \"Ошибка\" при выполнении операции *</th>\n\t\t\t<td data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">АРМ пользователя</th>\n\t\t\t<td width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Код продукта</th>\n\t\t\t<td width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Дополнительно (любая информация, не попадающая под формат)</th>\n\t\t\t<td width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t</tbody>\n</table>\n";
@@ -69,6 +72,12 @@ public class InitEntities {
                 .build();
     }
 
+    public static GeneralSlaId generateCategoryForWorkTask(TaskType.WorkTask taskType) {
+        return GeneralSlaId.builder()
+                .id(String.format(Operations.CAT.id, taskType.type))
+                .build();
+    }
+
     public static Udfs refreshUdf() {
         return Udfs.builder().build();
     }
@@ -119,6 +128,23 @@ public class InitEntities {
                 .build();
     }
 
+    public static UdfMemo generateUdfMemo(Udfs.UdfSd udfSdType, String value) {
+        return UdfMemo.builder()
+                .udfId(udfSdType.udfId)
+                .type(Type.MEMO.name())
+                .stringValue(value)
+                .build();
+    }
+
+    public static UdfMemo generateUdfMemo(Udfs.UdfSd udfSdType, String value, String userData) {
+        return UdfMemo.builder()
+                .udfId(udfSdType.udfId)
+                .type(Type.MEMO.name())
+                .stringValue(value)
+                .userData(userData)
+                .build();
+    }
+
     public static UdfUser generateUdfUser(Udfs.UdfSd udfSdType, User user) {
         return UdfUser.builder()
                 .udfId(udfSdType.udfId)
@@ -134,6 +160,32 @@ public class InitEntities {
                 .type(udfSdType.type.name())
                 .listValue(new List[]{new List(udfList.id)})
                 .build();
+    }
+
+    public static UdfList generateUdfList(Udfs.UdfSd udfSdType, List.Constants[] udfList) {
+        return UdfList.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .listValue(Arrays.stream(udfList).map(s -> new List(s.getId())).toArray(List[]::new))
+                .build();
+    }
+
+    public static UdfMultiList generateUdfMultiList(Udfs.UdfSd udfSdType, Map<List.Constants, UserData> value) {
+        return UdfMultiList.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .listValue(Arrays.stream(convertMapToArray(value)).map(s -> new MultiList(s.getId(), s.getUserData0(), s.getUserData())).toArray(MultiList[]::new))
+                .build();
+    }
+
+    private static MultiList[] convertMapToArray(Map<List.Constants, UserData> map) {
+        MultiList[] array = new MultiList[map.size()];
+        int index = 0;
+
+        for (Map.Entry<List.Constants, UserData> entry : map.entrySet()) {
+            array[index++] = new MultiList(entry.getKey().id, entry.getValue().getUserData0(), entry.getValue().getUserData());
+        }
+        return array;
     }
 
     public static UdfTask generateUdfTask(Udfs.UdfSd udfSdType, com.ts.common.entitites.commonEntities.Task.Constants udfTask) {
@@ -155,12 +207,19 @@ public class InitEntities {
     }
 
     public static UdfList generateUdfList(Udfs.UdfSd udfSdType, List.Constants udfList, String value) {
-
         return UdfList.builder()
                 .udfId(udfSdType.udfId)
                 .type(udfSdType.type.name())
                 .listValue(new List[]{new List(udfList.id, value)})
                 .userData(value)
+                .build();
+    }
+
+    public static UdfList generateUdfList(Udfs.UdfSd udfSdType, String value) {
+        return UdfList.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .listValue(new List[]{new List(value)})
                 .build();
     }
 
@@ -172,6 +231,14 @@ public class InitEntities {
                 .build();
     }
 
+    public static UdfString generateUdfString(Udfs.UdfSd udfSdType, String udfStringValue, String udfData) {
+        return UdfString.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .stringValue(udfStringValue)
+                .udfData(udfData)
+                .build();
+    }
 
     public static UdfDouble generateUdfDouble(Udfs.UdfSd udfsdType, Integer doubleValue) {
         return UdfDouble.builder()
@@ -181,11 +248,19 @@ public class InitEntities {
                 .build();
     }
 
-    public static UdfDate generateUdfDate(Udfs.UdfSd udfSdType) {
+    public static UdfDate generateUdfDate(Udfs.UdfSd udfSdType, int... days) {
         return UdfDate.builder()
                 .udfId(udfSdType.udfId)
                 .type(udfSdType.type.name())
-                .dateValue(DateUtils.getCurrentDate())
+                .dateValue(DateUtils.getCurrentDate(days[0]))
+                .build();
+    }
+
+    public static UdfDate generateUdfDate(Udfs.UdfSd udfSdType, String date) {
+        return UdfDate.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .dateValue(date)
                 .build();
     }
 
@@ -243,6 +318,11 @@ public class InitEntities {
     public static Status generatePriority(int priority) {
         return Status.builder()
                 .id(String.valueOf(priority))
+                .build();
+    }
+    public static Status generatePriority(Status.Priority priority) {
+        return Status.builder()
+                .id(priority.getId())
                 .build();
     }
 

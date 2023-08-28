@@ -1,6 +1,7 @@
 package com.ts.common.entitites.commonEntities.udf;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.commonEntities.Task;
 import lombok.*;
@@ -23,4 +24,6 @@ public class UdfTask {
     String udfId;
     String type;
     Task[] taskValue;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    Task[] taskValueSelector;
 }

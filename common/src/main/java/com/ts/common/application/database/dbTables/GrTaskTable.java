@@ -8,6 +8,8 @@ import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.Map;
+
 import static org.testng.AssertJUnit.assertNotNull;
 
 @Slf4j
@@ -22,8 +24,26 @@ public class GrTaskTable extends AbstractDbTable {
         return super.getEntityWhere(GrTaskDbEntity.class, "task_number", number);
     }
 
+    public BaseEntity receiveRandomTask(String... parameters) {
+        BaseEntity entityWhere = super.getRandomEntity(GrTaskDbEntity.class, parameters);
+        log.warn("Found following task with number {} from Database", entityWhere.receiveTaskNumber());
+        return entityWhere;
+    }
+
     public BaseEntity receiveByCategoryAndTaskStatus(String category, TaskStatuses taskStatus) {
         BaseEntity entityWhere = super.getEntityWhere(GrTaskDbEntity.class, "task_category", category, "task_status", taskStatus.name());
+        log.warn("Found following task with number {} from Database", entityWhere.receiveTaskNumber());
+        return entityWhere;
+    }
+
+    public BaseEntity receiveRandomTaskByCategoryAndStatus(String category, TaskStatuses taskStatus) {
+        BaseEntity entityWhere = super.getEntityWhere(GrTaskDbEntity.class, "task_category", category, "task_status", taskStatus.name());
+        log.warn("Found following task with number {} from Database", entityWhere.receiveTaskNumber());
+        return entityWhere;
+    }
+
+    public BaseEntity receiveByCategory(String category) {
+        BaseEntity entityWhere = super.getEntityWhereV2(GrTaskDbEntity.class, "task_category", category);
         log.warn("Found following task with number {} from Database", entityWhere.receiveTaskNumber());
         return entityWhere;
     }
