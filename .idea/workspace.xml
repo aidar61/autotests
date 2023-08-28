@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="Steps, DevTask" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/proc_work_task common test fix">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,7 +23,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/master" />
+    <option name="BRANCH" value="origin/devTask_BaseSubmitter" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -68,7 +70,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature/CatAdviceTestTemp",
+    "git-widget-placeholder": "feature/proc__work__task",
     "last_opened_file_path": "/Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -80,12 +82,12 @@
     "project.structure.side.proportion": "0.32876712",
     "settings.editor.selected.configurable": "terminal",
     "settings.editor.splitter.proportion": "0.39143732",
-    "spring.configuration.checksum": "ab5477e5e36ed233bc592765cce87835",
+    "spring.configuration.checksum": "77eb7acb45023b5c2285e592b7b52170",
     "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;oracle&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "oracle"
     ]
   }
 }]]></component>
@@ -101,7 +103,7 @@
       <recent name="com.ts.integration.tests.proc_work_task.dev_task_sanction" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.CommonWorkTaskProcessTest">
+  <component name="RunManager" selected="TestNG.DevTaskAcceptance2Test">
     <configuration name="CommonWorkTaskProcessTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -149,6 +151,23 @@
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.CommonWorkTaskProcessTest" />
       <option name="METHOD_NAME" value="createTask" />
       <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="DevTaskAcceptance2Test" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance.DevTaskAcceptance2Test" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
       <method v="2">
@@ -218,49 +237,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="/Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <option name="SUITE_NAME" value="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" />
-      <option name="TEST_OBJECT" value="SUITE" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="com.ts.integration.tests.proc_work_task" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task" />
-      <option name="TEST_OBJECT" value="PACKAGE" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.DevTaskAcceptance2Test" />
       <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
       <item itemvalue="TestNG.CommonWorkTaskProcessTest.changePlan" />
       <item itemvalue="TestNG.CommonWorkTaskProcessTest.createTask" />
       <item itemvalue="TestNG.Release1Test.catReleaseModule" />
-      <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
-      <item itemvalue="TestNG.DevTaskAcceptanceTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
-        <item itemvalue="TestNG.DevTaskAcceptanceTest" />
-        <item itemvalue="TestNG.com.ts.integration.tests.proc_work_task" />
-        <item itemvalue="TestNG.DevTaskSanctionTest" />
-        <item itemvalue="TestNG.DevTaskSanctionTest.changePrgArea1" />
+        <item itemvalue="TestNG.DevTaskAcceptance2Test" />
+        <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
+        <item itemvalue="TestNG.CommonWorkTaskProcessTest.changePlan" />
+        <item itemvalue="TestNG.Release1Test.catReleaseModule" />
+        <item itemvalue="TestNG.CommonWorkTaskProcessTest.createTask" />
       </list>
     </recent_temporary>
   </component>
@@ -552,7 +544,8 @@
     <MESSAGE value="add sanction test to Jenkins file." />
     <MESSAGE value="Steps, DevTask" />
     <MESSAGE value="feature/proc_work_task Common Test" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/proc_work_task Common Test" />
+    <MESSAGE value="feature/proc_work_task common test fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/proc_work_task common test fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -586,11 +579,6 @@
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance/DevTaskAcceptanceTest.java</url>
           <line>148</line>
           <option name="timeStamp" value="104" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java</url>
-          <line>121</line>
-          <option name="timeStamp" value="105" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
