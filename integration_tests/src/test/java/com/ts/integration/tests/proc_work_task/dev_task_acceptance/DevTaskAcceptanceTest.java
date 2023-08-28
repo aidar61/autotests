@@ -209,7 +209,8 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         CommonAssert
                 .assertThat(response)
                 .isCorrectTaskName("Приёмка доработки: Создание запроса на разработку")
-                .isCorrectTaskDescription("Создана автоматически при закрытии задачи", task.getNumber())
+                .isCorrectTaskDescription("Создана автоматически при закрытии задачи")
+                .isCorrectTaskLink(task.getNumber())
                 .isCorrectHandlerUser(creator.getLogin());
     }
 
