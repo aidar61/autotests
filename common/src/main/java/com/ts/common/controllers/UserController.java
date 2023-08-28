@@ -76,7 +76,9 @@ public class UserController extends ApiRequest {
     public UserRole receiveUserByRole(List<UserRole> userRoles, String role, String login) {
         return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(login)).findFirst().get();
     }
-
+//    public UserRole receiveUserByRoleV1(List<UserRole> userRoles, String role, String login){
+//
+//    }
     public List<UserRole> receiveUserByTask(String taskNumber) {
         return receiveUsersByTaskNumber(taskNumber);
     }

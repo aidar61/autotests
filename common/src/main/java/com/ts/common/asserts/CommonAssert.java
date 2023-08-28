@@ -2,15 +2,19 @@ package com.ts.common.asserts;
 
 
 import com.ts.common.config.AppConfigProvider;
+import com.ts.common.entitites.BaseEntity;
+import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.commonEntities.Status;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.commonEntities.udf.*;
 import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.TaskStatuses;
+import io.qameta.allure.Step;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.api.Assertions;
 import org.jsoup.Jsoup;
 
 import java.text.ParseException;
@@ -20,6 +24,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
@@ -27,6 +32,12 @@ import static org.testng.Assert.assertTrue;
 
 @Slf4j
 public class CommonAssert {
+    //TODO ВМЕСТО sout log, ПО ШАБЛОНУ метода isCorrectUdfDate(Udfs.UdfSd type, String expectedDate) или isCorrectUdfUSer(Udfs.UdfSd type, User expected)
+    //TODO Стараться сравнивать объекты используя метод BaseEntity.class isEquals()
+    //TODO ДОБАВИТЬ НА КАЖДЫЙ МЕТОД @STEP ПО ШАБЛОНУ :
+    /**
+     * @Step("[ASSERT] Checking udf type of {0}, Expected is: {1}")
+     */
     private Response response;
 
     public CommonAssert(Response response) {
@@ -114,19 +125,22 @@ public class CommonAssert {
         return this;
     }
 
-    public CommonAssert isCorrectUdfDate(Udfs.UdfSd type, String date) {
-        var udfDate = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfDate.class).getDateValue();
-        var udfFormattedDate = udfDate.substring(0, udfDate.indexOf('T'));
-        var actual = getSimpleFormattedDate(udfFormattedDate);
-        var expected = getSimpleFormattedDate(date);
-        var result = actual.compareTo(expected);
-        assertEquals(result, 0, type.udfId + " parameters is match: ");
+    @Step("[ASSERT] Checking udf date type of {0}, Expected is: {1}")
+    public CommonAssert isCorrectUdfDate(Udfs.UdfSd type, String expectedDate) {
+        String udfDate = extractUdfField(type, UdfDate.class).getDateValue();
+        var actualDate = udfDate.substring(0, udfDate.indexOf('T'));
+        Assertions.assertThat(actualDate)
+                .contains(expectedDate)
+                .withFailMessage("Date on field %s is not correct, Actual %s Expected %s", type.udfId, actualDate, expectedDate);
+        log.info("{} is correct Actual {}, Expected {}", type, actualDate, expectedDate);
         return this;
     }
 
+    @Step("[ASSERT] Checking udf double type of {0}, Expected is {1}")
     public CommonAssert isCorrectUdfDouble(Udfs.UdfSd type, Integer expected) {
-        var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfDouble.class).getNumberValue();
+        Integer actual = extractUdfField(type, UdfDouble.class).getNumberValue();
         assertEquals(actual, expected, type.udfId + " parameters is match: ");
+        log.info("{} is correct Actual {}, Expected {}", type, actual, expected);
         return this;
     }
 
@@ -141,6 +155,13 @@ public class CommonAssert {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfList.class).getListValue();
         System.out.println("actual: " + actual + ", expected: " + expected);
         assertTrue(Arrays.stream(actual).anyMatch(x -> x.getId().equals(expected)), type.udfId + " parameters is match: ");
+        return this;
+    }
+    @Step("[ASSERT] Checking udf list type of {0} is correct, Expected: {1}")
+    public CommonAssert isCorrectUdfList(Udfs.UdfSd type, List expected) {
+        List actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfList.class).getListValue()[0];
+        assertTrue(actual.isEquals(expected), "List is not match");
+        log.info("List is correct, Actual {}, Expected {}", actual, expected);
         return this;
     }
 
@@ -175,6 +196,14 @@ public class CommonAssert {
         return this;
     }
 
+    @Step("[ASSERT] Checking udfUser type of {0} is correct, Expected user: {1}")
+    public CommonAssert isCorrectUdfUSer(Udfs.UdfSd type, User expected) {
+        User actualUser = extractUdfField(type, UdfUser.class).getUserValue()[0];
+        assertTrue(actualUser.isEquals(expected), "Users is not match");
+        log.info("Users is correct Actual {}, Expected {}", actualUser, expected);
+        return this;
+    }
+
     public CommonAssert isCorrectUdfListCode(Udfs.UdfSd type, String expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfListAdditional.class).getListValue();
         System.out.println("actual: " + actual + ", expected: " + expected);
@@ -194,5 +223,17 @@ public class CommonAssert {
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private <T extends BaseEntity> T extractUdfField(Udfs.UdfSd udfType, Class<T> clazz) {
+        T object = null;
+        try {
+            object = new JsonPath(response.asString()).getObject("udfs." + udfType.udfId, clazz);
+            return object;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+            log.info("Cannot extract object of type {}, because this field don't exist", udfType.udfId);
+        }
+        return object;
     }
 }

@@ -72,6 +72,12 @@ public class InitEntities {
                 .build();
     }
 
+    public static GeneralSlaId generateCategoryForWorkTask(TaskType.WorkTask taskType) {
+        return GeneralSlaId.builder()
+                .id(String.format(Operations.CAT.id, taskType.type))
+                .build();
+    }
+
     public static Udfs refreshUdf() {
         return Udfs.builder().build();
     }
@@ -312,6 +318,11 @@ public class InitEntities {
     public static Status generatePriority(int priority) {
         return Status.builder()
                 .id(String.valueOf(priority))
+                .build();
+    }
+    public static Status generatePriority(Status.Priority priority) {
+        return Status.builder()
+                .id(priority.getId())
                 .build();
     }
 

@@ -20,6 +20,9 @@ import static com.ts.common.utils.RandomUtils.generateRandomNumberBetween;
 @Slf4j
 public abstract class AbstractDbTable {
     public static final String SELECT_QUERY = "SELECT * FROM %s";
+    public static final String SELECT_COUNT_QUERY = "SELECT COUNT(*) FROM %s";
+    public static final String SELECT_WHERE_COUNT_QUERY = SELECT_COUNT_QUERY + " WHERE %s = '%s'";
+    public static final String SELECT_WHERE_AND_COUNT = SELECT_WHERE_COUNT_QUERY + " AND %s = '%s'";
     public static final String SELECT_WHERE_QUERY = SELECT_QUERY + " WHERE %s = '%s'";
     public static final String SELECT_WHERE_AND = SELECT_WHERE_QUERY + " AND %s = '%s'";
     public static final String SELECT_WHERE_ID = SELECT_QUERY + " WHERE id = '%s'";
@@ -107,5 +110,6 @@ public abstract class AbstractDbTable {
     public List<BaseEntity> receiveEntitiesWithOffset(Class clazz) {
         return query(String.format(SELECT_OFFSET_NEXT, this.name, generateRandomNumberBetween(0, 350), 50), new BeanPropertyRowMapper<>(clazz));
     }
+
 
 }
