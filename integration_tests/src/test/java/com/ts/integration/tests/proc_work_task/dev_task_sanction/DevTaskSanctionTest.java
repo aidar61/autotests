@@ -199,7 +199,8 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
                 .isCorrectTaskStatus(STATUS_ADVICE_AWAIT)
                 .isCorrectSubmitterUser(handlerUser.getLogin())
                 .isCorrectUdfList(UDF_PRGAREA, UDF_PRGAREA_BNK.id)
-                .isCorrectTaskDescription("Запрос на санкционирование КПО BNK по задаче", task.getNumber());
+                .isCorrectTaskDescription("Запрос на санкционирование КПО BNK по задаче")
+                .isCorrectTaskLink(task.getNumber());
 
         var devTaskResponse = apiController.receiveTask(task.getNumber());
         CommonAssert

@@ -110,12 +110,18 @@ public class CommonAssert {
         return this;
     }
 
-    public CommonAssert isCorrectTaskDescription(String expectedDescription, String parentId) {
+    public CommonAssert isCorrectTaskDescription(String expectedDescription) {
+        var task = response.as(Task.class);
+        var actualDescription = task.getDescription().substring(0, expectedDescription.length());
+        assertEquals(actualDescription, expectedDescription, expectedDescription + " parameters is match: ");
+        return this;
+    }
+
+    public CommonAssert isCorrectTaskLink(String parentId) {
         var task = response.as(Task.class);
         var actualLink = Jsoup.parse(task.getDescription()).select("a[href]").first().attr("href");
         var expectedLink = AppConfigProvider.STAND_URL + "/app/task/" + parentId;
-        var actualDescription = task.getDescription().substring(0, expectedDescription.length());
-        assertTrue((actualLink.equals(expectedLink) && expectedDescription.equals(actualDescription)), expectedDescription + " parameters is match: ");
+        assertEquals(actualLink, expectedLink, expectedLink + " parameters is match: ");
         return this;
     }
 
