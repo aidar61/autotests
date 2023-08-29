@@ -40,6 +40,13 @@ public class ApiAsserts {
     }
 
     @Step("Response body is: {0}")
+    public ApiAsserts checkingResponseMessageField(String messageField, String expectedValue) {
+        var actualValue = this.response.jsonPath().getString("message." + messageField);
+        assertEquals(actualValue, expectedValue, "Error is correct");
+        return this;
+    }
+
+    @Step("Response body is: {0}")
     private static void logResponse(String responseBody) {
 //        log.info("Response body is : " + responseBody);
     }
