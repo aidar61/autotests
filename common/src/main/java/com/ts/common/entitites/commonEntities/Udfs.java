@@ -32,6 +32,10 @@ public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfMultiList udfMultiList;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfMultiList secondUdfMultiList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfMultiList thirdUdfMultiList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfList udfList;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfList secondUdfList;
@@ -50,11 +54,27 @@ public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfList ninethUdfList;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfList tenthUdfList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfList eleventhUdfList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfList twelfthUdfList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfList thirteenthUdfList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfList fourteenthUdfList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfList fifteenthUdfList;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfString udfString;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfString secondUdfString;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfString thirdUdfString;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfString fourthUdfString;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfString fifthUdfString;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfDouble udfDouble;
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -82,6 +102,8 @@ public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfTask seventhUdfTask;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfTask eighthUdfTask;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfMemo udfMemo;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfMemo secondUdfMemo;
@@ -99,12 +121,19 @@ public class Udfs extends BaseEntity {
         UDF_WORKTASK_DEPENDBF("UDF_WORKTASK_DEPENDBF", TASK),
         UDF_WORKTASK_ANNOTATION("UDF_WORKTASK_ANNOTATION", MEMO),
         UDF_WORKTASK_WAYCODEREVIEW("UDF_WORKTASK_WAYCODEREVIEW", LIST),
+        UDF_PROBLEMAREA("UDF_PROBLEMAREA", LIST),
+        UDF_COREBUILDTYPE("UDF_COREBUILDTYPE", LIST),
+        UDF_COMPONENTBUILDTYPE("UDF_COMPONENTBUILDTYPE", LIST),
         UDF_WORKTASK_BRANCH("UDF_WORKTASK_BRANCH", STRING),
+        UDF_COREBUILD("UDF_COREBUILD", STRING),
+        UDF_COMPONENTBUILD("UDF_COMPONENTBUILD", STRING),
+        UDF_DATABASES("UDF_DATABASES", STRING),
         UDF_WORKTASK_ANALYSISFD("UDF_WORKTASK_ANALYSISFD", DATE),
         UDF_WORKTASK_ANALYSIS("UDF_WORKTASK_ANALYSIS", LIST),
         UDF_CDP_ACCEPTANCE("UDF_CDP_ACCEPTANCE", LIST),
         UDF_WORKTASK_COMPLEXITYLEVEL("UDF_WORKTASK_COMPLEXITYLEVEL", LIST),
         UDF_PRGAREA("UDF_PRGAREA", MULTILIST),
+        UDF_L10N("UDF_L10N", MULTILIST),
         UDF_SD_TRUSTEDWATCHER("UDF_SD_TRUSTEDWATCHER", USER),
         UDF_SLA_CONSULTPROVIDEDATE("UDF_SLA_CONSULTPROVIDEDATE", STRING),
         UDF_WATCHER("UDF_WATCHER", USER),
@@ -125,15 +154,18 @@ public class Udfs extends BaseEntity {
         UDF_WORKTASK_SEVERITY("UDF_WORKTASK_SEVERITY", LIST),
         UDF_SD_RELATED_TASK_CODES("UDF_SD_RELATED_TASK_CODES", MULTILIST),
         UDF_SD_MODULE("UDF_SD_MODULE", TASK),
+        UDF_WORKTASK_DEPENDTASKFNC("UDF_SD_MODULE", TASK),
         UDF_SD_NOMODULE_REASON("UDF_SD_NOMODULE_REASON", STRING),
         UDF_SLAHELP_COST("UDF_SLAHELP_COST", STRING),
         UDF_ADVICE_PLANTD("UDF_ADVICE_PLANTD", DATE),
         UDF_SDFEATURE_GENUSE("UDF_SDFEATURE_GENUSE", LIST),
+        UDF_CDP_BP("UDF_CDP_BP", LIST),
         UDF_WORKTASK_SDREQUEST("UDF_WORKTASK_SDREQUEST", TASK),
         UDF_WORKTASK_WORK("UDF_WORKTASK_WORK", TASK),
         UDF_SLA_URGANCYHELP("UDF_SLA_URGANCYHELP", LIST),
         UDF_SD_HELPKOEF("UDF_SD_HELPKOEF", DOUBLE),
         UDF_SD_LINKEDREQUEST("UDF_SD_LINKEDREQUEST", TASK),
+        UDF_WORKTASK_TESTTASK("UDF_WORKTASK_TESTTASK", TASK),
         UDF_SD_REPEATREQUEST("UDF_SD_REPEATREQUEST", TASK),
         UDF_SD_CLIENTWATCHERS("UDF_SD_CLIENTWATCHERS", STRING),
         UDF_BDKU_CONFIGURATION("UDF_BDKU_CONFIGURATION", TASK),
@@ -188,6 +220,7 @@ public class Udfs extends BaseEntity {
         UDF_SDFEATURE_IMPLBUDGET("UDF_SDFEATURE_IMPLBUDGET", DOUBLE),
 
         UDF_PRODUCT("UDF_PRODUCT", TASK),
+        UDF_COMPONENT("UDF_COMPONENT", TASK),
 
         UDF_RELEASE_PREFIX("UDF_RELEASE_PREFIX", STRING),
 
@@ -217,7 +250,7 @@ public class Udfs extends BaseEntity {
         UDF_WORKTASK_INREPLAN("UDF_WORKTASK_INREPLAN", LIST),
 
         UDF_REGPROJECT("UDF_REGPROJECT", TASK),
-        UDF_WORKTASK_PLANTD("UDF_WORKTASK_PLANTD", TASK),
+        UDF_WORKTASK_PLANTD("UDF_WORKTASK_PLANTD", DATE),
         STDT_SUBMITTER("STDT_SUBMITTER", USER),
         UDF_WORKTASK_PLANFD("UDF_WORKTASK_PLANFD", DATE);
 

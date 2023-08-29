@@ -24,7 +24,6 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
@@ -157,6 +156,7 @@ public class CommonAssert {
         assertTrue(Arrays.stream(actual).anyMatch(x -> x.getId().equals(expected)), type.udfId + " parameters is match: ");
         return this;
     }
+
     @Step("[ASSERT] Checking udf list type of {0} is correct, Expected: {1}")
     public CommonAssert isCorrectUdfList(Udfs.UdfSd type, List expected) {
         List actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfList.class).getListValue()[0];
@@ -199,7 +199,7 @@ public class CommonAssert {
     @Step("[ASSERT] Checking udfUser type of {0} is correct, Expected user: {1}")
     public CommonAssert isCorrectUdfUSer(Udfs.UdfSd type, User expected) {
         User actualUser = extractUdfField(type, UdfUser.class).getUserValue()[0];
-        assertTrue(actualUser.isEquals(expected), "Users is not match");
+        assertEquals(actualUser.getLogin(), expected.getLogin(), "Users is not match");
         log.info("Users is correct Actual {}, Expected {}", actualUser, expected);
         return this;
     }
@@ -208,6 +208,13 @@ public class CommonAssert {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfListAdditional.class).getListValue();
         System.out.println("actual: " + actual + ", expected: " + expected);
         assertTrue(Arrays.stream(actual).anyMatch(x -> x.getCode().equals(expected)), type.udfId + " parameters is match: ");
+        return this;
+    }
+
+    public CommonAssert isCorrectUDfDouble(Udfs.UdfSd firstDoubleUdfType, Udfs.UdfSd secondDoubleUdfType) {
+        var firstPlanBudgetValue = new JsonPath(response.asString()).getDouble("udfs." + firstDoubleUdfType + ".numberValue");
+        var planBudgetValue = new JsonPath(response.asString()).getDouble("udfs." + secondDoubleUdfType + ".numberValue");
+        assertEquals(firstPlanBudgetValue, planBudgetValue, "Value is not match");
         return this;
     }
 
