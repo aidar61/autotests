@@ -43,6 +43,8 @@ public class ApiAsserts {
     public ApiAsserts checkingResponseMessageField(String messageField, String expectedValue) {
         var actualValue = this.response.jsonPath().getString("message." + messageField);
         assertEquals(actualValue, expectedValue, "Error is correct");
+        log.info("Message field '{}' is correct Actual: {}, Expected: {}",
+                messageField, actualValue, expectedValue);
         return this;
     }
 

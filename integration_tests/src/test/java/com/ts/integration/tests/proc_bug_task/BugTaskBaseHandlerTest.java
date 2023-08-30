@@ -27,8 +27,9 @@ import static com.ts.common.entitites.commonEntities.Task.Constants.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
 import static com.ts.common.entitites.commonEntities.User.Constants.BABUSHKIN_IVAN;
-import static com.ts.common.enums.Operations.ACCEPT_IN_WORK;
-import static com.ts.common.enums.Operations.COMMENT;
+import static com.ts.common.enums.Operations.*;
+import static com.ts.common.enums.Resolutions.MSG_WORKTASK_BUGDECLINE;
+import static com.ts.common.enums.Resolutions.RESOLUTION_WORK_SUSPENDED_INDEFINITELY;
 import static com.ts.common.enums.TaskStatuses.*;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateString;
@@ -184,5 +185,115 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_INWORK);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Отклонить ошибку", dependsOnMethods = "taskComment")
+    public void taskDecline() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setHandlerUser(handlerUser);
+        task.setDescription(generateString());
+        task.setResolution(generateResolution(MSG_WORKTASK_BUGDECLINE));
+        udf = refreshUdf();
+        udf.setUdfList(generateUdfList(UDF_WORKTASK_REASONERROR, UDF_WORKTASK_REASONERROR_IMPL));
+        udf.setUdfMemo(generateUdfMemo(UDF_WORKTASK_ERRORDESCRIPTION, "Описание ошибки и/или причины отсутствия источника"));
+        udf.setSecondUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816a8997826e018a40a7df531b82\",\"name\":\"Testing Пошаговый план\",\"order\":1,\"taskId\":\"" + task.getId() +
+                "\",\"weight\":1,\"budget\":0,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c25124956701513912e0f0081d\",\"workTypeNorm\":0.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0103] Создание документа - таблица, бизнес\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
+
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, BUGDECLINE);
+        var updateResponse = bugTaskController.getResponse();
+        ApiAsserts.assertThat(updateResponse)
+                .checkingResponseMessageField("handlerUser.login", creator.getLogin())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_DECLINED);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskDecline")
+    public void taskReturn() {
+        apiController.updateToken(generateAuthToken(creator));
+        task.setHandlerUser(handlerUser);
+        task.setDescription(generateString());
+        udf = refreshUdf();
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, RETURN);
+        var updateResponse = bugTaskController.getResponse();
+        ApiAsserts.assertThat(updateResponse)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
+    }
+
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskReturn")
+    public void taskStart2() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setHandlerUser(handlerUser);
+        task.setDescription(generateString());
+        udf = refreshUdf();
+        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816a8997826e018a44d4d7f61f86\",\"name\":\"Testing Пошаговый план\",\"order\":1,\"taskId\":\"" + task.getId() +
+                "\",\"weight\":1,\"budget\":0,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c25124956701513912e0f0081d\",\"workTypeNorm\":0.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0103] Создание документа - таблица, бизнес\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
+        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, 1));
+        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, 15));
+        task.refreshUdf(udf);
+
+        bugTaskController.performCommonOperation(task, ACCEPT_IN_WORK);
+        ApiAsserts.assertThat(bugTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_INWORK);
+
+        var response = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(response)
+                .isCorrectUDfDouble(UDF_WORKTASK_FIRSTPLANBUDGET, UDF_WORKTASK_PLANBUDGET);
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Отложить", dependsOnMethods = "taskStart2")
+    public void taskPostpone() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setResolution(generateResolution(RESOLUTION_WORK_SUSPENDED_INDEFINITELY));
+        udf = refreshUdf();
+        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANFD, 1));
+        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816a8997826e018a44d4d7f61f86\",\"name\":\"Testing Пошаговый план\",\"order\":1,\"taskId\":\"" + task.getId() +
+                "\",\"weight\":1,\"budget\":0,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c25124956701513912e0f0081d\",\"workTypeNorm\":0.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0103] Создание документа - таблица, бизнес\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, Operations.POSTPONE);
+        ApiAsserts.assertThat(bugTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_POSTPONED);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskPostpone")
+    public void taskStart3() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setHandlerUser(handlerUser);
+        task.setDescription(generateString());
+        udf = refreshUdf();
+        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816a8997826e018a44d4d7f61f86\",\"name\":\"Testing Пошаговый план\",\"order\":1,\"taskId\":\"" + task.getId() +
+                "\",\"weight\":1,\"budget\":0,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c25124956701513912e0f0081d\",\"workTypeNorm\":0.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0103] Создание документа - таблица, бизнес\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
+        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, 1));
+        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, 15));
+        task.refreshUdf(udf);
+
+        bugTaskController.performCommonOperation(task, ACCEPT_IN_WORK);
+        ApiAsserts.assertThat(bugTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_INWORK);
+
+        var response = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(response)
+                .isCorrectUDfDouble(UDF_WORKTASK_FIRSTPLANBUDGET, UDF_WORKTASK_PLANBUDGET);
     }
 }

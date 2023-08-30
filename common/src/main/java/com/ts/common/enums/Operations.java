@@ -8,6 +8,7 @@ public enum Operations {
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
     CHANGE("%S_CHANGE"), // изменить аттрибуты решения
     COMMENT("%S_COMMENT"), // коментарий
+    BUGDECLINE("%S_BUGDECLINE"), // отклонить ошибку
     CHANGE_PLAN("%S_CHANGEPLAN"), // коррекция плана
     CLI_COMMENT("%S_CLICOMMENT"), // задать вопрос
     CHANGE_STATUS("%S_CHANGESTATUS"), // изменить состояние
