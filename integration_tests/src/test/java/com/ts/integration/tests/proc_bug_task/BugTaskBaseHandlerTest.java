@@ -296,4 +296,66 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
                 .assertThat(response)
                 .isCorrectUDfDouble(UDF_WORKTASK_FIRSTPLANBUDGET, UDF_WORKTASK_PLANBUDGET);
     }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "taskStart3")
+    public void changePrgArea() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.refreshUdf();
+        udf.setUdfList(generateUdfList(UDF_PRGAREA, UDF_PRGAREA_BNK));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WORKTASK_CHANGEPRGAREA);
+        ApiAsserts.assertThat(bugTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_INWORK);
+
+        var catSanctionTask = apiController.receiveSubTaskByCategory(task.getNumber(), "CAT_SANCTION");
+
+        var catSanctionResponse = apiController.receiveTask(catSanctionTask.getNumber());
+        CommonAssert
+                .assertThat(catSanctionResponse)
+                .isCorrectTaskStatus(STATUS_ADVICE_AWAIT)
+                .isCorrectSubmitterUser(handlerUser.getLogin())
+                .isCorrectUdfList(UDF_PRGAREA, UDF_PRGAREA_BNK.id)
+                .isCorrectTaskDescription("Запрос на санкционирование КПО BNK по задаче")
+                .isCorrectTaskLink(task.getNumber());
+
+        var devTaskResponse = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(devTaskResponse)
+                .isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_BNK.getId(), "OFF")
+                .isCorrectPrgCode(UDF_PRGAREA, UDF_PRGAREA_BNK.getId(), "BNK");
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Перепланировать", dependsOnMethods = "changePrgArea")
+    public void taskChangeTime() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+        task.setConfirmed(false);
+        udf = refreshUdf();
+
+        var expectedCompletionDate3 = DateUtils.getCurrentDate(7);
+        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_AWAITTD, expectedCompletionDate3));
+        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_AWAITBUDGET, 25));
+        udf.setSecondUdfDouble(generateUdfDouble(UDF_CDP_NORMBUDGET, 25));
+        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPLAN, "[{\"id\":\"8181816a8997826e018a451503e22640\",\"name\":\"Testing Пошаговый план\",\"order\":1,\"taskId\":\"" + task.getId() +
+                "\",\"weight\":1,\"budget\":0,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c25124956701513912e0f0081d\",\"workTypeNorm\":0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0103] Создание документа - таблица, бизнес\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true,\"orderDraft\":1,\"nameDraft\":\"Testing Пошаговый план 2\",\"descriptionDraft\":\"\",\"statusDraft\":\"ACTUAL\",\"weightDraft\":1,\"budgetDraft\":90000,\"budgetHrs\":\"25\",\"budgetMinutes\":0,\"workTypeIdDraft\":\"402881c2516c220101516c711ff80024\",\"workTypeNormDraft\":25}]"));
+        udf.setUdfUser(generateUdfUser(UDF_WORKTASK_RESPFOREPLAN, handlerUser));
+        udf.setUdfList(generateUdfList(UDF_WORKTASK_REASONFOREPLAN, DEVELOPMENT_ERRORS));
+        udf.setSecondUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816a8997826e018a451503e22640\",\"name\":\"Testing Пошаговый план\",\"order\":1,\"taskId\":\"" + task.getId() +
+                "\",\"weight\":1,\"budget\":0,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c25124956701513912e0f0081d\",\"workTypeNorm\":0.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0103] Создание документа - таблица, бизнес\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, CHANGE_TIME);
+        ApiAsserts.assertThat(bugTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_INWORK);
+
+        var response = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(response)
+                .isCorrectUdfList(UDF_WORKTASK_INREPLAN, UDF_WORKTASK_INREPLAN_YES.id);
+    }
 }
