@@ -6,6 +6,7 @@ import com.ts.common.controllers.UserController;
 import com.ts.common.controllers.advice.AdviceController;
 import com.ts.common.controllers.advice.ConfirmationController;
 import com.ts.common.controllers.advice.SanctionController;
+import com.ts.common.controllers.bug.BugTaskController;
 import com.ts.common.controllers.workTask.DevTaskController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
@@ -44,6 +45,7 @@ public class TrackStudioApiControllers {
     private DevTaskController devTaskController;
     private WorkTaskController workTaskController;
     private BaseController baseController;
+    private BugTaskController bugTaskController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
@@ -60,6 +62,7 @@ public class TrackStudioApiControllers {
         this.sanctionController = new SanctionController(STAND_URL, authToken);
         this.devTaskController = new DevTaskController(STAND_URL, authToken);
         this.workTaskController = new WorkTaskController(STAND_URL, authToken);
+        this.bugTaskController = new BugTaskController(STAND_URL, authToken);
     }
 
 
@@ -75,6 +78,11 @@ public class TrackStudioApiControllers {
     public Response receiveTask(String slaTaskNumber) {
         return this.response = this.baseController.receiveActualTask(slaTaskNumber);
     }
+
+    public Response receiveParentTaskPayload(String parentTaskNumber, String category) {
+        return this.baseController.receiveParentTaskPayload(parentTaskNumber, category);
+    }
+
 
     public Response receiveSubTask(String taskNumber) {
         return this.baseController.receiveActiveSubTask(taskNumber);
@@ -114,6 +122,7 @@ public class TrackStudioApiControllers {
         this.devTaskController.setAuthToken(authToken);
         this.userController.setAuthToken(authToken);
         this.workTaskController.setAuthToken(authToken);
+        this.bugTaskController.setAuthToken(authToken);
     }
 
 }

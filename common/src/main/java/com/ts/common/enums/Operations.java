@@ -8,6 +8,7 @@ public enum Operations {
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
     CHANGE("%S_CHANGE"), // изменить аттрибуты решения
     COMMENT("%S_COMMENT"), // коментарий
+    BUGDECLINE("%S_BUGDECLINE"), // отклонить ошибку
     CHANGE_PLAN("%S_CHANGEPLAN"), // коррекция плана
     CLI_COMMENT("%S_CLICOMMENT"), // задать вопрос
     CHANGE_STATUS("%S_CHANGESTATUS"), // изменить состояние
@@ -87,12 +88,19 @@ public enum Operations {
     WORKTASK_ASSIGN("%S_ASSIGN"), // передать в работу
     WORKTASK_TO_ACCEPTANCE("%S_TOACCEPTANCE"), // передать на приёмку
     WORKTASK_CONFORMREPLAN("%S_CONFORMREPLAN"), // передать на приёмку
+    WORKTASK_DISTTOALL("%S_DISTTOALL"), // BAN
+    WORKTASK_CHANGEBRANCH("%S_CHANGEBRANCH"), // BAN
+    WORKTASK_DEPENDOTHERTASK("%S_DEPENDOTHERTASK"), // BAN
+    WORKTASK_CHANGETESTPLAN("%S_CHANGETESTPLAN"), // BAN
     WORKTASK_FINISHDEV("%S_FINISHDEV"), // закончить разработку
     WORKTASK_FINISHACCEPT("%S_FINISHACCEPT"), // закончить приёмку
-    WORKTASK_SUPERVISE("%S_SUPERVISE"), // закончить приёмку
+    WORKTASK_SUPERVISE("%S_SUPERVISE"), //
     WORKTASK_CHANGEPRGAREA("%S_CHANGEPRGAREA"), //  Связь с ККПО
     ADVICE_ALLOWKPO("%S_ALLOWKPO"), //  Санкционировать привязку КПО
     REMOVE_REQUEST("%S_REMOVEREQUEST"), // снять запрос
+    WORKTASK_BINDERRORTASK("%S_BINDERRORTASK"), // снять запрос
+    WORKTASK_CREATESUBTASKS("%S_CREATESUBTASKS"), //
+    WORKTASK_GENUSE("%S_GENUSE"), //
 
     CHANGE_SERVICE("%S_CHANGESERVICE");
 
