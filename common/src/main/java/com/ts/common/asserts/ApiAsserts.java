@@ -39,7 +39,7 @@ public class ApiAsserts {
         return this;
     }
 
-    @Step("Response body is: {0}")
+    @Step("Response messaga is: {0}")
     public ApiAsserts checkingResponseMessageField(String messageField, String expectedValue) {
         var actualValue = this.response.jsonPath().getString("message." + messageField);
         assertEquals(actualValue, expectedValue, "Error is correct");

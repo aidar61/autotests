@@ -48,6 +48,22 @@ public class CommonAssert {
         return new CommonAssert(response);
     }
 
+    @Step("[ASSERT] ({0}) Checking task field, Expected is {1}")
+    public CommonAssert isCorrectTaskField(String description, String expectedFieldValue, String path) {
+        String actualFieldValue = new JsonPath(response.asString()).getString(path);
+        assertEquals(actualFieldValue, expectedFieldValue, description + " parameters is match: ");
+        log.info(description + " is correct Actual {}, Expected {}", actualFieldValue, expectedFieldValue);
+        return this;
+    }
+
+    @Step("[ASSERT] Checking task {0}, Expected is {1}")
+    public CommonAssert isCorrectTaskUser(String description, String expectedUser, String path) {
+        var actualUser = new JsonPath(response.asString()).getList(path, String.class);
+        assertTrue(actualUser.stream().anyMatch(s -> s.equals(expectedUser)), expectedUser + " parameters is match: ");
+        log.info(description + " is correct Actual {}, Expected {}", actualUser, expectedUser);
+        return this;
+    }
+
     public CommonAssert isCorrectSubTasksStatus(String category, TaskStatuses expectedStatus) {
         var tasks = new JsonPath(response.asString()).getList("tasks", Task.class).stream().filter(s -> s.getCategory().getId().equals(category)).collect(Collectors.toList());
         assertTrue(tasks.stream().allMatch(s -> s.receiveTaskStatus().equals(expectedStatus.toString())), expectedStatus + " parameters is match: ");
@@ -116,6 +132,7 @@ public class CommonAssert {
         return this;
     }
 
+
     public CommonAssert isCorrectTaskLink(String parentId) {
         var task = response.as(Task.class);
         var actualLink = Jsoup.parse(task.getDescription()).select("a[href]").first().attr("href");
@@ -135,24 +152,32 @@ public class CommonAssert {
         return this;
     }
 
-    @Step("[ASSERT] Checking udf double type of {0}, Expected is {1}")
-    public CommonAssert isCorrectUdfDouble(Udfs.UdfSd type, Integer expected) {
-        Integer actual = extractUdfField(type, UdfDouble.class).getNumberValue();
+    @Step("[ASSERT] ({0}) Checking udf double type of {1}, Expected is {2}")
+    public CommonAssert isCorrectUdfInteger(String description, Udfs.UdfSd type, Integer expected) {
+        Integer actual = extractUdfField(type, UdfInteger.class).getNumberValue();
         assertEquals(actual, expected, type.udfId + " parameters is match: ");
-        log.info("{} is correct Actual {}, Expected {}", type, actual, expected);
+        log.info("{}: {} is correct Actual {}, Expected {}", description, type, actual, expected);
         return this;
     }
 
+    @Step("[ASSERT] ({0}) Checking udf double type of {1}, Expected is {2}")
+    public CommonAssert isCorrectUdfDouble(String description, Udfs.UdfSd type, Integer expected) {
+        Integer actual = extractUdfField(type, UdfDouble.class).getNumberValue();
+        assertEquals(actual, expected, type.udfId + " parameters is match: ");
+        log.info("{}: {} is correct Actual {}, Expected {}", description, type, actual, expected);
+        return this;
+    }
+
+    @Step("[ASSERT] Checking udf task type of {0} is correct, Expected: {1}")
     public CommonAssert isCorrectUdfTask(Udfs.UdfSd type, String expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfTask.class).getTaskValue();
-        System.out.println("actual: " + actual + ", expected: " + expected);
         assertTrue(Arrays.stream(actual).anyMatch(x -> x.getId().equals(expected)), type.udfId + " parameters is match: ");
         return this;
     }
 
+    @Step("[ASSERT] Checking udf list type of {0} is correct, Expected: {1}")
     public CommonAssert isCorrectUdfList(Udfs.UdfSd type, String expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfList.class).getListValue();
-        System.out.println("actual: " + actual + ", expected: " + expected);
         assertTrue(Arrays.stream(actual).anyMatch(x -> x.getId().equals(expected)), type.udfId + " parameters is match: ");
         return this;
     }
@@ -162,6 +187,22 @@ public class CommonAssert {
         List actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfList.class).getListValue()[0];
         assertTrue(actual.isEquals(expected), "List is not match");
         log.info("List is correct, Actual {}, Expected {}", actual, expected);
+        return this;
+    }
+
+    @Step("[ASSERT] Checking response error message is correct, Expected: {0}")
+    public CommonAssert isCorrectErrorMessage(String expectedMessage) {
+        String actual = new JsonPath(response.asString()).getString("message");
+        assertEquals(actual, expectedMessage, " parameters is match: ");
+        log.info("Message is correct, Actual {}, Expected {}", actual, expectedMessage);
+        return this;
+    }
+
+    @Step("[ASSERT] Checking response message {0}  is correct, Expected: {1}")
+    public CommonAssert isCorrectMessageField(String field, String expectedMessage) {
+        String actual = new JsonPath(response.asString()).getString("message." + field).substring(0, expectedMessage.length());
+        assertEquals(actual, expectedMessage, " parameters is match: ");
+        log.info("Message is correct, Actual {}, Expected {}", actual, expectedMessage);
         return this;
     }
 
@@ -189,9 +230,9 @@ public class CommonAssert {
         return this;
     }
 
+    @Step("[ASSERT] Checking udfUser type of {0} is correct, Expected user: {1}")
     public CommonAssert isCorrectUdfUSer(Udfs.UdfSd type, String expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfUser.class).getUserValue();
-        System.out.println("actual: " + actual + ", expected: " + expected);
         assertTrue(Arrays.stream(actual).anyMatch(x -> x.getLogin().equals(expected)), type.udfId + " parameters is match: ");
         return this;
     }
@@ -200,7 +241,6 @@ public class CommonAssert {
     public CommonAssert isCorrectUdfUSer(Udfs.UdfSd type, User expected) {
         User actualUser = extractUdfField(type, UdfUser.class).getUserValue()[0];
         assertEquals(actualUser.getLogin(), expected.getLogin(), "Users is not match");
-        log.info("Users is correct Actual {}, Expected {}", actualUser, expected);
         return this;
     }
 

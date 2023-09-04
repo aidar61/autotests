@@ -155,15 +155,15 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
             CommonAssert.assertThat(apiController.getResponse())
                     .isCorrectUdfDate(UDF_WORKTASK_PLANFD, DateUtils.getCurrentDate(0))
                     .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedDate)
-                    .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, expectedDoubleValue)
+                    .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, expectedDoubleValue)
                     .isCorrectUdfDate(UDF_WORKTASK_AWAITTD, expectedDate);
         } else {
             CommonAssert.assertThat(apiController.getResponse())
                     .isCorrectUdfDate(UDF_WORKTASK_PLANFD, DateUtils.getCurrentDate(0))
                     .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedDate)
-                    .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, expectedDoubleValue)
+                    .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, expectedDoubleValue)
                     .isCorrectUdfDate(UDF_WORKTASK_AWAITTD, expectedDate)
-                    .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, expectedDoubleValue);
+                    .isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, expectedDoubleValue);
         }
     }
 
@@ -248,12 +248,12 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
         if (category.equals(TaskType.WorkTask.AUTOTEST) || category.equals(TaskType.WorkTask.DEV_AUTOTEST)) {
             CommonAssert.assertThat(apiController.getResponse())
                     .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedDate)
-                    .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, expectedDoubleValue);
+                    .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, expectedDoubleValue);
         } else {
             CommonAssert.assertThat(apiController.getResponse())
                     .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedDate)
-                    .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, expectedDoubleValue)
-                    .isCorrectUdfDouble(UDF_WORKTASK_FIRSTPLANBUDGET, expectedDoubleValue);
+                    .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, expectedDoubleValue)
+                    .isCorrectUdfDouble("Первоначальная оценка трудоёмкости", UDF_WORKTASK_FIRSTPLANBUDGET, expectedDoubleValue);
         }
     }
 

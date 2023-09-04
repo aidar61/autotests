@@ -79,6 +79,11 @@ public class TrackStudioApiControllers {
         return this.response = this.baseController.receiveActualTask(slaTaskNumber);
     }
 
+    public Response receiveParentTaskPayload(String parentTaskNumber, String category) {
+        return this.baseController.receiveParentTaskPayload(parentTaskNumber, category);
+    }
+
+
     public Response receiveSubTask(String taskNumber) {
         return this.baseController.receiveActiveSubTask(taskNumber);
     }

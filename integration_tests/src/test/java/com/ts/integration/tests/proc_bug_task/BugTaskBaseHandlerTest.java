@@ -15,6 +15,7 @@ import com.ts.common.enums.TaskType;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
+import io.restassured.path.json.JsonPath;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -25,8 +26,7 @@ import static com.ts.common.application.database.DbQueryHelper.Operators.*;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
-import static com.ts.common.entitites.commonEntities.User.Constants.BABUSHKIN_IVAN;
+import static com.ts.common.entitites.commonEntities.User.Constants.*;
 import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.Resolutions.MSG_WORKTASK_BUGDECLINE;
 import static com.ts.common.enums.Resolutions.RESOLUTION_WORK_SUSPENDED_INDEFINITELY;
@@ -38,6 +38,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
     public BugTaskController bugTaskController;
     private GeneralTask task;
     private String misService;
+    private String misServiceForChange;
     private String cdpBl;
     private UdfTask productTask;
     private UdfTask bdkuTask;
@@ -45,9 +46,17 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
     private GrTaskTable grTaskTable;
     private GrTaskDbEntity parentTaskFromDb;
     private UdfTask customerRequest;
+    private UdfTask udfTestTask;
     private User creator;
     private User handlerUser;
+    private User constructorUser;
+    private String expectedCompletionDate;
+    private String firstPlanTdDate;
+    private int firstPlanBudget = 15;
+    private int planBudget = 25;
+    private int normBudget = 25;
     private Map<List.Constants, UserData> dependTaskFNC;
+    java.util.List<String> branches;
 
 
     @BeforeClass(alwaysRun = true)
@@ -70,13 +79,21 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
                 "task_category", EQUAL.operator, "CAT_GENPLAN",
                 AND.operator,
+                "task_status", NOT_EQUAL.operator, STATUS_SLABUG_CLOSED.name());
+        var testTask = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
+                "task_category", EQUAL.operator, "CAT_TESTTASK",
+                AND.operator,
                 "task_status", NOT_EQUAL.operator, STATUS_WORKTASK_CLOSED.name());
+        udfTestTask = InitEntities.generateUdfTask(UDF_WORKTASK_TESTTASK, new Task(testTask.getTask_id(), testTask.getTask_number()));
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
-        misService = bugTaskController.getMisService();
+        misService = bugTaskController.getMisService().get(0);
+        misServiceForChange = bugTaskController.getMisService().get(1);
         cdpBl = bugTaskController.getCdpBl();
         var employees = userController.receiveUserByTask(parent.getNumber());
         creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта")).findFirst().get().getForUser();
         handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();
+        var parentTaskPayload = apiController.receiveParentTaskPayload(parent.getNumber(), "CAT_BUGTASK").asString().replace("\\&", "\\\\&");
+        branches = new JsonPath(parentTaskPayload).getList("udfs.UDF_WORKTASK_BRANCH.stringValueSelector", String.class);
     }
 
 
@@ -85,9 +102,9 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         task.setParent(parent);
         task.setName("Задача на исправление ошибки: " + DateUtils.getCurrentDate(0));
-        task.setDescription("<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" class=\"general\" style=\"border:1px solid\">\n\t<tbody>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\" width=\"30%\"><span style=\"font-size:11px\"><strong>Разрешение экрана, версия ОС</strong><strong>*</strong></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; height:1px; text-align:left\" width=\"70%\">1000x2000</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\" width=\"30%\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Клиентская часть*</strong></span></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; height:1px; text-align:left\" width=\"70%\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Клиентская часть*</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Инстанция для тестирования*</strong></span></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Инстанция для тестирования*</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Пользователь / пароль*</strong></span></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Пользователь / пароль*</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>АРМ пользователя*</strong></span></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>АРМ пользователя*</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Версия модуля*</strong></span></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Версия модуля*</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Операционный день*</strong></span></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Операционный день*</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Воспроизведение</strong></span></span></th>\n\t\t\t<td style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Воспроизведение</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Ожидаемый результат</strong></span></span></th>\n\t\t\t<td style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Ожидаемый результат</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Фактический результат</strong></span></span></th>\n\t\t\t<td style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Фактический результат</strong></span></span></td>\n\t\t</tr>\n\t</tbody>\n</table>\n");
+        task.setDescription("<table border=\"1\" cellpadding=\"0\" cellspacing=\"0\" class=\"general\" style=\"border:1px solid\">\n\t<tbody>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\" width=\"30%\"><span style=\"font-size:11px\"><strong>" + generateString() +
+                "</strong><strong>*</strong></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; height:1px; text-align:left\" width=\"70%\">1000x2000</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\" width=\"30%\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Клиентская часть*</strong></span></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; height:1px; text-align:left\" width=\"70%\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Клиентская часть*</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Инстанция для тестирования*</strong></span></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Инстанция для тестирования*</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Пользователь / пароль*</strong></span></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Пользователь / пароль*</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>АРМ пользователя*</strong></span></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>АРМ пользователя*</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Версия модуля*</strong></span></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Версия модуля*</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Операционный день*</strong></span></span></th>\n\t\t\t<td data-required=\"true\" style=\"border-color:#777777; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Операционный день*</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Воспроизведение</strong></span></span></th>\n\t\t\t<td style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Воспроизведение</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Ожидаемый результат</strong></span></span></th>\n\t\t\t<td style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Ожидаемый результат</strong></span></span></td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"text-align: left; background-color: rgb(235, 241, 245); border-color: rgb(119, 119, 119);\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Фактический результат</strong></span></span></th>\n\t\t\t<td style=\"border-color:#777777; height:1px; text-align:left\"><span style=\"font-size:11px\"><span style=\"font-family:Arial,Helvetica,sans-serif\"><strong>Фактический результат</strong></span></span></td>\n\t\t</tr>\n\t</tbody>\n</table>\n");
         task.setHandlerUser(handlerUser);
-////        task.setPriority(generateStatus(TaskStatuses.));
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_WORKTASK_SEVERITY, UDF_WORKTASK_SEVERITY_TRIVIAL));
         udf.setSecondUdfList(generateUdfList(UDF_WORKTASK_COMPLEXITYLEVEL, TASK_LEVEL_7));
@@ -102,7 +119,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         udf.setFifthUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO));
         udf.setSixthUdfList(generateUdfList(UDF_WORKTASK_ANALYSIS, UDF_WORKTASK_ANALYSIS_NO));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, 1));
-        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, 15));
+        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, firstPlanBudget));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPLAN, "[{\"orderDraft\":1,\"weightDraft\":1,\"budgetDraft\":0,\"planby\":\"budget\",\"deletable\":true,\"statusDraft\":\"NEW\",\"nameDraft\":\"Testing Пошаговый план\",\"workTypeIdDraft\":\"402881c25124956701513912e0f0081d\",\"workTypeNormDraft\":0,\"budgetHrs\":\"\",\"budgetMinutes\":\"\"}]"));
         var userData1 = new UserData(null, "{\"type\":\"REQUIRED\",\"comment\":\"Required\"}");
         var userData2 = new UserData(null, "{\"type\":\"RECOMMENDED\",\"comment\":\"RECOMMENDED\"}");
@@ -111,7 +128,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         dependTaskFNC.put(UDF_PRGAREA_CDW, userData2);
         dependTaskFNC.put(UDF_PRGAREA_ISB, userData3);
         udf.setUdfMultiList(generateUdfMultiList(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
-        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, "hg:apng:default [Аnalitic platform new generation]"));
+        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.get(0)));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
         udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_NO));
         udf.setSecondUdfMultiList(generateUdfMultiList(UDF_L10N, UDF_L10N_KG));
@@ -126,7 +143,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         udf.setFourthUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES));
         udf.setFifthUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, bdkuTask.getTaskValueSelector()[0]));
         udf.setFifthUdfTask(customerRequest);
-        udf.setSixthUdfTask(generateUdfTask(UDF_WORKTASK_TESTTASK, WORKTASK_TESTTASK));
+        udf.setSixthUdfTask(udfTestTask);
         udf.setTwelfthUdfList(generateUdfList(UDF_CDP_BP, UDF_CDP_BP_TROUBLESHOOTING, "{\"TC\":[\"0901\",\"0201\",\"0505\",\"0506\",\"0707\",\"0714\",\"0803\"]}"));
         udf.setSeventhUdfTask(generateUdfTask(UDF_WORKTASK_WORK, KZ_KZI));
         udf.setEighthUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDBF, new Task.Constants[]{MTBANK, NOTIFICATION_SERVICE, HEAD_BOOK}));
@@ -135,8 +152,9 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         udf.setFifteenthUdfList(generateUdfList(UDF_WORKTASK_ADDTRSTWATCHINREQST, UDF_WORKTASK_ADDTRSTWATCHINREQST_NO));
         task.refreshUdf(udf);
         bugTaskController.createBagTask(task);
-
-        ApiAsserts.assertThat(bugTaskController.getResponse())
+        var response = bugTaskController.getResponse();
+        constructorUser = JsonPath.from(response.asString()).getObject("udfs.UDF_SD_MODULE.taskValue[0].udfs.UDF_CONSTRUCTOR.userValue[0]", User.class);
+        ApiAsserts.assertThat(response)
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
@@ -150,10 +168,11 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         task.setHandlerUser(handlerUser);
         task.setDescription(generateString());
         udf = refreshUdf();
+        firstPlanTdDate = DateUtils.getCurrentDate(1);
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816a8997826e018a3bfd2ab9164c\",\"name\":\"Testing Пошаговый план\",\"order\":1,\"taskId\":\"8181816a8997826e018a3bfd105b15f8\",\"weight\":1,\"budget\":0,\"progress\":0,\"description\":\"\",\"status\":\"BASE\",\"workTypeId\":\"402881c25124956701513912e0f0081d\",\"workTypeNorm\":0.0,\"nameDraft\":\"Testing Пошаговый план\",\"orderDraft\":1,\"weightDraft\":1,\"budgetDraft\":0,\"statusDraft\":\"BASE\",\"workTypeIdDraft\":\"402881c25124956701513912e0f0081d\",\"workTypeNormDraft\":0.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0103] Создание документа - таблица, бизнес\",\"workTypeDraftAsString\":\"[0103] Создание документа - таблица, бизнес\",\"draftChanged\":true}]"));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
-        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, 1));
-        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, 15));
+        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, firstPlanTdDate));
+        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, firstPlanBudget));
         task.refreshUdf(udf);
         bugTaskController.changeTaskType(TaskType.WORK_TASK);
         bugTaskController.performCommonOperation(task, ACCEPT_IN_WORK);
@@ -166,6 +185,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         var response = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(response)
+                .isCorrectUdfDate(UDF_WORKTASK_PLANTD, firstPlanTdDate)
                 .isCorrectUDfDouble(UDF_WORKTASK_FIRSTPLANBUDGET, UDF_WORKTASK_PLANBUDGET);
     }
 
@@ -237,8 +257,8 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816a8997826e018a44d4d7f61f86\",\"name\":\"Testing Пошаговый план\",\"order\":1,\"taskId\":\"" + task.getId() +
                 "\",\"weight\":1,\"budget\":0,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c25124956701513912e0f0081d\",\"workTypeNorm\":0.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0103] Создание документа - таблица, бизнес\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
-        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, 1));
-        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, 15));
+        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, firstPlanTdDate));
+        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, firstPlanBudget));
         task.refreshUdf(udf);
 
         bugTaskController.performCommonOperation(task, ACCEPT_IN_WORK);
@@ -254,7 +274,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
                 .isCorrectUDfDouble(UDF_WORKTASK_FIRSTPLANBUDGET, UDF_WORKTASK_PLANBUDGET);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Отложить", dependsOnMethods = "taskStart2")
+    @Test(groups = {"BugTask", "Regression"}, description = "Отложить", dependsOnMethods = "taskStart2")
     public void taskPostpone() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setResolution(generateResolution(RESOLUTION_WORK_SUSPENDED_INDEFINITELY));
@@ -281,7 +301,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
                 "\",\"weight\":1,\"budget\":0,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c25124956701513912e0f0081d\",\"workTypeNorm\":0.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0103] Создание документа - таблица, бизнес\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, 1));
-        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, 15));
+        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, firstPlanBudget));
         task.refreshUdf(udf);
 
         bugTaskController.performCommonOperation(task, ACCEPT_IN_WORK);
@@ -297,7 +317,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
                 .isCorrectUDfDouble(UDF_WORKTASK_FIRSTPLANBUDGET, UDF_WORKTASK_PLANBUDGET);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "taskStart3")
+    @Test(groups = {"BugTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "taskStart3")
     public void changePrgArea() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshUdf();
@@ -328,17 +348,16 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
                 .isCorrectPrgCode(UDF_PRGAREA, UDF_PRGAREA_BNK.getId(), "BNK");
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Перепланировать", dependsOnMethods = "changePrgArea")
+    @Test(groups = {"BugTask", "Regression"}, description = "Перепланировать", dependsOnMethods = "changePrgArea")
     public void taskChangeTime() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setDescription(generateString());
         task.setConfirmed(false);
         udf = refreshUdf();
-
-        var expectedCompletionDate3 = DateUtils.getCurrentDate(7);
-        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_AWAITTD, expectedCompletionDate3));
-        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_AWAITBUDGET, 25));
-        udf.setSecondUdfDouble(generateUdfDouble(UDF_CDP_NORMBUDGET, 25));
+        expectedCompletionDate = DateUtils.getCurrentDate(7);
+        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_AWAITTD, expectedCompletionDate));
+        udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_AWAITBUDGET, planBudget));
+        udf.setSecondUdfDouble(generateUdfDouble(UDF_CDP_NORMBUDGET, normBudget));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPLAN, "[{\"id\":\"8181816a8997826e018a451503e22640\",\"name\":\"Testing Пошаговый план\",\"order\":1,\"taskId\":\"" + task.getId() +
                 "\",\"weight\":1,\"budget\":0,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c25124956701513912e0f0081d\",\"workTypeNorm\":0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0103] Создание документа - таблица, бизнес\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true,\"orderDraft\":1,\"nameDraft\":\"Testing Пошаговый план 2\",\"descriptionDraft\":\"\",\"statusDraft\":\"ACTUAL\",\"weightDraft\":1,\"budgetDraft\":90000,\"budgetHrs\":\"25\",\"budgetMinutes\":0,\"workTypeIdDraft\":\"402881c2516c220101516c711ff80024\",\"workTypeNormDraft\":25}]"));
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_RESPFOREPLAN, handlerUser));
@@ -357,5 +376,280 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         CommonAssert
                 .assertThat(response)
                 .isCorrectUdfList(UDF_WORKTASK_INREPLAN, UDF_WORKTASK_INREPLAN_YES.id);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Согласовать перепланирование", dependsOnMethods = "taskChangeTime")
+    public void taskAgreeChangeTime() {
+        apiController.updateToken(generateAuthToken(creator));
+        task.setDescription(generateString());
+
+        udf = refreshUdf();
+        udf.setUdfMemo(generateUdfMemo(UDF_WORKTASK_TASKALLOCATION,
+                "{\"planFinishDate\":\"\",\"userLogin\":\"" + handlerUser.getLogin() +
+                        "\",\"allocations\":[]}"));
+        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate));
+        udf.setSecondUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816c89cef25c018a4611876c6257\",\"name\":\"Testing Пошаговый план\",\"order\":1,\"taskId\":\"" + task.getId() +
+                "\",\"weight\":1,\"budget\":0,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c25124956701513912e0f0081d\",\"workTypeNorm\":0.0,\"nameDraft\":\"Testing Пошаговый план\",\"statusDraft\":\"DELETE\",\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0103] Создание документа - таблица, бизнес\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WORKTASK_CONFORMREPLAN);
+        ApiAsserts.assertThat(bugTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_WORKTASK_INWORK);
+
+        var response = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(response)
+                .isCorrectUdfDouble("Первоначальная оценка трудоёмкости", UDF_WORKTASK_FIRSTPLANBUDGET, firstPlanBudget)
+                .isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, normBudget)
+                .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, planBudget)
+                .isCorrectUdfInteger("Количество перепланирований", UDF_WORKTASK_REPLAN_N, 1)
+                .isCorrectUdfDate(UDF_WORKTASK_AWAITTD, expectedCompletionDate)
+                .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Запретить/Разрешить тиражирование во все ветки: Запретить", dependsOnMethods = "taskAgreeChangeTime")
+    public void taskDistToAllBan() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+
+        udf = refreshUdf();
+        udf.setUdfList(generateUdfList(UDF_WORKTASK_DISTTOALL, UDF_WORKTASK_DISTTOALL_BAN));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WORKTASK_DISTTOALL);
+        ApiAsserts.assertThat(bugTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Запретить/Разрешить тиражирование во все ветки: Разрешить", dependsOnMethods = "taskDistToAllBan")
+    public void taskDistToAllAllow() {
+        apiController.updateToken(generateAuthToken(constructorUser));
+        task.setDescription(generateString());
+
+        udf = refreshUdf();
+        udf.setUdfList(generateUdfList(UDF_WORKTASK_DISTTOALL, UDF_WORKTASK_DISTTOALL_BAN));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WORKTASK_DISTTOALL);
+        var response = bugTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Изменить ветку для разработки", dependsOnMethods = "taskDistToAllAllow")
+    public void taskChangeBranch() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+
+        udf = refreshUdf();
+        udf.setUdfString(generateUdfString(UDF_WORKTASK_BRANCH, "hg:cbs3plus/ccs:default [Current Client Session]"));
+        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816c89cef25c018a4b8bbd8e74be\",\"name\":\"Testing Пошаговый план\",\"order\":0,\"taskId\":\"" + task.getId() +
+                "\",\"progress\":0,\"description\":\"\",\"status\":\"DELETE\",\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"-\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WORKTASK_CHANGEBRANCH);
+        var response = bugTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Установить функциональную зависимость от другой задачи", dependsOnMethods = "taskChangeBranch")
+    public void taskDependOtherTask() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+        udf = refreshUdf();
+        dependTaskFNC.clear();
+        var userData1 = new UserData(null, "{\"type\":\"REQUIRED\",\"comment\":\"Required\"}");
+        dependTaskFNC.put(UDF_PRGAREA_ISB, userData1);
+        udf.setUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WORKTASK_DEPENDOTHERTASK);
+        var response = bugTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Изменить план тестирования", dependsOnMethods = "taskDependOtherTask")
+    public void changeTestPlanTask() {
+        var description = generateString();
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(description);
+        udf = refreshUdf();
+        task.refreshTask();
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WORKTASK_CHANGETESTPLAN);
+        var response = bugTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+
+        CommonAssert
+                .assertThat(response)
+                .isCorrectMessageField("description", description);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "changeTestPlanTask")
+    public void changeLinkedTask() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+        udf = refreshUdf();
+        task.refreshTask();
+        var linkedTask = new com.ts.common.entitites.commonEntities.Task.Constants[]{
+                AKKREDITIVES,
+                SERVICE_DESK
+        };
+        udf.setUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, linkedTask));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, CHANGE_LINKED_TASKS);
+        var response = bugTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES.id)
+                .isCorrectUdfTask(UDF_SD_LINKEDREQUEST, SERVICE_DESK.id);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Изменить услугу", dependsOnMethods = "changeLinkedTask")
+    public void taskChangeService() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+        udf = refreshUdf();
+        task.refreshTask();
+        udf.setUdfList(generateUdfList(UDF_MIS_SERVICE, misServiceForChange));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, CHANGE_SERVICE);
+        var response = bugTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_MIS_SERVICE, misServiceForChange);
+
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "taskChangeService")
+    public void taskChangeSupervisor() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+        udf = refreshUdf();
+        task.refreshTask();
+        udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, new User.Constants[]{ABDULLAEV_BAHODIR, AKSENOV_ANDREY}));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WORKTASK_SUPERVISE);
+        var response = bugTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR.login)
+                .isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, AKSENOV_ANDREY.login);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "taskChangeSupervisor")
+    public void taskChangeWatcher() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+        udf = refreshUdf();
+        task.refreshTask();
+        udf.setUdfUser(generateUdfUser(UDF_WATCHER, new User.Constants[]{BABUSHKIN_IVAN, ALTUNIN_NIKOLAY}));
+        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816c89cef25c018a4f111b5d0094\",\"name\":\"Testing Пошаговый план\",\"order\":0,\"taskId\":\"" + task.getId() +
+                "\",\"progress\":0,\"description\":\"\",\"status\":\"DELETE\",\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"-\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WATCH);
+        var response = bugTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfUSer(UDF_WATCHER, BABUSHKIN_IVAN.login)
+                .isCorrectUdfUSer(UDF_WATCHER, ALTUNIN_NIKOLAY.login);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Привязать к источнику ошибки", dependsOnMethods = "taskChangeWatcher")
+    public void taskBindErrorTask() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+        udf = refreshUdf();
+        task.refreshTask();
+        udf.setUdfList(generateUdfList(UDF_WORKTASK_REASONERROR, UDF_WORKTASK_REASONERROR_DBL));
+        udf.setSecondUdfList(generateUdfList(UDF_WORKTASK_FROMSDREQUEST, UDF_WORKTASK_FROMSDREQUEST_NO));
+        udf.setUdfTask(generateUdfTask(UDF_WORKTASK_ERRORTASK, MODERN_COLVIR_PRODUCT));
+        udf.setUdfMemo(generateUdfMemo(UDF_WORKTASK_ERRORDESCRIPTION, "Описание ошибки и/или причины отсутствия " + generateString()));
+        udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_DEVREGVIOLATION, UDF_WORKTASK_DEVREGVIOLATION_YES));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WORKTASK_BINDERRORTASK);
+        var response = bugTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfTask(UDF_WORKTASK_ERRORTASK, MODERN_COLVIR_PRODUCT.id);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Создать подзадачу копированием", dependsOnMethods = "taskChangeWatcher")
+    public void taskCreateSubtaskWithCopy() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+        udf = refreshUdf();
+        task.refreshTask();
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WORKTASK_CREATESUBTASKS);
+        var response = bugTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        var catBugTask = apiController.receiveSubTaskByCategory(task.getNumber(), "CAT_BUGTASK");
+        var taskCopyDetail = apiController.receiveTask(catBugTask.getNumber());
+        var taskOriginalDetail = apiController.receiveTask(task.getNumber());
+
+        CommonAssert
+                .assertThat(taskOriginalDetail)
+                .isCorrectTaskField("Категория", new JsonPath(taskCopyDetail.asString()).getString("category.id"), "category.id")
+                .isCorrectTaskField("Причины отсутствия классификации по модулям или направлениям деятельности", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_SD_NOMODULE_REASON.stringValue"), "udfs.UDF_SD_NOMODULE_REASON.stringValue")
+                .isCorrectTaskField("Модуль системы", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_SD_MODULE.taskValue[0].id"), "udfs.UDF_SD_MODULE.taskValue[0].id")
+                .isCorrectTaskField("Услуга", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_MIS_SERVICE.listValue[0].id"), "udfs.UDF_MIS_SERVICE.listValue[0].id")
+                .isCorrectTaskField("Приёмка задачи", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_CDP_ACCEPTANCE.listValue[0].id"), "udfs.UDF_CDP_ACCEPTANCE.listValue[0].id")
+                .isCorrectTaskField("Планируемая дата завершения", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WORKTASK_PLANTD.dateValue"), "udfs.UDF_WORKTASK_PLANTD.dateValue")
+                .isCorrectTaskField("Проект БДКУ", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_PRODUCT.taskValue[0].id"), "udfs.UDF_PRODUCT.taskValue[0].id")
+                .isCorrectTaskField("Способ обзора кода", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WORKTASK_WAYCODEREVIEW.listValue[0].code"), "udfs.UDF_WORKTASK_WAYCODEREVIEW.listValue[0].code")
+                .isCorrectTaskField("Общеполезность", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_SDFEATURE_GENUSE.listValue[0].code"), "udfs.UDF_SDFEATURE_GENUSE.listValue[0].code")
+                .isCorrectTaskField("Запрос клиента", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WORKTASK_SDREQUEST.taskValue[0].number"), "udfs.UDF_WORKTASK_SDREQUEST.taskValue[0].number")
+                .isCorrectTaskField("Направление деятельности", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_CDP_BL.listValue[0].id"), "udfs.UDF_CDP_BL.listValue[0].id")
+                .isCorrectTaskUser("Наблюдатель1", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WATCHER.userValue[0].login"), "udfs.UDF_WATCHER.userValue.login")
+                .isCorrectTaskUser("Наблюдатель2", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WATCHER.userValue[1].login"), "udfs.UDF_WATCHER.userValue.login")
+                .isCorrectTaskUser("Контролер1", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WORKTASK_SUPERVISER.userValue[0].login"), "udfs.UDF_WORKTASK_SUPERVISER.userValue.login")
+                .isCorrectTaskUser("Контролер2", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WORKTASK_SUPERVISER.userValue[1].login"), "udfs.UDF_WORKTASK_SUPERVISER.userValue.login")
+                .isCorrectTaskField("Ответственный", new JsonPath(taskCopyDetail.asString()).getString("handlerUser.login"), "handlerUser.login")
+                .isCorrectTaskField("Автор", new JsonPath(taskCopyDetail.asString()).getString("submitterUser.login"), "submitterUser.login")
+                .isCorrectTaskField("Статус", new JsonPath(taskCopyDetail.asString()).getString("status.id"), "status.id");
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Установить общеполезность", dependsOnMethods = "taskCreateSubtaskWithCopy")
+    public void taskChangeGenuse() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+        udf = refreshUdf();
+        task.refreshTask();
+        udf.setUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, LOCAL, "{\"username\":\"shamsaddin.gadirov@azems.az\",\"name\":\"Шамсаддин Гадиров\"}"));
+        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816c89cef25c018a4f5c5958084f\",\"name\":\"Testing Пошаговый план\",\"order\":0,\"taskId\":\"" + task.getId() +
+                "\",\"progress\":0,\"description\":\"\",\"status\":\"DELETE\",\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"-\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WORKTASK_GENUSE);
+        var response = bugTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SDFEATURE_GENUSE, LOCAL.getId());
     }
 }

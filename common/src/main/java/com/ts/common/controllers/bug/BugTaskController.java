@@ -12,7 +12,9 @@ import com.ts.common.utils.JsonUtils;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
@@ -62,18 +64,12 @@ public class BugTaskController extends BaseController {
         return returnTasks;
     }
 
-    public String getMisService() {
-        var misService = new JsonPath(parentDetailInString).getObject("udfs.UDF_MIS_SERVICE", UdfList.class);
-        if (misService != null) {
-            if (misService.getListValue() != null && misService.getListValue().length > 0) {
-                return misService.getListValue()[0].getId();
-            }
-            if (misService.getListValueSelector() != null && misService.getListValueSelector().length > 0) {
-                return misService.getListValueSelector()[0].getId();
-            }
+    public List<String> getMisService() {
+        var misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValue.id", String.class);
+        if (misServiceListValue.size() > 0) {
+            return misServiceListValue;
         }
-
-        return null;
+        return new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValueSelector.id", String.class);
     }
 
     public String getCdpBl() {
