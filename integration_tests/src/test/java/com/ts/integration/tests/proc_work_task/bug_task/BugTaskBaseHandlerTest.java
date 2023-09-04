@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_bug_task;
+package com.ts.integration.tests.proc_work_task.bug_task;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
