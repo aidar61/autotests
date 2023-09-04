@@ -9,5 +9,6 @@ public enum Type {
     DOUBLE,
     MEMO,
     DATE,
-    LINK
+    LINK,
+    INTEGER
 }

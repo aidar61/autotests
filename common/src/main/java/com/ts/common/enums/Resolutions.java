@@ -4,6 +4,7 @@ import lombok.Getter;
 
 public enum Resolutions {
     RESOLUTION_DEPENDS_ON_ANOTHER_TASK("818181a82399260001239ee1001409b1"),
+    MSG_WORKTASK_BUGDECLINE("81818530685a926701685aa0af6f0005"), //Не в моей компетенции
     RESOLUTION_AWAITS_UNTIL_DATE("818181a820cd840f0120f7c2ae8b3748"),
 
     //Работа приостановлена на неопределённый срок

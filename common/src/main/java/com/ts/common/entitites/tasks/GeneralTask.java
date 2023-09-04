@@ -35,7 +35,7 @@ public class GeneralTask extends BaseEntity {
     User handlerUser;
     User submitterUser;
     Udfs udfs;
-//    String udfsString;
+    //    String udfsString;
     @JsonProperty("status")
     Status finishStatus;
     Status priority;
@@ -67,7 +67,10 @@ public class GeneralTask extends BaseEntity {
     }
 
     public void refreshTask() {
-
+        this.resolution = null;
+        this.handlerUser = null;
+        this.finishStatus = null;
+        this.confirmed = null;
     }
 
     @Override

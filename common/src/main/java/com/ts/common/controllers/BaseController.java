@@ -60,6 +60,11 @@ public class BaseController extends ApiRequest {
         return this.response = super.get(getEndpoint(REST, TASK, INFO, taskNumber));
     }
 
+    @Step("Получить parent task payload, Номер задачи: {0}")
+    public Response receiveParentTaskPayload(String parentTaskNumber, String category) {
+        return this.response = super.get(getEndpoint(REST, TASK, CREATE, parentTaskNumber, category));
+    }
+
     @Step("Получить все подзадачи, Номер задачи: {0}")
     public Response receiveAllSubTask(String taskNumber) {
         return super.get(getEndpoint(REST, TASK, INFO, taskNumber, "filter/8a8181df6e1089ea016e120b41da29d8/1/100"));

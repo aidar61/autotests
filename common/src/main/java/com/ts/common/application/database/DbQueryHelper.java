@@ -5,6 +5,7 @@ public class DbQueryHelper {
         OR("OR"),
         AND("AND"),
         EQUAL("="),
+        NOT_EQUAL("!="),
         LIKE("LIKE");
 
         public final String operator;

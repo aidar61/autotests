@@ -18,6 +18,7 @@ public enum TaskType {
     RELEASE_MODULE("RELEASEMODULE"),
     DEV_TASK("DEVTASK"),
     WORK_TASK("WORKTASK"),
+    BUG_TASK("BUGTASK"),
 
     RELEASE("RELEASE");
 

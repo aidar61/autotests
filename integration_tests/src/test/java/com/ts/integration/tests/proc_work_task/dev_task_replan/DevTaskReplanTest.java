@@ -156,8 +156,8 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
         var response = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(response)
-                .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, 2)
-                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 2)
+                .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, 2)
+                .isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, 2)
                 .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
     }
 
@@ -376,10 +376,10 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
         CommonAssert
                 .assertThat(response)
                 .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate)
-                .isCorrectUdfDouble(UDF_WORKTASK_PLANBUDGET, estimationLaborInput)
-                .isCorrectUdfDouble(UDF_WORKTASK_FIRSTPLANBUDGET, initialAssessmentLaborIntensity)
-                .isCorrectUdfDouble(UDF_WORKTASK_AWAITBUDGET, 20)
-                .isCorrectUdfDouble(UDF_CDP_NORMBUDGET, 20)
+                .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, estimationLaborInput)
+                .isCorrectUdfDouble("Первоначальная оценка трудоёмкости", UDF_WORKTASK_FIRSTPLANBUDGET, initialAssessmentLaborIntensity)
+                .isCorrectUdfDouble("Оценка трудоемкости исполнителем", UDF_WORKTASK_AWAITBUDGET, 20)
+                .isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, 20)
                 .isCorrectUdfDate(UDF_WORKTASK_AWAITTD, expectedAwaitedDate);
     }
 

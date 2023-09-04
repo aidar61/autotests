@@ -128,6 +128,14 @@ public class InitEntities {
                 .build();
     }
 
+    public static UdfUser generateUdfUser(Udfs.UdfSd udfSdType, User.Constants[] users) {
+        return UdfUser.builder()
+                .udfId(udfSdType.udfId)
+                .type(Type.USER.name())
+                .userValue(Arrays.stream(users).map(s -> new User(s.getId(), s.getLogin(), s.getName())).toArray(User[]::new))
+                .build();
+    }
+
     public static UdfMemo generateUdfMemo(Udfs.UdfSd udfSdType, String value) {
         return UdfMemo.builder()
                 .udfId(udfSdType.udfId)
@@ -178,6 +186,14 @@ public class InitEntities {
                 .build();
     }
 
+    public static UdfMultiList generateUdfMultiList(Udfs.UdfSd udfSdType, List.Constants multiList) {
+        return UdfMultiList.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .listValue(new MultiList[]{new MultiList(multiList.getId())})
+                .build();
+    }
+
     private static MultiList[] convertMapToArray(Map<List.Constants, UserData> map) {
         MultiList[] array = new MultiList[map.size()];
         int index = 0;
@@ -188,12 +204,28 @@ public class InitEntities {
         return array;
     }
 
+    public static UdfTask generateUdfTask(Udfs.UdfSd udfSdType, Map<List.Constants, UserData> value) {
+        return UdfTask.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .taskValue(Arrays.stream(convertMapToArray(value)).map(s -> new Task(s.getId(), "", s.getUserData0())).toArray(Task[]::new))
+                .build();
+    }
+
     public static UdfTask generateUdfTask(Udfs.UdfSd udfSdType, com.ts.common.entitites.commonEntities.Task.Constants udfTask) {
         return UdfTask.builder()
                 .udfId(udfSdType.udfId)
                 .type(Type.TASK.name())
                 .taskValue(new com.ts.common.entitites.commonEntities.Task[]
                         {new com.ts.common.entitites.commonEntities.Task(udfTask.id, udfTask.number)})
+                .build();
+    }
+
+    public static UdfTask generateUdfTask(Udfs.UdfSd udfSdType, com.ts.common.entitites.commonEntities.Task.Constants[] udfTasks) {
+        return UdfTask.builder()
+                .udfId(udfSdType.udfId)
+                .type(Type.TASK.name())
+                .taskValue(Arrays.stream(udfTasks).map(s -> new Task(s.id, s.number)).toArray(Task[]::new))
                 .build();
     }
 
@@ -320,6 +352,7 @@ public class InitEntities {
                 .id(String.valueOf(priority))
                 .build();
     }
+
     public static Status generatePriority(Status.Priority priority) {
         return Status.builder()
                 .id(priority.getId())
