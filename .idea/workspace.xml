@@ -108,12 +108,12 @@
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.bug_task_base_handler.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.bug_task.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_bug_task" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.bug_task_base_handler.BugTaskBaseHandlerTest" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.bug_task.BugTaskBaseHandlerTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -125,12 +125,12 @@
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.bug_task_base_handler.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.bug_task.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_bug_task" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.bug_task_base_handler.BugTaskBaseHandlerTest" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.bug_task.BugTaskBaseHandlerTest" />
       <option name="METHOD_NAME" value="bugTask" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
