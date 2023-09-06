@@ -272,15 +272,14 @@ public class CommonAssert {
         }
     }
 
-    private <T extends BaseEntity> T extractUdfField(Udfs.UdfSd udfType, Class<T> clazz) {
-        T object = null;
+    private <T extends BaseEntity> T extractUdfField(Udfs.UdfSd udfType, Class<T> type) {
         try {
-            object = new JsonPath(response.asString()).getObject("udfs." + udfType.udfId, clazz);
+            var object = new JsonPath(response.asString()).getObject("udfs." + udfType.udfId, type);
             return object;
         } catch (NullPointerException e) {
             e.printStackTrace();
             log.info("Cannot extract object of type {}, because this field don't exist", udfType.udfId);
+            return null;
         }
-        return object;
     }
 }

@@ -55,7 +55,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
     private int firstPlanBudget = 15;
     private int planBudget = 25;
     private int normBudget = 25;
-    private Map<List.Constants, UserData> dependTaskFNC;
+    private Map<Task.Constants, UserData> dependTaskFNC;
     java.util.List<String> branches;
 
 
@@ -121,13 +121,14 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, 1));
         udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, firstPlanBudget));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPLAN, "[{\"orderDraft\":1,\"weightDraft\":1,\"budgetDraft\":0,\"planby\":\"budget\",\"deletable\":true,\"statusDraft\":\"NEW\",\"nameDraft\":\"Testing Пошаговый план\",\"workTypeIdDraft\":\"402881c25124956701513912e0f0081d\",\"workTypeNormDraft\":0,\"budgetHrs\":\"\",\"budgetMinutes\":\"\"}]"));
+        Map<Task.Constants, UserData> dependTaskFNC = new HashMap<>();
         var userData1 = new UserData(null, "{\"type\":\"REQUIRED\",\"comment\":\"Required\"}");
         var userData2 = new UserData(null, "{\"type\":\"RECOMMENDED\",\"comment\":\"RECOMMENDED\"}");
         var userData3 = new UserData(null, "{\"type\":\"OPTIONAL\",\"option\":\"949177\",\"optionNot\":\"773226\",\"comment\":\"Optional\"}");
-        dependTaskFNC.put(UDF_PRGAREA_BNK, userData1);
-        dependTaskFNC.put(UDF_PRGAREA_CDW, userData2);
-        dependTaskFNC.put(UDF_PRGAREA_ISB, userData3);
-        udf.setUdfMultiList(generateUdfMultiList(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
+        dependTaskFNC.put(RYSGAL_BANK, userData1);
+        dependTaskFNC.put(WORKTASK_TESTTASK, userData2);
+        dependTaskFNC.put(CUSTOMER_REQUEST, userData3);
+        udf.setNinethUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
         udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.get(0)));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
         udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_NO));
@@ -459,7 +460,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         udf = refreshUdf();
         dependTaskFNC.clear();
         var userData1 = new UserData(null, "{\"type\":\"REQUIRED\",\"comment\":\"Required\"}");
-        dependTaskFNC.put(UDF_PRGAREA_ISB, userData1);
+        dependTaskFNC.put(HEAD_BOOK, userData1);
         udf.setUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
         task.refreshUdf(udf);
         bugTaskController.performCommonOperation(task, WORKTASK_DEPENDOTHERTASK);

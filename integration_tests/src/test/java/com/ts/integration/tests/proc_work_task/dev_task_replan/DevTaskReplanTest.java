@@ -73,11 +73,10 @@ public class DevTaskReplanTest extends BaseIntegrationTest {
         bdkuTask = tasks.get("UDF_BDKU_CONFIGURATION");
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
-        misService = devTaskController.getMisService();
+        misService = devTaskController.getMisService().get(0);
         cdpBl = devTaskController.getCdpBl();
         System.out.println(parent);
         System.out.println(parent);
-        System.out.println("@@@@" + parent.getNumber());
         var employees = userController.receiveUserByTask(parent.getNumber());
         creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта")).findFirst().get().getForUser();
         handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();

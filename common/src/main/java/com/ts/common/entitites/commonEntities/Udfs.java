@@ -104,6 +104,8 @@ public class Udfs extends BaseEntity {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfTask eighthUdfTask;
     @JsonInclude(JsonInclude.Include.NON_NULL)
+    UdfTask ninethUdfTask;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfMemo udfMemo;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     UdfMemo secondUdfMemo;

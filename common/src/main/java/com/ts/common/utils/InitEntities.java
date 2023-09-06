@@ -204,12 +204,22 @@ public class InitEntities {
         return array;
     }
 
-    public static UdfTask generateUdfTask(Udfs.UdfSd udfSdType, Map<List.Constants, UserData> value) {
+    public static UdfTask generateUdfTask(Udfs.UdfSd udfSdType, Map<Task.Constants, UserData> value) {
         return UdfTask.builder()
                 .udfId(udfSdType.udfId)
                 .type(udfSdType.type.name())
-                .taskValue(Arrays.stream(convertMapToArray(value)).map(s -> new Task(s.getId(), "", s.getUserData0())).toArray(Task[]::new))
+                .taskValue(Arrays.stream(convertTaskMapToArray(value)).map(s -> new Task(s.getId(), s.getNumber(), s.getUserdata0())).toArray(Task[]::new))
                 .build();
+    }
+
+    private static com.ts.common.entitites.commonEntities.Task[] convertTaskMapToArray(Map<Task.Constants, UserData> map) {
+        com.ts.common.entitites.commonEntities.Task[] array = new com.ts.common.entitites.commonEntities.Task[map.size()];
+        int index = 0;
+
+        for (Map.Entry<Task.Constants, UserData> entry : map.entrySet()) {
+            array[index++] = new com.ts.common.entitites.commonEntities.Task(entry.getKey().id, entry.getKey().number, entry.getValue().getUserData0());
+        }
+        return array;
     }
 
     public static UdfTask generateUdfTask(Udfs.UdfSd udfSdType, com.ts.common.entitites.commonEntities.Task.Constants udfTask) {
