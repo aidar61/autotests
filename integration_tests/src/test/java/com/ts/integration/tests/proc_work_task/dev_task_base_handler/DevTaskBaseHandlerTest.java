@@ -420,7 +420,26 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Установить функциональную зависимость от другой задачи", dependsOnMethods = "taskChangeBranch")
+    @Test(groups = {"BugTask", "Regression"}, description = "Изменить ветку для разработки на пустую", dependsOnMethods = "taskChangeBranch1")
+    public void taskChangeBranch1() {
+        udf = refreshUdf();
+        task.refreshTask();
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+        udf.setUdfString(generateUdfString(UDF_WORKTASK_BRANCH, null));
+        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816c89cef25c018a6f32b56b4b3c\",\"name\":\"Предварительный анализ\",\"order\":0,\"taskId\":\"" + task.getId() +
+                "\",\"progress\":0,\"description\":\"\",\"status\":\"DELETE\",\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"-\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true},{\"id\":\"8181816c89cef25c018a6f33e9c14c13\",\"name\":\"Пошаговый план 1\",\"order\":1,\"taskId\":\"" + task.getId() +
+                "\",\"weight\":1,\"budget\":7200,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c2516c220101516c711ff80024\",\"workTypeNorm\":2.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0701] Иное\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true},{\"id\":\"8181816c89cef25c018a6f33e9c14c14\",\"name\":\"Пошаговый план 2\",\"order\":2,\"taskId\":\"" + task.getId() +
+                "\",\"weight\":1,\"budget\":7200,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c2516c220101516c711ff80024\",\"workTypeNorm\":2.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0701] Иное\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
+
+        task.refreshUdf(udf);
+        devTaskController.performCommonOperation(task, WORKTASK_CHANGEBRANCH);
+        var response = devTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "Установить функциональную зависимость от другой задачи", dependsOnMethods = "taskChangeBranch1")
     public void taskDependOtherTask() {
         udf = refreshUdf();
         task.refreshTask();
