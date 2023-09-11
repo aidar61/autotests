@@ -82,6 +82,7 @@ public class CommonAssert {
     }
 
 
+    @Step("[ASSERT] Checking udf memo type of {0}, Expected is {1}")
     public CommonAssert isCorrectUdfMemo(Udfs.UdfSd type, String expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMemo.class).getStringValue();
         assertEquals(actual, expected, type.udfId + " parameters is match: ");

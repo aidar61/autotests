@@ -4,9 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="complete dev task base handler.">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="changed dev task base handler.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_base_handler/DevTaskBaseHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_base_handler/DevTaskBaseHandlerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,7 +319,7 @@
       <workItem from="1691636890369" duration="7711000" />
       <workItem from="1692336058224" duration="25267000" />
       <workItem from="1693392396713" duration="47868000" />
-      <workItem from="1693748429817" duration="65499000" />
+      <workItem from="1693748429817" duration="66727000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -548,7 +550,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694422931459</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="changed dev task base handler.">
+      <option name="closed" value="true" />
+      <created>1694430615891</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1694430615891</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -604,7 +614,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feature/ReleaseProc-Asserts" />
     <MESSAGE value="feature/CatSanction and CatConfirmation Tests" />
     <MESSAGE value="fix/TestsSupport" />
     <MESSAGE value="feature/Dynamic Database URL" />
@@ -629,7 +638,8 @@
     <MESSAGE value="changed directory for bug task." />
     <MESSAGE value="complete dev task base handler 1-10 scenarios." />
     <MESSAGE value="complete dev task base handler." />
-    <option name="LAST_COMMIT_MESSAGE" value="complete dev task base handler." />
+    <MESSAGE value="changed dev task base handler." />
+    <option name="LAST_COMMIT_MESSAGE" value="changed dev task base handler." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -681,7 +691,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java</url>
-          <line>179</line>
+          <line>180</line>
           <option name="timeStamp" value="128" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -691,12 +701,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java</url>
-          <line>164</line>
+          <line>165</line>
           <option name="timeStamp" value="130" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java</url>
-          <line>276</line>
+          <line>277</line>
           <option name="timeStamp" value="131" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

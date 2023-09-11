@@ -420,7 +420,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Изменить ветку для разработки на пустую", dependsOnMethods = "taskChangeBranch1")
+    @Test(groups = {"BugTask", "Regression"}, description = "Изменить ветку для разработки на пустую", dependsOnMethods = "taskChangeBranch")
     public void taskChangeBranch1() {
         udf = refreshUdf();
         task.refreshTask();
@@ -654,7 +654,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         dependTaskFNC.put(HEAD_BOOK, userData1);
         udf.setUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_NO));
-
+        task.setConfirmed(true);
         task.refreshUdf(udf);
         devTaskController.performCommonOperation(task, WORKTASK_FINISHDEV);
         var response = devTaskController.getResponse();
@@ -664,9 +664,10 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_CLOSED);
 
-//        var taskDetail = apiController.receiveTask(task.getNumber());
-//        CommonAssert
-//                .assertThat(taskDetail)
-//                .isCorrectUdfList(UDF_SDFEATURE_GENUSE, LOCAL.getId());
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfMemo(UDF_WORKTASK_TESTPLAN, testPLanDescription)
+                .isCorrectUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_NO.getId());
     }
 }
