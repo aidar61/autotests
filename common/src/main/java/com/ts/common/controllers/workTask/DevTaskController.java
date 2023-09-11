@@ -58,6 +58,10 @@ public class DevTaskController extends BaseController {
         return returnTasks;
     }
 
+    public String getBDKUTaskName(){
+        return new JsonPath(parentDetailInString).getString("udfs.UDF_BDKU_CONFIGURATION.taskValue[0].shortname");
+    }
+
     public List<String> getMisService() {
         var misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValue.id", String.class);
         if (misServiceListValue.size() > 0) {

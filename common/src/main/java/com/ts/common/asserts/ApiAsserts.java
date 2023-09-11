@@ -7,6 +7,7 @@ import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.request.ResponseBody;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
@@ -69,11 +70,9 @@ public class ApiAsserts {
     }
 
     @Step("Checking expected error: {0}")
-    public ApiAsserts isCorrectError(String expectedError) {
-        log.warn("Error is: {}", expectedError);
-        ErrorResponseBody errorResponseBody = (ErrorResponseBody) this.responseBody;
-        assertEquals(errorResponseBody.getMessage(), expectedError, "Error is correct");
-        log.info("Error is correct");
+    public ApiAsserts isCorrectErrorMessage(String expectedError) {
+        var actualError = new JsonPath(response.asString()).getString("message");
+        assertEquals(actualError, expectedError, "Error is correct");
         return this;
     }
 }

@@ -81,6 +81,8 @@ public class TrackStudioApiControllers {
 
     public Response receiveParentTaskPayload(String parentTaskNumber, String category) {
         return this.baseController.receiveParentTaskPayload(parentTaskNumber, category);
+    } public Response receiveFinishDevForm(String taskNumber) {
+        return this.baseController.receiveFinishDevForm(taskNumber);
     }
 
 
