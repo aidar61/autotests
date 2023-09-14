@@ -68,7 +68,7 @@ public class DevTaskAcceptance2Test extends BaseIntegrationTest {
         cdpBl = devTaskController.getCdpBl();
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
         sdRequestTask = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
-        misService = devTaskController.getMisService();
+        misService = devTaskController.getMisService().get(0);;
 
         var taskEmployees = userController.receiveUserByTask(parent.getNumber());
         System.out.println("********* " + taskEmployees.size());

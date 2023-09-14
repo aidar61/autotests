@@ -80,7 +80,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         cdpBl = devTaskController.getCdpBl();
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
-        misService = devTaskController.getMisService();
+        misService = devTaskController.getMisService().get(0);
         userController = apiController.getUserController();
         var taskEmployees = userController.receiveUserByTask(parent.getNumber());
         creator = userController.receiveUserByRole(taskEmployees, "Менеджер проекта", "root").getForUser();

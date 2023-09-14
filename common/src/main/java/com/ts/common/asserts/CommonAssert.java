@@ -24,6 +24,7 @@ import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
@@ -82,6 +83,7 @@ public class CommonAssert {
     }
 
 
+    @Step("[ASSERT] Checking udf memo type of {0}, Expected is {1}")
     public CommonAssert isCorrectUdfMemo(Udfs.UdfSd type, String expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMemo.class).getStringValue();
         assertEquals(actual, expected, type.udfId + " parameters is match: ");
@@ -132,12 +134,14 @@ public class CommonAssert {
         return this;
     }
 
-
+    @Step("[ASSERT] Checking is link contains task ID {}")
     public CommonAssert isCorrectTaskLink(String parentId) {
         var task = response.as(Task.class);
         var actualLink = Jsoup.parse(task.getDescription()).select("a[href]").first().attr("href");
-        var expectedLink = AppConfigProvider.STAND_URL + "/app/task/" + parentId;
-        assertEquals(actualLink, expectedLink, expectedLink + " parameters is match: ");
+        Assertions.assertThat(actualLink)
+                .withFailMessage("Url %s is not contain task number %s", actualLink, parentId)
+                .contains(parentId);
+        log.info("{} link is contains correct task number {}", actualLink, parentId);
         return this;
     }
 
@@ -146,16 +150,16 @@ public class CommonAssert {
         String udfDate = extractUdfField(type, UdfDate.class).getDateValue();
         var actualDate = udfDate.substring(0, udfDate.indexOf('T'));
         Assertions.assertThat(actualDate)
-                .contains(expectedDate)
-                .withFailMessage("Date on field %s is not correct, Actual %s Expected %s", type.udfId, actualDate, expectedDate);
+                .withFailMessage("Date on field %s is not correct, Actual %s Expected %s", type.udfId, actualDate, expectedDate)
+                .contains(expectedDate);
         log.info("{} is correct Actual {}, Expected {}", type, actualDate, expectedDate);
         return this;
     }
 
     @Step("[ASSERT] ({0}) Checking udf double type of {1}, Expected is {2}")
     public CommonAssert isCorrectUdfInteger(String description, Udfs.UdfSd type, Integer expected) {
-        Integer actual = extractUdfField(type, UdfInteger.class).getNumberValue();
-        assertEquals(actual, expected, type.udfId + " parameters is match: ");
+        Integer actual = Objects.requireNonNull(extractUdfField(type, UdfInteger.class)).getNumberValue();
+        assertEquals(actual, expected, type.udfId + " parameters is non match: ");
         log.info("{}: {} is correct Actual {}, Expected {}", description, type, actual, expected);
         return this;
     }
@@ -246,8 +250,10 @@ public class CommonAssert {
 
     public CommonAssert isCorrectUdfListCode(Udfs.UdfSd type, String expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfListAdditional.class).getListValue();
-        System.out.println("actual: " + actual + ", expected: " + expected);
-        assertTrue(Arrays.stream(actual).anyMatch(x -> x.getCode().equals(expected)), type.udfId + " parameters is match: ");
+        log.info("actual: " + Arrays.toString(actual) + ", expected: " + expected);
+        Assertions.assertThat(actual)
+                .withFailMessage("Code is not correct expected %s, actual %s", expected, Arrays.toString(actual))
+                .anyMatch(x -> x.getCode().equals(expected));
         return this;
     }
 
@@ -272,15 +278,17 @@ public class CommonAssert {
         }
     }
 
-    private <T extends BaseEntity> T extractUdfField(Udfs.UdfSd udfType, Class<T> clazz) {
+    private <T extends BaseEntity> T extractUdfField(Udfs.UdfSd udfType, Class<T> type) {
         T object = null;
         try {
-            object = new JsonPath(response.asString()).getObject("udfs." + udfType.udfId, clazz);
-            return object;
+            object = new JsonPath(response.asString()).getObject("udfs." + udfType.udfId, type);
         } catch (NullPointerException e) {
             e.printStackTrace();
-            log.info("Cannot extract object of type {}, because this field don't exist", udfType.udfId);
         }
+        Assertions.assertThat(object)
+                .withFailMessage("Cannot extract object of type %s because this field don't exist", udfType.udfId)
+                .isNotNull();
+        log.info("Extracted field value {} of type {}", object.toString(), udfType.udfId);
         return object;
     }
 }

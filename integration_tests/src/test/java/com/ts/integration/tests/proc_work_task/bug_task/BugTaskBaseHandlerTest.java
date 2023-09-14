@@ -55,7 +55,8 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
     private int firstPlanBudget = 15;
     private int planBudget = 25;
     private int normBudget = 25;
-    private Map<List.Constants, UserData> dependTaskFNC;
+    private String BDKUName;
+    private Map<Task.Constants, UserData> dependTaskFNC;
     java.util.List<String> branches;
 
 
@@ -94,6 +95,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();
         var parentTaskPayload = apiController.receiveParentTaskPayload(parent.getNumber(), "CAT_BUGTASK").asString().replace("\\&", "\\\\&");
         branches = new JsonPath(parentTaskPayload).getList("udfs.UDF_WORKTASK_BRANCH.stringValueSelector", String.class);
+        BDKUName = bugTaskController.getBDKUTaskName();
     }
 
 
@@ -121,14 +123,15 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, 1));
         udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, firstPlanBudget));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPLAN, "[{\"orderDraft\":1,\"weightDraft\":1,\"budgetDraft\":0,\"planby\":\"budget\",\"deletable\":true,\"statusDraft\":\"NEW\",\"nameDraft\":\"Testing Пошаговый план\",\"workTypeIdDraft\":\"402881c25124956701513912e0f0081d\",\"workTypeNormDraft\":0,\"budgetHrs\":\"\",\"budgetMinutes\":\"\"}]"));
+        Map<Task.Constants, UserData> dependTaskFNC = new HashMap<>();
         var userData1 = new UserData(null, "{\"type\":\"REQUIRED\",\"comment\":\"Required\"}");
         var userData2 = new UserData(null, "{\"type\":\"RECOMMENDED\",\"comment\":\"RECOMMENDED\"}");
         var userData3 = new UserData(null, "{\"type\":\"OPTIONAL\",\"option\":\"949177\",\"optionNot\":\"773226\",\"comment\":\"Optional\"}");
-        dependTaskFNC.put(UDF_PRGAREA_BNK, userData1);
-        dependTaskFNC.put(UDF_PRGAREA_CDW, userData2);
-        dependTaskFNC.put(UDF_PRGAREA_ISB, userData3);
-        udf.setUdfMultiList(generateUdfMultiList(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
-        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.get(0)));
+        dependTaskFNC.put(RYSGAL_BANK, userData1);
+        dependTaskFNC.put(WORKTASK_TESTTASK, userData2);
+        dependTaskFNC.put(CUSTOMER_REQUEST, userData3);
+        udf.setNinethUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
+        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.stream().filter(s -> s.toLowerCase().contains(BDKUName.toLowerCase())).findAny().get()));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
         udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_NO));
         udf.setSecondUdfMultiList(generateUdfMultiList(UDF_L10N, UDF_L10N_KG));
@@ -409,42 +412,67 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
                 .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Запретить/Разрешить тиражирование во все ветки: Запретить", dependsOnMethods = "taskAgreeChangeTime")
+    @Test(groups = {"BugTask", "Regression"}, description = "Запретить/Разрешить тиражирование во все ветки: Запретить", dependsOnMethods = "taskStart3")
     public void taskDistToAllBan() {
-        apiController.updateToken(generateAuthToken(handlerUser));
-        task.setDescription(generateString());
-
         udf = refreshUdf();
+        task.refreshTask();
+        apiController.updateToken(generateAuthToken(handlerUser));
+        var description = generateString();
+        task.setDescription(description);
         udf.setUdfList(generateUdfList(UDF_WORKTASK_DISTTOALL, UDF_WORKTASK_DISTTOALL_BAN));
+
         task.refreshUdf(udf);
         bugTaskController.performCommonOperation(task, WORKTASK_DISTTOALL);
         ApiAsserts.assertThat(bugTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST);
+                .checkingResponseMessageField("description", "<br/>Запрещено тиражирование задачи во все ветки. Причина: " + description)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Запретить/Разрешить тиражирование во все ветки: Разрешить", dependsOnMethods = "taskDistToAllBan")
-    public void taskDistToAllAllow() {
-        apiController.updateToken(generateAuthToken(constructorUser));
-        task.setDescription(generateString());
-
+    @Test(groups = {"BugTask", "Regression"}, description = "(Ответственный) Запретить/Разрешить тиражирование во все ветки: Разрешить", dependsOnMethods = "taskDistToAllBan")
+    public void taskDistToAllAllowWithHandlerUser() {
         udf = refreshUdf();
-        udf.setUdfList(generateUdfList(UDF_WORKTASK_DISTTOALL, UDF_WORKTASK_DISTTOALL_BAN));
+        task.refreshTask();
+        apiController.updateToken(generateAuthToken(handlerUser));
+        task.setDescription(generateString());
+        udf.setUdfList(generateUdfList(UDF_WORKTASK_DISTTOALL, UDF_WORKTASK_DISTTOALL_ALLOW));
+
         task.refreshUdf(udf);
         bugTaskController.performCommonOperation(task, WORKTASK_DISTTOALL);
         var response = bugTaskController.getResponse();
         ApiAsserts.assertThat(response)
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST);
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST)
+                .isCorrectErrorMessage("Разрешить тиражирование во все ветки может только конструктор модуля.<br>Вы не является конструктором модуля либо в задаче не указан модуль системы");
+    }
+
+    @Test(groups = {"BugTask", "Regression"}, description = "(Пользователь из поля Конструктор) Запретить/Разрешить тиражирование во все ветки: Разрешить", dependsOnMethods = "taskDistToAllAllowWithHandlerUser")
+    public void taskDistToAllAllow() {
+        udf = refreshUdf();
+        task.refreshTask();
+        apiController.updateToken(generateAuthToken(constructorUser));
+        var description = generateString();
+        task.setDescription(description);
+        udf.setUdfList(generateUdfList(UDF_WORKTASK_DISTTOALL, UDF_WORKTASK_DISTTOALL_ALLOW));
+
+        task.refreshUdf(udf);
+        bugTaskController.performCommonOperation(task, WORKTASK_DISTTOALL);
+        var response = bugTaskController.getResponse();
+        ApiAsserts.assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .checkingResponseMessageField("description", "<br/>Разрешено тиражирование задачи во все ветки. Причина: " + description);
     }
 
     @Test(groups = {"BugTask", "Regression"}, description = "Изменить ветку для разработки", dependsOnMethods = "taskDistToAllAllow")
     public void taskChangeBranch() {
+        udf = refreshUdf();
+        task.refreshTask();
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setDescription(generateString());
+        udf.setUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.stream().filter(s -> s.toLowerCase().contains(BDKUName.toLowerCase())).findAny().get()));
+        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816c89cef25c018a6f32b56b4b3c\",\"name\":\"Предварительный анализ\",\"order\":0,\"taskId\":\"" + task.getId() +
+                "\",\"progress\":0,\"description\":\"\",\"status\":\"DELETE\",\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"-\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true},{\"id\":\"8181816c89cef25c018a6f33e9c14c13\",\"name\":\"Пошаговый план 1\",\"order\":1,\"taskId\":\"" + task.getId() +
+                "\",\"weight\":1,\"budget\":7200,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c2516c220101516c711ff80024\",\"workTypeNorm\":2.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0701] Иное\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true},{\"id\":\"8181816c89cef25c018a6f33e9c14c14\",\"name\":\"Пошаговый план 2\",\"order\":2,\"taskId\":\"" + task.getId() +
+                "\",\"weight\":1,\"budget\":7200,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c2516c220101516c711ff80024\",\"workTypeNorm\":2.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0701] Иное\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
 
-        udf = refreshUdf();
-        udf.setUdfString(generateUdfString(UDF_WORKTASK_BRANCH, "hg:cbs3plus/ccs:default [Current Client Session]"));
-        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816c89cef25c018a4b8bbd8e74be\",\"name\":\"Testing Пошаговый план\",\"order\":0,\"taskId\":\"" + task.getId() +
-                "\",\"progress\":0,\"description\":\"\",\"status\":\"DELETE\",\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"-\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true}]"));
         task.refreshUdf(udf);
         bugTaskController.performCommonOperation(task, WORKTASK_CHANGEBRANCH);
         var response = bugTaskController.getResponse();
@@ -459,7 +487,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         udf = refreshUdf();
         dependTaskFNC.clear();
         var userData1 = new UserData(null, "{\"type\":\"REQUIRED\",\"comment\":\"Required\"}");
-        dependTaskFNC.put(UDF_PRGAREA_ISB, userData1);
+        dependTaskFNC.put(HEAD_BOOK, userData1);
         udf.setUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
         task.refreshUdf(udf);
         bugTaskController.performCommonOperation(task, WORKTASK_DEPENDOTHERTASK);

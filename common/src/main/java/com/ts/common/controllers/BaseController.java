@@ -65,6 +65,10 @@ public class BaseController extends ApiRequest {
         return this.response = super.get(getEndpoint(REST, TASK, CREATE, parentTaskNumber, category));
     }
 
+    @Step("Проверить открытие формы  MSG_WORKTASK_FINISHDEV, для задачи: {0}")
+    public Response receiveFinishDevForm(String taskNumber) {
+        return this.response = super.get(getEndpoint(REST, TrackStudioEndPoints.OPERATION, "MSG_WORKTASK_FINISHDEV", taskNumber, "context"));
+    }
     @Step("Получить все подзадачи, Номер задачи: {0}")
     public Response receiveAllSubTask(String taskNumber) {
         return super.get(getEndpoint(REST, TASK, INFO, taskNumber, "filter/8a8181df6e1089ea016e120b41da29d8/1/100"));

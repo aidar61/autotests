@@ -25,6 +25,7 @@ public class UdfListAdditional extends BaseEntity {
     @JsonProperty("udfid")
     String udfId;
     String type;
+    @JsonProperty(value = "listValue")
     ListAdditional[] listValue;
     ListAdditional[] listValueSelector;
     @JsonInclude(JsonInclude.Include.NON_NULL)
