@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="changed dev task base handler.">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="changed dev task base handler #2.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_base_handler/DevTaskBaseHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_base_handler/DevTaskBaseHandlerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +110,7 @@
       <recent name="com.ts.integration.tests.proc_work_task.dev_task_sanction" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.DevTaskBaseHandlerTest">
+  <component name="RunManager" selected="TestNG.BugTaskBaseHandlerTest">
     <configuration name="BugTaskBaseHandlerTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -121,23 +121,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_bug_task" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.bug_task.BugTaskBaseHandlerTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CommonWorkTaskProcessTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.CommonWorkTaskProcessTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -242,10 +225,20 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="/Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources/suite.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <option name="SUITE_NAME" value="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" />
+      <option name="TEST_OBJECT" value="SUITE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
+      <item itemvalue="TestNG./Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources/suite.xml" />
       <item itemvalue="TestNG.DevTaskBaseHandlerTest" />
       <item itemvalue="TestNG.DevTaskBaseHandlerTest.devTask" />
       <item itemvalue="TestNG.DevTaskSanctionTest" />
@@ -253,11 +246,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.DevTaskBaseHandlerTest" />
         <item itemvalue="TestNG.BugTaskBaseHandlerTest" />
+        <item itemvalue="TestNG./Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources/suite.xml" />
+        <item itemvalue="TestNG.DevTaskBaseHandlerTest" />
         <item itemvalue="TestNG.DevTaskBaseHandlerTest.devTask" />
         <item itemvalue="TestNG.DevTaskSanctionTest" />
-        <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
       </list>
     </recent_temporary>
   </component>
@@ -319,7 +312,8 @@
       <workItem from="1691636890369" duration="7711000" />
       <workItem from="1692336058224" duration="25267000" />
       <workItem from="1693392396713" duration="47868000" />
-      <workItem from="1693748429817" duration="66727000" />
+      <workItem from="1693748429817" duration="79320000" />
+      <workItem from="1694653676878" duration="3920000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -558,7 +552,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694430615891</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="changed dev task base handler #2.">
+      <option name="closed" value="true" />
+      <created>1694431854487</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1694431854487</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -595,7 +597,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="devTask_BaseSubmitter" />
+                        <option value="origin/devTask_BaseSubmitter" />
                       </list>
                     </value>
                   </entry>
@@ -614,7 +616,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feature/CatSanction and CatConfirmation Tests" />
     <MESSAGE value="fix/TestsSupport" />
     <MESSAGE value="feature/Dynamic Database URL" />
     <MESSAGE value="feature/CatAdvice" />
@@ -639,7 +640,8 @@
     <MESSAGE value="complete dev task base handler 1-10 scenarios." />
     <MESSAGE value="complete dev task base handler." />
     <MESSAGE value="changed dev task base handler." />
-    <option name="LAST_COMMIT_MESSAGE" value="changed dev task base handler." />
+    <MESSAGE value="changed dev task base handler #2." />
+    <option name="LAST_COMMIT_MESSAGE" value="changed dev task base handler #2." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

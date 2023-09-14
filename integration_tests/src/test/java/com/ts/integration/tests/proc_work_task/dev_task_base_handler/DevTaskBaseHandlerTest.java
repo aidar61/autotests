@@ -103,7 +103,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
             udf.setUdfList(generateUdfList(UDF_CDP_BL, cdpBl));
         }
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
-        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.stream().filter(s -> s.contains(BDKUName)).findAny().get()));
+        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.stream().filter(s -> s.toLowerCase().contains(BDKUName.toLowerCase())).findAny().get()));
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
         udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, 1));
