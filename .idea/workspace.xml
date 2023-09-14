@@ -4,11 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="changed dev task base handler #2.">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="initial PROC_SDQUESTIONinitial PROC_SDQUESTION">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sdquestion/SdQuestionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sdhelp/SdHelpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sdhelp/SdHelpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskStatuses.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskStatuses.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_base_handler/DevTaskBaseHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_base_handler/DevTaskBaseHandlerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,7 +115,7 @@
       <recent name="com.ts.integration.tests.proc_work_task.dev_task_sanction" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.BugTaskBaseHandlerTest">
+  <component name="RunManager" selected="TestNG.SdQuestionBaseTest">
     <configuration name="BugTaskBaseHandlerTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -163,16 +168,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DevTaskSanctionTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SdQuestionBaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_sanction.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_question.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_sanction" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_sanction.DevTaskSanctionTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_question" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_question.SdQuestionBaseTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -238,19 +243,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.SdQuestionBaseTest" />
       <item itemvalue="TestNG./Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources/suite.xml" />
       <item itemvalue="TestNG.DevTaskBaseHandlerTest" />
       <item itemvalue="TestNG.DevTaskBaseHandlerTest.devTask" />
-      <item itemvalue="TestNG.DevTaskSanctionTest" />
       <item itemvalue="TestNG.BugTaskBaseHandlerTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.SdQuestionBaseTest" />
         <item itemvalue="TestNG.BugTaskBaseHandlerTest" />
         <item itemvalue="TestNG./Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources/suite.xml" />
         <item itemvalue="TestNG.DevTaskBaseHandlerTest" />
         <item itemvalue="TestNG.DevTaskBaseHandlerTest.devTask" />
-        <item itemvalue="TestNG.DevTaskSanctionTest" />
       </list>
     </recent_temporary>
   </component>
@@ -313,7 +318,7 @@
       <workItem from="1692336058224" duration="25267000" />
       <workItem from="1693392396713" duration="47868000" />
       <workItem from="1693748429817" duration="79320000" />
-      <workItem from="1694653676878" duration="3920000" />
+      <workItem from="1694653676878" duration="8368000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -560,7 +565,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694431854487</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="initial PROC_SDQUESTION">
+      <option name="closed" value="true" />
+      <created>1694676104353</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1694676104354</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,7 +610,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/devTask_BaseSubmitter" />
+                        <option value="devTask_BaseSubmitter" />
                       </list>
                     </value>
                   </entry>
@@ -616,7 +629,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix/TestsSupport" />
     <MESSAGE value="feature/Dynamic Database URL" />
     <MESSAGE value="feature/CatAdvice" />
     <MESSAGE value="feature/CatDevTask 1-7 scenarios" />
@@ -641,7 +653,8 @@
     <MESSAGE value="complete dev task base handler." />
     <MESSAGE value="changed dev task base handler." />
     <MESSAGE value="changed dev task base handler #2." />
-    <option name="LAST_COMMIT_MESSAGE" value="changed dev task base handler #2." />
+    <MESSAGE value="initial PROC_SDQUESTION" />
+    <option name="LAST_COMMIT_MESSAGE" value="initial PROC_SDQUESTION" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -715,6 +728,11 @@
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_base_handler/DevTaskBaseHandlerTest.java</url>
           <line>177</line>
           <option name="timeStamp" value="132" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="135" />
         </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
