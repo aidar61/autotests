@@ -7,8 +7,7 @@
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/proc_work_task common test fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/udf/UdfListAdditional.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/udf/UdfListAdditional.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/bug_task/BugTaskBaseHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/bug_task/BugTaskBaseHandlerTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -110,7 +109,7 @@
       <recent name="com.ts.integration.tests.proc_work_task.dev_task_sanction" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.BugTaskBaseHandlerTest">
+  <component name="RunManager" selected="TestNG./Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources/suite.xml">
     <configuration name="BugTaskBaseHandlerTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -162,18 +161,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DevTaskAcceptanceTest.checkCatDevTask" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="DevTaskSanctionTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_sanction.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_acceptance.DevTaskAcceptanceTest" />
-      <option name="METHOD_NAME" value="checkCatDevTask" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_sanction" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_sanction.DevTaskSanctionTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
       <method v="2">
@@ -225,7 +223,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="/Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="/Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources/suite.xml" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <option name="SUITE_NAME" value="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" />
       <option name="TEST_OBJECT" value="SUITE" />
@@ -238,19 +236,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
+      <item itemvalue="TestNG./Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources/suite.xml" />
+      <item itemvalue="TestNG.DevTaskSanctionTest" />
       <item itemvalue="TestNG.BugTaskBaseHandlerTest" />
       <item itemvalue="TestNG.DevTaskAcceptanceTest" />
-      <item itemvalue="TestNG.DevTaskAcceptanceTest.checkCatDevTask" />
       <item itemvalue="TestNG.DevTaskAcceptance2Test" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG./Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources/suite.xml" />
+        <item itemvalue="TestNG.DevTaskSanctionTest" />
+        <item itemvalue="TestNG.DevTaskAcceptance2Test" />
         <item itemvalue="TestNG.BugTaskBaseHandlerTest" />
         <item itemvalue="TestNG.DevTaskAcceptanceTest" />
-        <item itemvalue="TestNG.DevTaskAcceptance2Test" />
-        <item itemvalue="TestNG.DevTaskAcceptanceTest.checkCatDevTask" />
-        <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
       </list>
     </recent_temporary>
   </component>

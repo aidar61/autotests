@@ -131,7 +131,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         dependTaskFNC.put(WORKTASK_TESTTASK, userData2);
         dependTaskFNC.put(CUSTOMER_REQUEST, userData3);
         udf.setNinethUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
-        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.stream().filter(s -> s.toLowerCase().contains(BDKUName.toLowerCase())).findAny().get()));
+        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.stream().filter(s -> s.toLowerCase().contains(BDKUName.toLowerCase())).findAny().orElse(null)));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
         udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_NO));
         udf.setSecondUdfMultiList(generateUdfMultiList(UDF_L10N, UDF_L10N_KG));
