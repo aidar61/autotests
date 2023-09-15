@@ -71,7 +71,6 @@ public class DevTaskAcceptance2Test extends BaseIntegrationTest {
         misService = devTaskController.getMisService().get(0);;
 
         var taskEmployees = userController.receiveUserByTask(parent.getNumber());
-        System.out.println("********* " + taskEmployees.size());
         creator = userController.receiveUserByRole(taskEmployees, "Менеджер проекта", "root").getForUser();
         handlerUser = userController.receiveUserByRole(taskEmployees, "Участник проекта", creator.getLogin()).getForUser();
     }

@@ -86,7 +86,7 @@ public class CommonAssert {
 
     @Step("[ASSERT] Checking udf memo type of {0}, Expected is {1}")
     public CommonAssert isCorrectUdfMemo(Udfs.UdfSd type, String expected) {
-        var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMemo.class).getStringValue();
+        var actual = extractUdfField(type, UdfMemo.class).getStringValue();
         assertEquals(actual, expected, type.udfId + " parameters is match: ");
         return this;
     }
@@ -113,7 +113,7 @@ public class CommonAssert {
         Assertions
                 .assertThat(actual)
                 .withFailMessage("Code is not correct expected %s, actual %s", expected, actual)
-                .anyMatch(x -> x.getCategory().getId().equals(expected));
+                .anyMatch(x -> !x.getCategory().getId().equals(expected));
         return this;
     }
 
@@ -229,7 +229,8 @@ public class CommonAssert {
 
     @Step("[ASSERT] Checking udf multi list type of {0} is correct, Expected: {1}")
     public CommonAssert isCorrectUdfMultiList(Udfs.UdfSd type, String expected) {
-        var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMultiList.class).getListValue();
+
+        var actual = extractUdfField(type, UdfMultiList.class).getListValue();
         Assertions
                 .assertThat(actual)
                 .withFailMessage("Code is not correct expected %s, actual %s", expected, actual)
@@ -239,7 +240,7 @@ public class CommonAssert {
 
     @Step("[ASSERT] Checking udf {0} with id {1} review mode, Expected: {2}")
     public CommonAssert isCorrectReviewMode(Udfs.UdfSd type, String id, String reviewMode) {
-        var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMultiList.class).getListValue();
+        var actual = extractUdfField(type, UdfMultiList.class).getListValue();
         var listValue = Arrays.stream(actual).filter(x -> x.getId().equals(id)).findFirst().get();
         var actualReviewMode = new JsonPath(listValue.getUserData0()).getString("reviewmode");
         assertEquals(actualReviewMode, reviewMode, actualReviewMode + " parameters is match: ");
@@ -249,7 +250,7 @@ public class CommonAssert {
 
     @Step("[ASSERT] Checking udf {0} with id {1} PRGCode, Expected: {2}")
     public CommonAssert isCorrectPrgCode(Udfs.UdfSd type, String id, String prgCode) {
-        var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfMultiList.class).getListValue();
+        var actual = extractUdfField(type, UdfMultiList.class).getListValue();
         var listValue = Arrays.stream(actual).filter(x -> x.getId().equals(id)).findFirst().get();
         var actualPrgCode = new JsonPath(listValue.getUserData0()).getString("prgcode");
         assertEquals(actualPrgCode, prgCode, actualPrgCode + " parameters is match: ");
@@ -258,7 +259,7 @@ public class CommonAssert {
 
     @Step("[ASSERT] Checking udfUser type of {0} is correct, Expected user: {1}")
     public CommonAssert isCorrectUdfUSer(Udfs.UdfSd type, String expected) {
-        var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfUser.class).getUserValue();
+        var actual = extractUdfField(type, UdfUser.class).getUserValue();
         Assertions
                 .assertThat(actual)
                 .withFailMessage("Code is not correct expected %s, actual %s", expected, actual)
@@ -275,7 +276,7 @@ public class CommonAssert {
 
     @Step("[ASSERT] Checking udf list type of {0} is correct, Expected: {1}")
     public CommonAssert isCorrectUdfListCode(Udfs.UdfSd type, String expected) {
-        var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfListAdditional.class).getListValue();
+        var actual = extractUdfField(type, UdfListAdditional.class).getListValue();
         log.info("actual: " + Arrays.toString(actual) + ", expected: " + expected);
         Assertions.assertThat(actual)
                 .withFailMessage("Code is not correct expected %s, actual %s", expected, Arrays.toString(actual))

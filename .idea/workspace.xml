@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/proc_work_task common test fix">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="added description for common assert methods, change to assert equals instead assert true.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/bug_task/BugTaskBaseHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/bug_task/BugTaskBaseHandlerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance/DevTaskAcceptance2Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task_acceptance/DevTaskAcceptance2Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -109,7 +110,7 @@
       <recent name="com.ts.integration.tests.proc_work_task.dev_task_sanction" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG./Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources/suite.xml">
+  <component name="RunManager" selected="TestNG.DevTaskAcceptance2Test">
     <configuration name="BugTaskBaseHandlerTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -244,9 +245,9 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.DevTaskAcceptance2Test" />
         <item itemvalue="TestNG./Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources/suite.xml" />
         <item itemvalue="TestNG.DevTaskSanctionTest" />
-        <item itemvalue="TestNG.DevTaskAcceptance2Test" />
         <item itemvalue="TestNG.BugTaskBaseHandlerTest" />
         <item itemvalue="TestNG.DevTaskAcceptanceTest" />
       </list>
@@ -467,7 +468,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692964632148</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="added description for common assert methods, change to assert equals instead assert true.">
+      <option name="closed" value="true" />
+      <created>1694749613393</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1694749613393</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -541,7 +550,8 @@
     <MESSAGE value="Steps, DevTask" />
     <MESSAGE value="feature/proc_work_task Common Test" />
     <MESSAGE value="feature/proc_work_task common test fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/proc_work_task common test fix" />
+    <MESSAGE value="added description for common assert methods, change to assert equals instead assert true." />
+    <option name="LAST_COMMIT_MESSAGE" value="added description for common assert methods, change to assert equals instead assert true." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
