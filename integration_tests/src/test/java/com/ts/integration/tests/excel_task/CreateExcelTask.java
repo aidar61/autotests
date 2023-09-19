@@ -44,7 +44,7 @@ public class CreateExcelTask extends BaseIntegrationTest {
         tasksFromExcel = ExcelService.readFromExcel(pathToFile);
     }
 
-    @Test(groups = {"EXCEL", "Regression"}, description = "создание CAT_SDQUESTION")
+    @Test(groups = {"EXCEL"}, description = "создание CAT_SDQUESTION")
     public void createTask() {
         apiController.updateToken(new AuthToken("root", "password"));
         for (int i = 0; i < 1000; i++) {
