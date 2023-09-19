@@ -3,6 +3,7 @@ package com.ts.common.enums;
 public enum TaskType {
 
     SLA_HElP("SLAHELP"),
+    CAT_CFGTASK("CFGTASK"),
 
     SLA_BUG("SLABUG"),
 
@@ -11,12 +12,15 @@ public enum TaskType {
     SOL_SELECTED("SOLSELECTED"),
     GAP_SOLUTION("GAPSOLUTION"),
     SD_HELP("SDHELP"),
+    SD_QUESTION("SDQUESTION"),
     GAP("GAP"),
     ADVICE("ADVICE"),
     SANCTION("SANCTION"),
     CONFIRMATION("CONFIRMATION"),
     RELEASE_MODULE("RELEASEMODULE"),
     DEV_TASK("DEVTASK"),
+    CAT_TECHTASK("TECHTASK"),
+    CAT_DISTASK("DISTASK"),
     WORK_TASK("WORKTASK"),
     BUG_TASK("BUGTASK"),
 

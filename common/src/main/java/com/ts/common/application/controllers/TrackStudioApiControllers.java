@@ -1,12 +1,14 @@
 package com.ts.common.application.controllers;
 
 import com.ts.common.controllers.BaseController;
+import com.ts.common.controllers.CreateFromExcelTaskController;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.UserController;
 import com.ts.common.controllers.advice.AdviceController;
 import com.ts.common.controllers.advice.ConfirmationController;
 import com.ts.common.controllers.advice.SanctionController;
 import com.ts.common.controllers.bug.BugTaskController;
+import com.ts.common.controllers.sdquestion.SdQuestionController;
 import com.ts.common.controllers.workTask.DevTaskController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
@@ -46,6 +48,8 @@ public class TrackStudioApiControllers {
     private WorkTaskController workTaskController;
     private BaseController baseController;
     private BugTaskController bugTaskController;
+    private SdQuestionController sdQuestionController;
+    private CreateFromExcelTaskController createFromExcelTaskController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
@@ -63,6 +67,9 @@ public class TrackStudioApiControllers {
         this.devTaskController = new DevTaskController(STAND_URL, authToken);
         this.workTaskController = new WorkTaskController(STAND_URL, authToken);
         this.bugTaskController = new BugTaskController(STAND_URL, authToken);
+        this.sdQuestionController = new SdQuestionController(STAND_URL, authToken);
+        this.createFromExcelTaskController = new CreateFromExcelTaskController(STAND_URL, authToken);
+
     }
 
 
@@ -81,7 +88,9 @@ public class TrackStudioApiControllers {
 
     public Response receiveParentTaskPayload(String parentTaskNumber, String category) {
         return this.baseController.receiveParentTaskPayload(parentTaskNumber, category);
-    } public Response receiveFinishDevForm(String taskNumber) {
+    }
+
+    public Response receiveFinishDevForm(String taskNumber) {
         return this.baseController.receiveFinishDevForm(taskNumber);
     }
 
@@ -125,6 +134,7 @@ public class TrackStudioApiControllers {
         this.userController.setAuthToken(authToken);
         this.workTaskController.setAuthToken(authToken);
         this.bugTaskController.setAuthToken(authToken);
+        this.createFromExcelTaskController.setAuthToken(authToken);
     }
 
 }

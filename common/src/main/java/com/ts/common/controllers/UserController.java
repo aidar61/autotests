@@ -69,7 +69,6 @@ public class UserController extends ApiRequest {
             put(TO_TASK, taskNumber);
         }};
         this.response = super.get(getEndpoint(REST, ACL, EFFECTIVE, formatParameters(queryParam)));
-//        System.out.println("@@@@@@@@@@@@@@ " + this.response.asPrettyString());
         return Arrays.asList(Objects.requireNonNull(JsonUtils.deserialize(this.response, UserRole[].class)));
     }
 

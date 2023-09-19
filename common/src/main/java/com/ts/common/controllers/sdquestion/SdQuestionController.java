@@ -1,4 +1,4 @@
-package com.ts.common.controllers.sdhelp;
+package com.ts.common.controllers.sdquestion;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.controllers.BaseController;
@@ -9,30 +9,29 @@ import com.ts.common.enums.TaskType;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import jdk.jfr.Registered;
 
-public class SdHelpController extends BaseController {
-    private static final TaskType TASK_TYPE = TaskType.SD_HELP;
+public class SdQuestionController extends BaseController {
+    private static final TaskType TASK_TYPE = TaskType.SD_QUESTION;
 
-    public SdHelpController(String url, AuthToken authToken) {
+    public SdQuestionController(String url, AuthToken authToken) {
         super(url, authToken);
         super.taskType = TASK_TYPE;
     }
 
     @Override
-    @Step("Создание SD Help")
+    @Step("Создание SD Question")
     protected Response createTask(String requestBody) {
         return super.createTask(requestBody);
     }
 
-    public void createSdHelp(GeneralTask sdHelpTask) {
-        TaskRequestBody sdHelpRequestBody = new TaskRequestBody(sdHelpTask);
-        this.response = createTask(sdHelpRequestBody.keepMandatoryAndCreateFields());
+    public void createSdQuestion(GeneralTask sdQuestionTask) {
+        TaskRequestBody sdQuestionRequestBody = new TaskRequestBody(sdQuestionTask);
+        this.response = createTask(sdQuestionRequestBody.keepMandatoryAndCreateFields());
         TaskResponseBody taskResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
         if (taskResponseBody != null) {
-            sdHelpTask.setId(taskResponseBody.getId());
-            sdHelpTask.setNumber(taskResponseBody.getNumber());
-            sdHelpTask.setFinishStatus(taskResponseBody.getFinishStatus());
+            sdQuestionTask.setId(taskResponseBody.getId());
+            sdQuestionTask.setNumber(taskResponseBody.getNumber());
+            sdQuestionTask.setFinishStatus(taskResponseBody.getFinishStatus());
         }
     }
 }
