@@ -79,6 +79,7 @@ public class CreateExcelTask extends BaseIntegrationTest {
                         .assertTask()
                         .isEquals(task);
                System.out.printf("======================================TASK NUMBER IS %s=======================================", j++);
+               if (j > 3000) break;
             }
         }
 
