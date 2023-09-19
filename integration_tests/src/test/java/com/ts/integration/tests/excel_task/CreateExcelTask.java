@@ -46,6 +46,7 @@ public class CreateExcelTask extends BaseIntegrationTest {
 
     @Test(groups = {"EXCEL"}, description = "создание CAT_SDQUESTION")
     public void createTask() {
+        int j = 0;
         apiController.updateToken(new AuthToken("root", "password"));
         for (int i = 0; i < 1000; i++) {
             for (TaskFromExcelModel task1 : tasksFromExcel) {
@@ -77,6 +78,7 @@ public class CreateExcelTask extends BaseIntegrationTest {
                         .isParseableBody(TaskResponseBody.class)
                         .assertTask()
                         .isEquals(task);
+               System.out.printf("======================================TASK NUMBER IS %s=======================================", j++);
             }
         }
 
