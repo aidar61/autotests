@@ -3,6 +3,7 @@ package com.ts.common.enums;
 public enum TaskType {
 
     SLA_HElP("SLAHELP"),
+    CAT_CFGTASK("CFGTASK"),
 
     SLA_BUG("SLABUG"),
 

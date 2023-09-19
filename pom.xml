@@ -40,10 +40,20 @@
         <oracle.jdbc.version>21.5.0.0</oracle.jdbc.version>
         <selenide.version>6.12.3</selenide.version>
         <org.hibernate.version>5.4.30.Final</org.hibernate.version>
+        <apache.poi.version>5.2.3</apache.poi.version>
     </properties>
 
     <dependencies>
-
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>${apache.poi.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi-ooxml</artifactId>
+            <version>${apache.poi.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
