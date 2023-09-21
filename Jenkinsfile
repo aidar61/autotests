@@ -7,12 +7,15 @@ pipeline {
     parameters {
         choice(
             name: "STAND",
-            choices: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
+            choices: ['http://tsdev1.dev.colvir.ru/TrackStudio'
+            , 'http://tsdev2.dev.colvir.ru/TrackStudio'
+            , 'http://tsdev4.dev.colvir.ru/TrackStudio'
+            ,  'https://cdp.colvir.ru/TrackStudio/'],
             description: 'Number of the Stand'
         )
         choice(
             name:"TEST_TYPE",
-            choices:['Regression','SlaFeature', 'SlaBug', 'SlaHelp', 'PotentialGap', 'GapSolution', 'Advice', 'DevTask', 'WorkTask', 'BugTask',"TaskGenerator"],
+            choices:["TaskGenerator"],
             description: 'Choose type test'
         )
     }
@@ -21,7 +24,7 @@ pipeline {
             steps {
                 script {
                     def stand = params.STAND ?: '4'
-                    def testType = params.TEST_TYPE ?: 'Regression'
+                    def testType = params.TEST_TYPE ?: 'TaskGenerator'
                     sh "mvn clean test -Dts.stand=$stand -Dgroups=$testType -DfailIfNoTests=false"
                 }
             }
