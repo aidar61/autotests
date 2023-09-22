@@ -4,21 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="refactoring">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/CreateFromExcelTaskController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/services/ExcelService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/services/models/ListValueSelector.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/services/models/TaskFromExcelModel.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/excel_task/CreateExcelTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/tasks.xlsx" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="added sd question test.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/AbstractDbTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/AbstractDbTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/dbTables/GrTaskTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/dbTables/GrTaskTable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/request/ApiRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/request/ApiRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sdquestion/SdQuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sdquestion/SdQuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskStatuses.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskStatuses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/excel_task/CreateExcelTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/excel_task/CreateExcelTask.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,39 +69,39 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Git.Branch.Popup.ShowAllRemotes": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature/proc__work__task",
-    "last_opened_file_path": "/Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.09375",
-    "project.structure.side.proportion": "0.32876712",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "settings.editor.splitter.proportion": "0.39143732",
-    "spring.configuration.checksum": "ab5477e5e36ed233bc592765cce87835",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/proc__work__task&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.09375&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.32876712&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.39143732&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;ab5477e5e36ed233bc592765cce87835&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "oracle"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;oracle&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/integration_tests/src/test/resources" />
@@ -126,7 +120,7 @@
       <recent name="com.ts.integration.tests.proc_work_task.dev_task_sanction" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.CreateExcelTask.createTask">
+  <component name="RunManager" selected="TestNG.SdQuestionBaseTest">
     <configuration name="ExcelService" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ts.common.services.ExcelService" />
       <module name="common" />
@@ -265,10 +259,10 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.SdQuestionBaseTest" />
         <item itemvalue="TestNG.CreateExcelTask.createTask" />
         <item itemvalue="TestNG.CreateExcelTask" />
         <item itemvalue="Application.ExcelService" />
-        <item itemvalue="TestNG.SdQuestionBaseTest" />
         <item itemvalue="TestNG.DevTaskAcceptance2Test" />
       </list>
     </recent_temporary>
@@ -331,7 +325,8 @@
       <workItem from="1691636890369" duration="7711000" />
       <workItem from="1692336058224" duration="25267000" />
       <workItem from="1694765454557" duration="3230000" />
-      <workItem from="1695091667109" duration="21816000" />
+      <workItem from="1695091667109" duration="24906000" />
+      <workItem from="1695272258327" duration="21845000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -498,7 +493,15 @@
       <option name="project" value="LOCAL" />
       <updated>1694749613393</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="create task from excel file.">
+      <option name="closed" value="true" />
+      <created>1695117235188</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1695117235188</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -573,7 +576,9 @@
     <MESSAGE value="feature/proc_work_task Common Test" />
     <MESSAGE value="feature/proc_work_task common test fix" />
     <MESSAGE value="added description for common assert methods, change to assert equals instead assert true." />
-    <option name="LAST_COMMIT_MESSAGE" value="added description for common assert methods, change to assert equals instead assert true." />
+    <MESSAGE value="create task from excel file." />
+    <MESSAGE value="added sd question test." />
+    <option name="LAST_COMMIT_MESSAGE" value="added sd question test." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -605,12 +610,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest.java</url>
-          <line>58</line>
+          <line>62</line>
           <option name="timeStamp" value="105" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest.java</url>
-          <line>52</line>
+          <line>56</line>
           <option name="timeStamp" value="106" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -619,13 +624,8 @@
           <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java</url>
-          <line>78</line>
-          <option name="timeStamp" value="108" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/excel_task/CreateExcelTask.java</url>
-          <line>78</line>
+          <line>74</line>
           <option name="timeStamp" value="120" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -639,19 +639,29 @@
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/excel_task/CreateExcelTask.java</url>
-          <line>54</line>
-          <option name="timeStamp" value="128" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/CreateFromExcelTaskController.java</url>
           <line>48</line>
           <option name="timeStamp" value="129" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/excel_task/CreateExcelTask.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="130" />
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sdquestion/SdQuestionController.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="131" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/request/RequestBody.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="132" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/request/RequestBody.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="133" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/request/RequestBody.java</url>
+          <line>81</line>
+          <option name="timeStamp" value="134" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

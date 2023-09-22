@@ -8,8 +8,6 @@ import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.Status;
 import com.ts.common.entitites.commonEntities.Task;
-import com.ts.common.entitites.commonEntities.User;
-import com.ts.common.entitites.commonEntities.udf.UdfList;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
@@ -17,7 +15,6 @@ import com.ts.common.services.ExcelService;
 import com.ts.common.services.models.TaskFromExcelModel;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
-import io.restassured.path.json.JsonPath;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -25,7 +22,6 @@ import java.io.IOException;
 import java.util.List;
 
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.enums.TaskStatuses.STATUS_WORKTASK_ASSIGNED;
 import static com.ts.common.utils.InitEntities.*;
 
 public class CreateExcelTask extends BaseIntegrationTest {

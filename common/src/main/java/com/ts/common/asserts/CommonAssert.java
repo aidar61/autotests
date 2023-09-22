@@ -91,6 +91,14 @@ public class CommonAssert {
         return this;
     }
 
+    @Step("[ASSERT] ({0}) Checking udf string type {1}, Expected is {2}")
+    public CommonAssert isCorrectStringField(String description, Udfs.UdfSd type, String expected) {
+        var stringType = extractUdfField(type, UdfString.class);
+        assertEquals(stringType.getStringValue(), expected, description + " parameters is match: ");
+        log.info(description + " is correct Actual {}, Expected {}", stringType.getStringValue(), expected);
+        return this;
+    }
+
     @Step("[ASSERT] Checking subtask status with category: {0}, Expected: {1}")
     public CommonAssert isCorrectSubTaskStatus(String category, TaskStatuses expectedStatus) {
         var tasks = new JsonPath(response.asString()).getList("tasks", Task.class);
