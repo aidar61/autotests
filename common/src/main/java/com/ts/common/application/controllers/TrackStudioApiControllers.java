@@ -135,6 +135,7 @@ public class TrackStudioApiControllers {
         this.workTaskController.setAuthToken(authToken);
         this.bugTaskController.setAuthToken(authToken);
         this.createFromExcelTaskController.setAuthToken(authToken);
+        this.sdQuestionController.setAuthToken(authToken);
     }
 
 }
