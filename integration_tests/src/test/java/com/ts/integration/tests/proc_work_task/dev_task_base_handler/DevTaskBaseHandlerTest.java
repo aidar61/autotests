@@ -108,7 +108,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, 1));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
-        udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_NO));
+        udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF));
         udf.setFourthUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, GENERAL, "{\"username\":\"babdullayev\",\"name\":\"Абдуллаев Баходир\"}"));
         udf.setThirdUdfString(generateUdfString(UDF_WORKTASK_ANNOTATION, generateString()));
         udf.setFifthUdfList(generateUdfList(UDF_WORKTASK_CHANGEWORKERINRQST, YES_AND_LEAVE_THIS_ROLE_TO_THE_CURRENT_PERFORMER));
@@ -230,7 +230,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         var response = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(response)
-                .isCorrectUdfTask(UDF_WORKTASK_DEPENDBF, MTBANK.id);
+                .isCorrectUdfTask(UDF_WORKTASK_DEPENDBF, MTBANK);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskPostpone")
@@ -497,8 +497,8 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         var taskDetail = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(taskDetail)
-                .isCorrectUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES.id)
-                .isCorrectUdfTask(UDF_SD_LINKEDREQUEST, SERVICE_DESK.id);
+                .isCorrectUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES)
+                .isCorrectUdfTask(UDF_SD_LINKEDREQUEST, SERVICE_DESK);
     }
 
     @Test(groups = {"BugTask", "Regression"}, description = "Изменить услугу", dependsOnMethods = "changeLinkedTask")

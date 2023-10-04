@@ -136,6 +136,7 @@ public class CommonAssert {
     public CommonAssert isCorrectSubmitterUser(String expectedLogin) {
         var submitterUser = new JsonPath(response.asString()).getObject("submitterUser", User.class);
         assertEquals(expectedLogin, submitterUser.getLogin(), expectedLogin + " parameters is match: ");
+        log.info("Submitter is correct Actual {}, Expected {}", submitterUser.getLogin(), expectedLogin);
         return this;
     }
 
@@ -193,12 +194,14 @@ public class CommonAssert {
     }
 
     @Step("[ASSERT] Checking udf task type of {0} is correct, Expected: {1}")
-    public CommonAssert isCorrectUdfTask(Udfs.UdfSd type, String expected) {
+    public CommonAssert isCorrectUdfTask(Udfs.UdfSd type, com.ts.common.entitites.commonEntities.Task.Constants expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfTask.class).getTaskValue();
         Assertions
                 .assertThat(actual)
-                .withFailMessage("Code is not correct expected %s, actual %s", expected, actual)
-                .anyMatch(x -> x.getId().equals(expected));
+                .withFailMessage("Code is not correct expected %s, actual %s", expected.number, actual)
+                .anyMatch(x -> x.getNumber().equals(expected.number));
+        log.info("Task number is correct Actual: {}, Expected: {}"
+                , Arrays.stream(actual).map(com.ts.common.entitites.commonEntities.Task::getNumber).collect(Collectors.joining("|")), expected);
         return this;
     }
 
@@ -209,6 +212,7 @@ public class CommonAssert {
                 .assertThat(actual)
                 .withFailMessage("Code is not correct expected %s, actual %s", expected, actual)
                 .anyMatch(x -> x.getId().equals(expected));
+        log.info("{} is correct, Actual {}, Expected {}", type.udfId, Arrays.stream(actual).map(List::getId).collect(Collectors.joining("|")), expected);
         return this;
     }
 
