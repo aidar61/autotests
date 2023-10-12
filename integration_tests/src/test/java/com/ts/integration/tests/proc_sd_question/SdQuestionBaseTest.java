@@ -211,7 +211,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"SdQuestion", "Regression"}, description = "Ответить", dependsOnMethods = "setWatcher")
     public void answer2() {
-        apiController.updateToken(generateAuthToken(members.get("Клиент")));
+        apiController.updateToken(generateAuthToken(members.get("Клиент2")));
         var supplier = "818182d33920daa3013920dde2200027";
         var comment = generateString();
         task.refreshTask();
@@ -232,7 +232,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, supplier);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Ответить", dependsOnMethods = "setWatcher")
+    @Test(groups = {"SdQuestion", "Regression"}, description = "Закрыть вопрос", dependsOnMethods = "setWatcher")
     public void close() {
         apiController.updateToken(generateAuthToken(members.get("Клиент")));
         var nobody = "818182d33920daa3013920dde2b30029";
