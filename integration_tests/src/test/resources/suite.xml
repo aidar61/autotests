@@ -35,9 +35,11 @@
             <class name="com.ts.integration.tests.proc_work_task.dev_task_acceptance.DevTaskAcceptance2Test"/>
             <class name="com.ts.integration.tests.proc_work_task.dev_task_sanction.DevTaskSanctionTest"/>
             <class name="com.ts.integration.tests.proc_work_task.dev_task_base_handler.DevTaskBaseHandlerTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.dev_task_base_submitter.DevTaskBaseSubmitterTest"/>
             <class name="com.ts.integration.tests.proc_work_task.bug_task.BugTaskBaseHandlerTest"/>
             <class name="com.ts.integration.tests.proc_work_task.CommonWorkTaskProcessTest"/>
-<!--            <class name="com.ts.integration.tests.excel_task.CreateExcelTask"/>-->
+            <class name="com.ts.integration.tests.proc_sd_question.SdQuestionBaseTest"/>
+            <class name="com.ts.integration.tests.proc_sd_question.SdQuestionBaseTest2"/>
         </classes>
     </test>
 </suite>
