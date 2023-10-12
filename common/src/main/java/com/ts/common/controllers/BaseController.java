@@ -43,6 +43,10 @@ public class BaseController extends ApiRequest {
         return super.post(getEndpoint(REST, TASK, UPDATE), requestBody);
     }
 
+    public Response receiveContextByOperation(String operations, String taskNumber) {
+        return super.get(getEndpoint(REST, TrackStudioEndPoints.OPERATION, operations, taskNumber, "context"));
+    }
+
     protected Response createTask(GeneralTask generalTask) {
         TaskRequestBody requestBody = new TaskRequestBody(generalTask);
         this.response = createTask(requestBody.keepMandatoryAndCreateFieldsAnd(HANDLER_USER));
@@ -69,6 +73,7 @@ public class BaseController extends ApiRequest {
     public Response receiveFinishDevForm(String taskNumber) {
         return this.response = super.get(getEndpoint(REST, TrackStudioEndPoints.OPERATION, "MSG_WORKTASK_FINISHDEV", taskNumber, "context"));
     }
+
     @Step("Получить все подзадачи, Номер задачи: {0}")
     public Response receiveAllSubTask(String taskNumber) {
         return super.get(getEndpoint(REST, TASK, INFO, taskNumber, "filter/8a8181df6e1089ea016e120b41da29d8/1/100"));

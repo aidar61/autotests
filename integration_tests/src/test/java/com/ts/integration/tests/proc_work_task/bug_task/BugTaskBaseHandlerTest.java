@@ -133,7 +133,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         udf.setNinethUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
         udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.stream().filter(s -> s.toLowerCase().contains(BDKUName.toLowerCase())).findAny().orElse(null)));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
-        udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_NO));
+        udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF));
         udf.setSecondUdfMultiList(generateUdfMultiList(UDF_L10N, UDF_L10N_KG));
         udf.setThirdUdfTask(generateUdfTask(UDF_COMPONENT, APP_SERVER));
         udf.setEighthUdfList(generateUdfList(UDF_PROBLEMAREA, UDF_PROBLEMAREA_COMFORT));
@@ -535,8 +535,8 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         var taskDetail = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(taskDetail)
-                .isCorrectUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES.id)
-                .isCorrectUdfTask(UDF_SD_LINKEDREQUEST, SERVICE_DESK.id);
+                .isCorrectUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES)
+                .isCorrectUdfTask(UDF_SD_LINKEDREQUEST, SERVICE_DESK);
     }
 
     @Test(groups = {"BugTask", "Regression"}, description = "Изменить услугу", dependsOnMethods = "changeLinkedTask")
@@ -621,7 +621,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         var taskDetail = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(taskDetail)
-                .isCorrectUdfTask(UDF_WORKTASK_ERRORTASK, MODERN_COLVIR_PRODUCT.id);
+                .isCorrectUdfTask(UDF_WORKTASK_ERRORTASK, MODERN_COLVIR_PRODUCT);
     }
 
     @Test(groups = {"BugTask", "Regression"}, description = "Создать подзадачу копированием", dependsOnMethods = "taskChangeWatcher")

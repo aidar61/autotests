@@ -91,6 +91,14 @@ public class CommonAssert {
         return this;
     }
 
+    @Step("[ASSERT] ({0}) Checking udf string type {1}, Expected is {2}")
+    public CommonAssert isCorrectStringField(String description, Udfs.UdfSd type, String expected) {
+        var stringType = extractUdfField(type, UdfString.class);
+        assertEquals(stringType.getStringValue(), expected, description + " parameters is match: ");
+        log.info(description + " is correct Actual {}, Expected {}", stringType.getStringValue(), expected);
+        return this;
+    }
+
     @Step("[ASSERT] Checking subtask status with category: {0}, Expected: {1}")
     public CommonAssert isCorrectSubTaskStatus(String category, TaskStatuses expectedStatus) {
         var tasks = new JsonPath(response.asString()).getList("tasks", Task.class);
@@ -128,6 +136,7 @@ public class CommonAssert {
     public CommonAssert isCorrectSubmitterUser(String expectedLogin) {
         var submitterUser = new JsonPath(response.asString()).getObject("submitterUser", User.class);
         assertEquals(expectedLogin, submitterUser.getLogin(), expectedLogin + " parameters is match: ");
+        log.info("Submitter is correct Actual {}, Expected {}", submitterUser.getLogin(), expectedLogin);
         return this;
     }
 
@@ -185,12 +194,14 @@ public class CommonAssert {
     }
 
     @Step("[ASSERT] Checking udf task type of {0} is correct, Expected: {1}")
-    public CommonAssert isCorrectUdfTask(Udfs.UdfSd type, String expected) {
+    public CommonAssert isCorrectUdfTask(Udfs.UdfSd type, com.ts.common.entitites.commonEntities.Task.Constants expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfTask.class).getTaskValue();
         Assertions
                 .assertThat(actual)
-                .withFailMessage("Code is not correct expected %s, actual %s", expected, actual)
-                .anyMatch(x -> x.getId().equals(expected));
+                .withFailMessage("Code is not correct expected %s, actual %s", expected.number, actual)
+                .anyMatch(x -> x.getNumber().equals(expected.number));
+        log.info("Task number is correct Actual: {}, Expected: {}"
+                , Arrays.stream(actual).map(com.ts.common.entitites.commonEntities.Task::getNumber).collect(Collectors.joining("|")), expected);
         return this;
     }
 
@@ -199,8 +210,9 @@ public class CommonAssert {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfList.class).getListValue();
         Assertions
                 .assertThat(actual)
-                .withFailMessage("Code is not correct expected %s, actual %s", expected, actual)
+                .withFailMessage("Code is not correct expected %s, actual %s", expected, Arrays.toString(actual))
                 .anyMatch(x -> x.getId().equals(expected));
+        log.info("{} is correct, Actual {}, Expected {}", type.udfId, Arrays.stream(actual).map(List::getId).collect(Collectors.joining("|")), expected);
         return this;
     }
 

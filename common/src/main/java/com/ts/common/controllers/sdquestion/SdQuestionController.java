@@ -10,6 +10,8 @@ import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 
+import static com.ts.common.controllers.TaskRequestBody.Fields.HANDLER_USER;
+
 public class SdQuestionController extends BaseController {
     private static final TaskType TASK_TYPE = TaskType.SD_QUESTION;
 
@@ -26,7 +28,7 @@ public class SdQuestionController extends BaseController {
 
     public void createSdQuestion(GeneralTask sdQuestionTask) {
         TaskRequestBody sdQuestionRequestBody = new TaskRequestBody(sdQuestionTask);
-        this.response = createTask(sdQuestionRequestBody.keepMandatoryAndCreateFields());
+        this.response = createTask(sdQuestionRequestBody.keepMandatoryAndCreateFieldsAnd(HANDLER_USER));
         TaskResponseBody taskResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
         if (taskResponseBody != null) {
             sdQuestionTask.setId(taskResponseBody.getId());
