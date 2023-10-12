@@ -13,6 +13,7 @@ import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.WaitManager;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.hibernate.id.GUIDGenerator;
 import org.testng.annotations.BeforeClass;
@@ -113,6 +114,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
         CommonAssert
                 .assertThat(taskDetail)
                 .isCorrectStringField("Наблюдатели клиента", UDF_SD_CLIENTWATCHERS, clientWatcher);
+        WaitManager.pause(5);
     }
 
     @Test(groups = {"SdQuestion", "Regression"}, description = "Ответить", dependsOnMethods = "appointClientWatcher")
@@ -136,6 +138,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
         CommonAssert
                 .assertThat(taskDetail)
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, supplier);
+        WaitManager.pause(5);
     }
 
     @Test(groups = {"SdQuestion", "Regression"}, description = "Задать уточняющий вопрос", dependsOnMethods = "answer")
@@ -211,7 +214,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"SdQuestion", "Regression"}, description = "Ответить", dependsOnMethods = "setWatcher")
     public void answer2() {
-        apiController.updateToken(generateAuthToken(members.get("Клиент")));
+        apiController.updateToken(generateAuthToken(members.get("Клиент2")));
         var supplier = "818182d33920daa3013920dde2200027";
         var comment = generateString();
         task.refreshTask();
@@ -232,9 +235,9 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, supplier);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Ответить", dependsOnMethods = "setWatcher")
+    @Test(groups = {"SdQuestion", "Regression"}, description = "Ответить", dependsOnMethods = "answer2")
     public void close() {
-        apiController.updateToken(generateAuthToken(members.get("Клиент")));
+        apiController.updateToken(generateAuthToken(members.get("Клиент2")));
         var nobody = "818182d33920daa3013920dde2b30029";
         var comment = generateString();
         task.refreshTask();
