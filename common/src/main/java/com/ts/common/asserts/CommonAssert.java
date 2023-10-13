@@ -210,7 +210,7 @@ public class CommonAssert {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfList.class).getListValue();
         Assertions
                 .assertThat(actual)
-                .withFailMessage("Code is not correct expected %s, actual %s", expected, actual)
+                .withFailMessage("Udf type %s: Code is not correct expected %s, actual %s", type.udfId, expected, Arrays.stream(actual).map(List::getId).collect(Collectors.joining("|")))
                 .anyMatch(x -> x.getId().equals(expected));
         log.info("{} is correct, Actual {}, Expected {}", type.udfId, Arrays.stream(actual).map(List::getId).collect(Collectors.joining("|")), expected);
         return this;
