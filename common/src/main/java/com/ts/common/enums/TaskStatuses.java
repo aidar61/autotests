@@ -2,6 +2,7 @@ package com.ts.common.enums;
 
 public enum TaskStatuses {
     STATUS_WORKTASK_ONANALYSIS,
+    STATUS_WORKTASK_NEW,
     STATUS_PROJECT_PLANNED,
     STATUS_SDPROJECT_NEW,
     STATUS_SDPROJECT_WARRANTY,
