@@ -366,7 +366,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
 
         apiController.receiveTask(task.getNumber());
         CommonAssert.assertThat(apiController.getResponse())
-                .isCorrectUdfList(UDF_MIS_SERVICE, new com.ts.common.entitites.commonEntities.List(expectedListValue.getId()));
+                .isCorrectUdfList(UDF_MIS_SERVICE, expectedListValue.getId());
     }
 
     @Test(groups = {"WorkTask", "Regression"}

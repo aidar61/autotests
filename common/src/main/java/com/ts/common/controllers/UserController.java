@@ -72,10 +72,20 @@ public class UserController extends ApiRequest {
         return Arrays.asList(Objects.requireNonNull(JsonUtils.deserialize(this.response, UserRole[].class)));
     }
 
+    public List<User> receiveUsersByTaskOperation(Udfs.UdfSd udfType, String taskNumber, String operationId) {
+        HashMap<String, String> queryParam = new LinkedHashMap<>() {{
+            put("active", "true");
+            put("operationId", operationId);
+        }};
+        this.response = super.get(getEndpoint(REST, UDF_VAL, udfType.udfId, TASK, taskNumber, USER, LIST, formatParameters(queryParam)));
+        return Arrays.asList(Objects.requireNonNull(JsonUtils.deserialize(this.response, User[].class)));
+    }
+
     public UserRole receiveUserByRole(List<UserRole> userRoles, String role, String login) {
         return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(login)).findFirst().get();
     }
-//    public UserRole receiveUserByRoleV1(List<UserRole> userRoles, String role, String login){
+
+    //    public UserRole receiveUserByRoleV1(List<UserRole> userRoles, String role, String login){
 //
 //    }
     public List<UserRole> receiveUserByTask(String taskNumber) {

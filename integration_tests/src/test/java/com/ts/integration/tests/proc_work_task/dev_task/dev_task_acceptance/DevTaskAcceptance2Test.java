@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_work_task.dev_task_acceptance;
+package com.ts.integration.tests.proc_work_task.dev_task.dev_task_acceptance;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
@@ -7,9 +7,7 @@ import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.workTask.DevTaskController;
-import com.ts.common.entitites.commonEntities.Parent;
-import com.ts.common.entitites.commonEntities.Task;
-import com.ts.common.entitites.commonEntities.User;
+import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
@@ -25,14 +23,13 @@ import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_CDP_WT;
-import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
-import static com.ts.common.entitites.commonEntities.User.Constants.BABUSHKIN_IVAN;
+import static com.ts.common.entitites.commonEntities.User.Constants.*;
 import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.TaskStatuses.*;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateString;
 
-public class DevTaskAcceptanceTest extends BaseIntegrationTest {
+public class DevTaskAcceptance2Test extends BaseIntegrationTest {
 
     public DevTaskController devTaskController;
     private String cdpBl;
@@ -72,10 +69,12 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
         sdRequestTask = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
         misService = devTaskController.getMisService().get(0);;
+
         var taskEmployees = userController.receiveUserByTask(parent.getNumber());
         creator = userController.receiveUserByRole(taskEmployees, "Менеджер проекта", "root").getForUser();
         handlerUser = userController.receiveUserByRole(taskEmployees, "Участник проекта", creator.getLogin()).getForUser();
     }
+
 
     @Test(groups = {"DevTask", "Regression"}, description = "Создание запроса на разработку")
     public void devTask() {
@@ -94,7 +93,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         }
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
-        udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYCREATOR));
+        udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYCONRTOLLER));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, 1));
         udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, "hg:apng:default [Аnalitic platform new generation]"));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
@@ -107,7 +106,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         udf.setFourthUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, bdkuTask.getTaskValueSelector()[0]));
         udf.setSixthUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDBF, MTBANK));
         udf.setSeventhUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES));
-        udf.setFifthUdfTask(sdRequestTask);
+        System.out.println("**** MIS_SERVICE: " + misService);
         if (misService != null)
             udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
         task.refreshUdf(udf);
@@ -168,24 +167,55 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
 
     @Test(groups = {"DevTask", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "taskStart")
     public void taskAcceptance() {
-        apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
         task.setConfirmed(true);
-        task.setHandlerUser(creator);
+        task.setHandlerUser(handlerUser);
 
         udf.setUdfMemo(generateUdfMemo(UDF_WORKTASK_TESTPLAN, generateString()));
-        udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_YES));
+        udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_NO));
         udf.setSecondUdfMemo(generateUdfMemo(UDF_WORKTASK_FILES, "le1.txt, file2.tx"));
         udf.setThirdUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{}]"));
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, creator));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
 
         task.refreshUdf(udf);
         devTaskController.performCommonOperation(task, WORKTASK_TO_ACCEPTANCE);
         ApiAsserts.assertThat(devTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask()
-                .isCorrectStatus(STATUS_WORKTASK_CLOSED);
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST);
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "taskAcceptance")
+    public void taskChangeSupervisor() {
+        udf = refreshUdf();
+        udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, ARTEMEVA_MARINA));
+        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{}]"));
+        task.refreshUdf(udf);
+        devTaskController.performCommonOperation(task, WORKTASK_SUPERVISE);
+        ApiAsserts.assertThat(devTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+
+        var responseTask = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(responseTask)
+                .isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, ARTEMEVA_MARINA.login);
+    }
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "taskChangeSupervisor")
+    public void taskAcceptance2() {
+        udf = refreshUdf();
+
+        task.setHandlerUser(generateUser(ARTEMEVA_MARINA));
+        task.setResolution(Resolution.builder().build());
+        task.setFinishStatus(Status.builder().build());
+        udf.setUdfMemo(generateUdfMemo(UDF_WORKTASK_TESTPLAN, generateString()));
+        udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_NO));
+        udf.setSecondUdfMemo(generateUdfMemo(UDF_WORKTASK_FILES, "le1.txt, file2.tx"));
+        udf.setThirdUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{}]"));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ARTEMEVA_MARINA));
+
+        task.refreshUdf(udf);
+        devTaskController.performCommonOperation(task, WORKTASK_TO_ACCEPTANCE);
+        ApiAsserts.assertThat(devTaskController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
 
         var response = apiController.receiveSubTask(task.getNumber());
         var subTasks = response.jsonPath()
@@ -194,39 +224,36 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         catAcceptTask = new Task(acceptTask.getId(), acceptTask.getNumber());
         CommonAssert
                 .assertThat(response)
-                .isCorrectSubTaskStatus("CAT_ACCEPTTASK", STATUS_WORKTASK_ASSIGNED);
-
-        var responseTask = apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(responseTask)
-                .isCorrectUdfList(UDF_CDP_ACCEPTANCE_STATUS, UDF_CDP_ACCEPTANCE_STATUS_ACCEPTANCE.id);
-
+                .isCorrectSubTaskStatus("CAT_ACCEPTTASK", STATUS_WORKTASK_ASSIGNED)
+                .isTaskNotCreate("CAT_DOCTASK");
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Проверить CAT_ACCEPTTASK", dependsOnMethods = "taskAcceptance")
+
+    @Test(groups = {"DevTask", "Regression"}, description = "Проверить CAT_ACCEPTTASK", dependsOnMethods = "taskAcceptance2")
     public void checkAcceptTask() {
-        apiController.updateToken(generateAuthToken(creator));
+        apiController.updateToken(generateAuthToken(generateUser(ARTEMEVA_MARINA)));
         var response = apiController.receiveTask(catAcceptTask.getNumber());
         CommonAssert
                 .assertThat(response)
                 .isCorrectTaskName("Приёмка доработки: Создание запроса на разработку")
                 .isCorrectTaskDescription("Создана автоматически при закрытии задачи")
                 .isCorrectTaskLink(task.getNumber())
-                .isCorrectHandlerUser(creator.getLogin());
+                .isCorrectHandlerUser(ARTEMEVA_MARINA.login);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу CAT_ACCEPTTASK", dependsOnMethods = "checkAcceptTask")
     public void startAcceptTask() {
-        apiController.updateToken(generateAuthToken(creator));
+        apiController.updateToken(generateAuthToken(generateUser(ARTEMEVA_MARINA)));
         udf = refreshUdf();
         var subTask = new GeneralTask();
         subTask.setAttachments(new String[0]);
         subTask.setDescription(generateString());
         subTask.setId(catAcceptTask.getId());
         subTask.setNumber(catAcceptTask.getNumber());
-        subTask.setHandlerUser(handlerUser);
+        subTask.setHandlerUser(generateUser(ARTEMEVA_MARINA));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, 1));
         udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, 8));
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ARTEMEVA_MARINA));
 
         subTask.refreshUdf(udf);
 

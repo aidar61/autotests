@@ -13,7 +13,6 @@ import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
-import com.ts.common.utils.WaitManager;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.hibernate.id.GUIDGenerator;
 import org.testng.annotations.BeforeClass;
@@ -47,10 +46,8 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
         var employees = userController.receiveUserByTask(parent.getNumber());
         var creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер клиента")).findAny().get().getForUser();
         var handler = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Клиент") && !f.getForUser().getLogin().equals(creator.getLogin())).findAny().get().getForUser();
-        var handler2 = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Клиент") && !f.getForUser().getLogin().equals(handler.getLogin()) && !f.getForUser().getLogin().equals(creator.getLogin())).findAny().get().getForUser();
         members.put("Менеджер клиента", creator);
         members.put("Клиент", handler);
-        members.put("Клиент2", handler2);
     }
 
     @Test(groups = {"SdQuestion", "Regression"}, description = "создание CAT_SDQUESTION")
@@ -114,7 +111,6 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
         CommonAssert
                 .assertThat(taskDetail)
                 .isCorrectStringField("Наблюдатели клиента", UDF_SD_CLIENTWATCHERS, clientWatcher);
-        WaitManager.pause(5);
     }
 
     @Test(groups = {"SdQuestion", "Regression"}, description = "Ответить", dependsOnMethods = "appointClientWatcher")
@@ -138,7 +134,6 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
         CommonAssert
                 .assertThat(taskDetail)
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, supplier);
-        WaitManager.pause(5);
     }
 
     @Test(groups = {"SdQuestion", "Regression"}, description = "Задать уточняющий вопрос", dependsOnMethods = "answer")
@@ -179,11 +174,13 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
     @Test(groups = {"SdQuestion", "Regression"}, description = "Назначить ответственного", dependsOnMethods = "privateComment")
     public void setHandler() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер клиента")));
+        udf = refreshUdf();
         task.refreshTask();
         task.setDescription(generateString());
+        var operationUsers = userController.receiveUsersByTaskOperation(STDT_HANDLER, task.getNumber(), "MSG_SDQUESTION_ASSIGN");
+        members.put("Клиент2", operationUsers.stream().findAny().get());
         task.setHandlerUser(generateUser(members.get("Клиент2")));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, members.get("Клиент2")));
-        udf = refreshUdf();
         task.refreshUdf(udf);
         sdQuestionController.performCommonOperation(task, SDQUESTION_ASSIGN);
         var updateResponse = sdQuestionController.getResponse();
@@ -235,9 +232,9 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, supplier);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Ответить", dependsOnMethods = "answer2")
+    @Test(groups = {"SdQuestion", "Regression"}, description = "Закрыть вопрос", dependsOnMethods = "setWatcher")
     public void close() {
-        apiController.updateToken(generateAuthToken(members.get("Клиент2")));
+        apiController.updateToken(generateAuthToken(members.get("Менеджер клиента")));
         var nobody = "818182d33920daa3013920dde2b30029";
         var comment = generateString();
         task.refreshTask();
