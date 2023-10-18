@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_work_task.dev_task_base_handler;
+package com.ts.integration.tests.proc_work_task.dev_task.dev_task_base_handler;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;

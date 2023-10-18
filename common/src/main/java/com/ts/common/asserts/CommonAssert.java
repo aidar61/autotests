@@ -216,12 +216,6 @@ public class CommonAssert {
         return this;
     }
 
-    @Step("[ASSERT] Checking udf list type of {0} is correct, Expected: {1}")
-    public CommonAssert isCorrectUdfList(Udfs.UdfSd type, List expected) {
-        List actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfList.class).getListValue()[0];
-        assertEquals(actual, expected, " parameters is match: ");
-        return this;
-    }
 
     @Step("[ASSERT] Checking response error message is correct, Expected: {0}")
     public CommonAssert isCorrectErrorMessage(String expectedMessage) {
