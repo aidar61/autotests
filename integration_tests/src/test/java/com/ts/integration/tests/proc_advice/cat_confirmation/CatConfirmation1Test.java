@@ -166,7 +166,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_CONFIRM);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Подтвердить", dependsOnMethods = "confirm")
+    @Test(groups = {"Advice", "Regression"}, description = "Отклонить запрос", dependsOnMethods = "confirm")
     public void reject() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
