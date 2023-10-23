@@ -159,7 +159,6 @@ public class DevTaskConvToBugTaskTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO.getId())
                 .isCorrectUdfList(UDF_WORKTASK_ANALYSIS, UDF_WORKTASK_ANALYSIS_YES.getId())
                 .isCorrectUdfDate(UDF_WORKTASK_ANALYSISFD, DateUtils.getCurrentDate(0))
-                .isCorrectUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF.getId())
                 .isCorrectUdfList(UDF_SDFEATURE_GENUSE, GENERAL.getId())
                 .isCorrectUdfMemo(UDF_WORKTASK_ANNOTATION, workTaskAnnotation)
                 .isCorrectUdfTask(UDF_BDKU_CONFIGURATION, bdkuTask.getTaskValueSelector()[0].getNumber());

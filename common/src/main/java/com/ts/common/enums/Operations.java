@@ -4,7 +4,7 @@ package com.ts.common.enums;
 public enum Operations {
 
     CAT("CAT_%S"),
-
+    CANCEL_BUG("%S_CANCELBUG"),
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
     CHANGE("%S_CHANGE"), // изменить аттрибуты решения
     COMMENT("%S_COMMENT"), // коментарий
@@ -112,6 +112,7 @@ public enum Operations {
     CHANGE_COMPLEXITY_LEV("%S_CHANGECOMPLEXITYLEV"), //
     CHANGE_CAT_TO_BUG_TASK("%S_CHANGECATTOBUGTASK"), //
     CHANGE_CAT_TO_TECH_TASK("%S_CHANGECATTTOTECHTAS"), //
+    CHANGE_CHANGE_SEVERITY("%S_CHANGESEVERITY"), //
 
     CHANGE_SERVICE("%S_CHANGESERVICE");
 
