@@ -265,7 +265,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
 
         CommonAssert.assertThat(catSanctionTasksResponse)
                 .isCorrectSubTasksStatus("CAT_SANCTION", STATUS_ADVICE_AWAIT)
-                .isCorrectSubTasksSubmitUser(handlerUser.getLogin());
+                .isCorrectSubTasksUser("submitterUser",handlerUser.getLogin());
 
         var currentTaskDetail = apiController.receiveTask(task.getNumber());
         CommonAssert

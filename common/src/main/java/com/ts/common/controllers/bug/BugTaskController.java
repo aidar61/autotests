@@ -12,18 +12,17 @@ import com.ts.common.utils.JsonUtils;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.controllers.TaskRequestBody.Fields.HANDLER_USER;
-import static com.ts.common.enums.TaskType.BUG_TASK;
+import static com.ts.common.enums.TaskType.WORK_TASK;
 
 public class BugTaskController extends BaseController {
 
-    public static TaskType TASK_TYPE = BUG_TASK;
+    public static TaskType TASK_TYPE = WORK_TASK;
     private static String parentDetailInString;
 
     public BugTaskController(String url, AuthToken authToken) {
@@ -44,6 +43,18 @@ public class BugTaskController extends BaseController {
     public Response createBagTask(GeneralTask devTask) {
         TaskRequestBody devTaskRequestBody = new TaskRequestBody(devTask);
         this.response = createTask(devTaskRequestBody.keepMandatoryAndCreateFieldsAnd(HANDLER_USER));
+        TaskResponseBody gapResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
+        if (gapResponseBody != null) {
+            devTask.setId(gapResponseBody.getId());
+            devTask.setNumber(gapResponseBody.getNumber());
+            devTask.setFinishStatus(gapResponseBody.getFinishStatus());
+        }
+        return this.response;
+    }
+
+    public Response updateBugTask(GeneralTask devTask) {
+        TaskRequestBody devTaskRequestBody = new TaskRequestBody(devTask);
+        this.response = createTask(devTaskRequestBody.keepMandatoryAndCreateFieldsAnd(TaskRequestBody.Fields.NUMBER));
         TaskResponseBody gapResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
         if (gapResponseBody != null) {
             devTask.setId(gapResponseBody.getId());

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.annotations.Create;
 import com.ts.common.annotations.Mandatory;
 import com.ts.common.annotations.TypeId;
+import com.ts.common.annotations.Update;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.tasks.GeneralTask;
 import lombok.*;
@@ -49,6 +50,8 @@ public class TaskRequestBody extends com.ts.common.request.RequestBody {
     @TypeId(type = "operation")
     @Create
     String[] attachments;
+    @Update
+    String number;
 
     public TaskRequestBody(GeneralTask generalTask) {
         this.id = generalTask.getId();
@@ -65,10 +68,12 @@ public class TaskRequestBody extends com.ts.common.request.RequestBody {
         this.resolution = generalTask.getResolution();
         this.finishStatus = generalTask.getFinishStatus();
         this.confirmed = generalTask.getConfirmed();
+        this.number = generalTask.getNumber();
     }
 
     public enum Fields {
         ID("id"),
+        NUMBER("number"),
         CATEGORY("category"),
         OPERATION("operation"),
         PARENT("parent"),
