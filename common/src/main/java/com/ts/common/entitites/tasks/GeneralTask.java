@@ -71,6 +71,8 @@ public class GeneralTask extends BaseEntity {
         this.handlerUser = null;
         this.finishStatus = null;
         this.confirmed = null;
+        this.description = null;
+        this.udfs = null;
     }
 
     @Override

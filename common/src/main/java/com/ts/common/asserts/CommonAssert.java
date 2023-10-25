@@ -70,13 +70,14 @@ public class CommonAssert {
         return this;
     }
 
-    @Step("[ASSERT] Checking subtask  submit user, Expected: {0}")
-    public CommonAssert isCorrectSubTasksSubmitUser(String expected) {
-        var actual = JsonPath.from(response.asString()).getList("tasks.submitterUser.login");
+    @Step("[ASSERT] Checking subtask {0} user, Expected: {1}")
+    public CommonAssert isCorrectSubTasksUser(String userType, String expected) {
+        var actual = JsonPath.from(response.asString()).getList("tasks." + userType, User.class);
         Assertions
                 .assertThat(actual)
-                .withFailMessage("Code is not correct expected %s, actual %s", expected, actual)
-                .anyMatch(x -> x.equals(expected.toString()));
+                .withFailMessage("User is not correct expected %s, actual %s", expected, actual)
+                .anyMatch(x -> x.getLogin().equals(expected.toString()));
+        log.info("Subtask {} Actual {}, Expected {}", userType, actual.stream().map(s -> s.getLogin()).collect(Collectors.joining("|")), expected);
         return this;
     }
 
@@ -85,6 +86,29 @@ public class CommonAssert {
     public CommonAssert isCorrectUdfMemo(Udfs.UdfSd type, String expected) {
         var actual = extractUdfField(type, UdfMemo.class).getStringValue();
         assertEquals(actual, expected, type.udfId + " parameters is match: ");
+        return this;
+    }
+
+    @Step("[ASSERT] Checking subtask created, Expected is {0}")
+    public CommonAssert isSubtaskCreated(String expected) {
+        var actual = new JsonPath(response.asString()).getList("tasks", Task.class);
+        Assertions
+                .assertThat(actual)
+                .withFailMessage("Code is not correct expected %s, actual %s", expected, actual)
+                .anyMatch(x -> x.getCategory().getId().equals(expected));
+
+        log.info("Subtask created with Actual {} category, Expected {}", actual.stream().map(s -> s.getCategory().getId()).collect(Collectors.joining("|")), expected);
+        return this;
+    }
+
+    @Step("[ASSERT] Checking subtask created, Expected category {0} created with {1} count")
+    public CommonAssert isSubtaskCreatedWithCount(String expectedCategory, int expectedCount) {
+        var actual = new JsonPath(response.asString())
+                .getList("tasks", Task.class)
+                .stream()
+                .filter(x -> x.getCategory().getId().equals(expectedCategory))
+                .collect(Collectors.toList());
+        assertEquals(actual.size(), expectedCount, expectedCategory + " size is match: ");
         return this;
     }
 
