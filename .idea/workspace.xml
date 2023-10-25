@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="suite.xml">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_advice/cat_confirmation/CatConfirmation1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_advice/cat_confirmation/CatConfirmation1Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -317,7 +316,7 @@
       <workItem from="1696154805267" duration="9762000" />
       <workItem from="1696303278552" duration="14006000" />
       <workItem from="1697614879020" duration="9563000" />
-      <workItem from="1697979691592" duration="507000" />
+      <workItem from="1697979691592" duration="3548000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -536,7 +535,14 @@
       <option name="project" value="LOCAL" />
       <updated>1697615695889</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="fix/test">
+      <created>1698052114565</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1698052114565</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -615,7 +621,8 @@
     <MESSAGE value="added sd question test." />
     <MESSAGE value="added sd question test 2." />
     <MESSAGE value="suite.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="suite.xml" />
+    <MESSAGE value="fix/test" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix/test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

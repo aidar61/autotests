@@ -38,6 +38,7 @@
             <class name="com.ts.integration.tests.proc_work_task.dev_task.dev_task_base_submitter.DevTaskBaseSubmitterTest"/>
             <class name="com.ts.integration.tests.proc_work_task.bug_task.BugTaskBaseHandlerTest"/>
             <class name="com.ts.integration.tests.proc_work_task.bug_task.BugTaskBaseSubmitterTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.bug_task.BugTaskAcceptanceTest"/>
             <class name="com.ts.integration.tests.proc_work_task.CommonWorkTaskProcessTest"/>
             <class name="com.ts.integration.tests.proc_work_task.dev_task_conv.DevTaskConvToBugTaskTest"/>
             <class name="com.ts.integration.tests.proc_work_task.dev_task_conv.DevTaskConvToTechTaskTest"/>
