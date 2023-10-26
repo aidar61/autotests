@@ -32,6 +32,7 @@ import static com.ts.common.enums.Resolutions.MSG_WORKTASK_BUGDECLINE;
 import static com.ts.common.enums.Resolutions.RESOLUTION_WORK_SUSPENDED_INDEFINITELY;
 import static com.ts.common.enums.TaskStatuses.*;
 import static com.ts.common.utils.InitEntities.*;
+import static com.ts.common.utils.RandomUtils.generateComment;
 import static com.ts.common.utils.RandomUtils.generateString;
 
 public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
@@ -499,20 +500,20 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"BugTask", "Regression"}, description = "Изменить план тестирования", dependsOnMethods = "taskDependOtherTask")
     public void changeTestPlanTask() {
-        var description = generateString();
+        var description = generateComment();
         apiController.updateToken(generateAuthToken(handlerUser));
-        task.setDescription(description);
         udf = refreshUdf();
         task.refreshTask();
+        udf.setUdfMemo(generateUdfMemo(UDF_WORKTASK_TESTPLAN, description));
         task.refreshUdf(udf);
         bugTaskController.performCommonOperation(task, WORKTASK_CHANGETESTPLAN);
         var response = bugTaskController.getResponse();
         ApiAsserts.assertThat(response)
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
-
+        var taskDetail = apiController.receiveTask(task.getNumber());
         CommonAssert
-                .assertThat(response)
-                .isCorrectMessageField("description", description);
+                .assertThat(taskDetail)
+                .isCorrectUdfMemo(UDF_WORKTASK_TESTPLAN, description);
     }
 
     @Test(groups = {"BugTask", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "changeTestPlanTask")

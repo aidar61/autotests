@@ -24,6 +24,8 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 
 import static com.ts.common.application.database.DbQueryHelper.Operators.*;
+import static com.ts.common.controllers.bug.BugTaskController.getFirstTask;
+import static com.ts.common.controllers.bug.BugTaskController.getLastTask;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Status.Priority.NORMAL;
 import static com.ts.common.entitites.commonEntities.Task.Constants.*;
@@ -35,6 +37,10 @@ import static com.ts.common.enums.TaskType.ADVICE;
 import static com.ts.common.enums.TaskType.WORK_TASK;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateString;
+
+import com.ts.common.entitites.tasks.Task;
+
+import java.util.List;
 
 public class BugTaskAcceptanceTest extends BaseIntegrationTest {
     public BugTaskController bugTaskController;
@@ -51,7 +57,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
     private String moduleReason;
     private String testPlan;
     private String taskNumber;
-    private java.util.List<com.ts.common.entitites.tasks.Task> subTasksAcceptWork;
+    private List<Task> subTasksAcceptWork;
 
 
     @BeforeClass(alwaysRun = true)
@@ -63,6 +69,8 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 "task_category", EQUAL.operator, "CAT_GENPLAN",
                 AND.operator,
                 "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
+                AND.operator,
+                "task_number", EQUAL.operator, "951569",
                 AND.operator,
                 "task_path", LIKE.operator, "%/2405/758009%");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
@@ -309,8 +317,8 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE_STATUS, UDF_CDP_ACCEPTANCE_STATUS_ACCEPTANCE.getId());
 
         var subTasksResponse = apiController.receiveAllSubTasks(task.getNumber());
-        subTasksAcceptWork = new JsonPath(subTasksResponse.asString()).getList("tasks", com.ts.common.entitites.tasks.Task.class).stream()
-                .sorted(Comparator.comparing(com.ts.common.entitites.tasks.Task::getNumber)).collect(Collectors.toList());
+        subTasksAcceptWork = new JsonPath(subTasksResponse.asString()).getList("tasks", Task.class);
+
         CommonAssert.assertThat(subTasksResponse)
                 .isSubtaskCreatedWithCount("CAT_ACCEPTWORK", 2)
                 .isCorrectSubTasksStatus("CAT_ACCEPTWORK", STATUS_ADVICE_AWAIT)
@@ -320,11 +328,12 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
 
     @Test(groups = {"BugTask", "Regression"}, description = "В первой задаче CAT_ACCEPTWORK выполнить Принять и закрыть", dependsOnMethods = "taskToAcceptanceBug2")
     public void subtaskAcceptAndClose() {
-        apiController.updateToken(generateAuthToken(subTasksAcceptWork.get(0).getHandlerUser()));
+        var firstTask = getFirstTask(subTasksAcceptWork);
+        apiController.updateToken(generateAuthToken(firstTask.getHandlerUser()));
         task.refreshTask();
         udf = refreshUdf();
         taskNumber = task.getNumber();
-        task.setNumber(subTasksAcceptWork.get(0).getNumber());
+        task.setNumber(firstTask.getNumber());
         task.refreshUdf(udf);
         bugTaskController.changeTaskType(ADVICE);
         bugTaskController.performCommonOperation(task, ACCEPT_AND_CLOSE);
@@ -354,10 +363,11 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
 
     @Test(groups = {"BugTask", "Regression"}, description = "Во второй задаче CAT_ACCEPTWORK выполнить Отклонить изменения", dependsOnMethods = "checkBugTask")
     public void subtaskDecline() {
-        apiController.updateToken(generateAuthToken(subTasksAcceptWork.get(1).getHandlerUser()));
+        var lastTask = getLastTask(subTasksAcceptWork);
+        apiController.updateToken(generateAuthToken(lastTask.getHandlerUser()));
         task.refreshTask();
         udf = refreshUdf();
-        task.setNumber(subTasksAcceptWork.get(1).getNumber());
+        task.setNumber(lastTask.getNumber());
         task.refreshUdf(udf);
         bugTaskController.changeTaskType(ADVICE);
         bugTaskController.performCommonOperation(task, DECLINE_ACCEPT);
@@ -420,7 +430,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE_STATUS, UDF_CDP_ACCEPTANCE_STATUS_ACCEPTANCE.getId());
 
         var subTasksResponse = apiController.receiveAllSubTasks(task.getNumber());
-        subTasksAcceptWork = new JsonPath(subTasksResponse.asString()).getList("tasks", com.ts.common.entitites.tasks.Task.class);
+        subTasksAcceptWork = new JsonPath(subTasksResponse.asString()).getList("tasks", Task.class);
         CommonAssert.assertThat(subTasksResponse)
                 .isSubtaskCreatedWithCount("CAT_ACCEPTWORK", 2)
                 .isCorrectSubTasksStatus("CAT_ACCEPTWORK", STATUS_ADVICE_AWAIT)
@@ -430,11 +440,12 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
 
     @Test(groups = {"BugTask", "Regression"}, description = "В отркытой CAT_ACCEPTWORK выполнить \"Принять и закрыть\"", dependsOnMethods = "taskToAcceptanceBug3")
     public void subtaskAcceptAndClose2() {
-        apiController.updateToken(generateAuthToken(subTasksAcceptWork.get(1).getHandlerUser()));
+        var lastTask = getLastTask(subTasksAcceptWork);
+        apiController.updateToken(generateAuthToken(lastTask.getHandlerUser()));
         task.refreshTask();
         udf = refreshUdf();
         taskNumber = task.getNumber();
-        task.setNumber(subTasksAcceptWork.get(1).getNumber());
+        task.setNumber(lastTask.getNumber());
         task.refreshUdf(udf);
         bugTaskController.changeTaskType(ADVICE);
         bugTaskController.performCommonOperation(task, ACCEPT_AND_CLOSE);

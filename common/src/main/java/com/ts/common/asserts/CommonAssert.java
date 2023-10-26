@@ -254,7 +254,7 @@ public class CommonAssert {
 
     @Step("[ASSERT] Checking udf list type of {0} is correct, Expected: {1}")
     public CommonAssert isCorrectUdfList(Udfs.UdfSd type, String expected) {
-        var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfList.class).getListValue();
+        var actual = extractUdfField(type, UdfList.class).getListValue();
         Assertions
                 .assertThat(actual)
                 .withFailMessage("Udf type %s: Code is not correct expected %s, actual %s", type.udfId, expected, Arrays.stream(actual).map(List::getId).collect(Collectors.joining("|")))

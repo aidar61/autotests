@@ -7,6 +7,7 @@ import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.commonEntities.udf.UdfList;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.JsonUtils;
 import io.restassured.path.json.JsonPath;
@@ -38,6 +39,22 @@ public class BugTaskController extends BaseController {
     @Override
     protected Response createTask(String requestBody) {
         return super.createTask(requestBody);
+    }
+
+    public static Task getLastTask(List<Task> subTasksAcceptWork) {
+        return subTasksAcceptWork.stream().max((obj1, obj2) -> {
+            var id1 = Integer.parseInt(obj1.getNumber());
+            var id2 = Integer.parseInt(obj2.getNumber());
+            return Integer.compare(id1, id2);
+        }).orElse(null);
+    }
+
+    public static Task getFirstTask(List<Task> subTasksAcceptWork) {
+        return subTasksAcceptWork.stream().min((obj1, obj2) -> {
+            var id1 = Integer.parseInt(obj1.getNumber());
+            var id2 = Integer.parseInt(obj2.getNumber());
+            return Integer.compare(id1, id2);
+        }).orElse(null);
     }
 
     public Response createBagTask(GeneralTask devTask) {
@@ -75,7 +92,7 @@ public class BugTaskController extends BaseController {
         return returnTasks;
     }
 
-    public String getBDKUTaskName(){
+    public String getBDKUTaskName() {
         return new JsonPath(parentDetailInString).getString("udfs.UDF_BDKU_CONFIGURATION.taskValue[0].shortname");
     }
 
