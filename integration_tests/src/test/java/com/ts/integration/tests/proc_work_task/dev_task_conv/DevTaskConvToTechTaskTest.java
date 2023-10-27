@@ -131,9 +131,6 @@ public class DevTaskConvToTechTaskTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.refreshTask();
         apiController.updateToken(generateAuthToken(creator));
-        task.setDescription(generateString());
-        udf.setUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO));
-        udf.setUdfString(generateUdfString(UDF_WORKTASK_BRANCH, ""));
         task.refreshUdf(udf);
         devTaskController.performCommonOperation(task, CHANGE_CAT_TO_TECH_TASK);
         ApiAsserts.assertThat(devTaskController.getResponse())
