@@ -4,6 +4,7 @@ import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
+import com.ts.common.asserts.CommonAssert;
 import com.ts.common.asserts.TaskAsserts;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.advice.AdviceController;
@@ -15,6 +16,7 @@ import com.ts.common.enums.Operations;
 import com.ts.common.enums.Resolutions;
 import com.ts.common.enums.TaskStatuses;
 import com.ts.common.enums.TaskType;
+import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
@@ -88,7 +90,28 @@ public class CatAdvice1Test extends BaseIntegrationTest {
                 .isNotEmpty(generalTask.getDescription());
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Предоставить консультацию", dependsOnMethods = "comment")
+    @Test(groups = {"Advice", "Regression"}, description = "Изменить крайний срок ответа", dependsOnMethods = "comment")
+    public void changePlanTime() {
+        apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
+        udf = refreshUdf();
+        task.refreshUdf();
+        task.setHandlerUser(null);
+        var planTime = DateUtils.getCurrentDate(1);
+        var planTime2 = DateUtils.getCurrentDate(1);
+        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD, planTime));
+        task.refreshUdf(udf);
+        adviceController.performCommonOperation(task, Operations.CHANGE_PLAN_TIME);
+        ApiAsserts.assertThat(adviceController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask();
+
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(taskDetail)
+                .isCorrectUdfDate(UDF_ADVICE_PLANTD, planTime2);
+    }
+
+    @Test(groups = {"Advice", "Regression"}, description = "Предоставить консультацию", dependsOnMethods = "changePlanTime")
     public void provideConsult() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -107,7 +130,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
     public void askFurther() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
-        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD,0));
+        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD, 0));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
         task.refreshUdf(udf);
         task.setHandlerUser(generateUser(HANDLER_USER_FROM_PARENT));
@@ -138,7 +161,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
     public void askExtraConsult() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
-        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD,0));
+        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD, 0));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ABDULLAEV_BAHODIR));
         task.refreshUdf(udf);
         task.setHandlerUser(generateUser(HANDLER_USER_FROM_PARENT));
