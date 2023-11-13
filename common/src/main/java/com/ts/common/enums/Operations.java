@@ -58,6 +58,7 @@ public enum Operations {
     START("%S_START"), // Передать в разработку
     ACCEPT_IN_WORK("%S_ACCEPTINWORK"), // Передать в разработку
     CHANGE_TIME("%S_CHANGETIME"), // Перепланировать
+    REJECT_REPLAN("%S_REJECTREPLAN"), // Отклонить запрос перепланирования
     HOTFIX("%S_HOTFIX"), // Предоставить решение
     PASS_TO_REALIZE("%S_PASSTOREALIZE"), // передать на реализацию
     RETURN("%S_RETURN"), // Вернуть в работу
@@ -117,6 +118,8 @@ public enum Operations {
     ACCEPT_AND_CLOSE("%S_ACCEPTANDCLOSE"),
     DECLINE_ACCEPT("%S_DECLINEACCEPT"),
     FINISH_BUG("%S_FINISHBUG"),
+    EXTEND_ANALYSIS("%S_EXTENDANALYSIS"),
+    CHANGE_PLAN_TIME("%S_CHANGEPLANTIME"),
 
     CHANGE_SERVICE("%S_CHANGESERVICE");
 

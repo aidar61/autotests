@@ -36,7 +36,13 @@ public class CommonAssert {
     public static CommonAssert assertThat(Response response) {
         return new CommonAssert(response);
     }
-
+    @Step("[ASSERT] ({0}) Checking task field, Expected is {1}")
+    public CommonAssert isCorrectField(String description, String expectedFieldValue, String path) {
+        String actualFieldValue = new JsonPath(response.asString()).getString(path);
+        assertEquals(actualFieldValue, expectedFieldValue, description + " parameters is match: ");
+        log.info(description + " is correct Actual {}, Expected {}", actualFieldValue, expectedFieldValue);
+        return this;
+    }
     @Step("[ASSERT] ({0}) Checking task field, Expected is {1}")
     public CommonAssert isCorrectTaskField(String description, String expectedFieldValue, String path) {
         String actualFieldValue = new JsonPath(response.asString()).getString(path);
