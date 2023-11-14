@@ -568,7 +568,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         task.refreshTask();
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, new User.Constants[]{ABDULLAEV_BAHODIR, AKSENOV_ANDREY}));
         task.refreshUdf(udf);
-        bugTaskController.performCommonOperation(task, WORKTASK_SUPERVISE);
+        bugTaskController.performCommonOperation(task, SUPERVISE);
         var response = bugTaskController.getResponse();
         ApiAsserts.assertThat(response)
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);

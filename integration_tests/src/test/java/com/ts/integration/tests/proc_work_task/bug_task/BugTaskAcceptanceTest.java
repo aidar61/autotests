@@ -189,7 +189,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "bugTask")
+    @Test(groups = {"BugTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
     public void taskStart() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();

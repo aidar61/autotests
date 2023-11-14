@@ -18,8 +18,11 @@ import org.hibernate.id.GUIDGenerator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
@@ -44,8 +47,20 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.SD_QUESTION, Operations.CAT);
         var employees = userController.receiveUserByTask(parent.getNumber());
-        var creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер клиента")).findAny().get().getForUser();
-        var handler = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Клиент") && !f.getForUser().getLogin().equals(creator.getLogin())).findAny().get().getForUser();
+        var creators = employees.stream()
+                .filter(f -> f.getAssignedRole().getName().equals("Менеджер клиента") &&
+                        f.getForUser().getActive() == true)
+                .collect(Collectors.toList());
+        var handlers = employees.stream()
+                .filter(f -> f.getAssignedRole().getName().equals("Клиент") &&
+                        f.getForUser().getActive() == true)
+                .collect(Collectors.toList());
+        Collections.shuffle(creators);
+        Collections.shuffle(handlers);
+        var creator = creators.get(0).getForUser();
+        creator.setActive(null);
+        var handler = handlers.get(0).getForUser();
+        handler.setActive(null);
         members.put("Менеджер клиента", creator);
         members.put("Клиент", handler);
     }

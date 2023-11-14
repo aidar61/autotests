@@ -189,7 +189,7 @@ public class DevTaskAcceptance2Test extends BaseIntegrationTest {
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, ARTEMEVA_MARINA));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{}]"));
         task.refreshUdf(udf);
-        devTaskController.performCommonOperation(task, WORKTASK_SUPERVISE);
+        devTaskController.performCommonOperation(task, SUPERVISE);
         ApiAsserts.assertThat(devTaskController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
 
