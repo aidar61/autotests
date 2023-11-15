@@ -6,7 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/test">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppConfigProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppConfigProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +78,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;devTask&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/resources&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/aidarka61/IdeaProjects/autotests&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -98,12 +100,13 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/integration_tests/src/test/resources" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/integration_tests/src/test/resources" />
       <recent name="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task" />
       <recent name="$PROJECT_DIR$/common/src/main/java/domain" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/integration_tests/src/main/java/resources" />
       <recent name="$PROJECT_DIR$/common/src/main/java/com/ts/common/services" />
     </key>
@@ -115,13 +118,13 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.DevTaskConvToBugTaskTest">
-    <configuration name="Task$Constants" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ts.common.entitites.commonEntities.Task$Constants" />
+  <component name="RunManager" selected="TestNG.CommonWorkTaskProcessTest.createTask">
+    <configuration name="AppConfigProvider" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ts.common.config.AppConfigProvider" />
       <module name="common" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.common.entitites.commonEntities.*" />
+          <option name="PATTERN" value="com.ts.common.config.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -129,17 +132,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="DevTaskBaseSubmitterTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CommonWorkTaskProcessTest.createTask" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task_base_submitter.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_base_submitter" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_base_submitter.DevTaskBaseSubmitterTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.CommonWorkTaskProcessTest" />
+      <option name="METHOD_NAME" value="createTask" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -236,21 +240,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Task$Constants" />
+      <item itemvalue="Application.AppConfigProvider" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.CommonWorkTaskProcessTest.createTask" />
       <item itemvalue="TestNG.DevTaskConvToBugTaskTest" />
       <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
-      <item itemvalue="TestNG.DevTaskBaseSubmitterTest" />
       <item itemvalue="TestNG.SdQuestionBaseTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.CommonWorkTaskProcessTest.createTask" />
+        <item itemvalue="Application.AppConfigProvider" />
         <item itemvalue="TestNG.DevTaskConvToBugTaskTest" />
         <item itemvalue="TestNG./Users/aidarka61/IdeaProjects/autotests/integration_tests/src/test/resources/suite.xml" />
         <item itemvalue="TestNG.SdQuestionBaseTest" />
-        <item itemvalue="TestNG.DevTaskBaseSubmitterTest" />
-        <item itemvalue="Application.Task$Constants" />
       </list>
     </recent_temporary>
   </component>
@@ -321,7 +325,8 @@
       <workItem from="1698394252794" duration="761000" />
       <workItem from="1698646691838" duration="646000" />
       <workItem from="1698829636783" duration="894000" />
-      <workItem from="1699855954042" duration="1811000" />
+      <workItem from="1699855954042" duration="4709000" />
+      <workItem from="1700057774962" duration="1243000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -554,7 +559,14 @@
       <option name="project" value="LOCAL" />
       <updated>1698215364665</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="fix/test">
+      <created>1700049675728</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1700049675728</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
