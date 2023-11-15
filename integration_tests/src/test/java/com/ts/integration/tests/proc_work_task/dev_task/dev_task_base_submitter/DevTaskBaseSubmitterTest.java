@@ -101,28 +101,29 @@ public class DevTaskBaseSubmitterTest extends BaseIntegrationTest {
         }
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
+        if (misService != null)
+            udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
         udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, 0));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
         udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF));
-        udf.setFourthUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, GENERAL, "{\"username\":\"babdullayev\",\"name\":\"Абдуллаев Баходир\"}"));
+        udf.setFourthUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, LOCAL, "{\"username\":\"babdullayev\",\"name\":\"Абдуллаев Баходир\"}"));
+        udf.setSeventhUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES));
         udf.setThirdUdfString(generateUdfString(UDF_WORKTASK_ANNOTATION, generateString()));
+        udf.setFourthUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, bdkuTask.getTaskValueSelector()[0]));
         udf.setFifthUdfList(generateUdfList(UDF_WORKTASK_CHANGEWORKERINRQST, YES_AND_LEAVE_THIS_ROLE_TO_THE_CURRENT_PERFORMER));
         udf.setSixthUdfList(generateUdfList(UDF_WORKTASK_ADDWATCHERINREQST, UDF_WORKTASK_ADDWATCHERINREQST_YES));
         udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_ADDTRSTWATCHINREQST, UDF_WORKTASK_ADDTRSTWATCHINREQST_YES));
-        udf.setFourthUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, bdkuTask.getTaskValueSelector()[0]));
-        udf.setSeventhUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES));
         udf.setFifthUdfTask(customerRequest);
-        if (misService != null)
-            udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
-
         Map<Task.Constants, UserData> dependTaskFNC = new HashMap<>();
         var userData1 = new UserData(null, "{\"type\":\"REQUIRED\",\"comment\":\"Required\"}");
         var userData2 = new UserData(null, "{\"type\":\"RECOMMENDED\",\"comment\":\"RECOMMENDED\"}");
-        var userData3 = new UserData(null, "{\"type\":\"OPTIONAL\",\"option\":\"949177\",\"optionNot\":\"773226\",\"comment\":\"Optional\"}");
-        dependTaskFNC.put(RYSGAL_BANK, userData1);
-        dependTaskFNC.put(WORKTASK_TESTTASK, userData2);
-        dependTaskFNC.put(CUSTOMER_REQUEST, userData3);
+        var userData3 = new UserData(null, "{\"type\":\"OPTIONAL\",\"option\":\"" + REQUIREMENTS.number +
+                "\",\"optionNot\":\"" + SERVICE_DESK.number +
+                "\",\"comment\":\"Optional\"}");
+        dependTaskFNC.put(COLVIR_MODERN_PRODUCT, userData1);
+        dependTaskFNC.put(SERVICE_DESK, userData2);
+        dependTaskFNC.put(REQUIREMENTS, userData3);
         udf.setEighthUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
         task.refreshUdf(udf);
         devTaskController.createDevTask(task);
@@ -133,11 +134,12 @@ public class DevTaskBaseSubmitterTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_WORKTASK_ONANALYSIS)
                 .isEquals(task);
+        var taskDetail = apiController.receiveTask(task.getNumber());
         CommonAssert
-                .assertThat(response)
-                .isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, RYSGAL_BANK)
-                .isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, WORKTASK_TESTTASK)
-                .isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, CUSTOMER_REQUEST);
+                .assertThat(taskDetail)
+                .isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, COLVIR_MODERN_PRODUCT)
+                .isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, SERVICE_DESK)
+                .isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, REQUIREMENTS);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "devTask")
@@ -261,6 +263,7 @@ public class DevTaskBaseSubmitterTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail)
                 .isCorrectUdfList(UDF_WORKTASK_COMPLEXITYLEVEL, TASK_LEVEL_10.getId());
     }
+
     @Test(groups = {"DevTask", "Regression"}, description = "Изменить автора", dependsOnMethods = "changeLevel")
     public void changeSubmitter() {
         udf = refreshUdf();

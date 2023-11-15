@@ -17,7 +17,6 @@ import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import static com.ts.common.application.database.DbQueryHelper.Operators.*;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.*;
@@ -41,10 +40,6 @@ public class DevTaskAcceptance2Test extends BaseIntegrationTest {
     private GrTaskTable grTaskTable;
     private GrTaskDbEntity parentTaskFromDb;
     private String expectedCompletionDate;
-    private String expectedCompletionDate2;
-    private String expectedCompletionDate3;
-    private String plannedStartDate;
-    private UdfTask sdRequestTask;
     private User creator;
     private User handlerUser;
     private Task catAcceptTask;
@@ -54,22 +49,20 @@ public class DevTaskAcceptance2Test extends BaseIntegrationTest {
         devTaskController = apiController.getDevTaskController();
         userController = apiController.getUserController();
         grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
-                "task_category", EQUAL.operator, "CAT_GENPLAN",
-                AND.operator,
-                "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
-                AND.operator,
-                "task_path", LIKE.operator, "%/2405/758009%");
+        parentTaskFromDb = (GrTaskDbEntity)
+                grTaskTable.receiveRandomTask(
+                        "task_category", EQUAL.operator, "CAT_GENPLAN",
+                        AND.operator,
+                        "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
+                        AND.operator,
+                        "task_path", LIKE.operator, "%/2405/758009%");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.DEV_TASK, Operations.CAT);
         var tasks = devTaskController.getTaskForSDRequest(parent.getNumber());
         productTask = tasks.get("UDF_PRODUCT");
         bdkuTask = tasks.get("UDF_BDKU_CONFIGURATION");
         cdpBl = devTaskController.getCdpBl();
-        var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
-        sdRequestTask = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
-        misService = devTaskController.getMisService().get(0);;
-
+        misService = devTaskController.getMisService().get(0);
         var taskEmployees = userController.receiveUserByTask(parent.getNumber());
         creator = userController.receiveUserByRole(taskEmployees, "Менеджер проекта", "root").getForUser();
         handlerUser = userController.receiveUserByRole(taskEmployees, "Участник проекта", creator.getLogin()).getForUser();
@@ -95,7 +88,6 @@ public class DevTaskAcceptance2Test extends BaseIntegrationTest {
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
         udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYCONRTOLLER));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, 1));
-        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, "hg:apng:default [Аnalitic platform new generation]"));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
         udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF));
         udf.setFourthUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, GENERAL, "{\"username\":\"babdullayev\",\"name\":\"Абдуллаев Баходир\"}"));
@@ -106,7 +98,6 @@ public class DevTaskAcceptance2Test extends BaseIntegrationTest {
         udf.setFourthUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, bdkuTask.getTaskValueSelector()[0]));
         udf.setSixthUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDBF, MTBANK));
         udf.setSeventhUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES));
-        System.out.println("**** MIS_SERVICE: " + misService);
         if (misService != null)
             udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
         task.refreshUdf(udf);
@@ -208,7 +199,7 @@ public class DevTaskAcceptance2Test extends BaseIntegrationTest {
         task.setFinishStatus(Status.builder().build());
         udf.setUdfMemo(generateUdfMemo(UDF_WORKTASK_TESTPLAN, generateString()));
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_NO));
-        udf.setSecondUdfMemo(generateUdfMemo(UDF_WORKTASK_FILES, "le1.txt, file2.tx"));
+        udf.setSecondUdfMemo(generateUdfMemo(UDF_WORKTASK_FILES, "file1.txt, file2.txt"));
         udf.setThirdUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{}]"));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ARTEMEVA_MARINA));
 
@@ -288,6 +279,6 @@ public class DevTaskAcceptance2Test extends BaseIntegrationTest {
         var devTask = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(devTask)
-                .isCorrectUdfListCode(UDF_CDP_ACCEPTANCE_STATUS, "ACCEPTED");
+                .isCorrectUdfListCode(UDF_CDP_ACCEPTANCE_STATUS, "ACCEPTANCE");
     }
 }

@@ -239,7 +239,7 @@ public class CommonAssert {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfTask.class).getTaskValue();
         Assertions
                 .assertThat(actual)
-                .withFailMessage("Code is not correct expected %s, actual %s", expected.number, actual)
+                .withFailMessage("Code is not correct expected %s, actual %s", expected.number, Arrays.stream(actual).map(com.ts.common.entitites.commonEntities.Task::getNumber).collect(Collectors.joining("|")), expected)
                 .anyMatch(x -> x.getNumber().equals(expected.number));
         log.info("Task number is correct Actual: {}, Expected: {}"
                 , Arrays.stream(actual).map(com.ts.common.entitites.commonEntities.Task::getNumber).collect(Collectors.joining("|")), expected);
