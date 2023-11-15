@@ -2,10 +2,12 @@ package com.ts.common.entitites.commonEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.ts.common.entitites.BaseEntity;
+import io.qameta.allure.internal.shadowed.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.jackson.Jacksonized;
 import lombok.extern.slf4j.Slf4j;
+import org.sonatype.guice.bean.reflect.IgnoreSetters;
 
 @Slf4j
 @Getter
@@ -21,9 +23,15 @@ public class User extends BaseEntity {
     String id;
     String login;
     String name;
+    Boolean active;
 
-    //    boolean active;
-//    String status;
+    public User(String id, String login, String name) {
+        this.id = id;
+        this.login = login;
+        this.name = name;
+    }
+
+    //    String status;
 //    int childrenCount;
 //    int wrongAuthAttempt;
 //    boolean authBlocked;

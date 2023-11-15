@@ -31,11 +31,6 @@ public class BugTaskController extends BaseController {
         this.taskType = TASK_TYPE;
     }
 
-    public void changeTaskType(TaskType taskType) {
-        TASK_TYPE = taskType;
-        this.taskType = TASK_TYPE;
-    }
-
     @Override
     protected Response createTask(String requestBody) {
         return super.createTask(requestBody);

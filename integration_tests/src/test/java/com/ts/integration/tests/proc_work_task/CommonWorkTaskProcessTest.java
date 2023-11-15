@@ -313,7 +313,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, expectedControllerUser));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, ANALYZE.value));
         task.refreshUdf(udf);
-        workTaskController.performCommonOperation(task, WORKTASK_SUPERVISE);
+        workTaskController.performCommonOperation(task, SUPERVISE);
 
         ApiAsserts.assertThat(workTaskController.getResponse())
                 .isCorrectResponseCode(HTTP_OK).isParseableBody(TaskResponseBody.class);

@@ -22,8 +22,11 @@ import io.restassured.path.json.JsonPath;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.ts.common.application.database.DbQueryHelper.Operators.*;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
@@ -130,7 +133,8 @@ public class BugTaskBaseSubmitterTest extends BaseIntegrationTest {
         dependTaskFNC.put(WORKTASK_TESTTASK, userData2);
         dependTaskFNC.put(CUSTOMER_REQUEST, userData3);
         udf.setNinethUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
-        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.stream().findFirst().get()));
+        Collections.shuffle(new ArrayList<>(branches));
+        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.stream().filter(x -> x.toLowerCase().contains("разработ")).findAny().orElse(null)));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
         udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF));
         udf.setSecondUdfMultiList(generateUdfMultiList(UDF_L10N, UDF_L10N_KG));

@@ -47,6 +47,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         parenOfParentTaskFromDb = parentTaskFromDb.receiveParentTask();
         HANDLER_USER_FROM_PARENT = apiController.receiveGeneralTask(parent.getNumber()).getHandlerUser();
+        HANDLER_USER_FROM_PARENT.setActive(null);
         task = InitEntities.getGeneralTask(TaskType.CONFIRMATION, Operations.CAT);
     }
 
@@ -110,7 +111,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
     public void assignConstructorRetry() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
-        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD,0));
+        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD, 0));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, HANDLER_USER_FROM_PARENT));
         task.refreshUdf(udf);
         task.setHandlerUser(HANDLER_USER_FROM_PARENT);
@@ -142,7 +143,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
     public void clearDecision() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
-        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD,0));
+        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD, 0));
         task.refreshUdf(udf);
         confirmationController.performCommonOperation(task, CLEAR_DECISION);
         ApiAsserts.assertThat(confirmationController.getResponse())
@@ -184,7 +185,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
     public void repeatRequest() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
-        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD,0));
+        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD, 0));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, HANDLER_USER_FROM_PARENT));
         task.setUdfs(udf);
         task.setHandlerUser(HANDLER_USER_FROM_PARENT);
@@ -228,7 +229,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
     public void returnToWork() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
-        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD,0));
+        udf.setUdfDate(generateUdfDate(UDF_ADVICE_PLANTD, 0));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, HANDLER_USER_FROM_PARENT));
         task.refreshUdf(udf);
         task.setHandlerUser(HANDLER_USER_FROM_PARENT);

@@ -1,4 +1,4 @@
-package com.ts.common.controllers.workTask;
+package com.ts.common.controllers.advice;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.controllers.BaseController;
@@ -11,21 +11,18 @@ import com.ts.common.enums.TaskType;
 import com.ts.common.utils.JsonUtils;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.controllers.TaskRequestBody.Fields.HANDLER_USER;
-import static com.ts.common.enums.TaskType.WORK_TASK;
+import static com.ts.common.enums.TaskType.*;
 
-public class DevTaskController extends BaseController {
-
-    private static final TaskType TASK_TYPE = WORK_TASK;
+public class CodeReviewController extends BaseController {
+    private static final TaskType TASK_TYPE = CODEREVIEW;
     private static String parentDetailInString;
 
-    public DevTaskController(String url, AuthToken authToken) {
+    public CodeReviewController(String url, AuthToken authToken) {
         super(url, authToken);
         this.taskType = TASK_TYPE;
     }
@@ -35,20 +32,21 @@ public class DevTaskController extends BaseController {
         return super.createTask(requestBody);
     }
 
-    public Response createDevTask(GeneralTask devTask) {
-        TaskRequestBody devTaskRequestBody = new TaskRequestBody(devTask);
-        this.response = createTask(devTaskRequestBody.keepMandatoryAndCreateFieldsAnd(HANDLER_USER));
+    public Response create(GeneralTask adviceTask) {
+        TaskRequestBody adviceTaskRequestBody = new TaskRequestBody(adviceTask);
+        this.response = createTask(adviceTaskRequestBody.keepMandatoryAndCreateFieldsAnd(HANDLER_USER));
         TaskResponseBody gapResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
         if (gapResponseBody != null) {
-            devTask.setId(gapResponseBody.getId());
-            devTask.setNumber(gapResponseBody.getNumber());
-            devTask.setFinishStatus(gapResponseBody.getFinishStatus());
+            adviceTask.setId(gapResponseBody.getId());
+            adviceTask.setNumber(gapResponseBody.getNumber());
+            adviceTask.setFinishStatus(gapResponseBody.getFinishStatus());
         }
         return this.response;
     }
 
+
     public Map<String, UdfTask> getTaskForSDRequest(String parentNumber) {
-        this.response = super.get(getEndpoint(REST, TASK, CREATE, parentNumber, "CAT_DEVTASK"));
+        this.response = super.get(getEndpoint(REST, TASK, CREATE, parentNumber, "CAT_BUGTASK"));
         parentDetailInString = this.response.asString().replace("\\&", "\\\\&");
         var udfProductTask = new JsonPath(parentDetailInString).getObject("udfs.UDF_PRODUCT", UdfTask.class);
         var udfBDKUTask = new JsonPath(parentDetailInString).getObject("udfs.UDF_BDKU_CONFIGURATION", UdfTask.class);
@@ -67,8 +65,7 @@ public class DevTaskController extends BaseController {
         if (misServiceListValue.size() > 0) {
             return misServiceListValue;
         }
-        misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValueSelector.id", String.class);
-        return misServiceListValue;
+        return new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValueSelector.id", String.class);
     }
 
     public String getCdpBl() {
@@ -81,7 +78,6 @@ public class DevTaskController extends BaseController {
                 return misService.getListValueSelector()[0].getId();
             }
         }
-
         return null;
     }
 }

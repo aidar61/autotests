@@ -530,7 +530,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, new User.Constants[]{ABDULLAEV_BAHODIR, AKSENOV_ANDREY}));
 
         task.refreshUdf(udf);
-        devTaskController.performCommonOperation(task, WORKTASK_SUPERVISE);
+        devTaskController.performCommonOperation(task, SUPERVISE);
         var response = devTaskController.getResponse();
         ApiAsserts.assertThat(response)
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);

@@ -6,6 +6,7 @@ import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.UserController;
 import com.ts.common.controllers.advice.AdviceController;
 import com.ts.common.controllers.advice.ConfirmationController;
+import com.ts.common.controllers.advice.CodeReviewController;
 import com.ts.common.controllers.advice.SanctionController;
 import com.ts.common.controllers.bug.BugTaskController;
 import com.ts.common.controllers.sdquestion.SdQuestionController;
@@ -19,7 +20,6 @@ import com.ts.common.controllers.sla.SlaHelpController;
 import com.ts.common.controllers.workTask.WorkTaskController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.entitites.tasks.Task;
-import com.ts.common.enums.Operations;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -27,7 +27,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.config.AppConfigProvider.STAND_URL;
 
 @Getter
@@ -52,6 +51,7 @@ public class TrackStudioApiControllers {
     private BugTaskController bugTaskController;
     private SdQuestionController sdQuestionController;
     private CreateFromExcelTaskController createFromExcelTaskController;
+    private CodeReviewController codeReviewController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
@@ -71,7 +71,7 @@ public class TrackStudioApiControllers {
         this.bugTaskController = new BugTaskController(STAND_URL, authToken);
         this.sdQuestionController = new SdQuestionController(STAND_URL, authToken);
         this.createFromExcelTaskController = new CreateFromExcelTaskController(STAND_URL, authToken);
-
+        this.codeReviewController = new CodeReviewController(STAND_URL, authToken);
     }
 
 
@@ -110,6 +110,7 @@ public class TrackStudioApiControllers {
                 .findFirst()
                 .get();
     }
+
     public Response receiveActiveSubTasks(String taskNumber) {
         return baseController.receiveActiveSubTask(taskNumber);
     }

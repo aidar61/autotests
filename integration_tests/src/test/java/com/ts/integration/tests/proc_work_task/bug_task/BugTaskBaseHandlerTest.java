@@ -19,8 +19,10 @@ import io.restassured.path.json.JsonPath;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
 
 import static com.ts.common.application.database.DbQueryHelper.Operators.*;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
@@ -58,7 +60,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
     private int normBudget = 25;
     private String BDKUName;
     private Map<Task.Constants, UserData> dependTaskFNC;
-    java.util.List<String> branches;
+    List<String> branches;
 
 
     @BeforeClass(alwaysRun = true)
@@ -132,7 +134,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         dependTaskFNC.put(WORKTASK_TESTTASK, userData2);
         dependTaskFNC.put(CUSTOMER_REQUEST, userData3);
         udf.setNinethUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
-        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.stream().filter(s -> s.toLowerCase().contains(BDKUName.toLowerCase())).findAny().orElse(null)));
+        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.get(0)));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
         udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF));
         udf.setSecondUdfMultiList(generateUdfMultiList(UDF_L10N, UDF_L10N_KG));
@@ -468,7 +470,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         task.refreshTask();
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setDescription(generateString());
-        udf.setUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.stream().filter(s -> s.toLowerCase().contains(BDKUName.toLowerCase())).findAny().get()));
+        udf.setUdfString(generateUdfString(UDF_WORKTASK_BRANCH, branches.get(1)));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"8181816c89cef25c018a6f32b56b4b3c\",\"name\":\"Предварительный анализ\",\"order\":0,\"taskId\":\"" + task.getId() +
                 "\",\"progress\":0,\"description\":\"\",\"status\":\"DELETE\",\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"-\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true},{\"id\":\"8181816c89cef25c018a6f33e9c14c13\",\"name\":\"Пошаговый план 1\",\"order\":1,\"taskId\":\"" + task.getId() +
                 "\",\"weight\":1,\"budget\":7200,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c2516c220101516c711ff80024\",\"workTypeNorm\":2.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeAsString\":\"[0701] Иное\",\"workTypeDraftAsString\":\"-\",\"draftChanged\":true},{\"id\":\"8181816c89cef25c018a6f33e9c14c14\",\"name\":\"Пошаговый план 2\",\"order\":2,\"taskId\":\"" + task.getId() +
@@ -568,7 +570,7 @@ public class BugTaskBaseHandlerTest extends BaseIntegrationTest {
         task.refreshTask();
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, new User.Constants[]{ABDULLAEV_BAHODIR, AKSENOV_ANDREY}));
         task.refreshUdf(udf);
-        bugTaskController.performCommonOperation(task, WORKTASK_SUPERVISE);
+        bugTaskController.performCommonOperation(task, SUPERVISE);
         var response = bugTaskController.getResponse();
         ApiAsserts.assertThat(response)
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);

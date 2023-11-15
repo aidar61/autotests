@@ -38,6 +38,9 @@ public class BaseController extends ApiRequest {
         super(url, HEADERS_BASE_CONTROLLER, authToken);
     }
 
+    public void changeTaskType(TaskType taskType) {
+        this.taskType = taskType;
+    }
 
     protected Response createTask(String requestBody) {
         return super.post(getEndpoint(REST, TASK, UPDATE), requestBody);
@@ -124,5 +127,4 @@ public class BaseController extends ApiRequest {
         }};
         return this.response = super.get(getEndpoint(REST, UDF_VAL, udfSd.udfId, TASK, taskNumber, TASK, LIST, formatParameters(params)));
     }
-
 }
