@@ -46,6 +46,13 @@ public class TaskResponseBody extends com.ts.common.request.ResponseBody {
         return getFinishStatus().getId();
     }
 
+    public Status receiveStatus() {
+        if (this.task != null) {
+            return task.getFinishStatus();
+        }
+        return getFinishStatus();
+    }
+
     @Override
     public Object receiveHandlerUser() {
         return this.message.getHandlerUser();
