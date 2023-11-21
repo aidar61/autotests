@@ -2,8 +2,11 @@ package com.ts.common.asserts;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.errors.ErrorResponseBody;
+import com.ts.common.application.errors.TrackStudioErrors;
+import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.tasks.GeneralTask;
+import com.ts.common.request.ApiRequest;
 import com.ts.common.request.ResponseBody;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
@@ -11,6 +14,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
+import org.hibernate.annotations.Persister;
 
 import static org.testng.Assert.*;
 
@@ -73,6 +77,17 @@ public class ApiAsserts {
     public ApiAsserts isCorrectErrorMessage(String expectedError) {
         var actualError = new JsonPath(response.asString()).getString("message");
         assertEquals(actualError, expectedError, "Error is correct");
+        return this;
+    }
+
+    @Step("Check expected error is correct: {error}")
+    public ApiAsserts isCorrectError(GeneralTask task, TrackStudioErrors error) {
+        String expectedErrorMessage = String.format(error.getValue(), task.getOperation().getId(), task.getNumber(), task.getFinishStatus().getId(), task.getHandlerUser().getLogin());
+        log.error("Generated following expected error message {}", expectedErrorMessage);
+        ErrorResponseBody actualResponseBody = this.response.as(ErrorResponseBody.class);
+        Assertions.assertThat(actualResponseBody.getMessage())
+                .withFailMessage("Error is not correct Expected {}, Actual {}", expectedErrorMessage, actualResponseBody.getMessage())
+                .isEqualTo(expectedErrorMessage);
         return this;
     }
 }
