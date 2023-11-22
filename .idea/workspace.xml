@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Sla negative scenarios, Errors" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Sla negative scenarios, Errors">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -330,7 +333,9 @@
       <workItem from="1699855954042" duration="4709000" />
       <workItem from="1700057774962" duration="9175000" />
       <workItem from="1700226156183" duration="53000" />
-      <workItem from="1700546056838" duration="5335000" />
+      <workItem from="1700546056838" duration="6226000" />
+      <workItem from="1700557346273" duration="2482000" />
+      <workItem from="1700637456864" duration="1517000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -591,7 +596,14 @@
       <option name="project" value="LOCAL" />
       <updated>1700551331025</updated>
     </task>
-    <option name="localTasksCounter" value="36" />
+    <task id="LOCAL-00036" summary="feature/Sla negative scenarios, Errors">
+      <created>1700551439468</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1700551439468</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -731,11 +743,6 @@
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest2.java</url>
           <line>78</line>
           <option name="timeStamp" value="136" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java</url>
-          <line>347</line>
-          <option name="timeStamp" value="137" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
