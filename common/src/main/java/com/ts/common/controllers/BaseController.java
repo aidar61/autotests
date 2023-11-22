@@ -127,4 +127,10 @@ public class BaseController extends ApiRequest {
         }};
         return this.response = super.get(getEndpoint(REST, UDF_VAL, udfSd.udfId, TASK, taskNumber, TASK, LIST, formatParameters(params)));
     }
+
+    public void saveTaskStatusFromResponse(GeneralTask task) {
+        TaskResponseBody taskResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
+        assert taskResponseBody != null;
+        task.setFinishStatus(taskResponseBody.receiveStatus());
+    }
 }

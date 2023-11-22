@@ -7,7 +7,7 @@ pipeline {
     parameters {
         choice(
             name: "STAND",
-            choices: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11'],
+            choices: ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', 'ts-integration'],
             description: 'Number of the Stand'
         )
         choice(

@@ -94,7 +94,6 @@ public abstract class ApiRequest {
         log.info("User is {}", authToken.getUser());
         this.response = given()
                 .auth()
-
                 .preemptive()
                 .basic(authToken.getUser(), authToken.getPassword())
                 .spec(requestSpec)
