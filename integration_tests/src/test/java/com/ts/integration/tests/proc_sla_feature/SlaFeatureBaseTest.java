@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_sla_feature.cat_slafeature;
+package com.ts.integration.tests.proc_sla_feature;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
@@ -24,13 +24,14 @@ import java.util.stream.Collectors;
 
 import static com.ts.common.entitites.commonEntities.List.Constants.UDF_SDFEATURE_TYPE_REG;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
+import static com.ts.common.enums.Operations.BEGINCOST_PRE;
 import static com.ts.common.enums.Operations.TOP_RECOST;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAFEATURE_NEW;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.*;
 import static org.testng.Assert.assertEquals;
 
-public class CatSlaFeatureTestTest extends BaseIntegrationTest {
+public class SlaFeatureBaseTest extends BaseIntegrationTest {
     public SlaFeatureController slaFeatureController;
     private GeneralTask task;
     private Parent parent;
@@ -169,76 +170,245 @@ public class CatSlaFeatureTestTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-//    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на предварительное согласование менеджеру по анализу доработок", dependsOnMethods = "startPreCost")
-//    public void startPreCostToImprovementAnalysisManagers() {
-//        apiController.updateToken(generateAuthToken(members.get("Аналитик")));
-//        var comment = generateString();
-//        task.refreshTask();
-//        task.setDescription(comment);
-//        udf = refreshUdf();
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на предварительное согласование менеджеру по анализу доработок", dependsOnMethods = "startPreCost")
+    public void startPreCostToImprovementAnalysisManagers() {
+        apiController.updateToken(generateAuthToken(members.get("Аналитик")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
 
-//        task.refreshUdf(udf);
-//        slaFeatureController
-//                .performCommonOperation(task, TOP_RECOST);
-//        ApiAsserts.assertThat(slaFeatureController.getResponse())
-//                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
-//    }
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
 
-//    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на предварительное планирование менеджеру по реализации доработок", dependsOnMethods = "startPreCostToImprovementAnalysisManagers")
-//    public void startPreCostToImplementationManagers() {
-//        apiController.updateToken(generateAuthToken(members.get("Менеджер по анализу доработок")));
-//        var comment = generateString();
-//        task.refreshTask();
-//        task.setDescription(comment);
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на предварительное планирование менеджеру по реализации доработок", dependsOnMethods = "startPreCostToImprovementAnalysisManagers")
+    public void startPreCostToImplementationManagers() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по анализу доработок")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
 
-//        task.refreshUdf(udf);
-//        slaFeatureController
-//                .performCommonOperation(task, TOP_RECOST);
-//        ApiAsserts.assertThat(slaFeatureController.getResponse())
-//                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
-//    }
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
 
-//        @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на предварительную оценку аккаунт-менеджеру", dependsOnMethods = "startPreCostToImplementationManagers")
-//    public void beginCostPreToAccountManager() {
-//        apiController.updateToken(generateAuthToken(members.get("Менеджер по реализации доработок")));
-//        var comment = generateString();
-//        task.refreshTask();
-//        task.setDescription(comment);
-//        udf = refreshUdf();
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на предварительную оценку аккаунт-менеджеру", dependsOnMethods = "startPreCostToImplementationManagers")
+    public void beginCostPreToAccountManager() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по реализации доработок")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
 
-//        task.refreshUdf(udf);
-//        slaFeatureController
-//                .performCommonOperation(task, BEGINCOST_PRE);
-//        ApiAsserts.assertThat(slaFeatureController.getResponse())
-//                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
-//    }
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, BEGINCOST_PRE);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
 
-    //    @Test(groups = {"SlaFeature", "Regression"}, description = "Сообщить предварительные условия реализации", dependsOnMethods = "beginCostPreToAccountManager")
-//    public void reportPreCondition() {
-//        apiController.updateToken(generateAuthToken(members.get("Account-менеджер")));
-//        var comment = generateString();
-//        task.refreshTask();
-//        task.setDescription(comment);
-//        udf = refreshUdf();
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Сообщить предварительные условия реализации", dependsOnMethods = "beginCostPreToAccountManager")
+    public void reportPreCondition() {
+        apiController.updateToken(generateAuthToken(members.get("Account-менеджер")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
 
-//        task.refreshUdf(udf);
-//        slaFeatureController
-//                .performCommonOperation(task, TOP_RECOST);
-//        ApiAsserts.assertThat(slaFeatureController.getResponse())
-//                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
-//    }
-    //    @Test(groups = {"SlaFeature", "Regression"}, description = "Принять предварительные условия реализации", dependsOnMethods = "reportPreCondition")
-//    public void acceptPreCost() {
-//        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
-//        var comment = generateString();
-//        task.refreshTask();
-//        task.setDescription(comment);
-//        udf = refreshUdf();
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
 
-//        task.refreshUdf(udf);
-//        slaFeatureController
-//                .performCommonOperation(task, TOP_RECOST);
-//        ApiAsserts.assertThat(slaFeatureController.getResponse())
-//                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
-//    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать аналитику", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost3() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на окончательное согласование менеджеру по анализу доработок", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost4() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на окончательное планирование менеджеру по реализации доработок", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost5() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на окончательную оценку аккаунт-менеджеру", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost6() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Сообщить окончательные условия реализации", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost7() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Принять окончательные условия реализации", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost8() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать в разработку", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost9() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Принять предварительные условия реализации", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost10() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Завершить выполнение работы", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost11() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на проверку клиенту", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost12() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Утвердить доработку", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost13() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Отправить патч", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost14() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
+    @Test(groups = {"SlaFeature", "Regression"}, description = "Установить в производственную среду", dependsOnMethods = "reportPreCondition")
+    public void acceptPreCost15() {
+        apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
+        var comment = generateString();
+        task.refreshTask();
+        task.setDescription(comment);
+        udf = refreshUdf();
+
+        task.refreshUdf(udf);
+        slaFeatureController
+                .performCommonOperation(task, TOP_RECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+    }
 }
