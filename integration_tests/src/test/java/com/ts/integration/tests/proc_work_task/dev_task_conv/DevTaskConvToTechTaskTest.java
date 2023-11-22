@@ -28,7 +28,6 @@ import static com.ts.common.entitites.commonEntities.Task.Constants.CORE;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
 import static com.ts.common.entitites.commonEntities.User.Constants.BABUSHKIN_IVAN;
-import static com.ts.common.enums.Operations.CHANGE_CAT_TO_BUG_TASK;
 import static com.ts.common.enums.Operations.CHANGE_CAT_TO_TECH_TASK;
 import static com.ts.common.enums.TaskStatuses.STATUS_PROJECT_PLANNED;
 import static com.ts.common.enums.TaskStatuses.STATUS_WORKTASK_ONANALYSIS;
