@@ -193,7 +193,6 @@ public class DevTaskAcceptance2Test extends BaseIntegrationTest {
     @Test(groups = {"DevTask", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "taskChangeSupervisor")
     public void taskAcceptance2() {
         udf = refreshUdf();
-
         task.setHandlerUser(generateUser(ARTEMEVA_MARINA));
         task.setResolution(Resolution.builder().build());
         task.setFinishStatus(Status.builder().build());
@@ -202,7 +201,6 @@ public class DevTaskAcceptance2Test extends BaseIntegrationTest {
         udf.setSecondUdfMemo(generateUdfMemo(UDF_WORKTASK_FILES, "file1.txt, file2.txt"));
         udf.setThirdUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{}]"));
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, ARTEMEVA_MARINA));
-
         task.refreshUdf(udf);
         devTaskController.performCommonOperation(task, WORKTASK_TO_ACCEPTANCE);
         ApiAsserts.assertThat(devTaskController.getResponse())
