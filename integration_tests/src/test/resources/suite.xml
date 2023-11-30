@@ -19,6 +19,8 @@
             <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature1Test"/>
             <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature2Test"/>
             <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature3Test"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative1Test"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative2Test"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelp1Test"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelp2Test"/>
             <class name="com.ts.integration.tests.proc_potential_gap.PotentialGap1Test"/>
