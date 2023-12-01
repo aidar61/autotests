@@ -116,6 +116,7 @@ public class List extends BaseEntity {
         UDF_WORKTASK_CREATETESTTASK_NO("4028891a4a538b2c014a53de69da003f"),
         UDF_SDFEATURE_TYPE_REG("ff8081813874cb210138752a75c80245"),//Требование регулятора
         UDF_WORKTASK_QUALITY_NORM("ff808081312c915c01312c966c3d00aa"),//Требование регулятора
+        CONTROL("8181818728cf30300128d0e8732116c5"),//Взять на контроль
         YES_V2("ff8080812f8cd356012f908c2c54005b"); // YES Требуется
 
 

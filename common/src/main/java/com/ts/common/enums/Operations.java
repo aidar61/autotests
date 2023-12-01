@@ -125,6 +125,8 @@ public enum Operations {
     CONFIRM_CHANGES("%S_CONFIRMCHANGES"),
     TOP_RECOST("%S_TOPRECOST"),
     ASSIGNCANCEL("%S_ASSIGNCANCEL"),
+    CHANGE_PLAN_FD("%S_CHANGEPLANFD"), //Изменить планируемую дату начала
+    CHANGE_PLAN_TD("%S_CHANGEPLANTD"), //Изменить планируемую дату завершения
 
     CHANGE_SERVICE("%S_CHANGESERVICE");
 
