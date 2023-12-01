@@ -51,6 +51,9 @@
             <class name="com.ts.integration.tests.proc_sd_question.SdQuestionBaseTest2"/>
             <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskBaseTest"/>
             <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskStaticHandlerTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskStaticSubmitterTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskConvertToBugTaskTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskConvertToDevTaskTest"/>
         </classes>
     </test>
 </suite>
