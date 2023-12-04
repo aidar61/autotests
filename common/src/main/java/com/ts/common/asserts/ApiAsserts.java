@@ -38,8 +38,8 @@ public class ApiAsserts {
         if (this.response == null)
             assertTrue(false);
         Assertions.assertThat(this.response.getStatusCode())
-                .isEqualTo(code.getValue())
-                .withFailMessage("Response code is incorrect. Expected: %s , Actual: %s", code.getValue(), this.response.getStatusCode());
+                .withFailMessage("Response code is incorrect. Expected: %s , Actual: %s", code.getValue(), this.response.getStatusCode())
+                .isEqualTo(code.getValue());
         log.info("Status code is correct: Actual {}, Expected {}", this.response.getStatusCode(), code);
         return this;
     }
