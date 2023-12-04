@@ -20,9 +20,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 
-import java.util.Comparator;
-import java.util.stream.Collectors;
-
 import static com.ts.common.application.database.DbQueryHelper.Operators.*;
 import static com.ts.common.controllers.bug.BugTaskController.getFirstTask;
 import static com.ts.common.controllers.bug.BugTaskController.getLastTask;
@@ -146,7 +143,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, moduleReason));
         if (misService != null)
             udf.setFourthUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
-        udf.setFifthUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYCREATOR));
+        udf.setFifthUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR));
         udf.setSixthUdfList(generateUdfList(UDF_WORKTASK_ANALYSIS, YES_V2));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, 1));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
@@ -162,7 +159,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_WORKTASK_ONANALYSIS)
                 .isEquals(task);
         CommonAssert.assertThat(response)
-                .isCorrectUdfList(UDF_CDP_ACCEPTANCE, REQBYCREATOR.getId());
+                .isCorrectUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR.getId());
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "bugTask")

@@ -23,6 +23,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
 @Slf4j
 public class CommonAssert {
@@ -36,6 +37,22 @@ public class CommonAssert {
     public static CommonAssert assertThat(Response response) {
         return new CommonAssert(response);
     }
+
+    @Step("[ASSERT] Checking BACK_UDF_WORKTASK_DEPENDBF task , Expected: {0}")
+    public CommonAssert isDependTaskExistReference(String taskNumber) {
+        var tasks = new JsonPath(response.asString()).getObject("BACK_UDF_WORKTASK_DEPENDBF", UdfTask.class).getTaskValue();
+        var task = Arrays.stream(tasks).filter(x -> x.getNumber().equals(taskNumber)).findAny().orElse(null);
+        if (task == null) {
+            fail("BACK_UDF_WORKTASK_DEPENDBF не найден");
+            return this;
+        }
+
+        var actual = new JsonPath(response.asString()).getBoolean("BACK_UDF_WORKTASK_DEPENDBF.reference");
+        assertEquals(actual, true, "В свзанной задаче проверить наличие свзи с типом \"Блокирует задачи\"" + " parameters is match: ");
+        log.info("В свзанной задаче проверить наличие свзи с типом \"Блокирует задачи\"" + " is correct Actual {}, Expected {}", actual, true);
+        return this;
+    }
+
     @Step("[ASSERT] ({0}) Checking task field, Expected is {1}")
     public CommonAssert isCorrectField(String description, String expectedFieldValue, String path) {
         String actualFieldValue = new JsonPath(response.asString()).getString(path);
@@ -43,6 +60,7 @@ public class CommonAssert {
         log.info(description + " is correct Actual {}, Expected {}", actualFieldValue, expectedFieldValue);
         return this;
     }
+
     @Step("[ASSERT] ({0}) Checking task field, Expected is {1}")
     public CommonAssert isCorrectTaskField(String description, String expectedFieldValue, String path) {
         String actualFieldValue = new JsonPath(response.asString()).getString(path);
@@ -169,7 +187,7 @@ public class CommonAssert {
     @Step("[ASSERT] Checking task handler user, Expected: {0}")
     public CommonAssert isCorrectHandlerUser(String expectedLogin) {
         var task = response.as(Task.class);
-        assertEquals(expectedLogin, task.getHandlerUser().getLogin(), expectedLogin + " parameters is match: ");
+        assertEquals(task.getHandlerUser().getLogin(), expectedLogin, expectedLogin + " parameters is match: ");
         return this;
     }
 
