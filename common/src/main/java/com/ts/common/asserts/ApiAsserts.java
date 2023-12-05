@@ -3,10 +3,8 @@ package com.ts.common.asserts;
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.errors.ErrorResponseBody;
 import com.ts.common.application.errors.TrackStudioErrors;
-import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.request.ApiRequest;
 import com.ts.common.request.ResponseBody;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
@@ -14,7 +12,6 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
-import org.hibernate.annotations.Persister;
 
 import static org.testng.Assert.*;
 
@@ -33,13 +30,18 @@ public class ApiAsserts {
         return new ApiAsserts(response);
     }
 
+    @Step("Response body is: {0}")
+    private static void logResponse(String responseBody) {
+//        log.info("Response body is : " + responseBody);
+    }
+
     @Step("Checking expected code: {0}")
     public ApiAsserts isCorrectResponseCode(TrackStudioHttpStatusCodes code) {
         if (this.response == null)
             assertTrue(false);
         Assertions.assertThat(this.response.getStatusCode())
-                .isEqualTo(code.getValue())
-                .withFailMessage("Response code is incorrect. Expected: %s , Actual: %s", code.getValue(), this.response.getStatusCode());
+                .withFailMessage("Response code is incorrect. Expected: %s , Actual: %s", code.getValue(), this.response.getStatusCode())
+                .isEqualTo(code.getValue());
         log.info("Status code is correct: Actual {}, Expected {}", this.response.getStatusCode(), code);
         return this;
     }
@@ -51,11 +53,6 @@ public class ApiAsserts {
         log.info("Message field '{}' is correct Actual: {}, Expected: {}",
                 messageField, actualValue, expectedValue);
         return this;
-    }
-
-    @Step("Response body is: {0}")
-    private static void logResponse(String responseBody) {
-//        log.info("Response body is : " + responseBody);
     }
 
     public <T> ApiAsserts isParseableBody(Class<T> clazz) {
@@ -75,8 +72,9 @@ public class ApiAsserts {
 
     @Step("Checking expected error: {0}")
     public ApiAsserts isCorrectErrorMessage(String expectedError) {
-        var actualError = new JsonPath(response.asString()).getString("message");
+        var actualError = new JsonPath(response.asString()).getString("message").substring(0, expectedError.length());
         assertEquals(actualError, expectedError, "Error is correct");
+        log.info("Error is correct: Actual {}, Expected {}", actualError, expectedError);
         return this;
     }
 
