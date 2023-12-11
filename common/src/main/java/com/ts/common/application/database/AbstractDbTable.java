@@ -88,6 +88,12 @@ public abstract class AbstractDbTable {
                 , new BeanPropertyRowMapper<>(type));
     }
 
+    public <T extends BaseEntity> T getRandomEntity(Class type, String query) {
+
+        return (T) queryForObject(query
+                , new BeanPropertyRowMapper<>(type));
+    }
+
     public List<BaseEntity> receiveEntities(Class clazz) {
         return query(String.format(SELECT_QUERY, this.name), new BeanPropertyRowMapper<>(clazz));
     }

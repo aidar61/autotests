@@ -31,7 +31,6 @@ public class SlaFeature1Test extends BaseIntegrationTest {
     private static SlaFeatureController slaFeatureController;
     private GeneralTask task;
 
-    //TODO нужно добавить в каждом тесте в контроллер пользователя, который выполняет операции (КЛИЕНТ, СОТРУДНИК)
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         slaFeatureController = apiController.getSlaFeatureController();
@@ -54,17 +53,6 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @AfterClass(alwaysRun = false)
-    public void afterClass() {
-
-//        udf = refreshUdf();
-//        udf.setUdfList(generateUdfList(UDF_SDFEATURE_CANCELREASON, CLIENTIGNOREANL));
-//        slaTask.refreshUdf(udf);
-//        slaFeatureController.performCommonOperation(slaTask, REMOVE_REQUEST);
-//        ApiAsserts.assertThat(slaFeatureController.getResponse())
-//                .isCorrectResponseCode(HTTP_OK)
-//                .isParseableBody(SlaResponseBody.class);
-    }
 
     @Test(groups = {"SlaFeature", "Regression"}, description = "get запрос", dependsOnMethods = "msgSlaFeatureCat")
     @Description("Test description: Receive task")
@@ -76,17 +64,6 @@ public class SlaFeature1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    //    @Test(groups = {"SlaFeature", "Regression"},priority = 1)
-//    @Description("Test description: Perform operation to change author")
-//    public void commonOperation() {
-//        udf = refreshUdf();
-//        udf.setUdfUser(generateUdfUser(UDF_SD_AUTHORCLIENT_MSG));
-//        slaTask.setUdfs(udf);
-//        slaFeatureController.performCommonOperation(slaTask, CHANGE_AUTHOR);
-//        ApiAsserts.assertThat(slaFeatureController.getResponse())
-//                .isCorrectResponseCode(HTTP_OK)
-//                .isParseableBody(SlaResponseBody.class);
-//    }
 
     @Test(groups = {"SlaFeature", "Regression"}, description = "Начать предварительную оценку", dependsOnMethods = "receiveTask")
     @Description("Начать предварительную оценку")

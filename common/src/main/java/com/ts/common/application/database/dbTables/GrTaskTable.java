@@ -24,6 +24,12 @@ public class GrTaskTable extends AbstractDbTable {
         return super.getEntityWhere(GrTaskDbEntity.class, "task_number", number);
     }
 
+    public BaseEntity receiveRandomTaskByQuery(String query) {
+        BaseEntity entityWhere = super.getRandomEntity(GrTaskDbEntity.class, query);
+        log.warn("Found following task with number {} from Database", entityWhere.receiveTaskNumber());
+        return entityWhere;
+    }
+
     public BaseEntity receiveRandomTask(String... parameters) {
         BaseEntity entityWhere = super.getRandomEntity(GrTaskDbEntity.class, parameters);
         log.warn("Found following task with number {} from Database", entityWhere.receiveTaskNumber());

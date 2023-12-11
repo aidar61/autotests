@@ -95,7 +95,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
         udf = refreshUdf();
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
         udf.setUdfList(generateUdfList(UDF_MIS_SERVICE, UDF_MIS_SERVICE_1));
-        udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYCREATOR));
+        udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR));
         udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_ANALYSIS, YES_V2));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, 0));
 
@@ -313,7 +313,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, expectedControllerUser));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, ANALYZE.value));
         task.refreshUdf(udf);
-        workTaskController.performCommonOperation(task, WORKTASK_SUPERVISE);
+        workTaskController.performCommonOperation(task, SUPERVISE);
 
         ApiAsserts.assertThat(workTaskController.getResponse())
                 .isCorrectResponseCode(HTTP_OK).isParseableBody(TaskResponseBody.class);
@@ -366,7 +366,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
 
         apiController.receiveTask(task.getNumber());
         CommonAssert.assertThat(apiController.getResponse())
-                .isCorrectUdfList(UDF_MIS_SERVICE, new com.ts.common.entitites.commonEntities.List(expectedListValue.getId()));
+                .isCorrectUdfList(UDF_MIS_SERVICE, expectedListValue.getId());
     }
 
     @Test(groups = {"WorkTask", "Regression"}

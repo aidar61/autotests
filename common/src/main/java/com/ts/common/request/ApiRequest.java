@@ -62,7 +62,7 @@ public abstract class ApiRequest {
         }));
     }
 
-    public static String getEndpoint(String... args) {
+    public static String  getEndpoint(String... args) {
         StringBuilder endpoint = new StringBuilder();
         for (String arg : args)
             endpoint.append(arg).append(SLASH);

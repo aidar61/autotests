@@ -35,5 +35,4 @@ public class SdHelpController extends BaseController {
             sdHelpTask.setFinishStatus(taskResponseBody.getFinishStatus());
         }
     }
-
 }

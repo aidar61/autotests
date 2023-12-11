@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_work_task.dev_task_acceptance;
+package com.ts.integration.tests.proc_work_task.dev_task.dev_task_acceptance;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
@@ -44,9 +44,6 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
     private GrTaskTable grTaskTable;
     private GrTaskDbEntity parentTaskFromDb;
     private String expectedCompletionDate;
-    private String expectedCompletionDate2;
-    private String expectedCompletionDate3;
-    private String plannedStartDate;
     private UdfTask sdRequestTask;
     private User creator;
     private User handlerUser;
@@ -71,7 +68,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         cdpBl = devTaskController.getCdpBl();
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
         sdRequestTask = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
-        misService = devTaskController.getMisService();
+        misService = devTaskController.getMisService().get(0);;
         var taskEmployees = userController.receiveUserByTask(parent.getNumber());
         creator = userController.receiveUserByRole(taskEmployees, "Менеджер проекта", "root").getForUser();
         handlerUser = userController.receiveUserByRole(taskEmployees, "Участник проекта", creator.getLogin()).getForUser();
@@ -94,11 +91,10 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         }
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
-        udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYCREATOR));
+        udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, 1));
-        udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, "hg:apng:default [Аnalitic platform new generation]"));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
-        udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_NO));
+        udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF));
         udf.setFourthUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, GENERAL, "{\"username\":\"babdullayev\",\"name\":\"Абдуллаев Баходир\"}"));
         udf.setThirdUdfString(generateUdfString(UDF_WORKTASK_ANNOTATION, generateString()));
         udf.setFifthUdfList(generateUdfList(UDF_WORKTASK_CHANGEWORKERINRQST, YES_AND_LEAVE_THIS_ROLE_TO_THE_CURRENT_PERFORMER));

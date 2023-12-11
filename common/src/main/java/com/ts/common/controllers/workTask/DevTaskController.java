@@ -13,6 +13,7 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
@@ -57,18 +58,17 @@ public class DevTaskController extends BaseController {
         return returnTasks;
     }
 
-    public String getMisService() {
-        var misService = new JsonPath(parentDetailInString).getObject("udfs.UDF_MIS_SERVICE", UdfList.class);
-        if (misService != null) {
-            if (misService.getListValue() != null && misService.getListValue().length > 0) {
-                return misService.getListValue()[0].getId();
-            }
-            if (misService.getListValueSelector() != null && misService.getListValueSelector().length > 0) {
-                return misService.getListValueSelector()[0].getId();
-            }
-        }
+    public String getBDKUTaskName() {
+        return new JsonPath(parentDetailInString).getString("udfs.UDF_BDKU_CONFIGURATION.taskValue[0].shortname");
+    }
 
-        return null;
+    public List<String> getMisService() {
+        var misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValue.id", String.class);
+        if (misServiceListValue.size() > 0) {
+            return misServiceListValue;
+        }
+        misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValueSelector.id", String.class);
+        return misServiceListValue;
     }
 
     public String getCdpBl() {

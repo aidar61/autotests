@@ -4,7 +4,7 @@ package com.ts.common.enums;
 public enum Operations {
 
     CAT("CAT_%S"),
-
+    CANCEL_BUG("%S_CANCELBUG"),
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
     CHANGE("%S_CHANGE"), // изменить аттрибуты решения
     COMMENT("%S_COMMENT"), // коментарий
@@ -58,6 +58,7 @@ public enum Operations {
     START("%S_START"), // Передать в разработку
     ACCEPT_IN_WORK("%S_ACCEPTINWORK"), // Передать в разработку
     CHANGE_TIME("%S_CHANGETIME"), // Перепланировать
+    REJECT_REPLAN("%S_REJECTREPLAN"), // Отклонить запрос перепланирования
     HOTFIX("%S_HOTFIX"), // Предоставить решение
     PASS_TO_REALIZE("%S_PASSTOREALIZE"), // передать на реализацию
     RETURN("%S_RETURN"), // Вернуть в работу
@@ -94,13 +95,39 @@ public enum Operations {
     WORKTASK_CHANGETESTPLAN("%S_CHANGETESTPLAN"), // BAN
     WORKTASK_FINISHDEV("%S_FINISHDEV"), // закончить разработку
     WORKTASK_FINISHACCEPT("%S_FINISHACCEPT"), // закончить приёмку
-    WORKTASK_SUPERVISE("%S_SUPERVISE"), //
+    SUPERVISE("%S_SUPERVISE"), //
     WORKTASK_CHANGEPRGAREA("%S_CHANGEPRGAREA"), //  Связь с ККПО
     ADVICE_ALLOWKPO("%S_ALLOWKPO"), //  Санкционировать привязку КПО
     REMOVE_REQUEST("%S_REMOVEREQUEST"), // снять запрос
     WORKTASK_BINDERRORTASK("%S_BINDERRORTASK"), // снять запрос
     WORKTASK_CREATESUBTASKS("%S_CREATESUBTASKS"), //
     WORKTASK_GENUSE("%S_GENUSE"), //
+    APPOINTCLIWATCHER("%S_APPOINTCLIWATCHER"), //
+    ANSWER("%S_ANSWER"), //
+    ASKMORE("%S_ASKMORE"), //
+    PRIVATECOMMENT("%S_PRIVATECOMMENT"), //
+    SDQUESTION_ASSIGN("%S_ASSIGN"), //MSG_SDQUESTION_ASSIGN
+    CHANGE_MEMBERS("%S_CHANGEMEMBERS"), //
+    CHNGTASKAL_LOCATION("%S_CHNGTASKALLOCATION"), //
+    CHANGE_WAY_CODE_REVIEW("%S_CHANGEWAYCODEREVIEW"), //
+    CHANGE_COMPLEXITY_LEV("%S_CHANGECOMPLEXITYLEV"), //
+    CHANGE_CAT_TO_BUG_TASK("%S_CHANGECATTOBUGTASK"), //
+    CHANGE_CAT_TO_TECH_TASK("%S_CHANGECATTTOTECHTAS"), //
+    CHANGE_CHANGE_SEVERITY("%S_CHANGESEVERITY"), //
+    TO_ACCEPTANCE_BUG("%S_TOACCEPTANCEBUG"),
+    ACCEPT_AND_CLOSE("%S_ACCEPTANDCLOSE"),
+    DECLINE_ACCEPT("%S_DECLINEACCEPT"),
+    FINISH_BUG("%S_FINISHBUG"),
+    EXTEND_ANALYSIS("%S_EXTENDANALYSIS"),
+    CHANGE_PLAN_TIME("%S_CHANGEPLANTIME"),
+    DECLINE_CHANGES("%S_DECLINECHANGES"),
+    RETURN_TO_REVIEW("%S_RETURNTOREVIEW"),
+    CONFIRM_CHANGES("%S_CONFIRMCHANGES"),
+    TOP_RECOST("%S_TOPRECOST"),
+    ASSIGNCANCEL("%S_ASSIGNCANCEL"),
+    CHANGE_PLAN_FD("%S_CHANGEPLANFD"), //Изменить планируемую дату начала
+    CHANGE_PLAN_TD("%S_CHANGEPLANTD"), //Изменить планируемую дату завершения
+    CHANGE_CAT("%S_CHANGECAT"), //Изменить планируемую дату завершения
 
     CHANGE_SERVICE("%S_CHANGESERVICE");
 
