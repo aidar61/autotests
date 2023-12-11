@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.jsoup.Jsoup;
 
+import javax.swing.text.html.parser.Parser;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;

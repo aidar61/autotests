@@ -1,5 +1,7 @@
 package com.ts.common.ui.driver;
 
+import com.codeborne.selenide.Configuration;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -16,8 +18,6 @@ public class Driver {
         chromeOptions.addArguments("--remote-allow-origins=*");
 
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability("enableVNC", true);
-        capabilities.setCapability("enableVideo", true);
 
         capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
 
