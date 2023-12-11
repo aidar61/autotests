@@ -7,7 +7,6 @@ import com.ts.common.ui.pages.HomePage;
 import com.ts.common.ui.pages.LoginPage;
 import com.ts.integration.tests.BaseUiTest;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.APP;
