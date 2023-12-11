@@ -31,18 +31,11 @@ public class BaseIntegrationTest extends AbstractBaseTest {
     protected UserController userController;
     protected Udfs udf;
 
-//    protected User EMPLOYEE;
-//    protected User CLIENT;
-
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
-//        log.info("test");Configuration.browserCapabilities = Driver.initBrowserCapabilities();
         this.authToken = generateAuthToken(Users.ROOT);
         apiController = new TrackStudioApiControllers(authToken);
         baseController = apiController.getBaseController();
-//        trackStudioPages = new Pages();
-//        EMPLOYEE = userController.receiveRandomEmployees(Parents.MTB).getForUser();
-//        CLIENT = userController.receiveRandomEmployees(Parents.MTB).getForUser();
         log.warn("=====================API TESTS IS STARTED=====================");
     }
 
