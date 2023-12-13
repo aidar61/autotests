@@ -1,5 +1,6 @@
 package com.ts.integration.tests.proc_sla_feature.negative;
 
+import com.ts.common.application.errors.ErrorResponseBody;
 import com.ts.common.application.errors.TrackStudioErrors;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
@@ -86,7 +87,7 @@ public class SlaFeatureNegative2Test extends BaseIntegrationTest {
         slaFeatureController.performCommonOperation(task, BEGINCOST_FINAL);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
                 .isCorrectResponseCode(HTTP_BAD_REQUEST)
-                .isParseableBody(TaskResponseBody.class)
+                .isParseableBody(ErrorResponseBody.class)
                 .isCorrectError(task, OPERATION_NOT_ALLOWED_FOR_TASK);
     }
 }

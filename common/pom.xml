@@ -35,6 +35,7 @@
             <artifactId>selenide-testng</artifactId>
             <version>${selenide.version}</version>
         </dependency>
+
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>

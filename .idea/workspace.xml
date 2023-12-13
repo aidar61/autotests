@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Sla negative scenarios, Errors">
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/cat_slafeature/CatSlaFeatureTestTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeatureBaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/ui test settings">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="feature/CatAdviceTestTemp" />
+        <entry key="$PROJECT_DIR$" value="devTask_BaseSubmitter" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,6 +65,7 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
     &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
     &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
     &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
@@ -87,7 +87,7 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.32876712&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
     &quot;settings.editor.splitter.proportion&quot;: &quot;0.39143732&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;f0a48e2334f1b84f98a2595c6f1cd1ef&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;77eb7acb45023b5c2285e592b7b52170&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -116,20 +116,7 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.SlaFeatureNegative1Test">
-    <configuration name="AppConfigProvider" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ts.common.config.AppConfigProvider" />
-      <module name="common" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.common.config.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="TestNG.UiTest">
     <configuration name="CommonWorkTaskProcessTest.createTask" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -158,23 +145,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_conv" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_conv.DevTaskConvToBugTaskTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SlaFeature1Test" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_feature.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_feature" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_feature.SlaFeature1Test" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -227,6 +197,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UiTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.UiTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UiTest.uiLoginTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.UiTest" />
+      <option name="METHOD_NAME" value="uiLoginTest" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Unnamed" type="TestNG" nameIsGenerated="true">
       <shortenClasspath name="NONE" />
       <option name="SUITE_NAME" value="" />
@@ -245,21 +250,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.AppConfigProvider" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.SlaFeature1Test" />
+      <item itemvalue="TestNG.UiTest" />
+      <item itemvalue="TestNG.UiTest.uiLoginTest" />
       <item itemvalue="TestNG.SlaFeatureNegative1Test" />
       <item itemvalue="TestNG.CommonWorkTaskProcessTest.createTask" />
       <item itemvalue="TestNG.DevTaskConvToBugTaskTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.SlaFeatureNegative1Test" />
-        <item itemvalue="TestNG.SlaFeature1Test" />
-        <item itemvalue="TestNG.CommonWorkTaskProcessTest.createTask" />
-        <item itemvalue="Application.AppConfigProvider" />
+        <item itemvalue="TestNG.UiTest" />
+        <item itemvalue="TestNG.UiTest.uiLoginTest" />
         <item itemvalue="TestNG.DevTaskConvToBugTaskTest" />
+        <item itemvalue="TestNG.CommonWorkTaskProcessTest.createTask" />
+        <item itemvalue="TestNG.SlaFeatureNegative1Test" />
       </list>
     </recent_temporary>
   </component>
@@ -336,6 +341,9 @@
       <workItem from="1700546056838" duration="6226000" />
       <workItem from="1700557346273" duration="2482000" />
       <workItem from="1700637456864" duration="1911000" />
+      <workItem from="1701401747478" duration="1093000" />
+      <workItem from="1701406041662" duration="611000" />
+      <workItem from="1701675893855" duration="11512000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -610,7 +618,28 @@
       <option name="project" value="LOCAL" />
       <updated>1700639866963</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="feature/Sla negative scenarios, Errors">
+      <created>1701675904063</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1701675904063</updated>
+    </task>
+    <task id="LOCAL-00039" summary="feature/Sla negative scenarios, Errors">
+      <created>1701766905954</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1701766905954</updated>
+    </task>
+    <task id="LOCAL-00040" summary="feature/ui test settings">
+      <created>1702281906832</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1702281906832</updated>
+    </task>
+    <option name="localTasksCounter" value="41" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -666,7 +695,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feature/CatSanction and CatConfirmation Tests" />
     <MESSAGE value="fix/TestsSupport" />
     <MESSAGE value="feature/Dynamic Database URL" />
     <MESSAGE value="feature/CatAdvice" />
@@ -691,7 +719,8 @@
     <MESSAGE value="feature/ts-int Jenkinsfile" />
     <MESSAGE value="fix/DevTaskAcceptance" />
     <MESSAGE value="feature/Sla negative scenarios, Errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/Sla negative scenarios, Errors" />
+    <MESSAGE value="feature/ui test settings" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/ui test settings" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -750,6 +779,11 @@
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest2.java</url>
           <line>78</line>
           <option name="timeStamp" value="136" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java</url>
+          <line>347</line>
+          <option name="timeStamp" value="137" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
