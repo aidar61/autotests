@@ -25,6 +25,7 @@ public enum TaskType {
     CAT_DISTASK("DISTASK"),
     WORK_TASK("WORKTASK"),
     BUG_TASK("BUGTASK"),
+    CONTINGENT("CONTINGENT"),
 
     RELEASE("RELEASE");
 

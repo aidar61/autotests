@@ -128,6 +128,10 @@ public class BaseController extends ApiRequest {
         return this.response = super.get(getEndpoint(REST, UDF_VAL, udfSd.udfId, TASK, taskNumber, TASK, LIST, formatParameters(params)));
     }
 
+    public Response receiveTaskMessages(String taskNumber) {
+        return this.response = super.get(getEndpoint(REST, TASK, INFO, taskNumber, "messages"));
+    }
+
     public Response getBackLinks(String taskNumber) {
         return super.get(getEndpoint(REST, TASK, INFO, taskNumber, "back-links"));
     }

@@ -16,6 +16,7 @@ import com.ts.common.controllers.sdquestion.SdQuestionController;
 import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.controllers.sla.SlaFeatureController;
 import com.ts.common.controllers.sla.SlaHelpController;
+import com.ts.common.controllers.workTask.ContingentTaskController;
 import com.ts.common.controllers.workTask.DevTaskController;
 import com.ts.common.controllers.workTask.TechTaskController;
 import com.ts.common.controllers.workTask.WorkTaskController;
@@ -54,6 +55,7 @@ public class TrackStudioApiControllers {
     private CreateFromExcelTaskController createFromExcelTaskController;
     private CodeReviewController codeReviewController;
     private TechTaskController techTaskController;
+    private ContingentTaskController contingentTaskController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
@@ -75,6 +77,7 @@ public class TrackStudioApiControllers {
         this.createFromExcelTaskController = new CreateFromExcelTaskController(STAND_URL, authToken);
         this.codeReviewController = new CodeReviewController(STAND_URL, authToken);
         this.techTaskController = new TechTaskController(STAND_URL, authToken);
+        this.contingentTaskController = new ContingentTaskController(STAND_URL, authToken);
     }
 
 
@@ -142,5 +145,6 @@ public class TrackStudioApiControllers {
         this.createFromExcelTaskController.setAuthToken(authToken);
         this.sdQuestionController.setAuthToken(authToken);
         this.techTaskController.setAuthToken(authToken);
+        this.contingentTaskController.setAuthToken(authToken);
     }
 }
