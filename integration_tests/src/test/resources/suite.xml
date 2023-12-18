@@ -55,6 +55,8 @@
             <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskStaticSubmitterTest"/>
             <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskConvertToBugTaskTest"/>
             <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskConvertToDevTaskTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.contingent_task.ContingentStaticTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.contingent_task.ContingentTaskBaseTest"/>
         </classes>
     </test>
 </suite>
