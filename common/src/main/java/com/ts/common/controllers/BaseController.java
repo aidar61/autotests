@@ -18,11 +18,13 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
-import static com.ts.common.controllers.TaskRequestBody.Fields.*;
 import static com.ts.common.controllers.TaskRequestBody.Fields.ID;
 import static com.ts.common.controllers.TaskRequestBody.Fields.OPERATION;
+import static com.ts.common.controllers.TaskRequestBody.Fields.*;
 
 public class BaseController extends ApiRequest {
+    public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS};
+    public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS_AND_RESOLUTION = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS, RESOLUTION, CONFIRMED, HANDLER_USER};
     @Getter
     protected TaskType taskType;
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS = {ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
@@ -31,16 +33,21 @@ public class BaseController extends ApiRequest {
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_RESOLUTION = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, RESOLUTION};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_CONDITION = {ID, OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_USER = {OPERATION, DESCRIPTION, HANDLER_USER, ATTACHMENTS, UDFS};
-    public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS};
-    public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS_AND_RESOLUTION = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS, RESOLUTION, CONFIRMED, HANDLER_USER};
 
     public BaseController(String url, AuthToken authToken) {
         super(url, HEADERS_BASE_CONTROLLER, authToken);
     }
 
+    public void changeTaskType(TaskType taskType) {
+        this.taskType = taskType;
+    }
 
     protected Response createTask(String requestBody) {
         return super.post(getEndpoint(REST, TASK, UPDATE), requestBody);
+    }
+
+    public Response receiveContextByOperation(String operations, String taskNumber) {
+        return super.get(getEndpoint(REST, TrackStudioEndPoints.OPERATION, operations, taskNumber, "context"));
     }
 
     protected Response createTask(GeneralTask generalTask) {
@@ -69,6 +76,7 @@ public class BaseController extends ApiRequest {
     public Response receiveFinishDevForm(String taskNumber) {
         return this.response = super.get(getEndpoint(REST, TrackStudioEndPoints.OPERATION, "MSG_WORKTASK_FINISHDEV", taskNumber, "context"));
     }
+
     @Step("Получить все подзадачи, Номер задачи: {0}")
     public Response receiveAllSubTask(String taskNumber) {
         return super.get(getEndpoint(REST, TASK, INFO, taskNumber, "filter/8a8181df6e1089ea016e120b41da29d8/1/100"));
@@ -120,4 +128,17 @@ public class BaseController extends ApiRequest {
         return this.response = super.get(getEndpoint(REST, UDF_VAL, udfSd.udfId, TASK, taskNumber, TASK, LIST, formatParameters(params)));
     }
 
+    public Response receiveTaskMessages(String taskNumber) {
+        return this.response = super.get(getEndpoint(REST, TASK, INFO, taskNumber, "messages"));
+    }
+
+    public Response getBackLinks(String taskNumber) {
+        return super.get(getEndpoint(REST, TASK, INFO, taskNumber, "back-links"));
+    }
+
+    public void saveTaskStatusFromResponse(GeneralTask task) {
+        TaskResponseBody taskResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
+        assert taskResponseBody != null;
+        task.setFinishStatus(taskResponseBody.receiveStatus());
+    }
 }

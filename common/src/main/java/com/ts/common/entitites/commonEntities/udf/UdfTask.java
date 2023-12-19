@@ -3,6 +3,7 @@ package com.ts.common.entitites.commonEntities.udf;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.Task;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -19,7 +20,7 @@ import lombok.extern.slf4j.Slf4j;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UdfTask {
+public class UdfTask extends BaseEntity {
     @JsonProperty("udfid")
     String udfId;
     String type;

@@ -58,7 +58,7 @@ public class DevTaskController extends BaseController {
         return returnTasks;
     }
 
-    public String getBDKUTaskName(){
+    public String getBDKUTaskName() {
         return new JsonPath(parentDetailInString).getString("udfs.UDF_BDKU_CONFIGURATION.taskValue[0].shortname");
     }
 
@@ -67,7 +67,8 @@ public class DevTaskController extends BaseController {
         if (misServiceListValue.size() > 0) {
             return misServiceListValue;
         }
-        return new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValueSelector.id", String.class);
+        misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValueSelector.id", String.class);
+        return misServiceListValue;
     }
 
     public String getCdpBl() {
