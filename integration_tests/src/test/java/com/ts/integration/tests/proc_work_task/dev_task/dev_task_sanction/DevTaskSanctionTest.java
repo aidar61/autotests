@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_work_task.dev_task_sanction;
+package com.ts.integration.tests.proc_work_task.dev_task.dev_task_sanction;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
@@ -110,7 +110,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, 1));
         udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_BRANCH, "hg:apng:default [Аnalitic platform new generation]"));
         udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
-        udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_NO));
+        udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF));
         udf.setFourthUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, GENERAL, "{\"username\":\"babdullayev\",\"name\":\"Абдуллаев Баходир\"}"));
         udf.setThirdUdfString(generateUdfString(UDF_WORKTASK_ANNOTATION, generateString()));
         udf.setFifthUdfList(generateUdfList(UDF_WORKTASK_CHANGEWORKERINRQST, YES_AND_LEAVE_THIS_ROLE_TO_THE_CURRENT_PERFORMER));
@@ -265,7 +265,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
 
         CommonAssert.assertThat(catSanctionTasksResponse)
                 .isCorrectSubTasksStatus("CAT_SANCTION", STATUS_ADVICE_AWAIT)
-                .isCorrectSubTasksSubmitUser(handlerUser.getLogin());
+                .isCorrectSubTasksUser("submitterUser",handlerUser.getLogin());
 
         var currentTaskDetail = apiController.receiveTask(task.getNumber());
         CommonAssert

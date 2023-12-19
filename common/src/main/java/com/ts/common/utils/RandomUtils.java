@@ -40,6 +40,10 @@ public class RandomUtils {
         return faker.internet().emailAddress();
     }
 
+    public static String generatePosition() {
+        return faker.company().profession();
+    }
+
     public static int generateRandomNumberBetween(int min, int max) {
         return faker.number().numberBetween(min, max);
     }

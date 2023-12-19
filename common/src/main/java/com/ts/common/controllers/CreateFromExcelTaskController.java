@@ -45,6 +45,10 @@ public class CreateFromExcelTaskController extends BaseController {
         return result;
     }
 
+    public UdfTask getUdfProduct(){
+        return new JsonPath(parentTaskPayload).getObject("udfs.UDF_PRODUCT", UdfTask.class);
+    }
+
     public ListValueSelector getParentUdfListValueSelector(String searchTerm, Udfs.UdfSd udfType) {
         var result = new JsonPath(parentTaskPayload).getList("udfs." + udfType.udfId + ".listValueSelector", ListValueSelector.class);
         return result.stream().filter(s -> s.getName().contains(searchTerm)).findFirst().get();

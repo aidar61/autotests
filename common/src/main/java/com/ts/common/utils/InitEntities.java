@@ -6,7 +6,6 @@ import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.*;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.*;
-import org.apache.commons.lang3.tuple.Pair;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -14,7 +13,7 @@ import java.util.Map;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.MSG;
 import static com.ts.common.enums.Parents.MTB;
 import static com.ts.common.enums.Parents.RYSGAL_BANK;
-import static com.ts.common.utils.RandomUtils.*;
+import static com.ts.common.utils.RandomUtils.generateName;
 
 public class InitEntities {
     private static final String slaBugDescription = "<table border=\"1px\" cellpadding=\"0\" cellspacing=\"0\" class=\"general\">\n\t<tbody>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Дата возникновения ошибки *</th>\n\t\t\t<td data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;23.12</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Пользователь *</th>\n\t\t\t<td data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;aaskeev</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Логин *</th>\n\t\t\t<td data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Пароль *</th>\n\t\t\t<td data-nolink-after-hash=\"true\" data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Тестовая инстанция *</th>\n\t\t\t<td data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Дата операционного дня *</th>\n\t\t\t<td data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Признак \"Ошибка\" при выполнении операции *</th>\n\t\t\t<td data-required=\"true\" width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">АРМ пользователя</th>\n\t\t\t<td width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Код продукта</th>\n\t\t\t<td width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t\t<tr>\n\t\t\t<th style=\"background-color: #EBF1F5; border: 1px solid #AAAAAA; color: #808080; font-size: 11px; font-weight: normal; text-align: right;\">Дополнительно (любая информация, не попадающая под формат)</th>\n\t\t\t<td width=\"50%\">&nbsp; &nbsp; &nbsp;test</td>\n\t\t</tr>\n\t</tbody>\n</table>\n";
@@ -186,6 +185,14 @@ public class InitEntities {
                 .build();
     }
 
+    public static UdfMultiList generateUdfMultiList(Udfs.UdfSd udfSdType, String id) {
+        return UdfMultiList.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .listValue(new MultiList[]{new MultiList(id)})
+                .build();
+    }
+
     public static UdfMultiList generateUdfMultiList(Udfs.UdfSd udfSdType, List.Constants multiList) {
         return UdfMultiList.builder()
                 .udfId(udfSdType.udfId)
@@ -287,6 +294,13 @@ public class InitEntities {
                 .udfId(udfsdType.udfId)
                 .type(udfsdType.type.name())
                 .numberValue(doubleValue)
+                .build();
+    }
+    public static UdfInteger generateUdfInteger(Udfs.UdfSd udfsdType, Integer value) {
+        return UdfInteger.builder()
+                .udfId(udfsdType.udfId)
+                .type(udfsdType.type.name())
+                .numberValue(value)
                 .build();
     }
 
