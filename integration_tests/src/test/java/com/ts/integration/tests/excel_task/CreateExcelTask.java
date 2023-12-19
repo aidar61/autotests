@@ -40,7 +40,7 @@ public class CreateExcelTask extends BaseIntegrationTest {
         tasksFromExcel = ExcelService.readFromExcel(pathToFile);
     }
 
-    @Test(groups = {"EXCEL"}, description = "создание CAT_SDQUESTION")
+    @Test(groups = {"TaskGenerator"}, description = "создание CAT_SDQUESTION")
     public void createTask() {
         int j = 0;
         for (TaskFromExcelModel task1 : tasksFromExcel) {
