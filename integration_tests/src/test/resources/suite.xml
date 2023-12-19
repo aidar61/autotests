@@ -55,6 +55,7 @@
             <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskStaticSubmitterTest"/>
             <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskConvertToBugTaskTest"/>
             <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskConvertToDevTaskTest"/>
+            <class name="com.ts.integration.tests.excel_task.CreateExcelTask"/>
         </classes>
     </test>
 </suite>
