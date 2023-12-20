@@ -6,8 +6,10 @@ import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
+import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.services.models.ListValueSelector;
+import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.path.json.JsonPath;
@@ -38,7 +40,15 @@ public class CreateFromExcelTaskController extends BaseController {
     }
 
     public Response addTag(String taskNumber, Tag data) {
-        return this.response = super.post(getEndpoint(REST, TASK, TAG, taskNumber),data);
+        return this.response = super.post(getEndpoint(REST, TASK, TAG, taskNumber), data);
+    }
+
+    public Response toClientTest(GeneralTask task) {
+        task.setOperation(InitEntities.generateOperationID(TaskType.WORK_TASK, Operations.TOCLIENTTEST));
+        task.setDescription("");
+        TaskRequestBody taskRequestBody = new TaskRequestBody(task);
+        return this.response = super.performOperationWithQueryParam(task
+                , taskRequestBody.keepFields(DEFAULT_FIELDS_USER));
     }
 
     public String getParentCDP_BL(String searchTerm) {
