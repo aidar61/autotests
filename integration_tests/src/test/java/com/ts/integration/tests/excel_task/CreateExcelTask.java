@@ -27,7 +27,7 @@ import static com.ts.common.utils.InitEntities.*;
 
 public class CreateExcelTask extends BaseIntegrationTest {
     private static final String pathToFile = "src/test/resources/tasks.xlsx";
-    private static final String parentNumber = "1506459";
+    private static final String parentNumber = "1513238";
     public CreateFromExcelTaskController controller;
     private GeneralTask task;
     private List<TaskFromExcelModel> tasksFromExcel;
@@ -80,7 +80,7 @@ public class CreateExcelTask extends BaseIntegrationTest {
 
             task.setName(task1.getName());
             task.setDescription(task1.getDescription());
-            task.setParent(new Parent("818181678c8669a0018c875752c1451b", parentNumber));
+            task.setParent(new Parent("8a8181df8bf3f4ab018c018415647a33", parentNumber));
             task.setPriority(taskPriority);
             udf = refreshUdf();
             udf.setUdfList(generateUdfList(UDF_CDP_BL, cdpBl.getId()));
