@@ -136,6 +136,7 @@ public class CreateExcelTask extends BaseIntegrationTest {
         }
     }
 
+
     private void getParticipants(String parentNumber) {
         userRoles = userController.receiveUserByTask(parentNumber);
     }
