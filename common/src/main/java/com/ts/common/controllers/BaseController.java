@@ -26,7 +26,7 @@ public class BaseController extends ApiRequest {
     public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS};
     public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS_AND_RESOLUTION = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS, RESOLUTION, CONFIRMED, HANDLER_USER};
     @Getter
-    protected TaskType taskType;
+    protected TaskType  taskType;
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS = {ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_CONFIRM = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, CONFIRMED};
