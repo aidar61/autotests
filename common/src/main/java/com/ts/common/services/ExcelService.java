@@ -25,18 +25,20 @@ public class ExcelService {
                 var task = TaskFromExcelModel.builder()
                         .name(dataFormatter.formatCellValue(row.getCell(1)))
                         .description(dataFormatter.formatCellValue(row.getCell(2)))
-                        .priority(dataFormatter.formatCellValue(row.getCell(9)))
                         .creator(dataFormatter.formatCellValue(row.getCell(3)))
                         .handler(dataFormatter.formatCellValue(row.getCell(4)))
-                        .status(dataFormatter.formatCellValue(row.getCell(13)))
-                        .file(row.getCell(14).getStringCellValue())
                         .UDF_WATCHER(dataFormatter.formatCellValue(row.getCell(5)))
                         .UDF_CDP_BL(dataFormatter.formatCellValue(row.getCell(6)))
                         .UDF_SD_MODULE(dataFormatter.formatCellValue(row.getCell(7)))
                         .UDF_MIS_SERVICE(dataFormatter.formatCellValue(row.getCell(8)))
+                        .priority(dataFormatter.formatCellValue(row.getCell(9)))
                         .UDF_WORKTASK_ANALYSIS(dataFormatter.formatCellValue(row.getCell(10)))
                         .UDF_BDKU_CONFIGURATION(dataFormatter.formatCellValue(row.getCell(11)))
                         .UDF_SD_LINKEDREQUEST(dataFormatter.formatCellValue(row.getCell(12)))
+                        .clientWatcher(dataFormatter.formatCellValue(row.getCell(13)))
+                        .tag(dataFormatter.formatCellValue(row.getCell(14)))
+                        .status(dataFormatter.formatCellValue(row.getCell(15)))
+//                        .file(dataFormatter.formatCellValue(row.getCell(15)))
                         .build();
                 tasks.add(task);
             }

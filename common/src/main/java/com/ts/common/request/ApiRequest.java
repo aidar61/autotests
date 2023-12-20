@@ -28,12 +28,12 @@ public abstract class ApiRequest {
     public static final String QUESTION_MARK = "?";
     public static final String EQUAL_MARK = "=";
     public static final String AMPERSAND_MARK = "&";
+    public AuthToken authToken;
     protected Jackson2Mapper objectMapper;
     protected String url;//TODO change to URL
     protected Map<String, String> headers;
     protected RequestSpecification requestSpec;
     protected Response response;
-    public AuthToken authToken;
 
 
     public ApiRequest(String url, Map<String, String> headers, AuthToken authToken) {
@@ -49,10 +49,6 @@ public abstract class ApiRequest {
         this.requestSpec.log();
     }
 
-    @Step("Response is:")
-    public void setResponseToAllure(String response) {
-    }
-
     private static Jackson2Mapper initObjectMapper() {
         return new Jackson2Mapper(((type, charset) -> {
             com.fasterxml.jackson.databind.ObjectMapper om = new ObjectMapper().findAndRegisterModules();
@@ -62,7 +58,7 @@ public abstract class ApiRequest {
         }));
     }
 
-    public static String  getEndpoint(String... args) {
+    public static String getEndpoint(String... args) {
         StringBuilder endpoint = new StringBuilder();
         for (String arg : args)
             endpoint.append(arg).append(SLASH);
@@ -75,6 +71,10 @@ public abstract class ApiRequest {
             query.append(entry.getKey() + "=" + entry.getValue() + "&");
         }
         return query.deleteCharAt(query.length() - 1).toString();
+    }
+
+    @Step("Response is:")
+    public void setResponseToAllure(String response) {
     }
 
     public ApiRequest logResponse() {
@@ -114,8 +114,12 @@ public abstract class ApiRequest {
     public Response post(String endpoint, Object request) {
         log.info("performed POST {}", endpoint);
         log.info("Body is {}", request);
+        log.info("User is {}", authToken.getUser());
         this.response = given()
-                .spec(this.requestSpec)
+                .auth()
+                .preemptive()
+                .basic(authToken.getUser(), authToken.getPassword())
+                .spec(requestSpec)
                 .body(request, objectMapper)
                 .post(endpoint);
         logResponse();
@@ -181,6 +185,5 @@ public abstract class ApiRequest {
             return null;
         }
     }
-
 
 }
