@@ -46,6 +46,7 @@ public class TrackStudioEndPoints {
 
     public static final String AUTHORIZATION_HEADER = AUTHORIZATION;
     public static final String TASK = "task";
+    public static final String TAG = "tag";
     public static final String UPDATE = "update";
     public static final String INFO = "info";
     public static final String CREATE = "create";
