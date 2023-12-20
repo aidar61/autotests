@@ -6,7 +6,7 @@ public enum Users {
     EMPLOYEE(AppConfigProvider.getUserConfig().username(), AppConfigProvider.getUserConfig().password()),
     CLIENT(AppConfigProvider.getUserConfig().clientUsername(), AppConfigProvider.getUserConfig().password()),
     SECOND_EMPLOYEE(AppConfigProvider.getUserConfig().secondUsername(), AppConfigProvider.getUserConfig().password()),
-    ROOT("root", "password");
+    ROOT("root", AppConfigProvider.getUserConfig().password());
     public final String username;
     public final String password;
 
