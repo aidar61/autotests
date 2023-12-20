@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/ui test settings">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/excel_task/CreateExcelTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/excel_task/CreateExcelTask.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +77,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "devTask",
+    "git-widget-placeholder": "test",
     "last_opened_file_path": "/Users/aidarka61/IdeaProjects/autotests",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -116,7 +118,7 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.UiTest">
+  <component name="RunManager" selected="TestNG.CreateExcelTask.createTask">
     <configuration name="CommonWorkTaskProcessTest.createTask" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -135,6 +137,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CreateExcelTask.createTask" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.excel_task.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.excel_task" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.excel_task.CreateExcelTask" />
+      <option name="METHOD_NAME" value="createTask" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DevTaskConvToBugTaskTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -145,23 +165,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_conv" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_conv.DevTaskConvToBugTaskTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SlaFeatureNegative1Test" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_feature.negative.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_feature.negative" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative1Test" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -252,19 +255,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.CreateExcelTask.createTask" />
       <item itemvalue="TestNG.UiTest" />
       <item itemvalue="TestNG.UiTest.uiLoginTest" />
-      <item itemvalue="TestNG.SlaFeatureNegative1Test" />
       <item itemvalue="TestNG.CommonWorkTaskProcessTest.createTask" />
       <item itemvalue="TestNG.DevTaskConvToBugTaskTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.CreateExcelTask.createTask" />
         <item itemvalue="TestNG.UiTest" />
         <item itemvalue="TestNG.UiTest.uiLoginTest" />
         <item itemvalue="TestNG.DevTaskConvToBugTaskTest" />
         <item itemvalue="TestNG.CommonWorkTaskProcessTest.createTask" />
-        <item itemvalue="TestNG.SlaFeatureNegative1Test" />
       </list>
     </recent_temporary>
   </component>
