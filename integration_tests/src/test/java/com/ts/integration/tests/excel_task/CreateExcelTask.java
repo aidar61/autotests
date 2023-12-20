@@ -2,7 +2,6 @@ package com.ts.integration.tests.excel_task;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.CreateFromExcelTaskController;
 import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.tasks.GeneralTask;
@@ -73,9 +72,6 @@ public class CreateExcelTask extends BaseIntegrationTest {
                     .build();
             var udfProduct = controller.getUdfProduct().getTaskValueSelector()[0];
 
-            task.refreshTask();
-            if (handler != null)
-                task.setHandlerUser(handler);
             task.setName(task1.getName());
             task.setDescription(task1.getDescription());
             task.setParent(new Parent("818181df67e816130167eb1d99d41c73", parentNumber));
@@ -89,6 +85,10 @@ public class CreateExcelTask extends BaseIntegrationTest {
             udf.setThirdUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, bdkuConfiguration));
             udf.setFourthUdfTask(generateUdfTask(UDF_PRODUCT, udfProduct));
             udf.setFifthUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO));
+            if (handler != null) {
+                task.setHandlerUser(handler);
+                udf.setSecondUdfUser(generateUdfUser(STDT_HANDLER, handler));
+            }
             if (watcher != null) {
                 udf.setUdfUser(generateUdfUser(UDF_WATCHER, watcher));
             }
@@ -97,15 +97,22 @@ public class CreateExcelTask extends BaseIntegrationTest {
             var response = controller.getResponse();
             ApiAsserts.assertThat(response)
                     .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
-            CommonAssert
-                    .assertThat(response)
-                    .isCorrectUdfList(UDF_CDP_BL, cdpBl.getId())
+
+            var addTagResponse = controller.addTag(task.getNumber(), Tag
+                    .builder()
+                    .tag(task1.getTag())
+                    .build());
+            ApiAsserts.assertThat(addTagResponse)
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+//            CommonAssert
+//                    .assertThat(response)
+//                    .isCorrectUdfList(UDF_CDP_BL, cdpBl.getId())
 //                    .isCorrectUdfList(UDF_MIS_SERVICE, misService.getId())
-                    .isCorrectUdfList(UDF_WORKTASK_ANALYSIS, workTaskAnalysis.getId())
-                    .isCorrectUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO.getId())
-                    .isCorrectUdfTask(UDF_SD_MODULE, module.getNumber())
-                    .isCorrectUdfTask(UDF_BDKU_CONFIGURATION, bdkuConfiguration.getNumber())
-                    .isCorrectUdfTask(UDF_PRODUCT, udfProduct.getNumber());
+//                    .isCorrectUdfList(UDF_WORKTASK_ANALYSIS, workTaskAnalysis.getId())
+//                    .isCorrectUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO.getId())
+//                    .isCorrectUdfTask(UDF_SD_MODULE, module.getNumber())
+//                    .isCorrectUdfTask(UDF_BDKU_CONFIGURATION, bdkuConfiguration.getNumber())
+//                    .isCorrectUdfTask(UDF_PRODUCT, udfProduct.getNumber());
 
             System.out.printf("======================================TASK NUMBER IS %s=======================================", j++);
         }

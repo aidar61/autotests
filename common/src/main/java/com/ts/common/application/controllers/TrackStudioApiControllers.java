@@ -102,7 +102,6 @@ public class TrackStudioApiControllers {
         return this.baseController.receiveFinishDevForm(taskNumber);
     }
 
-
     public Response receiveSubTask(String taskNumber) {
         return this.baseController.receiveActiveSubTask(taskNumber);
     }
