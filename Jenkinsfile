@@ -10,7 +10,7 @@ pipeline {
             choices: ['http://tsdev1.dev.colvir.ru/TrackStudio'
             , 'http://tsdev2.dev.colvir.ru/TrackStudio'
             , 'http://tsdev4.dev.colvir.ru/TrackStudio'
-            ,  'https://cdp.colvir.ru/TrackStudio/'],
+            ,  'https://cdp.colvir.ru/TrackStudio'],
             description: 'Number of the Stand'
         )
         choice(
