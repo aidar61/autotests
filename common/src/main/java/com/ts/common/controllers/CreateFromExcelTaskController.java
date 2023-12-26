@@ -1,7 +1,7 @@
 package com.ts.common.controllers;
 
 import com.ts.common.application.controllers.AuthToken;
-import com.ts.common.entitites.BaseEntity;
+import com.ts.common.entitites.commonEntities.Tag;
 import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
@@ -12,10 +12,8 @@ import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.assertj.core.api.Assertions;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
-import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_SD_MODULE;
 
 public class CreateFromExcelTaskController extends BaseController {
     private static final TaskType TASK_TYPE = TaskType.CAT_CFGTASK;
@@ -39,16 +37,25 @@ public class CreateFromExcelTaskController extends BaseController {
             parentTaskPayload = response.asString().replace("\\&", "\\\\&");
     }
 
+    public Response addTag(String taskNumber, Tag data) {
+        return this.response = super.post(getEndpoint(REST, TASK, TAG, taskNumber),data);
+    }
+
     public String getParentCDP_BL(String searchTerm) {
         var valueSelector = new JsonPath(parentTaskPayload).getList("udfs.UDF_CDP_BL.listValueSelector", String.class);
         var result = valueSelector.stream().filter(s -> s.contains(searchTerm)).findAny().get();
         return result;
     }
 
+    public UdfTask getUdfProduct() {
+        return new JsonPath(parentTaskPayload).getObject("udfs.UDF_PRODUCT", UdfTask.class);
+    }
+
     public ListValueSelector getParentUdfListValueSelector(String searchTerm, Udfs.UdfSd udfType) {
         var result = new JsonPath(parentTaskPayload).getList("udfs." + udfType.udfId + ".listValueSelector", ListValueSelector.class);
         return result.stream().filter(s -> s.getName().contains(searchTerm)).findFirst().get();
     }
+
     public String getParentUdfList(String searchTerm, Udfs.UdfSd udfType) {
         var result = new JsonPath(parentTaskPayload).getList("udfs." + udfType.udfId + ".listValue", ListValueSelector.class);
         return result.stream().filter(s -> s.getName().contains(searchTerm)).findFirst().get().getId();

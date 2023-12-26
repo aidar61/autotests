@@ -1,13 +1,13 @@
 package com.ts.common.services.models;
 
-
-import lombok.Getter;
-import lombok.Setter;
+import com.ts.common.entitites.commonEntities.Tag;
+import lombok.Builder;
+import lombok.Data;
 import lombok.ToString;
 
-@Setter
-@Getter
+@Data
 @ToString
+@Builder
 public class TaskFromExcelModel {
     String name;
     String description;
@@ -17,7 +17,15 @@ public class TaskFromExcelModel {
     String UDF_CDP_BL;
     String UDF_SD_MODULE;
     String UDF_MIS_SERVICE;
-    String UDF_BDKU_CONFIGURATION;
     String priority;
-    String workTaskAnalysis;
+    String UDF_WORKTASK_ANALYSIS; //Предварительный анализ
+    //    String UDF_WORKTASK_PLANFD; //Планируемая дата начала
+//    String UDF_WORKTASK_PLANTD; //Планируемая дата завершения
+//    String UDF_WORKTASK_PLANBUDGET; //Оценка трудоемко
+    String UDF_BDKU_CONFIGURATION;
+    String UDF_SD_LINKEDREQUEST;
+    String status;
+    String file;
+    String tag;
+    String clientWatcher;
 }
