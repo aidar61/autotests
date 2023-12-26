@@ -12,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.jsoup.Jsoup;
 
-import javax.swing.text.html.parser.Parser;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -268,12 +267,13 @@ public class CommonAssert {
     @Step("[ASSERT] Checking udf task type of {0} is correct, Expected: {1}")
     public CommonAssert isCorrectUdfTask(Udfs.UdfSd type, String expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfTask.class).getTaskValue();
+        var formattedActualData = Arrays.stream(actual).map(com.ts.common.entitites.commonEntities.Task::getNumber).collect(Collectors.joining("|"));
         Assertions
                 .assertThat(actual)
-                .withFailMessage("Code is not correct expected %s, actual %s", expected, actual)
+                .withFailMessage("Code is not correct expected %s, actual %s", expected, formattedActualData)
                 .anyMatch(x -> x.getNumber().equals(expected));
         log.info("Task number is correct Actual: {}, Expected: {}"
-                , Arrays.stream(actual).map(com.ts.common.entitites.commonEntities.Task::getNumber).collect(Collectors.joining("|")), expected);
+                , formattedActualData, expected);
         return this;
     }
 
