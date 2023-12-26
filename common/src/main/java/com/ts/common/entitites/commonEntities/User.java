@@ -44,6 +44,8 @@ public class User extends BaseEntity {
         ALTUNIN_NIKOLAY("818180a0550e6cfc015512ed27c13dca", "naltunin", "Алтунин Николай"),
         AKSENOV_ANDREY("818181df7ec16c9b017ed65c3d2f4401", "aaxyonov@mtbank.by", "Аксёнов Андрей"),
         ABDULLAEV_BAHODIR("818181df7edb763f017ee28d995a3ba6", "babdullayev", "Абдуллаев Баходир"),
+        FREELANCERS("818181b03d111b94013d11e324e82aac", "freelancers", "ВНЕШТАТНЫЕ СОТРУДНИКИ"),
+        KASENOVA_MARIJAN("8a8181df89d741260189decd938f2603", "m.kassenova@tengebank.uz", "Касенова Маржан Нуртаевна"),
         QA("818181df610695cb016108349b590ba8", "qa", "qa");
         public final String id;
         public final String login;

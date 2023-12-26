@@ -234,8 +234,6 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
                 .isCorrectHandlerUser(creator.getLogin())
                 .isCorrectUdfList(UDF_WORKTASK_ANALYSIS, "ff8080812f8cd356012f908c2bd8005a")//Не требуется
                 .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, 8);
-
-
     }
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskAcceptance")

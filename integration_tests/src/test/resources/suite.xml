@@ -46,15 +46,23 @@
             <class name="com.ts.integration.tests.proc_work_task.bug_task.BugTaskReplan1Test"/>
             <class name="com.ts.integration.tests.proc_work_task.bug_task.BugTaskReplan2Test"/>
             <class name="com.ts.integration.tests.proc_work_task.CommonWorkTaskProcessTest"/>
-            <class name="com.ts.integration.tests.proc_work_task.dev_task_conv.DevTaskConvToBugTaskTest"/>
-            <class name="com.ts.integration.tests.proc_work_task.dev_task_conv.DevTaskConvToTechTaskTest"/>
             <class name="com.ts.integration.tests.proc_sd_question.SdQuestionBaseTest"/>
             <class name="com.ts.integration.tests.proc_sd_question.SdQuestionBaseTest2"/>
             <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskBaseTest"/>
             <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskStaticHandlerTest"/>
             <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskStaticSubmitterTest"/>
-            <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskConvertToBugTaskTest"/>
-            <class name="com.ts.integration.tests.proc_work_task.tech_task.TechTaskConvertToDevTaskTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.conversion.tech_task.TechTaskConvertToBugTaskTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.conversion.tech_task.TechTaskConvertToDevTaskTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.conversion.dev_task.DevTaskConvertToBugTaskTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.conversion.dev_task.DevTaskConvertToTechTaskTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.conversion.admin_job.AdminJobConvertToBugTaskTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.conversion.admin_job.AdminJobConvertToChangeCatTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.conversion.admin_job.AdminJobConvertToTestTaskTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.conversion.admin_job.AdminJobConvertToTechTaskTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.conversion.bug_task.BugTaskConvertToDevTaskTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.conversion.bug_task.BugTaskConvToTechTaskTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.contingent_task.ContingentStaticTest"/>
+            <class name="com.ts.integration.tests.proc_work_task.contingent_task.ContingentTaskBaseTest"/>
         </classes>
     </test>
 </suite>
