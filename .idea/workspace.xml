@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Mass tasks">
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/dev task acceptance 2">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,15 +24,15 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/test" />
+    <option name="BRANCH" value="origin/devTask_BaseSubmitter" />
   </component>
   <component name="Git.Rebase.Settings">
-    <option name="NEW_BASE" value="origin/devTask_BaseSubmitter" />
+    <option name="NEW_BASE" value="origin/master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="devTask_BaseSubmitter" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -75,14 +75,14 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "devTask",
     "last_opened_file_path": "/Users/aidarka61/IdeaProjects/autotests",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.09375",
     "project.structure.side.proportion": "0.32876712",
     "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
@@ -116,34 +116,17 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.CreateExcelTask.createTask">
-    <configuration name="CreateExcelTask" type="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.UiTest">
+    <configuration name="CommonWorkTaskProcessTest.createTask" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.excel_task.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.excel_task" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.excel_task.CreateExcelTask" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CreateExcelTask.createTask" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.excel_task.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.excel_task" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.excel_task.CreateExcelTask" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.CommonWorkTaskProcessTest" />
       <option name="METHOD_NAME" value="createTask" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
@@ -162,6 +145,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_conv" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task_conv.DevTaskConvToBugTaskTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SlaFeatureNegative1Test" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_feature.negative.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_feature.negative" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative1Test" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -252,19 +252,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.CreateExcelTask" />
-      <item itemvalue="TestNG.CreateExcelTask.createTask" />
       <item itemvalue="TestNG.UiTest" />
       <item itemvalue="TestNG.UiTest.uiLoginTest" />
+      <item itemvalue="TestNG.SlaFeatureNegative1Test" />
+      <item itemvalue="TestNG.CommonWorkTaskProcessTest.createTask" />
       <item itemvalue="TestNG.DevTaskConvToBugTaskTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.CreateExcelTask.createTask" />
-        <item itemvalue="TestNG.CreateExcelTask" />
         <item itemvalue="TestNG.UiTest" />
         <item itemvalue="TestNG.UiTest.uiLoginTest" />
         <item itemvalue="TestNG.DevTaskConvToBugTaskTest" />
+        <item itemvalue="TestNG.CommonWorkTaskProcessTest.createTask" />
+        <item itemvalue="TestNG.SlaFeatureNegative1Test" />
       </list>
     </recent_temporary>
   </component>
@@ -344,7 +344,8 @@
       <workItem from="1701401747478" duration="1093000" />
       <workItem from="1701406041662" duration="611000" />
       <workItem from="1701675893855" duration="11512000" />
-      <workItem from="1702281996843" duration="4126000" />
+      <workItem from="1702281996843" duration="5024000" />
+      <workItem from="1702977169501" duration="372000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -647,49 +648,21 @@
       <option name="project" value="LOCAL" />
       <updated>1702282211764</updated>
     </task>
-    <task id="LOCAL-00042" summary="feature/Mass tasks">
-      <created>1703060784703</created>
+    <task id="LOCAL-00042" summary="feature/Contingent">
+      <created>1702884762702</created>
       <option name="number" value="00042" />
       <option name="presentableId" value="LOCAL-00042" />
       <option name="project" value="LOCAL" />
-      <updated>1703060784703</updated>
+      <updated>1702884762702</updated>
     </task>
-    <task id="LOCAL-00043" summary="feature/Mass tasks">
-      <created>1703063952943</created>
+    <task id="LOCAL-00043" summary="fix/dev task acceptance 2">
+      <created>1703486995770</created>
       <option name="number" value="00043" />
       <option name="presentableId" value="LOCAL-00043" />
       <option name="project" value="LOCAL" />
-      <updated>1703063952943</updated>
+      <updated>1703486995770</updated>
     </task>
-    <task id="LOCAL-00044" summary="feature/Mass tasks">
-      <created>1703067402394</created>
-      <option name="number" value="00044" />
-      <option name="presentableId" value="LOCAL-00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1703067402394</updated>
-    </task>
-    <task id="LOCAL-00045" summary="feature/Mass tasks">
-      <created>1703078717994</created>
-      <option name="number" value="00045" />
-      <option name="presentableId" value="LOCAL-00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1703078717994</updated>
-    </task>
-    <task id="LOCAL-00046" summary="feature/Mass tasks">
-      <created>1703078823389</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1703078823389</updated>
-    </task>
-    <task id="LOCAL-00047" summary="feature/Mass tasks">
-      <created>1703078924758</created>
-      <option name="number" value="00047" />
-      <option name="presentableId" value="LOCAL-00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1703078924758</updated>
-    </task>
-    <option name="localTasksCounter" value="48" />
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -745,7 +718,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feature/Dynamic Database URL" />
     <MESSAGE value="feature/CatAdvice" />
     <MESSAGE value="feature/CatDevTask 1-7 scenarios" />
     <MESSAGE value="scenariosfeature/CatDevTask 8-16" />
@@ -769,8 +741,9 @@
     <MESSAGE value="fix/DevTaskAcceptance" />
     <MESSAGE value="feature/Sla negative scenarios, Errors" />
     <MESSAGE value="feature/ui test settings" />
-    <MESSAGE value="feature/Mass tasks" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/Mass tasks" />
+    <MESSAGE value="feature/Contingent" />
+    <MESSAGE value="fix/dev task acceptance 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix/dev task acceptance 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -797,22 +770,22 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java</url>
-          <line>225</line>
+          <line>232</line>
           <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/CreateFromExcelTaskController.java</url>
-          <line>67</line>
+          <line>57</line>
           <option name="timeStamp" value="122" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/CreateFromExcelTaskController.java</url>
-          <line>62</line>
+          <line>52</line>
           <option name="timeStamp" value="126" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/CreateFromExcelTaskController.java</url>
-          <line>58</line>
+          <line>48</line>
           <option name="timeStamp" value="129" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -827,7 +800,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java</url>
-          <line>347</line>
+          <line>361</line>
           <option name="timeStamp" value="137" />
         </line-breakpoint>
       </breakpoints>

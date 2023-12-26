@@ -27,6 +27,7 @@ public enum TaskType {
     WORK_TASK("WORKTASK"),
     BUG_TASK("BUGTASK"),
     CONTINGENT("CONTINGENT"),
+    ADMINJOB("ADMINJOB"),
 
     RELEASE("RELEASE");
 
