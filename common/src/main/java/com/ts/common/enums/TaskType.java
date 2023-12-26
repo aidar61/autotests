@@ -4,6 +4,7 @@ public enum TaskType {
 
     SLA_HElP("SLAHELP"),
     CAT_CFGTASK("CFGTASK"),
+    CAT_CFG_FOLDER("CAT_CFGFOLDER"),
 
     SLA_BUG("SLABUG"),
 
@@ -26,6 +27,7 @@ public enum TaskType {
     WORK_TASK("WORKTASK"),
     BUG_TASK("BUGTASK"),
     CONTINGENT("CONTINGENT"),
+    ADMINJOB("ADMINJOB"),
 
     RELEASE("RELEASE");
 

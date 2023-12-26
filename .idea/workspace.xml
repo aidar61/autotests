@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/ui test settings">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/dev task acceptance 2">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,12 +27,12 @@
     <option name="BRANCH" value="origin/devTask_BaseSubmitter" />
   </component>
   <component name="Git.Rebase.Settings">
-    <option name="NEW_BASE" value="origin/devTask_BaseSubmitter" />
+    <option name="NEW_BASE" value="origin/master" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="devTask_BaseSubmitter" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -82,7 +82,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.09375",
     "project.structure.side.proportion": "0.32876712",
     "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
@@ -344,7 +344,8 @@
       <workItem from="1701401747478" duration="1093000" />
       <workItem from="1701406041662" duration="611000" />
       <workItem from="1701675893855" duration="11512000" />
-      <workItem from="1702281996843" duration="4126000" />
+      <workItem from="1702281996843" duration="5024000" />
+      <workItem from="1702977169501" duration="372000" />
     </task>
     <task id="LOCAL-00001" summary="fix/tests-support">
       <created>1687150315393</created>
@@ -647,7 +648,21 @@
       <option name="project" value="LOCAL" />
       <updated>1702282211764</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="feature/Contingent">
+      <created>1702884762702</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1702884762702</updated>
+    </task>
+    <task id="LOCAL-00043" summary="fix/dev task acceptance 2">
+      <created>1703486995770</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1703486995770</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -703,8 +718,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix/TestsSupport" />
-    <MESSAGE value="feature/Dynamic Database URL" />
     <MESSAGE value="feature/CatAdvice" />
     <MESSAGE value="feature/CatDevTask 1-7 scenarios" />
     <MESSAGE value="scenariosfeature/CatDevTask 8-16" />
@@ -728,7 +741,9 @@
     <MESSAGE value="fix/DevTaskAcceptance" />
     <MESSAGE value="feature/Sla negative scenarios, Errors" />
     <MESSAGE value="feature/ui test settings" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/ui test settings" />
+    <MESSAGE value="feature/Contingent" />
+    <MESSAGE value="fix/dev task acceptance 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix/dev task acceptance 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -755,7 +770,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java</url>
-          <line>225</line>
+          <line>232</line>
           <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -785,7 +800,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java</url>
-          <line>347</line>
+          <line>361</line>
           <option name="timeStamp" value="137" />
         </line-breakpoint>
       </breakpoints>

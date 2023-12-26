@@ -2,7 +2,10 @@ package com.ts.common.controllers;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.application.controllers.TrackStudioEndPoints;
+import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.entitites.commonEntities.Udfs;
+import com.ts.common.entitites.commonEntities.udf.UdfList;
+import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
@@ -11,11 +14,15 @@ import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import com.ts.common.utils.RandomUtils;
 import io.qameta.allure.Step;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.controllers.TaskRequestBody.Fields.ID;
@@ -96,8 +103,7 @@ public class BaseController extends ApiRequest {
         HashMap<String, String> params = new HashMap<>() {{
             put(ID.field, task.getId());
         }};
-        return this.response = super.post(getEndpoint(REST, TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE
-                , formatParameters(params)), requestBody);
+        return this.response = super.post(getEndpoint(REST, TrackStudioEndPoints.OPERATION, task.getNumber(), CREATE, formatParameters(params)), requestBody);
     }
 
     @Step("Выполнение общей операции: {1}")
@@ -140,5 +146,55 @@ public class BaseController extends ApiRequest {
         TaskResponseBody taskResponseBody = JsonUtils.deserialize(this.response, TaskResponseBody.class);
         assert taskResponseBody != null;
         task.setFinishStatus(taskResponseBody.receiveStatus());
+    }
+
+    public String getParentPayload(String parentNumber, String category) {
+        this.response = super.get(getEndpoint(REST, TASK, CREATE, parentNumber, category));
+        return this.response.asString().replace("\\&", "\\\\&");
+    }
+
+    public List<String> getParent_UDF_MIS_SERVICE(String parentDetailInString) {
+        var misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValue.id", String.class);
+        if (misServiceListValue.size() > 0) {
+            return misServiceListValue;
+        }
+        misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValueSelector.id", String.class);
+        return misServiceListValue;
+    }
+
+    public List<String> getParent_UDF_CDP_BL(String parentDetailInString) {
+        var misService = new JsonPath(parentDetailInString).getObject("udfs.UDF_CDP_BL", UdfList.class);
+        if (misService != null) {
+            if (misService.getListValue() != null && misService.getListValue().length > 0) {
+                return Arrays.stream(misService.getListValue()).map(com.ts.common.entitites.commonEntities.List::getId).collect(Collectors.toList());
+            }
+            if (misService.getListValueSelector() != null && misService.getListValueSelector().length > 0) {
+                return Arrays.stream(misService.getListValueSelector()).map(com.ts.common.entitites.commonEntities.List::getId).collect(Collectors.toList());
+            }
+        }
+
+        return null;
+    }
+
+    public Task[] getParent_UDF_PRODUCT(String parentDetailInString) {
+        var product = new JsonPath(parentDetailInString).getObject("udfs.UDF_PRODUCT", UdfTask.class);
+        if (product.getTaskValue() != null && product.getTaskValue().length > 1) {
+            return product.getTaskValue();
+        }
+        if (product.getTaskValueSelector() != null) {
+            return product.getTaskValueSelector();
+        }
+        throw new NullPointerException("Cannot extract UDF_PRODUCT");
+    }
+
+    public Task[] getParent_UDF_BDKU_CONFIGURATION(String parentDetailInString) {
+        var configuration = new JsonPath(parentDetailInString).getObject("udfs.UDF_BDKU_CONFIGURATION", UdfTask.class);
+        if (configuration.getTaskValue() != null && configuration.getTaskValue().length > 1) {
+            return configuration.getTaskValue();
+        }
+        if (configuration.getTaskValueSelector() != null) {
+            return configuration.getTaskValueSelector();
+        }
+        throw new NullPointerException("Cannot extract UDF_BDKU_CONFIGURATION");
     }
 }
