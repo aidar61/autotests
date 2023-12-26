@@ -277,6 +277,6 @@ public class DevTaskAcceptance2Test extends BaseIntegrationTest {
         var devTask = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(devTask)
-                .isCorrectUdfListCode(UDF_CDP_ACCEPTANCE_STATUS, "ACCEPTANCE");
+                .isCorrectUdfListCode(UDF_CDP_ACCEPTANCE_STATUS, "ACCEPTED");
     }
 }
