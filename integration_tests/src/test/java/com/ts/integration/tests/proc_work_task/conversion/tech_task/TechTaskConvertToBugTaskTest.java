@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_work_task.tech_task;
+package com.ts.integration.tests.proc_work_task.conversion.tech_task;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
@@ -95,7 +95,7 @@ public class TechTaskConvertToBugTaskTest extends BaseIntegrationTest {
 
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Создание CAT_TECHTASK")
-    public void techTask() {
+    public void createTask() {
         udf = refreshUdf();
         task.refreshTask();
         apiController.updateToken(InitEntities.generateAuthToken(creator));
@@ -135,8 +135,8 @@ public class TechTaskConvertToBugTaskTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить категорию на исправление ошибки", dependsOnMethods = "techTask")
-    public void convertToBugTask() {
+    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить категорию на исправление ошибки", dependsOnMethods = "createTask")
+    public void changeCategory() {
         udf = refreshUdf();
         task.refreshTask();
         udf.setUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO));

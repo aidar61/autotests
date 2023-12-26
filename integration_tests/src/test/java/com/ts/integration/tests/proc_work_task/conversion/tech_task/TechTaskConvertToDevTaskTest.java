@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_work_task.tech_task;
+package com.ts.integration.tests.proc_work_task.conversion.tech_task;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
@@ -94,7 +94,7 @@ public class TechTaskConvertToDevTaskTest extends BaseIntegrationTest {
 
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Создание CAT_TECHTASK")
-    public void techTask() {
+    public void createTask() {
         udf = refreshUdf();
         task.refreshTask();
         apiController.updateToken(InitEntities.generateAuthToken(creator));
@@ -134,8 +134,8 @@ public class TechTaskConvertToDevTaskTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить категорию на доработку", dependsOnMethods = "techTask")
-    public void convertToDevTask() {
+    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить категорию на доработку", dependsOnMethods = "createTask")
+    public void changeCategory() {
         udf = refreshUdf();
         task.refreshTask();
         var product = productTask.getTaskValue().length > 1 ? productTask.getTaskValue()[1] : productTask.getTaskValueSelector()[0];

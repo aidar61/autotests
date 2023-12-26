@@ -267,13 +267,13 @@ public class CommonAssert {
     @Step("[ASSERT] Checking udf task type of {0} is correct, Expected: {1}")
     public CommonAssert isCorrectUdfTask(Udfs.UdfSd type, String expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfTask.class).getTaskValue();
-        var formattedValues = Arrays.stream(actual).map(com.ts.common.entitites.commonEntities.Task::getNumber).collect(Collectors.joining("|"));
+        var formattedActualData = Arrays.stream(actual).map(com.ts.common.entitites.commonEntities.Task::getNumber).collect(Collectors.joining("|"));
         Assertions
                 .assertThat(actual)
-                .withFailMessage("%s is not correct expected %s, actual %s", type.name(), expected, formattedValues)
+                .withFailMessage("Code is not correct expected %s, actual %s", expected, formattedActualData)
                 .anyMatch(x -> x.getNumber().equals(expected));
         log.info("Task number is correct Actual: {}, Expected: {}"
-                , formattedValues, expected);
+                , formattedActualData, expected);
         return this;
     }
 
