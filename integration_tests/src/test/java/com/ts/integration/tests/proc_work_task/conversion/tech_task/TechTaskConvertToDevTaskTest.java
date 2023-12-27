@@ -140,7 +140,6 @@ public class TechTaskConvertToDevTaskTest extends BaseIntegrationTest {
         task.refreshTask();
         var product = productTask.getTaskValue().length > 1 ? productTask.getTaskValue()[1] : productTask.getTaskValueSelector()[0];
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, DateUtils.getCurrentDate(5)));
-        udf.setUdfString(generateUdfString(UDF_WORKTASK_BRANCH, "hg:arch-online:default [Онлайн архивация]"));
         udf.setUdfTask(generateUdfTask(UDF_PRODUCT, product));
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, LOCAL, "{\"username\":\"" + randomUser.getLogin() +
                 "\",\"name\":\"" + randomUser.getName() +

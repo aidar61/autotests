@@ -140,7 +140,6 @@ public class TechTaskConvertToBugTaskTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.refreshTask();
         udf.setUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO));
-        udf.setUdfString(generateUdfString(UDF_WORKTASK_BRANCH, "hg:arch-online:default [Онлайн архивация]"));
         task.refreshUdf(udf);
         techTaskController.performCommonOperation(task, CHANGE_CAT_TO_BUG_TASK);
         ApiAsserts.assertThat(techTaskController.getResponse())
