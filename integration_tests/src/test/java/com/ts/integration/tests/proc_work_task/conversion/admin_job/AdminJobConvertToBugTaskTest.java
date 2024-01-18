@@ -15,7 +15,9 @@ import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
+import javassist.NotFoundException;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -42,23 +44,22 @@ public class AdminJobConvertToBugTaskTest extends BaseIntegrationTest {
     private User handlerUser;
 
     @BeforeClass(alwaysRun = true)
-    public void beforeClass() {
+    public void beforeClass() throws NotFoundException {
         workTaskController = apiController.getWorkTaskController();
         userController = apiController.getUserController();
         grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
-                "task_category", EQUAL.operator, "CAT_GENPLAN",
-                AND.operator,
-                "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
-                AND.operator,
-                "task_path", LIKE.operator, "%/2405/758009%");
+        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_GENPLAN", AND.operator, "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(), AND.operator, "task_path", LIKE.operator, "%/2405/758009%");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
-        var parentPayload = workTaskController.getParentPayload(parent.getNumber(), "CAT_ADMINJOB");
+
+        var parentPayloadResponse = workTaskController.getParentPayload(parent.getNumber(), "CAT_ADMINJOB");
+        ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
+        MIS_SERVICE = workTaskController.getParent_UDF_MIS_SERVICE(parentPayload).get(0);
+        CDP_BL = workTaskController.getParent_UDF_CDP_BL(parentPayload).get(0);
+
         task = InitEntities.getGeneralTask(TaskType.ADMINJOB, Operations.CAT);
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
-        MIS_SERVICE = workTaskController.getParent_UDF_MIS_SERVICE(parentPayload).get(0);
-        CDP_BL = workTaskController.getParent_UDF_CDP_BL(parentPayload).get(0);
         var employees = userController.receiveUserByTask(parent.getNumber());
         creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта")).findFirst().get().getForUser();
         handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();
@@ -77,8 +78,7 @@ public class AdminJobConvertToBugTaskTest extends BaseIntegrationTest {
             udf.setSecondUdfList(generateUdfList(UDF_CDP_BL, CDP_BL));
         }
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
-        if (MIS_SERVICE != null)
-            udf.setThirdUdfList(generateUdfList(UDF_MIS_SERVICE, MIS_SERVICE));
+        if (MIS_SERVICE != null) udf.setThirdUdfList(generateUdfList(UDF_MIS_SERVICE, MIS_SERVICE));
         udf.setFourthUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR));
         udf.setFifthUdfList(generateUdfList(UDF_WORKTASK_ANALYSIS, YES_V2));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, 0));
@@ -87,12 +87,7 @@ public class AdminJobConvertToBugTaskTest extends BaseIntegrationTest {
         task.refreshUdf(udf);
         workTaskController.createAbstractWorkTask(task);
         var response = workTaskController.getResponse();
-        ApiAsserts.assertThat(response)
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask()
-                .isCorrectStatus(STATUS_WORKTASK_ONANALYSIS)
-                .isEquals(task);
+        ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Изменить категорию на исправление ошибки", dependsOnMethods = "createTask")
@@ -103,16 +98,10 @@ public class AdminJobConvertToBugTaskTest extends BaseIntegrationTest {
         udf.setUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR));
         task.refreshUdf(udf);
         workTaskController.performCommonOperation(task, CHANGE_CAT_TO_BUG_TASK);
-        ApiAsserts.assertThat(workTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask();
+        ApiAsserts.assertThat(workTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask();
 
         var taskDetail = apiController.receiveTask(task.getNumber());
-        CommonAssert
-                .assertThat(taskDetail)
-                .isCorrectTaskCategory("CAT_BUGTASK")
-                .isCorrectUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR.getId());
+        CommonAssert.assertThat(taskDetail).isCorrectTaskCategory("CAT_BUGTASK").isCorrectUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR.getId());
     }
 }
 

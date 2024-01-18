@@ -16,8 +16,8 @@ import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
-import io.restassured.path.json.JsonPath;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -37,15 +37,12 @@ import static com.ts.common.utils.RandomUtils.generateString;
 
 public class DevTaskConvertToTechTaskTest extends BaseIntegrationTest {
     public DevTaskController devTaskController;
-    java.util.List<String> branches;
     private GeneralTask task;
     private String MIS_SERVICE;
     private String CDP_BL;
     private Task[] PRODUCT;
     private Task[] BDKU_CONFIGURATION;
     private Parent parent;
-    private GrTaskTable grTaskTable;
-    private GrTaskDbEntity parentTaskFromDb;
     private UdfTask customerRequest;
     private User creator;
     private User handlerUser;
@@ -56,28 +53,24 @@ public class DevTaskConvertToTechTaskTest extends BaseIntegrationTest {
     public void beforeClass() {
         devTaskController = apiController.getDevTaskController();
         userController = apiController.getUserController();
-        grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb =
-                (GrTaskDbEntity) grTaskTable.receiveRandomTask(
-                "task_category", EQUAL.operator, "CAT_GENPLAN",
-                AND.operator,
-                "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
-                AND.operator,
-                "task_path", LIKE.operator, "%/2405/758009%");
+        GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
+        GrTaskDbEntity parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_GENPLAN", AND.operator, "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(), AND.operator, "task_path", LIKE.operator, "%/2405/758009%");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.DEV_TASK, Operations.CAT);
-        var parentPayload = devTaskController.getParentPayload(parent.getNumber(), "CAT_BUGTASK");
+
+        var parentPayloadResponse = devTaskController.getParentPayload(parent.getNumber(), "CAT_BUGTASK");
+        ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
         MIS_SERVICE = devTaskController.getParent_UDF_MIS_SERVICE(parentPayload).get(0);
         CDP_BL = devTaskController.getParent_UDF_CDP_BL(parentPayload).get(0);
         PRODUCT = devTaskController.getParent_UDF_PRODUCT(parentPayload);
         BDKU_CONFIGURATION = devTaskController.getParent_UDF_BDKU_CONFIGURATION(parentPayload);
+
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
         var employees = userController.receiveUserByTask(parent.getNumber());
         creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта")).findFirst().get().getForUser();
         handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();
-        var parentTaskPayload = apiController.receiveParentTaskPayload(parent.getNumber(), "CAT_DEVTASK").asString().replace("\\&", "\\\\&");
-        branches = new JsonPath(parentTaskPayload).getList("udfs.UDF_WORKTASK_BRANCH.stringValueSelector", String.class);
     }
 
 
@@ -112,17 +105,11 @@ public class DevTaskConvertToTechTaskTest extends BaseIntegrationTest {
         udf.setFourthUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, BDKU_CONFIGURATION[0]));
         udf.setSeventhUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES));
         udf.setFifthUdfTask(customerRequest);
-        if (MIS_SERVICE != null)
-            udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, MIS_SERVICE));
+        if (MIS_SERVICE != null) udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, MIS_SERVICE));
         task.refreshUdf(udf);
         devTaskController.createDevTask(task);
         var response = devTaskController.getResponse();
-        ApiAsserts.assertThat(response)
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask()
-                .isCorrectStatus(STATUS_WORKTASK_ONANALYSIS)
-                .isEquals(task);
+        ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
     @Test(groups = {"DevTask", "Regression"}, description = "Изменить категорию на технологическую работу", dependsOnMethods = "createTask")
@@ -132,29 +119,10 @@ public class DevTaskConvertToTechTaskTest extends BaseIntegrationTest {
         apiController.updateToken(generateAuthToken(creator));
         task.refreshUdf(udf);
         devTaskController.performCommonOperation(task, CHANGE_CAT_TO_TECH_TASK);
-        ApiAsserts.assertThat(devTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask()
-                .isCorrectStatus(STATUS_WORKTASK_ONANALYSIS);
+        ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS);
 
         var response = apiController.receiveTask(task.getNumber());
-        CommonAssert
-                .assertThat(response)
-                .isCorrectTaskCategory("CAT_TECHTASK")
-                .isCorrectSubmitterUser(creator.getLogin())
-                .isCorrectHandlerUser(handlerUser.getLogin())
-                .isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR.login)
-                .isCorrectUdfUSer(UDF_WATCHER, BABUSHKIN_IVAN.login)
-                .isCorrectUdfList(UDF_CDP_BL, CDP_BL)
-                .isCorrectUdfString(UDF_SD_NOMODULE_REASON, moduleReason)
-                .isCorrectUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES)
-                .isCorrectUdfList(UDF_MIS_SERVICE, MIS_SERVICE)
-                .isCorrectUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO.getId())
-                .isCorrectUdfList(UDF_WORKTASK_ANALYSIS, UDF_WORKTASK_ANALYSIS_YES.getId())
-                .isCorrectUdfDate(UDF_WORKTASK_ANALYSISFD, DateUtils.getCurrentDate(0))
-                .isCorrectUdfMemo(UDF_WORKTASK_ANNOTATION, workTaskAnnotation)
-                .isCorrectUdfTask(UDF_PRODUCT, PRODUCT[0].getNumber());
+        CommonAssert.assertThat(response).isCorrectTaskCategory("CAT_TECHTASK").isCorrectSubmitterUser(creator.getLogin()).isCorrectHandlerUser(handlerUser.getLogin()).isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR.login).isCorrectUdfUSer(UDF_WATCHER, BABUSHKIN_IVAN.login).isCorrectUdfList(UDF_CDP_BL, CDP_BL).isCorrectUdfString(UDF_SD_NOMODULE_REASON, moduleReason).isCorrectUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES).isCorrectUdfList(UDF_MIS_SERVICE, MIS_SERVICE).isCorrectUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO.getId()).isCorrectUdfList(UDF_WORKTASK_ANALYSIS, UDF_WORKTASK_ANALYSIS_YES.getId()).isCorrectUdfDate(UDF_WORKTASK_ANALYSISFD, DateUtils.getCurrentDate(0)).isCorrectUdfMemo(UDF_WORKTASK_ANNOTATION, workTaskAnnotation).isCorrectUdfTask(UDF_PRODUCT, PRODUCT[0].getNumber());
     }
 }
 

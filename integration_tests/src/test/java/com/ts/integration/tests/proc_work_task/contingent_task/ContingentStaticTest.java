@@ -15,8 +15,8 @@ import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
-import io.restassured.path.json.JsonPath;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -30,49 +30,45 @@ import static com.ts.common.entitites.commonEntities.Task.Constants.CORE;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.*;
 import static com.ts.common.enums.Operations.*;
-import static com.ts.common.enums.Resolutions.CANNOT_BE_COMPLETED_WITHIN_THE_SPECIFIED_TIME_FRAME;
-import static com.ts.common.enums.Resolutions.RESOLUTION_WORK_SUSPENDED_INDEFINITELY;
-import static com.ts.common.enums.TaskStatuses.*;
+import static com.ts.common.enums.TaskStatuses.STATUS_PROJECT_PLANNED;
+import static com.ts.common.enums.TaskStatuses.STATUS_WORKTASK_NEW;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.*;
 
 public class ContingentStaticTest extends BaseIntegrationTest {
     public ContingentTaskController contingentTaskController;
-    java.util.List<String> branches;
     private GeneralTask task;
-    private String misService;
-    private String misServiceForChange;
-    private String cdpBl;
     private Parent parent;
-    private GrTaskTable grTaskTable;
-    private GrTaskDbEntity parentTaskFromDb;
     private Task taskRegProject;
     private User creator;
-    private String qualification;
+    private String QUALIFICATION;
+    private String MIS_SERVICE;
+    private String MIS_SERVICE2;
+    private String CDP_BL;
 
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         contingentTaskController = apiController.getContingentTaskController();
         userController = apiController.getUserController();
-        grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_GENPLAN", AND.operator, "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(), AND.operator, "task_path", LIKE.operator, "%/2405/758009%");
+        GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
+        GrTaskDbEntity parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_GENPLAN", AND.operator, "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(), AND.operator, "task_path", LIKE.operator, "%/2405/758009%");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
-        var parentPayload = apiController.receiveParentTaskPayload(parent.getNumber(), "CAT_CONTINGENT");
-        branches = new JsonPath(parentPayload.asString()).getList("udfs.UDF_WORKTASK_BRANCH.stringValueSelector", String.class);
         task = InitEntities.getGeneralTask(TaskType.CONTINGENT, Operations.CAT);
         var taskRegProjectEntity = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_REGPROJECT");
         taskRegProject = new Task(taskRegProjectEntity.getTask_id(), taskRegProjectEntity.getTask_number());
-        misService = contingentTaskController.getMisService(parentPayload.asString()).get(0);
-        misServiceForChange = contingentTaskController.getMisService(parentPayload.asString()).get(1);
-        cdpBl = contingentTaskController.getCdpBl(parentPayload.asString());
 
-        var qualifications = new JsonPath(parentPayload.asString()).getList("udfs.UDF_WORKTASK_QUALIFICATION.listValueSelector.id", String.class);
-        qualification = qualifications.get(0);
+        var parentPayloadResponse = contingentTaskController.getParentPayload(parent.getNumber(), "CAT_CONTINGENT");
+        ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
+        MIS_SERVICE = contingentTaskController.getParent_UDF_MIS_SERVICE(parentPayload).get(0);
+        MIS_SERVICE2 = contingentTaskController.getParent_UDF_MIS_SERVICE(parentPayload).get(1);
+        CDP_BL = contingentTaskController.getParent_UDF_CDP_BL(parentPayload).get(0);
+        QUALIFICATION = contingentTaskController.getParent_WORKTASK_QUALIFICATION(parentPayload).get(0);
 
         var employees = userController.receiveUserByTask(parent.getNumber());
         Collections.shuffle(employees);
-        var creators = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта") && f.getForUser().getActive() == true).collect(Collectors.toList());
+        var creators = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта") && f.getForUser().getActive()).collect(Collectors.toList());
         creator = creators.get(0).getForUser();
     }
 
@@ -86,15 +82,15 @@ public class ContingentStaticTest extends BaseIntegrationTest {
         task.setName("Заявка на подбор персонала" + LocalDateTime.now().getNano());
         task.setDescription(task.getDescription() + generateString());
 
-        udf.setUdfList(generateUdfList(UDF_CDP_BL, cdpBl));
+        udf.setUdfList(generateUdfList(UDF_CDP_BL, CDP_BL));
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
-        if (misService != null) udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
+        if (MIS_SERVICE != null) udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, MIS_SERVICE));
         udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR));
         udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, generateRandomNumberBetween(1, 10)));
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SANCTIONER, ABDULLAEV_BAHODIR));
         udf.setSecondUdfString(generateUdfString(UDF_WORKTASK_POSITION, generatePosition()));
-        udf.setUdfMultiList(generateUdfMultiList(UDF_WORKTASK_QUALIFICATION, qualification));
+        udf.setUdfMultiList(generateUdfMultiList(UDF_WORKTASK_QUALIFICATION, QUALIFICATION));
         udf.setSecondUdfUser(generateUdfUser(UDF_WORKTASK_DEP, FREELANCERS));
         udf.setThirdUdfString(generateUdfString(UDF_WORKTASK_LINE, generateComment()));
         udf.setThirdUdfUser(generateUdfUser(UDF_WORKTASK_JOBAPPLICANT, creator));
@@ -188,7 +184,7 @@ public class ContingentStaticTest extends BaseIntegrationTest {
         task.setDescription(generateString());
         udf = refreshUdf();
         task.refreshTask();
-        udf.setUdfList(generateUdfList(UDF_MIS_SERVICE, misServiceForChange));
+        udf.setUdfList(generateUdfList(UDF_MIS_SERVICE, MIS_SERVICE2));
         task.refreshUdf(udf);
         contingentTaskController.performCommonOperation(task, CHANGE_SERVICE);
         var response = contingentTaskController.getResponse();
@@ -198,7 +194,7 @@ public class ContingentStaticTest extends BaseIntegrationTest {
         var taskDetail = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(taskDetail)
-                .isCorrectUdfList(UDF_MIS_SERVICE, misServiceForChange);
+                .isCorrectUdfList(UDF_MIS_SERVICE, MIS_SERVICE2);
     }
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "taskChangeService")

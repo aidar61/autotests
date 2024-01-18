@@ -17,6 +17,7 @@ import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -31,8 +32,9 @@ import static com.ts.common.application.database.DbQueryHelper.Operators.*;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.entitites.commonEntities.User.Constants.*;
-import static com.ts.common.enums.Operations.*;
+import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
+import static com.ts.common.entitites.commonEntities.User.Constants.BABUSHKIN_IVAN;
+import static com.ts.common.enums.Operations.EXTEND_ANALYSIS;
 import static com.ts.common.enums.TaskStatuses.STATUS_PROJECT_PLANNED;
 import static com.ts.common.enums.TaskStatuses.STATUS_WORKTASK_ONANALYSIS;
 import static com.ts.common.utils.InitEntities.*;
@@ -41,46 +43,38 @@ import static com.ts.common.utils.RandomUtils.generateString;
 public class TechTaskStaticSubmitterTest extends BaseIntegrationTest {
     public TechTaskController techTaskController;
     private GeneralTask task;
-    private String misService;
-    private String cdpBl;
-    private UdfTask productTask;
     private Parent parent;
-    private GrTaskTable grTaskTable;
-    private GrTaskDbEntity parentTaskFromDb;
     private String expectedCompletionDate;
     private UdfTask customerRequest;
     private User creator;
     private User handlerUser;
-
+    private String MIS_SERVICE;
+    private String CDP_BL;
+    private Task[] PRODUCT;
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         techTaskController = apiController.getTechTaskController();
         userController = apiController.getUserController();
-        grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
-                "task_category", EQUAL.operator, "CAT_GENPLAN",
-                AND.operator,
-                "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
-                AND.operator,
-                "task_path", LIKE.operator, "%/2405/758009%");
+        GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
+        GrTaskDbEntity parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_GENPLAN", AND.operator, "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(), AND.operator, "task_path", LIKE.operator, "%/2405/758009%");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.CAT_TECHTASK, Operations.CAT);
-        var tasks = techTaskController.getTaskForSDRequest(parent.getNumber());
-        productTask = tasks.get("UDF_PRODUCT");
-        var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
-                "task_category", EQUAL.operator, "CAT_SLABUG",
-                AND.operator,
-                "task_status", NOT_EQUAL.operator, STATUS_PROJECT_PLANNED.name());
+        var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_SLABUG", AND.operator, "task_status", NOT_EQUAL.operator, STATUS_PROJECT_PLANNED.name());
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
-        misService = techTaskController.getMisService().get(0);
-        cdpBl = techTaskController.getCdpBl();
+
+        var parentPayloadResponse = techTaskController.getParentPayload(parent.getNumber(), "CAT_TECHTASK");
+        ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
+        MIS_SERVICE = techTaskController.getParent_UDF_MIS_SERVICE(parentPayload).get(0);
+        CDP_BL = techTaskController.getParent_UDF_CDP_BL(parentPayload).get(0);
+        PRODUCT = techTaskController.getParent_UDF_PRODUCT(parentPayload);
 
         //Employees
         var employees = userController.receiveUserByTask(parent.getNumber());
         Collections.shuffle(employees);
-        var creators = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта") && f.getForUser().getActive() == true).collect(Collectors.toList());
-        var handlers = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && f.getForUser().getActive() == true).collect(Collectors.toList());
+        var creators = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта") && f.getForUser().getActive()).collect(Collectors.toList());
+        var handlers = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && f.getForUser().getActive()).collect(Collectors.toList());
         creator = creators.get(0).getForUser();
         handlerUser = handlers.get(0).getForUser();
         // TODO: 29.11.2023 Check await date
@@ -99,10 +93,10 @@ public class TechTaskStaticSubmitterTest extends BaseIntegrationTest {
         expectedCompletionDate = DateUtils.getCurrentDate(1);
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR));
         udf.setSecondUdfUser(generateUdfUser(UDF_WATCHER, BABUSHKIN_IVAN));
-        if (cdpBl != null) udf.setUdfList(generateUdfList(UDF_CDP_BL, cdpBl));
+        if (CDP_BL != null) udf.setUdfList(generateUdfList(UDF_CDP_BL, CDP_BL));
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
-        if (misService != null) udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
+        if (MIS_SERVICE != null) udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, MIS_SERVICE));
         udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR));
         udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_ANALYSIS, YES_V2));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, DateUtils.getCurrentDate(0)));
@@ -115,7 +109,7 @@ public class TechTaskStaticSubmitterTest extends BaseIntegrationTest {
         dependTaskFNC.put(WORKTASK_TESTTASK, userData2);
         dependTaskFNC.put(CUSTOMER_REQUEST, userData3);
         udf.setEighthUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
-        udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
+        udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, PRODUCT[0]));
         udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF));
         udf.setSeventhUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES));
         udf.setFifthUdfTask(customerRequest);
@@ -133,19 +127,11 @@ public class TechTaskStaticSubmitterTest extends BaseIntegrationTest {
         apiController.updateToken(InitEntities.generateAuthToken(handlerUser));
         udf = refreshUdf();
         task.refreshTask();
-        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD,DateUtils.getCurrentDate(5)));
+        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, DateUtils.getCurrentDate(5)));
         task.refreshUdf(udf);
         techTaskController.performCommonOperation(task, EXTEND_ANALYSIS);
-        ApiAsserts.assertThat(techTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask();
+        ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask();
         var taskDetail = apiController.receiveTask(task.getNumber());
-        CommonAssert
-                .assertThat(taskDetail)
-                .isCorrectSubmitterUser(creator.getLogin())
-                .isCorrectHandlerUser(handlerUser.getLogin())
-                .isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR.login)
-                .isCorrectUdfUSer(UDF_WATCHER, BABUSHKIN_IVAN.login);
+        CommonAssert.assertThat(taskDetail).isCorrectSubmitterUser(creator.getLogin()).isCorrectHandlerUser(handlerUser.getLogin()).isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR.login).isCorrectUdfUSer(UDF_WATCHER, BABUSHKIN_IVAN.login);
     }
 }

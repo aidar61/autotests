@@ -7,27 +7,33 @@ import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.bug.BugTaskController;
-import com.ts.common.entitites.commonEntities.*;
+import com.ts.common.entitites.commonEntities.Parent;
+import com.ts.common.entitites.commonEntities.Status;
+import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
+import com.ts.common.entitites.tasks.Task;
 import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
 import io.restassured.path.json.JsonPath;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.List;
 
 import static com.ts.common.application.database.DbQueryHelper.Operators.*;
 import static com.ts.common.controllers.bug.BugTaskController.getFirstTask;
 import static com.ts.common.controllers.bug.BugTaskController.getLastTask;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Status.Priority.NORMAL;
-import static com.ts.common.entitites.commonEntities.Task.Constants.*;
+import static com.ts.common.entitites.commonEntities.Task.Constants.CORE;
+import static com.ts.common.entitites.commonEntities.Task.Constants.KZ_KZI;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.entitites.commonEntities.User.Constants.*;
+import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
 import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.TaskStatuses.*;
 import static com.ts.common.enums.TaskType.ADVICE;
@@ -35,19 +41,13 @@ import static com.ts.common.enums.TaskType.WORK_TASK;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateString;
 
-import com.ts.common.entitites.tasks.Task;
-
-import java.util.List;
-
 public class BugTaskAcceptanceTest extends BaseIntegrationTest {
     public BugTaskController bugTaskController;
     private GeneralTask task;
-    private String misService;
-    private String cdpBl;
-    private UdfTask productTask;
+    private String MIS_SERVICE;
+    private String CDP_BL;
+    private com.ts.common.entitites.commonEntities.Task[] PRODUCT;
     private Parent parent;
-    private GrTaskTable grTaskTable;
-    private GrTaskDbEntity parentTaskFromDb;
     private User creator;
     private User handlerUser;
     private String description;
@@ -61,8 +61,8 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
     public void beforeClass() {
         bugTaskController = apiController.getBugTaskController();
         userController = apiController.getUserController();
-        grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
+        GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
+        GrTaskDbEntity parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
                 "task_category", EQUAL.operator, "CAT_GENPLAN",
                 AND.operator,
                 "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
@@ -72,13 +72,17 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 "task_path", LIKE.operator, "%/2405/758009%");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.BUG_TASK, Operations.CAT);
-        var tasks = bugTaskController.getTaskForSDRequest(parent.getNumber());
-        productTask = tasks.get("UDF_PRODUCT");
-        misService = bugTaskController.getMisService().get(0);
-        cdpBl = bugTaskController.getCdpBl();
+
+        var parentPayloadResponse = bugTaskController.getParentPayload(parent.getNumber(), "CAT_BUGTASK");
+        ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
+        MIS_SERVICE = bugTaskController.getParent_UDF_MIS_SERVICE(parentPayload).get(0);
+        CDP_BL = bugTaskController.getParent_UDF_CDP_BL(parentPayload).get(0);
+        PRODUCT = bugTaskController.getParent_UDF_PRODUCT(parentPayload);
+
         var employees = userController.receiveUserByTask(parent.getNumber());
-        creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта")).findFirst().get().getForUser();
-        handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();
+        creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта") && f.getForUser().getActive()).findFirst().get().getForUser();
+        handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && f.getForUser().getActive() && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();
     }
 
 
@@ -136,17 +140,17 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_WORKTASK_SEVERITY, UDF_WORKTASK_SEVERITY_TRIVIAL));
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR));
-        if (cdpBl != null)
-            udf.setThirdUdfList(generateUdfList(UDF_CDP_BL, cdpBl));
+        if (CDP_BL != null)
+            udf.setThirdUdfList(generateUdfList(UDF_CDP_BL, CDP_BL));
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         moduleReason = generateString();
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, moduleReason));
-        if (misService != null)
-            udf.setFourthUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
+        if (MIS_SERVICE != null)
+            udf.setFourthUdfList(generateUdfList(UDF_MIS_SERVICE, MIS_SERVICE));
         udf.setFifthUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR));
         udf.setSixthUdfList(generateUdfList(UDF_WORKTASK_ANALYSIS, YES_V2));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, 1));
-        udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
+        udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, PRODUCT[0]));
         udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF));
         udf.setSeventhUdfTask(generateUdfTask(UDF_WORKTASK_WORK, KZ_KZI));
         task.refreshUdf(udf);
@@ -260,12 +264,12 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
         task.setPriority(Status.builder().id(NORMAL.getId()).build());
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, moduleReason));
         udf.setUdfMemo(generateUdfMemo(UDF_WORKTASK_TESTPLAN, testPlan));
-        udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
+        udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, PRODUCT[0]));
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         udf.setSeventhUdfTask(generateUdfTask(UDF_WORKTASK_WORK, KZ_KZI));
         udf.setFifthUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYCONRTOLLER));
-        if (cdpBl != null)
-            udf.setThirdUdfList(generateUdfList(UDF_CDP_BL, cdpBl));
+        if (CDP_BL != null)
+            udf.setThirdUdfList(generateUdfList(UDF_CDP_BL, CDP_BL));
         task.refreshUdf(udf);
         bugTaskController.updateBugTask(task);
         var response = bugTaskController.getResponse();
