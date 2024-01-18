@@ -13,6 +13,9 @@ public interface AppUserConfig extends Config {
     @Config.Key("password")
     String password();
 
+    @Key("passwordProd")
+    String passwordProd();
+
     @Key("clientUsername")
     String clientUsername();
 
