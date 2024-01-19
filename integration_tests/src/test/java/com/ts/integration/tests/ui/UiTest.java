@@ -9,6 +9,7 @@ import com.ts.integration.tests.BaseUiTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import static com.codeborne.selenide.Configuration.browserVersion;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.APP;
 import static com.ts.common.config.AppConfigProvider.STAND_URL;
 public class UiTest extends BaseUiTest {
