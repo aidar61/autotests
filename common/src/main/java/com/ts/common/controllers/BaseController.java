@@ -17,6 +17,7 @@ import io.qameta.allure.Step;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -29,6 +30,7 @@ import static com.ts.common.controllers.TaskRequestBody.Fields.ID;
 import static com.ts.common.controllers.TaskRequestBody.Fields.OPERATION;
 import static com.ts.common.controllers.TaskRequestBody.Fields.*;
 
+@Slf4j
 public class BaseController extends ApiRequest {
     public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS};
     public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS_AND_RESOLUTION = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS, RESOLUTION, CONFIRMED, HANDLER_USER};
@@ -148,53 +150,90 @@ public class BaseController extends ApiRequest {
         task.setFinishStatus(taskResponseBody.receiveStatus());
     }
 
-    public String getParentPayload(String parentNumber, String category) {
-        this.response = super.get(getEndpoint(REST, TASK, CREATE, parentNumber, category));
-        return this.response.asString().replace("\\&", "\\\\&");
+    public Response getParentPayload(String parentNumber, String category) {
+        try {
+            return super.get(getEndpoint(REST, TASK, CREATE, parentNumber, category));
+        } catch (Exception e) {
+            log.error("Не удалось получить данные родительской задачи {}: {}", parentNumber, e.getMessage());
+        }
+        return null;
     }
 
     public List<String> getParent_UDF_MIS_SERVICE(String parentDetailInString) {
-        var misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValue.id", String.class);
-        if (misServiceListValue.size() > 0) {
-            return misServiceListValue;
-        }
-        misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValueSelector.id", String.class);
-        return misServiceListValue;
-    }
-
-    public List<String> getParent_UDF_CDP_BL(String parentDetailInString) {
-        var misService = new JsonPath(parentDetailInString).getObject("udfs.UDF_CDP_BL", UdfList.class);
-        if (misService != null) {
-            if (misService.getListValue() != null && misService.getListValue().length > 0) {
-                return Arrays.stream(misService.getListValue()).map(com.ts.common.entitites.commonEntities.List::getId).collect(Collectors.toList());
+        try {
+            var misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValue.id", String.class);
+            if (!misServiceListValue.isEmpty()) {
+                return misServiceListValue;
             }
-            if (misService.getListValueSelector() != null && misService.getListValueSelector().length > 0) {
-                return Arrays.stream(misService.getListValueSelector()).map(com.ts.common.entitites.commonEntities.List::getId).collect(Collectors.toList());
+            misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValueSelector.id", String.class);
+            if (!misServiceListValue.isEmpty()) {
+                return misServiceListValue;
             }
+        } catch (Exception e) {
+            log.error("Не удалось получить Услугу для задачи: {}", e.getMessage());
         }
 
         return null;
     }
 
+    public List<String> getParent_UDF_CDP_BL(String parentDetailInString) {
+        try {
+            var UDF_CDP_BL = new JsonPath(parentDetailInString).getObject("udfs.UDF_CDP_BL", UdfList.class);
+            if (UDF_CDP_BL != null) {
+                if (UDF_CDP_BL.getListValue() != null && UDF_CDP_BL.getListValue().length > 0) {
+                    return Arrays.stream(UDF_CDP_BL.getListValue()).map(com.ts.common.entitites.commonEntities.List::getId).collect(Collectors.toList());
+                }
+                if (UDF_CDP_BL.getListValueSelector() != null && UDF_CDP_BL.getListValueSelector().length > 0) {
+                    return Arrays.stream(UDF_CDP_BL.getListValueSelector()).map(com.ts.common.entitites.commonEntities.List::getId).collect(Collectors.toList());
+                }
+            }
+        } catch (Exception e) {
+            log.error("Не удалось получить Направление деятельности для задачи: {}", e.getMessage());
+        }
+
+        return null;
+    }
+
+    public List<String> getParent_WORKTASK_QUALIFICATION(String parentDetailInString) {
+        try {
+            return new JsonPath(parentDetailInString).getList("udfs.UDF_WORKTASK_QUALIFICATION.listValueSelector.id", String.class);
+        } catch (Exception e) {
+            log.error("Не удалось получить Квалификацию для задачи: {}", e.getMessage());
+        }
+        return null;
+    }
+
     public Task[] getParent_UDF_PRODUCT(String parentDetailInString) {
-        var product = new JsonPath(parentDetailInString).getObject("udfs.UDF_PRODUCT", UdfTask.class);
-        if (product.getTaskValue() != null && product.getTaskValue().length > 1) {
-            return product.getTaskValue();
+        try {
+            var product = new JsonPath(parentDetailInString).getObject("udfs.UDF_PRODUCT", UdfTask.class);
+            if (product.getTaskValue() != null && product.getTaskValue().length > 1) {
+                return product.getTaskValue();
+            }
+            if (product.getTaskValueSelector() != null) {
+                return product.getTaskValueSelector();
+            }
+        } catch (Exception e) {
+            log.error("Не удалось получить Проект БДКУ для задачи: {}", e.getMessage());
         }
-        if (product.getTaskValueSelector() != null) {
-            return product.getTaskValueSelector();
-        }
-        throw new NullPointerException("Cannot extract UDF_PRODUCT");
+        return null;
     }
 
     public Task[] getParent_UDF_BDKU_CONFIGURATION(String parentDetailInString) {
-        var configuration = new JsonPath(parentDetailInString).getObject("udfs.UDF_BDKU_CONFIGURATION", UdfTask.class);
-        if (configuration.getTaskValue() != null && configuration.getTaskValue().length > 1) {
-            return configuration.getTaskValue();
+        try {
+            var configuration = new JsonPath(parentDetailInString).getObject("udfs.UDF_BDKU_CONFIGURATION", UdfTask.class);
+            if (configuration.getTaskValue() != null && configuration.getTaskValue().length > 1) {
+                return configuration.getTaskValue();
+            }
+            if (configuration.getTaskValueSelector() != null) {
+                return configuration.getTaskValueSelector();
+            }
+        } catch (Exception e) {
+            log.error("Не удалось получить Конфигурацию для задачи: {}", e.getMessage());
         }
-        if (configuration.getTaskValueSelector() != null) {
-            return configuration.getTaskValueSelector();
-        }
-        throw new NullPointerException("Cannot extract UDF_BDKU_CONFIGURATION");
+        return null;
+    }
+
+    public List<String> getBranches(String parentDetailString) {
+        return new JsonPath(parentDetailString).getList("udfs.UDF_WORKTASK_BRANCH.stringValueSelector", String.class);
     }
 }

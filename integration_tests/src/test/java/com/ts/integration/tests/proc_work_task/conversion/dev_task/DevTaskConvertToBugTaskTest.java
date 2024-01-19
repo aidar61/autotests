@@ -16,32 +16,33 @@ import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
-import io.restassured.path.json.JsonPath;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.ts.common.application.database.DbQueryHelper.Operators.*;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
-import static com.ts.common.entitites.commonEntities.Task.Constants.*;
+import static com.ts.common.entitites.commonEntities.Task.Constants.AKKREDITIVES;
+import static com.ts.common.entitites.commonEntities.Task.Constants.CORE;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.entitites.commonEntities.User.Constants.*;
-import static com.ts.common.enums.Operations.*;
-import static com.ts.common.enums.TaskStatuses.*;
+import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
+import static com.ts.common.entitites.commonEntities.User.Constants.BABUSHKIN_IVAN;
+import static com.ts.common.enums.Operations.CHANGE_CAT_TO_BUG_TASK;
+import static com.ts.common.enums.TaskStatuses.STATUS_PROJECT_PLANNED;
+import static com.ts.common.enums.TaskStatuses.STATUS_WORKTASK_ONANALYSIS;
 import static com.ts.common.utils.InitEntities.*;
-import static com.ts.common.utils.RandomUtils.*;
+import static com.ts.common.utils.RandomUtils.generateComment;
+import static com.ts.common.utils.RandomUtils.generateString;
 
 public class DevTaskConvertToBugTaskTest extends BaseIntegrationTest {
     public DevTaskController devTaskController;
-    java.util.List<String> branches;
     private GeneralTask task;
     private String MIS_SERVICE;
     private String CDP_BL;
     private Task[] PRODUCT;
     private Task[] BDKU_CONFIGURATION;
     private Parent parent;
-    private GrTaskTable grTaskTable;
-    private GrTaskDbEntity parentTaskFromDb;
     private UdfTask customerRequest;
     private User creator;
     private User handlerUser;
@@ -52,28 +53,29 @@ public class DevTaskConvertToBugTaskTest extends BaseIntegrationTest {
     public void beforeClass() {
         devTaskController = apiController.getDevTaskController();
         userController = apiController.getUserController();
-        grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb =
-                (GrTaskDbEntity) grTaskTable.receiveRandomTask(
-                        "task_category", EQUAL.operator, "CAT_GENPLAN",
-                        AND.operator,
-                        "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
-                        AND.operator,
-                        "task_path", LIKE.operator, "%/2405/758009%");
+        GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
+        GrTaskDbEntity parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
+                "task_category", EQUAL.operator, "CAT_GENPLAN",
+                AND.operator,
+                "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
+                AND.operator,
+                "task_path", LIKE.operator, "%/2405/758009%");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.DEV_TASK, Operations.CAT);
-        var parentPayload = devTaskController.getParentPayload(parent.getNumber(), "CAT_BUGTASK");
+
+        var parentPayloadResponse = devTaskController.getParentPayload(parent.getNumber(), "CAT_BUGTASK");
+        ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
         MIS_SERVICE = devTaskController.getParent_UDF_MIS_SERVICE(parentPayload).get(0);
         CDP_BL = devTaskController.getParent_UDF_CDP_BL(parentPayload).get(0);
         PRODUCT = devTaskController.getParent_UDF_PRODUCT(parentPayload);
         BDKU_CONFIGURATION = devTaskController.getParent_UDF_BDKU_CONFIGURATION(parentPayload);
+
         var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
         var employees = userController.receiveUserByTask(parent.getNumber());
-        creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта")).findFirst().get().getForUser();
-        handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();
-        var parentTaskPayload = apiController.receiveParentTaskPayload(parent.getNumber(), "CAT_DEVTASK").asString().replace("\\&", "\\\\&");
-        branches = new JsonPath(parentTaskPayload).getList("udfs.UDF_WORKTASK_BRANCH.stringValueSelector", String.class);
+        creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта") && f.getForUser().getActive()).findFirst().get().getForUser();
+        handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && f.getForUser().getActive() && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();
     }
 
 

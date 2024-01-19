@@ -17,6 +17,7 @@ import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -42,52 +43,43 @@ import static com.ts.common.utils.RandomUtils.generateString;
 public class TechTaskConvertToDevTaskTest extends BaseIntegrationTest {
     public TechTaskController techTaskController;
     private GeneralTask task;
-    private String misService;
-    private String cdpBl;
-    private UdfTask productTask;
     private Parent parent;
-    private GrTaskTable grTaskTable;
-    private GrTaskDbEntity parentTaskFromDb;
     private String expectedCompletionDate;
     private UdfTask customerRequest;
     private User creator;
     private User handlerUser;
     private User randomUser;
-    private Map<String, UdfTask> tasks;
+    private String MIS_SERVICE;
+    private String CDP_BL;
+    private Task[] PRODUCT;
 
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         techTaskController = apiController.getTechTaskController();
         userController = apiController.getUserController();
-        grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
-                "task_category", EQUAL.operator, "CAT_GENPLAN",
-                AND.operator,
-                "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
-                AND.operator,
-                "task_path", LIKE.operator, "%/2405/758009%");
+        GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
+        GrTaskDbEntity parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_GENPLAN", AND.operator, "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(), AND.operator, "task_path", LIKE.operator, "%/2405/758009%");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.CAT_TECHTASK, Operations.CAT);
-        tasks = techTaskController.getTaskForSDRequest(parent.getNumber());
-        productTask = tasks.get("UDF_PRODUCT");
-        var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
-                "task_category", EQUAL.operator, "CAT_SLABUG",
-                AND.operator,
-                "task_status", NOT_EQUAL.operator, STATUS_PROJECT_PLANNED.name());
+        var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_SLABUG", AND.operator, "task_status", NOT_EQUAL.operator, STATUS_PROJECT_PLANNED.name());
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
-        misService = techTaskController.getMisService().get(0);
-        cdpBl = techTaskController.getCdpBl();
+
+        var parentPayloadResponse = techTaskController.getParentPayload(parent.getNumber(), "CAT_TECHTASK");
+        ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
+        MIS_SERVICE = techTaskController.getParent_UDF_MIS_SERVICE(parentPayload).get(0);
+        CDP_BL = techTaskController.getParent_UDF_CDP_BL(parentPayload).get(0);
+        PRODUCT = techTaskController.getParent_UDF_PRODUCT(parentPayload);
 
         //Employees
         var employees = userController.receiveUserByTask(parent.getNumber());
         Collections.shuffle(employees);
-        var creators = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта") && f.getForUser().getActive() == true).collect(Collectors.toList());
-        var handlers = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && f.getForUser().getActive() == true).collect(Collectors.toList());
+        var creators = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта") && f.getForUser().getActive()).collect(Collectors.toList());
+        var handlers = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && f.getForUser().getActive()).collect(Collectors.toList());
         creator = creators.get(0).getForUser();
         handlerUser = handlers.get(0).getForUser();
         randomUser = handlers.get(1).getForUser();
-
 
         // TODO: 29.11.2023 Check await date
     }
@@ -105,10 +97,10 @@ public class TechTaskConvertToDevTaskTest extends BaseIntegrationTest {
         expectedCompletionDate = DateUtils.getCurrentDate(1);
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR));
         udf.setSecondUdfUser(generateUdfUser(UDF_WATCHER, BABUSHKIN_IVAN));
-        if (cdpBl != null) udf.setUdfList(generateUdfList(UDF_CDP_BL, cdpBl));
+        if (CDP_BL != null) udf.setUdfList(generateUdfList(UDF_CDP_BL, CDP_BL));
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
-        if (misService != null) udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
+        if (MIS_SERVICE != null) udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, MIS_SERVICE));
         udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR));
         udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_ANALYSIS, YES_V2));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, DateUtils.getCurrentDate(0)));
@@ -121,7 +113,7 @@ public class TechTaskConvertToDevTaskTest extends BaseIntegrationTest {
         dependTaskFNC.put(WORKTASK_TESTTASK, userData2);
         dependTaskFNC.put(CUSTOMER_REQUEST, userData3);
         udf.setEighthUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
-        udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
+        udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, PRODUCT[0]));
         udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF));
         udf.setSeventhUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES));
         udf.setFifthUdfTask(customerRequest);
@@ -138,28 +130,15 @@ public class TechTaskConvertToDevTaskTest extends BaseIntegrationTest {
     public void changeCategory() {
         udf = refreshUdf();
         task.refreshTask();
-        var product = productTask.getTaskValue().length > 1 ? productTask.getTaskValue()[1] : productTask.getTaskValueSelector()[0];
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, DateUtils.getCurrentDate(5)));
-        udf.setUdfString(generateUdfString(UDF_WORKTASK_BRANCH, "hg:arch-online:default [Онлайн архивация]"));
-        udf.setUdfTask(generateUdfTask(UDF_PRODUCT, product));
-        udf.setUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, LOCAL, "{\"username\":\"" + randomUser.getLogin() +
-                "\",\"name\":\"" + randomUser.getName() +
-                "\"}"));
-        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"818181698c1b5016018c243d9a134ca4\",\"name\":\"Предварительный анализ\",\"order\":0,\"" + task.getId() +
-                "\":\"818181698c1b5016018c243d8daf4c79\",\"weight\":0,\"budget\":7200,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":" +
-                "\"402881c2516c220101516c711ff80024\",\"workTypeNorm\":2.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeDraftAsString\"" +
-                ":\"-\",\"workTypeAsString\":\"[0701] Иное\",\"draftChanged\":true}]"));
+        udf.setUdfTask(generateUdfTask(UDF_PRODUCT, PRODUCT[1]));
+        udf.setUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, LOCAL, "{\"username\":\"" + randomUser.getLogin() + "\",\"name\":\"" + randomUser.getName() + "\"}"));
+        udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"818181698c1b5016018c243d9a134ca4\",\"name\":\"Предварительный анализ\",\"order\":0,\"" + task.getId() + "\":\"818181698c1b5016018c243d8daf4c79\",\"weight\":0,\"budget\":7200,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":" + "\"402881c2516c220101516c711ff80024\",\"workTypeNorm\":2.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeDraftAsString\"" + ":\"-\",\"workTypeAsString\":\"[0701] Иное\",\"draftChanged\":true}]"));
         task.refreshUdf(udf);
         techTaskController.performCommonOperation(task, CHANGE_CAT);
-        ApiAsserts.assertThat(techTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask()
-                .isCorrectStatus(STATUS_WORKTASK_ONANALYSIS);
+        ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS);
 
         var taskDetail = apiController.receiveTask(task.getNumber());
-        CommonAssert
-                .assertThat(taskDetail)
-                .isCorrectTaskCategory("CAT_DEVTASK");
+        CommonAssert.assertThat(taskDetail).isCorrectTaskCategory("CAT_DEVTASK");
     }
 }
