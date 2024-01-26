@@ -157,10 +157,12 @@ public class BaseController extends ApiRequest {
     }
 
     public Response receiveTaskMessages(String taskNumber) {
+        super.setAuthToken(new AuthToken("root", "password"));
         return this.response = super.get(getEndpoint(REST, TASK, INFO, taskNumber, "messages"));
     }
 
     public Response getBackLinks(String taskNumber) {
+        super.setAuthToken(new AuthToken("root", "password"));
         return super.get(getEndpoint(REST, TASK, INFO, taskNumber, "back-links"));
     }
 
@@ -172,6 +174,7 @@ public class BaseController extends ApiRequest {
 
     public Response getParentPayload(String parentNumber, String category) {
         try {
+            super.setAuthToken(new AuthToken("root", "password"));
             return super.get(getEndpoint(REST, TASK, CREATE, parentNumber, category));
         } catch (Exception e) {
             log.error("Не удалось получить данные родительской задачи {}: {}", parentNumber, e.getMessage());
