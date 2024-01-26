@@ -41,6 +41,9 @@ public enum Operations {
     DECLINE("%S_DECLINE"), // отклонить
     INANALYSIS("%S_INANALYSIS"), // В АНАЛИЗЕ
     UNDODECLINE("%S_UNDODECLINE"), // отменить заказ
+    INPATCH("%S_INPATCH"), // отменить заказ
+    UNDOINPATCH("%S_UNDOINPATCH"), // отменить заказ
+    SENDPATCH("%S_SENDPATCH"), // отменить заказ
     TOPRECOST("%S_TOPRECOST"),//начать предварительный анализ
     REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
     PROVIDEREQINFO("%S_PROVIDEREQINFO"), // сообщить уточнение требований
@@ -132,6 +135,8 @@ public enum Operations {
     CHANGE_PLAN_FD("%S_CHANGEPLANFD"), //Изменить планируемую дату начала
     CHANGE_PLAN_TD("%S_CHANGEPLANTD"), //Изменить планируемую дату завершения
     CHANGE_CAT("%S_CHANGECAT"), //Изменить планируемую дату завершения
+    CLOSE_WO_PATCH("%S_CLOSEWOPATCH"), //Изменить планируемую дату завершения
+    UNDO_CLOSE("%S_UNDOCLOSE"), //Изменить планируемую дату завершения
 
     CHANGE_SERVICE("%S_CHANGESERVICE");
 

@@ -1,11 +1,11 @@
-package com.ts.integration.tests.proc_sd_bug;
+package com.ts.integration.tests.proc_sd_bug.sd_bug;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.sdbug.SdDocBugController;
+import com.ts.common.controllers.sdbug.SdBugController;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.entitites.commonEntities.User;
@@ -32,8 +32,12 @@ import static com.ts.common.enums.TaskStatuses.STATUS_SDBUG_NEW;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.*;
 
-public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
-    public SdDocBugController sdDocBugController;
+public class SdBugBaseStaticTest extends BaseIntegrationTest {
+    //UDF_SD_TASK_CODE  Затрагиваемые коды задачи
+    //http://tsdev4.dev.colvir.ru/TrackStudio/rest/operation/MSG_SDBUG_CHANGEAUTHOR/1490139/context
+
+
+    public SdBugController sdBugController;
     private GeneralTask task;
     private Parent parent;
     private User CLIENT;
@@ -48,17 +52,17 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
-        sdDocBugController = apiController.getSdDocBugController();
+        sdBugController = apiController.getSdBugController();
         userController = apiController.getUserController();
         GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
         GrTaskDbEntity parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByTaskNumber("1328786");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
-        task = InitEntities.getGeneralTask(TaskType.SD_DOC_BUG, Operations.CAT);
+        task = InitEntities.getGeneralTask(TaskType.SD_BUG, Operations.CAT);
 
-        var parentPayloadResponse = sdDocBugController.getParentPayload(parent.getNumber(), "CAT_SDDOCBUG");
+        var parentPayloadResponse = sdBugController.getParentPayload(parent.getNumber(), "CAT_SDBUG");
         ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
         var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
-        BDKU_CONFIGURATION = sdDocBugController.getParent_UDF_BDKU_CONFIGURATION(parentPayload);
+        BDKU_CONFIGURATION = sdBugController.getParent_UDF_BDKU_CONFIGURATION(parentPayload);
 
         USER_ROLES = userController.receiveUserByTask(parent.getNumber());
         CLIENT = userController.receiveUserByRole(USER_ROLES, "Клиент", "root").getForUser();
@@ -74,7 +78,7 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         task.refreshTask();
         task.setParent(parent);
         task.setDescription(generateDescriptionForOperation(Operations.CAT));
-        task.setName("CAT_SDIMPROVE: " + generateComment());
+        task.setName("CAT_SDBUG: " + generateComment());
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         udf.setUdfList(generateUdfList(UDF_SDBUG_PRIORITYBUG, SDBUG_PRIORITYBUG_CRITICAL));
         udf.setUdfMemo(generateUdfMemo(UDF_SDBUG_CONSEQ, generateString()));
@@ -82,8 +86,8 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         udf.setUdfString(generateUdfString(UDF_SD_REMOTEID, generateString()));
         udf.setSecondUdfString(generateUdfString(UDF_SD_INITPERSON, generateString()));
         task.refreshUdf(udf);
-        sdDocBugController.create(task);
-        var response = sdDocBugController.getResponse();
+        sdBugController.create(task);
+        var response = sdBugController.getResponse();
         ApiAsserts
                 .assertThat(response)
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
@@ -106,9 +110,9 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         udf.setSecondUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, RANDOM_TRUST_WATCHER));
         udf.setThirdUdfUser(generateUdfUser(UDF_WATCHER, RANDOM_WATCHER));
         task.refreshUdf(udf);
-        sdDocBugController.performCommonOperation(task, ANALIZE);
+        sdBugController.performCommonOperation(task, ANALIZE);
         ApiAsserts
-                .assertThat(sdDocBugController.getResponse())
+                .assertThat(sdBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
@@ -121,9 +125,9 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         task.refreshTask();
         udf = refreshUdf();
         task.refreshUdf(udf);
-        sdDocBugController.performCommonOperation(task, CLI_COMMENT);
+        sdBugController.performCommonOperation(task, CLI_COMMENT);
         ApiAsserts
-                .assertThat(sdDocBugController.getResponse())
+                .assertThat(sdBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -134,9 +138,9 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_SDBUG_PRIORITYBUG, SDBUG_PRIORITYBUG_CRITICAL_AFTER_UPDATE));
         task.refreshUdf(udf);
-        sdDocBugController.performCommonOperation(task, CHANGE_PRIORITY);
+        sdBugController.performCommonOperation(task, CHANGE_PRIORITY);
         ApiAsserts
-                .assertThat(sdDocBugController.getResponse())
+                .assertThat(sdBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -147,9 +151,9 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.setDescription(generateDescriptionForOperation(OUR_COMMENT));
         task.refreshUdf(udf);
-        sdDocBugController.performCommonOperation(task, OUR_COMMENT);
+        sdBugController.performCommonOperation(task, OUR_COMMENT);
         ApiAsserts
-                .assertThat(sdDocBugController.getResponse())
+                .assertThat(sdBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -162,9 +166,9 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         udf.setUdfString(generateUdfString(UDF_SD_REMOTEID, generateString()));
         udf.setSecondUdfString(generateUdfString(UDF_SD_INITPERSON, generateString()));
         task.refreshUdf(udf);
-        sdDocBugController.performCommonOperation(task, CHANGE_ATTR);
+        sdBugController.performCommonOperation(task, CHANGE_ATTR);
         ApiAsserts
-                .assertThat(sdDocBugController.getResponse())
+                .assertThat(sdBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -176,9 +180,9 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         task.setDescription(generateDescriptionForOperation(ADD_CLIENT_WATCHERS));
         udf.setUdfString(generateUdfString(UDF_SD_CLIENTWATCHERS, generateEmail()));
         task.refreshUdf(udf);
-        sdDocBugController.performCommonOperation(task, ADD_CLIENT_WATCHERS);
+        sdBugController.performCommonOperation(task, ADD_CLIENT_WATCHERS);
         ApiAsserts
-                .assertThat(sdDocBugController.getResponse())
+                .assertThat(sdBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -190,9 +194,9 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         task.setDescription(generateDescriptionForOperation(CHANGE_MODULE));
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         task.refreshUdf(udf);
-        sdDocBugController.performCommonOperation(task, CHANGE_MODULE);
+        sdBugController.performCommonOperation(task, CHANGE_MODULE);
         ApiAsserts
-                .assertThat(sdDocBugController.getResponse())
+                .assertThat(sdBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -204,9 +208,9 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         task.setDescription(generateDescriptionForOperation(CHANGE_LINKED_TASKS));
         udf.setUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, SERVICE_DESK));
         task.refreshUdf(udf);
-        sdDocBugController.performCommonOperation(task, CHANGE_LINKED_TASKS);
+        sdBugController.performCommonOperation(task, CHANGE_LINKED_TASKS);
         ApiAsserts
-                .assertThat(sdDocBugController.getResponse())
+                .assertThat(sdBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -219,9 +223,9 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         task.setDescription(generateDescriptionForOperation(ADD_TRUST_WATCHER));
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, RANDOM_TRUST_WATCHER));
         task.refreshUdf(udf);
-        sdDocBugController.performCommonOperation(task, ADD_TRUST_WATCHER);
+        sdBugController.performCommonOperation(task, ADD_TRUST_WATCHER);
         ApiAsserts
-                .assertThat(sdDocBugController.getResponse())
+                .assertThat(sdBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -234,9 +238,9 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         task.setDescription(generateDescriptionForOperation(ADD_WATCHERS));
         udf.setUdfUser(generateUdfUser(UDF_WATCHER, RANDOM_WATCHER));
         task.refreshUdf(udf);
-        sdDocBugController.performCommonOperation(task, ADD_WATCHERS);
+        sdBugController.performCommonOperation(task, ADD_WATCHERS);
         ApiAsserts
-                .assertThat(sdDocBugController.getResponse())
+                .assertThat(sdBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -247,15 +251,15 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.setDescription(generateDescriptionForOperation(PRIVATE_COMMENT));
         task.refreshUdf(udf);
-        sdDocBugController.performCommonOperation(task, PRIVATE_COMMENT);
+        sdBugController.performCommonOperation(task, PRIVATE_COMMENT);
         ApiAsserts
-                .assertThat(sdDocBugController.getResponse())
+                .assertThat(sdBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Изменить автора", dependsOnMethods = "taskPrivateComment")
     public void taskChangeAuthor() {
-        var authors = sdDocBugController.receiveAuthor(task.getNumber());
+        var authors = sdBugController.receiveAuthor(task.getNumber());
         if (authors != null) {
             apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
             task.refreshTask();
@@ -263,16 +267,16 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
             task.setDescription(generateDescriptionForOperation(CHANGE_AUTHOR));
             udf.setUdfUser(generateUdfUser(UDF_SD_AUTHORCLIENT_MSG, authors.get(0)));
             task.refreshUdf(udf);
-            sdDocBugController.performCommonOperation(task, CHANGE_AUTHOR);
+            sdBugController.performCommonOperation(task, CHANGE_AUTHOR);
             ApiAsserts
-                    .assertThat(sdDocBugController.getResponse())
+                    .assertThat(sdBugController.getResponse())
                     .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
         }
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Изменить ответственного", dependsOnMethods = "taskChangeAuthor")
     public void taskReassign() {
-        var authors = sdDocBugController.receiveAuthor(task.getNumber());
+        var authors = sdBugController.receiveAuthor(task.getNumber());
         if (authors != null) {
             apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
             task.refreshTask();
@@ -283,9 +287,9 @@ public class SdDocBugBaseStaticTest extends BaseIntegrationTest {
             udf.setSecondUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, RANDOM_TRUST_WATCHER));
             udf.setThirdUdfUser(generateUdfUser(UDF_WATCHER, RANDOM_WATCHER));
             task.refreshUdf(udf);
-            sdDocBugController.performCommonOperation(task, CHANGE_RES_PERSON);
+            sdBugController.performCommonOperation(task, CHANGE_RES_PERSON);
             ApiAsserts
-                    .assertThat(sdDocBugController.getResponse())
+                    .assertThat(sdBugController.getResponse())
                     .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
         }
     }

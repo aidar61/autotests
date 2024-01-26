@@ -1,11 +1,11 @@
-package com.ts.integration.tests.proc_sd_bug;
+package com.ts.integration.tests.proc_sd_bug.sd_improve;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.sdbug.SdOptimizationController;
+import com.ts.common.controllers.sdbug.SdImproveController;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.entitites.commonEntities.User;
@@ -32,8 +32,8 @@ import static com.ts.common.enums.TaskStatuses.STATUS_SDBUG_NEW;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.*;
 
-public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
-    public SdOptimizationController sdOptimizationController;
+public class SdImproveBaseStaticTest extends BaseIntegrationTest {
+    public SdImproveController sdImproveController;
     private GeneralTask task;
     private Parent parent;
     private User CLIENT;
@@ -48,17 +48,17 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
-        sdOptimizationController = apiController.getSdOptimizationController();
+        sdImproveController = apiController.getSdImproveController();
         userController = apiController.getUserController();
         GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
         GrTaskDbEntity parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByTaskNumber("1328786");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
-        task = InitEntities.getGeneralTask(TaskType.SD_OPTIMIZATION, Operations.CAT);
+        task = InitEntities.getGeneralTask(TaskType.SD_IMPROVE, Operations.CAT);
 
-        var parentPayloadResponse = sdOptimizationController.getParentPayload(parent.getNumber(), "CAT_SDOPTIMIZATION");
+        var parentPayloadResponse = sdImproveController.getParentPayload(parent.getNumber(), "CAT_SDIMPROVE");
         ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
         var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
-        BDKU_CONFIGURATION = sdOptimizationController.getParent_UDF_BDKU_CONFIGURATION(parentPayload);
+        BDKU_CONFIGURATION = sdImproveController.getParent_UDF_BDKU_CONFIGURATION(parentPayload);
 
         USER_ROLES = userController.receiveUserByTask(parent.getNumber());
         CLIENT = userController.receiveUserByRole(USER_ROLES, "Клиент", "root").getForUser();
@@ -82,8 +82,8 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
         udf.setUdfString(generateUdfString(UDF_SD_REMOTEID, generateString()));
         udf.setSecondUdfString(generateUdfString(UDF_SD_INITPERSON, generateString()));
         task.refreshUdf(udf);
-        sdOptimizationController.create(task);
-        var response = sdOptimizationController.getResponse();
+        sdImproveController.create(task);
+        var response = sdImproveController.getResponse();
         ApiAsserts
                 .assertThat(response)
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
@@ -106,9 +106,9 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
         udf.setSecondUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, RANDOM_TRUST_WATCHER));
         udf.setThirdUdfUser(generateUdfUser(UDF_WATCHER, RANDOM_WATCHER));
         task.refreshUdf(udf);
-        sdOptimizationController.performCommonOperation(task, ANALIZE);
+        sdImproveController.performCommonOperation(task, ANALIZE);
         ApiAsserts
-                .assertThat(sdOptimizationController.getResponse())
+                .assertThat(sdImproveController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
@@ -121,9 +121,9 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
         task.refreshTask();
         udf = refreshUdf();
         task.refreshUdf(udf);
-        sdOptimizationController.performCommonOperation(task, CLI_COMMENT);
+        sdImproveController.performCommonOperation(task, CLI_COMMENT);
         ApiAsserts
-                .assertThat(sdOptimizationController.getResponse())
+                .assertThat(sdImproveController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -134,9 +134,9 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_SDBUG_PRIORITYBUG, SDBUG_PRIORITYBUG_CRITICAL_AFTER_UPDATE));
         task.refreshUdf(udf);
-        sdOptimizationController.performCommonOperation(task, CHANGE_PRIORITY);
+        sdImproveController.performCommonOperation(task, CHANGE_PRIORITY);
         ApiAsserts
-                .assertThat(sdOptimizationController.getResponse())
+                .assertThat(sdImproveController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -147,9 +147,9 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.setDescription(generateDescriptionForOperation(OUR_COMMENT));
         task.refreshUdf(udf);
-        sdOptimizationController.performCommonOperation(task, OUR_COMMENT);
+        sdImproveController.performCommonOperation(task, OUR_COMMENT);
         ApiAsserts
-                .assertThat(sdOptimizationController.getResponse())
+                .assertThat(sdImproveController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -162,9 +162,9 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
         udf.setUdfString(generateUdfString(UDF_SD_REMOTEID, generateString()));
         udf.setSecondUdfString(generateUdfString(UDF_SD_INITPERSON, generateString()));
         task.refreshUdf(udf);
-        sdOptimizationController.performCommonOperation(task, CHANGE_ATTR);
+        sdImproveController.performCommonOperation(task, CHANGE_ATTR);
         ApiAsserts
-                .assertThat(sdOptimizationController.getResponse())
+                .assertThat(sdImproveController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -176,9 +176,9 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
         task.setDescription(generateDescriptionForOperation(ADD_CLIENT_WATCHERS));
         udf.setUdfString(generateUdfString(UDF_SD_CLIENTWATCHERS, generateEmail()));
         task.refreshUdf(udf);
-        sdOptimizationController.performCommonOperation(task, ADD_CLIENT_WATCHERS);
+        sdImproveController.performCommonOperation(task, ADD_CLIENT_WATCHERS);
         ApiAsserts
-                .assertThat(sdOptimizationController.getResponse())
+                .assertThat(sdImproveController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -190,9 +190,9 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
         task.setDescription(generateDescriptionForOperation(CHANGE_MODULE));
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         task.refreshUdf(udf);
-        sdOptimizationController.performCommonOperation(task, CHANGE_MODULE);
+        sdImproveController.performCommonOperation(task, CHANGE_MODULE);
         ApiAsserts
-                .assertThat(sdOptimizationController.getResponse())
+                .assertThat(sdImproveController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -204,9 +204,9 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
         task.setDescription(generateDescriptionForOperation(CHANGE_LINKED_TASKS));
         udf.setUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, SERVICE_DESK));
         task.refreshUdf(udf);
-        sdOptimizationController.performCommonOperation(task, CHANGE_LINKED_TASKS);
+        sdImproveController.performCommonOperation(task, CHANGE_LINKED_TASKS);
         ApiAsserts
-                .assertThat(sdOptimizationController.getResponse())
+                .assertThat(sdImproveController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -219,9 +219,9 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
         task.setDescription(generateDescriptionForOperation(ADD_TRUST_WATCHER));
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, RANDOM_TRUST_WATCHER));
         task.refreshUdf(udf);
-        sdOptimizationController.performCommonOperation(task, ADD_TRUST_WATCHER);
+        sdImproveController.performCommonOperation(task, ADD_TRUST_WATCHER);
         ApiAsserts
-                .assertThat(sdOptimizationController.getResponse())
+                .assertThat(sdImproveController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -234,9 +234,9 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
         task.setDescription(generateDescriptionForOperation(ADD_WATCHERS));
         udf.setUdfUser(generateUdfUser(UDF_WATCHER, RANDOM_WATCHER));
         task.refreshUdf(udf);
-        sdOptimizationController.performCommonOperation(task, ADD_WATCHERS);
+        sdImproveController.performCommonOperation(task, ADD_WATCHERS);
         ApiAsserts
-                .assertThat(sdOptimizationController.getResponse())
+                .assertThat(sdImproveController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
@@ -247,15 +247,15 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.setDescription(generateDescriptionForOperation(PRIVATE_COMMENT));
         task.refreshUdf(udf);
-        sdOptimizationController.performCommonOperation(task, PRIVATE_COMMENT);
+        sdImproveController.performCommonOperation(task, PRIVATE_COMMENT);
         ApiAsserts
-                .assertThat(sdOptimizationController.getResponse())
+                .assertThat(sdImproveController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Изменить автора", dependsOnMethods = "taskPrivateComment")
     public void taskChangeAuthor() {
-        var authors = sdOptimizationController.receiveAuthor(task.getNumber());
+        var authors = sdImproveController.receiveAuthor(task.getNumber());
         if (authors != null) {
             apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
             task.refreshTask();
@@ -263,16 +263,16 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
             task.setDescription(generateDescriptionForOperation(CHANGE_AUTHOR));
             udf.setUdfUser(generateUdfUser(UDF_SD_AUTHORCLIENT_MSG, authors.get(0)));
             task.refreshUdf(udf);
-            sdOptimizationController.performCommonOperation(task, CHANGE_AUTHOR);
+            sdImproveController.performCommonOperation(task, CHANGE_AUTHOR);
             ApiAsserts
-                    .assertThat(sdOptimizationController.getResponse())
+                    .assertThat(sdImproveController.getResponse())
                     .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
         }
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Изменить ответственного", dependsOnMethods = "taskChangeAuthor")
     public void taskReassign() {
-        var authors = sdOptimizationController.receiveAuthor(task.getNumber());
+        var authors = sdImproveController.receiveAuthor(task.getNumber());
         if (authors != null) {
             apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
             task.refreshTask();
@@ -283,9 +283,9 @@ public class SdOptimizationBaseStaticTest extends BaseIntegrationTest {
             udf.setSecondUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, RANDOM_TRUST_WATCHER));
             udf.setThirdUdfUser(generateUdfUser(UDF_WATCHER, RANDOM_WATCHER));
             task.refreshUdf(udf);
-            sdOptimizationController.performCommonOperation(task, CHANGE_RES_PERSON);
+            sdImproveController.performCommonOperation(task, CHANGE_RES_PERSON);
             ApiAsserts
-                    .assertThat(sdOptimizationController.getResponse())
+                    .assertThat(sdImproveController.getResponse())
                     .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
         }
     }
