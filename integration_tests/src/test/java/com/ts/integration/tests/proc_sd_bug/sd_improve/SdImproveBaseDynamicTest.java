@@ -31,7 +31,7 @@ import static com.ts.common.enums.TaskStatuses.*;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.*;
 
-public class SdImporveBaseDynamicTest extends BaseIntegrationTest {
+public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
 
     public SdImproveController sdBugController;
     private GeneralTask task;
