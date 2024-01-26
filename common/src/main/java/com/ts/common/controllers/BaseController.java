@@ -2,8 +2,10 @@ package com.ts.common.controllers;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.application.controllers.TrackStudioEndPoints;
+import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.entitites.commonEntities.Udfs;
+import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.commonEntities.udf.UdfList;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
@@ -35,7 +37,7 @@ public class BaseController extends ApiRequest {
     public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS};
     public TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_STATUS_AND_RESOLUTION = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, FINISH_STATUS, RESOLUTION, CONFIRMED, HANDLER_USER};
     @Getter
-    protected TaskType  taskType;
+    protected TaskType taskType;
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS = {ID, OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITHOUT_ID = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS};
     protected TaskRequestBody.Fields[] DEFAULT_FIELDS_WITH_CONFIRM = {OPERATION, DESCRIPTION, ATTACHMENTS, UDFS, CONFIRMED};
@@ -74,6 +76,24 @@ public class BaseController extends ApiRequest {
     @Step("Получить task, Номер задачи: {0}")
     public Response receiveActualTask(String taskNumber) {
         return this.response = super.get(getEndpoint(REST, TASK, INFO, taskNumber));
+    }
+
+    @Step("Получить автора, Номер задачи: {0}")
+    public List<User> receiveAuthor(String taskNumber) {
+        try {
+            var response = super.get(getEndpoint(REST, TrackStudioEndPoints.OPERATION, "MSG_SDBUG_CHANGEAUTHOR", taskNumber, "context"));
+            if (response.getStatusCode() == TrackStudioHttpStatusCodes.HTTP_OK.getValue()) {
+                var user = new JsonPath(response.asString()).getList("udfs.UDF_SD_AUTHORCLIENT_MSG.userValueSelector", User.class);
+                if (user == null) {
+                    user = new JsonPath(response.asString()).getList("udfs.UDF_SD_AUTHORCLIENT_MSG.userValue", User.class);
+                }
+                return user;
+            }
+            return null;
+        } catch (Exception e) {
+            log.error("Не удалось получить автора для задачи {}: {}", taskNumber, e.getMessage());
+        }
+        return null;
     }
 
     @Step("Получить parent task payload, Номер задачи: {0}")
@@ -236,4 +256,6 @@ public class BaseController extends ApiRequest {
     public List<String> getBranches(String parentDetailString) {
         return new JsonPath(parentDetailString).getList("udfs.UDF_WORKTASK_BRANCH.stringValueSelector", String.class);
     }
+
+
 }

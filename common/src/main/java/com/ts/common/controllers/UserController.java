@@ -80,12 +80,15 @@ public class UserController extends ApiRequest {
     }
 
     public UserRole receiveUserByRole(List<UserRole> userRoles, String role, String login) {
+        Collections.shuffle(userRoles);
         return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(login) && f.getForUser().getActive()).findFirst().get();
     }
 
-    //    public UserRole receiveUserByRoleV1(List<UserRole> userRoles, String role, String login){
-//
-//    }
+    public UserRole receiveUserByRole(List<UserRole> userRoles, String login) {
+        Collections.shuffle(userRoles);
+        return userRoles.stream().filter(f -> !f.getForUser().getLogin().equals(login) && f.getForUser().getActive()).findAny().get();
+    }
+
     public List<UserRole> receiveUserByTask(String taskNumber) {
 
         return receiveUsersByTaskNumber(taskNumber);
