@@ -12,6 +12,7 @@ import com.ts.common.controllers.bug.BugTaskController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
 import com.ts.common.controllers.release.ReleaseModuleController;
+import com.ts.common.controllers.sdbug.*;
 import com.ts.common.controllers.sdquestion.SdQuestionController;
 import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.controllers.sla.SlaFeatureController;
@@ -56,6 +57,11 @@ public class TrackStudioApiControllers {
     private CodeReviewController codeReviewController;
     private TechTaskController techTaskController;
     private ContingentTaskController contingentTaskController;
+    private SdBugController sdBugController;
+    private SdImproveController sdImproveController;
+    private SdDocImproveController sdDocImproveController;
+    private SdDocBugController sdDocBugController;
+    private SdOptimizationController sdOptimizationController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
@@ -78,6 +84,11 @@ public class TrackStudioApiControllers {
         this.codeReviewController = new CodeReviewController(STAND_URL, authToken);
         this.techTaskController = new TechTaskController(STAND_URL, authToken);
         this.contingentTaskController = new ContingentTaskController(STAND_URL, authToken);
+        this.sdBugController = new SdBugController(STAND_URL, authToken);
+        this.sdImproveController = new SdImproveController(STAND_URL, authToken);
+        this.sdDocImproveController = new SdDocImproveController(STAND_URL, authToken);
+        this.sdDocBugController = new SdDocBugController(STAND_URL, authToken);
+        this.sdOptimizationController = new SdOptimizationController(STAND_URL, authToken);
     }
 
 
@@ -145,5 +156,10 @@ public class TrackStudioApiControllers {
         this.sdQuestionController.setAuthToken(authToken);
         this.techTaskController.setAuthToken(authToken);
         this.contingentTaskController.setAuthToken(authToken);
+        this.sdBugController.setAuthToken(authToken);
+        this.sdImproveController.setAuthToken(authToken);
+        this.sdDocImproveController.setAuthToken(authToken);
+        this.sdDocBugController.setAuthToken(authToken);
+        this.sdOptimizationController.setAuthToken(authToken);
     }
 }

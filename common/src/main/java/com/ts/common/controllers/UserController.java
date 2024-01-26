@@ -7,7 +7,6 @@ import com.ts.common.entitites.commonEntities.UserRole;
 import com.ts.common.enums.Operations;
 import com.ts.common.enums.Parents;
 import com.ts.common.enums.TaskType;
-import com.ts.common.enums.Users;
 import com.ts.common.request.ApiRequest;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
@@ -18,7 +17,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
-import static com.ts.common.config.AppConfigProvider.STAND_URL;
 
 @Slf4j
 public class UserController extends ApiRequest {
@@ -82,13 +80,17 @@ public class UserController extends ApiRequest {
     }
 
     public UserRole receiveUserByRole(List<UserRole> userRoles, String role, String login) {
-        return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(login)).findFirst().get();
+        Collections.shuffle(userRoles);
+        return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(login) && f.getForUser().getActive()).findFirst().get();
     }
 
-    //    public UserRole receiveUserByRoleV1(List<UserRole> userRoles, String role, String login){
-//
-//    }
+    public UserRole receiveUserByRole(List<UserRole> userRoles, String login) {
+        Collections.shuffle(userRoles);
+        return userRoles.stream().filter(f -> !f.getForUser().getLogin().equals(login) && f.getForUser().getActive()).findAny().get();
+    }
+
     public List<UserRole> receiveUserByTask(String taskNumber) {
+
         return receiveUsersByTaskNumber(taskNumber);
     }
 

@@ -63,6 +63,16 @@
             <class name="com.ts.integration.tests.proc_work_task.conversion.bug_task.BugTaskConvToTechTaskTest"/>
             <class name="com.ts.integration.tests.proc_work_task.contingent_task.ContingentStaticTest"/>
             <class name="com.ts.integration.tests.proc_work_task.contingent_task.ContingentTaskBaseTest"/>
+            <class name="com.ts.integration.tests.proc_sd_bug.sd_bug.SdBugBaseDynamicTest"/>
+            <class name="com.ts.integration.tests.proc_sd_bug.sd_bug.SdBugBaseStaticTest"/>
+            <class name="com.ts.integration.tests.proc_sd_bug.sd_doc_bug.SdDocBugBaseDynamicTest"/>
+            <class name="com.ts.integration.tests.proc_sd_bug.sd_doc_bug.SdDocBugBaseStaticTest"/>
+            <class name="com.ts.integration.tests.proc_sd_bug.sd_doc_improve.SdDocImproveBaseDynamicTest"/>
+            <class name="com.ts.integration.tests.proc_sd_bug.sd_doc_improve.SdDocImproveBaseStaticTest"/>
+            <class name="com.ts.integration.tests.proc_sd_bug.sd_improve.SdImproveBaseDynamicTest"/>
+            <class name="com.ts.integration.tests.proc_sd_bug.sd_improve.SdImproveBaseStaticTest"/>
+            <class name="com.ts.integration.tests.proc_sd_bug.sd_optimization.SdOptimizationBaseDynamicTest"/>
+            <class name="com.ts.integration.tests.proc_sd_bug.sd_optimization.SdOptimizationBaseStaticTest"/>
         </classes>
     </test>
 </suite>

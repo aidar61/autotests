@@ -16,6 +16,7 @@ import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -35,17 +36,14 @@ import static com.ts.common.utils.RandomUtils.generateComment;
 
 public class BugTaskConvertToDevTaskTest extends BaseIntegrationTest {
 
-
     public WorkTaskController workTaskController;
     private GeneralTask task;
-    private String MIS_SERVICE;
-    private String CDP_BL;
     private Parent parent;
-    private GrTaskTable grTaskTable;
-    private GrTaskDbEntity parentTaskFromDb;
     private User creator;
     private User handlerUser;
     private User supervisor;
+    private String MIS_SERVICE;
+    private String CDP_BL;
     private Task[] PRODUCT;
     private Task[] BDKU_CONFIGURATION;
 
@@ -53,24 +51,28 @@ public class BugTaskConvertToDevTaskTest extends BaseIntegrationTest {
     public void beforeClass() {
         workTaskController = apiController.getWorkTaskController();
         userController = apiController.getUserController();
-        grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
+        GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
+        task = InitEntities.getGeneralTask(TaskType.BUG_TASK, Operations.CAT);
+        GrTaskDbEntity parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
                 "task_category", EQUAL.operator, "CAT_GENPLAN",
                 AND.operator,
                 "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
                 AND.operator,
                 "task_path", LIKE.operator, "%/2405/758009%");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
-        var parentPayload = workTaskController.getParentPayload(parent.getNumber(), "CAT_BUGTASK");
-        task = InitEntities.getGeneralTask(TaskType.BUG_TASK, Operations.CAT);
+
+        var parentPayloadResponse = workTaskController.getParentPayload(parent.getNumber(), "CAT_BUGTASK");
+        ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
         MIS_SERVICE = workTaskController.getParent_UDF_MIS_SERVICE(parentPayload).get(0);
         CDP_BL = workTaskController.getParent_UDF_CDP_BL(parentPayload).get(0);
         PRODUCT = workTaskController.getParent_UDF_PRODUCT(parentPayload);
         BDKU_CONFIGURATION = workTaskController.getParent_UDF_BDKU_CONFIGURATION(parentPayload);
+
         var employees = userController.receiveUserByTask(parent.getNumber());
-        creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта")).findFirst().get().getForUser();
-        handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();
-        supervisor = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && !f.getForUser().getLogin().equals(creator.getLogin())).collect(Collectors.toList()).get(1).getForUser();
+        creator = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта") && f.getForUser().getActive()).findFirst().get().getForUser();
+        handlerUser = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && f.getForUser().getActive() && !f.getForUser().getLogin().equals(creator.getLogin())).findFirst().get().getForUser();
+        supervisor = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && f.getForUser().getActive() && !f.getForUser().getLogin().equals(creator.getLogin())).collect(Collectors.toList()).get(1).getForUser();
     }
 
 

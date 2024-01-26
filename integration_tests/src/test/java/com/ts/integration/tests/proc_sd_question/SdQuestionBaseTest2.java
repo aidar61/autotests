@@ -14,8 +14,8 @@ import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
-import org.hibernate.id.GUIDGenerator;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -28,7 +28,8 @@ import java.util.stream.Collectors;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
 import static com.ts.common.enums.Operations.*;
-import static com.ts.common.enums.TaskStatuses.*;
+import static com.ts.common.enums.TaskStatuses.STATUS_SDQUESTION_CLOSED;
+import static com.ts.common.enums.TaskStatuses.STATUS_SDQUESTION_NEW;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateString;
 
@@ -37,6 +38,8 @@ public class SdQuestionBaseTest2 extends BaseIntegrationTest {
     private GeneralTask task;
     private Parent parent;
     private Map<String, User> members;
+
+    private Task[] BDKU_CONFIGURATION;
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
@@ -47,19 +50,15 @@ public class SdQuestionBaseTest2 extends BaseIntegrationTest {
         var parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTaskByQuery("SELECT * FROM gr_task WHERE task_category = 'CAT_SDPROJECT' AND (task_status = 'STATUS_SDPROJECT_NEW' OR task_status = 'STATUS_SDPROJECT_WARRANTY') AND task_path LIKE '%/1/8860/758008/%' ORDER BY DBMS_RANDOM.VALUE FETCH FIRST 1 ROWS ONLY");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.SD_QUESTION, Operations.CAT);
+
+        var parentPayloadResponse = sdQuestionController.getParentPayload(parent.getNumber(), "CAT_SDQUESTION");
+        ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
+        BDKU_CONFIGURATION = sdQuestionController.getParent_UDF_BDKU_CONFIGURATION(parentPayload);
+
         var employees = userController.receiveUserByTask(parent.getNumber());
-        var creators = employees
-                .stream()
-                .filter(f -> f.getAssignedRole().getName().equals("Менеджер клиента") &&
-                        !Objects.equals(f.getForUser().getLogin(), "root") &&
-                        f.getForUser().getActive() == true)
-                .collect(Collectors.toList());
-        var handlers = employees
-                .stream()
-                .filter(f -> f.getAssignedRole().getName().equals("Клиент") &&
-                        !Objects.equals(f.getForUser().getLogin(), "root") &&
-                        f.getForUser().getActive() == true)
-                .collect(Collectors.toList());
+        var creators = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер клиента") && !Objects.equals(f.getForUser().getLogin(), "root") && f.getForUser().getActive()).collect(Collectors.toList());
+        var handlers = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Клиент") && !Objects.equals(f.getForUser().getLogin(), "root") && f.getForUser().getActive()).collect(Collectors.toList());
         Collections.shuffle(handlers);
         Collections.shuffle(creators);
         var creator = creators.get(0).getForUser();
@@ -83,10 +82,9 @@ public class SdQuestionBaseTest2 extends BaseIntegrationTest {
         task.setHandlerUser(generateUser(members.get("Клиент")));
         udf = refreshUdf();
         var sdModule = new Task("818181b03c7fc013013c7fcaae5406fd", "186726");
-        var bdkuConf = new Task("818180a050c582480150c94f5cab3356", "462540");
         var sdRequest = new Task("8a8181df7740c235017749e6c0e20056", "1144909");
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, sdModule));
-        udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, bdkuConf));
+        udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, BDKU_CONFIGURATION[0]));
         udf.setThirdUdfTask(generateUdfTask(UDF_WORKTASK_SDREQUEST, sdRequest));
         task.refreshUdf(udf);
         sdQuestionController.createSdQuestion(task);
