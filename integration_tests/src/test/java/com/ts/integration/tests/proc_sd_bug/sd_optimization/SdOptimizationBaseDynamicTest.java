@@ -61,7 +61,7 @@ public class SdOptimizationBaseDynamicTest extends BaseIntegrationTest {
         BDKU_CONFIGURATION = sdOptimizationController.getParent_UDF_BDKU_CONFIGURATION(parentPayload);
 
         USER_ROLES = userController.receiveUserByTask(parent.getNumber());
-        CLIENT = userController.receiveUserByRole(USER_ROLES, "Клиент", "root").getForUser();
+        CLIENT = userController.receiveUserByRole(USER_ROLES, "Клиент", "rysgalbank.tm").getForUser();
         SUPPORT_MANAGER = userController.receiveUserByRole(USER_ROLES, "Менеджер клиента", CLIENT.getLogin()).getForUser();
         SUPPORT_MEMBER = userController.receiveUserByRole(USER_ROLES, "Участник проекта сопровождения", SUPPORT_MANAGER.getLogin()).getForUser();
         SUPPORT_MEMBER2 = userController.receiveUserByRole(USER_ROLES, "Участник проекта сопровождения", SUPPORT_MEMBER.getLogin()).getForUser();
