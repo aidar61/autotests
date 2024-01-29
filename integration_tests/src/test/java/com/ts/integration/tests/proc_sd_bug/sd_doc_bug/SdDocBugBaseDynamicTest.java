@@ -334,7 +334,25 @@ public class SdDocBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
-    @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Включить в патч", dependsOnMethods = "taskHotFix")
+    @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Подтвердить исправление", dependsOnMethods = "taskHotFix")
+    public void taskAcceptHotfix() {
+        apiController.updateToken(generateAuthToken(CLIENT));
+        task.refreshTask();
+        udf = refreshUdf();
+        task.refreshUdf(udf);
+        sdDocBugController.performCommonOperation(task, ACCEPTHOTFIX);
+        ApiAsserts
+                .assertThat(sdDocBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_INWORK);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
+    }
+
+    @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Включить в патч", dependsOnMethods = "taskAcceptHotfix")
     public void taskInPatch() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
