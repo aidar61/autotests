@@ -44,6 +44,7 @@ public enum Operations {
     INPATCH("%S_INPATCH"), // отменить заказ
     UNDOINPATCH("%S_UNDOINPATCH"), // отменить заказ
     SENDPATCH("%S_SENDPATCH"), // отменить заказ
+    UNDOSENDPATCH("%S_UNDOSEND"), // отменить заказ
     TOPRECOST("%S_TOPRECOST"),//начать предварительный анализ
     REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
     PROVIDEREQINFO("%S_PROVIDEREQINFO"), // сообщить уточнение требований
