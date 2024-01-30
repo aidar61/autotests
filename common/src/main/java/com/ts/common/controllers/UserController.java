@@ -66,6 +66,7 @@ public class UserController extends ApiRequest {
         HashMap<String, String> queryParam = new LinkedHashMap<>() {{
             put(TO_TASK, taskNumber);
         }};
+        super.setAuthToken(new AuthToken("root", "password"));
         this.response = super.get(getEndpoint(REST, ACL, EFFECTIVE, formatParameters(queryParam)));
         return Arrays.asList(Objects.requireNonNull(JsonUtils.deserialize(this.response, UserRole[].class)));
     }

@@ -4,6 +4,7 @@ import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
+import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.sdbug.SdImproveController;
 import com.ts.common.entitites.commonEntities.Parent;
@@ -22,8 +23,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-import static com.ts.common.entitites.commonEntities.List.Constants.DOC_REVISION_YES;
-import static com.ts.common.entitites.commonEntities.List.Constants.SDBUG_PRIORITYBUG_CRITICAL;
+import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.CORE;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.enums.Operations.*;
@@ -61,7 +61,7 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         BDKU_CONFIGURATION = sdBugController.getParent_UDF_BDKU_CONFIGURATION(parentPayload);
 
         USER_ROLES = userController.receiveUserByTask(parent.getNumber());
-        CLIENT = userController.receiveUserByRole(USER_ROLES, "Клиент", "root").getForUser();
+        CLIENT = userController.receiveUserByRole(USER_ROLES, "Клиент", "rysgalbank.tm").getForUser();
         SUPPORT_MANAGER = userController.receiveUserByRole(USER_ROLES, "Менеджер клиента", CLIENT.getLogin()).getForUser();
         SUPPORT_MEMBER = userController.receiveUserByRole(USER_ROLES, "Участник проекта сопровождения", SUPPORT_MANAGER.getLogin()).getForUser();
         SUPPORT_MEMBER2 = userController.receiveUserByRole(USER_ROLES, "Участник проекта сопровождения", SUPPORT_MEMBER.getLogin()).getForUser();
@@ -84,7 +84,15 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         task.refreshUdf(udf);
         sdBugController.create(task);
         var response = sdBugController.getResponse();
-        ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_SDBUG_NEW).isEquals(task);
+        ApiAsserts
+                .assertThat(response)
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class).assertTask()
+                .isCorrectStatus(STATUS_SDBUG_NEW).isEquals(task);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Принять на анализ", dependsOnMethods = "createTask")
@@ -101,7 +109,15 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf.setThirdUdfUser(generateUdfUser(UDF_WATCHER, RANDOM_WATCHER));
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, ANALIZE);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_SDBUG_ANALIZING);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class).assertTask()
+                .isCorrectStatus(STATUS_SDBUG_ANALIZING);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Отклонить", dependsOnMethods = "taskAnalyze")
@@ -111,7 +127,15 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, DECLINE);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_DECLINED);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_DECLINED);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskDecline")
@@ -124,8 +148,15 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, SUPPORT_MEMBER));
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, RETURN);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_ANALIZING);
-        ;
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_ANALIZING);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Начать работу", dependsOnMethods = "taskReturn")
@@ -135,8 +166,15 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, START);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_INWORK);
-
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_INWORK);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Закрыть без патча", dependsOnMethods = "taskStart")
@@ -146,7 +184,15 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, CLOSE_WO_PATCH);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_CLOSED);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_CLOSED);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_NOBODY.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Отменить закрытие", dependsOnMethods = "taskCloseWoPatch")
@@ -160,7 +206,15 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
 
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, UNDO_CLOSE);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_ANALIZING);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_ANALIZING);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Начать работу", dependsOnMethods = "taskUndoClose")
@@ -170,7 +224,15 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, START);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_INWORK);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_INWORK);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Вернуть на анализ", dependsOnMethods = "taskStart1")
@@ -184,8 +246,15 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
 
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, UNDOSTART);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_ANALIZING);
-        ;
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_ANALIZING);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Начать работу", dependsOnMethods = "taskUndoStart")
@@ -195,8 +264,14 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, START);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_INWORK);
-        ;
+        ApiAsserts.assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_INWORK);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Запросить информацию", dependsOnMethods = "taskStart2")
@@ -206,8 +281,14 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, REQUESTINFO);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_WAITINWORK);
-        ;
+        ApiAsserts.assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_WAITINWORK);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Предоставить информацию", dependsOnMethods = "taskRequestInfo")
@@ -217,7 +298,15 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, PROVIDEINFO);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_INWORK);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_INWORK);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
 
@@ -234,6 +323,10 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .assertTask()
                 .isCorrectStatus(STATUS_SDBUG_FIXED);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Подтвердить исправление", dependsOnMethods = "taskHotFix")
@@ -243,7 +336,15 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, ACCEPTHOTFIX);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_INWORK);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_INWORK);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
 
@@ -255,7 +356,15 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf.setUdfString(generateUdfString(UDF_SD_PATCHNUMBER, generateComment()));
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, INPATCH);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_INPATCH);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_INPATCH);
+//        var taskDetail = apiController.receiveTask(task.getNumber());
+//        CommonAssert
+//                .assertThat(taskDetail)
+//                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_NOBODY.getId());
     }
 
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Отменить включение в патч", dependsOnMethods = "taskInPatch")
@@ -265,10 +374,37 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, UNDOINPATCH);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_INWORK);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_INWORK);
+//        var taskDetail = apiController.receiveTask(task.getNumber());
+//        CommonAssert
+//                .assertThat(taskDetail)
+//                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_NOBODY.getId());
     }
 
-    @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Отправить патч", dependsOnMethods = "taskUndoInPatch")
+    @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Включить в патч", dependsOnMethods = "taskUndoInPatch")
+    public void taskInPatch2() {
+        apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
+        task.refreshTask();
+        udf = refreshUdf();
+        udf.setUdfString(generateUdfString(UDF_SD_PATCHNUMBER, generateComment()));
+        task.refreshUdf(udf);
+        sdBugController.performCommonOperation(task, INPATCH);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_INPATCH);
+//        var taskDetail = apiController.receiveTask(task.getNumber());
+//        CommonAssert
+//                .assertThat(taskDetail)
+//                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_NOBODY.getId());
+    }
+
+    @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Отправить патч", dependsOnMethods = "taskInPatch2")
     public void taskSendPatch() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -276,10 +412,55 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_YES));
         task.refreshUdf(udf);
         sdBugController.performCommonOperation(task, SENDPATCH);
-        ApiAsserts.assertThat(sdBugController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).assertTask().isCorrectStatus(STATUS_SDBUG_PATCHSEND);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_PATCHSEND);
+//        var taskDetail = apiController.receiveTask(task.getNumber());
+//        CommonAssert
+//                .assertThat(taskDetail)
+//                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_NOBODY.getId());
     }
 
-    @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Закрыть", dependsOnMethods = "taskSendPatch")
+    @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Отменить отправку патча", dependsOnMethods = "taskSendPatch")
+    public void taskUndoSendPatch() {
+        apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
+        task.refreshTask();
+        udf = refreshUdf();
+        task.refreshUdf(udf);
+        sdBugController.performCommonOperation(task, UNDOSENDPATCH);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_INPATCH);
+//        var taskDetail = apiController.receiveTask(task.getNumber());
+//        CommonAssert
+//                .assertThat(taskDetail)
+//                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_NOBODY.getId());
+    }
+
+    @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Отправить патч", dependsOnMethods = "taskUndoSendPatch")
+    public void taskSendPatch2() {
+        apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
+        task.refreshTask();
+        udf = refreshUdf();
+        udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_YES));
+        task.refreshUdf(udf);
+        sdBugController.performCommonOperation(task, SENDPATCH);
+        ApiAsserts
+                .assertThat(sdBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .assertTask()
+                .isCorrectStatus(STATUS_SDBUG_PATCHSEND);
+//        var taskDetail = apiController.receiveTask(task.getNumber());
+//        CommonAssert
+//                .assertThat(taskDetail)
+//                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_NOBODY.getId());
+    }
+
+    @Test(groups = {"PROC_SDBUG", "Regression"}, description = "Закрыть", dependsOnMethods = "taskSendPatch2")
     public void taskClose() {
         apiController.updateToken(generateAuthToken(CLIENT));
         task.refreshTask();
@@ -292,5 +473,9 @@ public class SdImproveBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .assertTask()
                 .isCorrectStatus(STATUS_SDBUG_CLOSED);
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_NOBODY.getId());
     }
 }

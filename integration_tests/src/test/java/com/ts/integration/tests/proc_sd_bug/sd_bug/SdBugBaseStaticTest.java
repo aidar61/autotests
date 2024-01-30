@@ -33,9 +33,6 @@ import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.*;
 
 public class SdBugBaseStaticTest extends BaseIntegrationTest {
-    //UDF_SD_TASK_CODE  Затрагиваемые коды задачи
-    //http://tsdev4.dev.colvir.ru/TrackStudio/rest/operation/MSG_SDBUG_CHANGEAUTHOR/1490139/context
-
 
     public SdBugController sdBugController;
     private GeneralTask task;
@@ -65,7 +62,7 @@ public class SdBugBaseStaticTest extends BaseIntegrationTest {
         BDKU_CONFIGURATION = sdBugController.getParent_UDF_BDKU_CONFIGURATION(parentPayload);
 
         USER_ROLES = userController.receiveUserByTask(parent.getNumber());
-        CLIENT = userController.receiveUserByRole(USER_ROLES, "Клиент", "root").getForUser();
+        CLIENT = userController.receiveUserByRole(USER_ROLES, "Клиент", "rysgalbank.tm").getForUser();
         SUPPORT_MANAGER = userController.receiveUserByRole(USER_ROLES, "Менеджер клиента", CLIENT.getLogin()).getForUser();
         SUPPORT_MEMBER = userController.receiveUserByRole(USER_ROLES, "Участник проекта сопровождения", SUPPORT_MANAGER.getLogin()).getForUser();
         SUPPORT_MEMBER2 = userController.receiveUserByRole(USER_ROLES, "Участник проекта сопровождения", SUPPORT_MEMBER.getLogin()).getForUser();
