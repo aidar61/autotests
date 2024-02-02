@@ -73,6 +73,8 @@ public class GeneralTask extends BaseEntity {
         this.confirmed = null;
         this.description = null;
         this.udfs = null;
+        this.shortName = null;
+        this.name = null;
     }
 
     @Override
