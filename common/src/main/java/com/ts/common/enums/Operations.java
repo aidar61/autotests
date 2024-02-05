@@ -5,6 +5,15 @@ public enum Operations {
 
     CAT("CAT_%S"),
     CANCEL_BUG("%S_CANCELBUG"),
+    FINISHPLANNING("%S_FINISHPLANNING"),
+    RETURNPLANNING("%S_RETURNPLANNING"),
+    STARTTESTING("%S_STARTTESTING"),
+    FINISHTESTING("%S_FINISHTESTING"),
+    STARTISSUE("%S_STARTISSUE"),
+    FINISHISSUE("%S_FINISHISSUE"),
+    TOARCHIVE("%S_TOARCHIVE"),
+    RETURNPREPARATION("%S_RETURNPREPARATION"),
+    RETURNTESTING("%S_RETURNTESTING"),
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
     CHANGE("%S_CHANGE"), // изменить аттрибуты решения
     COMMENT("%S_COMMENT"), // коментарий
@@ -45,6 +54,7 @@ public enum Operations {
     UNDOINPATCH("%S_UNDOINPATCH"), // отменить заказ
     SENDPATCH("%S_SENDPATCH"), // отменить заказ
     UNDOSENDPATCH("%S_UNDOSEND"), // отменить заказ
+    SETCOMPAT("%S_SETCOMPAT"), // задать совместимость
     TOPRECOST("%S_TOPRECOST"),//начать предварительный анализ
     REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
     PROVIDEREQINFO("%S_PROVIDEREQINFO"), // сообщить уточнение требований

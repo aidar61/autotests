@@ -11,6 +11,7 @@ import com.ts.common.controllers.advice.SanctionController;
 import com.ts.common.controllers.bug.BugTaskController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
+import com.ts.common.controllers.release.ReleaseController;
 import com.ts.common.controllers.release.ReleaseModuleController;
 import com.ts.common.controllers.sdbug.*;
 import com.ts.common.controllers.sdquestion.SdQuestionController;
@@ -62,6 +63,7 @@ public class TrackStudioApiControllers {
     private SdDocImproveController sdDocImproveController;
     private SdDocBugController sdDocBugController;
     private SdOptimizationController sdOptimizationController;
+    private ReleaseController releaseController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
@@ -89,6 +91,7 @@ public class TrackStudioApiControllers {
         this.sdDocImproveController = new SdDocImproveController(STAND_URL, authToken);
         this.sdDocBugController = new SdDocBugController(STAND_URL, authToken);
         this.sdOptimizationController = new SdOptimizationController(STAND_URL, authToken);
+        this.releaseController = new ReleaseController(STAND_URL, authToken);
     }
 
 
@@ -161,5 +164,6 @@ public class TrackStudioApiControllers {
         this.sdDocImproveController.setAuthToken(authToken);
         this.sdDocBugController.setAuthToken(authToken);
         this.sdOptimizationController.setAuthToken(authToken);
+        this.releaseController.setAuthToken(authToken);
     }
 }
