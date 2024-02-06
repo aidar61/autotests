@@ -17,6 +17,7 @@ import com.ts.common.enums.Resolutions;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
+import com.ts.common.utils.WaitManager;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
