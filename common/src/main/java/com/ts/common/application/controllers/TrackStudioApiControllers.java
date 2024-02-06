@@ -25,6 +25,7 @@ import com.ts.common.controllers.workTask.WorkTaskController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.entitites.tasks.Task;
 import com.ts.common.utils.JsonUtils;
+import com.ts.common.utils.WaitManager;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import lombok.Getter;
@@ -105,6 +106,7 @@ public class TrackStudioApiControllers {
     }
 
     public Response receiveTask(String slaTaskNumber) {
+        WaitManager.pause(3);
         return this.response = this.baseController.receiveActualTask(slaTaskNumber);
     }
 
