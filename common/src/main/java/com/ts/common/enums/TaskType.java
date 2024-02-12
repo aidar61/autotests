@@ -27,6 +27,7 @@ public enum TaskType {
     WORK_TASK("WORKTASK"),
     BUG_TASK("BUGTASK"),
     SD_BUG("SDBUG"),
+    SD_DEV("SDDEV"),
     SD_IMPROVE("SDIMPROVE"),
     SD_DOC_IMPROVE("SDDOCIMPROVE"),
     SD_DOC_BUG("SDDOCBUG"),
