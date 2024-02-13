@@ -6,7 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/sd bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/tech_task/TechTaskBaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/tech_task/TechTaskBaseTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +25,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/master" />
+    <option name="BRANCH" value="origin/local" />
   </component>
   <component name="Git.Rebase.Settings">
     <option name="NEW_BASE" value="origin/master" />
@@ -136,16 +136,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SdImproveBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SdDocBugBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_bug.sd_improve.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_bug.sd_doc_bug.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_bug.sd_improve" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_bug.sd_improve.SdImproveBaseDynamicTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_bug.sd_doc_bug" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_bug.sd_doc_bug.SdDocBugBaseDynamicTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -181,16 +181,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UiTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TechTaskBaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.ui.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.tech_task.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.UiTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.tech_task" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.tech_task.TechTaskBaseTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -198,18 +198,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UiTest.uiLoginTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="TechTaskStaticHandlerTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.tech_task.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.UiTest" />
-      <option name="METHOD_NAME" value="uiLoginTest" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.tech_task" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.tech_task.TechTaskStaticHandlerTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
       <method v="2">
@@ -252,19 +251,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.SdImproveBaseDynamicTest" />
+      <item itemvalue="TestNG.SdDocBugBaseDynamicTest" />
+      <item itemvalue="TestNG.TechTaskBaseTest" />
+      <item itemvalue="TestNG.TechTaskStaticHandlerTest" />
       <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
       <item itemvalue="TestNG.ContingentTaskBaseTest" />
-      <item itemvalue="TestNG.UiTest" />
-      <item itemvalue="TestNG.UiTest.uiLoginTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
-        <item itemvalue="TestNG.SdImproveBaseDynamicTest" />
-        <item itemvalue="TestNG.UiTest.uiLoginTest" />
+        <item itemvalue="TestNG.TechTaskBaseTest" />
         <item itemvalue="TestNG.ContingentTaskBaseTest" />
-        <item itemvalue="TestNG.UiTest" />
+        <item itemvalue="TestNG.TechTaskStaticHandlerTest" />
+        <item itemvalue="TestNG.SdDocBugBaseDynamicTest" />
       </list>
     </recent_temporary>
   </component>
@@ -346,13 +345,6 @@
       <workItem from="1701675893855" duration="11512000" />
       <workItem from="1702281996843" duration="5024000" />
       <workItem from="1702977169501" duration="372000" />
-    </task>
-    <task id="LOCAL-00001" summary="fix/tests-support">
-      <created>1687150315393</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1687150315393</updated>
     </task>
     <task id="LOCAL-00002" summary="feature/ReleaseProc-Asserts">
       <created>1687150359151</created>
@@ -704,7 +696,14 @@
       <option name="project" value="LOCAL" />
       <updated>1706251344828</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="feature/sd bug">
+      <created>1706606539505</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1706606539506</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
