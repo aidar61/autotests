@@ -4,19 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/release">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/performance/PerformanceController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Performance.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/performance_tests/PerformanceEmployeeTaskQueueTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/performance_tests/PerformanceTests.java" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/performance tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioEndPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioEndPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/BaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/request/ApiRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/request/ApiRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/CommonWorkTaskProcessTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/CommonWorkTaskProcessTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/performance/PerformanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/performance/PerformanceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/performance_tests/PerformanceEmployeeTaskQueueTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/performance_tests/PerformanceEmployeeTaskQueueTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -358,27 +349,6 @@
       <workItem from="1707115671669" duration="1900000" />
       <workItem from="1707198306554" duration="4574000" />
     </task>
-    <task id="LOCAL-00001" summary="fix/tests-support">
-      <created>1687150315393</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1687150315393</updated>
-    </task>
-    <task id="LOCAL-00002" summary="feature/ReleaseProc-Asserts">
-      <created>1687150359151</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1687150359151</updated>
-    </task>
-    <task id="LOCAL-00003" summary="feature/CatSanction and CatConfirmation Tests">
-      <created>1688634531358</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1688634531358</updated>
-    </task>
     <task id="LOCAL-00004" summary="fix/TestsSupport">
       <created>1688634994052</created>
       <option name="number" value="00004" />
@@ -715,7 +685,28 @@
       <option name="project" value="LOCAL" />
       <updated>1707215560600</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL-00052" summary="feature/performance tests">
+      <created>1707828704367</created>
+      <option name="number" value="00052" />
+      <option name="presentableId" value="LOCAL-00052" />
+      <option name="project" value="LOCAL" />
+      <updated>1707828704367</updated>
+    </task>
+    <task id="LOCAL-00053" summary="feature/performance tests">
+      <created>1707828708534</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1707828708534</updated>
+    </task>
+    <task id="LOCAL-00054" summary="feature/performance tests">
+      <created>1707828877326</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1707828877326</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -771,7 +762,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="complete acceptance 1." />
     <MESSAGE value="complete acceptance 2" />
     <MESSAGE value="receive random task with additional field." />
     <MESSAGE value="complete sanction scenario." />
@@ -796,7 +786,8 @@
     <MESSAGE value="fix/dev task accepted" />
     <MESSAGE value="feature/sd bug" />
     <MESSAGE value="feature/release" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/release" />
+    <MESSAGE value="feature/performance tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/performance tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

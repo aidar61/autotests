@@ -55,12 +55,9 @@ public class PerformanceEmployeeTaskQueueTest extends BaseIntegrationTest {
     @AfterClass(alwaysRun = true)
     public void afterClass() {
         apiController.updateToken(generateAuthToken(ROOT));
-        createdGeneralTasks.forEach(task -> {
-            task.refreshUdf();
-            task.refreshTask();
-            task.setTaskType(TaskType.WORK_TASK);
-            performanceController.performCommonOperation(task, CANCEL);
-        });
+        createdGeneralTasks.forEach(task ->
+                performanceController.cancelTask(task)
+        );
     }
 
     @Test(groups = {"Performance"}, description = "Запрос данных для портлета \"Очередь задач сотрудника\"")
