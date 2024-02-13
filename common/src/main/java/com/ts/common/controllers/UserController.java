@@ -82,7 +82,29 @@ public class UserController extends ApiRequest {
 
     public UserRole receiveUserByRole(List<UserRole> userRoles, String role, String login) {
         Collections.shuffle(userRoles);
-        return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(login) && f.getForUser().getActive()).findFirst().get();
+        if (role.equals("Клиент")) {
+            return userRoles.stream().filter(f -> f.getForUser().getLogin().contains("@") && f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(login) && f.getForUser().getActive()).findFirst().get();
+        }
+
+        return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().contains(login) && f.getForUser().getActive()).findFirst().get();
+    }
+
+    public UserRole receiveUserByRole(List<UserRole> userRoles, String role, String login, boolean singleRole) {
+        Collections.shuffle(userRoles);
+        if (role.equals("Клиент")) {
+            userRoles = userRoles.stream().filter(f -> f.getForUser().getLogin().contains("@") && f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().contains(login) && f.getForUser().getActive()).collect(Collectors.toList());
+        }
+        if (singleRole) {
+            var filteredUsers = userRoles.stream().filter(x -> x.getAssignedRole().getName().equals(role) && !x.getForUser().getLogin().contains(login)).collect(Collectors.toList());
+            for (var filteredUser : filteredUsers) {
+                var userCount = userRoles.stream().filter(x -> x.getForUser().getLogin().equals(filteredUser.getForUser().getLogin()) && !x.getForUser().getLogin().contains(login)).count();
+                if (userCount < 2) {
+                    return filteredUser;
+                }
+            }
+        }
+
+        return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().contains(login) && f.getForUser().getActive()).findAny().get();
     }
 
     public UserRole receiveUserByRole(List<UserRole> userRoles, String login) {

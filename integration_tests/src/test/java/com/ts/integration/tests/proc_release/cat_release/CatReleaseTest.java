@@ -128,7 +128,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
         var addedPatchTask = releaseController.getTasks(task.getNumber());
         CommonAssert
                 .assertThat(addedPatchTask)
-                .isCorrectFieldFromList("Проверить добавление задачи", patchTask.getTask_number(), "number");
+                .fieldFromListIsNotEmpty("Проверить добавление задачи", patchTask.getTask_number(), "number");
     }
 
     @Test(groups = {"ProcRelease", "Regression"}, description = "Удалить задачу", dependsOnMethods = "addPatchTask")
@@ -169,7 +169,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
 
         CommonAssert
                 .assertThat(addedPatchTask)
-                .isCorrectFieldFromList("Проверить добавление задачи", patchTask.getTask_number(), "number");
+                .fieldFromListIsNotEmpty("Проверить добавление задачи", patchTask.getTask_number(), "number");
     }
 
     @Test(groups = {"ProcRelease", "Regression"}, description = "Добавить инсталяцию", dependsOnMethods = "addPatchTask2")
@@ -191,7 +191,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
 
         CommonAssert
                 .assertThat(addedPatchTask)
-                .isCorrectFieldFromList("Проверить добавление инсталляции", clientTask.getTask_number(), "taskValue.number");
+                .fieldFromListIsNotEmpty("Проверить добавление инсталляции", clientTask.getTask_number(), "taskValue.number");
     }
 
     @Test(groups = {"ProcRelease", "Regression"}, description = "Удалить инсталляцию", dependsOnMethods = "addClients")

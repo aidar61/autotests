@@ -41,6 +41,7 @@ public class GeneralTask extends BaseEntity {
     Status priority;
     Resolution resolution;
     String statusName;
+    String mstatusName;
     String priorityName;
     Boolean confirmed;
     String[] attachments;
