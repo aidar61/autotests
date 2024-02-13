@@ -130,7 +130,11 @@ public class BaseController extends ApiRequest {
 
     @Step("Выполнение общей операции: {1}")
     public Response performCommonOperation(@NotNull GeneralTask task, Operations operation) {
-        task.setOperation(generateOperationID(this.taskType, operation));
+        task.setOperation(
+                this.taskType != null ?
+                        generateOperationID(this.taskType, operation) :
+                        generateOperationID(task.getTaskType(), operation)
+        );
         if (task.getDescription() == null) task.setDescription(RandomUtils.generateDescriptionForOperation(operation));
         TaskRequestBody taskRequestBody = new TaskRequestBody(task);
         if (task.getResolution() != null) {

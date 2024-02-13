@@ -11,6 +11,7 @@ import com.ts.common.controllers.advice.SanctionController;
 import com.ts.common.controllers.bug.BugTaskController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
+import com.ts.common.controllers.performance.PerformanceController;
 import com.ts.common.controllers.release.ReleaseController;
 import com.ts.common.controllers.release.ReleaseModuleController;
 import com.ts.common.controllers.sdbug.*;
@@ -70,6 +71,7 @@ public class TrackStudioApiControllers {
     private SdOptimizationController sdOptimizationController;
     private ReleaseController releaseController;
     private SdDevController sdDevController;
+    private PerformanceController performanceController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
