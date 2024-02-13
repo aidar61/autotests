@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/sd bug">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/release">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/tech_task/TechTaskBaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/tech_task/TechTaskBaseTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +24,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/local" />
+    <option name="BRANCH" value="origin/master" />
   </component>
   <component name="Git.Rebase.Settings">
     <option name="NEW_BASE" value="origin/master" />
@@ -33,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -44,16 +43,12 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2EVrpqXECvwZmBVnpzXQYsksh68" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -63,41 +58,42 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Git.Branch.Popup.ShowAllRemotes": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ToolWindowRun.ShowToolbar": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "stage",
-    "last_opened_file_path": "/Users/aidarka61/IdeaProjects/autotests",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.09375",
-    "project.structure.side.proportion": "0.32876712",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
-    "settings.editor.splitter.proportion": "0.39143732",
-    "spring.configuration.checksum": "77eb7acb45023b5c2285e592b7b52170",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;stage&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/aidarka61/IdeaProjects/autotests&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.09375&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.32876712&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.39143732&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;77eb7acb45023b5c2285e592b7b52170&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "oracle"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;oracle&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -118,7 +114,24 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.com.ts.integration.tests.proc_sd_bug">
+  <component name="RunManager" selected="TestNG.CatReleaseTest">
+    <configuration name="CatReleaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_release.cat_release.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_release.cat_release" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_release.cat_release.CatReleaseTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="ContingentTaskBaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -136,16 +149,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SdDocBugBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SdImproveBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_bug.sd_doc_bug.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_bug.sd_improve.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_bug.sd_doc_bug" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_bug.sd_doc_bug.SdDocBugBaseDynamicTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_bug.sd_improve" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_bug.sd_improve.SdImproveBaseDynamicTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -181,34 +194,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TechTaskBaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="UiTest.uiLoginTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.tech_task.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.tech_task" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.tech_task.TechTaskBaseTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TechTaskStaticHandlerTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.tech_task.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.tech_task" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.tech_task.TechTaskStaticHandlerTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.UiTest" />
+      <option name="METHOD_NAME" value="uiLoginTest" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -251,19 +248,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.SdDocBugBaseDynamicTest" />
-      <item itemvalue="TestNG.TechTaskBaseTest" />
-      <item itemvalue="TestNG.TechTaskStaticHandlerTest" />
+      <item itemvalue="TestNG.CatReleaseTest" />
+      <item itemvalue="TestNG.SdImproveBaseDynamicTest" />
       <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
       <item itemvalue="TestNG.ContingentTaskBaseTest" />
+      <item itemvalue="TestNG.UiTest.uiLoginTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.CatReleaseTest" />
         <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
-        <item itemvalue="TestNG.TechTaskBaseTest" />
+        <item itemvalue="TestNG.SdImproveBaseDynamicTest" />
+        <item itemvalue="TestNG.UiTest.uiLoginTest" />
         <item itemvalue="TestNG.ContingentTaskBaseTest" />
-        <item itemvalue="TestNG.TechTaskStaticHandlerTest" />
-        <item itemvalue="TestNG.SdDocBugBaseDynamicTest" />
       </list>
     </recent_temporary>
   </component>
@@ -345,6 +342,18 @@
       <workItem from="1701675893855" duration="11512000" />
       <workItem from="1702281996843" duration="5024000" />
       <workItem from="1702977169501" duration="372000" />
+      <workItem from="1706859790059" duration="2585000" />
+      <workItem from="1706899518459" duration="4000" />
+      <workItem from="1707113490959" duration="604000" />
+      <workItem from="1707115671669" duration="1900000" />
+      <workItem from="1707198306554" duration="4574000" />
+    </task>
+    <task id="LOCAL-00001" summary="fix/tests-support">
+      <created>1687150315393</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1687150315393</updated>
     </task>
     <task id="LOCAL-00002" summary="feature/ReleaseProc-Asserts">
       <created>1687150359151</created>
@@ -394,22 +403,6 @@
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
       <updated>1688635519041</updated>
-    </task>
-    <task id="LOCAL-00009" summary="feature/CatAdvice">
-      <option name="closed" value="true" />
-      <created>1689240179311</created>
-      <option name="number" value="00009" />
-      <option name="presentableId" value="LOCAL-00009" />
-      <option name="project" value="LOCAL" />
-      <updated>1689240179311</updated>
-    </task>
-    <task id="LOCAL-00010" summary="feature/CatDevTask 1-7 scenarios">
-      <option name="closed" value="true" />
-      <created>1690293020285</created>
-      <option name="number" value="00010" />
-      <option name="presentableId" value="LOCAL-00010" />
-      <option name="project" value="LOCAL" />
-      <updated>1690293020285</updated>
     </task>
     <task id="LOCAL-00011" summary="scenariosfeature/CatDevTask 8-16">
       <option name="closed" value="true" />
@@ -697,13 +690,22 @@
       <updated>1706251344828</updated>
     </task>
     <task id="LOCAL-00050" summary="feature/sd bug">
-      <created>1706606539505</created>
+      <option name="closed" value="true" />
+      <created>1707211203485</created>
       <option name="number" value="00050" />
       <option name="presentableId" value="LOCAL-00050" />
       <option name="project" value="LOCAL" />
-      <updated>1706606539506</updated>
+      <updated>1707211203485</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="feature/release">
+      <option name="closed" value="true" />
+      <created>1707215560600</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1707215560600</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -759,7 +761,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="Check additional fields" />
     <MESSAGE value="complete acceptance 1." />
     <MESSAGE value="complete acceptance 2" />
     <MESSAGE value="receive random task with additional field." />
@@ -784,7 +785,8 @@
     <MESSAGE value="fix/retries" />
     <MESSAGE value="fix/dev task accepted" />
     <MESSAGE value="feature/sd bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/sd bug" />
+    <MESSAGE value="feature/release" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/release" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

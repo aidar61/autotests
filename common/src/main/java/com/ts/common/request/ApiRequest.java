@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ts.common.application.controllers.AuthToken;
 import io.qameta.allure.Step;
 import io.restassured.builder.RequestSpecBuilder;
+import io.restassured.http.ContentType;
 import io.restassured.internal.mapping.Jackson2Mapper;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -121,6 +122,22 @@ public abstract class ApiRequest {
                 .basic(authToken.getUser(), authToken.getPassword())
                 .spec(requestSpec)
                 .body(request, objectMapper)
+                .post(endpoint);
+        logResponse();
+        return this.response;
+    }
+
+    public Response postWithForm(String endpoint, String key, Object request) {
+        log.info("performed POST {}", endpoint);
+        log.info("Body is {}", request);
+        log.info("User is {}", authToken.getUser());
+        this.response = given()
+                .auth()
+                .preemptive()
+                .basic(authToken.getUser(), authToken.getPassword())
+                .spec(requestSpec)
+                .contentType(ContentType.URLENC)
+                .formParam(key, request)
                 .post(endpoint);
         logResponse();
         return this.response;
