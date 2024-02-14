@@ -46,6 +46,7 @@ public class TrackStudioEndPoints {
 
     public static final String AUTHORIZATION_HEADER = AUTHORIZATION;
     public static final String TASK = "task";
+    public static final String TASKS = "tasks";
     public static final String TAG = "tag";
     public static final String UPDATE = "update";
     public static final String INFO = "info";
@@ -56,13 +57,17 @@ public class TrackStudioEndPoints {
     public static final String MSG = "MSG_";
     public static final String TEST = "TEST";
     public static final String REST = "rest";
+    public static final String PORTLET = "portlet";
+    public static final String PERSONAL_QUEUE = "personalqueue";
+    public static final String SLA_FEATURE_CONTROL = "slafeaturescontrol";
+    public static final String GET_SLA_FEATURE_CONTROL = "getFeaturesControl";
     public static final String APP = "app";
     public static final String ACL = "acl";
     public static final String EFFECTIVE = "effective";
     public static final String TO_TASK = "toTask";
     public static final String UDF_VAL = "udfval";
     public static final String USER = "user";
-    public static final String LIST= "list";
+    public static final String LIST = "list";
 
     private static String getDomainName(String url) {
         String s = url.split("//")[1];

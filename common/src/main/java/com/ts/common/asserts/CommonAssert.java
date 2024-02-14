@@ -80,12 +80,23 @@ public class CommonAssert {
     }
 
     @Step("[ASSERT] ({0}) Checking task field, Expected is {1}")
-    public CommonAssert isCorrectFieldFromList(String description, String expectedFieldValue, String path) {
+    public CommonAssert fieldFromListIsNotEmpty(String description, String expectedFieldValue, String path) {
         var actualFieldValues = new JsonPath(response.asString()).getList(path, String.class);
         Assertions.assertThat(actualFieldValues)
                 .withFailMessage("Code is not correct expected %s, actual %s", expectedFieldValue,
                         String.join("|", actualFieldValues))
                 .anyMatch(x -> x.equals(expectedFieldValue));
+        log.info(description + " is correct Actual {}, Expected {}", String.join("|", actualFieldValues), expectedFieldValue);
+        return this;
+    }
+
+    @Step("[ASSERT] ({0}) Checking task field, Expected is {1}")
+    public CommonAssert fieldFromListIsEmpty(String description, String expectedFieldValue, String path) {
+        var actualFieldValues = new JsonPath(response.asString()).getList(path, String.class);
+        Assertions.assertThat(actualFieldValues)
+                .withFailMessage("Code is not correct expected %s, actual %s", expectedFieldValue,
+                        String.join("|", actualFieldValues))
+                .anyMatch(x -> !x.equals(expectedFieldValue));
         log.info(description + " is correct Actual {}, Expected {}", String.join("|", actualFieldValues), expectedFieldValue);
         return this;
     }

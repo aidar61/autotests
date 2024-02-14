@@ -16,12 +16,12 @@
             <class name="com.ts.integration.tests.proc_sla_bug.SlaBug8Test"/>
             <class name="com.ts.integration.tests.proc_sla_bug.SlaBug9Test"/>
             <class name="com.ts.integration.tests.proc_sla_bug.SlaBug10Test"/>
-<!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature1Test"/>-->
-<!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature2Test"/>-->
-<!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature3Test"/>-->
-<!--            <class name="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative1Test"/>-->
-<!--            <class name="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative2Test"/>-->
-<!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureBaseTest"/>-->
+            <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature1Test"/>-->
+            <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature2Test"/>-->
+            <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature3Test"/>-->
+            <!--            <class name="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative1Test"/>-->
+            <!--            <class name="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative2Test"/>-->
+            <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureBaseTest"/>-->
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelp1Test"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelp2Test"/>
             <class name="com.ts.integration.tests.proc_potential_gap.PotentialGap1Test"/>
@@ -74,6 +74,10 @@
             <class name="com.ts.integration.tests.proc_sd_bug.sd_optimization.SdOptimizationBaseDynamicTest"/>
             <class name="com.ts.integration.tests.proc_sd_bug.sd_optimization.SdOptimizationBaseStaticTest"/>
             <class name="com.ts.integration.tests.proc_release.cat_release.CatReleaseTest"/>
+            <class name="com.ts.integration.tests.sd_dev.SdDevBaseDynamicTest"/>
+            <class name="com.ts.integration.tests.sd_dev.SdDevBaseStaticTest"/>
+            <class name="com.ts.integration.tests.performance_tests.PerformanceEmployeeTaskQueueTest"/>
+            <class name="com.ts.integration.tests.performance_tests.PerformanceTests"/>
         </classes>
     </test>
 </suite>

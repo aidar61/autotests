@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/release">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/performance tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/performance/PerformanceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/performance/PerformanceController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/performance_tests/PerformanceEmployeeTaskQueueTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/performance_tests/PerformanceEmployeeTaskQueueTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -114,7 +116,20 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.CatReleaseTest">
+  <component name="RunManager" selected="TestNG.PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue">
+    <configuration name="PerformanceController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ts.common.controllers.performance.PerformanceController" />
+      <module name="common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.common.controllers.performance.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CatReleaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -132,34 +147,54 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ContingentTaskBaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="PerformanceEmployeeTaskQueueTest.beforeClass" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.contingent_task.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.performance_tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.contingent_task" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.contingent_task.ContingentTaskBaseTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.performance_tests" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.performance_tests.PerformanceEmployeeTaskQueueTest" />
+      <option name="METHOD_NAME" value="beforeClass" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SdImproveBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_bug.sd_improve.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.performance_tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_bug.sd_improve" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_bug.sd_improve.SdImproveBaseDynamicTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.performance_tests" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.performance_tests.PerformanceEmployeeTaskQueueTest" />
+      <option name="METHOD_NAME" value="getPortletOfEmployeeTaskQueue" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PerformanceTests.getControlOperationMaintenance" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.performance_tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.performance_tests" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.performance_tests.PerformanceTests" />
+      <option name="METHOD_NAME" value="getControlOperationMaintenance" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -194,24 +229,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UiTest.uiLoginTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.UiTest" />
-      <option name="METHOD_NAME" value="uiLoginTest" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Unnamed" type="TestNG" nameIsGenerated="true">
       <shortenClasspath name="NONE" />
       <option name="SUITE_NAME" value="" />
@@ -229,38 +246,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.ts.integration.tests.proc_sd_bug" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_bug.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_bug" />
-      <option name="TEST_OBJECT" value="PACKAGE" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
+      <item itemvalue="Application.PerformanceController" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.beforeClass" />
+      <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue" />
+      <item itemvalue="TestNG.PerformanceTests.getControlOperationMaintenance" />
       <item itemvalue="TestNG.CatReleaseTest" />
-      <item itemvalue="TestNG.SdImproveBaseDynamicTest" />
-      <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
-      <item itemvalue="TestNG.ContingentTaskBaseTest" />
-      <item itemvalue="TestNG.UiTest.uiLoginTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue" />
+        <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.beforeClass" />
+        <item itemvalue="TestNG.PerformanceTests.getControlOperationMaintenance" />
+        <item itemvalue="Application.PerformanceController" />
         <item itemvalue="TestNG.CatReleaseTest" />
-        <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
-        <item itemvalue="TestNG.SdImproveBaseDynamicTest" />
-        <item itemvalue="TestNG.UiTest.uiLoginTest" />
-        <item itemvalue="TestNG.ContingentTaskBaseTest" />
       </list>
     </recent_temporary>
   </component>
@@ -347,31 +348,6 @@
       <workItem from="1707113490959" duration="604000" />
       <workItem from="1707115671669" duration="1900000" />
       <workItem from="1707198306554" duration="4574000" />
-      <workItem from="1707289427937" duration="966000" />
-      <workItem from="1707368716045" duration="16000" />
-      <workItem from="1707382046165" duration="651000" />
-      <workItem from="1707721548078" duration="3000" />
-    </task>
-    <task id="LOCAL-00001" summary="fix/tests-support">
-      <created>1687150315393</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1687150315393</updated>
-    </task>
-    <task id="LOCAL-00002" summary="feature/ReleaseProc-Asserts">
-      <created>1687150359151</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1687150359151</updated>
-    </task>
-    <task id="LOCAL-00003" summary="feature/CatSanction and CatConfirmation Tests">
-      <created>1688634531358</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1688634531358</updated>
     </task>
     <task id="LOCAL-00004" summary="fix/TestsSupport">
       <created>1688634994052</created>
@@ -407,6 +383,14 @@
       <option name="presentableId" value="LOCAL-00008" />
       <option name="project" value="LOCAL" />
       <updated>1688635519041</updated>
+    </task>
+    <task id="LOCAL-00011" summary="scenariosfeature/CatDevTask 8-16">
+      <option name="closed" value="true" />
+      <created>1690438255314</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1690438255314</updated>
     </task>
     <task id="LOCAL-00012" summary="added random user.">
       <option name="closed" value="true" />
@@ -701,15 +685,28 @@
       <option name="project" value="LOCAL" />
       <updated>1707215560600</updated>
     </task>
-    <task id="LOCAL-00052" summary="feature/release">
-      <option name="closed" value="true" />
-      <created>1707289458993</created>
+    <task id="LOCAL-00052" summary="feature/performance tests">
+      <created>1707828704367</created>
       <option name="number" value="00052" />
       <option name="presentableId" value="LOCAL-00052" />
       <option name="project" value="LOCAL" />
-      <updated>1707289458993</updated>
+      <updated>1707828704367</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="feature/performance tests">
+      <created>1707828708534</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1707828708534</updated>
+    </task>
+    <task id="LOCAL-00054" summary="feature/performance tests">
+      <created>1707828877326</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1707828877326</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -765,7 +762,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="complete acceptance 1." />
     <MESSAGE value="complete acceptance 2" />
     <MESSAGE value="receive random task with additional field." />
     <MESSAGE value="complete sanction scenario." />
@@ -790,7 +786,8 @@
     <MESSAGE value="fix/dev task accepted" />
     <MESSAGE value="feature/sd bug" />
     <MESSAGE value="feature/release" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/release" />
+    <MESSAGE value="feature/performance tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/performance tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -817,7 +814,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java</url>
-          <line>232</line>
+          <line>240</line>
           <option name="timeStamp" value="107" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -847,7 +844,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java</url>
-          <line>361</line>
+          <line>371</line>
           <option name="timeStamp" value="137" />
         </line-breakpoint>
       </breakpoints>

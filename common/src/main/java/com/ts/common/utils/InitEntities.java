@@ -160,6 +160,14 @@ public class InitEntities {
                 .build();
     }
 
+    public static UdfUser generateEmptyUdfUser(Udfs.UdfSd udfSdType) {
+        return UdfUser.builder()
+                .udfId(udfSdType.udfId)
+                .type(Type.USER.name())
+                .userValue(new User[]{})
+                .build();
+    }
+
 
     public static UdfList generateUdfList(Udfs.UdfSd udfSdType, List.Constants udfList) {
         return UdfList.builder()
@@ -264,6 +272,7 @@ public class InitEntities {
                 .build();
     }
 
+
     public static UdfList generateUdfList(Udfs.UdfSd udfSdType, String value) {
         return UdfList.builder()
                 .udfId(udfSdType.udfId)
@@ -296,6 +305,7 @@ public class InitEntities {
                 .numberValue(doubleValue)
                 .build();
     }
+
     public static UdfInteger generateUdfInteger(Udfs.UdfSd udfsdType, Integer value) {
         return UdfInteger.builder()
                 .udfId(udfsdType.udfId)
