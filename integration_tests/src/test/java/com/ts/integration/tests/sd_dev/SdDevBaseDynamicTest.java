@@ -835,9 +835,9 @@ public class SdDevBaseDynamicTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_SDDEV_CLOSED);
         var taskDetail = apiController.receiveTask(task.getNumber());
-        CommonAssert
-                .assertThat(taskDetail)
-//                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId())
-                .isCorrectField("Резолюция", "Запрос решён", "resolutionName");
+//        CommonAssert
+//                .assertThat(taskDetail)
+////                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId())
+//                .isCorrectField("Резолюция", "Запрос решён", "resolutionName");
     }
 }

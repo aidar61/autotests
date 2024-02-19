@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="added sd dev test scenarios. refactoring">
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelpBaseDynamicTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelpBaseStaticTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/sddev">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/BaseController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskStatuses.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskStatuses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sd_dev/SdDevBaseDynamicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/sd_dev/SdDevBaseDynamicTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,9 +41,6 @@
   <component name="JpbToolWindowState">
     <option name="isToolWindowVisible" value="false" />
   </component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -81,15 +71,11 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TestNG.SlaHelpBaseDynamicTest.createTask.executor": "Run",
-    "TestNG.SlaHelpBaseDynamicTest.executor": "Run",
-    "TestNG.SlaHelpBaseStaticTest.executor": "Run",
     "ToolWindowRun.ShowToolbar": "false",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "local",
+    "git-widget-placeholder": "stage",
     "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/turdukhodzhaevs/Projects/colvir/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help",
+    "last_opened_file_path": "/Users/aidarka61/IdeaProjects/autotests",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -98,7 +84,7 @@
     "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.09375",
     "project.structure.side.proportion": "0.32876712",
-    "settings.editor.selected.configurable": "reference.settings.project.maven.repository.indices",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
     "settings.editor.splitter.proportion": "0.39143732",
     "spring.configuration.checksum": "77eb7acb45023b5c2285e592b7b52170",
     "vue.rearranger.settings.migration": "true"
@@ -111,7 +97,6 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/integration_tests/src/test/resources" />
       <recent name="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task" />
@@ -130,17 +115,84 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.SlaHelpBaseStaticTest">
-    <configuration name="CatReleaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
+  <component name="RunManager" selected="TestNG.SdDevBaseDynamicTest">
+    <configuration name="PerformanceController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ts.common.controllers.performance.PerformanceController" />
+      <module name="common" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_release.cat_release.*" />
+          <option name="PATTERN" value="com.ts.common.controllers.performance.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_release.cat_release" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_release.cat_release.CatReleaseTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PerformanceEmployeeTaskQueueTest.beforeClass" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.performance_tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.performance_tests" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.performance_tests.PerformanceEmployeeTaskQueueTest" />
+      <option name="METHOD_NAME" value="beforeClass" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.performance_tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.performance_tests" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.performance_tests.PerformanceEmployeeTaskQueueTest" />
+      <option name="METHOD_NAME" value="getPortletOfEmployeeTaskQueue" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PerformanceTests.getControlOperationMaintenance" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.performance_tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.performance_tests" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.performance_tests.PerformanceTests" />
+      <option name="METHOD_NAME" value="getControlOperationMaintenance" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SdDevBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.sd_dev.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.sd_dev" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.sd_dev.SdDevBaseDynamicTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -176,58 +228,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SlaHelpBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_help.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_help" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_help.SlaHelpBaseDynamicTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SlaHelpBaseDynamicTest.createTask" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_help.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_help" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_help.SlaHelpBaseDynamicTest" />
-      <option name="METHOD_NAME" value="createTask" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SlaHelpBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_help.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_help" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_help.SlaHelpBaseStaticTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Unnamed" type="TestNG" nameIsGenerated="true">
       <shortenClasspath name="NONE" />
       <option name="SUITE_NAME" value="" />
@@ -245,38 +245,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.ts.integration.tests.proc_sd_bug" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_bug.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_bug" />
-      <option name="TEST_OBJECT" value="PACKAGE" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
+      <item itemvalue="Application.PerformanceController" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.SlaHelpBaseDynamicTest" />
-      <item itemvalue="TestNG.SlaHelpBaseDynamicTest.createTask" />
-      <item itemvalue="TestNG.SlaHelpBaseStaticTest" />
-      <item itemvalue="TestNG.CatReleaseTest" />
-      <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
+      <item itemvalue="TestNG.SdDevBaseDynamicTest" />
+      <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.beforeClass" />
+      <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue" />
+      <item itemvalue="TestNG.PerformanceTests.getControlOperationMaintenance" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.SlaHelpBaseStaticTest" />
-        <item itemvalue="TestNG.SlaHelpBaseDynamicTest" />
-        <item itemvalue="TestNG.SlaHelpBaseDynamicTest.createTask" />
-        <item itemvalue="TestNG.CatReleaseTest" />
-        <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
+        <item itemvalue="TestNG.SdDevBaseDynamicTest" />
+        <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue" />
+        <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.beforeClass" />
+        <item itemvalue="TestNG.PerformanceTests.getControlOperationMaintenance" />
+        <item itemvalue="Application.PerformanceController" />
       </list>
     </recent_temporary>
   </component>
@@ -284,14 +268,6 @@
     <option name="lastFrameworkName" value="Selenium" />
     <option name="lastLanguageId" value="JAVA" />
     <option name="lastUrl" value="http://url/" />
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-11.0.21-corretto-11.0.21-8336523bb0d9-641c9356" />
-        <option value="jdk-11.0.22-corretto-11.0.22-3183f394aec4-fdae186d" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -371,28 +347,6 @@
       <workItem from="1707113490959" duration="604000" />
       <workItem from="1707115671669" duration="1900000" />
       <workItem from="1707198306554" duration="4574000" />
-      <workItem from="1708345452716" duration="11324000" />
-    </task>
-    <task id="LOCAL-00001" summary="fix/tests-support">
-      <created>1687150315393</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1687150315393</updated>
-    </task>
-    <task id="LOCAL-00002" summary="feature/ReleaseProc-Asserts">
-      <created>1687150359151</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1687150359151</updated>
-    </task>
-    <task id="LOCAL-00003" summary="feature/CatSanction and CatConfirmation Tests">
-      <created>1688634531358</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1688634531358</updated>
     </task>
     <task id="LOCAL-00004" summary="fix/TestsSupport">
       <created>1688634994052</created>
@@ -722,15 +676,36 @@
       <option name="project" value="LOCAL" />
       <updated>1707215560600</updated>
     </task>
-    <task id="LOCAL-00052" summary="added sd dev test scenarios. refactoring">
-      <option name="closed" value="true" />
-      <created>1707721222600</created>
+    <task id="LOCAL-00052" summary="feature/performance tests">
+      <created>1707828704367</created>
       <option name="number" value="00052" />
       <option name="presentableId" value="LOCAL-00052" />
       <option name="project" value="LOCAL" />
-      <updated>1707721222600</updated>
+      <updated>1707828704367</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="feature/performance tests">
+      <created>1707828708534</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1707828708534</updated>
+    </task>
+    <task id="LOCAL-00054" summary="feature/performance tests">
+      <created>1707828877326</created>
+      <option name="number" value="00054" />
+      <option name="presentableId" value="LOCAL-00054" />
+      <option name="project" value="LOCAL" />
+      <updated>1707828877326</updated>
+    </task>
+    <task id="LOCAL-00055" summary="feature/sddev">
+      <option name="closed" value="true" />
+      <created>1707889370525</created>
+      <option name="number" value="00055" />
+      <option name="presentableId" value="LOCAL-00055" />
+      <option name="project" value="LOCAL" />
+      <updated>1707889370525</updated>
+    </task>
+    <option name="localTasksCounter" value="56" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -761,7 +736,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
         <entry key="a3617214-0463-4bb9-a828-11951a3da8d4">
@@ -774,7 +761,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="complete acceptance 2" />
     <MESSAGE value="receive random task with additional field." />
     <MESSAGE value="complete sanction scenario." />
     <MESSAGE value="add sanction test to Jenkins file." />
@@ -798,8 +784,9 @@
     <MESSAGE value="fix/dev task accepted" />
     <MESSAGE value="feature/sd bug" />
     <MESSAGE value="feature/release" />
-    <MESSAGE value="added sd dev test scenarios. refactoring" />
-    <option name="LAST_COMMIT_MESSAGE" value="added sd dev test scenarios. refactoring" />
+    <MESSAGE value="feature/performance tests" />
+    <MESSAGE value="feature/sddev" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/sddev" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -825,11 +812,6 @@
           <option name="timeStamp" value="104" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java</url>
-          <line>232</line>
-          <option name="timeStamp" value="107" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/CreateFromExcelTaskController.java</url>
           <line>57</line>
           <option name="timeStamp" value="122" />
@@ -853,29 +835,6 @@
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest2.java</url>
           <line>78</line>
           <option name="timeStamp" value="136" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java</url>
-          <line>361</line>
-          <option name="timeStamp" value="137" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelpBaseDynamicTest.java</url>
-          <line>74</line>
-          <properties class="com.ts.integration.tests.proc_sla_help.SlaHelpBaseDynamicTest" method="createTask">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="138" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelpBaseDynamicTest.java</url>
-          <line>51</line>
-          <properties class="com.ts.integration.tests.proc_sla_help.SlaHelpBaseDynamicTest" method="beforeClass">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="139" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

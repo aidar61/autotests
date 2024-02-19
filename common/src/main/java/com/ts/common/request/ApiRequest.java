@@ -66,7 +66,7 @@ public abstract class ApiRequest {
         return endpoint.substring(0, endpoint.length() - 1);
     }
 
-    public static String formatParameters(HashMap<String, String> parameters) {
+    public static String formatParameters(Map<String, String> parameters) {
         StringBuilder query = new StringBuilder("?");
         for (Map.Entry<String, String> entry : parameters.entrySet()) {
             query.append(entry.getKey() + "=" + entry.getValue() + "&");
