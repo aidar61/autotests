@@ -42,6 +42,8 @@ public enum Operations {
     LINK("%S_LINK"), // установить связь с GAP
     PRIVATE_COMMENT("%S_PRIVATECOMMENT"), // приватный комментарий
     PROVIDE_CONSULT("%S_PROVIDECONSULT"), // предоставить консультацию
+    CONSULT("%S_CONSULT"), // предоставить консультацию
+    SETCONSULTDATE("%S_SETCONSULTDATE"), // Установить дату оказания консультации
     ASK_FURTHER("%S_ASKFURTHER"), // задать дополнительный вопрос
     PASS_FOR_APPROVAL("%S_PASSFORAPPROVAL"), // передать на согласование
     CONFIRM_HIDDEN("%S_CONFIRMHIDDEN"), // подтвердить скрытый GAP
@@ -57,6 +59,7 @@ public enum Operations {
     SENDPATCH("%S_SENDPATCH"), // отменить заказ
     UNDOSENDPATCH("%S_UNDOSEND"), // отменить заказ
     SETCOMPAT("%S_SETCOMPAT"), // задать совместимость
+    EVALUATE_REQUEST_EXE("%S_EVALUATE_REQUEST_EXE"), // Оценить выполнение запроса
     TOPRECOST("%S_TOPRECOST"),//начать предварительный анализ
     REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
     PROVIDEREQINFO("%S_PROVIDEREQINFO"), // сообщить уточнение требований
