@@ -71,7 +71,7 @@ public class TrackStudioApiControllers {
     private SdOptimizationController sdOptimizationController;
     private ReleaseController releaseController;
     private SdDevController sdDevController;
-    private PerformanceController performanceController;
+//    private PerformanceController performanceController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
@@ -101,7 +101,7 @@ public class TrackStudioApiControllers {
         this.sdOptimizationController = new SdOptimizationController(STAND_URL, authToken);
         this.releaseController = new ReleaseController(STAND_URL, authToken);
         this.sdDevController = new SdDevController(STAND_URL, authToken);
-        this.performanceController = new PerformanceController(STAND_URL, authToken);
+//        this.performanceController = new PerformanceController(STAND_URL, authToken);
     }
 
     public GeneralTask receiveGeneralTask(String slaTaskNumber) {
