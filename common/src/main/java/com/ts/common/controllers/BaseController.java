@@ -288,6 +288,20 @@ public class BaseController extends ApiRequest {
         return null;
     }
 
+    public List<String> getUDF_SLA_CONSULTPROVIDEDATE(TaskType taskType, Operations operations, String taskNumber) {
+        try {
+            super.setAuthToken(new AuthToken("root", "password"));
+            var operationId = generateOperationID(taskType, operations);
+            var response =
+                    super.get(getEndpoint(REST, TrackStudioEndPoints.OPERATION, operationId.getId(), taskNumber, "context"));
+            return new JsonPath(response.asString()).getList("udfs.UDF_SLA_CONSULTPROVIDEDATE.stringValueSelector", String.class);
+
+        } catch (Exception e) {
+            log.error("Не удалось получить Дата предоставления консультации: {}", e.getMessage());
+        }
+        return null;
+    }
+
     public List<String> getBranches(String parentDetailString) {
         return new JsonPath(parentDetailString).getList("udfs.UDF_WORKTASK_BRANCH.stringValueSelector", String.class);
     }

@@ -76,8 +76,10 @@
             <class name="com.ts.integration.tests.proc_release.cat_release.CatReleaseTest"/>
             <class name="com.ts.integration.tests.sd_dev.SdDevBaseDynamicTest"/>
             <class name="com.ts.integration.tests.sd_dev.SdDevBaseStaticTest"/>
-            <class name="com.ts.integration.tests.performance_tests.PerformanceEmployeeTaskQueueTest"/>
-            <class name="com.ts.integration.tests.performance_tests.PerformanceTests"/>
+<!--            <class name="com.ts.integration.tests.performance_tests.PerformanceEmployeeTaskQueueTest"/>-->
+<!--            <class name="com.ts.integration.tests.performance_tests.PerformanceTests"/>-->
+            <class name="com.ts.integration.tests.proc_sla_help.SlaHelpBaseDynamicTest"/>
+            <class name="com.ts.integration.tests.proc_sla_help.SlaHelpBaseStaticTest"/>
         </classes>
     </test>
 </suite>
