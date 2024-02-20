@@ -22,8 +22,7 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.fail;
+import static org.testng.Assert.*;
 
 @Slf4j
 public class CommonAssert {
@@ -36,6 +35,25 @@ public class CommonAssert {
 
     public static CommonAssert assertThat(Response response) {
         return new CommonAssert(response);
+    }
+
+    @Step("[ASSERT] ({0}) Checking response task for empty")
+    public CommonAssert isEmptyBody(String description, String path, String expected) {
+        var actual = new JsonPath(response.asString()).getList(path, String.class);
+        Assertions.assertThat(actual)
+                .withFailMessage("Code is not correct expected %s, actual %s", expected,
+                        String.join("|", actual))
+                .allMatch(x -> !Objects.equals(x, expected));
+        log.info(description + " is correct Actual {}, Expected {}", String.join("|", actual), expected);
+        return this;
+    }
+
+    @Step("[ASSERT] ({0}) Checking response task for empty")
+    public CommonAssert isNotEmptyBody(String description) {
+        var actual = response.asString();
+        assertFalse(actual.isEmpty(), "Body is empty");
+        log.info(description + " is correct Actual {}", actual);
+        return this;
     }
 
     @Step("[ASSERT] Checking BACK_UDF_WORKTASK_DEPENDBF task , Expected: {0}")
@@ -58,6 +76,28 @@ public class CommonAssert {
         String actualFieldValue = new JsonPath(response.asString()).getString(path);
         assertEquals(actualFieldValue, expectedFieldValue, description + " parameters is match: ");
         log.info(description + " is correct Actual {}, Expected {}", actualFieldValue, expectedFieldValue);
+        return this;
+    }
+
+    @Step("[ASSERT] ({0}) Checking task field, Expected is {1}")
+    public CommonAssert fieldFromListIsNotEmpty(String description, String expectedFieldValue, String path) {
+        var actualFieldValues = new JsonPath(response.asString()).getList(path, String.class);
+        Assertions.assertThat(actualFieldValues)
+                .withFailMessage("Code is not correct expected %s, actual %s", expectedFieldValue,
+                        String.join("|", actualFieldValues))
+                .anyMatch(x -> x.equals(expectedFieldValue));
+        log.info(description + " is correct Actual {}, Expected {}", String.join("|", actualFieldValues), expectedFieldValue);
+        return this;
+    }
+
+    @Step("[ASSERT] ({0}) Checking task field, Expected is {1}")
+    public CommonAssert fieldFromListIsEmpty(String description, String expectedFieldValue, String path) {
+        var actualFieldValues = new JsonPath(response.asString()).getList(path, String.class);
+        Assertions.assertThat(actualFieldValues)
+                .withFailMessage("Code is not correct expected %s, actual %s", expectedFieldValue,
+                        String.join("|", actualFieldValues))
+                .anyMatch(x -> !x.equals(expectedFieldValue));
+        log.info(description + " is correct Actual {}, Expected {}", String.join("|", actualFieldValues), expectedFieldValue);
         return this;
     }
 
@@ -267,13 +307,13 @@ public class CommonAssert {
     @Step("[ASSERT] Checking udf task type of {0} is correct, Expected: {1}")
     public CommonAssert isCorrectUdfTask(Udfs.UdfSd type, String expected) {
         var actual = new JsonPath(response.asString()).getObject("udfs." + type.udfId, UdfTask.class).getTaskValue();
-        var formattedValues = Arrays.stream(actual).map(com.ts.common.entitites.commonEntities.Task::getNumber).collect(Collectors.joining("|"));
+        var formattedActualData = Arrays.stream(actual).map(com.ts.common.entitites.commonEntities.Task::getNumber).collect(Collectors.joining("|"));
         Assertions
                 .assertThat(actual)
-                .withFailMessage("%s is not correct expected %s, actual %s", type.name(), expected, formattedValues)
+                .withFailMessage("Code is not correct expected %s, actual %s", expected, formattedActualData)
                 .anyMatch(x -> x.getNumber().equals(expected));
         log.info("Task number is correct Actual: {}, Expected: {}"
-                , formattedValues, expected);
+                , formattedActualData, expected);
         return this;
     }
 

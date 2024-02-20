@@ -5,12 +5,22 @@ public enum Operations {
 
     CAT("CAT_%S"),
     CANCEL_BUG("%S_CANCELBUG"),
+    FINISHPLANNING("%S_FINISHPLANNING"),
+    RETURNPLANNING("%S_RETURNPLANNING"),
+    STARTTESTING("%S_STARTTESTING"),
+    FINISHTESTING("%S_FINISHTESTING"),
+    STARTISSUE("%S_STARTISSUE"),
+    FINISHISSUE("%S_FINISHISSUE"),
+    TOARCHIVE("%S_TOARCHIVE"),
+    RETURNPREPARATION("%S_RETURNPREPARATION"),
+    RETURNTESTING("%S_RETURNTESTING"),
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
     CHANGE("%S_CHANGE"), // изменить аттрибуты решения
     COMMENT("%S_COMMENT"), // коментарий
     BUGDECLINE("%S_BUGDECLINE"), // отклонить ошибку
     CHANGE_PLAN("%S_CHANGEPLAN"), // коррекция плана
     CLI_COMMENT("%S_CLICOMMENT"), // задать вопрос
+    CHANGE_PRIORITY("%S_CHANGEPRIORITY"), // Изменить приоритет
     CHANGE_STATUS("%S_CHANGESTATUS"), // изменить состояние
     CHANGE_RES_PERSON("%S_REASSIGN"),//изменить ответственного
     CHANGE_CURRENT_ROLE("%S_CHANGECURRENTROLE"),//изменить ответственную роль
@@ -32,6 +42,8 @@ public enum Operations {
     LINK("%S_LINK"), // установить связь с GAP
     PRIVATE_COMMENT("%S_PRIVATECOMMENT"), // приватный комментарий
     PROVIDE_CONSULT("%S_PROVIDECONSULT"), // предоставить консультацию
+    CONSULT("%S_CONSULT"), // предоставить консультацию
+    SETCONSULTDATE("%S_SETCONSULTDATE"), // Установить дату оказания консультации
     ASK_FURTHER("%S_ASKFURTHER"), // задать дополнительный вопрос
     PASS_FOR_APPROVAL("%S_PASSFORAPPROVAL"), // передать на согласование
     CONFIRM_HIDDEN("%S_CONFIRMHIDDEN"), // подтвердить скрытый GAP
@@ -40,6 +52,14 @@ public enum Operations {
     DECLINE("%S_DECLINE"), // отклонить
     INANALYSIS("%S_INANALYSIS"), // В АНАЛИЗЕ
     UNDODECLINE("%S_UNDODECLINE"), // отменить заказ
+    INPATCH("%S_INPATCH"), // отменить заказ
+    UNDOINPATCH("%S_UNDOINPATCH"), // отменить заказ
+    PROVIDE_FIX_DEADLINE("%S_PROVIDEFIXDEADLINE"), // Сообщить срок предоставления решения
+    UNDOSEND("%S_UNDOSEND"), // отменить заказ
+    SENDPATCH("%S_SENDPATCH"), // отменить заказ
+    UNDOSENDPATCH("%S_UNDOSEND"), // отменить заказ
+    SETCOMPAT("%S_SETCOMPAT"), // задать совместимость
+    EVALUATE_REQUEST_EXE("%S_EVALUATE_REQUEST_EXE"), // Оценить выполнение запроса
     TOPRECOST("%S_TOPRECOST"),//начать предварительный анализ
     REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
     PROVIDEREQINFO("%S_PROVIDEREQINFO"), // сообщить уточнение требований
@@ -47,7 +67,10 @@ public enum Operations {
     SD_QUESTION_LINK("SDQUESTION_LINK"), // привязать вопрос клиенту
     ACCEPTHOTFIX("%S_ACCEPTHOTFIX"), // подтвердить исправление
     BEGINCOST_PRE("%S_BEGINCOST_PRE"), // передать на предварительную оценку аккаунт-менеджеру
+    BEGINCOST("%S_BEGINCOST"),
     BEGINCOST_FINAL("%S_BEGINCOST_FINAL"), // передать на окончательную оценку аккаунт-менеджеру
+    SENDCOST("%S_SENDCOST"), // Сообщить условия реализации
+    UNDOSENDCOST("%S_UNDOSENDCOST"), // Отменить сообщение условий
     SENDCOST_PRE("%S_SENDCOST_PRE"), // Сообщить предварительные условия реализации
     ALTERNATECOST("%S_ALTERNATECOST"), // Задать вопрос или предложить альтернативные вопросы реализации
     ACCEPTPRECOST("%S_ACCEPTPRECOST"), // Принять предварительные условия реализации
@@ -114,6 +137,7 @@ public enum Operations {
     CHANGE_CAT_TO_BUG_TASK("%S_CHANGECATTOBUGTASK"), //
     CHANGE_CAT_TO_TECH_TASK("%S_CHANGECATTTOTECHTAS"), //
     CHANGE_CHANGE_SEVERITY("%S_CHANGESEVERITY"), //
+    CHANGE_CAT_TO_TEST_TASK("%S_CHANGECATTOTESTTASK"), //
     TO_ACCEPTANCE_BUG("%S_TOACCEPTANCEBUG"),
     ACCEPT_AND_CLOSE("%S_ACCEPTANDCLOSE"),
     DECLINE_ACCEPT("%S_DECLINEACCEPT"),
@@ -130,6 +154,10 @@ public enum Operations {
     CHANGE_PLAN_FD("%S_CHANGEPLANFD"), //Изменить планируемую дату начала
     CHANGE_PLAN_TD("%S_CHANGEPLANTD"), //Изменить планируемую дату завершения
     CHANGE_CAT("%S_CHANGECAT"), //Изменить планируемую дату завершения
+    CLOSE_WO_PATCH("%S_CLOSEWOPATCH"), //Изменить планируемую дату завершения
+    UNDO_CLOSE("%S_UNDOCLOSE"), //Изменить планируемую дату завершения
+    ACCOUNT_IN_LICENSE("%S_ACCOUNTINLICENSE"), //Учесть в лицензионной стоимости
+    CORRECT_BUDGET("%S_CORRECT_BUDGET"), //Учесть в лицензионной стоимости
 
     CHANGE_SERVICE("%S_CHANGESERVICE");
 

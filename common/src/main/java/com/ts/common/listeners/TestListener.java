@@ -10,7 +10,7 @@ import org.testng.TestListenerAdapter;
 
 @Slf4j
 public class TestListener extends TestListenerAdapter {
-    
+
     @Override
     public void beforeConfiguration(ITestResult tr) {
         super.beforeConfiguration(tr);
@@ -25,21 +25,21 @@ public class TestListener extends TestListenerAdapter {
     @Override
     public void onTestSuccess(ITestResult tr) {
         printTestResult(tr);
-        
+
         super.onTestSuccess(tr);
     }
 
     @Override
     public void onTestFailure(ITestResult tr) {
         printTestResult(tr);
-        
+
         super.onTestFailure(tr);
     }
 
     @Override
     public void onTestSkipped(ITestResult tr) {
         printTestResult(tr);
-        
+
         super.onTestSkipped(tr);
     }
 

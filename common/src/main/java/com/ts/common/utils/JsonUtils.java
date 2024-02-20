@@ -16,6 +16,10 @@ import java.io.IOException;
 public class JsonUtils {
     private final static ObjectMapper objectMapper = new ObjectMapper();
 
+    public static String removeExtraCharacters(Response response) {
+        return response.asString().replace("\\&", "\\\\&");
+    }
+
     public static <T extends BaseEntity> T convertJsonToObject(File json, Class<T> tClass) {
         try {
             return objectMapper.readValue(json, tClass);

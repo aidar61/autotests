@@ -15,9 +15,11 @@ import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
+import com.ts.common.enums.Users;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.ExtractResponseFieldUtils;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.JsonUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -41,12 +43,7 @@ import static com.ts.common.utils.RandomUtils.generateString;
 public class TechTaskBaseTest extends BaseIntegrationTest {
     public TechTaskController techTaskController;
     private GeneralTask task;
-    private String misService;
-    private String cdpBl;
-    private UdfTask productTask;
     private Parent parent;
-    private GrTaskTable grTaskTable;
-    private GrTaskDbEntity parentTaskFromDb;
     private String expectedCompletionDate;
     private UdfTask customerRequest;
     private User creator;
@@ -55,38 +52,35 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
     private String awaitDate;
     private Integer normBudgetValue;
     private Task dependTask;
-
+    private String MIS_SERVICE;
+    private String CDP_BL;
+    private Task[] PRODUCT;
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         techTaskController = apiController.getTechTaskController();
         userController = apiController.getUserController();
-        grTaskTable = dbHelper.getGrTaskTable();
-        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
-                "task_category", EQUAL.operator, "CAT_GENPLAN",
-                AND.operator,
-                "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
-                AND.operator,
-                "task_path", LIKE.operator, "%/2405/758009%");
+        GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
+        GrTaskDbEntity parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_GENPLAN", AND.operator, "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(), AND.operator, "task_path", LIKE.operator, "%/2405/758009%");
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.CAT_TECHTASK, Operations.CAT);
-        var tasks = techTaskController.getTaskForSDRequest(parent.getNumber());
-        productTask = tasks.get("UDF_PRODUCT");
-        var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
-                "task_category", EQUAL.operator, "CAT_SLABUG",
-                AND.operator,
-                "task_status", NOT_EQUAL.operator, STATUS_PROJECT_PLANNED.name());
+        var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_SLABUG", AND.operator, "task_status", NOT_EQUAL.operator, STATUS_PROJECT_PLANNED.name());
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
         var dependTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_DEVTASK", AND.operator, "task_status", EQUAL.operator, STATUS_WORKTASK_INWORK.name());
         dependTask = new Task(dependTaskFromDb.getTask_id(), dependTaskFromDb.getTask_number());
-        misService = techTaskController.getMisService().get(0);
-        cdpBl = techTaskController.getCdpBl();
+
+        var parentPayloadResponse = techTaskController.getParentPayload(parent.getNumber(), "CAT_TECHTASK");
+        ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
+        MIS_SERVICE = techTaskController.getParent_UDF_MIS_SERVICE(parentPayload).get(0);
+        CDP_BL = techTaskController.getParent_UDF_CDP_BL(parentPayload).get(0);
+        PRODUCT = techTaskController.getParent_UDF_PRODUCT(parentPayload);
 
         //Employees
         var employees = userController.receiveUserByTask(parent.getNumber());
         Collections.shuffle(employees);
-        var creators = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта") && f.getForUser().getActive() == true).collect(Collectors.toList());
-        var handlers = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && f.getForUser().getActive() == true).collect(Collectors.toList());
+        var creators = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта") && f.getForUser().getActive()).collect(Collectors.toList());
+        var handlers = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && f.getForUser().getActive()).collect(Collectors.toList());
         creator = creators.get(0).getForUser();
         handlerUser = handlers.get(0).getForUser();
         awaitDate = DateUtils.getCurrentDate(0);
@@ -106,10 +100,10 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         expectedCompletionDate = DateUtils.getCurrentDate(1);
         udf.setUdfUser(generateUdfUser(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR));
         udf.setSecondUdfUser(generateUdfUser(UDF_WATCHER, BABUSHKIN_IVAN));
-        if (cdpBl != null) udf.setUdfList(generateUdfList(UDF_CDP_BL, cdpBl));
+        if (CDP_BL != null) udf.setUdfList(generateUdfList(UDF_CDP_BL, CDP_BL));
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CORE));
         udf.setUdfString(generateUdfString(UDF_SD_NOMODULE_REASON, generateString()));
-        if (misService != null) udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, misService));
+        if (MIS_SERVICE != null) udf.setNinethUdfList(generateUdfList(UDF_MIS_SERVICE, MIS_SERVICE));
         udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR));
         udf.setSeventhUdfList(generateUdfList(UDF_WORKTASK_ANALYSIS, YES_V2));
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, DateUtils.getCurrentDate(0)));
@@ -122,7 +116,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         dependTaskFNC.put(WORKTASK_TESTTASK, userData2);
         dependTaskFNC.put(CUSTOMER_REQUEST, userData3);
         udf.setEighthUdfTask(generateUdfTask(UDF_WORKTASK_DEPENDTASKFNC, dependTaskFNC));
-        udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, productTask.getTaskValue()[0]));
+        udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, PRODUCT[0]));
         udf.setThirdUdfList(generateUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_OFF));
         udf.setSeventhUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES));
         udf.setFifthUdfTask(customerRequest);
@@ -173,18 +167,10 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
         task.refreshUdf(udf);
         techTaskController.performCommonOperation(task, ACCEPT_IN_WORK);
-        ApiAsserts.assertThat(techTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask()
-                .isCorrectStatus(STATUS_WORKTASK_INWORK);
+        ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
 
         var response = apiController.receiveTask(task.getNumber());
-        CommonAssert
-                .assertThat(response)
-                .isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate)
-                .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, awaitBudgetValue)
-                .isCorrectUdfDouble("Первоначальная оценка трудоёмкости", UDF_WORKTASK_FIRSTPLANBUDGET, awaitBudgetValue);
+        CommonAssert.assertThat(response).isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, awaitBudgetValue).isCorrectUdfDouble("Первоначальная оценка трудоёмкости", UDF_WORKTASK_FIRSTPLANBUDGET, awaitBudgetValue);
     }
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "taskStart")
@@ -203,32 +189,21 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_CLOSED);
 
         var childTasks = techTaskController.getBackLinks(task.getNumber());
-        var workTaskWork = ExtractResponseFieldUtils
-                .extractThat(childTasks)
-                .extractByPath("BACK_UDF_WORKTASK_WORK", UdfTask.class);
+        var workTaskWork = ExtractResponseFieldUtils.extractThat(childTasks).extractByPath("BACK_UDF_WORKTASK_WORK", UdfTask.class);
         var docTaskNumber = Objects.requireNonNull(Arrays.stream(workTaskWork.getTaskValue()).findFirst().orElse(null)).getNumber();
+        apiController.updateToken(generateAuthToken(Users.ROOT));
         var docTask = apiController.receiveTask(docTaskNumber);
 
-        CommonAssert
-                .assertThat(docTask)
-                .isCorrectTaskCategory("CAT_DOCTASK")
-                .isCorrectTaskStatus(STATUS_WORKTASK_ASSIGNED)
-                .isCorrectSubmitterUser("root")
-                .isCorrectHandlerUser("wc_gtd")
-                .isCorrectUdfList(UDF_CDP_ACCEPTANCE, "ff8081813fce5b48013fce5de6b40002")//Не требуется
+        CommonAssert.assertThat(docTask).isCorrectTaskCategory("CAT_DOCTASK").isCorrectTaskStatus(STATUS_WORKTASK_ASSIGNED).isCorrectSubmitterUser("root").isCorrectHandlerUser("wc_gtd").isCorrectUdfList(UDF_CDP_ACCEPTANCE, "ff8081813fce5b48013fce5de6b40002")//Не требуется
                 .isCorrectUdfList(UDF_WORKTASK_ANALYSIS, "ff8080812f8cd356012f908c2bd8005a")//Не требуется
                 .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, 8);
 
-        var workTaskAccept = ExtractResponseFieldUtils
-                .extractThat(childTasks)
-                .extractByPath("BACK_UDF_WORKTASK_ACCEPTTASK", UdfTask.class);
+        var workTaskAccept = ExtractResponseFieldUtils.extractThat(childTasks).extractByPath("BACK_UDF_WORKTASK_ACCEPTTASK", UdfTask.class);
 
         var acceptTaskNumber = Objects.requireNonNull(Arrays.stream(workTaskAccept.getTaskValue()).findFirst().orElse(null)).getNumber();
         var acceptTask = apiController.receiveTask(acceptTaskNumber);
 
-        CommonAssert
-                .assertThat(acceptTask)
-                .isCorrectTaskCategory("CAT_ACCEPTTASK")
+        CommonAssert.assertThat(acceptTask).isCorrectTaskCategory("CAT_ACCEPTTASK")
                 .isCorrectTaskStatus(STATUS_WORKTASK_ASSIGNED)
                 .isCorrectSubmitterUser(handlerUser.getLogin())
                 .isCorrectHandlerUser(creator.getLogin())
@@ -290,11 +265,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
 
         var response = apiController.receiveTask(task.getNumber());
-        CommonAssert
-                .assertThat(response)
-                .isCorrectUdfDate(UDF_WORKTASK_PLANTD, awaitDate)
-                .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, awaitBudgetValue)
-                .isCorrectUdfDouble("Первоначальная оценка трудоёмкости", UDF_WORKTASK_FIRSTPLANBUDGET, 5);
+        CommonAssert.assertThat(response).isCorrectUdfDate(UDF_WORKTASK_PLANTD, awaitDate).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, awaitBudgetValue).isCorrectUdfDouble("Первоначальная оценка трудоёмкости", UDF_WORKTASK_FIRSTPLANBUDGET, 5);
     }
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Отложить", dependsOnMethods = "taskStart2")
@@ -314,8 +285,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
     @Test(groups = {"WorkTask", "Regression"}, description = "В свзанной задаче проверить наличие свзи с типом \"Блокирует задачи\"", dependsOnMethods = "taskPostpone")
     public void checkDependTaskExistReference() {
         var response = techTaskController.getBackLinks(dependTask.getNumber());
-        CommonAssert.assertThat(response)
-                .isDependTaskExistReference(task.getNumber());
+        CommonAssert.assertThat(response).isDependTaskExistReference(task.getNumber());
     }
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Снять задачу", dependsOnMethods = "checkDependTaskExistReference")
@@ -328,19 +298,14 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"818181698c1b5016018c1ea5127713e0\",\"name\":\"Предварительный анализ\",\"order\":0,\"taskId\":\"" + task.getId() + "\",\"progress\":0,\"description\":\"\",\"status\":\"DELETE\",\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeDraftAsString\":\"-\"," + "\"workTypeAsString\":\"-\",\"draftChanged\":true},{\"id\":\"818181698c1b5016018c1ea53a331412\",\"name\":\"Предварительный анализ 1\",\"order\":1,\"taskId\":\"818181698c1b5016018c1ea5042f13b5\",\"weight\":1,\"budget\":7200,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c2516c220101516c711ff80024\",\"workTypeNorm\":2.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeDraftAsString\":\"-\",\"workTypeAsString\":\"[0701] Иное\",\"draftChanged\":true}]"));
         task.refreshUdf(udf);
         techTaskController.performCommonOperation(task, CANCEL);
-        ApiAsserts
-                .assertThat(techTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST)
-                .isCorrectErrorMessage("Задача не может быть закрыта пока не закрыты все подзадачи:");
+        ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST).isCorrectErrorMessage("Задача не может быть закрыта пока не закрыты все подзадачи:");
     }
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Снять задачу CAT_ACCEPTTASK", dependsOnMethods = "taskCancel")
     public void cancelChildTechTask() {
         apiController.updateToken(generateAuthToken(handlerUser));
         var response = techTaskController.getBackLinks(task.getNumber());
-        var udfAcceptTask = ExtractResponseFieldUtils
-                .extractThat(response)
-                .extractByPath("BACK_UDF_WORKTASK_ACCEPTTASK", UdfTask.class);
+        var udfAcceptTask = ExtractResponseFieldUtils.extractThat(response).extractByPath("BACK_UDF_WORKTASK_ACCEPTTASK", UdfTask.class);
         var acceptTask = InitEntities.getGeneralTask(TaskType.CAT_ACCEPTTASK, Operations.CAT);
         acceptTask.setNumber(Objects.requireNonNull(Arrays.stream(udfAcceptTask.getTaskValue()).findAny().orElse(null)).getNumber());
         udf = refreshUdf();
@@ -349,12 +314,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         udf.setUdfList(generateUdfList(UDF_WORKTASK_QUALITY, UDF_WORKTASK_QUALITY_NORM));
         acceptTask.refreshUdf(udf);
         techTaskController.performCommonOperation(acceptTask, CANCEL);
-        ApiAsserts
-                .assertThat(techTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask()
-                .isCorrectStatus(STATUS_WORKTASK_CLOSED);
+        ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_CLOSED);
     }
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Снять задачу CAT_TECHTASK", dependsOnMethods = "cancelChildTechTask")
@@ -367,13 +327,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"818181698c1b5016018c1ea5127713e0\",\"name\":\"Предварительный анализ\",\"order\":0,\"taskId\":\"" + task.getId() + "\",\"progress\":0,\"description\":\"\",\"status\":\"DELETE\",\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeDraftAsString\":\"-\"," + "\"workTypeAsString\":\"-\",\"draftChanged\":true},{\"id\":\"818181698c1b5016018c1ea53a331412\",\"name\":\"Предварительный анализ 1\",\"order\":1,\"taskId\":\"818181698c1b5016018c1ea5042f13b5\",\"weight\":1,\"budget\":7200,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c2516c220101516c711ff80024\",\"workTypeNorm\":2.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeDraftAsString\":\"-\",\"workTypeAsString\":\"[0701] Иное\",\"draftChanged\":true}]"));
         task.refreshUdf(udf);
         techTaskController.performCommonOperation(task, CANCEL);
-        ApiAsserts
-                .assertThat(techTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask()
-                .isCorrectStatus(STATUS_WORKTASK_CLOSED)
-                .isCorrectResolution(WILL_NOT_BE_IMPLEMENTED_V2);
+        ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_CLOSED).isCorrectResolution(WILL_NOT_BE_IMPLEMENTED_V2);
     }
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskCancel2")
@@ -384,10 +338,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
         task.refreshUdf(udf);
         techTaskController.performCommonOperation(task, RETURN);
-        ApiAsserts.assertThat(techTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class).assertTask()
-                .isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
+        ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
     }
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Отменить назначение", dependsOnMethods = "taskReturn3")
@@ -397,9 +348,6 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"818181698c1b5016018c1ea5127713e0\",\"name\":\"Предварительный анализ\",\"order\":0,\"taskId\":\"" + task.getId() + "\",\"progress\":0,\"description\":\"\",\"status\":\"DELETE\",\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeDraftAsString\":\"-\"," + "\"workTypeAsString\":\"-\",\"draftChanged\":true},{\"id\":\"818181698c1b5016018c1ea53a331412\",\"name\":\"Предварительный анализ 1\",\"order\":1,\"taskId\":\"818181698c1b5016018c1ea5042f13b5\",\"weight\":1,\"budget\":7200,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c2516c220101516c711ff80024\",\"workTypeNorm\":2.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeDraftAsString\":\"-\",\"workTypeAsString\":\"[0701] Иное\",\"draftChanged\":true}]"));
         task.refreshUdf(udf);
         techTaskController.performCommonOperation(task, ASSIGNCANCEL);
-        ApiAsserts.assertThat(techTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class).assertTask()
-                .isCorrectStatus(STATUS_WORKTASK_NEW);
+        ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_NEW);
     }
 }
