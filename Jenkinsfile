@@ -12,7 +12,7 @@ pipeline {
         )
         choice(
             name:"TEST_TYPE",
-            choices:['Regression','SlaFeature', 'SlaBug', 'SlaHelp', 'PotentialGap', 'GapSolution', 'Advice', 'DevTask', 'WorkTask', 'BugTask',"SdQuestion", "PROC_SDBUG", "ProcRelease", "Performance", "ProcSdDev"],
+            choices:['Regression','SlaFeature', 'SlaBug', 'SlaHelp', 'PotentialGap', 'GapSolution', 'Advice', 'DevTask', 'WorkTask', 'BugTask',"SdQuestion", "PROC_SDBUG", "ProcRelease", "ProcSdDev"],
             description: 'Choose type test'
         )
     }
