@@ -75,19 +75,33 @@ public class TrackStudioApiControllers {
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
-        var fields = this.getClass().getDeclaredFields();
-        for (var field : fields) {
-            if (ApiRequest.class.isAssignableFrom(field.getType())) {
-                field.setAccessible(true);
-                try {
-                    var constructor = field.getType().getConstructor(String.class, AuthToken.class);
-                    field.set(this, constructor.newInstance(STAND_URL, authToken));
-                } catch (NoSuchMethodException | InstantiationException | IllegalAccessException |
-                         InvocationTargetException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
+        this.userController = new UserController(STAND_URL, authToken);
+        this.slaHelpController = new SlaHelpController(STAND_URL, authToken);
+        this.slaBugController = new SlaBugController(STAND_URL, authToken);
+        this.slaFeatureController = new SlaFeatureController(STAND_URL, authToken);
+        this.potentialGapController = new PotentialGapController(STAND_URL, authToken);
+        this.baseController = new BaseController(STAND_URL, authToken);
+        this.gapSolutionController = new GapSolutionController(STAND_URL, authToken);
+        this.releaseModuleController = new ReleaseModuleController(STAND_URL, authToken);
+        this.adviceController = new AdviceController(STAND_URL, authToken);
+        this.confirmationController = new ConfirmationController(STAND_URL, authToken);
+        this.sanctionController = new SanctionController(STAND_URL, authToken);
+        this.devTaskController = new DevTaskController(STAND_URL, authToken);
+        this.workTaskController = new WorkTaskController(STAND_URL, authToken);
+        this.bugTaskController = new BugTaskController(STAND_URL, authToken);
+        this.sdQuestionController = new SdQuestionController(STAND_URL, authToken);
+        this.createFromExcelTaskController = new CreateFromExcelTaskController(STAND_URL, authToken);
+        this.codeReviewController = new CodeReviewController(STAND_URL, authToken);
+        this.techTaskController = new TechTaskController(STAND_URL, authToken);
+        this.contingentTaskController = new ContingentTaskController(STAND_URL, authToken);
+        this.sdBugController = new SdBugController(STAND_URL, authToken);
+        this.sdImproveController = new SdImproveController(STAND_URL, authToken);
+        this.sdDocImproveController = new SdDocImproveController(STAND_URL, authToken);
+        this.sdDocBugController = new SdDocBugController(STAND_URL, authToken);
+        this.sdOptimizationController = new SdOptimizationController(STAND_URL, authToken);
+        this.releaseController = new ReleaseController(STAND_URL, authToken);
+        this.sdDevController = new SdDevController(STAND_URL, authToken);
+        this.performanceController = new PerformanceController(STAND_URL, authToken);
     }
 
     public GeneralTask receiveGeneralTask(String slaTaskNumber) {
