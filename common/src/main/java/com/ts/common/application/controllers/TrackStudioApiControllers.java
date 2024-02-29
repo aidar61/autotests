@@ -153,7 +153,6 @@ public class TrackStudioApiControllers {
 
     @Step("Пользователь: {0}")
     public void updateToken(AuthToken authToken) {
-        WaitManager.pause(5);
         var fields = this.getClass().getDeclaredFields();
         for (var field : fields) {
             if (ApiRequest.class.isAssignableFrom(field.getType())) {
