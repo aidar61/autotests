@@ -2,6 +2,7 @@ package com.ts.common.utils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 public class DateUtils {
@@ -12,5 +13,15 @@ public class DateUtils {
         } else {
             return LocalDate.now().format(dateTimeFormatter);
         }
+    }
+
+    public static String getCurrentDateTimeStamp() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        long timestamp = localDateTime.toEpochSecond(ZoneOffset.UTC) * 1000;
+        return String.valueOf(timestamp);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getCurrentDateTimeStamp());
     }
 }

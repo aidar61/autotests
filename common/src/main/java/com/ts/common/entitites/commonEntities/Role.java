@@ -26,6 +26,7 @@ public class Role extends BaseEntity {
     public enum Constants {
         CLIENT("Клиент"),
         EMPLOYEE("Сотрудник"),
+        ACCOUNT_MANAGER("Account-менеджер"),
         CLIENT_MANAGER("Менеджер клиента");
         @Getter
         private final String role;

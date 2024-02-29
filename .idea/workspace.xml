@@ -4,16 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/performance tests">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Tables.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBugBaseDynamicTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Sla Bug">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/ResponsibleParty.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/BaseEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelpBaseDynamicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelpBaseDynamicTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskStatuses.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskStatuses.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/DateUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBugBaseDynamicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBugBaseDynamicTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelpBaseStaticTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelpBaseStaticTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -25,10 +29,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="spring-beans.schema" />
-        <option value="Enum" />
         <option value="Kotlin Class" />
         <option value="Interface" />
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -123,7 +127,20 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.SlaBugBaseDynamicTest.slaBugCat">
+  <component name="RunManager" selected="TestNG.SlaBugBaseDynamicTest">
+    <configuration name="DateUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ts.common.utils.DateUtils" />
+      <module name="common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.common.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="CommonWorkTaskProcessTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -141,42 +158,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PerformanceEmployeeTaskQueueTest.beforeClass" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.performance_tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.performance_tests" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.performance_tests.PerformanceEmployeeTaskQueueTest" />
-      <option name="METHOD_NAME" value="beforeClass" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.performance_tests.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.performance_tests" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.performance_tests.PerformanceEmployeeTaskQueueTest" />
-      <option name="METHOD_NAME" value="getPortletOfEmployeeTaskQueue" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SdDevBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -187,6 +168,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.sd_dev" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.sd_dev.SdDevBaseDynamicTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SlaBugBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_bug.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_bug" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_bug.SlaBugBaseDynamicTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -258,21 +256,21 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.DateUtils" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.SlaBugBaseDynamicTest" />
       <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
       <item itemvalue="TestNG.SlaBugBaseDynamicTest.slaBugCat" />
       <item itemvalue="TestNG.SdDevBaseDynamicTest" />
-      <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.beforeClass" />
-      <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.SlaBugBaseDynamicTest" />
+        <item itemvalue="Application.DateUtils" />
         <item itemvalue="TestNG.SlaBugBaseDynamicTest.slaBugCat" />
         <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
         <item itemvalue="TestNG.SdDevBaseDynamicTest" />
-        <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue" />
-        <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.beforeClass" />
       </list>
     </recent_temporary>
   </component>
@@ -360,14 +358,7 @@
       <workItem from="1707115671669" duration="1900000" />
       <workItem from="1707198306554" duration="4574000" />
       <workItem from="1707898497189" duration="1000" />
-      <workItem from="1709132683153" duration="1557000" />
-    </task>
-    <task id="LOCAL-00005" summary="fix/TestsSupport">
-      <created>1688635058703</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1688635058703</updated>
+      <workItem from="1709132683153" duration="18050000" />
     </task>
     <task id="LOCAL-00006" summary="fix/TestsSupport">
       <created>1688635179928</created>
@@ -719,7 +710,14 @@
       <option name="project" value="LOCAL" />
       <updated>1708414678393</updated>
     </task>
-    <option name="localTasksCounter" value="58" />
+    <task id="LOCAL-00058" summary="feature/Sla Bug">
+      <created>1709191775141</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1709191775141</updated>
+    </task>
+    <option name="localTasksCounter" value="59" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -775,7 +773,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="receive random task with additional field." />
     <MESSAGE value="complete sanction scenario." />
     <MESSAGE value="add sanction test to Jenkins file." />
     <MESSAGE value="Steps, DevTask" />
@@ -800,7 +797,8 @@
     <MESSAGE value="feature/release" />
     <MESSAGE value="feature/sddev" />
     <MESSAGE value="feature/performance tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/performance tests" />
+    <MESSAGE value="feature/Sla Bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/Sla Bug" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

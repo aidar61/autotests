@@ -29,8 +29,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import static com.ts.common.application.database.DbQueryHelper.Operators.EQUAL;
-import static com.ts.common.entitites.commonEntities.List.Constants.FIVE;
-import static com.ts.common.entitites.commonEntities.List.Constants.URGANCYHELP_YES;
+import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.CORE;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.enums.Operations.*;
@@ -103,11 +102,11 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .assertTask()
                 .isEquals(task);
 
-//        var taskDetail = apiController.receiveTask(task.getNumber());
-//        CommonAssert
-//                .assertThat(taskDetail)
-//                .isCorrectUdfList(UDF_SDDEV_CONDITIONSACCEPTED, CONDITIONS_ACCEPTED_NO.getId())
-//                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
+        var taskDetail = apiController.receiveTask(task.getNumber());
+        CommonAssert
+                .assertThat(taskDetail)
+                .isCorrectUdfList(UDF_SDDEV_CONDITIONSACCEPTED, CONDITIONS_ACCEPTED_NO.getId())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
     @Test(groups = {"SlaHelp", "Regression"}, description = "Задать вопрос", dependsOnMethods = "createTask")

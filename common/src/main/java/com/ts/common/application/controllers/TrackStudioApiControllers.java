@@ -26,7 +26,9 @@ import com.ts.common.controllers.workTask.TechTaskController;
 import com.ts.common.controllers.workTask.WorkTaskController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.entitites.tasks.Task;
+import com.ts.common.enums.Users;
 import com.ts.common.request.ApiRequest;
+import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import com.ts.common.utils.WaitManager;
 import io.qameta.allure.Step;
@@ -34,6 +36,7 @@ import io.restassured.response.Response;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.support.ui.Wait;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -114,7 +117,7 @@ public class TrackStudioApiControllers {
     }
 
     public Response receiveTask(String slaTaskNumber) {
-        WaitManager.pause(5);
+        updateToken(InitEntities.generateAuthToken(Users.ROOT));
         return this.response = this.baseController.receiveActualTask(slaTaskNumber);
     }
 
@@ -150,6 +153,7 @@ public class TrackStudioApiControllers {
 
     @Step("Пользователь: {0}")
     public void updateToken(AuthToken authToken) {
+        WaitManager.pause(5);
         var fields = this.getClass().getDeclaredFields();
         for (var field : fields) {
             if (ApiRequest.class.isAssignableFrom(field.getType())) {

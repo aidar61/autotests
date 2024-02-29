@@ -353,6 +353,14 @@ public class InitEntities {
                 .build();
     }
 
+    public static User generateUser(String id, String login, String name) {
+        return User.builder()
+                .id(id)
+                .login(login)
+                .name(name)
+                .build();
+    }
+
     public static User generateUser(User user) {
         return User.builder()
                 .id(user.getId())

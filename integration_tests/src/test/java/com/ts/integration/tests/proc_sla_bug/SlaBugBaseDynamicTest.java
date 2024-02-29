@@ -8,26 +8,26 @@ import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.entitites.commonEntities.*;
-import com.ts.common.entitites.commonEntities.udf.UdfString;
+import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.Operations;
-import com.ts.common.enums.Tables;
-import com.ts.common.enums.TaskType;
-import com.ts.common.enums.Users;
+import com.ts.common.enums.*;
+import com.ts.common.utils.DateUtils;
+import com.ts.common.utils.ExtractResponseFieldUtils;
 import com.ts.common.utils.InitEntities;
-import com.ts.common.utils.RandomUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.AKKREDITIVES;
 import static com.ts.common.entitites.commonEntities.Task.Constants.MTBANK;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.enums.Operations.ANALIZE;
-import static com.ts.common.enums.TaskStatuses.STATUS_SLABUG_NEW;
+import static com.ts.common.enums.Operations.*;
+import static com.ts.common.enums.TaskStatuses.*;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.*;
 
@@ -53,14 +53,17 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
         USER_ROLES = userController.receiveUserByTask(parentTaskNumber);
 
         CLIENT = userController.receiveUserByRole(USER_ROLES, Role.Constants.CLIENT, "root").getForUser();
+//        CLIENT = InitEntities.generateUser("818181df7b322025017b33fa24720f8a", "edyro@mtbank.by", "Дыро Елизавета Игоревна");
         CLIENT_MANAGER = userController.receiveUserByRole(USER_ROLES, Role.Constants.CLIENT_MANAGER, "root").getForUser();
+//        CLIENT_MANAGER = InitEntities.generateUser("818181b03c3a3f18013c3d38d5190138", "vvolskiy", "Вольский Валерий");
         EMPLOYEE = userController.receiveUserByRole(USER_ROLES, Role.Constants.EMPLOYEE, "root").getForUser();
+//        EMPLOYEE = InitEntities.generateUser("818181df795d7d1b01796b30780247fa", "mefimov", "Ефимов Михаил");
         EMPLOYEE_WATCHER = userController.receiveUserByRole(USER_ROLES, Role.Constants.EMPLOYEE, EMPLOYEE.getLogin()).getForUser();
-
+        EMPLOYEE_WATCHER = InitEntities.generateUser("8a8181df75b956e50175d653f6693b37", "aizotov", "Изотов Алексей");
         task = InitEntities.getGeneralTask(TaskType.SLA_BUG, Operations.CAT);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "создание")
+    @Test(groups = {"SlaBug", "Regression"}, description = "Создание CAT_SLABUG")
     public void slaBugCat() {
         apiController.updateToken(InitEntities.generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -89,8 +92,9 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_NEW);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "принять на анализ")
+    @Test(groups = {"SlaBug", "Regression"}, description = "Принять на анализ", dependsOnMethods = "slaBugCat")
     public void msgAnalyze() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
         task.refreshTask();
 
@@ -105,7 +109,428 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
         slaBugController.performCommonOperation(task, ANALIZE);
         ApiAsserts.assertThat(slaBugController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class);
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_ANALIZING);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
+                .isCorrectUdfUSer(UDF_ROLE_FIRST_LINE, CLIENT_MANAGER.getLogin());
     }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Запросить информацию", dependsOnMethods = "msgAnalyze")
+    public void requestInfo() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, REQUESTINFO);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_WAITING);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Отменить запрос информации", dependsOnMethods = "requestInfo")
+    public void undoRequestInfo() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, UNDOREQUESTINFO);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_ANALIZING);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE);
+
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Запросить информацию", dependsOnMethods = "undoRequestInfo")
+    public void requestInfoReply() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, REQUESTINFO);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_WAITING);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Предоставить информацию", dependsOnMethods = "requestInfoReply")
+    public void provideInfo() {
+        apiController.updateToken(generateAuthToken(CLIENT));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, PROVIDEINFO);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_ANALIZING);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Отклонить", dependsOnMethods = "provideInfo")
+    public void decline() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, DECLINE);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_DECLINED);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Вернуть на анализ", dependsOnMethods = "decline")
+    public void undoStart() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        task.setHandlerUser(CLIENT_MANAGER);
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, CLIENT_MANAGER));
+        task.refreshUdf(udf);
+
+        slaBugController.performCommonOperation(task, UNDOSTART);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_ANALIZING);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Начать работу", dependsOnMethods = "undoStart")
+    public void start() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, START);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_INWORK);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, DEVELOPER_ROLE_CURRENT)
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Вернуть на анализ", dependsOnMethods = "start")
+    public void undoStartReply() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        task.setHandlerUser(CLIENT_MANAGER);
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, CLIENT_MANAGER));
+        task.refreshUdf(udf);
+
+        slaBugController.performCommonOperation(task, UNDOSTART);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_ANALIZING);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Отклонить", dependsOnMethods = "undoStartReply")
+    public void declineReply() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, DECLINE);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_DECLINED);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Отменить заказ", dependsOnMethods = "declineReply")
+    public void undoDecline() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, UNDODECLINE);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_INWORK);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Запросить информацию", dependsOnMethods = "undoDecline")
+    public void requestInfoReplySecond() {
+
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, REQUESTINFO);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_WAITING);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Предоставить информацию", dependsOnMethods = "requestInfoReplySecond")
+    public void provideInfoReply() {
+        apiController.updateToken(generateAuthToken(CLIENT));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, PROVIDEINFO);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_ANALIZING);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Начать работу", dependsOnMethods = "provideInfoReply")
+    public void startReply() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, START);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_INWORK);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, DEVELOPER_ROLE_CURRENT)
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Предоставить временное решение", dependsOnMethods = "startReply")
+    public void provideTemporaryFixed() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        String expectedTempProvideDate = DateUtils.getCurrentDateTimeStamp();
+
+        udf.setUdfString(generateUdfString(UDF_SLABUG_TEMPPROVIDEDATE, expectedTempProvideDate));
+        task.refreshUdf(udf);
+
+        slaBugController.performCommonOperation(task, PROVIDETEMPORARYFIXED);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_TEMPORARYFIXED);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
+//                .isCorrectUdfString(UDF_SLABUG_TEMPPROVIDEDATE, expectedTempProvideDate);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Подтвердить исправление", dependsOnMethods = "provideTemporaryFixed")
+    public void acceptHotFix() {
+        apiController.updateToken(generateAuthToken(CLIENT));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, ACCEPTHOTFIX);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_INWORK);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, DEVELOPER_ROLE_CURRENT)
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Предоставить решение", dependsOnMethods = "acceptHotFix")
+    public void hotFix() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        String expectedTempProvideDate = DateUtils.getCurrentDateTimeStamp();
+
+        udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_NO));
+        udf.setUdfString(generateUdfString(UDF_SLABUG_PERMPROVIDEDATE, expectedTempProvideDate));
+        task.refreshUdf(udf);
+
+        slaBugController.performCommonOperation(task, HOTFIX);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_FIXED);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT);
+//                .isCorrectUdfString(UDF_SLABUG_PERMPROVIDEDATE, expectedTempProvideDate);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "hotFix")
+    public void returnTask() {
+        apiController.updateToken(generateAuthToken(CLIENT));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        slaBugController.performCommonOperation(task, RETURN);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_INWORK);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, DEVELOPER_ROLE_CURRENT);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Предоставить решение", dependsOnMethods = "returnTask")
+    public void hotFixReply() {
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        String expectedPermProvideDate = DateUtils.getCurrentDateTimeStamp();
+        udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, DOC_REVISION_YES));
+        udf.setUdfString(generateUdfString(UDF_SLABUG_PERMPROVIDEDATE, expectedPermProvideDate));
+        task.refreshUdf(udf);
+
+        slaBugController.performCommonOperation(task, HOTFIX);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_FIXED);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
+                .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
+
+        var childTasks = baseController.getBackLinks(task.getNumber());
+        var workTaskWork = ExtractResponseFieldUtils.extractThat(childTasks).extractByPath("BACK_UDF_WORKTASK_SDREQUEST", UdfTask.class);
+        var docTaskNumber = Objects.requireNonNull(Arrays.stream(workTaskWork.getTaskValue()).findFirst().orElse(null)).getNumber();
+        apiController.updateToken(generateAuthToken(Users.ROOT));
+
+        baseController.receiveActualTask(docTaskNumber);
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectTaskCategory("CAT_DOCTASK")
+                .isCorrectTaskStatus(STATUS_WORKTASK_ASSIGNED)
+                .isCorrectUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO)
+                .isCorrectUdfList(UDF_WORKTASK_ANALYSIS, UDF_WORKTASK_ANALYSIS_NO)
+                .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, 8);
+    }
+
+    @Test(groups = {"SlaBug", "Regression"}, description = "Ошибка устранена", dependsOnMethods = "hotFixReply")
+    public void acceptSolution() {
+        apiController.updateToken(generateAuthToken(CLIENT));
+        udf = refreshUdf();
+        task.refreshTask();
+
+        udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));
+        udf.setUdfString(generateUdfString(UDF_EVALUATING_REQUEST_COMMENT, generateString()));
+        task.refreshUdf(udf);
+
+        slaBugController.performCommonOperation(task, ACCEPTSOLUTION);
+        ApiAsserts.assertThat(slaBugController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLABUG_CLOSED);
+
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(baseController.getResponse())
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER);
+    }
+
 
 }

@@ -88,14 +88,38 @@ public class UserController extends ApiRequest {
         }
         return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().contains(login) && f.getForUser().getActive()).findFirst().get();
     }
+
     public UserRole receiveUserByRole(List<UserRole> userRoles, Role.Constants role, String exceptLogin) {
         Collections.shuffle(userRoles);
         if (role.getRole().equals("Клиент")) {
-            return userRoles.stream().filter(f -> f.getForUser().getLogin().contains("@") 
+            return userRoles.stream().filter(f -> f.getForUser().getLogin().contains("@")
                     && f.getAssignedRole().getName().equals(role.getRole())
                     && !f.getForUser().getLogin().equals(exceptLogin) && f.getForUser().getActive()).findFirst().get();
         }
         return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role.getRole()) && !f.getForUser().getLogin().contains(exceptLogin) && f.getForUser().getActive()).findFirst().get();
+    }
+
+    public UserRole receiveUserByRole(List<UserRole> userRoles, String exceptLogin, Role.Constants... role) {
+        Collections.shuffle(userRoles);
+
+        if (Arrays.stream(role).anyMatch(r -> r.getRole().equals("Клиент"))) {
+            return userRoles.stream().filter(f -> f.getForUser().getLogin().contains("@")
+                    && f.getAssignedRole().getName().equals(role[0].getRole())
+                    && f.getAssignedRole().getName().equals(role[1].getRole())
+                    && !f.getForUser().getLogin().equals(exceptLogin) && f.getForUser().getActive()).findFirst().get();
+        }
+        return userRoles.stream().filter(f ->
+                f.getAssignedRole().getName().equals(role[0].getRole())
+                        && f.getAssignedRole().getName().equals(role[1].getRole())
+                        && !f.getForUser().getLogin().contains(exceptLogin) && f.getForUser().getActive()).findFirst().get();
+    }
+
+    public UserRole receiveUserByRoles(List<UserRole> userRoles, String exceptLogin, Role.Constants... role) {
+        return Arrays.stream(role).map(r -> {
+            return userRoles.stream().filter(userRole ->
+                    userRole.getAssignedRole().getName().equals(r.getRole())
+                            && !userRole.getForUser().getLogin().contains(exceptLogin)).findFirst().get();
+        }).findAny().get();
     }
 
     public UserRole receiveUserByRole(List<UserRole> userRoles, String role, String login, boolean singleRole) {
