@@ -14,8 +14,11 @@ import com.ts.common.enums.*;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.ExtractResponseFieldUtils;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.WaitManager;
 import com.ts.integration.tests.BaseIntegrationTest;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -61,6 +64,11 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
         EMPLOYEE_WATCHER = userController.receiveUserByRole(USER_ROLES, Role.Constants.EMPLOYEE, EMPLOYEE.getLogin()).getForUser();
         EMPLOYEE_WATCHER = InitEntities.generateUser("8a8181df75b956e50175d653f6693b37", "aizotov", "Изотов Алексей");
         task = InitEntities.getGeneralTask(TaskType.SLA_BUG, Operations.CAT);
+    }
+
+    @BeforeMethod(alwaysRun = true)
+    public void beforeMethod() {
+        WaitManager.pause(5);
     }
 
     @Test(groups = {"SlaBug", "Regression"}, description = "Создание CAT_SLABUG")
