@@ -78,7 +78,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
         ROLE_CONTRACT_EMP = userController.receiveUserByRole(USER_ROLES, "Ведение контрактов", "root").getForUser();
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "создание")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "создание")
     public void createTask() {
         apiController.updateToken(InitEntities.generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -110,7 +110,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Задать вопрос", dependsOnMethods = "createTask")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Задать вопрос", dependsOnMethods = "createTask")
     public void taskCliComment() {
         apiController.updateToken(generateAuthToken(CLIENT));
         task.refreshTask();
@@ -127,7 +127,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Сообщить информацию (Комментарий)", dependsOnMethods = "taskCliComment")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Сообщить информацию (Комментарий)", dependsOnMethods = "taskCliComment")
     public void taskOurComment() {
         apiController.updateToken(generateAuthToken(CLIENT));
         task.refreshTask();
@@ -143,7 +143,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Изменить атрибуты запроса", dependsOnMethods = "taskOurComment")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить атрибуты запроса", dependsOnMethods = "taskOurComment")
     public void taskChangeAttr() {
         apiController.updateToken(generateAuthToken(CLIENT));
         task.refreshTask();
@@ -166,7 +166,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfString(UDF_SD_INITPERSON, sdInterPerson);
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Назначить наблюдателей клиента", dependsOnMethods = "taskChangeAttr")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Назначить наблюдателей клиента", dependsOnMethods = "taskChangeAttr")
     public void taskAppointCliWatchers() {
         apiController.updateToken(generateAuthToken(CLIENT));
         task.refreshTask();
@@ -186,7 +186,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfString(UDF_SD_CLIENTWATCHERS, email);
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Изменить автора", dependsOnMethods = "taskAppointCliWatchers")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить автора", dependsOnMethods = "taskAppointCliWatchers")
     public void taskChangeAuthors() {
         var authors = slaHelpController.getAuthors(task.getTaskType(), CHANGE_AUTHOR, task.getNumber());
         if (authors == null) {
@@ -212,7 +212,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectSubmitterUser(authors[0].getLogin());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Изменить модуль системы", dependsOnMethods = "taskChangeAuthors")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить модуль системы", dependsOnMethods = "taskChangeAuthors")
     public void taskChangeModule() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -230,7 +230,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfTask(UDF_SD_MODULE, CORE);
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Сообщить информацию (Комментарий)", dependsOnMethods = "taskChangeModule")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Сообщить информацию (Комментарий)", dependsOnMethods = "taskChangeModule")
     public void taskOurComment2() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -244,7 +244,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .assertTask();
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Установить дату оказания консультации", dependsOnMethods = "taskOurComment2")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Установить дату оказания консультации", dependsOnMethods = "taskOurComment2")
     public void taskSetConsultDate() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -264,7 +264,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfDate(UDF_SD_PROVIDEDHELPDEADLINE, DateUtils.getCurrentDate(0));
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Снять запрос", dependsOnMethods = "taskSetConsultDate")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Снять запрос", dependsOnMethods = "taskSetConsultDate")
     public void taskRemoveRequest() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -278,7 +278,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .assertTask();
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Оценить выполнение запроса", dependsOnMethods = "taskRemoveRequest")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Оценить выполнение запроса", dependsOnMethods = "taskRemoveRequest")
     public void taskEvaluateRequest() {
         apiController.updateToken(generateAuthToken(CLIENT));
         task.refreshTask();
@@ -301,7 +301,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfMemo(UDF_EVALUATING_REQUEST_COMMENT, randomText);
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Изменить автора", dependsOnMethods = "taskEvaluateRequest")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить автора", dependsOnMethods = "taskEvaluateRequest")
     public void taskChangeAuthors2() {
         var authors = slaHelpController.getAuthors(task.getTaskType(), CHANGE_AUTHOR, task.getNumber());
         if (authors == null) {
@@ -327,7 +327,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectSubmitterUser(authors[1].getLogin());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Изменить ответственного", dependsOnMethods = "taskChangeAuthors2")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить ответственного", dependsOnMethods = "taskChangeAuthors2")
     public void taskChangeHandler() {
         RANDOM_TRUST_WATCHER = userController.receiveUserByRole(USER_ROLES, "Сотрудник", "root").getForUser();
         RANDOM_WATCHER = userController.receiveUserByRole(USER_ROLES, "root").getForUser();
@@ -349,7 +349,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectHandlerUser(SUPPORT_MEMBER);
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "taskChangeHandler")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "taskChangeHandler")
     public void taskChangeLinkedTask() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -373,7 +373,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfTask(UDF_SD_LINKEDREQUEST, workTask.getNumber());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Корректировка сроков SLA", dependsOnMethods = "taskChangeLinkedTask")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Корректировка сроков SLA", dependsOnMethods = "taskChangeLinkedTask")
     public void taskCorrectSlaDates() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         var dates = slaHelpController.getUDF_SLA_CONSULTPROVIDEDATE(task.getTaskType(), CORRECT_SLA_DATES, task.getNumber());
@@ -393,7 +393,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfString(UDF_SLA_CONSULTPROVIDEDATE, Long.toString(milliseconds));
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Назначить доверенного наблюдателя", dependsOnMethods = "taskCorrectSlaDates")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Назначить доверенного наблюдателя", dependsOnMethods = "taskCorrectSlaDates")
     public void taskAddTrustedWatcher() {
         RANDOM_TRUST_WATCHER = userController.receiveUserByRole(USER_ROLES, "Сотрудник", "root").getForUser();
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
@@ -412,7 +412,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_SD_TRUSTEDWATCHER, RANDOM_TRUST_WATCHER);
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "taskAddTrustedWatcher")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "taskAddTrustedWatcher")
     public void taskAddAppointWatcher() {
         RANDOM_WATCHER = userController.receiveUserByRole(USER_ROLES, "root").getForUser();
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
@@ -430,7 +430,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfUSer(UDF_WATCHER, RANDOM_WATCHER);
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Приватный комментарий", dependsOnMethods = "taskAddAppointWatcher")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Приватный комментарий", dependsOnMethods = "taskAddAppointWatcher")
     public void taskPrivateComment() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -453,7 +453,7 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .assertThat(messagesForClient)
                 .fieldFromListIsEmpty("под 'Клиент' проверить что НЕ  доступно сообщение", "Приватный комментарий", "mstatusName");
     }
-//    @Test(groups = {"ProcSdDev", "Regression"}, description = "Снять запрос", dependsOnMethods = "taskPrivateComment")
+//    @Test(groups = {"SlaHelp", "Regression"}, description = "Снять запрос", dependsOnMethods = "taskPrivateComment")
 //    public void taskRemoveRequest2() {
 //        apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
 //        task.refreshTask();
