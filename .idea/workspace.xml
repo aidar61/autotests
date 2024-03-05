@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Sla Bug" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/responsibility party wait manager">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -344,22 +346,7 @@
       <workItem from="1707198306554" duration="4574000" />
       <workItem from="1707898497189" duration="1000" />
       <workItem from="1709132683153" duration="20505000" />
-    </task>
-    <task id="LOCAL-00013" summary="Check additional fields">
-      <option name="closed" value="true" />
-      <created>1691405057080</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1691405057080</updated>
-    </task>
-    <task id="LOCAL-00014" summary="complete acceptance 1.">
-      <option name="closed" value="true" />
-      <created>1691482321043</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1691482321043</updated>
+      <workItem from="1709623327498" duration="2131000" />
     </task>
     <task id="LOCAL-00015" summary="complete acceptance 2">
       <option name="closed" value="true" />
@@ -702,7 +689,21 @@
       <option name="project" value="LOCAL" />
       <updated>1709208823146</updated>
     </task>
-    <option name="localTasksCounter" value="62" />
+    <task id="LOCAL-00062" summary="fix/responsibility party wait manager">
+      <created>1709623512590</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1709623512591</updated>
+    </task>
+    <task id="LOCAL-00063" summary="fix/responsibility party wait manager">
+      <created>1709623610389</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1709623610389</updated>
+    </task>
+    <option name="localTasksCounter" value="64" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -758,7 +759,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="complete sanction scenario." />
     <MESSAGE value="add sanction test to Jenkins file." />
     <MESSAGE value="Steps, DevTask" />
     <MESSAGE value="feature/proc_work_task Common Test" />
@@ -783,7 +783,8 @@
     <MESSAGE value="feature/sddev" />
     <MESSAGE value="feature/performance tests" />
     <MESSAGE value="feature/Sla Bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/Sla Bug" />
+    <MESSAGE value="fix/responsibility party wait manager" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix/responsibility party wait manager" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
