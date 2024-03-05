@@ -62,7 +62,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
         EMPLOYEE = userController.receiveUserByRole(USER_ROLES, Role.Constants.EMPLOYEE, "root").getForUser();
 //        EMPLOYEE = InitEntities.generateUser("818181df795d7d1b01796b30780247fa", "mefimov", "Ефимов Михаил");
         EMPLOYEE_WATCHER = userController.receiveUserByRole(USER_ROLES, Role.Constants.EMPLOYEE, EMPLOYEE.getLogin()).getForUser();
-        EMPLOYEE_WATCHER = InitEntities.generateUser("8a8181df75b956e50175d653f6693b37", "aizotov", "Изотов Алексей");
+//        EMPLOYEE_WATCHER = InitEntities.generateUser("8a8181df75b956e50175d653f6693b37", "aizotov", "Изотов Алексей");
         task = InitEntities.getGeneralTask(TaskType.SLA_BUG, Operations.CAT);
     }
 
