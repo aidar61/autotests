@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Sla Bug">
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
-    </list>
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Sla Bug" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -345,21 +343,7 @@
       <workItem from="1707115671669" duration="1900000" />
       <workItem from="1707198306554" duration="4574000" />
       <workItem from="1707898497189" duration="1000" />
-      <workItem from="1709132683153" duration="18488000" />
-    </task>
-    <task id="LOCAL-00007" summary="feature/Dynamic Database URL">
-      <created>1688635515348</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1688635515348</updated>
-    </task>
-    <task id="LOCAL-00008" summary="feature/Dynamic Database URL">
-      <created>1688635519041</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1688635519041</updated>
+      <workItem from="1709132683153" duration="20505000" />
     </task>
     <task id="LOCAL-00013" summary="Check additional fields">
       <option name="closed" value="true" />
@@ -704,7 +688,21 @@
       <option name="project" value="LOCAL" />
       <updated>1709208514490</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL-00060" summary="feature/Sla Bug">
+      <created>1709208672735</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1709208672735</updated>
+    </task>
+    <task id="LOCAL-00061" summary="feature/Sla Bug">
+      <created>1709208823146</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1709208823146</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
