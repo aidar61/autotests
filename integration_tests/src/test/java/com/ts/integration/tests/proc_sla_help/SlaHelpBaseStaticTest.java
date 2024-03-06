@@ -33,6 +33,7 @@ import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.CORE;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.enums.Operations.*;
+import static com.ts.common.enums.TaskStatuses.STATUS_SLAHELP_NEW;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.*;
 
@@ -100,13 +101,13 @@ public class SlaHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(TaskResponseBody.class)
                 .assertTask()
+                .isCorrectStatus(STATUS_SLAHELP_NEW)
                 .isEquals(task);
 
         var taskDetail = apiController.receiveTask(task.getNumber());
         CommonAssert
                 .assertThat(taskDetail)
-                .isCorrectUdfList(UDF_SDDEV_CONDITIONSACCEPTED, CONDITIONS_ACCEPTED_NO.getId())
-                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER);
     }
 
     @Test(groups = {"SlaHelp", "Regression"}, description = "Задать вопрос", dependsOnMethods = "createTask")
