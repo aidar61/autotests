@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/responsibility party wait manager">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/AbstractDbTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/database/AbstractDbTable.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,23 +146,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SdDevBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.sd_dev.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.sd_dev" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.sd_dev.SdDevBaseDynamicTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SlaBugBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -242,22 +226,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="com.ts.integration.tests.proc_sd_bug" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_bug.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_bug" />
+      <option name="TEST_OBJECT" value="PACKAGE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.DateUtils" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
       <item itemvalue="TestNG.SlaBugBaseDynamicTest" />
       <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
       <item itemvalue="TestNG.SlaBugBaseDynamicTest.slaBugCat" />
-      <item itemvalue="TestNG.SdDevBaseDynamicTest" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="TestNG.SlaBugBaseDynamicTest" />
+        <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
         <item itemvalue="Application.DateUtils" />
         <item itemvalue="TestNG.SlaBugBaseDynamicTest.slaBugCat" />
         <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
-        <item itemvalue="TestNG.SdDevBaseDynamicTest" />
       </list>
     </recent_temporary>
   </component>
@@ -346,15 +346,7 @@
       <workItem from="1707198306554" duration="4574000" />
       <workItem from="1707898497189" duration="1000" />
       <workItem from="1709132683153" duration="20505000" />
-      <workItem from="1709623327498" duration="2131000" />
-    </task>
-    <task id="LOCAL-00015" summary="complete acceptance 2">
-      <option name="closed" value="true" />
-      <created>1691497786551</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1691497786551</updated>
+      <workItem from="1709623327498" duration="5518000" />
     </task>
     <task id="LOCAL-00016" summary="receive random task with additional field.">
       <option name="closed" value="true" />
@@ -703,7 +695,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709623610389</updated>
     </task>
-    <option name="localTasksCounter" value="64" />
+    <task id="LOCAL-00064" summary="fix/responsibility party wait manager">
+      <created>1709625961672</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1709625961672</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
