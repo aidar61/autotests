@@ -50,9 +50,12 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
         apiController.updateToken(InitEntities.generateAuthToken(Users.ROOT));
         slaBugController = apiController.getSlaBugController();
         userController = apiController.getUserController();
+        baseController = apiController.getBaseController();
+
         GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
         GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskNumber(parentTaskNumber);
         parent = InitEntities.generateParent(grTaskDbEntity.getTask_id(), grTaskDbEntity.getTask_number());
+
         USER_ROLES = userController.receiveUserByTask(parentTaskNumber);
 
         CLIENT = userController.receiveUserByRole(USER_ROLES, Role.Constants.CLIENT, "root").getForUser();
