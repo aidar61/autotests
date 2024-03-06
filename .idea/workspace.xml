@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Sla bug static">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/sla help">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelpBaseStaticTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelpBaseStaticTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,16 +115,20 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.SlaHelpBaseStaticTest">
-    <configuration name="DateUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ts.common.utils.DateUtils" />
-      <module name="common" />
+  <component name="RunManager" selected="TestNG.CommonWorkTaskProcessTest">
+    <configuration name="CommonWorkTaskProcessTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.common.utils.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.CommonWorkTaskProcessTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -242,21 +246,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.DateUtils" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
       <item itemvalue="TestNG.SlaBugBaseStaticTest" />
       <item itemvalue="TestNG.SlaHelpBaseStaticTest" />
       <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
       <item itemvalue="TestNG.SlaBugBaseDynamicTest" />
+      <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
         <item itemvalue="TestNG.SlaHelpBaseStaticTest" />
         <item itemvalue="TestNG.SlaBugBaseStaticTest" />
         <item itemvalue="TestNG.SlaBugBaseDynamicTest" />
         <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
-        <item itemvalue="Application.DateUtils" />
       </list>
     </recent_temporary>
   </component>
@@ -345,14 +349,7 @@
       <workItem from="1707198306554" duration="4574000" />
       <workItem from="1707898497189" duration="1000" />
       <workItem from="1709132683153" duration="20505000" />
-      <workItem from="1709623327498" duration="14127000" />
-    </task>
-    <task id="LOCAL-00020" summary="Steps, DevTask">
-      <created>1692690147006</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1692690147007</updated>
+      <workItem from="1709623327498" duration="14896000" />
     </task>
     <task id="LOCAL-00021" summary="feature/proc_work_task Common Test">
       <created>1692964632148</created>
@@ -698,7 +695,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709715070465</updated>
     </task>
-    <option name="localTasksCounter" value="69" />
+    <task id="LOCAL-00069" summary="fix/sla help">
+      <created>1709715617662</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1709715617662</updated>
+    </task>
+    <option name="localTasksCounter" value="70" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -754,7 +758,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feature/proc_work_task Common Test" />
     <MESSAGE value="feature/proc_work_task common test fix" />
     <MESSAGE value="added description for common assert methods, change to assert equals instead assert true." />
     <MESSAGE value="create task from excel file." />
@@ -779,7 +782,8 @@
     <MESSAGE value="fix/responsibility party wait manager" />
     <MESSAGE value="fix/sla bug dynamic test" />
     <MESSAGE value="feature/Sla bug static" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/Sla bug static" />
+    <MESSAGE value="fix/sla help" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix/sla help" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
