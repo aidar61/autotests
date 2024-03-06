@@ -122,7 +122,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_ANALIZING);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
                 .isCorrectUdfUSer(UDF_ROLE_FIRST_LINE, CLIENT_MANAGER.getLogin());
@@ -142,7 +142,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_WAITING);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
     }
@@ -161,7 +161,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_ANALIZING);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE);
 
@@ -181,7 +181,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_WAITING);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
     }
@@ -200,7 +200,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_ANALIZING);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
@@ -220,7 +220,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_DECLINED);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
     }
@@ -243,7 +243,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_ANALIZING);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
@@ -263,7 +263,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_INWORK);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, DEVELOPER_ROLE_CURRENT)
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
@@ -287,7 +287,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_ANALIZING);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
@@ -307,7 +307,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_DECLINED);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
     }
@@ -326,7 +326,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_INWORK);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
@@ -347,7 +347,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_WAITING);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
     }
@@ -366,7 +366,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_ANALIZING);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
@@ -386,7 +386,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_INWORK);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, DEVELOPER_ROLE_CURRENT)
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
@@ -411,7 +411,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_TEMPORARYFIXED);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
 //                .isCorrectUdfString(UDF_SLABUG_TEMPPROVIDEDATE, expectedTempProvideDate);
@@ -431,7 +431,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_INWORK);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, DEVELOPER_ROLE_CURRENT)
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
@@ -457,7 +457,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_FIXED);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT);
 //                .isCorrectUdfString(UDF_SLABUG_PERMPROVIDEDATE, expectedTempProvideDate);
     }
@@ -476,7 +476,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_INWORK);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, DEVELOPER_ROLE_CURRENT);
     }
@@ -500,7 +500,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_FIXED);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
 
@@ -509,8 +509,8 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
         var docTaskNumber = Objects.requireNonNull(Arrays.stream(workTaskWork.getTaskValue()).findFirst().orElse(null)).getNumber();
         apiController.updateToken(generateAuthToken(Users.ROOT));
 
-        baseController.receiveActualTask(docTaskNumber);
-        CommonAssert.assertThat(baseController.getResponse())
+        apiController.receiveTask(docTaskNumber);
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectTaskCategory("CAT_DOCTASK")
                 .isCorrectTaskStatus(STATUS_WORKTASK_ASSIGNED)
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO)
@@ -536,7 +536,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_CLOSED);
 
         apiController.receiveTask(task.getNumber());
-        CommonAssert.assertThat(baseController.getResponse())
+        CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER);
     }
 
