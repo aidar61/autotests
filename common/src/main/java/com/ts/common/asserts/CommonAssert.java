@@ -234,7 +234,7 @@ public class CommonAssert {
     @Step("[ASSERT] Checking task submitter user, Expected: {0}")
     public CommonAssert isCorrectSubmitterUser(String expectedLogin) {
         var submitterUser = new JsonPath(response.asString()).getObject("submitterUser", User.class);
-        assertEquals(expectedLogin, submitterUser.getLogin(), expectedLogin + " parameters is match: ");
+        assertEquals(submitterUser.getLogin(), expectedLogin, expectedLogin + " parameters is match: ");
         log.info("Submitter is correct Actual {}, Expected {}", submitterUser.getLogin(), expectedLogin);
         return this;
     }
@@ -328,6 +328,7 @@ public class CommonAssert {
         log.info("{} is correct, Actual {}, Expected {}", type.udfId, Arrays.stream(actual).map(List::getId).collect(Collectors.joining("|")), expected);
         return this;
     }
+
     @Step("[ASSERT] Checking udf list type of {0} is correct, Expected: {1}")
     public CommonAssert isCorrectUdfList(Udfs.UdfSd type, List.Constants expected) {
         var actual = extractUdfField(type, UdfList.class).getListValue();

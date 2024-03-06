@@ -117,7 +117,7 @@ public class TrackStudioApiControllers {
     }
 
     public Response receiveTask(String slaTaskNumber) {
-        updateToken(InitEntities.generateAuthToken(Users.ROOT));
+//        updateToken(InitEntities.generateAuthToken(Users.ROOT));
         return this.response = this.baseController.receiveActualTask(slaTaskNumber);
     }
 

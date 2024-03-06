@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/sla help">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/tech_task/TechTaskBaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/tech_task/TechTaskBaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/tech_task/TechTaskStaticHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/tech_task/TechTaskStaticHandlerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -115,7 +118,7 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.CommonWorkTaskProcessTest">
+  <component name="RunManager" selected="TestNG.SdDevBaseStaticTest">
     <configuration name="CommonWorkTaskProcessTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -133,33 +136,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SlaBugBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SdDevBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_bug.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.sd_dev.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_bug" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_bug.SlaBugBaseDynamicTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SlaBugBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_bug.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_bug" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_bug.SlaBugBaseStaticTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.sd_dev" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.sd_dev.SdDevBaseStaticTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -212,6 +198,40 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="TechTaskBaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.tech_task.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.tech_task" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.tech_task.TechTaskBaseTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TechTaskStaticHandlerTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.tech_task.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.tech_task" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.tech_task.TechTaskStaticHandlerTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Unnamed" type="TestNG" nameIsGenerated="true">
       <shortenClasspath name="NONE" />
       <option name="SUITE_NAME" value="" />
@@ -229,38 +249,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="com.ts.integration.tests.proc_sd_bug" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_bug.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_bug" />
-      <option name="TEST_OBJECT" value="PACKAGE" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.SlaBugBaseStaticTest" />
+      <item itemvalue="TestNG.SdDevBaseStaticTest" />
       <item itemvalue="TestNG.SlaHelpBaseStaticTest" />
-      <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
-      <item itemvalue="TestNG.SlaBugBaseDynamicTest" />
+      <item itemvalue="TestNG.TechTaskBaseTest" />
+      <item itemvalue="TestNG.TechTaskStaticHandlerTest" />
       <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.SdDevBaseStaticTest" />
+        <item itemvalue="TestNG.TechTaskStaticHandlerTest" />
+        <item itemvalue="TestNG.TechTaskBaseTest" />
         <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
         <item itemvalue="TestNG.SlaHelpBaseStaticTest" />
-        <item itemvalue="TestNG.SlaBugBaseStaticTest" />
-        <item itemvalue="TestNG.SlaBugBaseDynamicTest" />
-        <item itemvalue="TestNG.com.ts.integration.tests.proc_sd_bug" />
       </list>
     </recent_temporary>
   </component>
@@ -349,14 +353,7 @@
       <workItem from="1707198306554" duration="4574000" />
       <workItem from="1707898497189" duration="1000" />
       <workItem from="1709132683153" duration="20505000" />
-      <workItem from="1709623327498" duration="14896000" />
-    </task>
-    <task id="LOCAL-00021" summary="feature/proc_work_task Common Test">
-      <created>1692964632148</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1692964632148</updated>
+      <workItem from="1709623327498" duration="16597000" />
     </task>
     <task id="LOCAL-00022" summary="added description for common assert methods, change to assert equals instead assert true.">
       <option name="closed" value="true" />
@@ -702,7 +699,14 @@
       <option name="project" value="LOCAL" />
       <updated>1709715617662</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="fix/sla help">
+      <created>1709716353614</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1709716353614</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

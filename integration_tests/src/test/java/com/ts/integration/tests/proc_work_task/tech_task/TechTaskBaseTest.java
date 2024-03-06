@@ -175,6 +175,8 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "taskStart")
     public void taskAcceptance() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+
         udf = refreshUdf();
         task.setHandlerUser(handlerUser);
 
@@ -224,6 +226,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Отклонить", dependsOnMethods = "taskReturn")
     public void taskDecline() {
+        apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
         task.setHandlerUser(handlerUser);
         task.setResolution(generateResolution(CANNOT_BE_COMPLETED_WITHIN_THE_SPECIFIED_TIME_FRAME));
@@ -270,6 +273,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Отложить", dependsOnMethods = "taskStart2")
     public void taskPostpone() {
+        apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
         task.refreshTask();
         task.setResolution(generateResolution(RESOLUTION_DEPENDS_ON_ANOTHER_TASK));
