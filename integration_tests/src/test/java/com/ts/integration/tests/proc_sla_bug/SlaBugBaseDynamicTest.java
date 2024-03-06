@@ -16,7 +16,6 @@ import com.ts.common.utils.ExtractResponseFieldUtils;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.WaitManager;
 import com.ts.integration.tests.BaseIntegrationTest;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -91,7 +90,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
         udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
         udf.setSecondUdfString(generateUdfString(UDF_SD_REMOTEID, generateString()));
         udf.setThirdUdfString(generateUdfString(UDF_SD_INITPERSON, generateString()));
-        udf.setSecondUdfList(generateUdfList(UDF_SD_REMOTEACCESS, REMOTE_ACCESS));
+        udf.setSecondUdfList(generateUdfList(UDF_SD_REMOTEACCESS, NO_REMOTE_ACCESS));
         udf.setUdfMemo(generateUdfMemo(UDF_SD_REMOTEACCESSINFO, generateString()));
 
         task.refreshUdf(udf);

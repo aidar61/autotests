@@ -46,7 +46,7 @@ public class SlaBug3Test extends BaseIntegrationTest {
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
         udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
         udf.setUdfList(InitEntities.generateUdfList(UDF_SDBUG_PRIORITYBUG, CRITICAL));
-        udf.setSecondUdfList(InitEntities.generateUdfList(UDF_SD_REMOTEACCESS, REMOTE_ACCESS));
+        udf.setSecondUdfList(InitEntities.generateUdfList(UDF_SD_REMOTEACCESS, NO_REMOTE_ACCESS));
         task = InitEntities.getGeneralTask(TaskType.SLA_BUG, Operations.CAT);
         task.refreshUdf(udf);
         task.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));

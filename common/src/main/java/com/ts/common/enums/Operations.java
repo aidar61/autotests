@@ -16,6 +16,9 @@ public enum Operations {
     RETURNTESTING("%S_RETURNTESTING"),
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
     CHANGE("%S_CHANGE"), // изменить аттрибуты решения
+    CHANGE_TESTER("%S_CHANGETESTER"), // изменить тестировщика
+    CHANGE_DEVELOPER("%S_CHANGEDEVELOPER"), // изменить разработчика
+    CHANGE_FIRST_LINE("%S_CHANGEFIRSTLINE"), // изменить первую линию
     COMMENT("%S_COMMENT"), // коментарий
     BUGDECLINE("%S_BUGDECLINE"), // отклонить ошибку
     CHANGE_PLAN("%S_CHANGEPLAN"), // коррекция плана
@@ -23,6 +26,7 @@ public enum Operations {
     CHANGE_PRIORITY("%S_CHANGEPRIORITY"), // Изменить приоритет
     CHANGE_STATUS("%S_CHANGESTATUS"), // изменить состояние
     CHANGE_RES_PERSON("%S_REASSIGN"),//изменить ответственного
+    CHANGE_REMOTE_ACCESS("%S_CHANGEREMOTEACCESS"), // изменить наличие удаленного доступа
     CHANGE_CURRENT_ROLE("%S_CHANGECURRENTROLE"),//изменить ответственную роль
     CHANGE_LINKED_TASKS("%S_CHANGELINKEDTASKS"),// изменить список связанных задач
     CHANGE_LINKED_TASK("%S_CHANGELINKEDTASK"), // изменить список связанных задач
