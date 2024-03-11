@@ -18,6 +18,12 @@
             <class name="com.ts.integration.tests.proc_sla_bug.SlaBug10Test"/>
             <class name="com.ts.integration.tests.proc_sla_bug.SlaBugBaseDynamicTest"/>
             <class name="com.ts.integration.tests.proc_sla_bug.SlaBugBaseStaticTest"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBugCloseByClientTest"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBugCloseUnfixableAnalizeTest"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBugEssentialTest"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBugNoTempSolutionTest"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBugOtherTest"/>
+            <class name="com.ts.integration.tests.proc_sla_bug.SlaBugUnfixableInWorkTest"/>
             <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature1Test"/>-->
             <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature2Test"/>-->
             <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature3Test"/>-->
