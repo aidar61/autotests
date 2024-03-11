@@ -434,6 +434,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_SLABUG_INWORK);
 
+        apiController.updateToken(generateAuthToken(Users.ROOT));
         apiController.receiveTask(task.getNumber());
         CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
