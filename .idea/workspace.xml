@@ -350,23 +350,7 @@
       <workItem from="1707198306554" duration="4574000" />
       <workItem from="1707898497189" duration="1000" />
       <workItem from="1709132683153" duration="20505000" />
-      <workItem from="1709623327498" duration="17817000" />
-    </task>
-    <task id="LOCAL-00023" summary="create task from excel file.">
-      <option name="closed" value="true" />
-      <created>1695117235188</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1695117235188</updated>
-    </task>
-    <task id="LOCAL-00024" summary="added sd question test.">
-      <option name="closed" value="true" />
-      <created>1695382701141</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1695382701141</updated>
+      <workItem from="1709623327498" duration="18472000" />
     </task>
     <task id="LOCAL-00025" summary="added sd question test 2.">
       <option name="closed" value="true" />
@@ -702,7 +686,21 @@
       <option name="project" value="LOCAL" />
       <updated>1709718326012</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="fix/tests">
+      <created>1710140195678</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1710140195678</updated>
+    </task>
+    <task id="LOCAL-00073" summary="fix/tests">
+      <created>1710140232426</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1710140232427</updated>
+    </task>
+    <option name="localTasksCounter" value="74" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

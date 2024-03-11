@@ -201,7 +201,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_SLABUG_ANALIZING);
 
-        apiController.updateToken(generateAuthToken(Users.ROOT));
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         apiController.receiveTask(task.getNumber());
         CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
@@ -368,7 +368,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_SLABUG_ANALIZING);
 
-        apiController.updateToken(generateAuthToken(Users.ROOT));
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         apiController.receiveTask(task.getNumber());
         CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
@@ -434,7 +434,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .assertTask()
                 .isCorrectStatus(STATUS_SLABUG_INWORK);
 
-        apiController.updateToken(generateAuthToken(Users.ROOT));
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         apiController.receiveTask(task.getNumber());
         CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
@@ -512,8 +512,8 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
         var childTasks = baseController.getBackLinks(task.getNumber());
         var workTaskWork = ExtractResponseFieldUtils.extractThat(childTasks).extractByPath("BACK_UDF_WORKTASK_SDREQUEST", UdfTask.class);
         var docTaskNumber = Objects.requireNonNull(Arrays.stream(workTaskWork.getTaskValue()).findFirst().orElse(null)).getNumber();
-        apiController.updateToken(generateAuthToken(Users.ROOT));
 
+        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         apiController.receiveTask(docTaskNumber);
         CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectTaskCategory("CAT_DOCTASK")
