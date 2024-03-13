@@ -1,6 +1,8 @@
 package com.ts.common.application.database.dbEntities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.commonEntities.Task;
+import com.ts.common.entitites.tasks.GeneralTask;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +33,16 @@ public class GrTaskDbEntity extends DbEntity {
                 .build();
     }
 
+    public GeneralTask mapToGeneralTask() {
+        GeneralTask build = GeneralTask.builder()
+                .name(this.task_name)
+                .id(this.task_id)
+                .number(this.task_number)
+                .build();
+        log.info("Mapped to general task {}", build.toString());
+        return build;
+    }
+
     public Task receiveParentTask() {
         return Task.builder()
                 .id(this.task_parent)
@@ -54,4 +66,5 @@ public class GrTaskDbEntity extends DbEntity {
     public Object receiveTaskNumber() {
         return getTask_number();
     }
+
 }

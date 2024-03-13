@@ -7,7 +7,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import java.util.Arrays;
 import java.util.List;
 
 import static com.ts.common.utils.RandomUtils.generateRandomNumberBetween;
@@ -20,10 +19,12 @@ import static com.ts.common.utils.RandomUtils.generateRandomNumberBetween;
 @Slf4j
 public abstract class AbstractDbTable {
     public static final String SELECT_QUERY = "SELECT * FROM %s";
-    public static final String SELECT_COUNT_QUERY = "SELECT COUNT(*) FROM %s";
+    public static final String SELECT_COUNT_QUERY = "SELECT count(*) FROM %s";
     public static final String SELECT_WHERE_COUNT_QUERY = SELECT_COUNT_QUERY + " WHERE %s = '%s'";
+    public static final String SELECT_WHERE_LIKE_COUNT_QUERY = SELECT_COUNT_QUERY + " WHERE %s like '%s'";
     public static final String SELECT_WHERE_AND_COUNT = SELECT_WHERE_COUNT_QUERY + " AND %s = '%s'";
     public static final String SELECT_WHERE_QUERY = SELECT_QUERY + " WHERE %s = '%s'";
+    public static final String SELECT_WHERE_QUERY_LIKE = SELECT_QUERY + " WHERE %s like '%s'";
     public static final String SELECT_WHERE_AND = SELECT_WHERE_QUERY + " AND %s = '%s'";
     public static final String SELECT_WHERE_ID = SELECT_QUERY + " WHERE id = '%s'";
     public static final String SELECT_WHERE_AND_OFFSET = SELECT_WHERE_AND + " OFFSET %s ROWS FETCH NEXT %s ROWS ONLY";
@@ -99,6 +100,19 @@ public abstract class AbstractDbTable {
 
     public List<BaseEntity> receiveEntities(Class clazz) {
         return query(String.format(SELECT_QUERY, this.name), new BeanPropertyRowMapper<>(clazz));
+    }
+
+    public List<BaseEntity> receiveEntitiesWhere(Class clazz, String... parameters) {
+        return query(String.format(SELECT_WHERE_QUERY, this.name
+                , parameters[0], parameters[1]), new BeanPropertyRowMapper<>(clazz));
+    }
+    public List<BaseEntity> receiveEntitiesWhereLike(Class clazz, String... parameters) {
+        return query(String.format(SELECT_WHERE_QUERY_LIKE, this.name
+                , parameters[0], parameters[1]), new BeanPropertyRowMapper<>(clazz));
+    }
+    public <T extends BaseEntity> T receiveCountEntitiesWhereLike(Class clazz, String... parameters) {
+        return (T) queryForObject(String.format(SELECT_WHERE_LIKE_COUNT_QUERY, this.name
+                , parameters[0], parameters[1]), new BeanPropertyRowMapper<>(clazz));
     }
 
     public <T extends BaseEntity> T getEntityWhere(Class type, String... parameters) {

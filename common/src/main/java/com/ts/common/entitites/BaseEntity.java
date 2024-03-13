@@ -163,4 +163,8 @@ public abstract class BaseEntity implements Serializable {
     public Object receiveUdf() {
         return null;
     }
+
+    public Integer receiveCount() {
+        return null;
+    }
 }

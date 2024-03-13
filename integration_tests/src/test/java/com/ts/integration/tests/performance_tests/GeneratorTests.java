@@ -1,6 +1,8 @@
 package com.ts.integration.tests.performance_tests;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
+import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
+import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.ProjectController;
 import com.ts.common.controllers.TaskResponseBody;
@@ -46,9 +48,11 @@ public class GeneratorTests extends BaseIntegrationTest {
     GeneralTask JMETER_GENPLAN;
     GeneralTask JMETER_REGFOLDER;
     GeneralTask JMETER_REGPROJECT;
+    GrTaskTable grTaskTable;
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
+        grTaskTable = dbHelper.getGrTaskTable();
         userController = apiController.getUserController();
         projectController = apiController.getProjectController();
         devTaskController = apiController.getDevTaskController();
@@ -66,124 +70,178 @@ public class GeneratorTests extends BaseIntegrationTest {
     }
 
     private void CAT_SDPROJECTGROUP() {
-        task = InitEntities.getGeneralTask(SDPROJECTGROUP, Operations.CAT);
-        udf = refreshUdf();
-        task.refreshTask();
+        String taskName = "JMETER_SDPROJECTGROUP";
+        GrTaskDbEntity grTaskDb = (GrTaskDbEntity) grTaskTable.receiveByTaskName(taskName);
+        if (grTaskDb == null) {
+            task = InitEntities.getGeneralTask(SDPROJECTGROUP, Operations.CAT);
+            udf = refreshUdf();
+            task.refreshTask();
 
-        task.setName("JMETER_SDPROJECTGROUP");
-        task.setParent(SDPROJECT_PARENT);
-        task.setPriority(InitEntities.generatePriority(2));
+            task.setName(taskName);
+            task.setParent(SDPROJECT_PARENT);
+            task.setPriority(InitEntities.generatePriority(2));
 
-        udf.setUdfDouble(generateUdfDouble(UDF_SD_COST1CAT, 100));
-        udf.setSecondUdfDouble(generateUdfDouble(UDF_SD_COST2CAT, 200));
-        udf.setThirdUdfDouble(generateUdfDouble(UDF_SD_COST3CAT, 300));
+            udf.setUdfDouble(generateUdfDouble(UDF_SD_COST1CAT, 100));
+            udf.setSecondUdfDouble(generateUdfDouble(UDF_SD_COST2CAT, 200));
+            udf.setThirdUdfDouble(generateUdfDouble(UDF_SD_COST3CAT, 300));
 
-        task.refreshUdf(udf);
-        JMETER_SDPROJECTGROUP = projectController.createProject(task);
-        ApiAsserts.assertThat(projectController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class);
+            task.refreshUdf(udf);
+            JMETER_SDPROJECTGROUP = projectController.createProject(task);
+            ApiAsserts.assertThat(projectController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                    .isParseableBody(TaskResponseBody.class);
+        } else {
+            JMETER_SDPROJECTGROUP = grTaskDb.mapToGeneralTask();
+        }
     }
 
     private void CAT_SDPROJECT() {
-        Parent sdProjectParent = InitEntities.generateParent(JMETER_SDPROJECTGROUP);
-        task = InitEntities.getGeneralTask(SDPROJECT, Operations.CAT);
-        udf = refreshUdf();
-        task.refreshTask();
+        String taskName = "JMETER_SDPROJECT";
+        GrTaskDbEntity grTaskDb = (GrTaskDbEntity) grTaskTable.receiveByTaskName(taskName);
+        if (grTaskDb == null) {
+            Parent sdProjectParent = InitEntities.generateParent(JMETER_SDPROJECTGROUP);
+            task = InitEntities.getGeneralTask(SDPROJECT, Operations.CAT);
+            udf = refreshUdf();
+            task.refreshTask();
 
-        task.setName("JMETER_SDPROJECT");
-        task.setParent(sdProjectParent);
+            task.setName(taskName);
+            task.setParent(sdProjectParent);
 
-        udf.setUdfList(generateUdfList(UDF_SDPROJECT_SUPPORTTYPE, EXTENDED));
-        udf.setUdfInteger(generateUdfInteger(UDF_SD_COST1CAT, 100));
-        udf.setSecondUdfInteger(generateUdfInteger(UDF_SD_COST2CAT, 200));
-        udf.setThirdUdfInteger(generateUdfInteger(UDF_SD_COST3CAT, 300));
+            udf.setUdfList(generateUdfList(UDF_SDPROJECT_SUPPORTTYPE, EXTENDED));
+            udf.setUdfInteger(generateUdfInteger(UDF_SD_COST1CAT, 100));
+            udf.setSecondUdfInteger(generateUdfInteger(UDF_SD_COST2CAT, 200));
+            udf.setThirdUdfInteger(generateUdfInteger(UDF_SD_COST3CAT, 300));
 
-        task.refreshUdf(udf);
-        JMETER_SDPROJECT = projectController.createProject(task);
-        ApiAsserts.assertThat(projectController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class);
+            task.refreshUdf(udf);
+            JMETER_SDPROJECT = projectController.createProject(task);
+            ApiAsserts.assertThat(projectController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                    .isParseableBody(TaskResponseBody.class);
+        } else {
+            JMETER_SDPROJECT = grTaskDb.mapToGeneralTask();
+        }
     }
 
     private void CAT_GROUPTASKS() {
-        task = InitEntities.getGeneralTask(GROUPTASKS, Operations.CAT);
-        udf = refreshUdf();
-        task.refreshTask();
+        String taskName = "JMETER_GROUPTASKS";
+        GrTaskDbEntity grTaskDb = (GrTaskDbEntity) grTaskTable.receiveByTaskName(taskName);
+        if (grTaskDb == null) {
+            task = InitEntities.getGeneralTask(GROUPTASKS, Operations.CAT);
+            udf = refreshUdf();
+            task.refreshTask();
 
-        task.setName("JMETER_GROUPTASKS");
-        task.setParent(GROUPTASK_PARENT);
-        task.setPriority(InitEntities.generatePriority(NORMAL_PRIORITY));
+            task.setName(taskName);
+            task.setParent(GROUPTASK_PARENT);
+            task.setPriority(InitEntities.generatePriority(NORMAL_PRIORITY));
 
-        task.refreshUdf(udf);
+            task.refreshUdf(udf);
 
-        JMETER_GROUPTASKS = projectController.createProject(task);
-        ApiAsserts.assertThat(projectController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class);
+            JMETER_GROUPTASKS = projectController.createProject(task);
+            ApiAsserts.assertThat(projectController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                    .isParseableBody(TaskResponseBody.class);
+        } else {
+            JMETER_GROUPTASKS = grTaskDb.mapToGeneralTask();
+        }
+
     }
 
     private void CAT_GENPLAN() {
-        Parent genPlanParent = InitEntities.generateParent(JMETER_GROUPTASKS);
-        task = InitEntities.getGeneralTask(GENPLAN, Operations.CAT);
-        udf = refreshUdf();
-        task.refreshTask();
+        String taskName = "JMETER_GENPLAN";
+        GrTaskDbEntity grTaskDb = (GrTaskDbEntity) grTaskTable.receiveByTaskName(taskName);
+        if (grTaskDb == null) {
+            Parent genPlanParent = InitEntities.generateParent(JMETER_GROUPTASKS);
+            task = InitEntities.getGeneralTask(GENPLAN, Operations.CAT);
+            udf = refreshUdf();
+            task.refreshTask();
 
-        task.setName("JMETER_GENPLAN");
-        task.setParent(genPlanParent);
+            task.setName(taskName);
+            task.setParent(genPlanParent);
 
-        udf.setUdfList(generateUdfList(UDF_PROJECT_MANAGING, YES_NEED));
-        udf.setSecondUdfList(generateUdfList(UDF_PROJECT_HANDLE_OWN_TASKS, YES_V3));
-        udf.setThirdUdfList(generateUdfList(UDF_PROJECT_MEMBERCODEREVIEW, ALL_REVIEWERS));
-        task.refreshUdf(udf);
+            udf.setUdfList(generateUdfList(UDF_PROJECT_MANAGING, YES_NEED));
+            udf.setSecondUdfList(generateUdfList(UDF_PROJECT_HANDLE_OWN_TASKS, YES_V3));
+            udf.setThirdUdfList(generateUdfList(UDF_PROJECT_MEMBERCODEREVIEW, ALL_REVIEWERS));
+            task.refreshUdf(udf);
 
-        JMETER_GENPLAN = projectController.createProject(task);
-        ApiAsserts.assertThat(projectController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class);
+            JMETER_GENPLAN = projectController.createProject(task);
+            ApiAsserts.assertThat(projectController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                    .isParseableBody(TaskResponseBody.class);
+        } else {
+            JMETER_GENPLAN = grTaskDb.mapToGeneralTask();
+        }
     }
 
     private void CAT_REGFOLDER() {
-        task = InitEntities.getGeneralTask(REGFOLDER, Operations.CAT);
-        udf = refreshUdf();
-        task.refreshTask();
+        String taskName = "JMETER_REGFOLDER";
+        GrTaskDbEntity grTaskDb = (GrTaskDbEntity) grTaskTable.receiveByTaskName(taskName);
+        if (grTaskDb == null) {
+            task = InitEntities.getGeneralTask(REGFOLDER, Operations.CAT);
+            udf = refreshUdf();
+            task.refreshTask();
 
-        task.setName("JMETER_REGFOLDER");
-        task.setParent(REGFOLDER_PARENT);
-        task.setUdfs(udf);
+            task.setName(taskName);
+            task.setParent(REGFOLDER_PARENT);
+            task.setUdfs(udf);
 
-        JMETER_REGFOLDER = projectController.createProject(task);
-        ApiAsserts.assertThat(projectController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class);
+            JMETER_REGFOLDER = projectController.createProject(task);
+            ApiAsserts.assertThat(projectController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                    .isParseableBody(TaskResponseBody.class);
+        } else {
+            JMETER_REGFOLDER = grTaskDb.mapToGeneralTask();
+        }
+
     }
 
     private void CAT_REGPROJECT() {
-        Parent regFolderParent = InitEntities.generateParent(JMETER_REGFOLDER);
-        task = InitEntities.getGeneralTask(REGPROJECT, Operations.CAT);
-        udf = refreshUdf();
-        task.refreshTask();
+        String taskName = "JMETER_REGPROJECT";
+        GrTaskDbEntity grTaskDb = (GrTaskDbEntity) grTaskTable.receiveByTaskName(taskName);
+        if (grTaskDb == null) {
+            Parent regFolderParent = InitEntities.generateParent(JMETER_REGFOLDER);
+            task = InitEntities.getGeneralTask(REGPROJECT, Operations.CAT);
+            udf = refreshUdf();
+            task.refreshTask();
 
-        task.setName("JMETER_REGPROJECT");
-        task.setParent(regFolderParent);
+            task.setName(taskName);
+            task.setParent(regFolderParent);
 
-        udf.setUdfMultiList(generateUdfMultiList(UDF_REGISTRY_LOB, BANKING_BASE_WORK));
-        udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, KAZAH_NBP));
-        udf.setUdfTask(generateUdfTask(UDF_REGISTRY_FOLDER, JMETER_GENPLAN.mapToTask()));
-        udf.setSecondUdfTask(generateUdfTask(UDF_REGISTRY_SUPPORT, JMETER_SDPROJECT.mapToTask()));
-        udf.setSecondUdfList(generateUdfList(UDF_MIS_TPRJ, PROC_COLVIR_02));
+            udf.setUdfMultiList(generateUdfMultiList(UDF_REGISTRY_LOB, BANKING_BASE_WORK));
+            udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, KAZAH_NBP));
+            udf.setUdfTask(generateUdfTask(UDF_REGISTRY_FOLDER, JMETER_GENPLAN.mapToTask()));
+            udf.setSecondUdfTask(generateUdfTask(UDF_REGISTRY_SUPPORT, JMETER_SDPROJECT.mapToTask()));
+            udf.setSecondUdfList(generateUdfList(UDF_MIS_TPRJ, PROC_COLVIR_02));
 
-        task.refreshUdf(udf);
-        JMETER_REGPROJECT = projectController.createProject(task);
-        ApiAsserts.assertThat(projectController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class);
+            task.refreshUdf(udf);
+            JMETER_REGPROJECT = projectController.createProject(task);
+            ApiAsserts.assertThat(projectController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                    .isParseableBody(TaskResponseBody.class);
+        } else {
+            JMETER_REGPROJECT = grTaskDb.mapToGeneralTask();
+        }
     }
 
     private void assignRoles() {
         userController.assignRoleToTask(JMETER_SDPROJECTGROUP, jmeter_user, ROLE_SUPPORT_COSTMANAGER);
         userController.assignRoleToTask(JMETER_SDPROJECTGROUP, jmeter_user, ROLE_SUPPORT_MANAGER);
         userController.assignRoleToTask(JMETER_GROUPTASKS, jmeter_user, ROLE_TASK_MANAGER);
+    }
+
+    private Integer receiveActualCountOfSdFeatureTask() {
+        String value = String.format("/1/8860/758008/%s/%s%s"
+                , JMETER_SDPROJECTGROUP.getNumber()
+                , JMETER_SDPROJECT.getNumber()
+                , "%");
+        return grTaskTable.receiveCountBy("task_path", value);
+    }
+
+    private Integer receiveActualCountOfDevTask() {
+        String value = String.format("/1/2405/758009/%s/%s%s"
+                , JMETER_GROUPTASKS.getNumber()
+                , JMETER_GENPLAN.getNumber()
+                , "%");
+        return grTaskTable.receiveCountBy("task_path", value);
     }
 
     @Test(groups = "Generator", description = "Task generator")
@@ -205,60 +263,65 @@ public class GeneratorTests extends BaseIntegrationTest {
         // Установить права для  jmeter-user
         assignRoles();
 
-        // Создать в JMETER_SDPROJECT 100 запросов CAT_SDFEAURE
+        // Создать в JMETER_SDPROJECT 100 запросов CAT_SDFEATURE
         apiController.updateToken(generateAuthToken(jmeter_user));
         Parent sdFeatureParent = InitEntities.generateParent(JMETER_SDPROJECT);
+        int actualCountSdFeature = receiveActualCountOfSdFeatureTask() - 2;
+        if (actualCountSdFeature < 100) {
+            for (int i = 0; i < 100 - actualCountSdFeature; i++) {
+                task = InitEntities.getGeneralTask(SD_FEATURE, Operations.CAT);
+                udf = refreshUdf();
 
-        for (int i = 0; i < 100; i++) {
-            task = InitEntities.getGeneralTask(SD_FEATURE, Operations.CAT);
-            udf = refreshUdf();
+                udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
 
-            udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
+                task.refreshUdf(udf);
+                task.setParent(sdFeatureParent);
+                task.setDescription(Tables.SD_FEATURE.getTable());
+                sdFeatureController.createTask(task);
+                ApiAsserts.assertThat(sdFeatureController.getResponse())
+                        .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                        .isParseableBody(TaskResponseBody.class);
+                //  Перевести все запросы CAT_SDFEATURE в состояние анализа с помощью операции "Начать предварительную оценку".
+                udf = refreshUdf();
+                task.refreshTask();
 
-            task.refreshUdf(udf);
-            task.setParent(sdFeatureParent);
-            task.setDescription(Tables.SD_FEATURE.getTable());
-            sdFeatureController.createTask(task);
-            ApiAsserts.assertThat(sdFeatureController.getResponse())
-                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                    .isParseableBody(TaskResponseBody.class);
-            //  Перевести все запросы CAT_SDFEATURE в состояние анализа с помощью операции "Начать предварительную оценку".
-            udf = refreshUdf();
-            task.refreshTask();
+                udf.setUdfUser(generateUdfUser(STDT_HANDLER, jmeter_user));
+                task.refreshUdf(udf);
+                task.setHandlerUser(jmeter_user);
 
-            udf.setUdfUser(generateUdfUser(STDT_HANDLER, jmeter_user));
-            task.refreshUdf(udf);
-            task.setHandlerUser(jmeter_user);
-
-            sdFeatureController.performCommonOperation(task, TOPRECOST);
-            ApiAsserts.assertThat(sdFeatureController.getResponse())
-                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                    .isParseableBody(TaskResponseBody.class);
+                sdFeatureController.performCommonOperation(task, TOPRECOST);
+                ApiAsserts.assertThat(sdFeatureController.getResponse())
+                        .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                        .isParseableBody(TaskResponseBody.class);
+            }
         }
 
         // Создать JMETER_GENPLAN 100 задач CAT_DEVTASK указав ответственного - jmeter-user
         Parent jmeterGenPlan = InitEntities.generateParent(JMETER_GENPLAN);
-        task = InitEntities.getGeneralTask(DEV_TASK, CAT);
-        udf = refreshUdf();
+        int actualCountOfDevTasks = receiveActualCountOfDevTask() - 1;
+        if (actualCountOfDevTasks != 100) {
+            task = InitEntities.getGeneralTask(DEV_TASK, CAT);
+            udf = refreshUdf();
 
-        udf.setUdfList(generateUdfList(UDF_CDP_BL, BANKING_BASE_WORK_V2));
-        udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, Task.Constants.AKKREDITIVES));
-        udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO));
-        udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, DateUtils.getCurrentDate(0)));
-        udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, PRODUCT));
-        udf.setThirdUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, GENERAL, "{\"username\":\"aziskakov\",\"name\":\"Искаков Азамат\"}"));
-        udf.setFourthUdfList(generateUdfList(UDF_WORKTASK_CHANGEWORKERINRQST, YES_AND_LEAVE_THIS_ROLE_TO_THE_CURRENT_PERFORMER));
+            udf.setUdfList(generateUdfList(UDF_CDP_BL, BANKING_BASE_WORK_V2));
+            udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, Task.Constants.AKKREDITIVES));
+            udf.setSecondUdfList(generateUdfList(UDF_CDP_ACCEPTANCE, UDF_CDP_ACCEPTANCE_NO));
+            udf.setUdfDate(generateUdfDate(UDF_WORKTASK_ANALYSISFD, DateUtils.getCurrentDate(0)));
+            udf.setSecondUdfTask(generateUdfTask(UDF_PRODUCT, PRODUCT));
+            udf.setThirdUdfList(generateUdfList(UDF_SDFEATURE_GENUSE, GENERAL, "{\"username\":\"aziskakov\",\"name\":\"Искаков Азамат\"}"));
+            udf.setFourthUdfList(generateUdfList(UDF_WORKTASK_CHANGEWORKERINRQST, YES_AND_LEAVE_THIS_ROLE_TO_THE_CURRENT_PERFORMER));
 
-        task.refreshUdf(udf);
-        task.setParent(jmeterGenPlan);
-        task.setPriority(InitEntities.generatePriority(NORMAL));
-        task.setHandlerUser(jmeter_user);
+            task.refreshUdf(udf);
+            task.setParent(jmeterGenPlan);
+            task.setPriority(InitEntities.generatePriority(NORMAL));
+            task.setHandlerUser(jmeter_user);
 
-        for (int i = 0; i < 100; i++) {
-            devTaskController.createDevTask(task);
-            ApiAsserts.assertThat(devTaskController.getResponse())
-                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                    .isParseableBody(TaskResponseBody.class);
+            for (int i = 0; i < 100 - actualCountOfDevTasks; i++) {
+                devTaskController.createDevTask(task);
+                ApiAsserts.assertThat(devTaskController.getResponse())
+                        .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                        .isParseableBody(TaskResponseBody.class);
+            }
         }
     }
 }
