@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/generator">
-      <change beforePath="$PROJECT_DIR$/JenkinsFilePerformance" beforeDir="false" afterPath="$PROJECT_DIR$/JenkinsFilePerformance" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -350,20 +349,6 @@
       <workItem from="1709132683153" duration="20505000" />
       <workItem from="1709623327498" duration="22150000" />
     </task>
-    <task id="LOCAL-00030" summary="fix/test">
-      <created>1698052114565</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1698052114565</updated>
-    </task>
-    <task id="LOCAL-00031" summary="fix/test">
-      <created>1698215364665</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1698215364665</updated>
-    </task>
     <task id="LOCAL-00032" summary="fix/test">
       <created>1700049675728</created>
       <option name="number" value="00032" />
@@ -697,7 +682,21 @@
       <option name="project" value="LOCAL" />
       <updated>1710334063332</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="feature/generator">
+      <created>1710334973080</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1710334973081</updated>
+    </task>
+    <task id="LOCAL-00080" summary="feature/generator">
+      <created>1710335085875</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1710335085875</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
