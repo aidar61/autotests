@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     def stand = params.STAND ?: '7'
-                    sh "mvn clean test -Dts.stand=$stand -Dgroups=Performance -DfailIfNoTests=false"
+                    sh "mvn clean test -Dts.stand=$stand -Dgroups=Generator -DfailIfNoTests=false"
                     //.\apache-jmeter-5.6.3\apache-jmeter-5.6.3\bin\jmeter -n -t Perf_mon.jmx -jhost=tsdev$stand.dev.colvir.ru -l report.jtl
                 }
             }
