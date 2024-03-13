@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -36,12 +38,20 @@ public class UserController extends ApiRequest {
     public User createUser(String username, String project) {
         String userJson;
         try {
-            userJson = Files.readString(Paths.get("common/src/main/resources/user.json"))
+            URL url = UserController.class.getResource("/user.json");
+            assert url != null;
+            userJson = Files.readString(Paths.get(url.toURI()))
                     .replaceAll("username", username);
-        } catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             throw new RuntimeException(e);
         }
         this.response = super.post(getEndpoint(REST, USER, project, SAVE), userJson);
+        return extractObject(User.class);
+    }
+
+    @Step("Get user {0}")
+    public User getUserBy(String username) {
+        this.response = super.get(getEndpoint(REST, USER, username));
         return extractObject(User.class);
     }
 

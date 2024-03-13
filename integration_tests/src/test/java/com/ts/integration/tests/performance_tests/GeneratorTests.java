@@ -29,7 +29,7 @@ import static com.ts.common.enums.TaskType.*;
 import static com.ts.common.utils.InitEntities.*;
 
 public class GeneratorTests extends BaseIntegrationTest {
-    User user;
+    User jmeter_user;
     String username = "jmeter-user";
     String project = "company.100.07.01";
     Parent SDPROJECT_PARENT;
@@ -59,7 +59,10 @@ public class GeneratorTests extends BaseIntegrationTest {
     }
 
     private void createJmeterUser() {
-        user = userController.createUser(username, project);
+        jmeter_user = userController.createUser(username, project);
+        if (userController.getResponse().getStatusCode() == 400) {
+            jmeter_user = userController.getUserBy(username);
+        }
     }
 
     private void CAT_SDPROJECTGROUP() {
@@ -94,7 +97,7 @@ public class GeneratorTests extends BaseIntegrationTest {
         udf.setUdfList(generateUdfList(UDF_SDPROJECT_SUPPORTTYPE, EXTENDED));
         udf.setUdfInteger(generateUdfInteger(UDF_SD_COST1CAT, 100));
         udf.setSecondUdfInteger(generateUdfInteger(UDF_SD_COST2CAT, 200));
-        udf.setThirdUdfInteger(generateUdfInteger(UDF_SD_COST2CAT, 300));
+        udf.setThirdUdfInteger(generateUdfInteger(UDF_SD_COST3CAT, 300));
 
         task.refreshUdf(udf);
         JMETER_SDPROJECT = projectController.createProject(task);
@@ -178,50 +181,60 @@ public class GeneratorTests extends BaseIntegrationTest {
     }
 
     private void assignRoles() {
-        userController.assignRoleToTask(JMETER_SDPROJECTGROUP, user, ROLE_SUPPORT_COSTMANAGER);
-        userController.assignRoleToTask(JMETER_SDPROJECTGROUP, user, ROLE_SUPPORT_MANAGER);
-        userController.assignRoleToTask(JMETER_GROUPTASKS, user, ROLE_TASK_MANAGER);
+        userController.assignRoleToTask(JMETER_SDPROJECTGROUP, jmeter_user, ROLE_SUPPORT_COSTMANAGER);
+        userController.assignRoleToTask(JMETER_SDPROJECTGROUP, jmeter_user, ROLE_SUPPORT_MANAGER);
+        userController.assignRoleToTask(JMETER_GROUPTASKS, jmeter_user, ROLE_TASK_MANAGER);
     }
 
     @Test(groups = "Generator", description = "Task generator")
     public void taskGeneratorTest() {
+        // Создать пользователя в узле company.100.07.01 с параметрами:
         createJmeterUser();
+        // Создать CAT_SDPROJECTGROUP в узле 758008 с параметрами
         CAT_SDPROJECTGROUP();
+        // Создать CAT_SDPROJECT в узле JMETER_SDPROJECTGROUP  с параметрами
         CAT_SDPROJECT();
+        // Создать CAT_GROUPTASKS в узле 758009 с параметрами:
         CAT_GROUPTASKS();
+        // Создать CAT_GENPLAN в узле JMETER_GROUPTASKS с параметрами:
         CAT_GENPLAN();
+        // Создать CAT_REGFOLDER в узле 758007 с параметрами:
         CAT_REGFOLDER();
+        // Создать CAT_REGPROJECT в узле JMETER_REGFOLDER с параметрами:
         CAT_REGPROJECT();
+        // Установить права для  jmeter-user
         assignRoles();
 
         // Создать в JMETER_SDPROJECT 100 запросов CAT_SDFEAURE
+        apiController.updateToken(generateAuthToken(jmeter_user));
         Parent sdFeatureParent = InitEntities.generateParent(JMETER_SDPROJECT);
-        task = InitEntities.getGeneralTask(SD_FEATURE, Operations.CAT);
-        udf = refreshUdf();
 
-        udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
+        for (int i = 0; i < 100; i++) {
+            task = InitEntities.getGeneralTask(SD_FEATURE, Operations.CAT);
+            udf = refreshUdf();
 
-        task.refreshUdf(udf);
-        task.setParent(sdFeatureParent);
-        task.setDescription(Tables.SD_FEATURE.getTable());
+            udf.setUdfList(generateUdfList(UDF_SDFEATURE_TYPE, OWN));
 
-        sdFeatureController.createTask(task);
-        ApiAsserts.assertThat(sdFeatureController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class);
+            task.refreshUdf(udf);
+            task.setParent(sdFeatureParent);
+            task.setDescription(Tables.SD_FEATURE.getTable());
+            sdFeatureController.createTask(task);
+            ApiAsserts.assertThat(sdFeatureController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                    .isParseableBody(TaskResponseBody.class);
+            //  Перевести все запросы CAT_SDFEATURE в состояние анализа с помощью операции "Начать предварительную оценку".
+            udf = refreshUdf();
+            task.refreshTask();
 
-        //  Перевести все запросы  CAT_SDFEAURE в состояние анализа с помощью операции "Начать предварительную оценку".
-        udf = refreshUdf();
-        task.refreshTask();
+            udf.setUdfUser(generateUdfUser(STDT_HANDLER, jmeter_user));
+            task.refreshUdf(udf);
+            task.setHandlerUser(jmeter_user);
 
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, user));
-        task.refreshUdf(udf);
-        task.setHandlerUser(user);
-
-        sdFeatureController.performCommonOperation(task, TOPRECOST);
-        ApiAsserts.assertThat(sdFeatureController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class);
+            sdFeatureController.performCommonOperation(task, TOPRECOST);
+            ApiAsserts.assertThat(sdFeatureController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                    .isParseableBody(TaskResponseBody.class);
+        }
 
         // Создать JMETER_GENPLAN 100 задач CAT_DEVTASK указав ответственного - jmeter-user
         Parent jmeterGenPlan = InitEntities.generateParent(JMETER_GENPLAN);
@@ -239,11 +252,13 @@ public class GeneratorTests extends BaseIntegrationTest {
         task.refreshUdf(udf);
         task.setParent(jmeterGenPlan);
         task.setPriority(InitEntities.generatePriority(NORMAL));
-        task.setHandlerUser(user);
+        task.setHandlerUser(jmeter_user);
 
-        devTaskController.createDevTask(task);
-        ApiAsserts.assertThat(devTaskController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class);
+        for (int i = 0; i < 100; i++) {
+            devTaskController.createDevTask(task);
+            ApiAsserts.assertThat(devTaskController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+                    .isParseableBody(TaskResponseBody.class);
+        }
     }
 }
