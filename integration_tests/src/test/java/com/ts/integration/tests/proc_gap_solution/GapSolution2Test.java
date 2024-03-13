@@ -1,32 +1,12 @@
 package com.ts.integration.tests.proc_gap_solution;
 
-import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.UserController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
-import com.ts.common.entitites.commonEntities.Parent;
-import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.Parents;
-import com.ts.common.enums.TaskType;
-import com.ts.common.enums.Users;
-import com.ts.common.utils.InitEntities;
-import com.ts.common.utils.RandomUtils;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
-import static com.ts.common.entitites.commonEntities.List.Constants.*;
-import static com.ts.common.entitites.commonEntities.List.Constants.YES_GAP_SECOND;
-import static com.ts.common.entitites.commonEntities.Task.Constants.FRONT_OFFICE;
-import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.entitites.commonEntities.User.Constants.*;
-import static com.ts.common.enums.TaskType.SOL_SELECTED;
-import static com.ts.common.enums.Users.CLIENT;
-import static com.ts.common.enums.Users.SECOND_EMPLOYEE;
-import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.InitEntities.generateUdfList;
 
 public class GapSolution2Test extends BaseIntegrationTest {

@@ -42,12 +42,12 @@ public class PerformanceEmployeeTaskQueueTest extends BaseIntegrationTest {
         for (int i = 0; i < 7; i++) {
             Arrays.stream(workTask).forEach(taskType -> {
                         commonWorkTaskProcessTest.createTask(taskType);
-                        allCategoriesOfWorkTaskProcess = commonWorkTaskProcessTest.getAllCategoriesOfWorkTaskProcess();
+                        allCategoriesOfWorkTaskProcess = commonWorkTaskProcessTest.allCategoriesOfWorkTaskProcess;
                         createdGeneralTasks.add(allCategoriesOfWorkTaskProcess.get(taskType));
                     }
             );
         }
-        HANDLER_USER = commonWorkTaskProcessTest.getHANDLER_USER();
+        HANDLER_USER = commonWorkTaskProcessTest.HANDLER_USER;
         System.err.println(createdGeneralTasks);
         System.err.println(createdGeneralTasks.size());
     }

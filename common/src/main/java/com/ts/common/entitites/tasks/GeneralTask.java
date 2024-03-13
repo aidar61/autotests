@@ -6,6 +6,7 @@ import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
+import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import lombok.*;
@@ -55,6 +56,13 @@ public class GeneralTask extends BaseEntity {
         this.handlerUser = taskResponseBody.getHandlerUser();
         this.submitterUser = taskResponseBody.getSubmitterUser();
 //        this.udfsString = taskResponseBody.getUdfs();
+    }
+
+    public Task mapToTask() {
+        return Task.builder()
+                .id(this.id)
+                .number(this.number)
+                .build();
     }
 
 

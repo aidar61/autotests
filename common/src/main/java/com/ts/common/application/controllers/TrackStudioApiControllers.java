@@ -1,9 +1,6 @@
 package com.ts.common.application.controllers;
 
-import com.ts.common.controllers.BaseController;
-import com.ts.common.controllers.CreateFromExcelTaskController;
-import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.UserController;
+import com.ts.common.controllers.*;
 import com.ts.common.controllers.advice.AdviceController;
 import com.ts.common.controllers.advice.CodeReviewController;
 import com.ts.common.controllers.advice.ConfirmationController;
@@ -14,29 +11,27 @@ import com.ts.common.controllers.gap.PotentialGapController;
 import com.ts.common.controllers.performance.PerformanceController;
 import com.ts.common.controllers.release.ReleaseController;
 import com.ts.common.controllers.release.ReleaseModuleController;
+import com.ts.common.controllers.sdFeature.SdFeatureController;
 import com.ts.common.controllers.sdbug.*;
 import com.ts.common.controllers.sddev.SdDevController;
 import com.ts.common.controllers.sdquestion.SdQuestionController;
 import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.controllers.sla.SlaFeatureController;
 import com.ts.common.controllers.sla.SlaHelpController;
+import com.ts.common.controllers.user.UserController;
 import com.ts.common.controllers.workTask.ContingentTaskController;
 import com.ts.common.controllers.workTask.DevTaskController;
 import com.ts.common.controllers.workTask.TechTaskController;
 import com.ts.common.controllers.workTask.WorkTaskController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.entitites.tasks.Task;
-import com.ts.common.enums.Users;
 import com.ts.common.request.ApiRequest;
-import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
-import com.ts.common.utils.WaitManager;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.support.ui.Wait;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -74,7 +69,9 @@ public class TrackStudioApiControllers {
     private SdOptimizationController sdOptimizationController;
     private ReleaseController releaseController;
     private SdDevController sdDevController;
-//    private PerformanceController performanceController;
+    private ProjectController projectController;
+    private PerformanceController performanceController;
+    private SdFeatureController sdFeatureController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
@@ -104,7 +101,9 @@ public class TrackStudioApiControllers {
         this.sdOptimizationController = new SdOptimizationController(STAND_URL, authToken);
         this.releaseController = new ReleaseController(STAND_URL, authToken);
         this.sdDevController = new SdDevController(STAND_URL, authToken);
-//        this.performanceController = new PerformanceController(STAND_URL, authToken);
+        this.performanceController = new PerformanceController(STAND_URL, authToken);
+        this.projectController = new ProjectController(STAND_URL, authToken);
+        this.sdFeatureController = new SdFeatureController(STAND_URL, authToken);
     }
 
     public GeneralTask receiveGeneralTask(String slaTaskNumber) {

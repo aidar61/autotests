@@ -95,6 +95,12 @@ public class InitEntities {
                 .number(number)
                 .build();
     }
+    public static Parent generateParent(GeneralTask task) {
+        return Parent.builder()
+                .id(task.getId())
+                .number(task.getNumber())
+                .build();
+    }
 
 
     public static GeneralSlaId getGeneralId(Operations category) {
@@ -391,6 +397,11 @@ public class InitEntities {
     }
 
     public static Status generatePriority(int priority) {
+        return Status.builder()
+                .id(String.valueOf(priority))
+                .build();
+    }
+    public static Status generatePriority(String priority) {
         return Status.builder()
                 .id(String.valueOf(priority))
                 .build();

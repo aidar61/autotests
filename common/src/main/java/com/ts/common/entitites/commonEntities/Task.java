@@ -106,7 +106,8 @@ public class Task extends BaseEntity {
         MODERN_COLVIR_PRODUCT("818181df62d0f2270162d349b524569b", "757948"),
         CURRENCY_MARKET("818181b03c7fc013013c7fca7f9104c2", "186640"),
         CUSTOMER_REQUEST("8a8181df879af7cb01879d663123091e", "1441326"), //Двойное начисление штрафа по гарантиям в первый день просрочки
-        AKKREDITIVES("818181b03c7fc013013c7fca7130041d", "186616");
+        AKKREDITIVES("818181b03c7fc013013c7fca7130041d", "186616"),
+        PRODUCT("81818187291b7b8f01293fe43f6e7018", "41095");
         public final String id;
         public final String number;
 

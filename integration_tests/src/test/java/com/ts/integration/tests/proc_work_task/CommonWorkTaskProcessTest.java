@@ -41,12 +41,12 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
     public WorkTaskController workTaskController;
     private GeneralTask task;
     private User AUTHOR;
-    private User HANDLER_USER;
+    public User HANDLER_USER;
     private GrTaskDbEntity parentTaskFromDb;
     private GrTaskDbEntity slaBugTaskFromDb;
     private Parent parent;
     private GrTaskTable grTaskTable;
-    private Map<TaskType.WorkTask, GeneralTask> allCategoriesOfWorkTaskProcess;
+    public Map<TaskType.WorkTask, GeneralTask> allCategoriesOfWorkTaskProcess;
     private static final Integer expectedDoubleValue = 2;
     private static final String expectedDate = DateUtils.getCurrentDate(1);
 

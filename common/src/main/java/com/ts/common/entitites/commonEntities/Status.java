@@ -42,7 +42,8 @@ public class Status extends BaseEntity {
     String trName;
 
     public enum Priority {
-        NORMAL("818181a81faa73ff011fad72666a0150");
+        NORMAL("818181a81faa73ff011fad72666a0150"),
+        NORMAL_PRIORITY("ff8081812ebde328012ebe063858000b");
         @Getter
         public final String id;
 

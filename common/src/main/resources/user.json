@@ -1,0 +1,199 @@
+{
+  "id": "",
+  "login": "username",
+  "nameIntnl": "username",
+  "name": "username",
+  "active": true,
+  "role": {
+    "id": "ROLE_WORKER",
+    "name": "Сотрудник",
+    "owner": {
+      "id": "1",
+      "login": "root",
+      "name": "COLVIR",
+      "active": true,
+      "wrongAuthAttempt": 0,
+      "authBlocked": false,
+      "freelancer": false
+    }
+  },
+  "company": "Colvir",
+  "tel": "",
+  "email": "",
+  "locale": {
+    "key": "ru_RU",
+    "value": "русский (Россия)"
+  },
+  "timezone": {
+    "key": "Europe/Moscow",
+    "value": "Москва, стандартное время"
+  },
+  "defaultTask": {
+    "id": "818181a81e9d8b28011e9d9811150002",
+    "abudget": 0,
+    "actualBudget": 0,
+    "name": "Задачи [tsdev7]",
+    "number": "2405",
+    "shortname": "TASKS",
+    "categoryLink": "http://tsdev4.dev.colvir.ru/TrackStudio/cssimages/categories/folder.png",
+    "category": {
+      "id": "CAT_GROUPTASKS",
+      "name": "Группа для внутренних работ",
+      "workflowId": "PROC_GROUPTASKS",
+      "icon": "folder.png",
+      "handlerRequired": false,
+      "groupHandlerAllowed": false,
+      "canManage": false
+    },
+    "status": {
+      "id": "STATUS_GROUPTASKS_ACTIVE",
+      "color": "#00FF00",
+      "name": "Активна",
+      "workflowId": "PROC_GROUPTASKS",
+      "defaultStart": true,
+      "image": "startstate.png",
+      "order": 0,
+      "start": true,
+      "finish": false
+    },
+    "statusName": "Активна",
+    "childrenCount": 0,
+    "hasChildren": true,
+    "messageCount": 0,
+    "hasAttachments": false,
+    "onSight": true,
+    "udfs": {},
+    "stateLink": "http://tsdev4.dev.colvir.ru/TrackStudio/cssimages/startstate.png",
+    "statusColor": "#00FF00",
+    "taskLink": "http://tsdev4.dev.colvir.ru/TrackStudio/app/task/2405",
+    "sortMessageAsc": false,
+    "selectable": true,
+    "canEditHandler": false
+  },
+  "emailTemplate": "",
+  "parentId": "818181b03d1866b2013d1a4eec6b329d",
+  "parent": {
+    "id": "818181b03d1866b2013d1a4eec6b329d",
+    "login": "company.100.07.01",
+    "name": "Группа разработки инструментария планирования и управления",
+    "active": true,
+    "childrenCount": 31,
+    "wrongAuthAttempt": 0,
+    "authBlocked": false,
+    "freelancer": false,
+    "$$key": "company.100.07.01",
+    "$selected": true
+  },
+  "udfs": [
+    {
+      "id": "UDF_USER_CHECKREPLAN",
+      "udfid": "UDF_USER_CHECKREPLAN",
+      "ownerType": "user",
+      "owner": "company.100.07.01",
+      "caption": "**Проверять необходимость перепланирования",
+      "order": 500,
+      "loadType": "NORMAL",
+      "type": "LIST",
+      "description": "Проверять ли неоьходимость перепланирования при списании трудозатрат",
+      "listValue": [
+        {
+          "id": "8181817e365d7c2c01365d827128073f",
+          "code": "NO",
+          "name": "Нет",
+          "selected": false,
+          "selectable": true,
+          "hasChild": false,
+          "order": 0
+        }
+      ],
+      "group": "CUSTOM_FIELDS",
+      "editable": false,
+      "required": false,
+      "isEmpty": false,
+      "userdata": {},
+      "userdataMap0": {},
+      "enabled": true,
+      "listValueSelector": [
+        {
+          "id": "8181817e365d7c2c01365d827128073f",
+          "code": "NO",
+          "name": "Нет",
+          "selected": true,
+          "selectable": true,
+          "hasChild": false,
+          "order": 0
+        },
+        {
+          "id": "8181817e365d7c2c01365d8270db073e",
+          "code": "YES",
+          "name": "Да",
+          "selected": false,
+          "selectable": true,
+          "hasChild": false,
+          "order": 1
+        }
+      ],
+      "reference": false,
+      "htmlview": false,
+      "empty": false,
+      "$$hashKey": "object:523"
+    },
+    {
+      "id": "UDF_USER_REVIEWER",
+      "udfid": "UDF_USER_REVIEWER",
+      "ownerType": "user",
+      "owner": "company.100.07.01",
+      "caption": "Рецензент кода",
+      "order": 200,
+      "loadType": "NORMAL",
+      "type": "LIST",
+      "listValue": [
+        {
+          "id": "ff808081307943d6013079f071a40543",
+          "code": "YES",
+          "name": "Да",
+          "selected": false,
+          "selectable": true,
+          "hasChild": false,
+          "order": 0
+        }
+      ],
+      "group": "CUSTOM_FIELDS",
+      "editable": false,
+      "required": false,
+      "isEmpty": false,
+      "userdata": {},
+      "userdataMap0": {},
+      "enabled": true,
+      "listValueSelector": [
+        {
+          "id": "ff808081307943d6013079f071a40543",
+          "code": "YES",
+          "name": "Да",
+          "selected": false,
+          "selectable": true,
+          "hasChild": false,
+          "order": 0
+        },
+        {
+          "id": "ff808081307943d6013079f071b20544",
+          "code": "NO",
+          "name": "Нет",
+          "selected": true,
+          "selectable": true,
+          "hasChild": false,
+          "order": 0
+        }
+      ],
+      "reference": false,
+      "htmlview": false,
+      "empty": false,
+      "$$hashKey": "object:519"
+    }
+  ],
+  "wrongAuthAttempt": 0,
+  "authBlocked": false,
+  "freelancer": false,
+  "password": "password",
+  "passwordConfirm": "password"
+}
