@@ -5,15 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/tests">
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBugCloseByClientTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBugCloseUnfixableAnalizeTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBugEssentialTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBugNoTempSolutionTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBugOtherTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_bug/SlaBugUnfixableInWorkTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -358,14 +350,7 @@
       <workItem from="1707198306554" duration="4574000" />
       <workItem from="1707898497189" duration="1000" />
       <workItem from="1709132683153" duration="20505000" />
-      <workItem from="1709623327498" duration="21425000" />
-    </task>
-    <task id="LOCAL-00026" summary="added sd question test 2.">
-      <created>1697095481845</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1697095481846</updated>
+      <workItem from="1709623327498" duration="22150000" />
     </task>
     <task id="LOCAL-00027" summary="suite.xml">
       <created>1697095564271</created>
@@ -707,7 +692,14 @@
       <option name="project" value="LOCAL" />
       <updated>1710140787636</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="fix/tests">
+      <created>1710143747925</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1710143747925</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
