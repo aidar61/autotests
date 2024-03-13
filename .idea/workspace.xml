@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/sddev">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/tests">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -16,9 +16,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="spring-beans.schema" />
-        <option value="Enum" />
         <option value="Kotlin Class" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -72,7 +72,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;stage&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/aidarka61/IdeaProjects/autotests&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -114,31 +114,35 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.SdDevBaseDynamicTest">
-    <configuration name="PerformanceController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ts.common.controllers.performance.PerformanceController" />
-      <module name="common" />
+  <component name="RunManager" selected="TestNG.SlaBugCloseByClientTest">
+    <configuration name="SlaBugCloseByClientTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.common.controllers.performance.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_bug.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_bug" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_bug.SlaBugCloseByClientTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PerformanceEmployeeTaskQueueTest.beforeClass" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SlaBugCloseByClientTest.slaBugCat" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.performance_tests.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_bug.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.performance_tests" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.performance_tests.PerformanceEmployeeTaskQueueTest" />
-      <option name="METHOD_NAME" value="beforeClass" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_bug" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_bug.SlaBugCloseByClientTest" />
+      <option name="METHOD_NAME" value="slaBugCat" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -146,52 +150,50 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SlaBugEssentialTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.performance_tests.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_bug.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.performance_tests" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.performance_tests.PerformanceEmployeeTaskQueueTest" />
-      <option name="METHOD_NAME" value="getPortletOfEmployeeTaskQueue" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_bug" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_bug.SlaBugEssentialTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="PerformanceTests.getControlOperationMaintenance" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SlaBugOtherTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.performance_tests.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_bug.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.performance_tests" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.performance_tests.PerformanceTests" />
-      <option name="METHOD_NAME" value="getControlOperationMaintenance" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_bug" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_bug.SlaBugOtherTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SdDevBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SlaBugUnfixableInWorkTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.sd_dev.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_bug.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.sd_dev" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.sd_dev.SdDevBaseDynamicTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_bug" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_bug.SlaBugUnfixableInWorkTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -245,21 +247,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.PerformanceController" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.SdDevBaseDynamicTest" />
-      <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.beforeClass" />
-      <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue" />
-      <item itemvalue="TestNG.PerformanceTests.getControlOperationMaintenance" />
+      <item itemvalue="TestNG.SlaBugCloseByClientTest" />
+      <item itemvalue="TestNG.SlaBugCloseByClientTest.slaBugCat" />
+      <item itemvalue="TestNG.SlaBugEssentialTest" />
+      <item itemvalue="TestNG.SlaBugOtherTest" />
+      <item itemvalue="TestNG.SlaBugUnfixableInWorkTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.SdDevBaseDynamicTest" />
-        <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.getPortletOfEmployeeTaskQueue" />
-        <item itemvalue="TestNG.PerformanceEmployeeTaskQueueTest.beforeClass" />
-        <item itemvalue="TestNG.PerformanceTests.getControlOperationMaintenance" />
-        <item itemvalue="Application.PerformanceController" />
+        <item itemvalue="TestNG.SlaBugCloseByClientTest" />
+        <item itemvalue="TestNG.SlaBugCloseByClientTest.slaBugCat" />
+        <item itemvalue="TestNG.SlaBugOtherTest" />
+        <item itemvalue="TestNG.SlaBugEssentialTest" />
+        <item itemvalue="TestNG.SlaBugUnfixableInWorkTest" />
       </list>
     </recent_temporary>
   </component>
@@ -347,149 +349,8 @@
       <workItem from="1707115671669" duration="1900000" />
       <workItem from="1707198306554" duration="4574000" />
       <workItem from="1707898497189" duration="1000" />
-    </task>
-    <task id="LOCAL-00004" summary="fix/TestsSupport">
-      <created>1688634994052</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1688634994052</updated>
-    </task>
-    <task id="LOCAL-00005" summary="fix/TestsSupport">
-      <created>1688635058703</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1688635058703</updated>
-    </task>
-    <task id="LOCAL-00006" summary="fix/TestsSupport">
-      <created>1688635179928</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1688635179928</updated>
-    </task>
-    <task id="LOCAL-00007" summary="feature/Dynamic Database URL">
-      <created>1688635515348</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1688635515348</updated>
-    </task>
-    <task id="LOCAL-00008" summary="feature/Dynamic Database URL">
-      <created>1688635519041</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1688635519041</updated>
-    </task>
-    <task id="LOCAL-00013" summary="Check additional fields">
-      <option name="closed" value="true" />
-      <created>1691405057080</created>
-      <option name="number" value="00013" />
-      <option name="presentableId" value="LOCAL-00013" />
-      <option name="project" value="LOCAL" />
-      <updated>1691405057080</updated>
-    </task>
-    <task id="LOCAL-00014" summary="complete acceptance 1.">
-      <option name="closed" value="true" />
-      <created>1691482321043</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1691482321043</updated>
-    </task>
-    <task id="LOCAL-00015" summary="complete acceptance 2">
-      <option name="closed" value="true" />
-      <created>1691497786551</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1691497786551</updated>
-    </task>
-    <task id="LOCAL-00016" summary="receive random task with additional field.">
-      <option name="closed" value="true" />
-      <created>1692004797185</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1692004797185</updated>
-    </task>
-    <task id="LOCAL-00017" summary="complete sanction scenario.">
-      <option name="closed" value="true" />
-      <created>1692364787099</created>
-      <option name="number" value="00017" />
-      <option name="presentableId" value="LOCAL-00017" />
-      <option name="project" value="LOCAL" />
-      <updated>1692364787099</updated>
-    </task>
-    <task id="LOCAL-00018" summary="add sanction test to Jenkins file.">
-      <option name="closed" value="true" />
-      <created>1692365018246</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1692365018246</updated>
-    </task>
-    <task id="LOCAL-00019" summary="Steps, DevTask">
-      <created>1692689894871</created>
-      <option name="number" value="00019" />
-      <option name="presentableId" value="LOCAL-00019" />
-      <option name="project" value="LOCAL" />
-      <updated>1692689894871</updated>
-    </task>
-    <task id="LOCAL-00020" summary="Steps, DevTask">
-      <created>1692690147006</created>
-      <option name="number" value="00020" />
-      <option name="presentableId" value="LOCAL-00020" />
-      <option name="project" value="LOCAL" />
-      <updated>1692690147007</updated>
-    </task>
-    <task id="LOCAL-00021" summary="feature/proc_work_task Common Test">
-      <created>1692964632148</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1692964632148</updated>
-    </task>
-    <task id="LOCAL-00022" summary="added description for common assert methods, change to assert equals instead assert true.">
-      <option name="closed" value="true" />
-      <created>1694749613393</created>
-      <option name="number" value="00022" />
-      <option name="presentableId" value="LOCAL-00022" />
-      <option name="project" value="LOCAL" />
-      <updated>1694749613393</updated>
-    </task>
-    <task id="LOCAL-00023" summary="create task from excel file.">
-      <option name="closed" value="true" />
-      <created>1695117235188</created>
-      <option name="number" value="00023" />
-      <option name="presentableId" value="LOCAL-00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1695117235188</updated>
-    </task>
-    <task id="LOCAL-00024" summary="added sd question test.">
-      <option name="closed" value="true" />
-      <created>1695382701141</created>
-      <option name="number" value="00024" />
-      <option name="presentableId" value="LOCAL-00024" />
-      <option name="project" value="LOCAL" />
-      <updated>1695382701141</updated>
-    </task>
-    <task id="LOCAL-00025" summary="added sd question test 2.">
-      <option name="closed" value="true" />
-      <created>1695729749607</created>
-      <option name="number" value="00025" />
-      <option name="presentableId" value="LOCAL-00025" />
-      <option name="project" value="LOCAL" />
-      <updated>1695729749607</updated>
-    </task>
-    <task id="LOCAL-00026" summary="added sd question test 2.">
-      <created>1697095481845</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1697095481846</updated>
+      <workItem from="1709132683153" duration="20505000" />
+      <workItem from="1709623327498" duration="22150000" />
     </task>
     <task id="LOCAL-00027" summary="suite.xml">
       <created>1697095564271</created>
@@ -705,7 +566,140 @@
       <option name="project" value="LOCAL" />
       <updated>1707892544371</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="feature/performance tests">
+      <created>1708414678392</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1708414678393</updated>
+    </task>
+    <task id="LOCAL-00058" summary="feature/Sla Bug">
+      <created>1709191775141</created>
+      <option name="number" value="00058" />
+      <option name="presentableId" value="LOCAL-00058" />
+      <option name="project" value="LOCAL" />
+      <updated>1709191775141</updated>
+    </task>
+    <task id="LOCAL-00059" summary="feature/Sla Bug">
+      <created>1709208514490</created>
+      <option name="number" value="00059" />
+      <option name="presentableId" value="LOCAL-00059" />
+      <option name="project" value="LOCAL" />
+      <updated>1709208514490</updated>
+    </task>
+    <task id="LOCAL-00060" summary="feature/Sla Bug">
+      <created>1709208672735</created>
+      <option name="number" value="00060" />
+      <option name="presentableId" value="LOCAL-00060" />
+      <option name="project" value="LOCAL" />
+      <updated>1709208672735</updated>
+    </task>
+    <task id="LOCAL-00061" summary="feature/Sla Bug">
+      <created>1709208823146</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1709208823146</updated>
+    </task>
+    <task id="LOCAL-00062" summary="fix/responsibility party wait manager">
+      <created>1709623512590</created>
+      <option name="number" value="00062" />
+      <option name="presentableId" value="LOCAL-00062" />
+      <option name="project" value="LOCAL" />
+      <updated>1709623512591</updated>
+    </task>
+    <task id="LOCAL-00063" summary="fix/responsibility party wait manager">
+      <created>1709623610389</created>
+      <option name="number" value="00063" />
+      <option name="presentableId" value="LOCAL-00063" />
+      <option name="project" value="LOCAL" />
+      <updated>1709623610389</updated>
+    </task>
+    <task id="LOCAL-00064" summary="fix/responsibility party wait manager">
+      <created>1709625961672</created>
+      <option name="number" value="00064" />
+      <option name="presentableId" value="LOCAL-00064" />
+      <option name="project" value="LOCAL" />
+      <updated>1709625961672</updated>
+    </task>
+    <task id="LOCAL-00065" summary="fix/responsibility party wait manager">
+      <created>1709705414430</created>
+      <option name="number" value="00065" />
+      <option name="presentableId" value="LOCAL-00065" />
+      <option name="project" value="LOCAL" />
+      <updated>1709705414430</updated>
+    </task>
+    <task id="LOCAL-00066" summary="fix/sla bug dynamic test">
+      <created>1709705683206</created>
+      <option name="number" value="00066" />
+      <option name="presentableId" value="LOCAL-00066" />
+      <option name="project" value="LOCAL" />
+      <updated>1709705683206</updated>
+    </task>
+    <task id="LOCAL-00067" summary="fix/sla bug dynamic test">
+      <created>1709706191074</created>
+      <option name="number" value="00067" />
+      <option name="presentableId" value="LOCAL-00067" />
+      <option name="project" value="LOCAL" />
+      <updated>1709706191074</updated>
+    </task>
+    <task id="LOCAL-00068" summary="feature/Sla bug static">
+      <created>1709715070465</created>
+      <option name="number" value="00068" />
+      <option name="presentableId" value="LOCAL-00068" />
+      <option name="project" value="LOCAL" />
+      <updated>1709715070465</updated>
+    </task>
+    <task id="LOCAL-00069" summary="fix/sla help">
+      <created>1709715617662</created>
+      <option name="number" value="00069" />
+      <option name="presentableId" value="LOCAL-00069" />
+      <option name="project" value="LOCAL" />
+      <updated>1709715617662</updated>
+    </task>
+    <task id="LOCAL-00070" summary="fix/sla help">
+      <created>1709716353614</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1709716353614</updated>
+    </task>
+    <task id="LOCAL-00071" summary="fix/tests">
+      <created>1709718326012</created>
+      <option name="number" value="00071" />
+      <option name="presentableId" value="LOCAL-00071" />
+      <option name="project" value="LOCAL" />
+      <updated>1709718326012</updated>
+    </task>
+    <task id="LOCAL-00072" summary="fix/tests">
+      <created>1710140195678</created>
+      <option name="number" value="00072" />
+      <option name="presentableId" value="LOCAL-00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1710140195678</updated>
+    </task>
+    <task id="LOCAL-00073" summary="fix/tests">
+      <created>1710140232426</created>
+      <option name="number" value="00073" />
+      <option name="presentableId" value="LOCAL-00073" />
+      <option name="project" value="LOCAL" />
+      <updated>1710140232427</updated>
+    </task>
+    <task id="LOCAL-00074" summary="fix/tests">
+      <created>1710140787636</created>
+      <option name="number" value="00074" />
+      <option name="presentableId" value="LOCAL-00074" />
+      <option name="project" value="LOCAL" />
+      <updated>1710140787636</updated>
+    </task>
+    <task id="LOCAL-00075" summary="fix/tests">
+      <created>1710143747925</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1710143747925</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -761,12 +755,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="receive random task with additional field." />
-    <MESSAGE value="complete sanction scenario." />
-    <MESSAGE value="add sanction test to Jenkins file." />
-    <MESSAGE value="Steps, DevTask" />
-    <MESSAGE value="feature/proc_work_task Common Test" />
-    <MESSAGE value="feature/proc_work_task common test fix" />
     <MESSAGE value="added description for common assert methods, change to assert equals instead assert true." />
     <MESSAGE value="create task from excel file." />
     <MESSAGE value="added sd question test." />
@@ -784,9 +772,15 @@
     <MESSAGE value="fix/dev task accepted" />
     <MESSAGE value="feature/sd bug" />
     <MESSAGE value="feature/release" />
-    <MESSAGE value="feature/performance tests" />
     <MESSAGE value="feature/sddev" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/sddev" />
+    <MESSAGE value="feature/performance tests" />
+    <MESSAGE value="feature/Sla Bug" />
+    <MESSAGE value="fix/responsibility party wait manager" />
+    <MESSAGE value="fix/sla bug dynamic test" />
+    <MESSAGE value="feature/Sla bug static" />
+    <MESSAGE value="fix/sla help" />
+    <MESSAGE value="fix/tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix/tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

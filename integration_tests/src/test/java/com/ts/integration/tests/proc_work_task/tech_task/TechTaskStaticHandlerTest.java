@@ -131,6 +131,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Изменить участников", dependsOnMethods = "techTask")
     public void changeMembers() {
+        apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
         task.refreshTask();
         udf.setUdfUser(generateUdfUser(UDF_PARTICIPANTS, ABDULLAEV_BAHODIR));
@@ -144,6 +145,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Комментарий", dependsOnMethods = "changeMembers")
     public void comment() {
+        apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
         task.refreshTask();
         task.setDescription(generateComment());
@@ -154,6 +156,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "comment")
     public void changePrgArea() {
+        apiController.updateToken(InitEntities.generateAuthToken(creator));
         task.refreshUdf();
         udf.setUdfList(generateUdfList(UDF_PRGAREA, UDF_PRGAREA_BNK));
         task.refreshUdf(udf);
@@ -166,6 +169,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Изменить способ обзора кода", dependsOnMethods = "changePrgArea")
     public void changeCodeReview() {
+        apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
         task.refreshTask();
         task.setDescription(generateString());
@@ -180,6 +184,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Установить функциональную зависимость от другой задачи", dependsOnMethods = "changeCodeReview")
     public void taskDependOtherTask() {
+        apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
         task.refreshTask();
 
@@ -205,6 +210,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Изменить планируемую дату начала", dependsOnMethods = "taskDependOtherTask")
     public void changePlanFD() {
+        apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
         task.refreshTask();
         task.setDescription(generateString());
@@ -219,6 +225,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Изменить планируемую дату завершения", dependsOnMethods = "changePlanFD")
     public void changePlanTD() {
+        apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
         task.refreshTask();
         task.setDescription(generateString());
@@ -233,6 +240,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "changePlanTD")
     public void changeLinkedTask() {
+        apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
         task.refreshTask();
         task.setDescription(generateString());
@@ -246,6 +254,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "changeLinkedTask")
     public void setSupervise() {
+        apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
         task.refreshTask();
         task.setDescription(generateString());
@@ -260,6 +269,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "setSupervise")
     public void setWatcher() {
+        apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
         task.refreshTask();
         task.setDescription(generateString());
@@ -274,6 +284,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Переназначить ответственного", dependsOnMethods = "setWatcher")
     public void reAssign() {
+        apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
         task.refreshTask();
         task.setDescription(generateString());
@@ -291,6 +302,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Изменить автора", dependsOnMethods = "reAssign")
     public void changeAuthor() {
+        apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
         task.refreshTask();
         task.setDescription(generateString());

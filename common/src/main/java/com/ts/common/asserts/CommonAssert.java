@@ -234,7 +234,7 @@ public class CommonAssert {
     @Step("[ASSERT] Checking task submitter user, Expected: {0}")
     public CommonAssert isCorrectSubmitterUser(String expectedLogin) {
         var submitterUser = new JsonPath(response.asString()).getObject("submitterUser", User.class);
-        assertEquals(expectedLogin, submitterUser.getLogin(), expectedLogin + " parameters is match: ");
+        assertEquals(submitterUser.getLogin(), expectedLogin, expectedLogin + " parameters is match: ");
         log.info("Submitter is correct Actual {}, Expected {}", submitterUser.getLogin(), expectedLogin);
         return this;
     }
@@ -322,8 +322,21 @@ public class CommonAssert {
         var actual = extractUdfField(type, UdfList.class).getListValue();
         Assertions
                 .assertThat(actual)
-                .withFailMessage("Udf type %s: Code is not correct expected %s, actual %s", type.udfId, expected, Arrays.stream(actual).map(List::getId).collect(Collectors.joining("|")))
+                .withFailMessage("Udf type %s: Code is not correct expected %s, actual %s", type.udfId, expected, Arrays.stream(actual).map(List::getId)
+                        .collect(Collectors.joining("|")))
                 .anyMatch(x -> x.getId().equals(expected));
+        log.info("{} is correct, Actual {}, Expected {}", type.udfId, Arrays.stream(actual).map(List::getId).collect(Collectors.joining("|")), expected);
+        return this;
+    }
+
+    @Step("[ASSERT] Checking udf list type of {0} is correct, Expected: {1}")
+    public CommonAssert isCorrectUdfList(Udfs.UdfSd type, List.Constants expected) {
+        var actual = extractUdfField(type, UdfList.class).getListValue();
+        Assertions
+                .assertThat(actual)
+                .withFailMessage("Udf type %s: Code is not correct expected %s, actual %s", type.udfId, expected, Arrays.stream(actual).map(List::getId)
+                        .collect(Collectors.joining("|")))
+                .anyMatch(x -> x.getId().equals(expected.getId()));
         log.info("{} is correct, Actual {}, Expected {}", type.udfId, Arrays.stream(actual).map(List::getId).collect(Collectors.joining("|")), expected);
         return this;
     }
@@ -380,7 +393,7 @@ public class CommonAssert {
         var actual = extractUdfField(type, UdfUser.class).getUserValue();
         Assertions
                 .assertThat(actual)
-                .withFailMessage("Code is not correct expected %s, actual %s", expected, actual)
+                .withFailMessage("User is not correct expected %s, actual %s", expected, actual)
                 .anyMatch(x -> x.getLogin().equals(expected));
         return this;
     }

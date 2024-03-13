@@ -71,7 +71,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
         ROLE_CONTRACT_EMP = userController.receiveUserByRole(USER_ROLES, "Ведение контрактов", "root").getForUser();
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "создание")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "создание")
     public void createTask() {
         apiController.updateToken(InitEntities.generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -104,7 +104,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Принять на анализ", dependsOnMethods = "createTask")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Принять на анализ", dependsOnMethods = "createTask")
     public void taskAnalyze() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -127,7 +127,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Запросить информацию", dependsOnMethods = "taskAnalyze")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Запросить информацию", dependsOnMethods = "taskAnalyze")
     public void taskRequestInfo() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -145,7 +145,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Отменить запрос информации", dependsOnMethods = "taskRequestInfo")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Отменить запрос информации", dependsOnMethods = "taskRequestInfo")
     public void taskUndoRequestInfo() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -163,7 +163,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Запросить информацию", dependsOnMethods = "taskUndoRequestInfo")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Запросить информацию", dependsOnMethods = "taskUndoRequestInfo")
     public void taskRequestInfo1() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -181,7 +181,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Предоставить информацию", dependsOnMethods = "taskRequestInfo1")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Предоставить информацию", dependsOnMethods = "taskRequestInfo1")
     public void taskProvideInfo() {
         apiController.updateToken(generateAuthToken(CLIENT));
         task.refreshTask();
@@ -199,7 +199,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Оказать консультацию", dependsOnMethods = "taskProvideInfo")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Оказать консультацию", dependsOnMethods = "taskProvideInfo")
     public void taskConsult() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -217,7 +217,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskConsult")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskConsult")
     public void taskReturn() {
         apiController.updateToken(generateAuthToken(CLIENT));
         task.refreshTask();
@@ -236,7 +236,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Оказать консультацию", dependsOnMethods = "taskReturn")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Оказать консультацию", dependsOnMethods = "taskReturn")
     public void taskConsult2() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -254,7 +254,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
-    @Test(groups = {"ProcSdDev", "Regression"}, description = "Закрыть", dependsOnMethods = "taskConsult2")
+    @Test(groups = {"SlaHelp", "Regression"}, description = "Закрыть", dependsOnMethods = "taskConsult2")
     public void taskClose() {
         apiController.updateToken(generateAuthToken(CLIENT));
         task.refreshTask();
@@ -275,7 +275,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-//    @Test(groups = {"ProcSdDev", "Regression"}, description = "Отменить закрытие", dependsOnMethods = "taskClose")
+//    @Test(groups = {"SlaHelp", "Regression"}, description = "Отменить закрытие", dependsOnMethods = "taskClose")
 //    public void taskUndoClose() {
 //        apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
 //        task.refreshTask();

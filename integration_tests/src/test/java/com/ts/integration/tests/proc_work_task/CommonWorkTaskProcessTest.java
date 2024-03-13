@@ -15,7 +15,6 @@ import com.ts.common.enums.TaskType;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
-import lombok.Data;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -38,7 +37,6 @@ import static com.ts.common.enums.TaskStatuses.*;
 import static com.ts.common.enums.TaskType.WORK_TASK;
 import static com.ts.common.utils.InitEntities.*;
 
-@Data
 public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
     public WorkTaskController workTaskController;
     private GeneralTask task;
@@ -397,7 +395,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}
             , description = "Принять в работу для всех созданных задач"
-            , dependsOnMethods = "changeService"
+            , dependsOnMethods = "acceptInWorkRetrySecondTime"
             , dataProvider = "workTaskCategories")
     public void toAcceptance(TaskType.WorkTask category) {
         apiController.updateToken(generateAuthToken(HANDLER_USER));

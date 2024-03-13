@@ -263,6 +263,7 @@ public class InitEntities {
                 .build();
     }
 
+
     public static UdfList generateUdfList(Udfs.UdfSd udfSdType, List.Constants udfList, String value) {
         return UdfList.builder()
                 .udfId(udfSdType.udfId)
@@ -350,6 +351,14 @@ public class InitEntities {
                 .id(user.getId())
                 .login(user.getLogin())
                 .name(user.getName())
+                .build();
+    }
+
+    public static User generateUser(String id, String login, String name) {
+        return User.builder()
+                .id(id)
+                .login(login)
+                .name(name)
                 .build();
     }
 

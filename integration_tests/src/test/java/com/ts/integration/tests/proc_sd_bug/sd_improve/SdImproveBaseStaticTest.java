@@ -15,8 +15,10 @@ import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
+import com.ts.common.utils.WaitManager;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -66,7 +68,10 @@ public class SdImproveBaseStaticTest extends BaseIntegrationTest {
         SUPPORT_MEMBER = userController.receiveUserByRole(USER_ROLES, "Участник проекта сопровождения", SUPPORT_MANAGER.getLogin()).getForUser();
         SUPPORT_MEMBER2 = userController.receiveUserByRole(USER_ROLES, "Участник проекта сопровождения", SUPPORT_MEMBER.getLogin()).getForUser();
     }
-
+    @BeforeMethod(alwaysRun = true)
+    public void beforeMethod() {
+        WaitManager.pause(5);
+    }
     @Test(groups = {"PROC_SDBUG", "Regression"}, description = "создание CAT_SDBUG")
     public void createTask() {
         apiController.updateToken(InitEntities.generateAuthToken(CLIENT));

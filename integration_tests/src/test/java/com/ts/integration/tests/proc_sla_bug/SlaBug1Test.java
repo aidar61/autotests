@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
 import static com.ts.common.entitites.commonEntities.List.Constants.CRITICAL;
-import static com.ts.common.entitites.commonEntities.List.Constants.REMOTE_ACCESS;
+import static com.ts.common.entitites.commonEntities.List.Constants.NO_REMOTE_ACCESS;
 import static com.ts.common.entitites.commonEntities.Task.Constants.AKKREDITIVES;
 import static com.ts.common.entitites.commonEntities.Task.Constants.MTBANK;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
@@ -48,7 +48,7 @@ public class SlaBug1Test extends BaseIntegrationTest {
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
         udf.setSecondUdfTask(generateUdfTask(UDF_BDKU_CONFIGURATION, MTBANK));
         udf.setUdfList(InitEntities.generateUdfList(UDF_SDBUG_PRIORITYBUG, CRITICAL));
-        udf.setSecondUdfList(InitEntities.generateUdfList(UDF_SD_REMOTEACCESS, REMOTE_ACCESS));
+        udf.setSecondUdfList(InitEntities.generateUdfList(UDF_SD_REMOTEACCESS, NO_REMOTE_ACCESS));
         task = InitEntities.getGeneralTask(TaskType.SLA_BUG, Operations.CAT);
         task.refreshUdf(udf);
         task.setHandlerUser(generateUser(ALTUNIN_NIKOLAY));
