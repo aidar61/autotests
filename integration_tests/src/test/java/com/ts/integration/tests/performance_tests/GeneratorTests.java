@@ -266,7 +266,7 @@ public class GeneratorTests extends BaseIntegrationTest {
         // Создать в JMETER_SDPROJECT 100 запросов CAT_SDFEATURE
         apiController.updateToken(generateAuthToken(jmeter_user));
         Parent sdFeatureParent = InitEntities.generateParent(JMETER_SDPROJECT);
-        int actualCountSdFeature = receiveActualCountOfSdFeatureTask() - 2;
+        int actualCountSdFeature = receiveActualCountOfSdFeatureTask() - 1;
         if (actualCountSdFeature < 100) {
             for (int i = 0; i < 100 - actualCountSdFeature; i++) {
                 task = InitEntities.getGeneralTask(SD_FEATURE, Operations.CAT);
