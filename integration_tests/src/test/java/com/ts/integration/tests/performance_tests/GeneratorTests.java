@@ -299,7 +299,7 @@ public class GeneratorTests extends BaseIntegrationTest {
         // Создать JMETER_GENPLAN 100 задач CAT_DEVTASK указав ответственного - jmeter-user
         Parent jmeterGenPlan = InitEntities.generateParent(JMETER_GENPLAN);
         int actualCountOfDevTasks = receiveActualCountOfDevTask() - 1;
-        if (actualCountOfDevTasks != 100) {
+        if (actualCountOfDevTasks < 100) {
             task = InitEntities.getGeneralTask(DEV_TASK, CAT);
             udf = refreshUdf();
 
