@@ -388,6 +388,11 @@ public class CommonAssert {
         return this;
     }
 
+//    @Step("[ASSERT] Checking udfData {0} ({1}) is equals, Expected {2}")
+//    public CommonAssert isCorrectUserData(Udfs.UdfSd type, String description, String userData) {
+//        extractUdfField(type, UdfString.class)
+//    }
+
     @Step("[ASSERT] Checking udfUser type of {0} is correct, Expected user: {1}")
     public CommonAssert isCorrectUdfUSer(Udfs.UdfSd type, String expected) {
         var actual = extractUdfField(type, UdfUser.class).getUserValue();

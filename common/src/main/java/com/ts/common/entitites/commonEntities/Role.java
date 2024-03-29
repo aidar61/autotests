@@ -27,7 +27,8 @@ public class Role extends BaseEntity {
         CLIENT("Клиент"),
         EMPLOYEE("Сотрудник"),
         ACCOUNT_MANAGER("Account-менеджер"),
-        CLIENT_MANAGER("Менеджер клиента");
+        CLIENT_MANAGER("Менеджер клиента"),
+        ROLE_SUPPORT_MEMBER("Участник проекта сопровождения");
         @Getter
         private final String role;
 

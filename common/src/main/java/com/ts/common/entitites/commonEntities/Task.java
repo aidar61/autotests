@@ -105,6 +105,7 @@ public class Task extends BaseEntity {
         KZ_KZI("818181df64257a61016427680a2f5d1b", "788781"),
         MODERN_COLVIR_PRODUCT("818181df62d0f2270162d349b524569b", "757948"),
         CURRENCY_MARKET("818181b03c7fc013013c7fca7f9104c2", "186640"),
+        SENAGAT_BANK("818180a050c582480150c9522c794871", "463883"),
         CUSTOMER_REQUEST("8a8181df879af7cb01879d663123091e", "1441326"), //Двойное начисление штрафа по гарантиям в первый день просрочки
         AKKREDITIVES("818181b03c7fc013013c7fca7130041d", "186616");
         public final String id;

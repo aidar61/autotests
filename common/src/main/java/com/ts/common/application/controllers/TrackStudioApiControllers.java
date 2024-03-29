@@ -16,6 +16,7 @@ import com.ts.common.controllers.release.ReleaseController;
 import com.ts.common.controllers.release.ReleaseModuleController;
 import com.ts.common.controllers.sdbug.*;
 import com.ts.common.controllers.sddev.SdDevController;
+import com.ts.common.controllers.sdhelp.SdHelpController;
 import com.ts.common.controllers.sdquestion.SdQuestionController;
 import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.controllers.sla.SlaFeatureController;
@@ -74,7 +75,7 @@ public class TrackStudioApiControllers {
     private SdOptimizationController sdOptimizationController;
     private ReleaseController releaseController;
     private SdDevController sdDevController;
-//    private PerformanceController performanceController;
+    private SdHelpController sdHelpController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
@@ -104,7 +105,7 @@ public class TrackStudioApiControllers {
         this.sdOptimizationController = new SdOptimizationController(STAND_URL, authToken);
         this.releaseController = new ReleaseController(STAND_URL, authToken);
         this.sdDevController = new SdDevController(STAND_URL, authToken);
-//        this.performanceController = new PerformanceController(STAND_URL, authToken);
+        this.sdHelpController = new SdHelpController(STAND_URL, authToken);
     }
 
     public GeneralTask receiveGeneralTask(String slaTaskNumber) {
