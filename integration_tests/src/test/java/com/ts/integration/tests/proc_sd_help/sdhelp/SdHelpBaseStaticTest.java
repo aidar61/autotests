@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_sd_help;
+package com.ts.integration.tests.proc_sd_help.sdhelp;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;

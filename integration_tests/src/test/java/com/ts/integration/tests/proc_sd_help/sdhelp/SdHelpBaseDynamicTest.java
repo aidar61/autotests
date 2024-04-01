@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_sd_help;
+package com.ts.integration.tests.proc_sd_help.sdhelp;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
@@ -7,14 +7,9 @@ import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.sdhelp.SdHelpController;
-import com.ts.common.entitites.commonEntities.Parent;
-import com.ts.common.entitites.commonEntities.Role;
-import com.ts.common.entitites.commonEntities.User;
-import com.ts.common.entitites.commonEntities.UserRole;
+import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.Operations;
-import com.ts.common.enums.TaskType;
-import com.ts.common.enums.Users;
+import com.ts.common.enums.*;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.RandomUtils;
@@ -30,17 +25,14 @@ import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.AKKREDITIVES;
 import static com.ts.common.entitites.commonEntities.Task.Constants.SENAGAT_BANK;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_SD_PROVIDEDHELPDEADLINE;
 import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.Resolutions.REQUEST_NOT_ACTUAL;
 import static com.ts.common.enums.Resolutions.REQUEST_RESOLVE;
 import static com.ts.common.enums.TaskStatuses.*;
-import static com.ts.common.enums.TaskStatuses.STATUS_SDHELP_CLOSED;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.*;
-import static com.ts.common.utils.RandomUtils.generateString;
 
-public class SdTechAssistBaseDynamicTest extends BaseIntegrationTest {
+public class SdHelpBaseDynamicTest extends BaseIntegrationTest {
     private SdHelpController sdHelpController;
     private GeneralTask task;
     private Parent parent;
@@ -66,7 +58,7 @@ public class SdTechAssistBaseDynamicTest extends BaseIntegrationTest {
         CLIENT = userController.receiveUserByRole(USER_ROLES, Role.Constants.CLIENT, "root").getForUser();
         CLIENT_MANAGER = userController.receiveUserByRole(USER_ROLES, Role.Constants.CLIENT_MANAGER, "root").getForUser();
         HANDLER_USER = userController.receiveUserByRole(USER_ROLES, Role.Constants.ROLE_SUPPORT_MEMBER, "root").getForUser();
-        task = InitEntities.getGeneralTask(TaskType.SD_TECH_ASSIST, Operations.CAT);
+        task = InitEntities.getGeneralTask(TaskType.SD_HELP, Operations.CAT);
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -74,8 +66,8 @@ public class SdTechAssistBaseDynamicTest extends BaseIntegrationTest {
         WaitManager.pause(5);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Создание CAT_SDTECHASSIST (КЛИЕНТ)")
-    void catSdTechAssist() {
+    @Test(groups = {"SD_HELP", "Regression"}, description = "Создание CAT_SDHELP (КЛИЕНТ)")
+    void catSdHelp() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
 
@@ -101,7 +93,7 @@ public class SdTechAssistBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Принять на анализ (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "catSdTechAssist")
+    @Test(groups = {"SD_HELP", "Regression"}, description = "Принять на анализ (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "catSdHelp")
     void analize() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -161,14 +153,13 @@ public class SdTechAssistBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Оказать консультацию (МЕНЕДЖЕР КЛИЕНТА)"
-            , dependsOnMethods = "provideInfo")
-    void techHelp() {
+    @Test(groups = {"SD_HELP", "Regression"}, description = "Оказать консультацию (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "provideInfo")
+    void consult() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
         task.refreshTask();
 
-        sdHelpController.performCommonOperation(task, TECH_HELP);
+        sdHelpController.performCommonOperation(task, CONSULT);
         ApiAsserts.assertThat(sdHelpController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(TaskResponseBody.class)
@@ -176,12 +167,12 @@ public class SdTechAssistBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SDHELP_CONSULTED);
         apiController.receiveTask(task.getNumber());
         CommonAssert.assertThat(apiController.getResponse())
-                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT);
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT)
+                .isCorrectUdfDate(UDF_SD_PROVIDEDHELPDEADLINE, DateUtils.getCurrentDate(0));
 
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Запросить информацию (МЕНЕДЖЕР КЛИЕНТА)"
-            , dependsOnMethods = "techHelp")
+    @Test(groups = {"SD_HELP", "Regression"}, description = "Запросить информацию (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "consult")
     void requestInfoReply() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -243,7 +234,7 @@ public class SdTechAssistBaseDynamicTest extends BaseIntegrationTest {
         udf = refreshUdf();
         task.refreshTask();
 
-        sdHelpController.performCommonOperation(task, TECH_HELP);
+        sdHelpController.performCommonOperation(task, CONSULT);
         ApiAsserts.assertThat(sdHelpController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(TaskResponseBody.class)
@@ -321,4 +312,5 @@ public class SdTechAssistBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SDHELP_CLOSED)
                 .isEquals(task);
     }
+
 }

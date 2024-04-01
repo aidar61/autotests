@@ -5,11 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/sd help">
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/SdTechAssistBaseDynamicTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdBuy/SdBuyBaseDynamicTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdBuy/SdBuyBaseStaticTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdLearn/SdLearnBaseDynamicTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdLearn/SdLearnBaseStaticTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdTechAssist/SdTechAssistBaseStaticTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/SdHelpBaseDynamicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdhelp/SdHelpBaseDynamicTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/SdHelpBaseStaticTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdhelp/SdHelpBaseStaticTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/SdTechAssistBaseDynamicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdTechAssist/SdTechAssistBaseDynamicTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,30 +125,17 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.SdTechAssistBaseDynamicTest">
-    <configuration name="RandomUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ts.common.utils.RandomUtils" />
-      <module name="common" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.common.utils.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SdHelpBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.SdBuyBaseDynamicTest">
+    <configuration name="SdBuyBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdBuy.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.SdHelpBaseDynamicTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help.sdBuy" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseDynamicTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -149,16 +143,33 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SdHelpBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SdLearnBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdhelp.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.SdHelpBaseStaticTest" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdLearn.SdLearnBaseDynamicTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SdLearnBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdLearn.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help.sdLearn" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdLearn.SdLearnBaseStaticTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -170,12 +181,12 @@
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdhelp.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.SdTechAssistBaseDynamicTest" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdTechAssist.SdTechAssistBaseDynamicTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -183,16 +194,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SlaBugCloseByClientTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SdTechAssistBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_bug.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdhelp.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_bug" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_bug.SlaBugCloseByClientTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdTechAssist.SdTechAssistBaseStaticTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -246,21 +257,21 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.RandomUtils" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.SdHelpBaseDynamicTest" />
-      <item itemvalue="TestNG.SdHelpBaseStaticTest" />
+      <item itemvalue="TestNG.SdBuyBaseDynamicTest" />
+      <item itemvalue="TestNG.SdLearnBaseDynamicTest" />
+      <item itemvalue="TestNG.SdLearnBaseStaticTest" />
       <item itemvalue="TestNG.SdTechAssistBaseDynamicTest" />
-      <item itemvalue="TestNG.SlaBugCloseByClientTest" />
+      <item itemvalue="TestNG.SdTechAssistBaseStaticTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.SdBuyBaseDynamicTest" />
+        <item itemvalue="TestNG.SdLearnBaseStaticTest" />
+        <item itemvalue="TestNG.SdLearnBaseDynamicTest" />
+        <item itemvalue="TestNG.SdTechAssistBaseStaticTest" />
         <item itemvalue="TestNG.SdTechAssistBaseDynamicTest" />
-        <item itemvalue="TestNG.SdHelpBaseStaticTest" />
-        <item itemvalue="TestNG.SdHelpBaseDynamicTest" />
-        <item itemvalue="Application.RandomUtils" />
-        <item itemvalue="TestNG.SlaBugCloseByClientTest" />
       </list>
     </recent_temporary>
   </component>
@@ -350,13 +361,6 @@
       <workItem from="1707898497189" duration="1000" />
       <workItem from="1709132683153" duration="20505000" />
       <workItem from="1709623327498" duration="22150000" />
-    </task>
-    <task id="LOCAL-00029" summary="suite.xml">
-      <created>1697615695889</created>
-      <option name="number" value="00029" />
-      <option name="presentableId" value="LOCAL-00029" />
-      <option name="project" value="LOCAL" />
-      <updated>1697615695889</updated>
     </task>
     <task id="LOCAL-00030" summary="fix/test">
       <created>1698052114565</created>
@@ -698,7 +702,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711957453992</updated>
     </task>
-    <option name="localTasksCounter" value="78" />
+    <task id="LOCAL-00078" summary="feature/sd help">
+      <created>1711962214178</created>
+      <option name="number" value="00078" />
+      <option name="presentableId" value="LOCAL-00078" />
+      <option name="project" value="LOCAL" />
+      <updated>1711962214178</updated>
+    </task>
+    <option name="localTasksCounter" value="79" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

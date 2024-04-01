@@ -53,6 +53,7 @@ public enum Operations {
     PASS_FOR_APPROVAL("%S_PASSFORAPPROVAL"), // передать на согласование
     CONFIRM_HIDDEN("%S_CONFIRMHIDDEN"), // подтвердить скрытый GAP
     CHANGE_MODULE("%S_CHANGE_SD_MODULE"), // изменить модуль системы
+    CHANGE_ONLY_SD_MODULE("%S_CHANGE_ONLY_SD_MODULE"), // изменить модуль системы
     ANALIZE("%S_ANALIZE"), // принять на анализ
     DECLINE("%S_DECLINE"), // отклонить
     INANALYSIS("%S_INANALYSIS"), // В АНАЛИЗЕ
