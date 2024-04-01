@@ -86,6 +86,14 @@
             <class name="com.ts.integration.tests.sd_dev.SdDevBaseStaticTest"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelpBaseDynamicTest"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelpBaseStaticTest"/>
+            <class name="com.ts.integration.tests.proc_sd_help.sdhelp.SdHelpBaseDynamicTest"/>
+            <class name="com.ts.integration.tests.proc_sd_help.sdhelp.SdHelpBaseStaticTest"/>
+            <class name="com.ts.integration.tests.proc_sd_help.sdLearn.SdLearnBaseDynamicTest"/>
+            <class name="com.ts.integration.tests.proc_sd_help.sdLearn.SdLearnBaseStaticTest"/>
+            <class name="com.ts.integration.tests.proc_sd_help.sdTechAssist.SdTechAssistBaseDynamicTest"/>
+            <class name="com.ts.integration.tests.proc_sd_help.sdTechAssist.SdTechAssistBaseStaticTest"/>
+            <class name="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseDynamicTest"/>
+            <class name="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseStaticTest"/>
         </classes>
     </test>
 </suite>

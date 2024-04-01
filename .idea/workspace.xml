@@ -125,7 +125,7 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.SdBuyBaseDynamicTest">
+  <component name="RunManager" selected="TestNG.SdBuyBaseStaticTest">
     <configuration name="SdBuyBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -136,6 +136,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help.sdBuy" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseDynamicTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SdBuyBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdBuy.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help.sdBuy" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseStaticTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -170,23 +187,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help.sdLearn" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdLearn.SdLearnBaseStaticTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SdTechAssistBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdhelp.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdTechAssist.SdTechAssistBaseDynamicTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -260,18 +260,18 @@
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
       <item itemvalue="TestNG.SdBuyBaseDynamicTest" />
+      <item itemvalue="TestNG.SdBuyBaseStaticTest" />
       <item itemvalue="TestNG.SdLearnBaseDynamicTest" />
       <item itemvalue="TestNG.SdLearnBaseStaticTest" />
-      <item itemvalue="TestNG.SdTechAssistBaseDynamicTest" />
       <item itemvalue="TestNG.SdTechAssistBaseStaticTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.SdBuyBaseStaticTest" />
         <item itemvalue="TestNG.SdBuyBaseDynamicTest" />
         <item itemvalue="TestNG.SdLearnBaseStaticTest" />
         <item itemvalue="TestNG.SdLearnBaseDynamicTest" />
         <item itemvalue="TestNG.SdTechAssistBaseStaticTest" />
-        <item itemvalue="TestNG.SdTechAssistBaseDynamicTest" />
       </list>
     </recent_temporary>
   </component>

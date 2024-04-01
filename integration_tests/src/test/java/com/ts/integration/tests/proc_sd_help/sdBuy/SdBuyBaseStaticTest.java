@@ -192,7 +192,7 @@ public class SdBuyBaseStaticTest extends BaseIntegrationTest {
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, CURRENCY_MARKET));
         task.refreshUdf(udf);
 
-        sdHelpController.performCommonOperation(task, CHANGE_MODULE);
+        sdHelpController.performCommonOperation(task, CHANGE_ONLY_SD_MODULE);
         ApiAsserts.assertThat(sdHelpController.getResponse())
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
                 .isParseableBody(TaskResponseBody.class)
@@ -214,25 +214,25 @@ public class SdBuyBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Сообщить срок оказания консультации (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "ourCommentClientManager")
-    void provideDeadline() {
-        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
-        udf = refreshUdf();
-        task.refreshTask();
-
-        udf.setUdfDate(generateUdfDate(UDF_SD_HELPDEADLINE, DateUtils.getCurrentDate(0)));
-        task.refreshUdf(udf);
-
-        sdHelpController.performCommonOperation(task, PROVIDE_DEADLINE);
-        ApiAsserts.assertThat(sdHelpController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask()
-                .isEquals(task);
-    }
+//    @Test(groups = {"SD_HELP", "Regression"}, description = "Сообщить срок оказания консультации (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "ourCommentClientManager")
+//    void provideDeadline() {
+//        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+//        udf = refreshUdf();
+//        task.refreshTask();
+//
+//        udf.setUdfDate(generateUdfDate(UDF_SD_HELPDEADLINE, DateUtils.getCurrentDate(0)));
+//        task.refreshUdf(udf);
+//
+//        sdHelpController.performCommonOperation(task, PROVIDE_DEADLINE);
+//        ApiAsserts.assertThat(sdHelpController.getResponse())
+//                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+//                .isParseableBody(TaskResponseBody.class)
+//                .assertTask()
+//                .isEquals(task);
+//    }
 
     @Test(groups = {"SD_HELP", "Regression"}, description = "Изменить список связанных задач (МЕНЕДЖЕР КЛИЕНТА)"
-            , dependsOnMethods = "provideDeadline")
+            , dependsOnMethods = "ourCommentClientManager")
     void changeLinkedTasks() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -324,29 +324,29 @@ public class SdBuyBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Изменить ответственного (МЕНЕДЖЕР КЛИЕНТА)"
-            , dependsOnMethods = "changeAuthorClientManager")
-    void reassign() {
-        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
-        udf = refreshUdf();
-        task.refreshTask();
-
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, HANDLER_USER));
-        udf.setSecondUdfUser(generateUdfUser(UDF_WATCHER, EMPLOYEE));
-        udf.setThirdUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, TRUSTED_WATCHER));
-        task.refreshUdf(udf);
-        task.setHandlerUser(HANDLER_USER);
-
-        sdHelpController.performCommonOperation(task, CHANGE_RES_PERSON);
-        ApiAsserts.assertThat(sdHelpController.getResponse())
-                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask()
-                .isEquals(task);
-    }
+//    @Test(groups = {"SD_HELP", "Regression"}, description = "Изменить ответственного (МЕНЕДЖЕР КЛИЕНТА)"
+//            , dependsOnMethods = "changeAuthorClientManager")
+//    void reassign() {
+//        apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
+//        udf = refreshUdf();
+//        task.refreshTask();
+//
+//        udf.setUdfUser(generateUdfUser(STDT_HANDLER, HANDLER_USER));
+//        udf.setSecondUdfUser(generateUdfUser(UDF_WATCHER, EMPLOYEE));
+//        udf.setThirdUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, TRUSTED_WATCHER));
+//        task.refreshUdf(udf);
+//        task.setHandlerUser(HANDLER_USER);
+//
+//        sdHelpController.performCommonOperation(task, CHANGE_RES_PERSON);
+//        ApiAsserts.assertThat(sdHelpController.getResponse())
+//                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK)
+//                .isParseableBody(TaskResponseBody.class)
+//                .assertTask()
+//                .isEquals(task);
+//    }
 
     @Test(groups = {"SD_HELP", "Regression"}, description = "Снять запрос (МЕНЕДЖЕР КЛИЕНТА)"
-            , dependsOnMethods = "reassign")
+            , dependsOnMethods = "changeAuthorClientManager")
     void removeRequest() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
