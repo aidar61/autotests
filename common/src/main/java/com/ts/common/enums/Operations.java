@@ -59,6 +59,7 @@ public enum Operations {
     INPATCH("%S_INPATCH"), // отменить заказ
     UNDOINPATCH("%S_UNDOINPATCH"), // отменить заказ
     PROVIDE_FIX_DEADLINE("%S_PROVIDEFIXDEADLINE"), // Сообщить срок предоставления решения
+    PROVIDE_DEADLINE("%S_PROVIDEDEADLINE"), // Сообщить срок оказания консультации
     UNDOSEND("%S_UNDOSEND"), // отменить заказ
     SENDPATCH("%S_SENDPATCH"), // отменить заказ
     UNDOSENDPATCH("%S_UNDOSEND"), // отменить заказ
