@@ -34,6 +34,7 @@ public enum Operations {
     CORRECT_SLA_DATES("%S_CORRECTSLADATES"), // корректировка SLA дат
     CHANGE_ATTR("%S_CHANGEATTRS"), // изменить аттрибуты задачи
     CHANGE_ANALYST("%S_CHANGEANALYST"), // изменить аналитика
+    TECH_HELP("%S_TECH_HELP"), // оказать техническую помощь
     CONFIRM("%S_CONFIRM"), // подтвердить и опубликовать
     ADD_TRUST_WATCHER("%S_ADDTRUSTEDWATCHER"),// назначить доверенного наблюдателя
     ALLOW_KPO("%S_ALLOWKPO"), // санкцинировать привязку КПО
