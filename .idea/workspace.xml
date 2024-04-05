@@ -5,18 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/sd help">
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdBuy/SdBuyBaseDynamicTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdBuy/SdBuyBaseStaticTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdLearn/SdLearnBaseDynamicTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdLearn/SdLearnBaseStaticTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdTechAssist/SdTechAssistBaseStaticTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Jenkinsfile" beforeDir="false" afterPath="$PROJECT_DIR$/Jenkinsfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/SdHelpBaseDynamicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdhelp/SdHelpBaseDynamicTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/SdHelpBaseStaticTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdhelp/SdHelpBaseStaticTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/SdTechAssistBaseDynamicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdTechAssist/SdTechAssistBaseDynamicTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdBuy/SdBuyBaseStaticTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdBuy/SdBuyBaseStaticTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task/dev_task_base_handler/DevTaskBaseHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task/dev_task_base_handler/DevTaskBaseHandlerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +117,24 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.SdBuyBaseStaticTest">
+  <component name="RunManager" selected="TestNG.DevTaskBaseHandlerTest">
+    <configuration name="DevTaskBaseHandlerTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task.dev_task_base_handler.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task.dev_task_base_handler" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task.dev_task_base_handler.DevTaskBaseHandlerTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="SdBuyBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -194,23 +203,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SdTechAssistBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdhelp.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdTechAssist.SdTechAssistBaseStaticTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SlaHelp1Test.msgSlaHelpAnalize" type="TestNG" nameIsGenerated="true">
       <module name="trackstudio-test.integration_tests" />
       <shortenClasspath name="NONE" />
@@ -259,19 +251,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.DevTaskBaseHandlerTest" />
       <item itemvalue="TestNG.SdBuyBaseDynamicTest" />
       <item itemvalue="TestNG.SdBuyBaseStaticTest" />
       <item itemvalue="TestNG.SdLearnBaseDynamicTest" />
       <item itemvalue="TestNG.SdLearnBaseStaticTest" />
-      <item itemvalue="TestNG.SdTechAssistBaseStaticTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.DevTaskBaseHandlerTest" />
         <item itemvalue="TestNG.SdBuyBaseStaticTest" />
         <item itemvalue="TestNG.SdBuyBaseDynamicTest" />
         <item itemvalue="TestNG.SdLearnBaseStaticTest" />
         <item itemvalue="TestNG.SdLearnBaseDynamicTest" />
-        <item itemvalue="TestNG.SdTechAssistBaseStaticTest" />
       </list>
     </recent_temporary>
   </component>
@@ -361,20 +353,7 @@
       <workItem from="1707898497189" duration="1000" />
       <workItem from="1709132683153" duration="20505000" />
       <workItem from="1709623327498" duration="22150000" />
-    </task>
-    <task id="LOCAL-00030" summary="fix/test">
-      <created>1698052114565</created>
-      <option name="number" value="00030" />
-      <option name="presentableId" value="LOCAL-00030" />
-      <option name="project" value="LOCAL" />
-      <updated>1698052114565</updated>
-    </task>
-    <task id="LOCAL-00031" summary="fix/test">
-      <created>1698215364665</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1698215364665</updated>
+      <workItem from="1712115331155" duration="4767000" />
     </task>
     <task id="LOCAL-00032" summary="fix/test">
       <created>1700049675728</created>
@@ -709,7 +688,21 @@
       <option name="project" value="LOCAL" />
       <updated>1711962214178</updated>
     </task>
-    <option name="localTasksCounter" value="79" />
+    <task id="LOCAL-00079" summary="feature/sd help">
+      <created>1711968267497</created>
+      <option name="number" value="00079" />
+      <option name="presentableId" value="LOCAL-00079" />
+      <option name="project" value="LOCAL" />
+      <updated>1711968267497</updated>
+    </task>
+    <task id="LOCAL-00080" summary="feature/sd help">
+      <created>1711968493679</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1711968493679</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -96,7 +96,11 @@ public class UserController extends ApiRequest {
                     && f.getAssignedRole().getName().equals(role.getRole())
                     && !f.getForUser().getLogin().equals(exceptLogin) && f.getForUser().getActive()).findFirst().get();
         }
-        return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role.getRole()) && !f.getForUser().getLogin().contains(exceptLogin) && f.getForUser().getActive()).findFirst().get();
+        return userRoles.stream().filter(f ->
+                f.getAssignedRole().getName().equals(role.getRole())
+                        && f.getForUser().getActive()
+                        && !f.getForUser().getLogin().contains(exceptLogin)
+                        && !f.getForUser().getLogin().equals("ovoronov")).findFirst().get();
     }
 
     public UserRole receiveUserByRole(List<UserRole> userRoles, String exceptLogin, Role.Constants... role) {

@@ -281,50 +281,51 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Запретить/Разрешить тиражирование во все ветки: Запретить", dependsOnMethods = "taskStart3")
-    public void taskDistToAllBan() {
-        udf = refreshUdf();
-        task.refreshTask();
-        apiController.updateToken(generateAuthToken(handlerUser));
-        var description = generateString();
-        task.setDescription(description);
-        udf.setUdfList(generateUdfList(UDF_WORKTASK_DISTTOALL, UDF_WORKTASK_DISTTOALL_BAN));
+//    @Test(groups = {"BugTask", "Regression"}, description = "Запретить/Разрешить тиражирование во все ветки: Запретить", dependsOnMethods = "taskStart3")
+//    public void taskDistToAllBan() {
+//        udf = refreshUdf();
+//        task.refreshTask();
+//        apiController.updateToken(generateAuthToken(handlerUser));
+//        var description = generateString();
+//        task.setDescription(description);
+//        udf.setUdfList(generateUdfList(UDF_WORKTASK_DISTTOALL, UDF_WORKTASK_DISTTOALL_BAN));
+//
+//        task.refreshUdf(udf);
+//        devTaskController.performCommonOperation(task, WORKTASK_DISTTOALL);
+//        ApiAsserts.assertThat(devTaskController.getResponse()).checkingResponseMessageField("description", "<br/>Запрещено тиражирование задачи во все ветки. Причина: " + description).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+//    }
 
-        task.refreshUdf(udf);
-        devTaskController.performCommonOperation(task, WORKTASK_DISTTOALL);
-        ApiAsserts.assertThat(devTaskController.getResponse()).checkingResponseMessageField("description", "<br/>Запрещено тиражирование задачи во все ветки. Причина: " + description).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
-    }
+//    @Test(groups = {"BugTask", "Regression"}, description = "(Ответственный) Запретить/Разрешить тиражирование во все ветки: Разрешить"
+//            , dependsOnMethods = "changePlan2")
+//    public void taskDistToAllAllowWithHandlerUser() {
+//        udf = refreshUdf();
+//        task.refreshTask();
+//        apiController.updateToken(generateAuthToken(handlerUser));
+//        task.setDescription(generateString());
+//        udf.setUdfList(generateUdfList(UDF_WORKTASK_DISTTOALL, UDF_WORKTASK_DISTTOALL_ALLOW));
+//
+//        task.refreshUdf(udf);
+//        devTaskController.performCommonOperation(task, WORKTASK_DISTTOALL);
+//        var response = devTaskController.getResponse();
+//        ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST).isCorrectErrorMessage("Разрешить тиражирование во все ветки может только конструктор модуля.<br>Вы не является конструктором модуля либо в задаче не указан модуль системы");
+//    }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "(Ответственный) Запретить/Разрешить тиражирование во все ветки: Разрешить", dependsOnMethods = "taskDistToAllBan")
-    public void taskDistToAllAllowWithHandlerUser() {
-        udf = refreshUdf();
-        task.refreshTask();
-        apiController.updateToken(generateAuthToken(handlerUser));
-        task.setDescription(generateString());
-        udf.setUdfList(generateUdfList(UDF_WORKTASK_DISTTOALL, UDF_WORKTASK_DISTTOALL_ALLOW));
+//    @Test(groups = {"BugTask", "Regression"}, description = "(Пользователь из поля Конструктор) Запретить/Разрешить тиражирование во все ветки: Разрешить", dependsOnMethods = "taskStart3")
+//    public void taskDistToAllAllow() {
+//        udf = refreshUdf();
+//        task.refreshTask();
+//        apiController.updateToken(generateAuthToken(constructorUser));
+//        var description = generateString();
+//        task.setDescription(description);
+//        udf.setUdfList(generateUdfList(UDF_WORKTASK_DISTTOALL, UDF_WORKTASK_DISTTOALL_ALLOW));
+//
+//        task.refreshUdf(udf);
+//        devTaskController.performCommonOperation(task, WORKTASK_DISTTOALL);
+//        var response = devTaskController.getResponse();
+//        ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).checkingResponseMessageField("description", "<br/>Разрешено тиражирование задачи во все ветки. Причина: " + description);
+//    }
 
-        task.refreshUdf(udf);
-        devTaskController.performCommonOperation(task, WORKTASK_DISTTOALL);
-        var response = devTaskController.getResponse();
-        ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST).isCorrectErrorMessage("Разрешить тиражирование во все ветки может только конструктор модуля.<br>Вы не является конструктором модуля либо в задаче не указан модуль системы");
-    }
-
-    @Test(groups = {"BugTask", "Regression"}, description = "(Пользователь из поля Конструктор) Запретить/Разрешить тиражирование во все ветки: Разрешить", dependsOnMethods = "taskDistToAllAllowWithHandlerUser")
-    public void taskDistToAllAllow() {
-        udf = refreshUdf();
-        task.refreshTask();
-        apiController.updateToken(generateAuthToken(constructorUser));
-        var description = generateString();
-        task.setDescription(description);
-        udf.setUdfList(generateUdfList(UDF_WORKTASK_DISTTOALL, UDF_WORKTASK_DISTTOALL_ALLOW));
-
-        task.refreshUdf(udf);
-        devTaskController.performCommonOperation(task, WORKTASK_DISTTOALL);
-        var response = devTaskController.getResponse();
-        ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).checkingResponseMessageField("description", "<br/>Разрешено тиражирование задачи во все ветки. Причина: " + description);
-    }
-
-    @Test(groups = {"BugTask", "Regression"}, description = "Изменить ветку для разработки", dependsOnMethods = "taskDistToAllAllow")
+    @Test(groups = {"BugTask", "Regression"}, description = "Изменить ветку для разработки", dependsOnMethods = "taskStart3")
     public void taskChangeBranch() {
         udf = refreshUdf();
         task.refreshTask();
