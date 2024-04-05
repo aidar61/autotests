@@ -4,17 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/test">
-      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/ChromeWebDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/ChromeWebDriver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/ElementActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/ElementActions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/AbstractBasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/AbstractBasePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/BasePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/HomePage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/LoginPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/UiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/UiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/sd help">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdBuy/SdBuyBaseStaticTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdBuy/SdBuyBaseStaticTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task/dev_task_base_handler/DevTaskBaseHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task/dev_task_base_handler/DevTaskBaseHandlerTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -359,7 +353,14 @@
       <workItem from="1707898497189" duration="1000" />
       <workItem from="1709132683153" duration="20505000" />
       <workItem from="1709623327498" duration="22150000" />
-      <workItem from="1712115331155" duration="9317000" />
+      <workItem from="1712115331155" duration="4767000" />
+    </task>
+    <task id="LOCAL-00032" summary="fix/test">
+      <created>1700049675728</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1700049675728</updated>
     </task>
     <task id="LOCAL-00033" summary="feature/ts-int Jenkinsfile">
       <created>1700059037373</created>
@@ -701,14 +702,7 @@
       <option name="project" value="LOCAL" />
       <updated>1711968493679</updated>
     </task>
-    <task id="LOCAL-00081" summary="fix/test">
-      <created>1712302805014</created>
-      <option name="number" value="00081" />
-      <option name="presentableId" value="LOCAL-00081" />
-      <option name="project" value="LOCAL" />
-      <updated>1712302805015</updated>
-    </task>
-    <option name="localTasksCounter" value="82" />
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -768,6 +762,7 @@
     <MESSAGE value="added sd question test." />
     <MESSAGE value="added sd question test 2." />
     <MESSAGE value="suite.xml" />
+    <MESSAGE value="fix/test" />
     <MESSAGE value="feature/ts-int Jenkinsfile" />
     <MESSAGE value="fix/DevTaskAcceptance" />
     <MESSAGE value="feature/Sla negative scenarios, Errors" />
@@ -788,8 +783,7 @@
     <MESSAGE value="fix/sla help" />
     <MESSAGE value="fix/tests" />
     <MESSAGE value="feature/sd help" />
-    <MESSAGE value="fix/test" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix/test" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/sd help" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
