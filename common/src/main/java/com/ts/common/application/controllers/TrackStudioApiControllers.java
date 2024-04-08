@@ -26,17 +26,13 @@ import com.ts.common.controllers.workTask.TechTaskController;
 import com.ts.common.controllers.workTask.WorkTaskController;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.entitites.tasks.Task;
-import com.ts.common.enums.Users;
 import com.ts.common.request.ApiRequest;
-import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
-import com.ts.common.utils.WaitManager;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.openqa.selenium.support.ui.Wait;
 
 import java.lang.reflect.InvocationTargetException;
 
