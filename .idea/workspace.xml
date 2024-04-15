@@ -5,7 +5,34 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/test">
-      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/00254b2b-0316-46b8-8e08-41fb30443a0f-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/13752010-4f63-4445-a06b-96e8d516df46-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/1e818859-1ae8-4aff-956b-65e971961b79-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/25ff2e6b-97cb-43d6-a1ae-5671ca776d4e-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/2678b5b7-cb5c-47f7-aa8c-41c91d8e0d88-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/36895504-963f-4797-97f2-40b233b31af7-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/3a96bfc4-6a81-4e25-9389-c914e566b6c6-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/4e4738c7-f8f2-4e2c-8c03-97d129a47df8-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/521041fa-305f-4194-85dd-b376ac4a63f8-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/5ddae118-5c3d-4252-bfb7-fa1ae16b9230-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/732b2d54-9644-4f19-bc12-436be3cb2a6c-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/77a46b8e-984b-475d-9476-a43ab7450dc4-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/8ea6697d-2524-41ae-a854-60291d6adf3f-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/96911131-4b2f-4eb4-b33a-e4fc25c79550-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/97a98e4b-64d7-4b8b-9e7c-392d28036198-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/9e4ffa95-2234-4e71-adec-c74214a4fcc9-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/b527b832-23ed-4fe0-b19b-7872991a35d3-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/ccbbc578-1d4f-454e-bffa-a3018dc8ee90-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/d72434c3-ca1a-41be-975a-31cf014e0152-container.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/allure-results/f31e57d3-d392-47d9-9410-3859b7b5e959-result.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/FilterPage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/SelenideTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/experimental/FilterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/Pages.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/Pages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/request/ApiRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/request/ApiRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/tests/AbstractBaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/tests/AbstractBaseTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/ChromeWebDriver.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/ChromeWebDriver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/Driver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/ElementActions.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/ElementActions.java" afterDir="false" />
@@ -13,6 +40,7 @@
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/BasePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/BasePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/HomePage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/LoginPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/LoginPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/UiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/UiTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
@@ -92,7 +120,7 @@
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.09375&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.32876712&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.scopes&quot;,
     &quot;settings.editor.splitter.proportion&quot;: &quot;0.39143732&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;77eb7acb45023b5c2285e592b7b52170&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
@@ -111,6 +139,7 @@
       <recent name="$PROJECT_DIR$/common/src/main/java/domain" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Dev\Java-Projects\autotests" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/integration_tests/src/main/java/resources" />
       <recent name="$PROJECT_DIR$/common/src/main/java/com/ts/common/services" />
@@ -123,86 +152,55 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.DevTaskBaseHandlerTest">
-    <configuration name="DevTaskBaseHandlerTest" type="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.FilterTest.editFilter">
+    <configuration name="FilterTest.editFilter" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task.dev_task_base_handler.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.ui.experimental.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task.dev_task_base_handler" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task.dev_task_base_handler.DevTaskBaseHandlerTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.experimental" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.experimental.FilterTest" />
+      <option name="METHOD_NAME" value="editFilter" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SdBuyBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="SelenideTest.authTest (1)" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdBuy.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help.sdBuy" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseDynamicTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.SelenideTest" />
+      <option name="METHOD_NAME" value="authTest" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SdBuyBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
+    <configuration name="SelenideTest.authTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="common" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdBuy.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help.sdBuy" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseStaticTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SdLearnBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdhelp.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdLearn.SdLearnBaseDynamicTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SdLearnBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdLearn.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help.sdLearn" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdLearn.SdLearnBaseStaticTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="PACKAGE_NAME" value="com.ts.common" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.SelenideTest" />
+      <option name="METHOD_NAME" value="authTest" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -237,6 +235,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UiTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.UiTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UiTest.experemental" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.UiTest" />
+      <option name="METHOD_NAME" value="experemental" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Unnamed" type="TestNG" nameIsGenerated="true">
       <shortenClasspath name="NONE" />
       <option name="SUITE_NAME" value="" />
@@ -257,19 +290,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.DevTaskBaseHandlerTest" />
-      <item itemvalue="TestNG.SdBuyBaseDynamicTest" />
-      <item itemvalue="TestNG.SdBuyBaseStaticTest" />
-      <item itemvalue="TestNG.SdLearnBaseDynamicTest" />
-      <item itemvalue="TestNG.SdLearnBaseStaticTest" />
+      <item itemvalue="TestNG.FilterTest.editFilter" />
+      <item itemvalue="TestNG.SelenideTest.authTest" />
+      <item itemvalue="TestNG.SelenideTest.authTest (1)" />
+      <item itemvalue="TestNG.UiTest" />
+      <item itemvalue="TestNG.UiTest.experemental" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.DevTaskBaseHandlerTest" />
-        <item itemvalue="TestNG.SdBuyBaseStaticTest" />
-        <item itemvalue="TestNG.SdBuyBaseDynamicTest" />
-        <item itemvalue="TestNG.SdLearnBaseStaticTest" />
-        <item itemvalue="TestNG.SdLearnBaseDynamicTest" />
+        <item itemvalue="TestNG.FilterTest.editFilter" />
+        <item itemvalue="TestNG.UiTest.experemental" />
+        <item itemvalue="TestNG.UiTest" />
+        <item itemvalue="TestNG.SelenideTest.authTest (1)" />
+        <item itemvalue="TestNG.SelenideTest.authTest" />
       </list>
     </recent_temporary>
   </component>
@@ -838,6 +871,20 @@
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest2.java</url>
           <line>78</line>
           <option name="timeStamp" value="136" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeature1Test.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="139" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/SelenideTest.java</url>
+          <line>10</line>
+          <properties class="com.ts.common.SelenideTest" method="authTest">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="137" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
