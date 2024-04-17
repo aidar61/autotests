@@ -16,7 +16,7 @@ import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseUiTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
+//TODO пустые импорты лучше убирать
 import static com.codeborne.selenide.Configuration.browserVersion;
 import static com.codeborne.selenide.Selenide.open;
 import static com.ts.common.application.controllers.TrackStudioEndPoints.APP;
@@ -47,10 +47,13 @@ public class UiTest extends BaseUiTest {
     }
 
     @Test
-    public void experemental () {
+    public void experemental() {
+        //TODO инициализация контроллеров происходит в BeforeClass(alwaysRun = true) методе
         slaFeatureController = apiController.getSlaFeatureController();
+        //TODO на 32 строке присутствует поле task, для обработки можно использовать его
         GeneralTask generalTask = InitEntities.getGeneralTask(TaskType.SLA_FEATURE, Operations.CAT);
         slaFeatureController.createSlaFeatureTask(generalTask);
+        //TODO здесь вместо статичной ссылки лучше использовать динамичную "STAND_URL" используя метод getEndpoint();
         String taskURL = "http://tsdev7.dev.colvir.ru/TrackStudio/app/task/" + generalTask.getNumber();
         open(taskURL);
 

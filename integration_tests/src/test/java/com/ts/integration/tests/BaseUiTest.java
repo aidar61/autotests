@@ -22,6 +22,6 @@ public class BaseUiTest extends AbstractBaseTest {
         Configuration.browserCapabilities = Driver.initBrowserCapabilities();
         apiController = new TrackStudioApiControllers(InitEntities.generateAuthToken(Users.ROOT));
         trackStudioPages = new Pages();
-        log.warn("=====================API TESTS IS STARTED=====================");
+        log.warn("=====================UI TESTS IS STARTED=====================");
     }
 }

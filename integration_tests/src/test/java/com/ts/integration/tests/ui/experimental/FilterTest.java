@@ -26,11 +26,12 @@ public class FilterTest extends BaseUiTest {
 
     @Test
     public void editFilter() {
+        //TODO здесь вместо статичной ссылки лучше использовать динамичную "STAND_URL" используя метод getEndpoint();
         open("http://tsdev8.dev.colvir.ru/TrackStudio/app");
         loginPage.loginNoToken("vkhudoshin");
         homePage.openFilterSetting();
 
-        FilterPage filterPage;
+        FilterPage filterPage;//TODO page хранить лучше как поле класса и производить инициализацию в BeforeClass()
         filterPage = trackStudioPages.getFilterPage();
 
         filterPage.setFilterName("Selenide_test")

@@ -1,5 +1,6 @@
 target/
 integration_tests/allure-results
+common/allure-results
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
