@@ -1,21 +1,16 @@
 package com.ts.integration.tests.proc_sla_feature;
 
-import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.sla.SlaFeatureController;
-import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.Parent;
-import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.commonEntities.UserRole;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.Operations;
 import com.ts.common.enums.Tables;
-import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
@@ -29,7 +24,9 @@ import static com.ts.common.entitites.commonEntities.Task.Constants.MTBANK;
 import static com.ts.common.entitites.commonEntities.Task.Constants.NOTIFICATION_SERVICE2;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.enums.Operations.CAT;
+import static com.ts.common.enums.Operations.TOPRECOST;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAFEATURE_NEW;
+import static com.ts.common.enums.TaskStatuses.STATUS_SLAFEATURE_PRECOST;
 import static com.ts.common.enums.TaskType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.*;
@@ -69,7 +66,8 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         task = InitEntities.getGeneralTask(SLA_FEATURE, CAT);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Создать Запрос на доработку ЛПО (new) (КЛИЕНТ)")
+    @Test(groups = {"SlaFeature", "Regression"}
+            , description = "Создать Запрос на доработку ЛПО (new) (КЛИЕНТ)")
     void cat() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -101,5 +99,30 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_SDFEATURE_STAGE, STAGE_AWAIT)
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_NOBODY);
+    }
+
+    @Test(groups = {"SlaFeature", "Regression"}
+            , description = "Начать предварительную оценку (ACCOUNT-MANAGER)"
+            , dependsOnMethods = "cat")
+    void toprecost() {
+        apiController.updateToken(ACCOUNT_MANAGER);
+        udf = refreshUdf();
+        task.refreshTask();
+
+        task.setHandlerUser(ANALYTIC);
+        udf.setUdfString(generateUdfString(UDF_SDFEATURE_OVERLIMITREASON, generateString()));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ANALYTIC));
+        task.refreshUdf(udf);
+
+        slaFeatureController.performCommonOperation(task, TOPRECOST);
+        ApiAsserts.assertThat(slaFeatureController.getResponse())
+                .isCorrectResponseCode(HTTP_OK)
+                .isParseableBody(TaskResponseBody.class)
+                .assertTask()
+                .isCorrectStatus(STATUS_SLAFEATURE_PRECOST);
+        apiController.receiveTask(task.getNumber());
+        CommonAssert.assertThat(apiController.getResponse())
+                .isCorrectUdfList(UDF_SDFEATURE_STAGE, STAGE_PRE_COST)
+                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER);
     }
 }
