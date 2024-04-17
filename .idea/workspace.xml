@@ -4,11 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/sd help">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/ui-clear">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdBuy/SdBuyBaseStaticTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_help/sdBuy/SdBuyBaseStaticTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task/dev_task_base_handler/DevTaskBaseHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task/dev_task_base_handler/DevTaskBaseHandlerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/Pages.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/Pages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/tests/AbstractBaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/tests/AbstractBaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/UiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/UiTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,7 +91,7 @@
     &quot;project.structure.side.proportion&quot;: &quot;0.32876712&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
     &quot;settings.editor.splitter.proportion&quot;: &quot;0.39143732&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;77eb7acb45023b5c2285e592b7b52170&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;f0a48e2334f1b84f98a2595c6f1cd1ef&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -117,24 +120,7 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.DevTaskBaseHandlerTest">
-    <configuration name="DevTaskBaseHandlerTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.dev_task.dev_task_base_handler.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.dev_task.dev_task_base_handler" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.dev_task.dev_task_base_handler.DevTaskBaseHandlerTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="TestNG.UiTest.uiLoginTest">
     <configuration name="SdBuyBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -231,6 +217,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UiTest.uiLoginTest" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.ui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.UiTest" />
+      <option name="METHOD_NAME" value="uiLoginTest" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Unnamed" type="TestNG" nameIsGenerated="true">
       <shortenClasspath name="NONE" />
       <option name="SUITE_NAME" value="" />
@@ -251,7 +255,7 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.DevTaskBaseHandlerTest" />
+      <item itemvalue="TestNG.UiTest.uiLoginTest" />
       <item itemvalue="TestNG.SdBuyBaseDynamicTest" />
       <item itemvalue="TestNG.SdBuyBaseStaticTest" />
       <item itemvalue="TestNG.SdLearnBaseDynamicTest" />
@@ -259,11 +263,11 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.DevTaskBaseHandlerTest" />
-        <item itemvalue="TestNG.SdBuyBaseStaticTest" />
-        <item itemvalue="TestNG.SdBuyBaseDynamicTest" />
+        <item itemvalue="TestNG.UiTest.uiLoginTest" />
         <item itemvalue="TestNG.SdLearnBaseStaticTest" />
         <item itemvalue="TestNG.SdLearnBaseDynamicTest" />
+        <item itemvalue="TestNG.SdBuyBaseStaticTest" />
+        <item itemvalue="TestNG.SdBuyBaseDynamicTest" />
       </list>
     </recent_temporary>
   </component>
@@ -354,13 +358,9 @@
       <workItem from="1709132683153" duration="20505000" />
       <workItem from="1709623327498" duration="22150000" />
       <workItem from="1712115331155" duration="4767000" />
-    </task>
-    <task id="LOCAL-00032" summary="fix/test">
-      <created>1700049675728</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1700049675728</updated>
+      <workItem from="1712907566311" duration="54000" />
+      <workItem from="1713182187040" duration="609000" />
+      <workItem from="1713242973013" duration="3036000" />
     </task>
     <task id="LOCAL-00033" summary="feature/ts-int Jenkinsfile">
       <created>1700059037373</created>
@@ -702,7 +702,14 @@
       <option name="project" value="LOCAL" />
       <updated>1711968493679</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="fix/test&#10;&#10;(cherry picked from commit d2c630871c938a1f7ae64a9078513b931d92b75c)">
+      <created>1712580706773</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1712580706773</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -758,7 +765,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="create task from excel file." />
     <MESSAGE value="added sd question test." />
     <MESSAGE value="added sd question test 2." />
     <MESSAGE value="suite.xml" />
@@ -783,7 +789,8 @@
     <MESSAGE value="fix/sla help" />
     <MESSAGE value="fix/tests" />
     <MESSAGE value="feature/sd help" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/sd help" />
+    <MESSAGE value="fix/test&#10;&#10;(cherry picked from commit d2c630871c938a1f7ae64a9078513b931d92b75c)" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix/test&#10;&#10;(cherry picked from commit d2c630871c938a1f7ae64a9078513b931d92b75c)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -37,6 +37,7 @@
         <aspectj.version>1.9.2</aspectj.version>
         <jdbc.template.version>5.3.15</jdbc.template.version>
         <oracle.jdbc.version>21.5.0.0</oracle.jdbc.version>
+        <selenide.version>6.19.1</selenide.version>
         <org.hibernate.version>5.4.30.Final</org.hibernate.version>
         <apache.poi.version>5.2.3</apache.poi.version>
     </properties>

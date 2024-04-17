@@ -1,8 +1,11 @@
 package com.ts.integration.tests.ui;
 
 
+import com.codeborne.selenide.Selenide;
 import com.ts.common.enums.Users;
 import com.ts.common.request.ApiRequest;
+import com.ts.common.ui.pages.HomePage;
+import com.ts.common.ui.pages.LoginPage;
 import com.ts.integration.tests.BaseUiTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
