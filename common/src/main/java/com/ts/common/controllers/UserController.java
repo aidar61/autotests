@@ -150,8 +150,11 @@ public class UserController extends ApiRequest {
     }
 
     public List<UserRole> receiveUserByTask(String taskNumber) {
-
         return receiveUsersByTaskNumber(taskNumber);
+    }
+
+    public User receiveUserByLogin(List<UserRole> userRoles, String login) {
+        return userRoles.stream().filter(u -> u.getForUser().getLogin().equals(login)).findFirst().get().getForUser();
     }
 
     public Map<String, UserRole> receiveUsersByRoles(String taskNumber, String... roles) {

@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_sla_feature;
+package com.ts.integration.tests.proc_sla_feature.oldTests;
 
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;

@@ -5,97 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/ui-clear">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeatureBase2Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/16a2a49113a4b42a.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/1784e6132d28a7a2.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/2c2a6a3639bcad80.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/3e84aa5512cfb85f.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/4690fb5d52f7bf52.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/57540bb8280110a0.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/61b4123918bf9229.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/7446e0da1026a5da.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/8cdc9d61b4da9fc9.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/a60cf8c30bb4046e.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/ae45b3b24a1c7264.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/c53c5ecbd42044f0.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/attachments/f240b0680c9021fd.bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/behaviors.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/behaviors.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/categories.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/categories.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/packages.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/suites.csv" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/suites.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/19ad2a8468be215b.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/22a791bc1120c1e7.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/256eb51013bc77fa.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/6d041ef9cf8c5376.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/892949e2b1495453.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/94fa18c12056d14.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/dfd68fda0bd7530b.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/e0cc6ac858bf3398.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/ebc043d56aaab43a.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/ecc20276fabe5552.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/f68531d7e4072981.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/f6978168ce9d85da.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/test-cases/fb6a41734ecec837.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/data/timeline.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/export/influxDbData.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/export/mail.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/export/prometheusData.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/history/categories-trend.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/history/duration-trend.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/history/history-trend.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/history/history.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/history/retry-trend.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/plugins/behaviors/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/plugins/packages/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/plugins/screen-diff/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/plugins/screen-diff/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/styles.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/behaviors.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/categories-trend.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/categories.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/duration-trend.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/duration.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/environment.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/executors.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/history-trend.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/launch.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/retry-trend.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/severity.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/status-chart.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/suites.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/allure-report/widgets/summary.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/00254b2b-0316-46b8-8e08-41fb30443a0f-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/13752010-4f63-4445-a06b-96e8d516df46-result.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/1e818859-1ae8-4aff-956b-65e971961b79-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/25ff2e6b-97cb-43d6-a1ae-5671ca776d4e-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/2678b5b7-cb5c-47f7-aa8c-41c91d8e0d88-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/36895504-963f-4797-97f2-40b233b31af7-result.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/3a96bfc4-6a81-4e25-9389-c914e566b6c6-result.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/4e4738c7-f8f2-4e2c-8c03-97d129a47df8-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/521041fa-305f-4194-85dd-b376ac4a63f8-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/5ddae118-5c3d-4252-bfb7-fa1ae16b9230-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/732b2d54-9644-4f19-bc12-436be3cb2a6c-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/77a46b8e-984b-475d-9476-a43ab7450dc4-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/8ea6697d-2524-41ae-a854-60291d6adf3f-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/96911131-4b2f-4eb4-b33a-e4fc25c79550-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/97a98e4b-64d7-4b8b-9e7c-392d28036198-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/9e4ffa95-2234-4e71-adec-c74214a4fcc9-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/b527b832-23ed-4fe0-b19b-7872991a35d3-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/ccbbc578-1d4f-454e-bffa-a3018dc8ee90-result.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/d72434c3-ca1a-41be-975a-31cf014e0152-container.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/allure-results/f31e57d3-d392-47d9-9410-3859b7b5e959-result.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/driver/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/UiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/UiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/experimental/FilterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/experimental/FilterTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Tables.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Tables.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeature1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/oldTests/SlaFeature1Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeature2Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/oldTests/SlaFeature2Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeature3Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/oldTests/SlaFeature3Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeatureBaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeatureBaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/resources/suite.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,7 +43,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="stage" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -204,7 +125,7 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.FilterTest.editFilter">
+  <component name="RunManager" selected="TestNG.SlaFeatureBase2Test.cat">
     <configuration name="FilterTest.editFilter" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -217,23 +138,6 @@
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.experimental.FilterTest" />
       <option name="METHOD_NAME" value="editFilter" />
       <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SdBuyBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdBuy.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help.sdBuy" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseStaticTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
       <method v="2">
@@ -268,6 +172,24 @@
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help.sdLearn" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdLearn.SdLearnBaseStaticTest" />
       <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SlaFeatureBase2Test.cat" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_feature.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_feature" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_feature.SlaFeatureBase2Test" />
+      <option name="METHOD_NAME" value="cat" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -340,19 +262,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.SlaFeatureBase2Test.cat" />
       <item itemvalue="TestNG.FilterTest.editFilter" />
       <item itemvalue="TestNG.UiTest.uiLoginTest" />
-      <item itemvalue="TestNG.SdBuyBaseStaticTest" />
       <item itemvalue="TestNG.SdLearnBaseDynamicTest" />
       <item itemvalue="TestNG.SdLearnBaseStaticTest" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.SlaFeatureBase2Test.cat" />
         <item itemvalue="TestNG.FilterTest.editFilter" />
         <item itemvalue="TestNG.UiTest.uiLoginTest" />
         <item itemvalue="TestNG.SdLearnBaseStaticTest" />
         <item itemvalue="TestNG.SdLearnBaseDynamicTest" />
-        <item itemvalue="TestNG.SdBuyBaseStaticTest" />
       </list>
     </recent_temporary>
   </component>
@@ -446,13 +368,6 @@
       <workItem from="1712907566311" duration="54000" />
       <workItem from="1713182187040" duration="609000" />
       <workItem from="1713242973013" duration="4507000" />
-    </task>
-    <task id="LOCAL-00034" summary="fix/DevTaskAcceptance">
-      <created>1700119035577</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1700119035577</updated>
     </task>
     <task id="LOCAL-00035" summary="feature/Sla negative scenarios, Errors">
       <created>1700551331025</created>
@@ -794,7 +709,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713330230697</updated>
     </task>
-    <option name="localTasksCounter" value="83" />
+    <task id="LOCAL-00083" summary="fix/ui-clear">
+      <created>1713332428640</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1713332428640</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
