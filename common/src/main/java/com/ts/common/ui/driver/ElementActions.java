@@ -16,6 +16,13 @@ public class ElementActions {
         element.shouldBe(visible).sendKeys(text);
         return this;
     }
+
+    public ElementActions inputWithClear(SelenideElement element, String text) {
+        element.shouldBe(visible).click();
+        element.shouldBe(visible).clear();
+        element.shouldBe(visible).sendKeys(text);
+        return this;
+    }
     public ElementActions hover(SelenideElement element) {
         element.shouldBe(visible).hover();
         return this;

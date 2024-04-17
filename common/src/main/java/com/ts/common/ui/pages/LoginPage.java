@@ -20,4 +20,11 @@ public class LoginPage extends BasePage {
                 .click(loginButton);
         return this;
     }
+
+    public LoginPage loginNoToken(String username) {
+        elActions.input(loginInput, username)
+                .input(passwordInput, "password")
+                .click(loginButton);
+        return this;
+    }
 }

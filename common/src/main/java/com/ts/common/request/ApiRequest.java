@@ -1,8 +1,8 @@
 package com.ts.common.request;
 
 
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.ObjectMapper;
+//import com.fasterxml.jackson.databind.DeserializationFeature;
+//import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ts.common.application.controllers.AuthToken;
 import io.qameta.allure.Step;
 import io.restassured.builder.RequestSpecBuilder;
@@ -38,7 +38,7 @@ public abstract class ApiRequest {
 
 
     public ApiRequest(String url, Map<String, String> headers, AuthToken authToken) {
-        this.objectMapper = initObjectMapper();
+        //this.objectMapper = initObjectMapper();
         this.headers = headers;
         this.url = url;
         this.authToken = authToken;
@@ -50,14 +50,14 @@ public abstract class ApiRequest {
         this.requestSpec.log();
     }
 
-    private static Jackson2Mapper initObjectMapper() {
-        return new Jackson2Mapper(((type, charset) -> {
-            com.fasterxml.jackson.databind.ObjectMapper om = new ObjectMapper().findAndRegisterModules();
-            om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-            //om.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
-            return om;
-        }));
-    }
+//    private static Jackson2Mapper initObjectMapper() {
+//        return new Jackson2Mapper(((type, charset) -> {
+////            com.fasterxml.jackson.databind.ObjectMapper om = new ObjectMapper().findAndRegisterModules();
+////            om.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+//            //om.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
+////            return om;
+//        }));
+//    }
 
     public static String getEndpoint(String... args) {
         StringBuilder endpoint = new StringBuilder();
