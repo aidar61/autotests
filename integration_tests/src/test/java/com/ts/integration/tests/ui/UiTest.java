@@ -51,10 +51,10 @@ public class UiTest extends BaseUiTest {
         //TODO инициализация контроллеров происходит в BeforeClass(alwaysRun = true) методе
         slaFeatureController = apiController.getSlaFeatureController();
         //TODO на 32 строке присутствует поле task, для обработки можно использовать его
-        GeneralTask generalTask = InitEntities.getGeneralTask(TaskType.SLA_FEATURE, Operations.CAT);
-        slaFeatureController.createSlaFeatureTask(generalTask);
+        task = InitEntities.getGeneralTask(TaskType.SLA_FEATURE, Operations.CAT);
+        slaFeatureController.createSlaFeatureTask(task);
         //TODO здесь вместо статичной ссылки лучше использовать динамичную "STAND_URL" используя метод getEndpoint();
-        String taskURL = "http://tsdev7.dev.colvir.ru/TrackStudio/app/task/" + generalTask.getNumber();
+        String taskURL = "http://tsdev7.dev.colvir.ru/TrackStudio/app/task/" + task.getNumber();
         open(taskURL);
 
     }

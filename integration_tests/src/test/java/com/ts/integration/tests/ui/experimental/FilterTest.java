@@ -16,12 +16,14 @@ import static com.ts.common.config.AppConfigProvider.STAND_URL;
 public class FilterTest extends BaseUiTest {
     LoginPage loginPage;
     HomePage homePage;
+    FilterPage filterPage;
 
 
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         loginPage = trackStudioPages.getLoginPage();
         homePage = trackStudioPages.getHomePage();
+        filterPage = trackStudioPages.getFilterPage();
     }
 
     @Test
@@ -31,13 +33,13 @@ public class FilterTest extends BaseUiTest {
         loginPage.loginNoToken("vkhudoshin");
         homePage.openFilterSetting();
 
-        FilterPage filterPage;//TODO page хранить лучше как поле класса и производить инициализацию в BeforeClass()
-        filterPage = trackStudioPages.getFilterPage();
+
+
 
         filterPage.setFilterName("Selenide_test")
                 .setGroupName("Selenide_test")
                 .clearSearchParams()
-                .saveAsNewForm()
+                //.saveAsNewForm()
                 .checkSaveIsSuccess();
     }
 }

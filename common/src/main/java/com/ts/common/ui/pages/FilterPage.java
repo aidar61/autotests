@@ -16,7 +16,7 @@ public class FilterPage extends BasePage {
     SelenideElement successMsg = $x("//*[contains(text(), \"Filter created\")]");
 
 
-    public FilterPage saveAsNewForm() {
+    public FilterPage saveNewFilter() {
         elActions.click(saveAsNewBtn);
         return this;
     }
