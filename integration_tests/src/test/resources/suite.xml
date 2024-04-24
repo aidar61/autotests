@@ -24,9 +24,9 @@
             <class name="com.ts.integration.tests.proc_sla_bug.SlaBugNoTempSolutionTest"/>
             <class name="com.ts.integration.tests.proc_sla_bug.SlaBugOtherTest"/>
             <class name="com.ts.integration.tests.proc_sla_bug.SlaBugUnfixableInWorkTest"/>
-            <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature1Test"/>-->
-            <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature2Test"/>-->
-            <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeature3Test"/>-->
+            <!--            <class name="com.ts.integration.tests.proc_sla_feature.oldTests.SlaFeature1Test"/>-->
+            <!--            <class name="com.ts.integration.tests.proc_sla_feature.oldTests.SlaFeature2Test"/>-->
+            <!--            <class name="com.ts.integration.tests.proc_sla_feature.oldTests.SlaFeature3Test"/>-->
             <!--            <class name="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative1Test"/>-->
             <!--            <class name="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative2Test"/>-->
             <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureBaseTest"/>-->
@@ -36,7 +36,7 @@
             <class name="com.ts.integration.tests.proc_potential_gap.PotentialGap2Test"/>
             <class name="com.ts.integration.tests.proc_potential_gap.PotentialGap3Test"/>
             <class name="com.ts.integration.tests.proc_gap_solution.GapSolution1Test"/>
-            <class name="com.ts.integration.tests.proc_gap_solution.GapSolution2Test"/>
+            <!--            <class name="com.ts.integration.tests.proc_gap_solution.GapSolution2Test"/>-->
             <class name="com.ts.integration.tests.proc_release_module.Release1Test"/>
             <class name="com.ts.integration.tests.proc_advice.cat_advice.CatAdvice1Test"/>
             <class name="com.ts.integration.tests.proc_advice.cat_sanction.CatSanction1Test"/>

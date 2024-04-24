@@ -31,6 +31,8 @@ public class List extends BaseEntity {
 
     @Getter
     public enum Constants {
+        STAGE_PRE_COST("8181817e3cb3b662013cb3e957720106"),
+        STAGE_AWAIT("8181817e3cb3b662013cb3e952fa0105"),
         OWN("ff8081813874cb210138752a757f0243"),
         UDF_L10N_KG("818181b03c8bcef8013c900ef71e767a"),
         UDF_CDP_BP_TROUBLESHOOTING("c7264df2ae741c4fe040007f01000d2c"),

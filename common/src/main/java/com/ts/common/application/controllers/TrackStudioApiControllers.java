@@ -24,9 +24,11 @@ import com.ts.common.controllers.workTask.ContingentTaskController;
 import com.ts.common.controllers.workTask.DevTaskController;
 import com.ts.common.controllers.workTask.TechTaskController;
 import com.ts.common.controllers.workTask.WorkTaskController;
+import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.entitites.tasks.Task;
 import com.ts.common.request.ApiRequest;
+import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
@@ -149,6 +151,24 @@ public class TrackStudioApiControllers {
 
     @Step("Пользователь: {0}")
     public void updateToken(AuthToken authToken) {
+        var fields = this.getClass().getDeclaredFields();
+        for (var field : fields) {
+            if (ApiRequest.class.isAssignableFrom(field.getType())) {
+                try {
+                    var method = field.getType().getMethod("setAuthToken", AuthToken.class);
+                    var fieldValue = field.get(this);
+                    method.setAccessible(true);
+                    method.invoke(fieldValue, authToken);
+                } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    @Step("Пользователь: {0}")
+    public void updateToken(User user) {
+        AuthToken authToken = InitEntities.generateAuthToken(user);
         var fields = this.getClass().getDeclaredFields();
         for (var field : fields) {
             if (ApiRequest.class.isAssignableFrom(field.getType())) {
