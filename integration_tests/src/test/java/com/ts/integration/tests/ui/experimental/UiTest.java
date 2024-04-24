@@ -1,4 +1,4 @@
-package com.ts.integration.tests.ui;
+package com.ts.integration.tests.ui.experimental;
 
 import com.codeborne.selenide.Driver;
 import com.codeborne.selenide.Selenide;

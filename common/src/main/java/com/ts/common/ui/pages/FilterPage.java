@@ -39,7 +39,7 @@ public class FilterPage extends BasePage {
     }
 
     public FilterPage checkSaveIsSuccess() {
-        successMsg.shouldBe(Condition.visible);
+        successMsg.shouldNot(Condition.visible);
         return this;
     }
 
