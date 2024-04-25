@@ -1,17 +1,15 @@
 package com.ts.integration.tests.ui.patches;
 
-import com.ts.common.application.database.DbHelper;
-import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.controllers.folder.SdPatchFolderController;
 import com.ts.common.controllers.installation.InstallationController;
-import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.ui.pages.LoginPage;
 import com.ts.common.ui.pages.portlets.PatchPage;
+import com.ts.common.ui.pages.portlets.UserSelector;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseUiTest;
 import org.testng.annotations.BeforeClass;
@@ -27,6 +25,7 @@ import static com.ts.common.utils.InitEntities.generateUdfString;
 public class CreatePatchTestPage extends BaseUiTest {
     LoginPage loginPage;
     PatchPage patchPage;
+    UserSelector userSelector;
     InstallationController installationController;
     SdPatchFolderController sdPatchFolderController;
     GeneralTask generalTask;
@@ -40,7 +39,9 @@ public class CreatePatchTestPage extends BaseUiTest {
     public void beforeClass() {
         loginPage = trackStudioPages.getLoginPage();
         patchPage = trackStudioPages.getPatchPage();
+        userSelector = trackStudioPages.getUserSelector();
 
+        // генерация структуры данных для тестов
         installationController = apiController.getInstallationController();
         sdPatchFolderController = apiController.getSdPatchfolderController();
         //grTaskTable = dbHelper.getGrTaskTable();
@@ -73,8 +74,25 @@ public class CreatePatchTestPage extends BaseUiTest {
         open(url);
         loginPage.loginNoToken(user);
         patchPage.setConfiguration()
-                .openTaskForm()
-                .saveTaskForm();
+                .openTaskForm();
+
+        userSelector.setFromSearch("Ответственный", "vpraded");
+        userSelector.setFromSearch("Наблюдатели", "vkhudoshin");
+        userSelector.setFromSearch("Владелец патча", "vpraded");
+
+
+
+        // проверка валидации обязательных полей
+        patchPage.alertIsPresent("Владелец патча");
+        patchPage.alertIsPresent("Плановая дата ввода в эксплуатацию");
+        patchPage.alertIsPresent("Плановая дата завершения работы");
+        patchPage.alertIsPresent("Тип патча");
+
+        // проверка отсутствия валидации необязательных полей
+        patchPage.alertIsNotPresent("Ответственный");
+        patchPage.alertIsNotPresent("Наблюдатели");
+        patchPage.alertIsNotPresent("Релизы патча");
+        patchPage.alertIsNotPresent("Ветка формирования патча");
 
 
     }

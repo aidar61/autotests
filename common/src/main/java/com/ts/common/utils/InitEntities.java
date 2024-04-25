@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.MSG;
-import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_LIST_AFFCTD_SYS;
+//import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_LIST_AFFCTD_SYS;
 import static com.ts.common.enums.Parents.MTB;
 import static com.ts.common.enums.Parents.RYSGAL_BANK;
 import static com.ts.common.utils.RandomUtils.generateName;
@@ -429,8 +429,8 @@ public class InitEntities {
     }
 
 
-    public static void main(String[] args) {
-        System.out.println(generateUdfMultiList(UDF_LIST_AFFCTD_SYS, List.Constants.COLVIR_V4, List.Constants.AFS));
-    }
+//    public static void main(String[] args) {
+//        System.out.println(generateUdfMultiList(UDF_LIST_AFFCTD_SYS, List.Constants.COLVIR_V4, List.Constants.AFS));
+//    }
 
 }
