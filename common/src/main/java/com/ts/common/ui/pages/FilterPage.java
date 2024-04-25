@@ -3,10 +3,11 @@ package com.ts.common.ui.pages;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import lombok.Getter;
 
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
-
+@Getter
 public class FilterPage extends BasePage {
     SelenideElement filterNameInput = $x("//input[contains(@ng-model, \"filter.name\")]");
     SelenideElement groupNameInput = $x("//input[contains(@ng-model, \"filter.group\")]");
