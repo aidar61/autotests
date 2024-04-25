@@ -10,21 +10,27 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class PatchPage extends BasePage {
     SelenideElement selectConfigBtn = $x("//clv-select[contains(@ng-model, \"configuration\")]//button");
-    ElementsCollection confgListItem = $$x("//clv-select-choices-row");
+    SelenideElement confgListItem = $x("//*[contains(text(), \"AT_INSTALLATION\")]");
     SelenideElement createPatchBtn = $x("//*[contains(@ng-click, \"createNewPatch\")]");
     SelenideElement udfPatchOwnerBtn = $x("//*[contains(text(), \"Владелец патча\")]" +
             "/ancestor::div[contains(@class, \"form-group\")]" +
             "//button[not(contains(@class, \"clv-select-toggle\"))]");
+    SelenideElement saveBtn = $x("//*[contains(@ng-click, \"createNewPatch89\")]");
 
     public PatchPage setConfiguration(){
         //elActions.hover(selectConfigBtn);
         elActions.click(selectConfigBtn);
-        elActions.click(confgListItem.last());
+        elActions.click(confgListItem);
         return this;
     }
 
     public PatchPage openTaskForm(){
         elActions.click(createPatchBtn);
+        return this;
+    }
+
+    public PatchPage saveTaskForm(){
+        elActions.click(saveBtn);
         return this;
     }
 

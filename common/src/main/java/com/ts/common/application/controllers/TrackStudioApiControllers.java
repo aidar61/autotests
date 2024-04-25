@@ -9,8 +9,10 @@ import com.ts.common.controllers.advice.CodeReviewController;
 import com.ts.common.controllers.advice.ConfirmationController;
 import com.ts.common.controllers.advice.SanctionController;
 import com.ts.common.controllers.bug.BugTaskController;
+import com.ts.common.controllers.folder.SdPatchFolderController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
+import com.ts.common.controllers.installation.InstallationController;
 import com.ts.common.controllers.release.ReleaseController;
 import com.ts.common.controllers.release.ReleaseModuleController;
 import com.ts.common.controllers.sdbug.*;
@@ -73,6 +75,8 @@ public class TrackStudioApiControllers {
     private ReleaseController releaseController;
     private SdDevController sdDevController;
     private SdHelpController sdHelpController;
+    private InstallationController installationController;
+    private SdPatchFolderController sdPatchfolderController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
@@ -103,6 +107,8 @@ public class TrackStudioApiControllers {
         this.releaseController = new ReleaseController(STAND_URL, authToken);
         this.sdDevController = new SdDevController(STAND_URL, authToken);
         this.sdHelpController = new SdHelpController(STAND_URL, authToken);
+        this.installationController = new InstallationController(STAND_URL, authToken);
+        this.sdPatchfolderController = new SdPatchFolderController(STAND_URL, authToken);
     }
 
     public GeneralTask receiveGeneralTask(String slaTaskNumber) {
