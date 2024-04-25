@@ -5,6 +5,7 @@ public enum Operations {
 
     CAT("CAT_%S"),
     CANCEL_BUG("%S_CANCELBUG"),
+    TO_IMPLMGRPRLMAPR("%S_TO_IMPLMGRPRLMAPR"),
     FINISHPLANNING("%S_FINISHPLANNING"),
     RETURNPLANNING("%S_RETURNPLANNING"),
     STARTTESTING("%S_STARTTESTING"),
@@ -68,6 +69,7 @@ public enum Operations {
     SETCOMPAT("%S_SETCOMPAT"), // задать совместимость
     EVALUATE_REQUEST_EXE("%S_EVALUATE_REQUEST_EXE"), // Оценить выполнение запроса
     TOPRECOST("%S_TOPRECOST"),//начать предварительный анализ
+    TO_ANLSMGRPRLMAPR("%S_TO_ANLSMGRPRLMAPR"),//передать на предварительное согласование менеджеру по анализу доработок
     REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
     PROVIDEREQINFO("%S_PROVIDEREQINFO"), // сообщить уточнение требований
     PROVIDETEMPORARYFIXED("%S_PROVIDETEMPORARYFIXED"), // предоставить временное решение

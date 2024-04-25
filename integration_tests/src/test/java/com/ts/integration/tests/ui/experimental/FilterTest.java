@@ -1,7 +1,7 @@
 package com.ts.integration.tests.ui.experimental;
 
-import com.ts.common.enums.Users;
-import com.ts.common.request.ApiRequest;
+import com.codeborne.selenide.Condition;
+import com.ts.common.asserts.UiAsserts;
 import com.ts.common.ui.pages.FilterPage;
 import com.ts.common.ui.pages.HomePage;
 import com.ts.common.ui.pages.LoginPage;
@@ -10,8 +10,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.ts.common.application.controllers.TrackStudioEndPoints.APP;
-import static com.ts.common.config.AppConfigProvider.STAND_URL;
 
 public class FilterTest extends BaseUiTest {
     LoginPage loginPage;
@@ -37,7 +35,10 @@ public class FilterTest extends BaseUiTest {
         filterPage.setFilterName("Selenide_test")
                 .setGroupName("Selenide_test")
                 .clearSearchParams()
-                .saveAsNewForm()
-                .checkSaveIsSuccess();
+                .saveAsNewForm();
+
+        UiAsserts.assertThat(filterPage.getSuccessMsg())
+                .isElementAccordCondition(Condition.visible)
+                .isElementNotAccordCondition(Condition.visible);
     }
 }

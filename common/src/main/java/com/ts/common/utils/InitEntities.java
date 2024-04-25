@@ -9,8 +9,10 @@ import com.ts.common.enums.*;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.MSG;
+import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_LIST_AFFCTD_SYS;
 import static com.ts.common.enums.Parents.MTB;
 import static com.ts.common.enums.Parents.RYSGAL_BANK;
 import static com.ts.common.utils.RandomUtils.generateName;
@@ -209,6 +211,16 @@ public class InitEntities {
                 .build();
     }
 
+    public static UdfMultiList generateUdfMultiList(Udfs.UdfSd udfSdType, List.Constants... multiList) {
+        return UdfMultiList.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .listValue(Arrays.stream(multiList)
+                        .map(m -> new MultiList(m.getId()))
+                        .toArray(MultiList[]::new))
+                .build();
+    }
+
     private static MultiList[] convertMapToArray(Map<List.Constants, UserData> map) {
         MultiList[] array = new MultiList[map.size()];
         int index = 0;
@@ -304,6 +316,14 @@ public class InitEntities {
                 .udfId(udfsdType.udfId)
                 .type(udfsdType.type.name())
                 .numberValue(doubleValue)
+                .build();
+    }
+
+    public static UdfDouble generateUdfDouble(Udfs.UdfSd udfsdType, Double doubleValue) {
+        return UdfDouble.builder()
+                .udfId(udfsdType.udfId)
+                .type(udfsdType.type.name())
+                .numberValueDouble(doubleValue)
                 .build();
     }
 
@@ -410,7 +430,7 @@ public class InitEntities {
 
 
     public static void main(String[] args) {
-        System.out.println(generateStatus(TaskStatuses.STATUS_SLAHELP_CONSULTED));
+        System.out.println(generateUdfMultiList(UDF_LIST_AFFCTD_SYS, List.Constants.COLVIR_V4, List.Constants.AFS));
     }
 
 }

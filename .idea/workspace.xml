@@ -5,10 +5,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/slaFeatureTest">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/UiAsserts.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/UiAssertsCollection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/MemoPlan.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/serializers/UdfDoubleArraySerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/serializers/UdfSerializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/tests/Udf.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/resources/test.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/SlaFeatureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/SlaFeatureController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/List.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/udf/UdfDouble.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/udf/UdfDouble.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Operations.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/request/RequestBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/request/RequestBody.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/FilterPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/FilterPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/HomePage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/HomePage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/JsonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/JsonUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/resources/selenide.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/selenide.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeatureBase2Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeatureBase2Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/experimental/FilterTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/experimental/FilterTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +135,33 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.SlaFeatureBase2Test">
+  <component name="RunManager" selected="TestNG.FilterTest.editFilter">
+    <configuration name="InitEntities" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ts.common.utils.InitEntities" />
+      <module name="common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.common.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Udfs" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ts.common.entitites.commonEntities.Udfs" />
+      <module name="common" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.common.entitites.commonEntities.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="FilterTest.editFilter" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -130,23 +174,6 @@
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.experimental.FilterTest" />
       <option name="METHOD_NAME" value="editFilter" />
       <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SdLearnBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_help.sdLearn.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sd_help.sdLearn" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_help.sdLearn.SdLearnBaseStaticTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
       <method v="2">
@@ -216,24 +243,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UiTest.uiLoginTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.ui.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.UiTest" />
-      <option name="METHOD_NAME" value="uiLoginTest" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Unnamed" type="TestNG" nameIsGenerated="true">
       <shortenClasspath name="NONE" />
       <option name="SUITE_NAME" value="" />
@@ -252,21 +261,21 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.InitEntities" />
+      <item itemvalue="Application.Udfs" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
       <item itemvalue="TestNG.SlaFeatureBase2Test" />
       <item itemvalue="TestNG.SlaFeatureBase2Test.cat" />
       <item itemvalue="TestNG.FilterTest.editFilter" />
-      <item itemvalue="TestNG.UiTest.uiLoginTest" />
-      <item itemvalue="TestNG.SdLearnBaseStaticTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.SlaFeatureBase2Test" />
-        <item itemvalue="TestNG.SlaFeatureBase2Test.cat" />
         <item itemvalue="TestNG.FilterTest.editFilter" />
-        <item itemvalue="TestNG.UiTest.uiLoginTest" />
-        <item itemvalue="TestNG.SdLearnBaseStaticTest" />
+        <item itemvalue="TestNG.SlaFeatureBase2Test" />
+        <item itemvalue="Application.Udfs" />
+        <item itemvalue="Application.InitEntities" />
+        <item itemvalue="TestNG.SlaFeatureBase2Test.cat" />
       </list>
     </recent_temporary>
   </component>
@@ -360,13 +369,8 @@
       <workItem from="1712907566311" duration="54000" />
       <workItem from="1713182187040" duration="609000" />
       <workItem from="1713242973013" duration="4507000" />
-    </task>
-    <task id="LOCAL-00037" summary="feature/Sla negative scenarios, Errors">
-      <created>1700639866963</created>
-      <option name="number" value="00037" />
-      <option name="presentableId" value="LOCAL-00037" />
-      <option name="project" value="LOCAL" />
-      <updated>1700639866963</updated>
+      <workItem from="1713440090328" duration="19980000" />
+      <workItem from="1713939306550" duration="8158000" />
     </task>
     <task id="LOCAL-00038" summary="feature/Sla negative scenarios, Errors">
       <created>1701675904063</created>
@@ -708,7 +712,14 @@
       <option name="project" value="LOCAL" />
       <updated>1713340850141</updated>
     </task>
-    <option name="localTasksCounter" value="86" />
+    <task id="LOCAL-00086" summary="feature/slaFeatureTest">
+      <created>1713342603322</created>
+      <option name="number" value="00086" />
+      <option name="presentableId" value="LOCAL-00086" />
+      <option name="project" value="LOCAL" />
+      <updated>1713342603322</updated>
+    </task>
+    <option name="localTasksCounter" value="87" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -831,7 +842,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/request/RequestBody.java</url>
-          <line>72</line>
+          <line>73</line>
           <option name="timeStamp" value="132" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

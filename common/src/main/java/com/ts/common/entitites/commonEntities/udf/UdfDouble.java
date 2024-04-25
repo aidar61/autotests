@@ -1,6 +1,7 @@
 package com.ts.common.entitites.commonEntities.udf;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.BaseEntity;
 import lombok.*;
@@ -22,5 +23,9 @@ public class UdfDouble extends BaseEntity {
     @JsonProperty("udfid")
     String udfId;
     String type;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     Integer numberValue;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonProperty("numberValue")
+    Double numberValueDouble;
 }
