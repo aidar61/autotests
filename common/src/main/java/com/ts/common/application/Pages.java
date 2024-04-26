@@ -4,7 +4,6 @@ import com.ts.common.ui.pages.FilterPage;
 import com.ts.common.ui.pages.HomePage;
 import com.ts.common.ui.pages.LoginPage;
 import com.ts.common.ui.pages.portlets.PatchPage;
-import com.ts.common.ui.pages.portlets.UserSelector;
 import lombok.Getter;
 
 public class Pages {
@@ -16,15 +15,12 @@ public class Pages {
     private final FilterPage filterPage;
     @Getter
     private final PatchPage patchPage;
-    @Getter
-    private final UserSelector userSelector;
 
     public Pages() {
         this.loginPage = new LoginPage();
         this.homePage = new HomePage();
         this.filterPage = new FilterPage();
         this.patchPage = new PatchPage();
-        this.userSelector = new UserSelector();
     }
 
 

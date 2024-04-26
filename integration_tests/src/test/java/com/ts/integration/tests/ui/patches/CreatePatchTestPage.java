@@ -7,13 +7,15 @@ import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
+import com.ts.common.ui.pages.FormPage;
 import com.ts.common.ui.pages.LoginPage;
 import com.ts.common.ui.pages.portlets.PatchPage;
-import com.ts.common.ui.pages.portlets.UserSelector;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseUiTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.concurrent.ForkJoinPool;
 
 import static com.codeborne.selenide.Selenide.open;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_BDKU_CSCCLIENT;
@@ -25,7 +27,6 @@ import static com.ts.common.utils.InitEntities.generateUdfString;
 public class CreatePatchTestPage extends BaseUiTest {
     LoginPage loginPage;
     PatchPage patchPage;
-    UserSelector userSelector;
     InstallationController installationController;
     SdPatchFolderController sdPatchFolderController;
     GeneralTask generalTask;
@@ -39,7 +40,6 @@ public class CreatePatchTestPage extends BaseUiTest {
     public void beforeClass() {
         loginPage = trackStudioPages.getLoginPage();
         patchPage = trackStudioPages.getPatchPage();
-        userSelector = trackStudioPages.getUserSelector();
 
         // генерация структуры данных для тестов
         installationController = apiController.getInstallationController();
@@ -76,11 +76,9 @@ public class CreatePatchTestPage extends BaseUiTest {
         patchPage.setConfiguration()
                 .openTaskForm();
 
-        userSelector.setFromSearch("Ответственный", "vpraded");
-        userSelector.setFromSearch("Наблюдатели", "vkhudoshin");
-        userSelector.setFromSearch("Владелец патча", "vpraded");
-
-
+        formPage.userSelectorSetValue("Ответственный", "vpraded");
+        formPage.userSelectorSetValue("Наблюдатели", "vkhudoshin");
+        formPage.userSelectorSetValue("Владелец патча", "vpraded");
 
         // проверка валидации обязательных полей
         patchPage.alertIsPresent("Владелец патча");

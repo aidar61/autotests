@@ -9,6 +9,7 @@ import com.ts.common.application.controllers.TrackStudioApiControllers;
 import com.ts.common.enums.Users;
 import com.ts.common.tests.AbstractBaseTest;
 import com.ts.common.ui.driver.Driver;
+import com.ts.common.ui.pages.FormPage;
 import com.ts.common.utils.InitEntities;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.BeforeTest;
@@ -17,11 +18,13 @@ import org.testng.annotations.Listeners;
 @Slf4j
 @Listeners({SoftAsserts.class, TextReport.class})
 public class BaseUiTest extends AbstractBaseTest {
+    protected FormPage formPage;
     @BeforeTest(alwaysRun = true)
     public void setupUi() {
         Configuration.browserCapabilities = Driver.initBrowserCapabilities();
         apiController = new TrackStudioApiControllers(InitEntities.generateAuthToken(Users.ROOT));
         trackStudioPages = new Pages();
+        formPage = new FormPage();
         log.warn("=====================UI TESTS IS STARTED=====================");
     }
 }
