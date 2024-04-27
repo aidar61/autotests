@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/ui asserts">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix user selector">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/UiAsserts.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/UiAsserts.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/FormPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/FormPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/portlets/PatchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/portlets/PatchPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/patches/CreatePatchTestPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/patches/CreatePatchTestPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +76,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;qa&quot;,
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/aidarka61/IdeaProjects/autotests&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -114,20 +118,7 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.CatReleaseTest">
-    <configuration name="Udfs" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ts.common.entitites.commonEntities.Udfs" />
-      <module name="common" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.common.entitites.commonEntities.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="TestNG.CreatePatchTestPage.createByAdmin">
     <configuration name="CatReleaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -139,6 +130,24 @@
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_release.cat_release" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_release.cat_release.CatReleaseTest" />
       <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CreatePatchTestPage.createByAdmin" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.ui.patches.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.patches" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.patches.CreatePatchTestPage" />
+      <option name="METHOD_NAME" value="createByAdmin" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -244,9 +253,9 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.Udfs" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.CreatePatchTestPage.createByAdmin" />
       <item itemvalue="TestNG.CatReleaseTest" />
       <item itemvalue="TestNG.SlaFeatureBase2Test" />
       <item itemvalue="TestNG.SlaFeatureBase2Test.cat" />
@@ -254,11 +263,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.CreatePatchTestPage.createByAdmin" />
         <item itemvalue="TestNG.CatReleaseTest" />
         <item itemvalue="TestNG.FilterTest.editFilter" />
         <item itemvalue="TestNG.SlaFeatureBase2Test.cat" />
         <item itemvalue="TestNG.SlaFeatureBase2Test" />
-        <item itemvalue="Application.Udfs" />
       </list>
     </recent_temporary>
   </component>

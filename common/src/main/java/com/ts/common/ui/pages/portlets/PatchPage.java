@@ -3,9 +3,11 @@ package com.ts.common.ui.pages.portlets;
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import com.ts.common.asserts.UiAsserts;
 import com.ts.common.ui.pages.BasePage;
 import lombok.Getter;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -41,18 +43,15 @@ public class PatchPage extends BasePage {
         return this;
     }
 
-    public void alertIsPresent(String fieldName) {
+    public void alertIsPresent(String fieldName, boolean present) {
         SelenideElement alert = $x("//*[contains(text(), \"" + fieldName + "\")]" +
                 "/ancestor::*[contains(@class, \"form-group\")]//udf-edit-error/div[not(contains(@class, \"ng-hide\"))]");
 
-        alert.shouldBe(Condition.exist);
-    }
-
-    public void alertIsNotPresent(String fieldName) {
-        SelenideElement alert = $x("//*[contains(text(), \"" + fieldName + "\")]" +
-                "/ancestor::*[contains(@class, \"form-group\")]//udf-edit-error/div[contains(@class, \"ng-hide\")]");
-
-        alert.shouldBe(Condition.exist);
+        if (present) {
+            UiAsserts.assertThat(alert).isElementAccordCondition(Condition.visible);
+        } else {
+            UiAsserts.assertThat(alert).isElementNotAccordCondition(Condition.visible);
+        }
     }
 
 

@@ -22,7 +22,7 @@ public class UiAsserts {
         this.elements = elements;
     }
 
-    @Step("[ASSERT] Selenide element: {element.describe()}")
+    @Step("[ASSERT] Selenide element: {0}")
     public static UiAsserts assertThat(SelenideElement element) {
         if (element == null) assertTrue(false);
         log.info("Asserting element {}", element.describe());

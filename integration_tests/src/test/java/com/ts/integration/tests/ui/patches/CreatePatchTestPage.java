@@ -11,6 +11,7 @@ import com.ts.common.ui.pages.FormPage;
 import com.ts.common.ui.pages.LoginPage;
 import com.ts.common.ui.pages.portlets.PatchPage;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.WaitManager;
 import com.ts.integration.tests.BaseUiTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -41,7 +42,7 @@ public class CreatePatchTestPage extends BaseUiTest {
         loginPage = trackStudioPages.getLoginPage();
         patchPage = trackStudioPages.getPatchPage();
 
-        // генерация структуры данных для тестов
+        //генерация структуры данных для тестов
         installationController = apiController.getInstallationController();
         sdPatchFolderController = apiController.getSdPatchfolderController();
         //grTaskTable = dbHelper.getGrTaskTable();
@@ -76,21 +77,26 @@ public class CreatePatchTestPage extends BaseUiTest {
         patchPage.setConfiguration()
                 .openTaskForm();
 
-        formPage.userSelectorSetValue("Ответственный", "vpraded");
-        formPage.userSelectorSetValue("Наблюдатели", "vkhudoshin");
-        formPage.userSelectorSetValue("Владелец патча", "vpraded");
+        WaitManager.pause(2);
 
-        // проверка валидации обязательных полей
-        patchPage.alertIsPresent("Владелец патча");
-        patchPage.alertIsPresent("Плановая дата ввода в эксплуатацию");
-        patchPage.alertIsPresent("Плановая дата завершения работы");
-        patchPage.alertIsPresent("Тип патча");
+        //проверка валидации полей
+        patchPage.alertIsPresent("Ответственный", false);
+        patchPage.alertIsPresent("Наблюдатели", false);
+        patchPage.alertIsPresent("Владелец патча", true);
+        patchPage.alertIsPresent("Плановая дата вывода из эксплуатации", false);
+        patchPage.alertIsPresent("Код клиента CSC", false);
+        patchPage.alertIsPresent("Релизы патча", false);
+        patchPage.alertIsPresent("Тип патча", true);
+        patchPage.alertIsPresent("Ветка формирования патча", false);
+        patchPage.alertIsPresent("Проект реестра", false);
 
-        // проверка отсутствия валидации необязательных полей
-        patchPage.alertIsNotPresent("Ответственный");
-        patchPage.alertIsNotPresent("Наблюдатели");
-        patchPage.alertIsNotPresent("Релизы патча");
-        patchPage.alertIsNotPresent("Ветка формирования патча");
+        //заполнение полей
+        formPage.userSelectorSetValue("Ответственный");
+        formPage.userSelectorSetValue("Наблюдатели");
+        formPage.userSelectorSetValue("Владелец патча");
+
+
+
 
 
     }
