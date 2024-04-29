@@ -29,7 +29,7 @@ import static com.ts.common.utils.InitEntities.generateUser;
 import static com.ts.common.utils.RandomUtils.generateDescriptionForOperation;
 
 public class SlaFeatureController extends BaseController {
-    private static final TaskType SLA_TYPE = SD_FEATURE;
+    private static final TaskType SLA_TYPE = SLA_FEATURE;
     private static String parentDetailInString;
 
     public SlaFeatureController(String url, AuthToken authToken) {

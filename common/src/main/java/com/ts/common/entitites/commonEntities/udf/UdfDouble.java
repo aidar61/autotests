@@ -24,8 +24,5 @@ public class UdfDouble extends BaseEntity {
     String udfId;
     String type;
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    Integer numberValue;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonProperty("numberValue")
-    Double numberValueDouble;
+    Double numberValue;
 }

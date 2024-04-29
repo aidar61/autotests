@@ -286,8 +286,8 @@ public class CommonAssert {
 
     @Step("[ASSERT] ({0}) Checking udf double type of {1}, Expected is {2}")
     public CommonAssert isCorrectUdfDouble(String description, Udfs.UdfSd type, Integer expected) {
-        Integer actual = extractUdfField(type, UdfDouble.class).getNumberValue();
-        assertEquals(actual, expected, type.udfId + " parameters is match: ");
+        Double actual = extractUdfField(type, UdfDouble.class).getNumberValue();
+        assertEquals(actual, Double.valueOf(expected), type.udfId + " parameters is match: ");
         log.info("{}: {} is correct Actual {}, Expected {}", description, type, actual, expected);
         return this;
     }

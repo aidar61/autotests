@@ -315,15 +315,14 @@ public class InitEntities {
         return UdfDouble.builder()
                 .udfId(udfsdType.udfId)
                 .type(udfsdType.type.name())
-                .numberValue(doubleValue)
+                .numberValue(Double.valueOf(doubleValue))
                 .build();
     }
-
     public static UdfDouble generateUdfDouble(Udfs.UdfSd udfsdType, Double doubleValue) {
         return UdfDouble.builder()
                 .udfId(udfsdType.udfId)
                 .type(udfsdType.type.name())
-                .numberValueDouble(doubleValue)
+                .numberValue(doubleValue)
                 .build();
     }
 

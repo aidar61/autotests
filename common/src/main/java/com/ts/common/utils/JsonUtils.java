@@ -30,12 +30,11 @@ public class JsonUtils {
     }
 
     public static String convertToString(Object obj) {
-        ObjectMapper ow = new ObjectMapper();
+        ObjectWriter ow = new ObjectMapper().writer().withDefaultPrettyPrinter();
         String json = StringUtils.EMPTY;
         try {
-            json = ow.writeValueAsString(obj)
-                    .replace("\r", StringUtils.EMPTY)
-                    .replace("\n", StringUtils.EMPTY);
+            json = ow.writeValueAsString(obj).replace("\r", StringUtils.EMPTY).replace("\n", StringUtils.EMPTY);
+
         } catch (JsonProcessingException e) {
             log.error("Can not parse object: ", e);
         }

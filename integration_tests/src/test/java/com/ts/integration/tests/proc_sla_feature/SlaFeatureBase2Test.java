@@ -28,7 +28,6 @@ import static com.ts.common.enums.MemoPlan.*;
 import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAFEATURE_NEW;
 import static com.ts.common.enums.TaskStatuses.STATUS_SLAFEATURE_PRECOST;
-import static com.ts.common.enums.TaskType.SD_FEATURE;
 import static com.ts.common.enums.TaskType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.*;
@@ -65,7 +64,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         MANAGER_REQUEST = userController.receiveUserByLogin(USER_ROLES, "ibabushkin");
         MANAGER_CLIENT = userController.receiveUserByLogin(USER_ROLES, "lkorennaya");
 
-        task = InitEntities.getGeneralTask(SD_FEATURE, CAT);
+        task = InitEntities.getGeneralTask(SLA_FEATURE, CAT);
     }
 
     @Test(groups = {"SlaFeature", "Regression"}
