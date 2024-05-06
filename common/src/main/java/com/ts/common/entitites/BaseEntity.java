@@ -71,6 +71,10 @@ public abstract class BaseEntity implements Serializable {
         }
     }
 
+    public String toJson() {
+        return JsonUtils.convertToJson(JsonUtils.convertToString(this)).toString();
+    }
+
 
     public String removeField(String field) {
         ObjectNode jsonNode = JsonUtils.convertToJson(JsonUtils.convertToString(this));
@@ -137,6 +141,10 @@ public abstract class BaseEntity implements Serializable {
     }
 
     public Object receiveTaskStatus() {
+        return null;
+    }
+
+    public Object receiveMTaskStatusName() {
         return null;
     }
 

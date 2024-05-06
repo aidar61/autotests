@@ -318,6 +318,7 @@ public class InitEntities {
                 .numberValue(Double.valueOf(doubleValue))
                 .build();
     }
+
     public static UdfDouble generateUdfDouble(Udfs.UdfSd udfsdType, Double doubleValue) {
         return UdfDouble.builder()
                 .udfId(udfsdType.udfId)
@@ -427,6 +428,17 @@ public class InitEntities {
                 .build();
     }
 
+    public static CostString generateCostString(Integer cost
+            , Integer budgetFirst
+            , Integer budgetSecond
+            , Integer budgetThird) {
+        return CostString.builder()
+                .cost(cost)
+                .budgetFirst(budgetFirst)
+                .budgetSecond(budgetSecond)
+                .budgetThird(budgetThird)
+                .build();
+    }
 
     public static void main(String[] args) {
         System.out.println(generateUdfMultiList(UDF_LIST_AFFCTD_SYS, List.Constants.COLVIR_V4, List.Constants.AFS));

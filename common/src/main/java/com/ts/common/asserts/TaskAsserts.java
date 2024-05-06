@@ -78,6 +78,15 @@ public class TaskAsserts extends EntityAssert {
         return this;
     }
 
+    @Step("Checking m status name: {0}")
+    public TaskAsserts isCorrectMStatusName(String expectedMStatusName) {
+        assertEquals(super.entity.receiveMTaskStatusName()
+                , expectedMStatusName, "M Status name is not valid");
+        log.info("Task M status is correct Actual: {}, Expected: {}"
+                , super.entity.receiveMTaskStatusName(), expectedMStatusName);
+        return this;
+    }
+
     public TaskAsserts isCorrectHandlerUser(User expectedHandlerUser) {
         assertTrue(expectedHandlerUser.isEquals(super.entity.receiveHandlerUser())
                 , "Handler user is not correct");

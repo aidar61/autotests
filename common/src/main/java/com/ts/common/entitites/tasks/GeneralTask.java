@@ -41,6 +41,7 @@ public class GeneralTask extends BaseEntity {
     Status priority;
     Resolution resolution;
     String statusName;
+    @JsonProperty("mstatusName")
     String mstatusName;
     String priorityName;
     Boolean confirmed;

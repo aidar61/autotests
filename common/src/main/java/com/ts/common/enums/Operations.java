@@ -81,6 +81,7 @@ public enum Operations {
     SENDCOST("%S_SENDCOST"), // Сообщить условия реализации
     UNDOSENDCOST("%S_UNDOSENDCOST"), // Отменить сообщение условий
     SENDCOST_PRE("%S_SENDCOST_PRE"), // Сообщить предварительные условия реализации
+    SUBMIT_TO_AGR_ANLS("%S_SUBMIT_TOAGR_ANLS"), //Передать на окончательное согласование
     ALTERNATECOST("%S_ALTERNATECOST"), // Задать вопрос или предложить альтернативные вопросы реализации
     ACCEPTPRECOST("%S_ACCEPTPRECOST"), // Принять предварительные условия реализации
     SENDCOST_FINAL("%S_SENDCOST_FINAL"), // Сообщить окончательные условия реализации
@@ -138,6 +139,7 @@ public enum Operations {
     ANSWER("%S_ANSWER"), //
     ASKMORE("%S_ASKMORE"), //
     PRIVATECOMMENT("%S_PRIVATECOMMENT"), //
+    ASSIGN_FIN_PLNIMP("%S_ASSIGN_FIN_PLNIMP"), // Передать на окончательное планирование
     SDQUESTION_ASSIGN("%S_ASSIGN"), //MSG_SDQUESTION_ASSIGN
     CHANGE_MEMBERS("%S_CHANGEMEMBERS"), //
     CHNGTASKAL_LOCATION("%S_CHNGTASKALLOCATION"), //

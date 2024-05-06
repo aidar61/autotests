@@ -1,6 +1,7 @@
 package com.ts.common.entitites.commonEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ts.common.entitites.BaseEntity;
 import io.qameta.allure.internal.shadowed.jackson.annotation.JsonIgnore;
 import lombok.*;
@@ -23,6 +24,7 @@ public class User extends BaseEntity {
     String id;
     String login;
     String name;
+    @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     Boolean active;
 
     public User(String id, String login, String name) {
