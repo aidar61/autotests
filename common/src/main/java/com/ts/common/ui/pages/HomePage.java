@@ -1,5 +1,6 @@
 package com.ts.common.ui.pages;
 
+import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
@@ -14,6 +15,7 @@ public class HomePage extends BasePage {
     ElementsCollection plusTreeElements = $$x("//ul[@class='a1 ng-scope']/li/i[1]");
     ElementsCollection treeElements = $$x("//ul[@class='a1 ng-scope']/li/div");
     SelenideElement selenideElement = $x("//span[text()='Загрузка...']");
+    SelenideElement filterSettingBtn = $x("//label[contains(@ng-click, \"currentFilter\")]");
 
     public HomePage openPlusAllElements() {
         for (SelenideElement element : plusTreeElements) {
@@ -32,6 +34,11 @@ public class HomePage extends BasePage {
 
     public HomePage openTreeBtn() {
         elActions.click(treeBtn);
+        return this;
+    }
+
+    public HomePage openFilterSetting() {
+        elActions.click(filterSettingBtn);
         return this;
     }
 

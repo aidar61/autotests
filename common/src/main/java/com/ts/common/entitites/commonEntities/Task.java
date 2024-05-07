@@ -93,6 +93,7 @@ public class Task extends BaseEntity {
         APP_SERVER("818181b03c88913a013c889ce00b0557", "187245"),
         MTBANK("818181df581d378801581f74aad8098a", "589152"),
         NOTIFICATION_SERVICE("818181df62efd8e80162f1d00d3b5c41", ""),
+        NOTIFICATION_SERVICE2("818181df62efd8e80162f1d00d3b5c41", "760987"),
         APNG("8a8181df717ac73501719cbc94596f2f", "1032095"),
         HEAD_BOOK("818181b03c7fc013013c7fca6d1803ea", "186609"),
         SERVICE_DESK("818181a822ee6d820122f4f8e43207ae", "8860"),
@@ -104,6 +105,8 @@ public class Task extends BaseEntity {
         WORKTASK_TESTTASK("818181df7ddf2212017de2ae35ec1c12", "1279796"),
         KZ_KZI("818181df64257a61016427680a2f5d1b", "788781"),
         MODERN_COLVIR_PRODUCT("818181df62d0f2270162d349b524569b", "757948"),
+        CURRENCY_MARKET("818181b03c7fc013013c7fca7f9104c2", "186640"),
+        SENAGAT_BANK("818180a050c582480150c9522c794871", "463883"),
         CUSTOMER_REQUEST("8a8181df879af7cb01879d663123091e", "1441326"), //Двойное начисление штрафа по гарантиям в первый день просрочки
         AKKREDITIVES("818181b03c7fc013013c7fca7130041d", "186616");
         public final String id;

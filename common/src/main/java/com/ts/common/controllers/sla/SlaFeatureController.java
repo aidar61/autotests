@@ -22,6 +22,7 @@ import static com.ts.common.controllers.TaskRequestBody.Fields.ID;
 import static com.ts.common.controllers.TaskRequestBody.Fields.OPERATION;
 import static com.ts.common.controllers.TaskRequestBody.Fields.*;
 import static com.ts.common.enums.Operations.*;
+import static com.ts.common.enums.TaskType.SD_FEATURE;
 import static com.ts.common.enums.TaskType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.generateOperationID;
 import static com.ts.common.utils.InitEntities.generateUser;

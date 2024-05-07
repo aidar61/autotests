@@ -9,8 +9,10 @@ import com.ts.common.enums.*;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.MSG;
+import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_LIST_AFFCTD_SYS;
 import static com.ts.common.enums.Parents.MTB;
 import static com.ts.common.enums.Parents.RYSGAL_BANK;
 import static com.ts.common.utils.RandomUtils.generateName;
@@ -160,6 +162,14 @@ public class InitEntities {
                 .build();
     }
 
+    public static UdfUser generateEmptyUdfUser(Udfs.UdfSd udfSdType) {
+        return UdfUser.builder()
+                .udfId(udfSdType.udfId)
+                .type(Type.USER.name())
+                .userValue(new User[]{})
+                .build();
+    }
+
 
     public static UdfList generateUdfList(Udfs.UdfSd udfSdType, List.Constants udfList) {
         return UdfList.builder()
@@ -198,6 +208,16 @@ public class InitEntities {
                 .udfId(udfSdType.udfId)
                 .type(udfSdType.type.name())
                 .listValue(new MultiList[]{new MultiList(multiList.getId())})
+                .build();
+    }
+
+    public static UdfMultiList generateUdfMultiList(Udfs.UdfSd udfSdType, List.Constants... multiList) {
+        return UdfMultiList.builder()
+                .udfId(udfSdType.udfId)
+                .type(udfSdType.type.name())
+                .listValue(Arrays.stream(multiList)
+                        .map(m -> new MultiList(m.getId()))
+                        .toArray(MultiList[]::new))
                 .build();
     }
 
@@ -255,6 +275,7 @@ public class InitEntities {
                 .build();
     }
 
+
     public static UdfList generateUdfList(Udfs.UdfSd udfSdType, List.Constants udfList, String value) {
         return UdfList.builder()
                 .udfId(udfSdType.udfId)
@@ -263,6 +284,7 @@ public class InitEntities {
                 .userData(value)
                 .build();
     }
+
 
     public static UdfList generateUdfList(Udfs.UdfSd udfSdType, String value) {
         return UdfList.builder()
@@ -293,9 +315,18 @@ public class InitEntities {
         return UdfDouble.builder()
                 .udfId(udfsdType.udfId)
                 .type(udfsdType.type.name())
+                .numberValue(Double.valueOf(doubleValue))
+                .build();
+    }
+
+    public static UdfDouble generateUdfDouble(Udfs.UdfSd udfsdType, Double doubleValue) {
+        return UdfDouble.builder()
+                .udfId(udfsdType.udfId)
+                .type(udfsdType.type.name())
                 .numberValue(doubleValue)
                 .build();
     }
+
     public static UdfInteger generateUdfInteger(Udfs.UdfSd udfsdType, Integer value) {
         return UdfInteger.builder()
                 .udfId(udfsdType.udfId)
@@ -340,6 +371,14 @@ public class InitEntities {
                 .id(user.getId())
                 .login(user.getLogin())
                 .name(user.getName())
+                .build();
+    }
+
+    public static User generateUser(String id, String login, String name) {
+        return User.builder()
+                .id(id)
+                .login(login)
+                .name(name)
                 .build();
     }
 
@@ -389,9 +428,20 @@ public class InitEntities {
                 .build();
     }
 
+    public static CostString generateCostString(Integer cost
+            , Integer budgetFirst
+            , Integer budgetSecond
+            , Integer budgetThird) {
+        return CostString.builder()
+                .cost(cost)
+                .budgetFirst(budgetFirst)
+                .budgetSecond(budgetSecond)
+                .budgetThird(budgetThird)
+                .build();
+    }
 
     public static void main(String[] args) {
-        System.out.println(generateStatus(TaskStatuses.STATUS_SLAHELP_CONSULTED));
+        System.out.println(generateUdfMultiList(UDF_LIST_AFFCTD_SYS, List.Constants.COLVIR_V4, List.Constants.AFS));
     }
 
 }

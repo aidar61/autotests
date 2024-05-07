@@ -10,9 +10,6 @@ import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import org.openqa.selenium.json.Json;
-
-import java.util.logging.StreamHandler;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.controllers.TaskRequestBody.Fields.PRIORITY;

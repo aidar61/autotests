@@ -22,4 +22,18 @@ import lombok.extern.slf4j.Slf4j;
 public class Role extends BaseEntity {
     String id;
     String name;
+
+    public enum Constants {
+        CLIENT("Клиент"),
+        EMPLOYEE("Сотрудник"),
+        ACCOUNT_MANAGER("Account-менеджер"),
+        CLIENT_MANAGER("Менеджер клиента"),
+        ROLE_SUPPORT_MEMBER("Участник проекта сопровождения");
+        @Getter
+        private final String role;
+
+        Constants(String role) {
+            this.role = role;
+        }
+    }
 }

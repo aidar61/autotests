@@ -395,7 +395,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}
             , description = "Принять в работу для всех созданных задач"
-            , dependsOnMethods = "changeService"
+            , dependsOnMethods = "acceptInWorkRetrySecondTime"
             , dataProvider = "workTaskCategories")
     public void toAcceptance(TaskType.WorkTask category) {
         apiController.updateToken(generateAuthToken(HANDLER_USER));

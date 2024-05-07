@@ -15,6 +15,7 @@ import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
+import com.ts.common.enums.Users;
 import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.ExtractResponseFieldUtils;
 import com.ts.common.utils.InitEntities;
@@ -174,6 +175,8 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "taskStart")
     public void taskAcceptance() {
+        apiController.updateToken(generateAuthToken(handlerUser));
+
         udf = refreshUdf();
         task.setHandlerUser(handlerUser);
 
@@ -190,6 +193,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         var childTasks = techTaskController.getBackLinks(task.getNumber());
         var workTaskWork = ExtractResponseFieldUtils.extractThat(childTasks).extractByPath("BACK_UDF_WORKTASK_WORK", UdfTask.class);
         var docTaskNumber = Objects.requireNonNull(Arrays.stream(workTaskWork.getTaskValue()).findFirst().orElse(null)).getNumber();
+        apiController.updateToken(generateAuthToken(Users.ROOT));
         var docTask = apiController.receiveTask(docTaskNumber);
 
         CommonAssert.assertThat(docTask).isCorrectTaskCategory("CAT_DOCTASK").isCorrectTaskStatus(STATUS_WORKTASK_ASSIGNED).isCorrectSubmitterUser("root").isCorrectHandlerUser("wc_gtd").isCorrectUdfList(UDF_CDP_ACCEPTANCE, "ff8081813fce5b48013fce5de6b40002")//Не требуется
@@ -201,7 +205,11 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         var acceptTaskNumber = Objects.requireNonNull(Arrays.stream(workTaskAccept.getTaskValue()).findFirst().orElse(null)).getNumber();
         var acceptTask = apiController.receiveTask(acceptTaskNumber);
 
-        CommonAssert.assertThat(acceptTask).isCorrectTaskCategory("CAT_ACCEPTTASK").isCorrectTaskStatus(STATUS_WORKTASK_ASSIGNED).isCorrectSubmitterUser(handlerUser.getLogin()).isCorrectHandlerUser(creator.getLogin()).isCorrectUdfList(UDF_WORKTASK_ANALYSIS, "ff8080812f8cd356012f908c2bd8005a")//Не требуется
+        CommonAssert.assertThat(acceptTask).isCorrectTaskCategory("CAT_ACCEPTTASK")
+                .isCorrectTaskStatus(STATUS_WORKTASK_ASSIGNED)
+                .isCorrectSubmitterUser(handlerUser.getLogin())
+                .isCorrectHandlerUser(creator.getLogin())
+                .isCorrectUdfList(UDF_WORKTASK_ANALYSIS, "ff8080812f8cd356012f908c2bd8005a")//Не требуется
                 .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, 8);
     }
 
@@ -218,6 +226,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Отклонить", dependsOnMethods = "taskReturn")
     public void taskDecline() {
+        apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
         task.setHandlerUser(handlerUser);
         task.setResolution(generateResolution(CANNOT_BE_COMPLETED_WITHIN_THE_SPECIFIED_TIME_FRAME));
@@ -264,6 +273,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"WorkTask", "Regression"}, description = "Отложить", dependsOnMethods = "taskStart2")
     public void taskPostpone() {
+        apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
         task.refreshTask();
         task.setResolution(generateResolution(RESOLUTION_DEPENDS_ON_ANOTHER_TASK));

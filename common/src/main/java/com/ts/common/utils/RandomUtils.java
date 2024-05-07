@@ -16,6 +16,10 @@ public class RandomUtils {
         return faker.commerce().productName();
     }
 
+    public static String generateStringWithLength(int length) {
+        return "AUTOTEST " + faker.random().hex(length);
+    }
+
     public static String generateDescriptionForOperation(Operations operations) {
         return String.format(operations.id, TEST);
     }
@@ -49,6 +53,6 @@ public class RandomUtils {
     }
 
     public static void main(String[] args) {
-        System.out.println(generateUrl());
+        System.out.println(generateStringWithLength(30));
     }
 }

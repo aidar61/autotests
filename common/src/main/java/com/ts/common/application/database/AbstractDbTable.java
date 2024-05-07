@@ -49,6 +49,7 @@ public abstract class AbstractDbTable {
             this.template.query(sql, rs -> this);
         } catch (DataAccessException e) {
             log.error("Can not find an object in DB");
+            throw new NullPointerException(e.getMessage());
         }
         return this;
     }
@@ -58,9 +59,10 @@ public abstract class AbstractDbTable {
             log.info("SQL query: " + sql);
             return this.template.query(sql, mapper);
         } catch (DataAccessException e) {
-            log.error("Can not find an object in DB, {}", e.toString());
+            e.printStackTrace();
+            log.error("Can not find an object in DB, {}", e.getMessage());
+            throw new NullPointerException(e.getMessage());
         }
-        return null;
     }
 
     protected <T> T queryForObject(String sql, BeanPropertyRowMapper<T> mapper) {
@@ -68,9 +70,10 @@ public abstract class AbstractDbTable {
             log.info("SQL query: " + sql);
             return this.template.queryForObject(sql, mapper);
         } catch (DataAccessException e) {
-            log.error("Can not find an object in DB");
+            e.printStackTrace();
+            log.error("Can not find an object in DB {}", e.getMessage());
+            throw new NullPointerException(e.getMessage());
         }
-        return null;
     }
 
     public <T extends BaseEntity> T getRandomEntity(Class type, String... parameters) {

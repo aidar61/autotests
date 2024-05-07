@@ -9,7 +9,6 @@ import com.ts.common.enums.TaskType;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
-import jdk.jfr.Registered;
 
 public class SdHelpController extends BaseController {
     private static final TaskType TASK_TYPE = TaskType.SD_HELP;

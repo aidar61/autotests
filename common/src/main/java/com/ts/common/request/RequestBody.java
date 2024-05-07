@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public abstract class RequestBody {
+
     public String removeField(String field) {
         ObjectNode jsonNode = JsonUtils.convertToJson(JsonUtils.convertToString(this));
         jsonNode.remove(field);

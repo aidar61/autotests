@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 public abstract class BaseEntity implements Serializable {
-    private static String[] IGNORING_FIELDS = {"slaType, category, operation, parent, handlerUser, udfs, attachments, description , finishStatus", "submitterUser"};
+    private static String[] IGNORING_FIELDS = {"description, slaType, category, operation, parent, handlerUser, udfs, attachments, description, finishStatus", "submitterUser"};
 
     public boolean isEquals(Object obj) {
         try {
@@ -69,6 +69,10 @@ public abstract class BaseEntity implements Serializable {
         } catch (AssertionError e) {
             return false;
         }
+    }
+
+    public String toJson() {
+        return JsonUtils.convertToJson(JsonUtils.convertToString(this)).toString();
     }
 
 
@@ -137,6 +141,10 @@ public abstract class BaseEntity implements Serializable {
     }
 
     public Object receiveTaskStatus() {
+        return null;
+    }
+
+    public Object receiveMTaskStatusName() {
         return null;
     }
 

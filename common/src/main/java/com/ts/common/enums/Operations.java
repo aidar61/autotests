@@ -5,8 +5,21 @@ public enum Operations {
 
     CAT("CAT_%S"),
     CANCEL_BUG("%S_CANCELBUG"),
+    TO_IMPLMGRPRLMAPR("%S_TO_IMPLMGRPRLMAPR"),
+    FINISHPLANNING("%S_FINISHPLANNING"),
+    RETURNPLANNING("%S_RETURNPLANNING"),
+    STARTTESTING("%S_STARTTESTING"),
+    FINISHTESTING("%S_FINISHTESTING"),
+    STARTISSUE("%S_STARTISSUE"),
+    FINISHISSUE("%S_FINISHISSUE"),
+    TOARCHIVE("%S_TOARCHIVE"),
+    RETURNPREPARATION("%S_RETURNPREPARATION"),
+    RETURNTESTING("%S_RETURNTESTING"),
     CHANGE_AUTHOR("%S_CHANGEAUTHOR"),// изменить автора
     CHANGE("%S_CHANGE"), // изменить аттрибуты решения
+    CHANGE_TESTER("%S_CHANGETESTER"), // изменить тестировщика
+    CHANGE_DEVELOPER("%S_CHANGEDEVELOPER"), // изменить разработчика
+    CHANGE_FIRST_LINE("%S_CHANGEFIRSTLINE"), // изменить первую линию
     COMMENT("%S_COMMENT"), // коментарий
     BUGDECLINE("%S_BUGDECLINE"), // отклонить ошибку
     CHANGE_PLAN("%S_CHANGEPLAN"), // коррекция плана
@@ -14,6 +27,7 @@ public enum Operations {
     CHANGE_PRIORITY("%S_CHANGEPRIORITY"), // Изменить приоритет
     CHANGE_STATUS("%S_CHANGESTATUS"), // изменить состояние
     CHANGE_RES_PERSON("%S_REASSIGN"),//изменить ответственного
+    CHANGE_REMOTE_ACCESS("%S_CHANGEREMOTEACCESS"), // изменить наличие удаленного доступа
     CHANGE_CURRENT_ROLE("%S_CHANGECURRENTROLE"),//изменить ответственную роль
     CHANGE_LINKED_TASKS("%S_CHANGELINKEDTASKS"),// изменить список связанных задач
     CHANGE_LINKED_TASK("%S_CHANGELINKEDTASK"), // изменить список связанных задач
@@ -21,6 +35,7 @@ public enum Operations {
     CORRECT_SLA_DATES("%S_CORRECTSLADATES"), // корректировка SLA дат
     CHANGE_ATTR("%S_CHANGEATTRS"), // изменить аттрибуты задачи
     CHANGE_ANALYST("%S_CHANGEANALYST"), // изменить аналитика
+    TECH_HELP("%S_TECH_HELP"), // оказать техническую помощь
     CONFIRM("%S_CONFIRM"), // подтвердить и опубликовать
     ADD_TRUST_WATCHER("%S_ADDTRUSTEDWATCHER"),// назначить доверенного наблюдателя
     ALLOW_KPO("%S_ALLOWKPO"), // санкцинировать привязку КПО
@@ -33,27 +48,40 @@ public enum Operations {
     LINK("%S_LINK"), // установить связь с GAP
     PRIVATE_COMMENT("%S_PRIVATECOMMENT"), // приватный комментарий
     PROVIDE_CONSULT("%S_PROVIDECONSULT"), // предоставить консультацию
+    CONSULT("%S_CONSULT"), // предоставить консультацию
+    SETCONSULTDATE("%S_SETCONSULTDATE"), // Установить дату оказания консультации
     ASK_FURTHER("%S_ASKFURTHER"), // задать дополнительный вопрос
     PASS_FOR_APPROVAL("%S_PASSFORAPPROVAL"), // передать на согласование
     CONFIRM_HIDDEN("%S_CONFIRMHIDDEN"), // подтвердить скрытый GAP
     CHANGE_MODULE("%S_CHANGE_SD_MODULE"), // изменить модуль системы
+    CHANGE_ONLY_SD_MODULE("%S_CHANGE_ONLY_SD_MODULE"), // изменить модуль системы
     ANALIZE("%S_ANALIZE"), // принять на анализ
     DECLINE("%S_DECLINE"), // отклонить
     INANALYSIS("%S_INANALYSIS"), // В АНАЛИЗЕ
     UNDODECLINE("%S_UNDODECLINE"), // отменить заказ
     INPATCH("%S_INPATCH"), // отменить заказ
     UNDOINPATCH("%S_UNDOINPATCH"), // отменить заказ
+    PROVIDE_FIX_DEADLINE("%S_PROVIDEFIXDEADLINE"), // Сообщить срок предоставления решения
+    PROVIDE_DEADLINE("%S_PROVIDEDEADLINE"), // Сообщить срок оказания консультации
+    UNDOSEND("%S_UNDOSEND"), // отменить заказ
     SENDPATCH("%S_SENDPATCH"), // отменить заказ
     UNDOSENDPATCH("%S_UNDOSEND"), // отменить заказ
+    SETCOMPAT("%S_SETCOMPAT"), // задать совместимость
+    EVALUATE_REQUEST_EXE("%S_EVALUATE_REQUEST_EXE"), // Оценить выполнение запроса
     TOPRECOST("%S_TOPRECOST"),//начать предварительный анализ
+    TO_ANLSMGRPRLMAPR("%S_TO_ANLSMGRPRLMAPR"),//передать на предварительное согласование менеджеру по анализу доработок
     REQUESTREQINFO("%S_REQUESTREQINFO"), // запросить уточнение требований
     PROVIDEREQINFO("%S_PROVIDEREQINFO"), // сообщить уточнение требований
     PROVIDETEMPORARYFIXED("%S_PROVIDETEMPORARYFIXED"), // предоставить временное решение
     SD_QUESTION_LINK("SDQUESTION_LINK"), // привязать вопрос клиенту
     ACCEPTHOTFIX("%S_ACCEPTHOTFIX"), // подтвердить исправление
     BEGINCOST_PRE("%S_BEGINCOST_PRE"), // передать на предварительную оценку аккаунт-менеджеру
+    BEGINCOST("%S_BEGINCOST"),
     BEGINCOST_FINAL("%S_BEGINCOST_FINAL"), // передать на окончательную оценку аккаунт-менеджеру
+    SENDCOST("%S_SENDCOST"), // Сообщить условия реализации
+    UNDOSENDCOST("%S_UNDOSENDCOST"), // Отменить сообщение условий
     SENDCOST_PRE("%S_SENDCOST_PRE"), // Сообщить предварительные условия реализации
+    SUBMIT_TO_AGR_ANLS("%S_SUBMIT_TOAGR_ANLS"), //Передать на окончательное согласование
     ALTERNATECOST("%S_ALTERNATECOST"), // Задать вопрос или предложить альтернативные вопросы реализации
     ACCEPTPRECOST("%S_ACCEPTPRECOST"), // Принять предварительные условия реализации
     SENDCOST_FINAL("%S_SENDCOST_FINAL"), // Сообщить окончательные условия реализации
@@ -111,6 +139,7 @@ public enum Operations {
     ANSWER("%S_ANSWER"), //
     ASKMORE("%S_ASKMORE"), //
     PRIVATECOMMENT("%S_PRIVATECOMMENT"), //
+    ASSIGN_FIN_PLNIMP("%S_ASSIGN_FIN_PLNIMP"), // Передать на окончательное планирование
     SDQUESTION_ASSIGN("%S_ASSIGN"), //MSG_SDQUESTION_ASSIGN
     CHANGE_MEMBERS("%S_CHANGEMEMBERS"), //
     CHNGTASKAL_LOCATION("%S_CHNGTASKALLOCATION"), //
@@ -138,6 +167,8 @@ public enum Operations {
     CHANGE_CAT("%S_CHANGECAT"), //Изменить планируемую дату завершения
     CLOSE_WO_PATCH("%S_CLOSEWOPATCH"), //Изменить планируемую дату завершения
     UNDO_CLOSE("%S_UNDOCLOSE"), //Изменить планируемую дату завершения
+    ACCOUNT_IN_LICENSE("%S_ACCOUNTINLICENSE"), //Учесть в лицензионной стоимости
+    CORRECT_BUDGET("%S_CORRECT_BUDGET"), //Учесть в лицензионной стоимости
 
     CHANGE_SERVICE("%S_CHANGESERVICE");
 

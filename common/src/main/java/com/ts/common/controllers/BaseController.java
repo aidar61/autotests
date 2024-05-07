@@ -12,7 +12,6 @@ import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
 import com.ts.common.request.ApiRequest;
-import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import com.ts.common.utils.RandomUtils;
 import io.qameta.allure.Step;
@@ -31,6 +30,7 @@ import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.controllers.TaskRequestBody.Fields.ID;
 import static com.ts.common.controllers.TaskRequestBody.Fields.OPERATION;
 import static com.ts.common.controllers.TaskRequestBody.Fields.*;
+import static com.ts.common.utils.InitEntities.generateOperationID;
 
 @Slf4j
 public class BaseController extends ApiRequest {
@@ -130,7 +130,11 @@ public class BaseController extends ApiRequest {
 
     @Step("Выполнение общей операции: {1}")
     public Response performCommonOperation(@NotNull GeneralTask task, Operations operation) {
-        task.setOperation(InitEntities.generateOperationID(this.taskType, operation));
+        task.setOperation(
+                this.taskType != null ?
+                        generateOperationID(this.taskType, operation) :
+                        generateOperationID(task.getTaskType(), operation)
+        );
         if (task.getDescription() == null) task.setDescription(RandomUtils.generateDescriptionForOperation(operation));
         TaskRequestBody taskRequestBody = new TaskRequestBody(task);
         if (task.getResolution() != null) {
@@ -241,6 +245,34 @@ public class BaseController extends ApiRequest {
         return null;
     }
 
+    public Response getTaskMessages(String taskNumber) {
+
+        try {
+            return
+                    super.get(getEndpoint(REST, TASK, INFO, taskNumber, "messages?order=desc"));
+        } catch (Exception e) {
+            log.error("Не удалось получить операции для задачи: {}", e.getMessage());
+        }
+        return null;
+    }
+
+    public User[] getAuthors(TaskType taskType, Operations operations, String taskNumber) {
+
+        try {
+            super.setAuthToken(new AuthToken("root", "password"));
+            var operationId = generateOperationID(taskType, operations);
+            var response =
+                    super.get(getEndpoint(REST, TrackStudioEndPoints.OPERATION, operationId.getId(), taskNumber, "context"));
+            var authors = new JsonPath(response.asString()).getObject("udfs.UDF_SD_AUTHORCLIENT_MSG.userValueSelector", User[].class);
+            if (authors != null && authors.length > 0) {
+                return authors;
+            }
+        } catch (Exception e) {
+            log.error("Не удалось получить авторов для задачи: {}", e.getMessage());
+        }
+        return null;
+    }
+
     public Task[] getParent_UDF_BDKU_CONFIGURATION(String parentDetailInString) {
         try {
             var configuration = new JsonPath(parentDetailInString).getObject("udfs.UDF_BDKU_CONFIGURATION", UdfTask.class);
@@ -256,9 +288,36 @@ public class BaseController extends ApiRequest {
         return null;
     }
 
+    public List<String> getUDF_SLA_CONSULTPROVIDEDATE(TaskType taskType, Operations operations, String taskNumber) {
+        try {
+            super.setAuthToken(new AuthToken("root", "password"));
+            var operationId = generateOperationID(taskType, operations);
+            var response =
+                    super.get(getEndpoint(REST, TrackStudioEndPoints.OPERATION, operationId.getId(), taskNumber, "context"));
+            return new JsonPath(response.asString()).getList("udfs.UDF_SLA_CONSULTPROVIDEDATE.stringValueSelector", String.class);
+
+        } catch (Exception e) {
+            log.error("Не удалось получить Дата предоставления консультации: {}", e.getMessage());
+        }
+        return null;
+    }
+
     public List<String> getBranches(String parentDetailString) {
         return new JsonPath(parentDetailString).getList("udfs.UDF_WORKTASK_BRANCH.stringValueSelector", String.class);
     }
 
-
+    public com.ts.common.entitites.commonEntities.List[] getParent_UDF_SD_RELATED_TASK_CODES(String parentDetailInString) {
+        try {
+            var product = new JsonPath(parentDetailInString).getObject("udfs.UDF_SD_RELATED_TASK_CODES", UdfList.class);
+            if (product.getListValue() != null && product.getListValue().length > 1) {
+                return product.getListValue();
+            }
+            if (product.getListValueSelector() != null) {
+                return product.getListValueSelector();
+            }
+        } catch (Exception e) {
+            log.error("Не удалось получить Проект БДКУ для задачи: {}", e.getMessage());
+        }
+        return null;
+    }
 }

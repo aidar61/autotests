@@ -11,8 +11,11 @@ import com.ts.common.controllers.advice.SanctionController;
 import com.ts.common.controllers.bug.BugTaskController;
 import com.ts.common.controllers.gap.GapSolutionController;
 import com.ts.common.controllers.gap.PotentialGapController;
+import com.ts.common.controllers.release.ReleaseController;
 import com.ts.common.controllers.release.ReleaseModuleController;
 import com.ts.common.controllers.sdbug.*;
+import com.ts.common.controllers.sddev.SdDevController;
+import com.ts.common.controllers.sdhelp.SdHelpController;
 import com.ts.common.controllers.sdquestion.SdQuestionController;
 import com.ts.common.controllers.sla.SlaBugController;
 import com.ts.common.controllers.sla.SlaFeatureController;
@@ -21,14 +24,19 @@ import com.ts.common.controllers.workTask.ContingentTaskController;
 import com.ts.common.controllers.workTask.DevTaskController;
 import com.ts.common.controllers.workTask.TechTaskController;
 import com.ts.common.controllers.workTask.WorkTaskController;
+import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.entitites.tasks.Task;
+import com.ts.common.request.ApiRequest;
+import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+
+import java.lang.reflect.InvocationTargetException;
 
 import static com.ts.common.config.AppConfigProvider.STAND_URL;
 
@@ -62,6 +70,9 @@ public class TrackStudioApiControllers {
     private SdDocImproveController sdDocImproveController;
     private SdDocBugController sdDocBugController;
     private SdOptimizationController sdOptimizationController;
+    private ReleaseController releaseController;
+    private SdDevController sdDevController;
+    private SdHelpController sdHelpController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {
@@ -89,8 +100,10 @@ public class TrackStudioApiControllers {
         this.sdDocImproveController = new SdDocImproveController(STAND_URL, authToken);
         this.sdDocBugController = new SdDocBugController(STAND_URL, authToken);
         this.sdOptimizationController = new SdOptimizationController(STAND_URL, authToken);
+        this.releaseController = new ReleaseController(STAND_URL, authToken);
+        this.sdDevController = new SdDevController(STAND_URL, authToken);
+        this.sdHelpController = new SdHelpController(STAND_URL, authToken);
     }
-
 
     public GeneralTask receiveGeneralTask(String slaTaskNumber) {
         this.response = this.baseController.receiveActualTask(slaTaskNumber);
@@ -102,6 +115,7 @@ public class TrackStudioApiControllers {
     }
 
     public Response receiveTask(String slaTaskNumber) {
+//        updateToken(InitEntities.generateAuthToken(Users.ROOT));
         return this.response = this.baseController.receiveActualTask(slaTaskNumber);
     }
 
@@ -135,31 +149,39 @@ public class TrackStudioApiControllers {
         return baseController.receiveAllSubTask(taskNumber);
     }
 
-
     @Step("Пользователь: {0}")
     public void updateToken(AuthToken authToken) {
-        this.baseController.setAuthToken(authToken);
-        this.slaFeatureController.setAuthToken(authToken);
-        this.slaBugController.setAuthToken(authToken);
-        this.slaHelpController.setAuthToken(authToken);
-        this.potentialGapController.setAuthToken(authToken);
-        this.gapSolutionController.setAuthToken(authToken);
-        this.releaseModuleController.setAuthToken(authToken);
-        this.adviceController.setAuthToken(authToken);
-        this.confirmationController.setAuthToken(authToken);
-        this.sanctionController.setAuthToken(authToken);
-        this.devTaskController.setAuthToken(authToken);
-        this.userController.setAuthToken(authToken);
-        this.workTaskController.setAuthToken(authToken);
-        this.bugTaskController.setAuthToken(authToken);
-        this.createFromExcelTaskController.setAuthToken(authToken);
-        this.sdQuestionController.setAuthToken(authToken);
-        this.techTaskController.setAuthToken(authToken);
-        this.contingentTaskController.setAuthToken(authToken);
-        this.sdBugController.setAuthToken(authToken);
-        this.sdImproveController.setAuthToken(authToken);
-        this.sdDocImproveController.setAuthToken(authToken);
-        this.sdDocBugController.setAuthToken(authToken);
-        this.sdOptimizationController.setAuthToken(authToken);
+        var fields = this.getClass().getDeclaredFields();
+        for (var field : fields) {
+            if (ApiRequest.class.isAssignableFrom(field.getType())) {
+                try {
+                    var method = field.getType().getMethod("setAuthToken", AuthToken.class);
+                    var fieldValue = field.get(this);
+                    method.setAccessible(true);
+                    method.invoke(fieldValue, authToken);
+                } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
+
+    @Step("Пользователь: {0}")
+    public void updateToken(User user) {
+        AuthToken authToken = InitEntities.generateAuthToken(user);
+        var fields = this.getClass().getDeclaredFields();
+        for (var field : fields) {
+            if (ApiRequest.class.isAssignableFrom(field.getType())) {
+                try {
+                    var method = field.getType().getMethod("setAuthToken", AuthToken.class);
+                    var fieldValue = field.get(this);
+                    method.setAccessible(true);
+                    method.invoke(fieldValue, authToken);
+                } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
 }
+
