@@ -31,6 +31,9 @@
             <!--            <class name="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative2Test"/>-->
             <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureBaseTest"/>-->
             <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureBase2Test"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureByAccountTest"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureNoPrecostTest"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureToFinalAccountTest"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelp1Test"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelp2Test"/>
             <class name="com.ts.integration.tests.proc_potential_gap.PotentialGap1Test"/>
