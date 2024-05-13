@@ -4,18 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/sla feature">
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_potential_gap/sd_question/analytic/GapPotentialQuestion1Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_potential_gap/sd_question/analytic/GapPrivateQuestion1Test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_potential_gap/sd_question/analytic/GapQuestion1Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskStatuses.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskStatuses.java" afterDir="false" />
-    </list>
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/gap_question" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,6 +83,7 @@
     "TestNG.SlaFeatureByAccountTest.executor": "Run",
     "TestNG.SlaFeatureNoPrecostTest.executor": "Run",
     "TestNG.SlaFeatureToFinalAccountTest.executor": "Run",
+    "TestNG.com.ts.integration.tests.proc_potential_gap.sdQuestion.executor": "Run",
     "ToolWindowRun.ShowToolbar": "false",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
@@ -393,7 +383,7 @@
       <workItem from="1714463758234" duration="4374000" />
       <workItem from="1714565653048" duration="18451000" />
       <workItem from="1714998680658" duration="12531000" />
-      <workItem from="1715427516983" duration="14839000" />
+      <workItem from="1715427516983" duration="15506000" />
     </task>
     <task id="LOCAL-00038" summary="feature/Sla negative scenarios, Errors">
       <created>1701675904063</created>
@@ -499,14 +489,6 @@
       <option name="presentableId" value="LOCAL-00054" />
       <option name="project" value="LOCAL" />
       <updated>1707828877326</updated>
-    </task>
-    <task id="LOCAL-00055" summary="feature/sddev">
-      <option name="closed" value="true" />
-      <created>1707889370525</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1707889370525</updated>
     </task>
     <task id="LOCAL-00056" summary="feature/sddev">
       <option name="closed" value="true" />
@@ -742,7 +724,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715060629216</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="feature/gap_question">
+      <option name="closed" value="true" />
+      <created>1715594527942</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1715594527942</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -801,7 +791,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix/test" />
     <MESSAGE value="feature/ts-int Jenkinsfile" />
     <MESSAGE value="fix/DevTaskAcceptance" />
     <MESSAGE value="feature/Sla negative scenarios, Errors" />
@@ -826,7 +815,8 @@
     <MESSAGE value="fix/ui-clear" />
     <MESSAGE value="feature/slaFeatureTest" />
     <MESSAGE value="feature/sla feature" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/sla feature" />
+    <MESSAGE value="feature/gap_question" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/gap_question" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
