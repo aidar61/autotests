@@ -62,7 +62,7 @@ public class GapQuestion1Test extends BaseIntegrationTest {
         return users;
     }
 
-    @BeforeClass
+    @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         tasks = new HashMap<>();
         gapSolutionController = apiController.getGapSolutionController();
