@@ -46,7 +46,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
     private User MANAGER_REQUEST;
     private User MANAGER_CLIENT;
     private List<UserRole> USER_ROLES;
-    private final String parentTaskNumber = "928666";
+    private final String parentTaskNumber = "1537204";
 
     @BeforeClass(alwaysRun = true)
     public void beforeCLass() {
@@ -61,11 +61,17 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         USER_ROLES = userController.receiveUserByTask(parentTaskNumber);
 
         CLIENT = userController.receiveUserByLogin(USER_ROLES, "vvoskobovich@mtb.minsk.by");
+//        CLIENT = userController.receiveUserByLogin(USER_ROLES, "AT_CLIENT@test.ru");
         ANALYTIC = userController.receiveUserByLogin(USER_ROLES, "azubov");
+//        ANALYTIC = userController.receiveUserByLogin(USER_ROLES, "AT_TASK_ANALITIC");
         ACCOUNT_MANAGER = userController.receiveUserByLogin(USER_ROLES, "vvolskiy");
+//        ACCOUNT_MANAGER = userController.receiveUserByLogin(USER_ROLES, "AT_SUPPORT_COSTMANAGER");
         MANAGER_ANALYZE_FEATURE = userController.receiveUserByLogin(USER_ROLES, "nsolovey");
+//        MANAGER_ANALYZE_FEATURE = userController.receiveUserByLogin(USER_ROLES, "AT_SDFEATURE_ANALYSIS_MANAGER");
         MANAGER_REQUEST = userController.receiveUserByLogin(USER_ROLES, "ibabushkin");
+//        MANAGER_REQUEST = userController.receiveUserByLogin(USER_ROLES, "AT_SDFEATURE_IMPL_MANAGER");
         MANAGER_CLIENT = userController.receiveUserByLogin(USER_ROLES, "lkorennaya");
+//        MANAGER_CLIENT = userController.receiveUserByLogin(USER_ROLES, "AT_SUPPORT_MANAGER");
 
         task = InitEntities.getGeneralTask(SLA_FEATURE, CAT);
     }
