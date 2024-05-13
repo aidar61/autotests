@@ -98,6 +98,9 @@
             <class name="com.ts.integration.tests.proc_sd_help.sdTechAssist.SdTechAssistBaseStaticTest"/>
             <class name="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseDynamicTest"/>
             <class name="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseStaticTest"/>
+            <class name="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapPotentialQuestion1Test"/>
+            <class name="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapPrivateQuestion1Test"/>
+            <class name="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapQuestion1Test"/>
         </classes>
     </test>
 </suite>

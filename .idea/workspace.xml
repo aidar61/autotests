@@ -5,11 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/sla feature">
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeatureByAccountTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeatureNoPrecostTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeatureToFinalAccountTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_potential_gap/sd_question/analytic/GapPotentialQuestion1Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_potential_gap/sd_question/analytic/GapPrivateQuestion1Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_potential_gap/sd_question/analytic/GapQuestion1Test.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/CommonAssert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskStatuses.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskStatuses.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,7 +33,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/master" />
+    <option name="BRANCH" value="origin/main" />
   </component>
   <component name="Git.Rebase.Settings">
     <option name="NEW_BASE" value="origin/master" />
@@ -76,9 +81,19 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "TestNG.BugTaskAcceptanceTest.executor": "Run",
+    "TestNG.GapPotentialQuestion1Test.executor": "Run",
+    "TestNG.GapPrivateQuestion1Test.executor": "Run",
+    "TestNG.GapPrivateQuestion1Test.passForApproval.executor": "Run",
+    "TestNG.GapQuestion1Test.catSdQuestion.executor": "Run",
+    "TestNG.GapQuestion1Test.executor": "Run",
+    "TestNG.GapQuestion1Test.passForApproval.executor": "Run",
+    "TestNG.GapSolutionQuestion1Test.executor": "Run",
+    "TestNG.GapSolutionQuestion1Test.passForApproval.executor": "Run",
+    "TestNG.SdQuestionBaseTest.createSdQuestion.executor": "Run",
     "TestNG.SlaFeatureBase2Test.executor": "Run",
     "TestNG.SlaFeatureByAccountTest.executor": "Run",
     "TestNG.SlaFeatureNoPrecostTest.executor": "Run",
+    "TestNG.SlaFeatureToFinalAccountTest.executor": "Run",
     "ToolWindowRun.ShowToolbar": "false",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
@@ -124,30 +139,17 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.SlaFeatureToFinalAccountTest">
-    <configuration name="CostString" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ts.common.entitites.commonEntities.CostString" />
-      <module name="common" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.common.entitites.commonEntities.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SlaFeatureBase2Test" type="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.com.ts.integration.tests.proc_potential_gap.sdQuestion">
+    <configuration name="GapPotentialQuestion1Test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_feature.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_feature" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_feature.SlaFeatureBase2Test" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_potential_gap.sd_question" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapPotentialQuestion1Test" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -155,16 +157,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SlaFeatureByAccountTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="GapPrivateQuestion1Test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_feature.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_feature" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_feature.SlaFeatureByAccountTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_potential_gap.sd_question" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapPrivateQuestion1Test" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -172,33 +174,34 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SlaFeatureNoPrecostTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="GapPrivateQuestion1Test.passForApproval" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_feature.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_feature" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_feature.SlaFeatureNoPrecostTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_potential_gap.sd_question.analytic" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapPrivateQuestion1Test" />
+      <option name="METHOD_NAME" value="passForApproval" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SlaFeatureToFinalAccountTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="GapQuestion1Test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_feature.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_feature" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_feature.SlaFeatureToFinalAccountTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_potential_gap.sd_question" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapQuestion1Test" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -251,22 +254,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="com.ts.integration.tests.proc_potential_gap.sdQuestion" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_potential_gap.sdQuestion" />
+      <option name="TEST_OBJECT" value="PACKAGE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="Application.CostString" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.SlaFeatureByAccountTest" />
-      <item itemvalue="TestNG.SlaFeatureNoPrecostTest" />
-      <item itemvalue="TestNG.SlaFeatureToFinalAccountTest" />
-      <item itemvalue="TestNG.SlaFeatureBase2Test" />
+      <item itemvalue="TestNG.GapPotentialQuestion1Test" />
+      <item itemvalue="TestNG.GapPrivateQuestion1Test" />
+      <item itemvalue="TestNG.GapPrivateQuestion1Test.passForApproval" />
+      <item itemvalue="TestNG.GapQuestion1Test" />
+      <item itemvalue="TestNG.com.ts.integration.tests.proc_potential_gap.sdQuestion" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.SlaFeatureToFinalAccountTest" />
-        <item itemvalue="TestNG.SlaFeatureByAccountTest" />
-        <item itemvalue="TestNG.SlaFeatureNoPrecostTest" />
-        <item itemvalue="TestNG.SlaFeatureBase2Test" />
-        <item itemvalue="Application.CostString" />
+        <item itemvalue="TestNG.com.ts.integration.tests.proc_potential_gap.sdQuestion" />
+        <item itemvalue="TestNG.GapQuestion1Test" />
+        <item itemvalue="TestNG.GapPrivateQuestion1Test" />
+        <item itemvalue="TestNG.GapPotentialQuestion1Test" />
+        <item itemvalue="TestNG.GapPrivateQuestion1Test.passForApproval" />
       </list>
     </recent_temporary>
   </component>
@@ -373,7 +392,8 @@
       <workItem from="1714365372513" duration="4242000" />
       <workItem from="1714463758234" duration="4374000" />
       <workItem from="1714565653048" duration="18451000" />
-      <workItem from="1714998680658" duration="3158000" />
+      <workItem from="1714998680658" duration="12531000" />
+      <workItem from="1715427516983" duration="14839000" />
     </task>
     <task id="LOCAL-00038" summary="feature/Sla negative scenarios, Errors">
       <created>1701675904063</created>
@@ -458,14 +478,6 @@
       <option name="presentableId" value="LOCAL-00049" />
       <option name="project" value="LOCAL" />
       <updated>1706251344828</updated>
-    </task>
-    <task id="LOCAL-00051" summary="feature/release">
-      <option name="closed" value="true" />
-      <created>1707215560600</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1707215560600</updated>
     </task>
     <task id="LOCAL-00052" summary="feature/performance tests">
       <created>1707828704367</created>
@@ -722,11 +734,22 @@
       <option name="project" value="LOCAL" />
       <updated>1714996267577</updated>
     </task>
-    <option name="localTasksCounter" value="88" />
+    <task id="LOCAL-00088" summary="feature/sla feature">
+      <option name="closed" value="true" />
+      <created>1715060629216</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1715060629216</updated>
+    </task>
+    <option name="localTasksCounter" value="89" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="app.properties" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="OPEN_GENERIC_TABS">
@@ -842,11 +865,6 @@
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/CreateFromExcelTaskController.java</url>
           <line>48</line>
           <option name="timeStamp" value="129" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest2.java</url>
-          <line>78</line>
-          <option name="timeStamp" value="136" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -203,7 +203,8 @@ public class CommonAssert {
     @Step("[ASSERT] Checking task status, Expected: {0}")
     public CommonAssert isCorrectTaskStatus(TaskStatuses expectedStatus) {
         var actualStatus = new JsonPath(response.asString()).getObject("status", Status.class);
-        assertEquals(expectedStatus.toString(), actualStatus.getId(), expectedStatus + " parameters is match: ");
+        assertEquals(actualStatus.getId(), expectedStatus.toString(), expectedStatus + " parameters is match: ");
+        log.info("Status is correct Actual {}, Expected {}", actualStatus.getId(), expectedStatus);
         return this;
     }
 
