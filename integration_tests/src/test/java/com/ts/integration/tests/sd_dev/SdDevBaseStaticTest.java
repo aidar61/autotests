@@ -295,6 +295,7 @@ public class SdDevBaseStaticTest extends BaseIntegrationTest {
 
     @Test(groups = {"ProcSdDev", "Regression"}, description = "Назначить доверенного наблюдателя", dependsOnMethods = "taskChangeLinkedTask")
     public void taskAddTrustedWatcher() {
+        RANDOM_WATCHER = userController.receiveUserByRole(USER_ROLES, "Сотрудник", "@").getForUser();
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
         udf = refreshUdf();
