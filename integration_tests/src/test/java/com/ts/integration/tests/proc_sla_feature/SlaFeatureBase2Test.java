@@ -46,7 +46,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
     private User MANAGER_REQUEST;
     private User MANAGER_CLIENT;
     private List<UserRole> USER_ROLES;
-    private final String parentTaskNumber = "1537204";
+    private final String parentTaskNumber = "928666";
 
     @BeforeClass(alwaysRun = true)
     public void beforeCLass() {
