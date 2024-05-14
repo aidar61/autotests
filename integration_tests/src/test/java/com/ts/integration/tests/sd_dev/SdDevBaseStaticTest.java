@@ -72,7 +72,8 @@ public class SdDevBaseStaticTest extends BaseIntegrationTest {
         CLIENT = userController.receiveUserByRole(USER_ROLES, "Клиент", "root").getForUser();
         SUPPORT_MANAGER = userController.receiveUserByRole(USER_ROLES, "Менеджер клиента", "@").getForUser();
         SUPPORT_MEMBER = userController.receiveUserByRole(USER_ROLES, "Участник проекта сопровождения", "root").getForUser();
-        ROLE_CONTRACT_EMP = userController.receiveUserByRole(USER_ROLES, "Ведение контрактов", "root").getForUser();
+//        ROLE_CONTRACT_EMP = userController.receiveUserByRole(USER_ROLES, "Ведение контрактов", "root").getForUser();
+        ROLE_CONTRACT_EMP = userController.receiveUserByLogin(USER_ROLES, "eschepovsky");
         RANDOM_WATCHER = userController.receiveUserByRole(USER_ROLES, "Сотрудник", "@").getForUser();
         RANDOM_WATCHER2 = userController.receiveUserByRole(USER_ROLES, "Сотрудник", "@").getForUser();
     }
