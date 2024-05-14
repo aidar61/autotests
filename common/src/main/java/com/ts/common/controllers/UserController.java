@@ -81,12 +81,15 @@ public class UserController extends ApiRequest {
         return Arrays.asList(Objects.requireNonNull(JsonUtils.deserialize(this.response, User[].class)));
     }
 
-    public UserRole receiveUserByRole(List<UserRole> userRoles, String role, String login) {
+    public UserRole receiveUserByRole(List<UserRole> userRoles, String role, String exceptLogin) {
         Collections.shuffle(userRoles);
         if (role.equals("Клиент")) {
-            return userRoles.stream().filter(f -> f.getForUser().getLogin().contains("@") && f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(login) && f.getForUser().getActive()).findFirst().get();
+            return userRoles.stream().filter(f -> f.getForUser().getLogin().contains("@") && f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().equals(exceptLogin) && f.getForUser().getActive()).findFirst().get();
         }
-        return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role) && !f.getForUser().getLogin().contains(login) && f.getForUser().getActive()).findFirst().get();
+        return userRoles.stream().filter(f -> f.getAssignedRole().getName().equals(role)
+                && f.getForUser().getActive()
+                && !f.getForUser().getLogin().contains(exceptLogin)
+                && !f.getForUser().getLogin().equals("ovoronov")).findFirst().get();
     }
 
     public UserRole receiveUserByRole(List<UserRole> userRoles, Role.Constants role, String exceptLogin) {
