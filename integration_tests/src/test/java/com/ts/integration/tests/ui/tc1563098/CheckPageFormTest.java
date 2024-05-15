@@ -1,16 +1,13 @@
-package com.ts.integration.tests.ui.patches;
+package com.ts.integration.tests.ui.tc1563098;
 
 import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.SelenideElement;
 import com.ts.common.application.database.dbTables.GrTaskTable;
-import com.ts.common.asserts.UiAsserts;
 import com.ts.common.controllers.folder.SdPatchFolderController;
 import com.ts.common.controllers.installation.InstallationController;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
-import com.ts.common.ui.pages.FormPage;
 import com.ts.common.ui.pages.LoginPage;
 import com.ts.common.ui.pages.portlets.PatchPage;
 import com.ts.common.utils.DateUtils;
@@ -20,8 +17,6 @@ import com.ts.integration.tests.BaseUiTest;
 import org.testng.Assert;
 import org.testng.annotations.*;
 
-import java.util.concurrent.ForkJoinPool;
-
 import static com.codeborne.selenide.Selenide.open;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_BDKU_CSCCLIENT;
 import static com.ts.common.enums.TaskType.BDKU_INSTALLATION;
@@ -29,7 +24,7 @@ import static com.ts.common.enums.TaskType.SDPATCHFOLDER;
 import static com.ts.common.utils.InitEntities.generateUdfString;
 
 
-public class CreatePatchTestPage extends BaseUiTest {
+public class CheckPageFormTest extends BaseUiTest {
     LoginPage loginPage;
     PatchPage patchPage;
     InstallationController installationController;
@@ -77,7 +72,7 @@ public class CreatePatchTestPage extends BaseUiTest {
     }
 
     @Test(enabled = true)
-    public void createByAdmin() {
+    public void formByAdmin() {
         String user = "root";
 
         auth(url, user);
@@ -136,7 +131,7 @@ public class CreatePatchTestPage extends BaseUiTest {
     }
 
     @Test(enabled = false)
-    public void createBySupportManager() {
+    public void formBySupportManager() {
         String user = "ibabushkin";
 
         auth(url, user);
@@ -162,7 +157,7 @@ public class CreatePatchTestPage extends BaseUiTest {
     }
 
     @Test(enabled = false)
-    public void createByGroupTechnologyService() {
+    public void formByGroupTechnologyService() {
         String user = "vovsienko";
 
         auth(url, user);
@@ -189,7 +184,7 @@ public class CreatePatchTestPage extends BaseUiTest {
     }
 
     @Test(enabled = false)
-    public void createByWorker() {
+    public void formByWorker() {
         String user = "aaskeev";
 
         auth(url, user);
