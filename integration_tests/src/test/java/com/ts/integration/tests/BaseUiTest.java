@@ -10,15 +10,19 @@ import com.ts.common.enums.Users;
 import com.ts.common.tests.AbstractBaseTest;
 import com.ts.common.ui.driver.Driver;
 import com.ts.common.ui.pages.FormPage;
+import com.ts.common.ui.pages.LoginPage;
 import com.ts.common.utils.InitEntities;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 
+import static com.codeborne.selenide.Selenide.open;
+
 @Slf4j
 @Listeners({SoftAsserts.class, TextReport.class})
 public class BaseUiTest extends AbstractBaseTest {
     protected FormPage formPage;
+
     @BeforeTest(alwaysRun = true)
     public void setupUi() {
         Configuration.browserCapabilities = Driver.initBrowserCapabilities();
@@ -26,5 +30,12 @@ public class BaseUiTest extends AbstractBaseTest {
         trackStudioPages = new Pages();
         formPage = new FormPage();
         log.warn("=====================UI TESTS IS STARTED=====================");
+    }
+
+    public static void auth(String url, String userLogin) {
+        LoginPage loginPage = trackStudioPages.getLoginPage();
+
+        open(url);
+        loginPage.loginNoToken(userLogin);
     }
 }

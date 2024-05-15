@@ -15,6 +15,15 @@ public class DateUtils {
         }
     }
 
+    public static String getCurrentDate(int days, String format) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(format);
+        if (days > 0) {
+            return LocalDateTime.now().plusDays(days).format(dateTimeFormatter);
+        } else {
+            return LocalDate.now().format(dateTimeFormatter);
+        }
+    }
+
     public static String getCurrentDateTimeStamp() {
         LocalDateTime localDateTime = LocalDateTime.now();
         long timestamp = localDateTime.toEpochSecond(ZoneOffset.UTC) * 1000;
