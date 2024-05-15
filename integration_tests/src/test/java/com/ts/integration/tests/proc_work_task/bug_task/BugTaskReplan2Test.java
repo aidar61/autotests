@@ -73,7 +73,7 @@ public class BugTaskReplan2Test extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"BugTask", "Regression"}, description = "создание CAT_BUGTASK")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "создание CAT_BUGTASK")
     public void bugTask() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         task.setParent(parent);
@@ -101,7 +101,7 @@ public class BugTaskReplan2Test extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Продлить предварительный анализ", dependsOnMethods = "bugTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Продлить предварительный анализ", dependsOnMethods = "bugTask")
     public void extendAnalysis() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();
@@ -118,7 +118,7 @@ public class BugTaskReplan2Test extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfDate(UDF_WORKTASK_ANALYSISFD, analysisDate);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "extendAnalysis")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Коррекция плана", dependsOnMethods = "extendAnalysis")
     public void changePlan() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();
@@ -140,7 +140,7 @@ public class BugTaskReplan2Test extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfDate(UDF_WORKTASK_AWAITTD, awaitDate).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_AWAITBUDGET, planBudget + 2).isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, normBudget);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Проверить форму операции Передать в работу", dependsOnMethods = "changePlan")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Проверить форму операции Передать в работу", dependsOnMethods = "changePlan")
     public void taskAssignForm() {
         apiController.updateToken(generateAuthToken(creator));
         var response = bugTaskController.receiveContextByOperation(InitEntities.generateOperationID(WORK_TASK, WORKTASK_ASSIGN).getId(), task.getNumber());
@@ -148,7 +148,7 @@ public class BugTaskReplan2Test extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDate(UDF_WORKTASK_PLANTD, awaitDate).isCorrectTaskField("Ответственный", handlerUser.getLogin(), "currentHandler.login");
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Передать в работу", dependsOnMethods = "taskAssignForm")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Передать в работу", dependsOnMethods = "taskAssignForm")
     public void taskAssign() {
         apiController.updateToken(generateAuthToken(creator));
         task.refreshTask();
@@ -167,7 +167,7 @@ public class BugTaskReplan2Test extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfDate(UDF_WORKTASK_PLANTD, awaitDate).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, planBudget).isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, normBudget).isCorrectUdfDate(UDF_WORKTASK_AWAITTD, awaitDate);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Проверить форму Принять в работу", dependsOnMethods = "taskAssign")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Проверить форму Принять в работу", dependsOnMethods = "taskAssign")
     public void taskAcceptForm() {
         apiController.updateToken(generateAuthToken(handlerUser));
         var response = bugTaskController.receiveContextByOperation(InitEntities.generateOperationID(WORK_TASK, ACCEPT_IN_WORK).getId(), task.getNumber());
@@ -175,7 +175,7 @@ public class BugTaskReplan2Test extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDate(UDF_WORKTASK_PLANTD, awaitDate).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, planBudget).isCorrectTaskField("Ответственный", handlerUser.getLogin(), "currentHandler.login");
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskAcceptForm")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskAcceptForm")
     public void taskStart() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setDescription(generateString());
@@ -195,7 +195,7 @@ public class BugTaskReplan2Test extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDate(UDF_WORKTASK_PLANTD, firstPlanTdDate).isCorrectUdfDate(UDF_WORKTASK_AWAITTD, awaitDate).isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, normBudget).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, planBudget).isCorrectUdfDouble("Первоначальная оценка трудоёмкости", UDF_WORKTASK_FIRSTPLANBUDGET, planBudget);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Перепланировать", dependsOnMethods = "taskStart")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Перепланировать", dependsOnMethods = "taskStart")
     public void taskChangeTime() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setDescription(generateString());
@@ -221,7 +221,7 @@ public class BugTaskReplan2Test extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDate(UDF_WORKTASK_AWAITTD, step8PlanDate).isCorrectUdfDouble("Оценка трудоемкости исполнителем", UDF_WORKTASK_AWAITBUDGET, planBudget + 2).isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, normBudget).isCorrectUdfList(UDF_WORKTASK_INREPLAN, UDF_WORKTASK_INREPLAN_YES.id);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Перепланировать", dependsOnMethods = "taskChangeTime")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Перепланировать", dependsOnMethods = "taskChangeTime")
     public void taskRejectReplan() {
         apiController.updateToken(generateAuthToken(creator));
         task.setDescription(generateString());
@@ -235,7 +235,7 @@ public class BugTaskReplan2Test extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDate(UDF_WORKTASK_PLANTD, firstPlanTdDate).isCorrectUdfDate(UDF_WORKTASK_AWAITTD, step8PlanDate).isCorrectUdfDouble("Оценка трудоемкости исполнителем", UDF_WORKTASK_AWAITBUDGET, planBudget + 2).isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, normBudget).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, 30).isCorrectUdfDouble("Первоначальная оценка трудоёмкости", UDF_WORKTASK_FIRSTPLANBUDGET, 30);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Перепланировать", dependsOnMethods = "taskRejectReplan")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Перепланировать", dependsOnMethods = "taskRejectReplan")
     public void taskChangeTime2() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setDescription(generateString());
@@ -261,7 +261,7 @@ public class BugTaskReplan2Test extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDate(UDF_WORKTASK_AWAITTD, step8PlanDate).isCorrectUdfDouble("Оценка трудоемкости исполнителем", UDF_WORKTASK_AWAITBUDGET, planBudget + 2).isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, normBudget).isCorrectUdfList(UDF_WORKTASK_INREPLAN, UDF_WORKTASK_INREPLAN_YES.id);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Согласовать перепланирование", dependsOnMethods = "taskChangeTime2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Согласовать перепланирование", dependsOnMethods = "taskChangeTime2")
     public void taskConfirmReplan() {
         apiController.updateToken(generateAuthToken(creator));
         task.setDescription(generateString());

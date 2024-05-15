@@ -36,7 +36,7 @@ public class GapSolution1Test extends BaseIntegrationTest {
         gapSolutionController = apiController.getGapSolutionController();
     }
 
-    @Test(groups = {"GapSolution", "Regression"}, description = "Создание потенциального Gap")
+    @Test(groups = {"PROC_SOLUTION", "Regression"}, description = "Создание потенциального Gap")
     public void catPotentialGap() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
@@ -50,7 +50,7 @@ public class GapSolution1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"GapSolution", "Regression"}, description = "Передать на согласование", dependsOnMethods = "catPotentialGap")
+    @Test(groups = {"PROC_SOLUTION", "Regression"}, description = "Передать на согласование", dependsOnMethods = "catPotentialGap")
     public void msgGapPassForApproval() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
@@ -63,7 +63,7 @@ public class GapSolution1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"GapSolution", "Regression"}, description = "Подтвердить и опубликовать", dependsOnMethods = "msgGapPassForApproval")
+    @Test(groups = {"PROC_SOLUTION", "Regression"}, description = "Подтвердить и опубликовать", dependsOnMethods = "msgGapPassForApproval")
     public void msgGapConfirm() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
@@ -76,7 +76,7 @@ public class GapSolution1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"GapSolution", "Regression"}, description = "Создать решение GAP", dependsOnMethods = "msgGapConfirm")
+    @Test(groups = {"PROC_SOLUTION", "Regression"}, description = "Создать решение GAP", dependsOnMethods = "msgGapConfirm")
     public void catSolSelected() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         Parent parent = generateParent(task.getId(), task.getNumber());
@@ -97,7 +97,7 @@ public class GapSolution1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"GapSolution", "Regression"}, description = "Изменить аттрибуты решения", dependsOnMethods = "catSolSelected")
+    @Test(groups = {"PROC_SOLUTION", "Regression"}, description = "Изменить аттрибуты решения", dependsOnMethods = "catSolSelected")
     public void msgGapSolutionChange() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
@@ -115,7 +115,7 @@ public class GapSolution1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"GapSolution", "Regression"}, description = "Приватный комментариуй", dependsOnMethods = "msgGapSolutionChange")
+    @Test(groups = {"PROC_SOLUTION", "Regression"}, description = "Приватный комментариуй", dependsOnMethods = "msgGapSolutionChange")
     public void msgGapSolutionPrivateComment() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         task.refreshUdf();
@@ -125,7 +125,7 @@ public class GapSolution1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"GapSoltion", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "msgGapSolutionPrivateComment")
+    @Test(groups = {"PROC_SOLUTION", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "msgPROC_SOLUTIONPrivateComment")
     public void msgGapSolutionChangeLinkedTask() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
@@ -137,7 +137,7 @@ public class GapSolution1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"GapSolution", "Regression"}, description = "Снять решение", dependsOnMethods = "msgGapSolutionChangeLinkedTask")
+    @Test(groups = {"PROC_SOLUTION", "Regression"}, description = "Снять решение", dependsOnMethods = "msgGapSolutionChangeLinkedTask")
     public void msgGapSolutionCancel() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         task.refreshUdf();

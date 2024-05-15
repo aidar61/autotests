@@ -81,7 +81,7 @@ public class TechTaskStaticSubmitterTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Создание CAT_TECHTASK")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Создание CAT_TECHTASK")
     public void techTask() {
         udf = refreshUdf();
         task.refreshTask();
@@ -122,7 +122,7 @@ public class TechTaskStaticSubmitterTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Продлить предварительный анализ", dependsOnMethods = "techTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Продлить предварительный анализ", dependsOnMethods = "techTask")
     public void extendAnalysis() {
         apiController.updateToken(InitEntities.generateAuthToken(handlerUser));
         udf = refreshUdf();

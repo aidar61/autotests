@@ -73,7 +73,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
         WaitManager.pause(5);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Создание CAT_SLABUG")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Создание CAT_SLABUG")
     public void slaBugCat() {
         apiController.updateToken(InitEntities.generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -102,7 +102,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_NEW);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Принять на анализ", dependsOnMethods = "slaBugCat")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Принять на анализ", dependsOnMethods = "slaBugCat")
     public void msgAnalyze() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -130,7 +130,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_FIRST_LINE, CLIENT_MANAGER.getLogin());
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Запросить информацию", dependsOnMethods = "msgAnalyze")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Запросить информацию", dependsOnMethods = "msgAnalyze")
     public void requestInfo() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -149,7 +149,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Отменить запрос информации", dependsOnMethods = "requestInfo")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Отменить запрос информации", dependsOnMethods = "requestInfo")
     public void undoRequestInfo() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -169,7 +169,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
 
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Запросить информацию", dependsOnMethods = "undoRequestInfo")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Запросить информацию", dependsOnMethods = "undoRequestInfo")
     public void requestInfoReply() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -188,7 +188,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Предоставить информацию", dependsOnMethods = "requestInfoReply")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Предоставить информацию", dependsOnMethods = "requestInfoReply")
     public void provideInfo() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -209,7 +209,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Отклонить", dependsOnMethods = "provideInfo")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Отклонить", dependsOnMethods = "provideInfo")
     public void decline() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -228,7 +228,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Вернуть на анализ", dependsOnMethods = "decline")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Вернуть на анализ", dependsOnMethods = "decline")
     public void undoStart() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -252,7 +252,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Начать работу", dependsOnMethods = "undoStart")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Начать работу", dependsOnMethods = "undoStart")
     public void start() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -272,7 +272,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Вернуть на анализ", dependsOnMethods = "start")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Вернуть на анализ", dependsOnMethods = "start")
     public void undoStartReply() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -296,7 +296,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Отклонить", dependsOnMethods = "undoStartReply")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Отклонить", dependsOnMethods = "undoStartReply")
     public void declineReply() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -315,7 +315,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Отменить заказ", dependsOnMethods = "declineReply")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Отменить заказ", dependsOnMethods = "declineReply")
     public void undoDecline() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -335,7 +335,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Запросить информацию", dependsOnMethods = "undoDecline")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Запросить информацию", dependsOnMethods = "undoDecline")
     public void requestInfoReplySecond() {
 
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -355,7 +355,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Предоставить информацию", dependsOnMethods = "requestInfoReplySecond")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Предоставить информацию", dependsOnMethods = "requestInfoReplySecond")
     public void provideInfoReply() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -376,7 +376,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Начать работу", dependsOnMethods = "provideInfoReply")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Начать работу", dependsOnMethods = "provideInfoReply")
     public void startReply() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -396,7 +396,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Предоставить временное решение", dependsOnMethods = "startReply")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Предоставить временное решение", dependsOnMethods = "startReply")
     public void provideTemporaryFixed() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -421,7 +421,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfString(UDF_SLABUG_TEMPPROVIDEDATE, expectedTempProvideDate);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Подтвердить исправление", dependsOnMethods = "provideTemporaryFixed")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Подтвердить исправление", dependsOnMethods = "provideTemporaryFixed")
     public void acceptHotFix() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -442,7 +442,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Предоставить решение", dependsOnMethods = "acceptHotFix")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Предоставить решение", dependsOnMethods = "acceptHotFix")
     public void hotFix() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -467,7 +467,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfString(UDF_SLABUG_PERMPROVIDEDATE, expectedTempProvideDate);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "hotFix")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "hotFix")
     public void returnTask() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -486,7 +486,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, DEVELOPER_ROLE_CURRENT);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Предоставить решение", dependsOnMethods = "returnTask")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Предоставить решение", dependsOnMethods = "returnTask")
     public void hotFixReply() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -523,7 +523,7 @@ public class SlaBugBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, 8);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Ошибка устранена", dependsOnMethods = "hotFixReply")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Ошибка устранена", dependsOnMethods = "hotFixReply")
     public void acceptSolution() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();

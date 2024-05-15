@@ -51,7 +51,7 @@ public class CatCodeReviewTest extends BaseIntegrationTest {
         cdpBl = codeReviewController.getCdpBl();
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Создание запроса на подтверждение решения")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Создание запроса на подтверждение решения")
     public void catCodeReview() {
         apiController.updateToken(InitEntities.generateAuthToken(HANDLER_USER_FROM_PARENT));
         task.setParent(parent);
@@ -73,7 +73,7 @@ public class CatCodeReviewTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Комментарий", dependsOnMethods = "catCodeReview")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Комментарий", dependsOnMethods = "catCodeReview")
     public void comment() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -88,7 +88,7 @@ public class CatCodeReviewTest extends BaseIntegrationTest {
                 .isNotEmpty(generalTask.getDescription());
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "comment")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "comment")
     public void setWatcher() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -106,7 +106,7 @@ public class CatCodeReviewTest extends BaseIntegrationTest {
 
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Назначить контролера", dependsOnMethods = "setWatcher")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Назначить контролера", dependsOnMethods = "setWatcher")
     public void setSupervisor() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -124,7 +124,7 @@ public class CatCodeReviewTest extends BaseIntegrationTest {
 //                .isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, ALTUNIN_NIKOLAY.login);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Отклонить изменения", dependsOnMethods = "setSupervisor")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Отклонить изменения", dependsOnMethods = "setSupervisor")
     public void declineChanges() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -137,7 +137,7 @@ public class CatCodeReviewTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_CHANGEDECLINED);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Вернуть на обзор", dependsOnMethods = "declineChanges")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Вернуть на обзор", dependsOnMethods = "declineChanges")
     public void returnToReview() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -150,7 +150,7 @@ public class CatCodeReviewTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_AWAIT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Подтвердить изменения", dependsOnMethods = "returnToReview")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Подтвердить изменения", dependsOnMethods = "returnToReview")
     public void confirmChanges() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -163,7 +163,7 @@ public class CatCodeReviewTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_CLOSED);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Вернуть на обзор", dependsOnMethods = "confirmChanges")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Вернуть на обзор", dependsOnMethods = "confirmChanges")
     public void returnToReview2() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -176,7 +176,7 @@ public class CatCodeReviewTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_AWAIT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Снять задачу", dependsOnMethods = "returnToReview2")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Снять задачу", dependsOnMethods = "returnToReview2")
     public void cancel() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();

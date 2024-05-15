@@ -37,7 +37,7 @@ public class SlaBug6Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "создание задачи")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "создание задачи")
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -51,7 +51,7 @@ public class SlaBug6Test extends BaseIntegrationTest {
         slaBugController.createSlaBugTask(task);
     }
 
-//    @Test(groups = {"SlaBug", "Regression"},description = "закрыть задачу", dependsOnMethods = "slaBugCat")
+//    @Test(groups = {"PROC_SLABUG", "Regression"},description = "закрыть задачу", dependsOnMethods = "slaBugCat")
 //    public void slaBugMsgClose() {
 //        udf = refreshUdf();
 //        udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));

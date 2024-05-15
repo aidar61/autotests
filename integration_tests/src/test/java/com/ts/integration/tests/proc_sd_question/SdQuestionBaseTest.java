@@ -73,7 +73,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
         members.put("Клиент", handler);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "создание CAT_SDQUESTION")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "создание CAT_SDQUESTION")
     public void createSdQuestion() {
         apiController.updateToken(InitEntities.generateAuthToken(members.get("Менеджер клиента")));
         task.setParent(parent);
@@ -99,7 +99,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, "818182d33920daa3013920dde2800028");
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Комментарий", dependsOnMethods = "createSdQuestion")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Комментарий", dependsOnMethods = "createSdQuestion")
     public void taskComment() {
         apiController.updateToken(generateAuthToken(members.get("Клиент")));
         var comment = generateString();
@@ -114,7 +114,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Назначить наблюдателей клиента", dependsOnMethods = "taskComment")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Назначить наблюдателей клиента", dependsOnMethods = "taskComment")
     public void appointClientWatcher() {
         apiController.updateToken(generateAuthToken(members.get("Клиент")));
         var clientWatcher = "test@domain.com";
@@ -135,7 +135,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectStringField("Наблюдатели клиента", UDF_SD_CLIENTWATCHERS, clientWatcher);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Ответить", dependsOnMethods = "appointClientWatcher")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Ответить", dependsOnMethods = "appointClientWatcher")
     public void answer() {
         apiController.updateToken(generateAuthToken(members.get("Клиент")));
         var supplier = "818182d33920daa3013920dde2200027";
@@ -158,7 +158,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, supplier);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Задать уточняющий вопрос", dependsOnMethods = "answer")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Задать уточняющий вопрос", dependsOnMethods = "answer")
     public void askMore() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер клиента")));
         var client = "818182d33920daa3013920dde2800028";
@@ -180,7 +180,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, client);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Приватный комментарий", dependsOnMethods = "askMore")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Приватный комментарий", dependsOnMethods = "askMore")
     public void privateComment() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер клиента")));
         task.refreshTask();
@@ -193,7 +193,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Назначить ответственного", dependsOnMethods = "privateComment")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Назначить ответственного", dependsOnMethods = "privateComment")
     public void setHandler() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер клиента")));
         udf = refreshUdf();
@@ -213,7 +213,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectMessageField("handlerUser.login", members.get("Клиент2").getLogin());
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "setHandler")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "setHandler")
     public void setWatcher() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер клиента")));
         task.refreshTask();
@@ -231,7 +231,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_WATCHER, ABDULLAEV_BAHODIR.getLogin());
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Ответить", dependsOnMethods = "setWatcher")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Ответить", dependsOnMethods = "setWatcher")
     public void answer2() {
         apiController.updateToken(generateAuthToken(members.get("Клиент2")));
         var supplier = "818182d33920daa3013920dde2200027";
@@ -254,7 +254,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, supplier);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Закрыть вопрос", dependsOnMethods = "setWatcher")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Закрыть вопрос", dependsOnMethods = "setWatcher")
     public void close() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер клиента")));
         var nobody = "818182d33920daa3013920dde2b30029";
@@ -277,7 +277,7 @@ public class SdQuestionBaseTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, nobody);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Задать уточняющий вопрос", dependsOnMethods = "close")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Задать уточняющий вопрос", dependsOnMethods = "close")
     public void askMore2() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер клиента")));
         var client = "818182d33920daa3013920dde2800028";

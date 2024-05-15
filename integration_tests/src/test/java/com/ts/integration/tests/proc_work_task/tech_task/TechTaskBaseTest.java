@@ -88,7 +88,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Создание CAT_TECHTASK")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Создание CAT_TECHTASK")
     public void techTask() {
         udf = refreshUdf();
         task.refreshTask();
@@ -129,7 +129,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "techTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Коррекция плана", dependsOnMethods = "techTask")
     public void changePlan() {
         udf = refreshUdf();
         task.refreshTask();
@@ -152,7 +152,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, normBudgetValue).isCorrectUdfDate(UDF_WORKTASK_AWAITTD, awaitDate);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
     public void taskStart() {
         udf = refreshUdf();
         task.refreshTask();
@@ -173,7 +173,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, awaitBudgetValue).isCorrectUdfDouble("Первоначальная оценка трудоёмкости", UDF_WORKTASK_FIRSTPLANBUDGET, awaitBudgetValue);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "taskStart")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "taskStart")
     public void taskAcceptance() {
         apiController.updateToken(generateAuthToken(handlerUser));
 
@@ -213,7 +213,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
                 .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, 8);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskAcceptance")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskAcceptance")
     public void taskReturn() {
         apiController.updateToken(generateAuthToken(creator));
         udf = refreshUdf();
@@ -224,7 +224,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Отклонить", dependsOnMethods = "taskReturn")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Отклонить", dependsOnMethods = "taskReturn")
     public void taskDecline() {
         apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
@@ -238,7 +238,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_DECLINED).isCorrectResolution(CANNOT_BE_COMPLETED_WITHIN_THE_SPECIFIED_TIME_FRAME);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Вернуть в работу 2", dependsOnMethods = "taskDecline")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Вернуть в работу 2", dependsOnMethods = "taskDecline")
     public void taskReturn2() {
         apiController.updateToken(generateAuthToken(creator));
         udf = refreshUdf();
@@ -249,7 +249,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskReturn2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskReturn2")
     public void taskStart2() {
         apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
@@ -271,7 +271,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDate(UDF_WORKTASK_PLANTD, awaitDate).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, awaitBudgetValue).isCorrectUdfDouble("Первоначальная оценка трудоёмкости", UDF_WORKTASK_FIRSTPLANBUDGET, 5);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Отложить", dependsOnMethods = "taskStart2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Отложить", dependsOnMethods = "taskStart2")
     public void taskPostpone() {
         apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
@@ -286,13 +286,13 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_POSTPONED);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "В свзанной задаче проверить наличие свзи с типом \"Блокирует задачи\"", dependsOnMethods = "taskPostpone")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "В свзанной задаче проверить наличие свзи с типом \"Блокирует задачи\"", dependsOnMethods = "taskPostpone")
     public void checkDependTaskExistReference() {
         var response = techTaskController.getBackLinks(dependTask.getNumber());
         CommonAssert.assertThat(response).isDependTaskExistReference(task.getNumber());
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Снять задачу", dependsOnMethods = "checkDependTaskExistReference")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Снять задачу", dependsOnMethods = "checkDependTaskExistReference")
     public void taskCancel() {
         apiController.updateToken(generateAuthToken(creator));
         udf = refreshUdf();
@@ -305,7 +305,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_BAD_REQUEST).isCorrectErrorMessage("Задача не может быть закрыта пока не закрыты все подзадачи:");
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Снять задачу CAT_ACCEPTTASK", dependsOnMethods = "taskCancel")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Снять задачу CAT_ACCEPTTASK", dependsOnMethods = "taskCancel")
     public void cancelChildTechTask() {
         apiController.updateToken(generateAuthToken(handlerUser));
         var response = techTaskController.getBackLinks(task.getNumber());
@@ -321,7 +321,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_CLOSED);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Снять задачу CAT_TECHTASK", dependsOnMethods = "cancelChildTechTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Снять задачу CAT_TECHTASK", dependsOnMethods = "cancelChildTechTask")
     public void taskCancel2() {
         apiController.updateToken(generateAuthToken(creator));
         udf = refreshUdf();
@@ -334,7 +334,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_CLOSED).isCorrectResolution(WILL_NOT_BE_IMPLEMENTED_V2);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskCancel2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskCancel2")
     public void taskReturn3() {
         apiController.updateToken(generateAuthToken(creator));
         udf = refreshUdf();
@@ -345,7 +345,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Отменить назначение", dependsOnMethods = "taskReturn3")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Отменить назначение", dependsOnMethods = "taskReturn3")
     public void taskAssignCancel() {
         apiController.updateToken(generateAuthToken(creator));
         udf = refreshUdf();

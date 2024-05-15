@@ -79,7 +79,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
         members.put("Account-менеджер", accountManagers.stream().findAny().orElse(null).getForUser());
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "создание SLA_FEATURE")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "создание SLA_FEATURE")
     public void createSlaFeature() {
         var client = members.get("Менеджер по взаимодействию с поставщиком");
         apiController.updateToken(InitEntities.generateAuthToken(client));
@@ -153,7 +153,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Начать предварительную оценку", dependsOnMethods = "createSlaFeature")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Начать предварительную оценку", dependsOnMethods = "createSlaFeature")
     public void startPreCost() {
         apiController.updateToken(generateAuthToken(members.get("Account-менеджер")));
         var comment = generateString();
@@ -170,7 +170,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на предварительное согласование менеджеру по анализу доработок", dependsOnMethods = "startPreCost")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Передать на предварительное согласование менеджеру по анализу доработок", dependsOnMethods = "startPreCost")
     public void startPreCostToImprovementAnalysisManagers() {
         apiController.updateToken(generateAuthToken(members.get("Аналитик")));
         var comment = generateString();
@@ -185,7 +185,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на предварительное планирование менеджеру по реализации доработок", dependsOnMethods = "startPreCostToImprovementAnalysisManagers")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Передать на предварительное планирование менеджеру по реализации доработок", dependsOnMethods = "startPreCostToImprovementAnalysisManagers")
     public void startPreCostToImplementationManagers() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по анализу доработок")));
         var comment = generateString();
@@ -199,7 +199,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на предварительную оценку аккаунт-менеджеру", dependsOnMethods = "startPreCostToImplementationManagers")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Передать на предварительную оценку аккаунт-менеджеру", dependsOnMethods = "startPreCostToImplementationManagers")
     public void beginCostPreToAccountManager() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по реализации доработок")));
         var comment = generateString();
@@ -214,7 +214,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Сообщить предварительные условия реализации", dependsOnMethods = "beginCostPreToAccountManager")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Сообщить предварительные условия реализации", dependsOnMethods = "beginCostPreToAccountManager")
     public void reportPreCondition() {
         apiController.updateToken(generateAuthToken(members.get("Account-менеджер")));
         var comment = generateString();
@@ -229,7 +229,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать аналитику", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Передать аналитику", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost3() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();
@@ -244,7 +244,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на окончательное согласование менеджеру по анализу доработок", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Передать на окончательное согласование менеджеру по анализу доработок", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost4() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();
@@ -259,7 +259,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на окончательное планирование менеджеру по реализации доработок", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Передать на окончательное планирование менеджеру по реализации доработок", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost5() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();
@@ -274,7 +274,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на окончательную оценку аккаунт-менеджеру", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Передать на окончательную оценку аккаунт-менеджеру", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost6() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();
@@ -289,7 +289,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Сообщить окончательные условия реализации", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Сообщить окончательные условия реализации", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost7() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();
@@ -304,7 +304,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Принять окончательные условия реализации", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Принять окончательные условия реализации", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost8() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();
@@ -319,7 +319,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать в разработку", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Передать в разработку", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost9() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();
@@ -334,7 +334,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Принять предварительные условия реализации", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Принять предварительные условия реализации", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost10() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();
@@ -349,7 +349,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Завершить выполнение работы", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Завершить выполнение работы", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost11() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();
@@ -364,7 +364,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Передать на проверку клиенту", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Передать на проверку клиенту", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost12() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();
@@ -379,7 +379,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Утвердить доработку", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Утвердить доработку", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost13() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();
@@ -394,7 +394,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Отправить патч", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Отправить патч", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost14() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();
@@ -409,7 +409,7 @@ public class SlaFeatureBaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}, description = "Установить в производственную среду", dependsOnMethods = "reportPreCondition")
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}, description = "Установить в производственную среду", dependsOnMethods = "reportPreCondition")
     public void acceptPreCost15() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер по взаимодействию с поставщиком")));
         var comment = generateString();

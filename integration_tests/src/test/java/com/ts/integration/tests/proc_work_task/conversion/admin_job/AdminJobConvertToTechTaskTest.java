@@ -70,7 +70,7 @@ public class AdminJobConvertToTechTaskTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "создание Административная задача")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "создание Административная задача")
     public void createTask() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -100,7 +100,7 @@ public class AdminJobConvertToTechTaskTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить категорию на технологическую работу", dependsOnMethods = "createTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить категорию на технологическую работу", dependsOnMethods = "createTask")
     public void changeCategory() {
         udf = refreshUdf();
         task.refreshTask();

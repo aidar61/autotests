@@ -51,7 +51,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
         task = InitEntities.getGeneralTask(TaskType.CONFIRMATION, Operations.CAT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Создание запроса на подтверждение решения")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Создание запроса на подтверждение решения")
     public void catConfirmation() {
         apiController.updateToken(InitEntities.generateAuthToken(HANDLER_USER_FROM_PARENT));
         task.setParent(parent);
@@ -75,7 +75,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Комментарий", dependsOnMethods = "catConfirmation")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Комментарий", dependsOnMethods = "catConfirmation")
     public void comment() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -89,7 +89,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isNotEmpty(generalTask.getDescription());
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Изменить ответственного конструктора", dependsOnMethods = "comment")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Изменить ответственного конструктора", dependsOnMethods = "comment")
     public void assignConstructor() {
         User expectedUser = generateUser(QA);
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
@@ -107,7 +107,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_AWAIT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Изменить ответственного конструктора", dependsOnMethods = "assignConstructor")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Изменить ответственного конструктора", dependsOnMethods = "assignConstructor")
     public void assignConstructorRetry() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -124,7 +124,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_AWAIT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Изменить решение", dependsOnMethods = "assignConstructorRetry")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Изменить решение", dependsOnMethods = "assignConstructorRetry")
     public void changeDecision() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -139,7 +139,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_CHANGED);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Уточнить решение", dependsOnMethods = "changeDecision")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Уточнить решение", dependsOnMethods = "changeDecision")
     public void clearDecision() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -153,7 +153,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_AWAIT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Подтвердить", dependsOnMethods = "clearDecision")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Подтвердить", dependsOnMethods = "clearDecision")
     public void confirm() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -167,7 +167,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_CONFIRM);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Отклонить запрос", dependsOnMethods = "confirm")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Отклонить запрос", dependsOnMethods = "confirm")
     public void reject() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -181,7 +181,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_DECLINED);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Повторить запрос", dependsOnMethods = "reject")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Повторить запрос", dependsOnMethods = "reject")
     public void repeatRequest() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -197,7 +197,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_AWAIT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Подтвердить с оценкой запроса", dependsOnMethods = "repeatRequest")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Подтвердить с оценкой запроса", dependsOnMethods = "repeatRequest")
     public void scoreConfirm() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -211,7 +211,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_CONFIRM);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Закрыть продтверждения решения", dependsOnMethods = "scoreConfirm")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Закрыть продтверждения решения", dependsOnMethods = "scoreConfirm")
     public void closeConfirm() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -225,7 +225,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_CLOSED);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "closeConfirm")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "closeConfirm")
     public void returnToWork() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -241,7 +241,7 @@ public class CatConfirmation1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_AWAIT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Снять задачу", dependsOnMethods = "returnToWork")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Снять задачу", dependsOnMethods = "returnToWork")
     public void cancel() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();

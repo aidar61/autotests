@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_potential_gap.sdQuestion;
+package com.ts.integration.tests.proc_gap.TP_1541680.TM_01;
 
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
@@ -27,16 +27,15 @@ import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.H
 import static com.ts.common.entitites.commonEntities.Task.Constants.AKKREDITIVES;
 import static com.ts.common.entitites.commonEntities.Task.Constants.ALOQA_BANK;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_WORKTASK_SDREQUEST;
-import static com.ts.common.enums.Operations.*;
+import static com.ts.common.enums.Operations.CAT;
+import static com.ts.common.enums.Operations.PASS_FOR_APPROVAL;
 import static com.ts.common.enums.TaskStatuses.*;
-import static com.ts.common.enums.TaskType.POTENTIAL_GAP;
-import static com.ts.common.enums.TaskType.SD_QUESTION;
+import static com.ts.common.enums.TaskType.*;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.generateName;
 import static com.ts.common.utils.RandomUtils.generateString;
 
-public class GapQuestion1Test extends BaseIntegrationTest {
+public class GapPotentialQuestion1Test extends BaseIntegrationTest {
     GapSolutionController gapSolutionController;
     PotentialGapController potentialGapController;
     SdQuestionController sdQuestionController;
@@ -86,7 +85,7 @@ public class GapQuestion1Test extends BaseIntegrationTest {
         taskByHandlerUser = new HashMap<>();
     }
 
-    @Test(groups = {"Gap_Question", "Regression"}
+    @Test(groups = {"PROC_GAP", "Regression"}
             , description = "Создание потенциального GAP (СОТРУДНИК)"
             , dataProvider = "users")
     void cat(User handlerUser) {
@@ -113,7 +112,7 @@ public class GapQuestion1Test extends BaseIntegrationTest {
         taskByHandlerUser.put(handlerUser, task);
     }
 
-    @Test(groups = {"Gap_Question", "Regression"}, description = "Передать на согласование (СОТРУДНИК)", dependsOnMethods = "cat"
+    @Test(groups = {"PROC_GAP", "Regression"}, description = "Передать на согласование (СОТРУДНИК)", dependsOnMethods = "cat"
             , dataProvider = "users")
     void passForApproval(User handlerUser) {
         task = taskByHandlerUser.get(handlerUser);
@@ -135,30 +134,7 @@ public class GapQuestion1Test extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"Gap_Question", "Regression"}, description = "Подтвердить и опубликовать GAP (ОТВЕТСТВЕННЫЙ)", dependsOnMethods = "passForApproval"
-            , dataProvider = "users")
-    void confirm(User handlerUser) {
-        task = taskByHandlerUser.get(handlerUser);
-
-        apiController.updateToken(handlerUser);
-        udf = refreshUdf();
-        task.refreshTask();
-
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
-
-        task.refreshUdf(udf);
-        task.setHandlerUser(handlerUser);
-
-        potentialGapController.performCommonOperation(task, CONFIRM);
-        ApiAsserts.assertThat(potentialGapController.getResponse())
-                .isCorrectResponseCode(HTTP_OK)
-                .isParseableBody(TaskResponseBody.class)
-                .assertTask()
-                .isCorrectStatus(STATUS_GAP_CONFIRMED)
-                .isEquals(task);
-    }
-
-    @Test(groups = {"Gap_Question", "Regression"}, description = "Создание категории \"Вопрос Сотруднику\"(СОТРУДНИК)", dependsOnMethods = "confirm"
+    @Test(groups = {"PROC_GAP", "Regression"}, description = "Создание категории \"Вопрос Сотруднику\"(СОТРУДНИК)", dependsOnMethods = "passForApproval"
             , dataProvider = "users")
     void catSdQuestion(User handlerUser) {
         task = taskByHandlerUser.get(handlerUser);
@@ -166,7 +142,7 @@ public class GapQuestion1Test extends BaseIntegrationTest {
         tasks.put(task.getTaskType(), task);
         parent = InitEntities.generateParent(task.getId(), task.getNumber());
 
-        apiController.updateToken(AUTHOR);
+        apiController.updateToken(handlerUser);
 
         task = getGeneralTask(SD_QUESTION, CAT);
         udf = refreshUdf();

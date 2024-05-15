@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_potential_gap;
+package com.ts.integration.tests.proc_gap;
 
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
@@ -19,7 +19,7 @@ import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.Users.SECOND_EMPLOYEE;
 import static com.ts.common.utils.InitEntities.*;
 
-public class PotentialGap3Test extends BaseIntegrationTest {
+public class PotentialGapBaseTest extends BaseIntegrationTest {
     private PotentialGapController potentialGapController;
     private GeneralTask task;
 
@@ -28,7 +28,7 @@ public class PotentialGap3Test extends BaseIntegrationTest {
         potentialGapController = apiController.getPotentialGapController();
     }
 
-    @Test(groups = {"PotentialGap", "Regression"}, description = "Создание потенциального Gap")
+    @Test(groups = {"PROC_GAP", "Regression"}, description = "Создание потенциального Gap")
     public void catPotentialGap() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
@@ -41,7 +41,7 @@ public class PotentialGap3Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"PotentialGap", "Regression"}, description = "Передать на согласование", dependsOnMethods = "catPotentialGap")
+    @Test(groups = {"PROC_GAP", "Regression"}, description = "Передать на согласование", dependsOnMethods = "catPotentialGap")
     public void msgGapPassForApproval() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
@@ -54,7 +54,7 @@ public class PotentialGap3Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"PotentialGap", "Regression"}, description = "Приватный комментарий", dependsOnMethods = "msgGapPassForApproval")
+    @Test(groups = {"PROC_GAP", "Regression"}, description = "Приватный комментарий", dependsOnMethods = "msgGapPassForApproval")
     public void msgGapPrivateComment() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         task.refreshUdf();
@@ -64,7 +64,7 @@ public class PotentialGap3Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"PotentialGap", "Regression"}, description = "Изменить аналитика", dependsOnMethods = "msgGapPrivateComment")
+    @Test(groups = {"PROC_GAP", "Regression"}, description = "Изменить аналитика", dependsOnMethods = "msgGapPrivateComment")
     public void msgGapChangeAnalyst() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         task.refreshUdf();
@@ -74,7 +74,7 @@ public class PotentialGap3Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"PotentialGap", "Regression"}, description = "Изменить аналитика", dependsOnMethods = "msgGapChangeAnalyst")
+    @Test(groups = {"PROC_GAP", "Regression"}, description = "Изменить аналитика", dependsOnMethods = "msgGapChangeAnalyst")
     public void msgGapChangeLinkedTasks() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
@@ -86,7 +86,7 @@ public class PotentialGap3Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"PotentialGap", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "msgGapChangeLinkedTasks")
+    @Test(groups = {"PROC_GAP", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "msgGapChangeLinkedTasks")
     public void msgGapWatch() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
@@ -98,7 +98,7 @@ public class PotentialGap3Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"PotentialGap", "Regression"}, description = "Привязать вопрос клиенту",dependsOnMethods = "msgGapWatch")
+    @Test(groups = {"PROC_GAP", "Regression"}, description = "Привязать вопрос клиенту",dependsOnMethods = "msgGapWatch")
     public void msgGapQuestionLink() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
@@ -110,7 +110,7 @@ public class PotentialGap3Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"PotentialGap", "Regression"}, description = "Установить связь с GAP",dependsOnMethods = "msgGapQuestionLink")
+    @Test(groups = {"PROC_GAP", "Regression"}, description = "Установить связь с GAP",dependsOnMethods = "msgGapQuestionLink")
     public void msgGapLink() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();

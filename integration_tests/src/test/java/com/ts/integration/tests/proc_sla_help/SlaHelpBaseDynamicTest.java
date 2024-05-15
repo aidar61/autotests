@@ -57,7 +57,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
         parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
         task = InitEntities.getGeneralTask(TaskType.SLA_HElP, Operations.CAT);
 
-        var parentPayloadResponse = slaHelpController.getParentPayload(parent.getNumber(), "CAT_SLAHELP");
+        var parentPayloadResponse = slaHelpController.getParentPayload(parent.getNumber(), "CAT_PROC_SLAHELP");
         ApiAsserts.assertThat(parentPayloadResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
         var parentPayload = JsonUtils.removeExtraCharacters(parentPayloadResponse);
         BDKU_CONFIGURATION = slaHelpController.getParent_UDF_BDKU_CONFIGURATION(parentPayload);
@@ -71,7 +71,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
         ROLE_CONTRACT_EMP = userController.receiveUserByRole(USER_ROLES, "Ведение контрактов", "root").getForUser();
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "создание")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "создание")
     public void createTask() {
         apiController.updateToken(InitEntities.generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -104,7 +104,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Принять на анализ", dependsOnMethods = "createTask")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Принять на анализ", dependsOnMethods = "createTask")
     public void taskAnalyze() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -127,7 +127,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Запросить информацию", dependsOnMethods = "taskAnalyze")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Запросить информацию", dependsOnMethods = "taskAnalyze")
     public void taskRequestInfo() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -145,7 +145,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Отменить запрос информации", dependsOnMethods = "taskRequestInfo")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Отменить запрос информации", dependsOnMethods = "taskRequestInfo")
     public void taskUndoRequestInfo() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -163,7 +163,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Запросить информацию", dependsOnMethods = "taskUndoRequestInfo")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Запросить информацию", dependsOnMethods = "taskUndoRequestInfo")
     public void taskRequestInfo1() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -181,7 +181,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Предоставить информацию", dependsOnMethods = "taskRequestInfo1")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Предоставить информацию", dependsOnMethods = "taskRequestInfo1")
     public void taskProvideInfo() {
         apiController.updateToken(generateAuthToken(CLIENT));
         task.refreshTask();
@@ -199,7 +199,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Оказать консультацию", dependsOnMethods = "taskProvideInfo")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Оказать консультацию", dependsOnMethods = "taskProvideInfo")
     public void taskConsult() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -217,7 +217,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskConsult")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskConsult")
     public void taskReturn() {
         apiController.updateToken(generateAuthToken(CLIENT));
         task.refreshTask();
@@ -236,7 +236,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER.getId());
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Оказать консультацию", dependsOnMethods = "taskReturn")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Оказать консультацию", dependsOnMethods = "taskReturn")
     public void taskConsult2() {
         apiController.updateToken(generateAuthToken(SUPPORT_MANAGER));
         task.refreshTask();
@@ -254,7 +254,7 @@ public class SlaHelpBaseDynamicTest extends BaseIntegrationTest {
 //                .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT.getId());
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Закрыть", dependsOnMethods = "taskConsult2")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Закрыть", dependsOnMethods = "taskConsult2")
     public void taskClose() {
         apiController.updateToken(generateAuthToken(CLIENT));
         task.refreshTask();

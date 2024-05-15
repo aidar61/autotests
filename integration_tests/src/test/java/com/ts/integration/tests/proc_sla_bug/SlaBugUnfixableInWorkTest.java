@@ -76,7 +76,7 @@ public class SlaBugUnfixableInWorkTest extends BaseIntegrationTest {
         WaitManager.pause(5);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Создание CAT_SLABUG")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Создание CAT_SLABUG")
     public void slaBugCat() {
         apiController.updateToken(InitEntities.generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -105,7 +105,7 @@ public class SlaBugUnfixableInWorkTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_NEW);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Принять на анализ", dependsOnMethods = "slaBugCat")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Принять на анализ", dependsOnMethods = "slaBugCat")
     public void msgAnalyze() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -132,7 +132,7 @@ public class SlaBugUnfixableInWorkTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
                 .isCorrectUdfUSer(UDF_ROLE_FIRST_LINE, CLIENT_MANAGER.getLogin());
     }
-    @Test(groups = {"SlaBug", "Regression"}, description = "Начать работу", dependsOnMethods = "msgAnalyze")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Начать работу", dependsOnMethods = "msgAnalyze")
     public void start() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -151,7 +151,7 @@ public class SlaBugUnfixableInWorkTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, DEVELOPER_ROLE_CURRENT)
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
     }
-    @Test(groups = {"SlaBug", "Regression"}, description = "Закрыть как неустранимую"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Закрыть как неустранимую"
             , dependsOnMethods = "start")
     public void closeUnfixable() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));

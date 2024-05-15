@@ -70,7 +70,7 @@ public class AdminJobConvertToChangeCatTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "создание Административная задача")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "создание Административная задача")
     public void createTask() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -94,7 +94,7 @@ public class AdminJobConvertToChangeCatTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить категорию на доработку", dependsOnMethods = "createTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить категорию на доработку", dependsOnMethods = "createTask")
     public void changeCategory() {
         udf = refreshUdf();
         task.refreshTask();

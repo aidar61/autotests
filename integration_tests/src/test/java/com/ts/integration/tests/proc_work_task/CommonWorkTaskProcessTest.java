@@ -81,7 +81,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"WorkTask", "Regression"}
+    @Test(groups = {"PROC_WORKTASK", "Regression"}
             , description = "Создание задачи для всех категорий"
             , dataProvider = "workTaskCategories")
     public void createTask(TaskType.WorkTask category) {
@@ -117,7 +117,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"WorkTask", "Regression"}
+    @Test(groups = {"PROC_WORKTASK", "Regression"}
             , description = "Коррекция плана для всех созданных задач"
             , dependsOnMethods = "createTask"
             , dataProvider = "workTaskCategories")
@@ -167,7 +167,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
         }
     }
 
-    @Test(groups = {"WorkTask", "Regression"}
+    @Test(groups = {"PROC_WORKTASK", "Regression"}
             , description = "Принять в работу для всех созданных задач"
             , dependsOnMethods = "changePlan"
             , dataProvider = "workTaskCategories")
@@ -192,7 +192,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}
+    @Test(groups = {"PROC_WORKTASK", "Regression"}
             , description = "Отложить для всех созданных задач"
             , dependsOnMethods = "acceptInWork"
             , dataProvider = "workTaskCategories")
@@ -221,7 +221,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 .isCorrectUdfDate(UDF_WORKTASK_PLANFD, expectedStartDate);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}
+    @Test(groups = {"PROC_WORKTASK", "Regression"}
             , description = "Принять в работу для всех созданных задач"
             , dependsOnMethods = "postPone"
             , dataProvider = "workTaskCategories")
@@ -257,7 +257,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
         }
     }
 
-    @Test(groups = {"WorkTask", "Regression"}
+    @Test(groups = {"PROC_WORKTASK", "Regression"}
             , description = "Отклонить для всех созданных задач"
             , dependsOnMethods = "postPone"
             , dataProvider = "workTaskCategories")
@@ -279,7 +279,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_WORKTASK_DECLINED).isCorrectResolution(expectedResolution).isCorrectHandlerUser(AUTHOR);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}
+    @Test(groups = {"PROC_WORKTASK", "Regression"}
             , description = "Вернуть в работу для всех созданных задач"
             , dependsOnMethods = "decline"
             , dataProvider = "workTaskCategories")
@@ -300,7 +300,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_WORKTASK_ASSIGNED).isCorrectHandlerUser(HANDLER_USER);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}
+    @Test(groups = {"PROC_WORKTASK", "Regression"}
             , description = "Назначить контроллера для всех созданных задач"
             , dependsOnMethods = "returnTask"
             , dataProvider = "workTaskCategories")
@@ -323,7 +323,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, generateUser(expectedControllerUser));
     }
 
-    @Test(groups = {"WorkTask", "Regression"}
+    @Test(groups = {"PROC_WORKTASK", "Regression"}
             , description = "Назначить наблюдателя для всех созданных задач"
             , dependsOnMethods = "superVice"
             , dataProvider = "workTaskCategories")
@@ -347,7 +347,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_WATCHER, generateUser(expectedWatcherUser));
     }
 
-    @Test(groups = {"WorkTask", "Regression"}
+    @Test(groups = {"PROC_WORKTASK", "Regression"}
             , description = "Изменить услугу для всех созданных задач"
             , dependsOnMethods = "watch"
             , dataProvider = "workTaskCategories")
@@ -369,7 +369,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_MIS_SERVICE, expectedListValue.getId());
     }
 
-    @Test(groups = {"WorkTask", "Regression"}
+    @Test(groups = {"PROC_WORKTASK", "Regression"}
             , description = "Принять в работу для всех созданных задач"
             , dependsOnMethods = "changeService"
             , dataProvider = "workTaskCategories")
@@ -393,7 +393,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}
+    @Test(groups = {"PROC_WORKTASK", "Regression"}
             , description = "Принять в работу для всех созданных задач"
             , dependsOnMethods = "acceptInWorkRetrySecondTime"
             , dataProvider = "workTaskCategories")

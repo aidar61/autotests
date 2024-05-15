@@ -82,7 +82,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Заявка на подбор персонала")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Заявка на подбор персонала")
     public void workTask() {
         udf = refreshUdf();
         task.refreshTask();
@@ -131,7 +131,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_NEW).isEquals(task);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Передать в работу", dependsOnMethods = "workTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Передать в работу", dependsOnMethods = "workTask")
     public void taskAssign() {
         apiController.updateToken(generateAuthToken(creator));
         task.refreshTask();
@@ -147,7 +147,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(contingentTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Отменить назначение", dependsOnMethods = "taskAssign")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Отменить назначение", dependsOnMethods = "taskAssign")
     public void assignCancel() {
         apiController.updateToken(generateAuthToken(creator));
         task.refreshTask();
@@ -156,7 +156,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(contingentTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_NEW);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Запрос санкции", dependsOnMethods = "assignCancel")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Запрос санкции", dependsOnMethods = "assignCancel")
     public void requestSanction() {
         apiController.updateToken(generateAuthToken(creator));
         task.refreshTask();
@@ -165,7 +165,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(contingentTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_SANCTION);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Санкционировать заявку", dependsOnMethods = "requestSanction")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Санкционировать заявку", dependsOnMethods = "requestSanction")
     public void sanction() {
         var taskDetail = apiController.receiveTask(task.getNumber());
         var sanctioner = new JsonPath(taskDetail.asString()).getObject("udfs.UDF_WORKTASK_SANCTIONER.userValue[0]", User.class);
@@ -180,7 +180,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskMessages).isCorrectField("Санкция = Одобрена", WORKTASK_SANCTION_APPROVE.getId(), "[0].udfs.UDF_WORKTASK_SANCTION.listValue[0].id");
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Переназначить ответственного", dependsOnMethods = "sanction")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Переназначить ответственного", dependsOnMethods = "sanction")
     public void reAssign() {
         apiController.updateToken(generateAuthToken(creator));
         task.refreshTask();
@@ -193,7 +193,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(contingentTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectHandlerUser(handlerUser);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Передать в работу", dependsOnMethods = "reAssign")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Передать в работу", dependsOnMethods = "reAssign")
     public void taskAssign2() {
         apiController.updateToken(generateAuthToken(creator));
         task.refreshTask();
@@ -209,7 +209,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(contingentTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskAssign2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskAssign2")
     public void acceptInWork() {
         apiController.updateToken(generateAuthToken(handlerUser2));
         task.refreshTask();
@@ -224,7 +224,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(contingentTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Отложить", dependsOnMethods = "acceptInWork")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Отложить", dependsOnMethods = "acceptInWork")
     public void taskPostpone() {
         apiController.updateToken(generateAuthToken(handlerUser2));
         task.setResolution(generateResolution(RESOLUTION_WORK_SUSPENDED_INDEFINITELY));
@@ -235,7 +235,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(contingentTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectResolution(RESOLUTION_WORK_SUSPENDED_INDEFINITELY).isCorrectStatus(STATUS_WORKTASK_POSTPONED);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskPostpone")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskPostpone")
     public void acceptInWork2() {
         apiController.updateToken(generateAuthToken(handlerUser2));
         task.refreshTask();
@@ -250,7 +250,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(contingentTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Отклонить", dependsOnMethods = "acceptInWork2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Отклонить", dependsOnMethods = "acceptInWork2")
     public void taskDecline() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setResolution(generateResolution(CANNOT_BE_COMPLETED_WITHIN_THE_SPECIFIED_TIME_FRAME));
@@ -260,7 +260,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(contingentTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectResolution(CANNOT_BE_COMPLETED_WITHIN_THE_SPECIFIED_TIME_FRAME).isCorrectHandlerUser(creator).isCorrectStatus(STATUS_WORKTASK_DECLINED);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskDecline")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskDecline")
     public void taskReturn() {
         apiController.updateToken(generateAuthToken(creator));
         task.refreshTask();
@@ -274,7 +274,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(updateResponse).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "taskReturn")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "taskReturn")
     public void setSupervise() {
         apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
@@ -288,7 +288,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, ARUTYANIN_YURIY.login);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "setSupervise")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "setSupervise")
     public void setWatcher() {
         apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
@@ -302,7 +302,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfUSer(UDF_WATCHER, ARTEMEVA_MARINA.login);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить услугу", dependsOnMethods = "setWatcher")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить услугу", dependsOnMethods = "setWatcher")
     public void taskChangeService() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setDescription(generateString());
@@ -318,7 +318,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfList(UDF_MIS_SERVICE, MIS_SERVICE2);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskChangeService")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskChangeService")
     public void taskStart2() {
         apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
@@ -332,7 +332,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(contingentTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Перепланировать", dependsOnMethods = "taskStart2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Перепланировать", dependsOnMethods = "taskStart2")
     public void taskChangeTime() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setDescription(generateString());
@@ -348,7 +348,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(contingentTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Переназначить ответственного", dependsOnMethods = "taskChangeTime")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Переназначить ответственного", dependsOnMethods = "taskChangeTime")
     public void reAssign2() {
         apiController.updateToken(generateAuthToken(creator));
         udf = refreshUdf();
@@ -366,7 +366,7 @@ public class ContingentTaskBaseTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectHandlerUser(handlerUser3.getLogin()).isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, creator.getLogin());
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "reAssign2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "reAssign2")
     public void taskAcceptance2() {
         apiController.updateToken(generateAuthToken(handlerUser3));
         udf = refreshUdf();

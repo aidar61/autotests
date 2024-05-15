@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_release_module;
+package com.ts.integration.tests.proc_release;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.asserts.ApiAsserts;
@@ -8,7 +8,6 @@ import com.ts.common.controllers.release.ReleaseModuleController;
 import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Users;
-import com.ts.common.request.ResponseBody;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.RandomDataUtils;
 import com.ts.common.utils.RandomUtils;
@@ -17,7 +16,6 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import static com.ts.common.entitites.commonEntities.Task.Constants.APNG;
-import static com.ts.common.entitites.commonEntities.Task.Constants.ONE_HUNGRED;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.enums.Operations.CAT;
 import static com.ts.common.enums.Parents.OPERATION_ACC_CLIENT;
@@ -38,7 +36,7 @@ public class Release1Test extends BaseIntegrationTest {
         releaseModuleController = apiController.getReleaseModuleController();
     }
 
-    @Test(groups = {"Release", "Regression"}, description = "Создать CAT_RELEASEMODULE")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Создать CAT_RELEASEMODULE")
     public void catReleaseModule() {
         apiController.updateToken(generateAuthToken(Users.ROOT));
         task = InitEntities.getGeneralTask(RELEASE_MODULE, CAT);
@@ -60,7 +58,7 @@ public class Release1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"Release", "Regression"}, description = "Получить форму", dependsOnMethods = "catReleaseModule")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Получить форму", dependsOnMethods = "catReleaseModule")
     public void receiveForm() {
         apiController.updateToken(generateAuthToken(Users.ROOT));
         releaseModuleController.receiveForm(task);

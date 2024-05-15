@@ -77,7 +77,7 @@ public class SlaBugCloseByClientTest extends BaseIntegrationTest {
         WaitManager.pause(5);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Создание CAT_SLABUG")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Создание CAT_SLABUG")
     public void slaBugCat() {
         apiController.updateToken(InitEntities.generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -106,7 +106,7 @@ public class SlaBugCloseByClientTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_NEW);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Закрыть", dependsOnMethods = "slaBugCat")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Закрыть", dependsOnMethods = "slaBugCat")
     public void close() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();

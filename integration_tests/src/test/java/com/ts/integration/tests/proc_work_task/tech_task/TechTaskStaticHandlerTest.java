@@ -88,7 +88,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Создание CAT_TECHTASK")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Создание CAT_TECHTASK")
     public void techTask() {
         udf = refreshUdf();
         task.refreshTask();
@@ -129,7 +129,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить участников", dependsOnMethods = "techTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить участников", dependsOnMethods = "techTask")
     public void changeMembers() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -143,7 +143,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfUSer(UDF_PARTICIPANTS, ABDULLAEV_BAHODIR.login);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Комментарий", dependsOnMethods = "changeMembers")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Комментарий", dependsOnMethods = "changeMembers")
     public void comment() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -154,7 +154,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(techTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask();
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "comment")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "comment")
     public void changePrgArea() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         task.refreshUdf();
@@ -167,7 +167,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfMultiList(UDF_PRGAREA, UDF_PRGAREA_BNK.getId()).isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_BNK.getId(), "OFF");
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить способ обзора кода", dependsOnMethods = "changePrgArea")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить способ обзора кода", dependsOnMethods = "changePrgArea")
     public void changeCodeReview() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -182,7 +182,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_NONBLOCKING.getId());
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Установить функциональную зависимость от другой задачи", dependsOnMethods = "changeCodeReview")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Установить функциональную зависимость от другой задачи", dependsOnMethods = "changeCodeReview")
     public void taskDependOtherTask() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -208,7 +208,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, HEAD_BOOK.number).isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, KZ_KZI.number).isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, HEAD_BOOK.number).isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, APNG.number);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить планируемую дату начала", dependsOnMethods = "taskDependOtherTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить планируемую дату начала", dependsOnMethods = "taskDependOtherTask")
     public void changePlanFD() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -223,7 +223,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfDate(UDF_WORKTASK_PLANFD, pannedStartDate);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить планируемую дату завершения", dependsOnMethods = "changePlanFD")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить планируемую дату завершения", dependsOnMethods = "changePlanFD")
     public void changePlanTD() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -238,7 +238,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfDate(UDF_WORKTASK_PLANTD, pannedStartDate);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "changePlanTD")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "changePlanTD")
     public void changeLinkedTask() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -252,7 +252,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfTask(UDF_SD_LINKEDREQUEST, REQUIREMENTS);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "changeLinkedTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "changeLinkedTask")
     public void setSupervise() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -267,7 +267,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, ARUTYANIN_YURIY.login);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "setSupervise")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "setSupervise")
     public void setWatcher() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -282,7 +282,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfUSer(UDF_WATCHER, ARTEMEVA_MARINA.login);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Переназначить ответственного", dependsOnMethods = "setWatcher")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Переназначить ответственного", dependsOnMethods = "setWatcher")
     public void reAssign() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -300,7 +300,7 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectHandlerUser(handlerUser2.getLogin()).isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, creator.getLogin());
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить автора", dependsOnMethods = "reAssign")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить автора", dependsOnMethods = "reAssign")
     public void changeAuthor() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();

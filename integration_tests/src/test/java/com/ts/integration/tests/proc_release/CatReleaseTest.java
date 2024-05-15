@@ -1,4 +1,4 @@
-package com.ts.integration.tests.proc_release.cat_release;
+package com.ts.integration.tests.proc_release;
 
 import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
@@ -80,7 +80,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
         CREATOR = userController.receiveUserByRole(USER_ROLES, "Менеджер проекта", "root").getForUser();
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "создание")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "создание")
     public void createTask() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();
@@ -110,7 +110,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_RELEASE_PLANNING);
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Добавить задачу в патч", dependsOnMethods = "createTask")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Добавить задачу в патч", dependsOnMethods = "createTask")
     public void addPatchTask() {
         apiController.updateToken(generateAuthToken(MANAGER));
         task.refreshTask();
@@ -131,7 +131,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .fieldFromListIsNotEmpty("Проверить добавление задачи", patchTask.getTask_number(), "number");
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Удалить задачу", dependsOnMethods = "addPatchTask")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Удалить задачу", dependsOnMethods = "addPatchTask")
     public void deletePatchTask() {
         apiController.updateToken(generateAuthToken(MANAGER));
         task.refreshTask();
@@ -150,7 +150,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isEmptyBody("Проверить удаление задачи", "number", patchTaskNumber);
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Добавить задачу в патч", dependsOnMethods = "deletePatchTask")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Добавить задачу в патч", dependsOnMethods = "deletePatchTask")
     public void addPatchTask2() {
         apiController.updateToken(generateAuthToken(MANAGER));
         task.refreshTask();
@@ -172,7 +172,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .fieldFromListIsNotEmpty("Проверить добавление задачи", patchTask.getTask_number(), "number");
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Добавить инсталяцию", dependsOnMethods = "addPatchTask2")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Добавить инсталяцию", dependsOnMethods = "addPatchTask2")
     public void addClients() {
         apiController.updateToken(generateAuthToken(MANAGER));
         task.refreshTask();
@@ -194,7 +194,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .fieldFromListIsNotEmpty("Проверить добавление инсталляции", clientTask.getTask_number(), "taskValue.number");
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Удалить инсталляцию", dependsOnMethods = "addClients")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Удалить инсталляцию", dependsOnMethods = "addClients")
     public void deleteClientTask() {
         apiController.updateToken(generateAuthToken(MANAGER));
         task.refreshTask();
@@ -212,7 +212,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isEmptyBody("Проверить удаление инсталляции", "taskValue.number", clientTaskNumber);
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Сформировать описание", dependsOnMethods = "deleteClientTask")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Сформировать описание", dependsOnMethods = "deleteClientTask")
     public void generateDescription() {
         apiController.updateToken(generateAuthToken(MANAGER));
 
@@ -222,7 +222,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_NO_CONTENT);
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Задать совместимость", dependsOnMethods = "generateDescription")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Задать совместимость", dependsOnMethods = "generateDescription")
     public void compactTask() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();
@@ -247,7 +247,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isNotEmptyBody("проверить наличие совместимостей");
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Изменить автора", dependsOnMethods = "compactTask")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Изменить автора", dependsOnMethods = "compactTask")
     public void changeAuthor() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();
@@ -263,7 +263,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isCorrectSubmitterUser(CREATOR.getLogin());
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Завершить планирование состава работ", dependsOnMethods = "changeAuthor")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Завершить планирование состава работ", dependsOnMethods = "changeAuthor")
     public void changeFinishPlaning() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();
@@ -277,7 +277,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isCorrectStatus(TaskStatuses.STATUS_RELEASE_PREPARATION);
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Начать тестирование", dependsOnMethods = "changeFinishPlaning")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Начать тестирование", dependsOnMethods = "changeFinishPlaning")
     public void changeStartTesting() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();
@@ -302,7 +302,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isCorrectUdfTask(UDF_RELEASE_STANDS, CAT_STAND.get(1).getNumber());
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Завершить тестирование", dependsOnMethods = "changeStartTesting")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Завершить тестирование", dependsOnMethods = "changeStartTesting")
     public void changeFinishTesting() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();
@@ -327,7 +327,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isCorrectUdfTask(UDF_RELEASE_STANDS, CAT_STAND.get(2).getNumber());
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Вернуть на тестирование", dependsOnMethods = "changeFinishTesting")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Вернуть на тестирование", dependsOnMethods = "changeFinishTesting")
     public void changeReturnTesting() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();
@@ -340,7 +340,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isCorrectStatus(TaskStatuses.STATUS_RELEASE_INTEST);
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Вернуться на подготовку", dependsOnMethods = "changeReturnTesting")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Вернуться на подготовку", dependsOnMethods = "changeReturnTesting")
     public void changeReturnPreparation() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();
@@ -353,7 +353,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isCorrectStatus(TaskStatuses.STATUS_RELEASE_PREPARATION);
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Вернуться на планирование состава работ", dependsOnMethods = "changeReturnPreparation")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Вернуться на планирование состава работ", dependsOnMethods = "changeReturnPreparation")
     public void changeReturnPlaning() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();
@@ -366,7 +366,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isCorrectStatus(TaskStatuses.STATUS_RELEASE_PLANNING);
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Завершить планирование состава работ", dependsOnMethods = "changeReturnPlaning")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Завершить планирование состава работ", dependsOnMethods = "changeReturnPlaning")
     public void changeFinishPlaning2() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();
@@ -380,7 +380,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isCorrectStatus(TaskStatuses.STATUS_RELEASE_PREPARATION);
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Начать выпуск", dependsOnMethods = "changeFinishPlaning2")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Начать выпуск", dependsOnMethods = "changeFinishPlaning2")
     public void changeStartIssue() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();
@@ -405,7 +405,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isCorrectUdfTask(UDF_RELEASE_STANDS, CAT_STAND.get(3).getNumber());
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Завершить выпуск", dependsOnMethods = "changeStartIssue")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Завершить выпуск", dependsOnMethods = "changeStartIssue")
     public void changeFinishIssue() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();
@@ -422,7 +422,7 @@ public class CatReleaseTest extends BaseIntegrationTest {
                 .isCorrectStatus(TaskStatuses.STATUS_RELEASE_USING);
     }
 
-    @Test(groups = {"ProcRelease", "Regression"}, description = "Передать в архив", dependsOnMethods = "changeFinishIssue")
+    @Test(groups = {"PROC_RELEASE", "Regression"}, description = "Передать в архив", dependsOnMethods = "changeFinishIssue")
     public void changeToArchive() {
         apiController.updateToken(InitEntities.generateAuthToken(MANAGER));
         udf = refreshUdf();

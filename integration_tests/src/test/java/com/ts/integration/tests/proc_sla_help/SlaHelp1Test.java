@@ -42,7 +42,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
 //        CLIENT = userController.receiveRandomClient(Parents.MTB).getForUser();
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Создание запроса на консультацию")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Создание запроса на консультацию")
     public void catSlaHelp() {
         udf = refreshUdf();
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -56,7 +56,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Принять на анализ", dependsOnMethods = "catSlaHelp")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Принять на анализ", dependsOnMethods = "catSlaHelp")
     public void msgSlaHelpAnalize() {
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         udf = refreshUdf();
@@ -70,7 +70,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить модуль системы", dependsOnMethods = "msgSlaHelpAnalize")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Изменить модуль системы", dependsOnMethods = "msgSlaHelpAnalize")
     public void msgSlaHelpChangeSdModule() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_SD_TASK_CODE, ACCUPDLST));
@@ -83,7 +83,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить модуль системы", dependsOnMethods = "msgSlaHelpChangeSdModule")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Изменить модуль системы", dependsOnMethods = "msgSlaHelpChangeSdModule")
     public void msgSlaHelpChangeAuthor() {
         udf = refreshUdf();
         udf.setUdfString(generateUdfString(UDF_SD_INITPERSON, generateString()));
@@ -96,7 +96,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "msgSlaHelpChangeAuthor")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "msgSlaHelpChangeAuthor")
     public void msgSlaHelpChangeLinkedTasks() {
         udf = refreshUdf();
         udf.setUdfTask(generateUdfTask(UDF_SD_LINKEDREQUEST, SERVICE_DESK));
@@ -108,7 +108,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Корректировка сорков SLA", dependsOnMethods = "msgSlaHelpChangeLinkedTasks")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Корректировка сорков SLA", dependsOnMethods = "msgSlaHelpChangeLinkedTasks")
     public void msgSlaHelpCorrectSlaDates() {
         udf = refreshUdf();
         udf.setUdfString(generateUdfString(UDF_SLA_CONSULTPROVIDEDATE, "1683797653000"));
@@ -120,7 +120,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Назначить доверенного наблюдателя", dependsOnMethods = "msgSlaHelpCorrectSlaDates")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Назначить доверенного наблюдателя", dependsOnMethods = "msgSlaHelpCorrectSlaDates")
     public void msgSlaHelpAddTrustedWatcher() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ALTUNIN_NIKOLAY));
@@ -132,7 +132,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "msgSlaHelpAddTrustedWatcher")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "msgSlaHelpAddTrustedWatcher")
     public void msgSlaHelpAppointWatcher() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_WATCHER, ABDULLAEV_BAHODIR));
@@ -144,7 +144,7 @@ public class SlaHelp1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"SlaHelp", "Regression"}, description = "Изменить состояние", dependsOnMethods = "msgSlaHelpAppointWatcher")
+    @Test(groups = {"PROC_SLAHELP", "Regression"}, description = "Изменить состояние", dependsOnMethods = "msgSlaHelpAppointWatcher")
     public void msgSlaHelpChangeStatus() {
         slaTask.refreshUdf();
         slaTask.setFinishStatus(generateStatus(STATUS_SLAHELP_CONSULTED));

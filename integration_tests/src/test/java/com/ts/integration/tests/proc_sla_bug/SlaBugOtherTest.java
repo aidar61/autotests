@@ -79,7 +79,7 @@ public class SlaBugOtherTest extends BaseIntegrationTest {
         WaitManager.pause(5);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Создание CAT_SLABUG")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Создание CAT_SLABUG")
     public void slaBugCat() {
         apiController.updateToken(InitEntities.generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -108,7 +108,7 @@ public class SlaBugOtherTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_NEW);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Принять на анализ", dependsOnMethods = "slaBugCat")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Принять на анализ", dependsOnMethods = "slaBugCat")
     public void msgAnalyze() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -135,7 +135,7 @@ public class SlaBugOtherTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, FIRST_LINE)
                 .isCorrectUdfUSer(UDF_ROLE_FIRST_LINE, CLIENT_MANAGER.getLogin());
     }
-    @Test(groups = {"SlaBug", "Regression"}, description = "Начать работу", dependsOnMethods = "msgAnalyze")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Начать работу", dependsOnMethods = "msgAnalyze")
     public void start() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -154,7 +154,7 @@ public class SlaBugOtherTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, DEVELOPER_ROLE_CURRENT)
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, CLIENT_MANAGER);
     }
-    @Test(groups = {"SlaBug", "Regression"}, description = "Предоставить решение", dependsOnMethods = "start")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Предоставить решение", dependsOnMethods = "start")
     public void hotFix() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -178,7 +178,7 @@ public class SlaBugOtherTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT);
 //                .isCorrectUdfString(UDF_SLABUG_PERMPROVIDEDATE, expectedTempProvideDate);
     }
-    @Test(groups = {"SlaBug", "Regression"}, description = "Ошибка устранена", dependsOnMethods = "hotFix")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Ошибка устранена", dependsOnMethods = "hotFix")
     public void acceptSolution() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();

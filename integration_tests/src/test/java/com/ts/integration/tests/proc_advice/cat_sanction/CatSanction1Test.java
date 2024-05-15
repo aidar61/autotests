@@ -50,7 +50,7 @@ public class CatSanction1Test extends BaseIntegrationTest {
         task = InitEntities.getGeneralTask(TaskType.SANCTION, Operations.CAT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Создание запроса на подтверждение КПО")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Создание запроса на подтверждение КПО")
     public void catSanction() {
         apiController.updateToken(InitEntities.generateAuthToken(HANDLER_USER_FROM_PARENT));
         task.setParent(parent);
@@ -73,7 +73,7 @@ public class CatSanction1Test extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Комментарий", dependsOnMethods = "catSanction")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Комментарий", dependsOnMethods = "catSanction")
     public void comment() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -87,7 +87,7 @@ public class CatSanction1Test extends BaseIntegrationTest {
                 .isNotEmpty(generalTask.getDescription());
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Отклонить запрос", dependsOnMethods = "comment")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Отклонить запрос", dependsOnMethods = "comment")
     public void reject() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -103,7 +103,7 @@ public class CatSanction1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_CLOSED);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "reject")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "reject")
     public void adviceReturn() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -119,7 +119,7 @@ public class CatSanction1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_AWAIT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Санкцинировать привязку КПО", dependsOnMethods = "adviceReturn")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Санкцинировать привязку КПО", dependsOnMethods = "adviceReturn")
     public void allowKPO() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -134,7 +134,7 @@ public class CatSanction1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_AWAIT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Санкцинировать привязку КПО", dependsOnMethods = "allowKPO")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Санкцинировать привязку КПО", dependsOnMethods = "allowKPO")
     public void allowKPORetry() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -148,7 +148,7 @@ public class CatSanction1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_CLOSED);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "allowKPORetry")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "allowKPORetry")
     public void returnRetry() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         task.setHandlerUser(HANDLER_USER_FROM_PARENT);
@@ -165,7 +165,7 @@ public class CatSanction1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_AWAIT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Закрыть вопрос", dependsOnMethods = "returnRetry")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Закрыть вопрос", dependsOnMethods = "returnRetry")
     public void close() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         task.refreshUdf();
