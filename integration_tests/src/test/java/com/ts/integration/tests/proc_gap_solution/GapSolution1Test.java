@@ -125,7 +125,7 @@ public class GapSolution1Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"PROC_SOLUTION", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "msgPROC_SOLUTIONPrivateComment")
+    @Test(groups = {"PROC_SOLUTION", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "msgGapSolutionPrivateComment")
     public void msgGapSolutionChangeLinkedTask() {
         apiController.updateToken(generateAuthToken(SECOND_EMPLOYEE));
         udf = refreshUdf();
