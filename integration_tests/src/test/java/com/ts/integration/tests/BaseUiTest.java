@@ -6,6 +6,7 @@ import com.codeborne.selenide.testng.SoftAsserts;
 import com.codeborne.selenide.testng.TextReport;
 import com.ts.common.application.Pages;
 import com.ts.common.application.controllers.TrackStudioApiControllers;
+import com.ts.common.application.database.DbHelper;
 import com.ts.common.enums.Users;
 import com.ts.common.tests.AbstractBaseTest;
 import com.ts.common.ui.driver.Driver;
@@ -29,6 +30,7 @@ public class BaseUiTest extends AbstractBaseTest {
         apiController = new TrackStudioApiControllers(InitEntities.generateAuthToken(Users.ROOT));
         trackStudioPages = new Pages();
         formPage = new FormPage();
+        dbHelper = new DbHelper();
         log.warn("=====================UI TESTS IS STARTED=====================");
     }
 

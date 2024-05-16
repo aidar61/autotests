@@ -23,6 +23,10 @@ public class GrTaskTable extends AbstractDbTable {
     public BaseEntity receiveByTaskNumber(String number) {
         return super.getEntityWhere(GrTaskDbEntity.class, "task_number", number);
     }
+    public BaseEntity receiveByTaskName(String name) {
+        return super.getEntityWhere(GrTaskDbEntity.class, "task_name", name);
+    }
+
 
     public BaseEntity receiveRandomTaskByQuery(String query) {
         BaseEntity entityWhere = super.getRandomEntity(GrTaskDbEntity.class, query);

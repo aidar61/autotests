@@ -1,6 +1,7 @@
 package com.ts.integration.tests.ui.tc1563098;
 
 import com.codeborne.selenide.Selenide;
+import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.controllers.folder.SdPatchFolderController;
 import com.ts.common.controllers.installation.InstallationController;
@@ -24,7 +25,7 @@ import static com.ts.common.enums.TaskType.SDPATCHFOLDER;
 import static com.ts.common.utils.InitEntities.generateUdfString;
 
 
-public class CheckPageFormTest extends BaseUiTest {
+public class CheckPatchFormTest extends BaseUiTest {
     LoginPage loginPage;
     PatchPage patchPage;
     InstallationController installationController;
@@ -41,29 +42,32 @@ public class CheckPageFormTest extends BaseUiTest {
         loginPage = trackStudioPages.getLoginPage();
         patchPage = trackStudioPages.getPatchPage();
 
-        //генерация структуры данных для тестов
-        installationController = apiController.getInstallationController();
-        sdPatchFolderController = apiController.getSdPatchfolderController();
-        //grTaskTable = dbHelper.getGrTaskTable();
-        //GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskNumber("462311");
+        grTaskTable = dbHelper.getGrTaskTable();
+        GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskName("AT_INSTALLATION");
 
-        parent = InitEntities.generateParent("818180a050c582480150c947cb252eb5", "462311");
-        generalTask = InitEntities.getGeneralTask(BDKU_INSTALLATION, Operations.CAT);
-        udf = InitEntities.refreshUdf();
-        generalTask.setName("AT_INSTALLATION");
-        generalTask.setParent(parent);
-        udf.setUdfString(generateUdfString(UDF_BDKU_CSCCLIENT, "AT_INSTALLATION"));
-        generalTask.refreshUdf(udf);
-        installationController.createInstallation(generalTask);
-
-        parent = InitEntities.generateParent(generalTask.getId(), generalTask.getNumber());
-        generalTask = InitEntities.getGeneralTask(SDPATCHFOLDER, Operations.CAT);
-        udf = InitEntities.refreshUdf();
-        generalTask.setName("AT_SDPATCHFOLDER");
-        generalTask.setParent(parent);
-        //udf.setUdfString(generateUdfString(UDF_BDKU_CSCCLIENT, "AT_INSTALLATION"));
-        generalTask.refreshUdf(udf);
-        sdPatchFolderController.createSdPatchFolder(generalTask);
+//        //генерация структуры данных для тестов
+//        installationController = apiController.getInstallationController();
+//        sdPatchFolderController = apiController.getSdPatchfolderController();
+//        //grTaskTable = dbHelper.getGrTaskTable();
+//        //GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskNumber("462311");
+//
+//        parent = InitEntities.generateParent("818180a050c582480150c947cb252eb5", "462311");
+//        generalTask = InitEntities.getGeneralTask(BDKU_INSTALLATION, Operations.CAT);
+//        udf = InitEntities.refreshUdf();
+//        generalTask.setName("AT_INSTALLATION");
+//        generalTask.setParent(parent);
+//        udf.setUdfString(generateUdfString(UDF_BDKU_CSCCLIENT, "AT_INSTALLATION"));
+//        generalTask.refreshUdf(udf);
+//        installationController.createInstallation(generalTask);
+//
+//        parent = InitEntities.generateParent(generalTask.getId(), generalTask.getNumber());
+//        generalTask = InitEntities.getGeneralTask(SDPATCHFOLDER, Operations.CAT);
+//        udf = InitEntities.refreshUdf();
+//        generalTask.setName("AT_SDPATCHFOLDER");
+//        generalTask.setParent(parent);
+//        //udf.setUdfString(generateUdfString(UDF_BDKU_CSCCLIENT, "AT_INSTALLATION"));
+//        generalTask.refreshUdf(udf);
+//        sdPatchFolderController.createSdPatchFolder(generalTask);
     }
 
     @AfterMethod
