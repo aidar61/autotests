@@ -4,13 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix user selector">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="update db connection">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/FormPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/FormPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/portlets/PatchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/portlets/PatchPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/DateUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/patches/CreatePatchTestPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/patches/CreatePatchTestPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/CheckPatchFormTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/CheckPatchFormTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,7 +115,7 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.CreatePatchTestPage">
+  <component name="RunManager" selected="TestNG.CheckPatchFormTest.formByAdmin">
     <configuration name="CatReleaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -137,16 +133,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CreatePatchTestPage" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CheckPatchFormTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.ui.patches.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.ui.tc1563098.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.patches" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.patches.CreatePatchTestPage" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.patches.CheckPatchFormTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -154,17 +150,35 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CreatePatchTestPage.createByAdmin" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CheckPatchFormTest.createByAdmin" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.ui.patches.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.ui.tc1563098.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.patches" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.patches.CreatePatchTestPage" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.patches.CheckPatchFormTest" />
       <option name="METHOD_NAME" value="createByAdmin" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CheckPatchFormTest.formByAdmin" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.ui.tc1563098.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.tc1563098" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.tc1563098.CheckPatchFormTest" />
+      <option name="METHOD_NAME" value="formByAdmin" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -183,24 +197,6 @@
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.experimental" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.experimental.FilterTest" />
       <option name="METHOD_NAME" value="editFilter" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SlaFeatureBase2Test.cat" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_feature.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_feature" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_feature.SlaFeatureBase2Test" />
-      <option name="METHOD_NAME" value="cat" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -256,19 +252,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.CreatePatchTestPage" />
-      <item itemvalue="TestNG.CreatePatchTestPage.createByAdmin" />
+      <item itemvalue="TestNG.CheckPatchFormTest.formByAdmin" />
+      <item itemvalue="TestNG.CheckPatchFormTest" />
+      <item itemvalue="TestNG.CheckPatchFormTest.createByAdmin" />
       <item itemvalue="TestNG.CatReleaseTest" />
-      <item itemvalue="TestNG.SlaFeatureBase2Test.cat" />
       <item itemvalue="TestNG.FilterTest.editFilter" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.CreatePatchTestPage" />
-        <item itemvalue="TestNG.CreatePatchTestPage.createByAdmin" />
+        <item itemvalue="TestNG.CheckPatchFormTest.formByAdmin" />
+        <item itemvalue="TestNG.CheckPatchFormTest" />
+        <item itemvalue="TestNG.CheckPatchFormTest.createByAdmin" />
         <item itemvalue="TestNG.CatReleaseTest" />
         <item itemvalue="TestNG.FilterTest.editFilter" />
-        <item itemvalue="TestNG.SlaFeatureBase2Test.cat" />
       </list>
     </recent_temporary>
   </component>
@@ -449,22 +445,6 @@
       <option name="project" value="LOCAL" />
       <updated>1706251344828</updated>
     </task>
-    <task id="LOCAL-00050" summary="feature/sd bug">
-      <option name="closed" value="true" />
-      <created>1707211203485</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1707211203485</updated>
-    </task>
-    <task id="LOCAL-00051" summary="feature/release">
-      <option name="closed" value="true" />
-      <created>1707215560600</created>
-      <option name="number" value="00051" />
-      <option name="presentableId" value="LOCAL-00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1707215560600</updated>
-    </task>
     <task id="LOCAL-00052" summary="feature/performance tests">
       <created>1707828704367</created>
       <option name="number" value="00052" />
@@ -485,14 +465,6 @@
       <option name="presentableId" value="LOCAL-00054" />
       <option name="project" value="LOCAL" />
       <updated>1707828877326</updated>
-    </task>
-    <task id="LOCAL-00055" summary="feature/sddev">
-      <option name="closed" value="true" />
-      <created>1707889370525</created>
-      <option name="number" value="00055" />
-      <option name="presentableId" value="LOCAL-00055" />
-      <option name="project" value="LOCAL" />
-      <updated>1707889370525</updated>
     </task>
     <task id="LOCAL-00056" summary="feature/sddev">
       <option name="closed" value="true" />
@@ -712,7 +684,31 @@
       <option name="project" value="LOCAL" />
       <updated>1713342603322</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="add patch admin test">
+      <option name="closed" value="true" />
+      <created>1715786745592</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1715786745592</updated>
+    </task>
+    <task id="LOCAL-00088" summary="fix update admin test">
+      <option name="closed" value="true" />
+      <created>1715787181768</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
+      <option name="project" value="LOCAL" />
+      <updated>1715787181768</updated>
+    </task>
+    <task id="LOCAL-00089" summary="update db connection">
+      <option name="closed" value="true" />
+      <created>1715843151613</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1715843151614</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -749,7 +745,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="origin/qa" />
                       </list>
                     </value>
                   </entry>
@@ -768,9 +764,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="suite.xml" />
-    <MESSAGE value="fix/test" />
-    <MESSAGE value="feature/ts-int Jenkinsfile" />
     <MESSAGE value="fix/DevTaskAcceptance" />
     <MESSAGE value="feature/Sla negative scenarios, Errors" />
     <MESSAGE value="feature/ui test settings" />
@@ -793,7 +786,10 @@
     <MESSAGE value="fix/test&#10;&#10;(cherry picked from commit d2c630871c938a1f7ae64a9078513b931d92b75c)" />
     <MESSAGE value="fix/ui-clear" />
     <MESSAGE value="feature/slaFeatureTest" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/slaFeatureTest" />
+    <MESSAGE value="add patch admin test" />
+    <MESSAGE value="fix update admin test" />
+    <MESSAGE value="update db connection" />
+    <option name="LAST_COMMIT_MESSAGE" value="update db connection" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
