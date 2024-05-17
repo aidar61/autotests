@@ -11,6 +11,17 @@ import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class FormPage extends BasePage {
+    public void setTaskName(String value){
+        SelenideElement taskName = $x("//*[contains(@ng-model, 'task.name')]");
+        elActions.input(taskName, value);
+    }
+
+    public void setMenuOption(String menuName, String menuOption){
+        SelenideElement menuBtn = $x("//*[contains(text(), '" + menuName + "')]/ancestor::button");
+        SelenideElement listOption = $x("//body/ul//a[contains(string(), '" + menuOption + "')]");
+        elActions.click(menuBtn);
+        elActions.click(listOption);
+    }
 
     //метод устанавливает значение в поле типа "пользователь" с помощью поиска
     public void userSelectorSetValue(String fieldName, String user) {
@@ -25,17 +36,6 @@ public class FormPage extends BasePage {
         elActions.input(activeInput, user);
         elActions.click(searchResult);
     }
-
-//    public void userSelectorSetValue(String fieldName) {
-//        SelenideElement dictionaryBtn = $x("//*[contains(text(), \"" + fieldName + "\")]" +
-//                "/ancestor::*[contains(@class, \"form-group\")]//button[not(contains(@class, \"clv-select-toggle\"))]");
-//        ElementsCollection usersList = $$x("//*[contains(@class, \"ag-center-cols-container\")]//*[@role=\"row\"]");
-//        SelenideElement applyBtn = $x("//*[contains(@class, \"modal-dialog\")]//button[contains(@ng-click, \"ok\")]");
-//
-//        elActions.click(dictionaryBtn);
-//        elActions.click(usersList.first());
-//        elActions.click(applyBtn);
-//    }
 
     //метод устанавливает значение в поле типа "пользователь" из справочника
     public void userSelectorSetValue(String fieldName, int userCount) {
@@ -97,6 +97,51 @@ public class FormPage extends BasePage {
             elActions.click(list.first());
         } else {
             elActions.click(list.get(valueNumber - 1));
+        }
+    }
+
+    public void clickButton(String buttonName){
+        SelenideElement button = $x("//span[contains(text(), '" + buttonName + "')]/..");
+        button.shouldBe(Condition.enabled).click();
+    }
+
+    public void checkCurrentTask(String name){
+        SelenideElement taskName = $x("//*[contains(@class, 'taskTitle')]//*");
+        UiAsserts.assertThat(taskName).isTextContains(name);
+    }
+
+    public void alertIsPresent(String fieldName, boolean present) {
+        SelenideElement alert = $x("//*[contains(text(), \"" + fieldName + "\")]" +
+                "/ancestor::*[contains(@class, \"form-group\")]//udf-edit-error/div[not(contains(@class, \"ng-hide\"))]");
+
+        if (present) {
+            UiAsserts.assertThat(alert).isElementAccordCondition(Condition.exist);
+        } else {
+            UiAsserts.assertThat(alert).isElementNotAccordCondition(Condition.exist);
+        }
+    }
+
+    public void fieldIsPresent(String fieldName, boolean present) {
+        SelenideElement alert = $x("//*[contains(text(), \"" + fieldName + "\")]" +
+                "/ancestor::*[contains(@class, \"form-group\")]");
+        if (present) {
+            UiAsserts.assertThat(alert).isElementAccordCondition(Condition.exist);
+        } else {
+            UiAsserts.assertThat(alert).isElementNotAccordCondition(Condition.exist);
+        }
+    }
+
+    public int presentFieldsCount() {
+        ElementsCollection fieldLabel = $$x("//label[contains(@class, 'control-label')]");
+        return fieldLabel.size();
+    }
+
+    public void checkDraft(){
+        WaitManager.pause(1);
+        SelenideElement draftAlert = $x("//*[contains(text(), 'Восстановить из черновика')]");
+        SelenideElement notRestoreBtn = $x("//button[contains(@ng-click, 'dismiss')]");
+        if(draftAlert.isDisplayed()){
+            elActions.click(notRestoreBtn);
         }
     }
 
