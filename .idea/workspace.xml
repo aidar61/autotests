@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix errors">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="add edit form test">
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/EditPatchFormTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/FormPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/FormPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/portlets/PatchPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/portlets/PatchPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/CheckPatchFormTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/CheckPatchFormTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/CheckPatchFormTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/CreatePatchFormTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -110,14 +110,14 @@
       <recent name="$PROJECT_DIR$/common/src/main/java/com/ts/common/services" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.ts.integration.tests.ui.tc1563098" />
       <recent name="com.ts.integration.tests.proc_work_task.dev_task_base_submitter" />
       <recent name="com.ts.integration.tests.proc_sd_question" />
       <recent name="com.ts.common.controllers" />
       <recent name="com.ts.common.entitites.commonEntities" />
-      <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.CheckPatchFormTest.formByAdmin">
+  <component name="RunManager" selected="TestNG.EditPatchFormTest.formByAdmin">
     <configuration name="CatReleaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -170,7 +170,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CheckPatchFormTest.formByAdmin" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="EditPatchFormTest.formByAdmin" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
@@ -179,7 +179,7 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.tc1563098" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.tc1563098.CheckPatchFormTest" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.tc1563098.EditPatchFormTest" />
       <option name="METHOD_NAME" value="formByAdmin" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
@@ -254,7 +254,7 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.CheckPatchFormTest.formByAdmin" />
+      <item itemvalue="TestNG.EditPatchFormTest.formByAdmin" />
       <item itemvalue="TestNG.CheckPatchFormTest" />
       <item itemvalue="TestNG.CheckPatchFormTest.createByAdmin" />
       <item itemvalue="TestNG.CatReleaseTest" />
@@ -262,7 +262,7 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.CheckPatchFormTest.formByAdmin" />
+        <item itemvalue="TestNG.EditPatchFormTest.formByAdmin" />
         <item itemvalue="TestNG.CheckPatchFormTest" />
         <item itemvalue="TestNG.CheckPatchFormTest.createByAdmin" />
         <item itemvalue="TestNG.CatReleaseTest" />
@@ -678,14 +678,6 @@
       <option name="project" value="LOCAL" />
       <updated>1713342603322</updated>
     </task>
-    <task id="LOCAL-00087" summary="add patch admin test">
-      <option name="closed" value="true" />
-      <created>1715786745592</created>
-      <option name="number" value="00087" />
-      <option name="presentableId" value="LOCAL-00087" />
-      <option name="project" value="LOCAL" />
-      <updated>1715786745592</updated>
-    </task>
     <task id="LOCAL-00088" summary="fix update admin test">
       <option name="closed" value="true" />
       <created>1715787181768</created>
@@ -710,7 +702,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715932570929</updated>
     </task>
-    <option name="localTasksCounter" value="91" />
+    <task id="LOCAL-00091" summary="add edit form test">
+      <option name="closed" value="true" />
+      <created>1715957315973</created>
+      <option name="number" value="00091" />
+      <option name="presentableId" value="LOCAL-00091" />
+      <option name="project" value="LOCAL" />
+      <updated>1715957315973</updated>
+    </task>
+    <option name="localTasksCounter" value="92" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -766,7 +766,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feature/Sla negative scenarios, Errors" />
     <MESSAGE value="feature/ui test settings" />
     <MESSAGE value="feature/Contingent" />
     <MESSAGE value="fix/dev task acceptance 2" />
@@ -791,7 +790,8 @@
     <MESSAGE value="fix update admin test" />
     <MESSAGE value="update db connection" />
     <MESSAGE value="fix errors" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix errors" />
+    <MESSAGE value="add edit form test" />
+    <option name="LAST_COMMIT_MESSAGE" value="add edit form test" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -840,20 +840,6 @@
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest2.java</url>
           <line>78</line>
           <option name="timeStamp" value="136" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/CheckPatchFormTest.java</url>
-          <line>77</line>
-          <option name="timeStamp" value="140" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/CheckPatchFormTest.java</url>
-          <line>249</line>
-          <properties class="com.ts.integration.tests.ui.tc1563098.CheckPatchFormTest" method="createByWorker">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="142" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

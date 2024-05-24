@@ -132,8 +132,8 @@ public class FormPage extends BasePage {
     }
 
     public int presentFieldsCount() {
-        ElementsCollection fieldLabel = $$x("//label[contains(@class, 'control-label')]");
-        return fieldLabel.size();
+        ElementsCollection fieldLabelCount = $$x("//label[contains(@class, 'control-label')]");
+        return fieldLabelCount.size();
     }
 
     public void checkDraft(){
