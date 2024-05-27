@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Condition.visible;
 
 public class ElementActions {
 
-    public ElementActions click(SelenideElement element) {
+    public ElementActions click(SelenideElement element) { //TODO сюда добавить нужно hover()
         element.shouldBe(visible).click();
         return this;
     }

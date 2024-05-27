@@ -24,7 +24,9 @@ public class PatchPage extends BasePage {
 
     public PatchPage setConfiguration() {
         elActions.click(selectConfigBtn);
-        elActions.click(confgListItem);
+        ElementsCollection configurationClients = $$x("//ul[@class='clv-select-choices clv-select-choices-content']/li");
+        elActions.click(configurationClients.filter(Condition.visible).find(Condition.innerText("AT_INSTALLATION")));
+//        elActions.click(confgListItem);
         return this;
     }
 

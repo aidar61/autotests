@@ -29,8 +29,8 @@ public class EditPatchFormTest extends BaseUiTest {
     GrTaskTable grTaskTable;
     Parent parent;
 
-    String url = "http://tsdev7.dev.colvir.ru/TrackStudio/app/portlet/patch?branch=AZPST";
-    String admin = "root";
+    String url = "http://tsdev7.dev.colvir.ru/TrackStudio/app/portlet/patch?branch=AZPST";//TODO использовать ссылку из AppConfigProvider
+    String admin = "root"; //TODO лучше использовать объект User и дать название объектам в верхнем регистре
     String supportManager = "ibabushkin";
     String groupTechnologyService = "vovsienko";
     String worker = "aaskeev";
@@ -68,11 +68,11 @@ public class EditPatchFormTest extends BaseUiTest {
 //        sdPatchFolderController.createSdPatchFolder(generalTask);
     }
 
-    @AfterMethod
+    @AfterMethod//TODO добавить alwaysRun(true)
     public void afterTest() {
         Selenide.clearBrowserCookies();
     }
-    @Test(enabled = true)
+    @Test(enabled = true) //TODO добавить описание groups/description
     public void editeByAdmin() {
         auth(url, admin);
         patchPage.setConfiguration()
@@ -85,7 +85,7 @@ public class EditPatchFormTest extends BaseUiTest {
         //заполняем поля и сохраняем форму
         formPage.userSelectorSetValue("Ответственный", 1);
         formPage.userSelectorSetValue("Наблюдатели", 3);
-        formPage.userSelectorSetValue("Владелец патча", 1);
+        formPage.userSelectorSetValue("Владелец патча", 1); //TODO на этом месте тест падает из-за того что элемент не виден (добавить в click hover())
         formPage.setDateValue("Плановая дата вывода из эксплуатации",
                 DateUtils.getCurrentDate(0, "dd.MM.yyyy"));
         formPage.setRadioValue("Тип патча", 2);
@@ -114,7 +114,7 @@ public class EditPatchFormTest extends BaseUiTest {
         formPage.fieldIsPresent("Связанные задачи", true);
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true) //TODO добавить описание groups/description
     public void editBySupportManager() {
         auth(url, supportManager);
         patchPage.setConfiguration()
@@ -127,7 +127,7 @@ public class EditPatchFormTest extends BaseUiTest {
         //заполняем поля и сохраняем форму
         formPage.userSelectorSetValue("Ответственный", 1);
         formPage.userSelectorSetValue("Наблюдатели", 3);
-        formPage.userSelectorSetValue("Владелец патча", 1);
+        formPage.userSelectorSetValue("Владелец патча", 1); //TODO на этом месте тест падает из-за того что элемент не виден (добавить в click hover())
         formPage.setDateValue("Плановая дата ввода в эксплуатаци",
                 DateUtils.getCurrentDate(0, "dd.MM.yyyy"));
         formPage.setDateValue("Плановая дата завершения работы",
@@ -158,7 +158,7 @@ public class EditPatchFormTest extends BaseUiTest {
         formPage.fieldIsPresent("Связанные задачи", true);
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true) //TODO добавить описание groups/description
     public void editByGroupTechnologyService() {
         auth(url, groupTechnologyService);
         patchPage.setConfiguration()
@@ -171,7 +171,7 @@ public class EditPatchFormTest extends BaseUiTest {
         //заполняем поля и сохраняем форму
         formPage.userSelectorSetValue("Ответственный", 1);
         formPage.userSelectorSetValue("Наблюдатели", 3);
-        formPage.userSelectorSetValue("Владелец патча", 1);
+        formPage.userSelectorSetValue("Владелец патча", 1); //TODO на этом месте тест падает из-за того что элемент не виден (добавить в click hover())
         formPage.setDateValue("Плановая дата ввода в эксплуатацию",
                 DateUtils.getCurrentDate(0, "dd.MM.yyyy"));
         formPage.setDateValue("Плановая дата завершения работы",
