@@ -12,5 +12,4 @@ public abstract class AbstractBaseTest {
     protected static DbHelper dbHelper;
     @Getter
     protected static Pages trackStudioPages;
-
 }

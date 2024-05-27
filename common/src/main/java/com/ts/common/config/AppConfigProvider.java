@@ -14,11 +14,6 @@ public class AppConfigProvider {
     public static final int IMPLICITLY_WAIT_SEC = get().implicitlyWait();
     public static final int IMPLICITLY_SLEEP_MS = get().implicitlySleep();
 
-    public static void main(String[] args) {
-        System.out.println(DB_URL);
-        System.out.println(STAND_URL);
-    }
-
     private AppConfigProvider() {
         throw new IllegalStateException("AppConfigProvider should never be instantiated");
     }

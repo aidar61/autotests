@@ -33,11 +33,6 @@ public class User extends BaseEntity {
         this.name = name;
     }
 
-    //    String status;
-//    int childrenCount;
-//    int wrongAuthAttempt;
-//    boolean authBlocked;
-//    boolean freelancer;
     @Getter
     public enum Constants {
         ARUTYANIN_YURIY("818181df6936d3710169388776323be0", "yarutyunyan", "Арутюнян Юрий"),
