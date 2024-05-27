@@ -1,10 +1,11 @@
-package com.ts.common.controllers;
+package com.ts.common.controllers.user;
 
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.entitites.commonEntities.Role;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.commonEntities.UserRole;
+import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.enums.Parents;
 import com.ts.common.enums.TaskType;
@@ -12,8 +13,14 @@ import com.ts.common.request.ApiRequest;
 import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import com.ts.common.utils.RandomUtils;
+import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,6 +30,32 @@ import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 public class UserController extends ApiRequest {
     public UserController(String url, AuthToken authToken) {
         super(url, HEADERS_BASE_CONTROLLER, authToken);
+    }
+
+    @Step("Creating user username is {0}, project {1}")
+    public User createUser(String username, String project) {
+        String userJson;
+        try {
+            URL url = UserController.class.getResource("/user.json");
+            assert url != null;
+            userJson = Files.readString(Paths.get(url.toURI()))
+                    .replaceAll("username", username);
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
+        this.response = super.post(getEndpoint(REST, USER, project, SAVE), userJson);
+        return extractObject(User.class);
+    }
+
+    @Step("Get user {0}")
+    public User getUserBy(String username) {
+        this.response = super.get(getEndpoint(REST, USER, username));
+        return extractObject(User.class);
+    }
+
+    public void assignRoleToTask(GeneralTask task, User user, Role.Constants role) {
+        AssignRoleRequestBody assignRoleRequestBody = new AssignRoleRequestBody(task, user, role);
+        this.response = super.post(getEndpoint(REST, ACL, CREATE), assignRoleRequestBody.removeFields());
     }
 
     private List<UserRole> receiveAllUserForProject(Parents parents) {
@@ -169,13 +202,5 @@ public class UserController extends ApiRequest {
         }
         return usersByRole;
     }
-
-//    public static void main(String[] args) {
-//        UserController userController = new UserController(STAND_URL, InitEntities.generateAuthToken(Users.ROOT));
-//        UserRole userRole = userController.receiveRandomClient(Parents.MTB);
-//        UserRole userRole1 = userController.receiveRandomEmployees(Parents.MTB);
-//        System.out.println(userRole);
-//        System.out.println(userRole1);
-//    }
 
 }
