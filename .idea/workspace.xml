@@ -4,11 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="add edit form test">
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/EditPatchFormTest.java" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix divided and rename">
+      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/experimental/CheckOperationPermission.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/FormPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/FormPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/CheckPatchFormTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/CreatePatchFormTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioEndPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioEndPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/BaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/BaseController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +117,7 @@
       <recent name="com.ts.common.entitites.commonEntities" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.EditPatchFormTest.formByAdmin">
+  <component name="RunManager" selected="TestNG.CheckOperationPermission.checkMsgSdpatchWatchPermissions">
     <configuration name="CatReleaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
@@ -129,6 +129,24 @@
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_release.cat_release" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_release.cat_release.CatReleaseTest" />
       <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CheckOperationPermission.checkMsgSdpatchWatchPermissions" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.ui.experimental.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.experimental" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.experimental.CheckOperationPermission" />
+      <option name="METHOD_NAME" value="checkMsgSdpatchWatchPermissions" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -188,24 +206,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="FilterTest.editFilter" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.ui.experimental.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.experimental" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.experimental.FilterTest" />
-      <option name="METHOD_NAME" value="editFilter" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="SlaHelp1Test.msgSlaHelpAnalize" type="TestNG" nameIsGenerated="true">
       <module name="trackstudio-test.integration_tests" />
       <shortenClasspath name="NONE" />
@@ -254,19 +254,19 @@
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.CheckOperationPermission.checkMsgSdpatchWatchPermissions" />
       <item itemvalue="TestNG.EditPatchFormTest.formByAdmin" />
       <item itemvalue="TestNG.CheckPatchFormTest" />
       <item itemvalue="TestNG.CheckPatchFormTest.createByAdmin" />
       <item itemvalue="TestNG.CatReleaseTest" />
-      <item itemvalue="TestNG.FilterTest.editFilter" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.CheckOperationPermission.checkMsgSdpatchWatchPermissions" />
         <item itemvalue="TestNG.EditPatchFormTest.formByAdmin" />
         <item itemvalue="TestNG.CheckPatchFormTest" />
         <item itemvalue="TestNG.CheckPatchFormTest.createByAdmin" />
         <item itemvalue="TestNG.CatReleaseTest" />
-        <item itemvalue="TestNG.FilterTest.editFilter" />
       </list>
     </recent_temporary>
   </component>
@@ -678,14 +678,6 @@
       <option name="project" value="LOCAL" />
       <updated>1713342603322</updated>
     </task>
-    <task id="LOCAL-00088" summary="fix update admin test">
-      <option name="closed" value="true" />
-      <created>1715787181768</created>
-      <option name="number" value="00088" />
-      <option name="presentableId" value="LOCAL-00088" />
-      <option name="project" value="LOCAL" />
-      <updated>1715787181768</updated>
-    </task>
     <task id="LOCAL-00089" summary="update db connection">
       <option name="closed" value="true" />
       <created>1715843151613</created>
@@ -710,7 +702,15 @@
       <option name="project" value="LOCAL" />
       <updated>1715957315973</updated>
     </task>
-    <option name="localTasksCounter" value="92" />
+    <task id="LOCAL-00092" summary="fix divided and rename">
+      <option name="closed" value="true" />
+      <created>1716554503296</created>
+      <option name="number" value="00092" />
+      <option name="presentableId" value="LOCAL-00092" />
+      <option name="project" value="LOCAL" />
+      <updated>1716554503296</updated>
+    </task>
+    <option name="localTasksCounter" value="93" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -766,7 +766,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feature/ui test settings" />
     <MESSAGE value="feature/Contingent" />
     <MESSAGE value="fix/dev task acceptance 2" />
     <MESSAGE value="fix/access prod" />
@@ -791,7 +790,8 @@
     <MESSAGE value="update db connection" />
     <MESSAGE value="fix errors" />
     <MESSAGE value="add edit form test" />
-    <option name="LAST_COMMIT_MESSAGE" value="add edit form test" />
+    <MESSAGE value="fix divided and rename" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix divided and rename" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

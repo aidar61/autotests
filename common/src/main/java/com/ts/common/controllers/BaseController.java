@@ -20,6 +20,7 @@ import io.restassured.response.Response;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.config.YamlProcessor;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -319,5 +320,10 @@ public class BaseController extends ApiRequest {
             log.error("Не удалось получить Проект БДКУ для задачи: {}", e.getMessage());
         }
         return null;
+    }
+
+    public Response getOpretionPermission(String operationName){
+        return super.get(getEndpoint(REST, WORKFLOW, MSTATUS, operationName, PERMISSIONS));
+
     }
 }
