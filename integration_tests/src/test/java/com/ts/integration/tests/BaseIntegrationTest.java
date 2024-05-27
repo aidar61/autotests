@@ -1,5 +1,6 @@
 package com.ts.integration.tests;
 
+import com.ts.common.application.Pages;
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.application.controllers.TrackStudioApiControllers;
 import com.ts.common.application.database.DbHelper;
@@ -9,7 +10,6 @@ import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.enums.Users;
 import com.ts.common.listeners.TestListener;
 import com.ts.common.tests.AbstractBaseTest;
-import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
@@ -20,7 +20,6 @@ import static com.ts.common.utils.InitEntities.generateAuthToken;
 @Slf4j
 @Listeners({TestListener.class})
 public class BaseIntegrationTest extends AbstractBaseTest {
-    protected Response response;
     protected AuthToken authToken;
     protected BaseController baseController;
     protected UserController userController;
@@ -30,13 +29,15 @@ public class BaseIntegrationTest extends AbstractBaseTest {
     public void setUp() {
         this.authToken = generateAuthToken(Users.ROOT);
         apiController = new TrackStudioApiControllers(authToken);
-        baseController = apiController.getBaseController();
+        dbHelper = new DbHelper();
+        trackStudioPages = new Pages();
         log.warn("=====================API TESTS IS STARTED=====================");
     }
 
     @BeforeTest(alwaysRun = true)
     public void init() {
+        log.warn("=====================BEFORE TEST INITIALIZING=====================");
+        baseController = apiController.getBaseController();
         userController = apiController.getUserController();
-        dbHelper = new DbHelper();
     }
 }
