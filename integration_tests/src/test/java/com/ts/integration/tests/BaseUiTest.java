@@ -35,7 +35,7 @@ public class BaseUiTest extends AbstractBaseTest {
     }
 
     public static void auth(String url, String userLogin) {
-        LoginPage loginPage = trackStudioPages.getLoginPage();
+        LoginPage loginPage = trackStudioPages.getLoginPage(); //TODO использовать LoginPage как поле и добавить инициализацию в setupUi()
 
         open(url);
         loginPage.loginNoToken(userLogin);
