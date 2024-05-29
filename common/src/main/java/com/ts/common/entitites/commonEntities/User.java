@@ -3,6 +3,7 @@ package com.ts.common.entitites.commonEntities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ts.common.entitites.BaseEntity;
+import com.ts.common.utils.InitEntities;
 import io.qameta.allure.internal.shadowed.jackson.annotation.JsonIgnore;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -20,17 +21,34 @@ import org.sonatype.guice.bean.reflect.IgnoreSetters;
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User extends BaseEntity {
     String id;
     String login;
     String name;
     @JsonInclude(JsonInclude.Include.NON_DEFAULT)
     Boolean active;
+    Role role;
+    String company;
+    String tel;
+    String email;
+    Locale locale;
+    Locale timezone;
+    Task defaultTask;
+    String emailTemplate;
+    User parent;
+    Udfs[] udfs;
 
     public User(String id, String login, String name) {
         this.id = id;
         this.login = login;
         this.name = name;
+    }
+
+    public void defaultUser() {
+        this.setCompany(" None");
+        this.setLocale(InitEntities.generateLocale(com.ts.common.entitites.commonEntities.Locale.Constants.ru_RU));
+        this.setTimezone(InitEntities.generateLocale(com.ts.common.entitites.commonEntities.Locale.Constants.EUROPE_MOSCOW));
     }
 
     @Getter
@@ -43,6 +61,8 @@ public class User extends BaseEntity {
         ABDULLAEV_BAHODIR("818181df7edb763f017ee28d995a3ba6", "babdullayev", "Абдуллаев Баходир"),
         FREELANCERS("818181b03d111b94013d11e324e82aac", "freelancers", "ВНЕШТАТНЫЕ СОТРУДНИКИ"),
         KASENOVA_MARIJAN("8a8181df89d741260189decd938f2603", "m.kassenova@tengebank.uz", "Касенова Маржан Нуртаевна"),
+        CLI_ROOT("818181a822ee6d820122f5a241600be3", "cli.root", "Клиенты"),
+        COMPANY_100_100("8181816f8cf83196018cf834292b000a", "company.100.100", "Colvir Virtual Office 1"),
         QA("818181df610695cb016108349b590ba8", "qa", "qa");
         public final String id;
         public final String login;

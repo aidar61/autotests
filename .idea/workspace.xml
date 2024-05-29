@@ -4,28 +4,36 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/sd dev">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/user create">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/user/CreateUserRequestBody.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Locale.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/JenkinsFilePerformance" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppConfigProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppConfigProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/CreateFromExcelTaskController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/TaskResponseBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/TaskResponseBody.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Descriptions.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/Pages.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/ui/Pages.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/infrastructure/dao/TaskDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/infrastructure/dao/UserDao.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/infrastructure/domain/BaseEntity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/infrastructure/domain/HibernateSessionFactoryUtil.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/infrastructure/domain/entities/Task.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/infrastructure/domain/entities/User.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/infrastructure/services/TaskService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/infrastructure/services/UserService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/SlaFeatureController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/sla/SlaFeatureController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Task.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/TaskV2.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/UserDataJson.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/listeners/TestListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/listeners/TestListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/services/ExcelService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/services/models/ListValueSelector.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/services/models/TaskFromExcelModel.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/tests/AbstractBaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/tests/AbstractBaseTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/main/java/com/ts/tests/runners/RetryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/main/java/com/ts/tests/runners/RetryTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/SelenideTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/excel_task/CreateExcelTask.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/resources/tasks.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_advice/cat_advice/CatAdvice1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_advice/cat_advice/CatAdvice1Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/negative/SlaFeatureNegative1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/negative/SlaFeatureNegative1Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/negative/SlaFeatureNegative2Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/negative/SlaFeatureNegative2Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/oldTests/SlaFeature1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/oldTests/SlaFeature1Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelp1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_help/SlaHelp1Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,18 +52,19 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/main" />
+    <option name="BRANCH" value="origin/master" />
   </component>
   <component name="Git.Rebase.Settings">
-    <option name="NEW_BASE" value="origin/master" />
+    <option name="NEW_BASE" value="origin/test" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="test" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
   </component>
   <component name="GitLabMergeRequestFiltersHistory">{
   &quot;lastFilter&quot;: {
@@ -99,6 +108,7 @@
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
     "Application.MemoStringValue.executor": "Run",
+    "Application.UserController.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "Git.Branch.Popup.ShowAllRemotes": "true",
     "Repository.Attach.Annotations": "false",
@@ -107,8 +117,8 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TestNG.BaseIntegrationTest.test.executor": "Run",
     "TestNG.BugTaskAcceptanceTest.executor": "Run",
-    "TestNG.FilterTest.editFilter.executor": "Run",
     "TestNG.GapPotentialQuestion1Test.executor": "Run",
     "TestNG.GapPrivateQuestion1Test.executor": "Run",
     "TestNG.GapPrivateQuestion1Test.passForApproval.executor": "Run",
@@ -120,6 +130,7 @@
     "TestNG.SdDevBaseDynamicTest.executor": "Run",
     "TestNG.SdDevBaseStaticTest.executor": "Run",
     "TestNG.SdQuestionBaseTest.createSdQuestion.executor": "Run",
+    "TestNG.SlaBug1Test.slaBugCat.executor": "Run",
     "TestNG.SlaFeatureBase2Test.executor": "Run",
     "TestNG.SlaFeatureByAccountTest.executor": "Run",
     "TestNG.SlaFeatureNoPrecostTest.executor": "Run",
@@ -170,36 +181,32 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.FilterTest.editFilter">
-    <configuration name="FilterTest.editFilter" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
+  <component name="RunManager" selected="TestNG.BaseIntegrationTest.test">
+    <configuration name="UserController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ts.common.controllers.user.UserController" />
+      <module name="common" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.ui.experimental.*" />
+          <option name="PATTERN" value="com.ts.common.controllers.user.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.experimental" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.experimental.FilterTest" />
-      <option name="METHOD_NAME" value="editFilter" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SdDevBaseDynamicTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="BaseIntegrationTest.test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_dev.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.sd_dev" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_dev.SdDevBaseDynamicTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.BaseIntegrationTest" />
+      <option name="METHOD_NAME" value="test" />
+      <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
       <method v="2">
@@ -302,21 +309,21 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.UserController" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.FilterTest.editFilter" />
-      <item itemvalue="TestNG.SdDevBaseDynamicTest" />
+      <item itemvalue="TestNG.BaseIntegrationTest.test" />
       <item itemvalue="TestNG.SdDevBaseStaticTest" />
       <item itemvalue="TestNG.SlaFeatureBase2Test" />
       <item itemvalue="TestNG.com.ts.integration.tests.proc_gap.TP1541680" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.FilterTest.editFilter" />
-        <item itemvalue="TestNG.SdDevBaseDynamicTest" />
-        <item itemvalue="TestNG.SdDevBaseStaticTest" />
-        <item itemvalue="TestNG.SlaFeatureBase2Test" />
+        <item itemvalue="TestNG.BaseIntegrationTest.test" />
+        <item itemvalue="Application.UserController" />
         <item itemvalue="TestNG.com.ts.integration.tests.proc_gap.TP1541680" />
+        <item itemvalue="TestNG.SlaFeatureBase2Test" />
+        <item itemvalue="TestNG.SdDevBaseStaticTest" />
       </list>
     </recent_temporary>
   </component>
@@ -425,7 +432,13 @@
       <workItem from="1714565653048" duration="18451000" />
       <workItem from="1714998680658" duration="12531000" />
       <workItem from="1715427516983" duration="15990000" />
-      <workItem from="1715597827750" duration="16907000" />
+      <workItem from="1715597827750" duration="29400000" />
+      <workItem from="1715848740855" duration="2961000" />
+      <workItem from="1715856851645" duration="359000" />
+      <workItem from="1715857223379" duration="3390000" />
+      <workItem from="1715925929108" duration="603000" />
+      <workItem from="1715928407059" duration="605000" />
+      <workItem from="1716187897856" duration="24041000" />
     </task>
     <task id="LOCAL-00038" summary="feature/Sla negative scenarios, Errors">
       <created>1701675904063</created>
@@ -742,39 +755,39 @@
       <option name="project" value="LOCAL" />
       <updated>1713342603322</updated>
     </task>
-    <task id="LOCAL-00093" summary="fix/ovoronov">
+    <task id="LOCAL-00097" summary="refactoring/jenkins groups name to PROC">
       <option name="closed" value="true" />
-      <created>1715664497072</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
+      <created>1715760997478</created>
+      <option name="number" value="00097" />
+      <option name="presentableId" value="LOCAL-00097" />
       <option name="project" value="LOCAL" />
-      <updated>1715664497072</updated>
+      <updated>1715760997478</updated>
     </task>
-    <task id="LOCAL-00094" summary="fix/ovoronov">
+    <task id="LOCAL-00098" summary="refactoring/jenkins groups name to PROC">
       <option name="closed" value="true" />
-      <created>1715664552364</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
+      <created>1715761011174</created>
+      <option name="number" value="00098" />
+      <option name="presentableId" value="LOCAL-00098" />
       <option name="project" value="LOCAL" />
-      <updated>1715664552364</updated>
+      <updated>1715761011174</updated>
     </task>
-    <task id="LOCAL-00095" summary="fix/sd dev">
+    <task id="LOCAL-00099" summary="refactoring/jenkins groups name to PROC">
       <option name="closed" value="true" />
-      <created>1715674898554</created>
-      <option name="number" value="00095" />
-      <option name="presentableId" value="LOCAL-00095" />
+      <created>1715761155452</created>
+      <option name="number" value="00099" />
+      <option name="presentableId" value="LOCAL-00099" />
       <option name="project" value="LOCAL" />
-      <updated>1715674898554</updated>
+      <updated>1715761155452</updated>
     </task>
-    <task id="LOCAL-00096" summary="fix/sd dev">
+    <task id="LOCAL-00100" summary="feature/user create">
       <option name="closed" value="true" />
-      <created>1715678176696</created>
-      <option name="number" value="00096" />
-      <option name="presentableId" value="LOCAL-00096" />
+      <created>1716793374905</created>
+      <option name="number" value="00100" />
+      <option name="presentableId" value="LOCAL-00100" />
       <option name="project" value="LOCAL" />
-      <updated>1715678176696</updated>
+      <updated>1716793374905</updated>
     </task>
-    <option name="localTasksCounter" value="97" />
+    <option name="localTasksCounter" value="101" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -784,11 +797,6 @@
     <option featureType="com.intellij.fileTypeFactory" implementationName="app.properties" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
-    <option name="OPEN_GENERIC_TABS">
-      <map>
-        <entry key="a3617214-0463-4bb9-a828-11951a3da8d4" value="TOOL_WINDOW" />
-      </map>
-    </option>
     <option name="RECENT_FILTERS">
       <map>
         <entry key="Branch">
@@ -809,12 +817,17 @@
         <entry key="MAIN">
           <value>
             <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
               <option name="FILTERS">
                 <map>
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="generators" />
                       </list>
                     </value>
                   </entry>
@@ -823,18 +836,11 @@
             </State>
           </value>
         </entry>
-        <entry key="a3617214-0463-4bb9-a828-11951a3da8d4">
-          <value>
-            <State />
-          </value>
-        </entry>
       </map>
     </option>
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feature/Sla negative scenarios, Errors" />
-    <MESSAGE value="feature/ui test settings" />
     <MESSAGE value="feature/Contingent" />
     <MESSAGE value="fix/dev task acceptance 2" />
     <MESSAGE value="fix/access prod" />
@@ -858,7 +864,9 @@
     <MESSAGE value="feature/gap_question" />
     <MESSAGE value="fix/ovoronov" />
     <MESSAGE value="fix/sd dev" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix/sd dev" />
+    <MESSAGE value="refactoring/jenkins groups name to PROC" />
+    <MESSAGE value="feature/user create" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/user create" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

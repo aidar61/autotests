@@ -1,7 +1,6 @@
 package com.ts.integration.tests.proc_sla_feature.negative;
 
 import com.ts.common.application.errors.ErrorResponseBody;
-import com.ts.common.application.errors.TrackStudioErrors;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.sla.SlaFeatureController;

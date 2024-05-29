@@ -2,7 +2,7 @@ package com.ts.common.application.controllers;
 
 import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.TaskResponseBody;
-import com.ts.common.controllers.UserController;
+import com.ts.common.controllers.user.UserController;
 import com.ts.common.controllers.advice.AdviceController;
 import com.ts.common.controllers.advice.CodeReviewController;
 import com.ts.common.controllers.advice.ConfirmationController;

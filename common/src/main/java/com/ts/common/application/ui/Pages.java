@@ -1,16 +1,14 @@
-package com.ts.common.application;
+package com.ts.common.application.ui;
 
 import com.ts.common.ui.pages.FilterPage;
 import com.ts.common.ui.pages.HomePage;
 import com.ts.common.ui.pages.LoginPage;
 import lombok.Getter;
 
+@Getter
 public class Pages {
-    @Getter
     private final LoginPage loginPage;
-    @Getter
     private final HomePage homePage;
-    @Getter
     private final FilterPage filterPage;
 
     public Pages() {
