@@ -1,11 +1,9 @@
 package com.ts.common.listeners;
 
 
-import io.qameta.allure.Attachment;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
-import org.testng.Reporter;
 import org.testng.TestListenerAdapter;
 
 @Slf4j

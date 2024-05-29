@@ -79,7 +79,7 @@ public class DevTaskConvertToBugTaskTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Создание запроса на разработку")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Создание запроса на разработку")
     public void createTask() {
         udf = refreshUdf();
         task.refreshTask();
@@ -123,7 +123,7 @@ public class DevTaskConvertToBugTaskTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Изменить категорию на исправление ошибки", dependsOnMethods = "createTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить категорию на исправление ошибки", dependsOnMethods = "createTask")
     public void changeCategory() {
         udf = refreshUdf();
         task.refreshTask();

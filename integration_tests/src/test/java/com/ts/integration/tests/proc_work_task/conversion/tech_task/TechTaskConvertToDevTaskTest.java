@@ -85,7 +85,7 @@ public class TechTaskConvertToDevTaskTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Создание CAT_TECHTASK")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Создание CAT_TECHTASK")
     public void createTask() {
         udf = refreshUdf();
         task.refreshTask();
@@ -126,7 +126,7 @@ public class TechTaskConvertToDevTaskTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить категорию на доработку", dependsOnMethods = "createTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить категорию на доработку", dependsOnMethods = "createTask")
     public void changeCategory() {
         udf = refreshUdf();
         task.refreshTask();

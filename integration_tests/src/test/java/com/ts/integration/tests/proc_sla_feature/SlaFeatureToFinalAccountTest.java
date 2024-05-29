@@ -79,7 +79,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
         WaitManager.pause(5);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Создать Запрос на доработку ЛПО (new) (КЛИЕНТ)")
     void cat() {
         apiController.updateToken(generateAuthToken(CLIENT));
@@ -114,7 +114,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_NOBODY);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Начать предварительную оценку (ACCOUNT-MANAGER)"
             , dependsOnMethods = "cat")
     void toprecost() {
@@ -141,7 +141,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Передать на предварительное согласование менеджеру по анализу доработок (АНАЛИТИК)"
             , dependsOnMethods = "toprecost")
     void toAnlsmgprlmapr() {
@@ -205,7 +205,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, MANAGER_ANALYZE_FEATURE);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Передать на предварительное планирование менеджеру запроса (МЕНЕДЖЕР ПО АНАЛИЗУ ДОРАБОТОК)"
             , dependsOnMethods = "toAnlsmgprlmapr")
     void toImplmgrprlmapr() {
@@ -266,7 +266,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, IMPLMANAGER)
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, MANAGER_REQUEST);
     }
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Передать на окончательную оценку аккаунт-менеджеру (МЕНЕДЖЕР ЗАПРОСА)"
             , dependsOnMethods = "toImplmgrprlmapr")
     void beginCostFinal() {
@@ -334,7 +334,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, ACCOUNT_MANAGER);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Сообщить окончательные условия реализации (ACCOUNT-MANAGER)"
             , dependsOnMethods = "beginCostFinal")
     void sendCostFinal() {
@@ -377,7 +377,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_REQ_APRV_IMPLSMANAGER, APPRVD_REQUEST);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Принять на окончательные условия реализации (КЛИЕНТ)"
             , dependsOnMethods = "sendCostFinal")
     void acceptConditions() {
@@ -400,7 +400,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, ACCOUNT_MANAGER_LIST);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Передать в разработку (ACCOUNT-MANAGER)"
             , dependsOnMethods = "acceptConditions")
     void start() {
@@ -434,7 +434,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_WORKER, ACCOUNT_MANAGER);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Завершить выполнение работы (ACCOUNT-MANAGER)"
             , dependsOnMethods = "start")
     void finish() {
@@ -457,7 +457,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, MANAGER_CLIENT_ROLE_CURRENT);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Передать на проверку клиенту (Менеджер клиента)"
             , dependsOnMethods = "finish")
     void toClientTest() {
@@ -478,7 +478,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Утвердить доработку (КЛИЕНТ)"
             , dependsOnMethods = "toClientTest")
     void acceptFeature() {
@@ -501,7 +501,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, MANAGER_CLIENT_ROLE_CURRENT);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Отправить патч (Менеджер клиента)"
             , dependsOnMethods = "acceptFeature")
     void send() {
@@ -529,7 +529,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_ROLE_CURRENT, CLIENT_ROLE_CURRENT);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Установить в производственную среду (КЛИЕНТ)"
             , dependsOnMethods = "send")
     void install() {
@@ -558,7 +558,7 @@ public class SlaFeatureToFinalAccountTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SDFEATURE_STAGE, STAGE_PAY);
     }
 
-    @Test(groups = {"SlaFeature", "Regression"}
+    @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Закрыть (ACCOUNT-MANAGER)"
             , dependsOnMethods = "install")
     void close() {

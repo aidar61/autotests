@@ -68,11 +68,7 @@ public class TrackStudioEndPoints {
     public static final String UDF_VAL = "udfval";
     public static final String USER = "user";
     public static final String LIST = "list";
-    public static final String WORKFLOW = "workflow";
-    public static final String MSTATUS = "mstatus";
-    public static final String PERMISSIONS = "permissions";
-
-
+    public static final String SAVE = "save";
 
     private static String getDomainName(String url) {
         String s = url.split("//")[1];

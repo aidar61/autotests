@@ -41,7 +41,7 @@ public class SlaBug9Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "создание задачи")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "создание задачи")
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -55,7 +55,7 @@ public class SlaBug9Test extends BaseIntegrationTest {
         slaBugController.createSlaBugTask(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "принятие на анализ", dependsOnMethods = "slaBugCat")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "принятие на анализ", dependsOnMethods = "slaBugCat")
     public void slaBugMsgAnalize() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ABDULLAEV_BAHODIR));
@@ -67,14 +67,14 @@ public class SlaBug9Test extends BaseIntegrationTest {
         slaBugController.msgAnalize(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "начать работу", dependsOnMethods = "slaBugMsgAnalize")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "начать работу", dependsOnMethods = "slaBugMsgAnalize")
     public void slaBugMsgStart() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, START);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "закрыть", dependsOnMethods = "slaBugMsgStart")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "закрыть", dependsOnMethods = "slaBugMsgStart")
     public void slaBugMsgClose() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));

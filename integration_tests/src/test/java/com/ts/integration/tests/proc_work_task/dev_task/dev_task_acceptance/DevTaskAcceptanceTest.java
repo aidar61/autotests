@@ -71,7 +71,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         handlerUser = userController.receiveUserByRole(taskEmployees, "Участник проекта", creator.getLogin()).getForUser();
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Создание запроса на разработку")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Создание запроса на разработку")
     public void devTask() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         task.setParent(parent);
@@ -107,7 +107,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "devTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Коррекция плана", dependsOnMethods = "devTask")
     public void changePlan() {
         apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
@@ -128,7 +128,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, 2).isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, 2).isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
     public void taskStart() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setHandlerUser(handlerUser);
@@ -139,7 +139,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "taskStart")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Передать на приёмку", dependsOnMethods = "taskStart")
     public void taskAcceptance() {
         apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
@@ -167,14 +167,14 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
 
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Проверить CAT_ACCEPTTASK", dependsOnMethods = "taskAcceptance")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Проверить CAT_ACCEPTTASK", dependsOnMethods = "taskAcceptance")
     public void checkAcceptTask() {
         apiController.updateToken(generateAuthToken(creator));
         var response = apiController.receiveTask(catAcceptTask.getNumber());
         CommonAssert.assertThat(response).isCorrectTaskName("Приёмка доработки: Создание запроса на разработку").isCorrectTaskDescription("Создана автоматически при закрытии задачи").isCorrectTaskLink(task.getNumber()).isCorrectHandlerUser(creator.getLogin());
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу CAT_ACCEPTTASK", dependsOnMethods = "checkAcceptTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу CAT_ACCEPTTASK", dependsOnMethods = "checkAcceptTask")
     public void startAcceptTask() {
         apiController.updateToken(generateAuthToken(creator));
         udf = refreshUdf();
@@ -194,7 +194,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Закончить приёмку CAT_ACCEPTTASK", dependsOnMethods = "startAcceptTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Закончить приёмку CAT_ACCEPTTASK", dependsOnMethods = "startAcceptTask")
     public void completeAcceptTask() {
         apiController.updateToken(generateAuthToken(creator));
         udf = refreshUdf();
@@ -207,7 +207,7 @@ public class DevTaskAcceptanceTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_CLOSED);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Проверить CAT_DEVTASK", dependsOnMethods = "completeAcceptTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Проверить CAT_DEVTASK", dependsOnMethods = "completeAcceptTask")
     public void checkCatDevTask() {
         apiController.updateToken(generateAuthToken(creator));
         var devTask = apiController.receiveTask(task.getNumber());

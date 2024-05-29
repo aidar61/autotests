@@ -73,7 +73,7 @@ public class ContingentStaticTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Заявка на подбор персонала")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Заявка на подбор персонала")
     public void workTask() {
         udf = refreshUdf();
         task.refreshTask();
@@ -127,7 +127,7 @@ public class ContingentStaticTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_WORKTASK_NEW).isEquals(task);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить участников", dependsOnMethods = "workTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить участников", dependsOnMethods = "workTask")
     public void changeMembers() {
         udf = refreshUdf();
         task.refreshTask();
@@ -145,7 +145,7 @@ public class ContingentStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_PARTICIPANTS, ABDULLAEV_BAHODIR.login);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Комментарий", dependsOnMethods = "changeMembers")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Комментарий", dependsOnMethods = "changeMembers")
     public void taskComment() {
         var comment = generateString();
         task.setDescription(comment);
@@ -161,7 +161,7 @@ public class ContingentStaticTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_WORKTASK_NEW);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить планируемую дату завершения", dependsOnMethods = "taskComment")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить планируемую дату завершения", dependsOnMethods = "taskComment")
     public void changePlanTD() {
         udf = refreshUdf();
         task.refreshTask();
@@ -179,7 +179,7 @@ public class ContingentStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfDate(UDF_WORKTASK_PLANTD, pannedStartDate);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить услугу", dependsOnMethods = "changePlanTD")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить услугу", dependsOnMethods = "changePlanTD")
     public void taskChangeService() {
         task.setDescription(generateString());
         udf = refreshUdf();
@@ -197,7 +197,7 @@ public class ContingentStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_MIS_SERVICE, MIS_SERVICE2);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "taskChangeService")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "taskChangeService")
     public void setSupervise() {
         udf = refreshUdf();
         task.refreshTask();
@@ -214,7 +214,7 @@ public class ContingentStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, ARUTYANIN_YURIY.login);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "setSupervise")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "setSupervise")
     public void setWatcher() {
         udf = refreshUdf();
         task.refreshTask();

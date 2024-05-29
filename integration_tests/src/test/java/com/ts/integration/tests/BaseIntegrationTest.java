@@ -1,42 +1,59 @@
 package com.ts.integration.tests;
 
+import com.ts.common.application.ui.Pages;
 import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.application.controllers.TrackStudioApiControllers;
 import com.ts.common.application.database.DbHelper;
 import com.ts.common.controllers.BaseController;
-import com.ts.common.controllers.UserController;
+import com.ts.common.controllers.user.UserController;
+import com.ts.common.entitites.commonEntities.Role;
 import com.ts.common.entitites.commonEntities.Udfs;
+import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.enums.Users;
+import com.ts.common.generators.UserGenerator;
 import com.ts.common.listeners.TestListener;
 import com.ts.common.tests.AbstractBaseTest;
-import io.restassured.response.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
-import static com.ts.common.utils.InitEntities.generateAuthToken;
+import java.util.List;
+import java.util.Map;
+
+import static com.ts.common.utils.InitEntities.*;
 
 @Slf4j
 @Listeners({TestListener.class})
 public class BaseIntegrationTest extends AbstractBaseTest {
-    protected Response response;
     protected AuthToken authToken;
     protected BaseController baseController;
     protected UserController userController;
     protected Udfs udf;
+    protected Map<Role.RoleConstants, List<User>> userRoles;
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
         this.authToken = generateAuthToken(Users.ROOT);
         apiController = new TrackStudioApiControllers(authToken);
-        baseController = apiController.getBaseController();
+        dbHelper = new DbHelper();
+        trackStudioPages = new Pages();
         log.warn("=====================API TESTS IS STARTED=====================");
     }
 
     @BeforeTest(alwaysRun = true)
     public void init() {
+        log.warn("=====================BEFORE TEST INITIALIZING=====================");
+        baseController = apiController.getBaseController();
         userController = apiController.getUserController();
-        dbHelper = new DbHelper();
+        //Generator
+        userRoles = UserGenerator.create(userController).generateUsers();
     }
+
+    @Test()
+    void test() {
+
+    }
+
 }

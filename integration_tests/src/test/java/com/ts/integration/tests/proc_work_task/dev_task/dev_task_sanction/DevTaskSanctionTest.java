@@ -72,7 +72,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Создание запроса на разработку")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Создание запроса на разработку")
     public void devTask() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         task.setParent(parent);
@@ -108,7 +108,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "devTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Коррекция плана", dependsOnMethods = "devTask")
     public void changePlan() {
         apiController.updateToken(generateAuthToken(handlerUser));
         udf = refreshUdf();
@@ -129,7 +129,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, 2).isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, 2).isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
     public void taskStart() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setHandlerUser(handlerUser);
@@ -140,7 +140,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "taskStart")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "taskStart")
     public void changePrgArea() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshUdf();
@@ -158,7 +158,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         CommonAssert.assertThat(devTaskResponse).isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_BNK.getId(), "OFF").isCorrectPrgCode(UDF_PRGAREA, UDF_PRGAREA_BNK.getId(), "BNK");
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Санкционировать привязку КПО в CAT_SANCTION", dependsOnMethods = "changePrgArea")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Санкционировать привязку КПО в CAT_SANCTION", dependsOnMethods = "changePrgArea")
     public void allowKPO() {
         apiController.updateToken(generateAuthToken(catSanctionTask.getHandlerUser()));
         var subTask = new GeneralTask();
@@ -182,7 +182,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         CommonAssert.assertThat(catSanctionResponse).isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_BNK.getId(), "NBL");
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "allowKPO")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "allowKPO")
     public void changePrgArea1() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshUdf();
@@ -203,7 +203,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         CommonAssert.assertThat(currentTaskDetail).isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_CDW.id, "OFF").isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_ISB.id, "OFF");
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "changePrgArea1")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "changePrgArea1")
     public void changePrgArea2() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshUdf();
@@ -219,7 +219,7 @@ public class DevTaskSanctionTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectReviewMode(UDF_PRGAREA, UDF_PRGAREA_CDW.id, "OFF").isCorrectUdfMultiList(UDF_PRGAREA, UDF_PRGAREA_BNK.id).isCorrectUdfMultiList(UDF_PRGAREA, UDF_PRGAREA_CDW.id);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "changePrgArea2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Связь с ККПО", dependsOnMethods = "changePrgArea2")
     public void changePrgArea3() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshUdf();

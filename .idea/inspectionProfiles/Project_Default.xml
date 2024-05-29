@@ -10,7 +10,7 @@
     <inspection_tool class="groupsTestNG" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="groups">
         <value>
-          <list size="14">
+          <list size="26">
             <item index="0" class="java.lang.String" itemvalue="Regression" />
             <item index="1" class="java.lang.String" itemvalue="SlaFeature" />
             <item index="2" class="java.lang.String" itemvalue="SlaBug" />
@@ -25,6 +25,18 @@
             <item index="11" class="java.lang.String" itemvalue="PotentialGap" />
             <item index="12" class="java.lang.String" itemvalue="Gap_Solution" />
             <item index="13" class="java.lang.String" itemvalue="Gap_Question" />
+            <item index="14" class="java.lang.String" itemvalue="PROC_SDHELP" />
+            <item index="15" class="java.lang.String" itemvalue="PROC_SLAFEATURE" />
+            <item index="16" class="java.lang.String" itemvalue="PROC_SLABUG" />
+            <item index="17" class="java.lang.String" itemvalue="PROC_SLAHELP" />
+            <item index="18" class="java.lang.String" itemvalue="PROC_SOLUTION" />
+            <item index="19" class="java.lang.String" itemvalue="PROC_GAP" />
+            <item index="20" class="java.lang.String" itemvalue="PROC_ADVICE" />
+            <item index="21" class="java.lang.String" itemvalue="PROC_WORKTASK" />
+            <item index="22" class="java.lang.String" itemvalue="PROC_SDQUESTION" />
+            <item index="23" class="java.lang.String" itemvalue="PROC_SDBUG" />
+            <item index="24" class="java.lang.String" itemvalue="PROC_RELEASE" />
+            <item index="25" class="java.lang.String" itemvalue="PROC_SDDEV" />
           </list>
         </value>
       </option>

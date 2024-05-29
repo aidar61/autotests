@@ -87,7 +87,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Создание запроса на разработку")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Создание запроса на разработку")
     public void devTask() {
         udf = refreshUdf();
         task.refreshTask();
@@ -134,7 +134,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_ONANALYSIS).isEquals(task);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "devTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Коррекция плана", dependsOnMethods = "devTask")
     public void changePlan() {
         udf = refreshUdf();
         task.refreshTask();
@@ -157,7 +157,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, awaitBudgetValue).isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, normBudgetValue).isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
     public void taskStart() {
         udf = refreshUdf();
         task.refreshTask();
@@ -171,7 +171,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Комментарий", dependsOnMethods = "taskStart")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Комментарий", dependsOnMethods = "taskStart")
     public void taskComment() {
         udf = refreshUdf();
         task.refreshTask();
@@ -182,7 +182,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask();
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Отложить", dependsOnMethods = "taskComment")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Отложить", dependsOnMethods = "taskComment")
     public void taskPostpone() {
         udf = refreshUdf();
         task.refreshTask();
@@ -199,7 +199,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfTask(UDF_WORKTASK_DEPENDBF, MTBANK);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskPostpone")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "taskPostpone")
     public void taskStart2() {
         udf = refreshUdf();
         task.refreshTask();
@@ -212,7 +212,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Отклонить", dependsOnMethods = "taskStart2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Отклонить", dependsOnMethods = "taskStart2")
     public void taskDecline() {
         udf = refreshUdf();
         task.refreshTask();
@@ -225,7 +225,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectResolution(CANNOT_BE_COMPLETED_WITHIN_THE_SPECIFIED_TIME_FRAME).isCorrectHandlerUser(creator).isCorrectStatus(STATUS_WORKTASK_DECLINED);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Передать на предварительный анализ", dependsOnMethods = "taskDecline")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Передать на предварительный анализ", dependsOnMethods = "taskDecline")
     public void taskSubmitForAnalysis() {
         udf = refreshUdf();
         task.refreshTask();
@@ -244,7 +244,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDate(UDF_WORKTASK_ANALYSISFD, expectedCompletionDate);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "taskSubmitForAnalysis")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Коррекция плана", dependsOnMethods = "taskSubmitForAnalysis")
     public void changePlan2() {
         udf = refreshUdf();
         task.refreshTask();
@@ -267,7 +267,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectTaskField("Планируемая дата завершения = Ожидаемая дата завершения", new JsonPath(response.asString()).getString("udfs.UDF_WORKTASK_PLANTD.dateValue"), "udfs.UDF_WORKTASK_AWAITTD.dateValue").isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, 4).isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, 4);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan2")
     public void taskStart3() {
         udf = refreshUdf();
         task.refreshTask();
@@ -325,7 +325,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
 //        ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).checkingResponseMessageField("description", "<br/>Разрешено тиражирование задачи во все ветки. Причина: " + description);
 //    }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Изменить ветку для разработки", dependsOnMethods = "taskStart3")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить ветку для разработки", dependsOnMethods = "taskStart3")
     public void taskChangeBranch() {
         udf = refreshUdf();
         task.refreshTask();
@@ -340,7 +340,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Изменить ветку для разработки на пустую", dependsOnMethods = "taskChangeBranch")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить ветку для разработки на пустую", dependsOnMethods = "taskChangeBranch")
     public void taskChangeBranch1() {
         udf = refreshUdf();
         task.refreshTask();
@@ -355,7 +355,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Установить функциональную зависимость от другой задачи", dependsOnMethods = "taskChangeBranch1")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Установить функциональную зависимость от другой задачи", dependsOnMethods = "taskChangeBranch1")
     public void taskDependOtherTask() {
         udf = refreshUdf();
         task.refreshTask();
@@ -372,7 +372,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Изменить план тестирования", dependsOnMethods = "taskDependOtherTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить план тестирования", dependsOnMethods = "taskDependOtherTask")
     public void changeTestPlanTask() {
         udf = refreshUdf();
         task.refreshTask();
@@ -388,7 +388,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectMessageField("description", description);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "changeTestPlanTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить список связанных задач", dependsOnMethods = "changeTestPlanTask")
     public void changeLinkedTask() {
         udf = refreshUdf();
         task.refreshTask();
@@ -406,7 +406,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfTask(UDF_SD_LINKEDREQUEST, AKKREDITIVES).isCorrectUdfTask(UDF_SD_LINKEDREQUEST, SERVICE_DESK);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Изменить услугу", dependsOnMethods = "changeLinkedTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить услугу", dependsOnMethods = "changeLinkedTask")
     public void taskChangeService() {
         udf = refreshUdf();
         task.refreshTask();
@@ -423,7 +423,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
 
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "taskChangeService")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Назначить контролёра", dependsOnMethods = "taskChangeService")
     public void taskChangeSupervisor() {
         udf = refreshUdf();
         task.refreshTask();
@@ -440,7 +440,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, ABDULLAEV_BAHODIR.login).isCorrectUdfUSer(UDF_WORKTASK_SUPERVISER, AKSENOV_ANDREY.login);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "taskChangeSupervisor")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Назначить наблюдателя", dependsOnMethods = "taskChangeSupervisor")
     public void taskChangeWatcher() {
         udf = refreshUdf();
         task.refreshTask();
@@ -457,7 +457,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfUSer(UDF_WATCHER, BABUSHKIN_IVAN.login).isCorrectUdfUSer(UDF_WATCHER, ALTUNIN_NIKOLAY.login);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Установить общеполезность", dependsOnMethods = "taskChangeWatcher")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Установить общеполезность", dependsOnMethods = "taskChangeWatcher")
     public void taskChangeGenuse() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setDescription(generateString());
@@ -473,7 +473,7 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfList(UDF_SDFEATURE_GENUSE, LOCAL.getId());
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Создать подзадачу копированием", dependsOnMethods = "taskChangeGenuse")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Создать подзадачу копированием", dependsOnMethods = "taskChangeGenuse")
     public void taskCreateSubtaskWithCopy() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setDescription(generateString());
@@ -490,14 +490,14 @@ public class DevTaskBaseHandlerTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskOriginalDetail).isCorrectTaskField("Категория", new JsonPath(taskCopyDetail.asString()).getString("category.id"), "category.id").isCorrectTaskField("Причины отсутствия классификации по модулям или направлениям деятельности", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_SD_NOMODULE_REASON.stringValue"), "udfs.UDF_SD_NOMODULE_REASON.stringValue").isCorrectTaskField("Модуль системы", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_SD_MODULE.taskValue[0].id"), "udfs.UDF_SD_MODULE.taskValue[0].id").isCorrectTaskField("Услуга", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_MIS_SERVICE.listValue[0].id"), "udfs.UDF_MIS_SERVICE.listValue[0].id").isCorrectTaskField("Приёмка задачи", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_CDP_ACCEPTANCE.listValue[0].id"), "udfs.UDF_CDP_ACCEPTANCE.listValue[0].id").isCorrectTaskField("Планируемая дата завершения", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WORKTASK_PLANTD.dateValue"), "udfs.UDF_WORKTASK_PLANTD.dateValue").isCorrectTaskField("Проект БДКУ", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_PRODUCT.taskValue[0].id"), "udfs.UDF_PRODUCT.taskValue[0].id").isCorrectTaskField("Способ обзора кода", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WORKTASK_WAYCODEREVIEW.listValue[0].code"), "udfs.UDF_WORKTASK_WAYCODEREVIEW.listValue[0].code").isCorrectTaskField("Общеполезность", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_SDFEATURE_GENUSE.listValue[0].code"), "udfs.UDF_SDFEATURE_GENUSE.listValue[0].code").isCorrectTaskField("Запрос клиента", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WORKTASK_SDREQUEST.taskValue[0].number"), "udfs.UDF_WORKTASK_SDREQUEST.taskValue[0].number").isCorrectTaskField("Направление деятельности", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_CDP_BL.listValue[0].id"), "udfs.UDF_CDP_BL.listValue[0].id").isCorrectTaskUser("Наблюдатель1", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WATCHER.userValue[0].login"), "udfs.UDF_WATCHER.userValue.login").isCorrectTaskUser("Наблюдатель2", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WATCHER.userValue[1].login"), "udfs.UDF_WATCHER.userValue.login").isCorrectTaskUser("Контролер1", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WORKTASK_SUPERVISER.userValue[0].login"), "udfs.UDF_WORKTASK_SUPERVISER.userValue.login").isCorrectTaskUser("Контролер2", new JsonPath(taskCopyDetail.asString()).getString("udfs.UDF_WORKTASK_SUPERVISER.userValue[1].login"), "udfs.UDF_WORKTASK_SUPERVISER.userValue.login").isCorrectTaskField("Ответственный", new JsonPath(taskCopyDetail.asString()).getString("handlerUser.login"), "handlerUser.login").isCorrectTaskField("Автор", new JsonPath(taskCopyDetail.asString()).getString("submitterUser.login"), "submitterUser.login").isCorrectTaskField("Статус", new JsonPath(taskCopyDetail.asString()).getString("status.id"), "status.id");
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Проверить открытие формы  MSG_WORKTASK_FINISHDEV", dependsOnMethods = "taskCreateSubtaskWithCopy")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Проверить открытие формы  MSG_WORKTASK_FINISHDEV", dependsOnMethods = "taskCreateSubtaskWithCopy")
     public void taskFinishDevForm() {
         apiController.updateToken(generateAuthToken(handlerUser));
         var response = apiController.receiveFinishDevForm(task.getNumber());
         CommonAssert.assertThat(response).isCorrectTaskField("Функционально зависима от задачи = данные из ш.14", HEAD_BOOK.number, "udfs.UDF_WORKTASK_DEPENDTASKFNC.taskValue[0].number").isCorrectTaskField("Доработка документации = нет", "NO", "udfs.UDF_SDFEATURE_DOCREVISION.listValue[0].code");
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Закончить разработку", dependsOnMethods = "taskFinishDevForm")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Закончить разработку", dependsOnMethods = "taskFinishDevForm")
     public void taskFinishDev() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.setDescription(generateString());

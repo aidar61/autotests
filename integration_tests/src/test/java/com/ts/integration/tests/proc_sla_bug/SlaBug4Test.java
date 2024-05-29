@@ -41,7 +41,7 @@ public class SlaBug4Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test( groups = {"SlaBug", "Regression"},description = "создание задачи")
+    @Test( groups = {"PROC_SLABUG", "Regression"},description = "создание задачи")
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -55,7 +55,7 @@ public class SlaBug4Test extends BaseIntegrationTest {
         slaBugController.createSlaBugTask(task);
     }
 
-    @Test( groups = {"SlaBug", "Regression"},description = "принятие на анализ", dependsOnMethods = "slaBugCat")
+    @Test( groups = {"PROC_SLABUG", "Regression"},description = "принятие на анализ", dependsOnMethods = "slaBugCat")
     public void slaBugMsgAnalize() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ABDULLAEV_BAHODIR));
@@ -67,21 +67,21 @@ public class SlaBug4Test extends BaseIntegrationTest {
         slaBugController.msgAnalize(task);
     }
 
-    @Test( groups = {"SlaBug", "Regression"},description = "отклонить", dependsOnMethods = "slaBugMsgAnalize")
+    @Test( groups = {"PROC_SLABUG", "Regression"},description = "отклонить", dependsOnMethods = "slaBugMsgAnalize")
     public void slaBugMsgDecline() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, DECLINE);
     }
 
-    @Test( groups = {"SlaBug", "Regression"},description = "отменить заказ", dependsOnMethods = "slaBugMsgDecline")
+    @Test( groups = {"PROC_SLABUG", "Regression"},description = "отменить заказ", dependsOnMethods = "slaBugMsgDecline")
     public void slaBugMsgUndoDecline() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, UNDODECLINE);
     }
 
-    @Test( groups = {"SlaBug", "Regression"},description = "закрыть как неустраненную", dependsOnMethods = "slaBugMsgUndoDecline")
+    @Test( groups = {"PROC_SLABUG", "Regression"},description = "закрыть как неустраненную", dependsOnMethods = "slaBugMsgUndoDecline")
     public void slaBugMsgCloseUnfixable() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));

@@ -86,7 +86,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"BugTask", "Regression"}, description = "создание CAT_BUGTASK")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "создание CAT_BUGTASK")
     public void bugTask() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         task.setParent(parent);
@@ -166,7 +166,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR.getId());
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "bugTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Коррекция плана", dependsOnMethods = "bugTask")
     public void changePlan() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();
@@ -190,7 +190,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_WORKTASK_ASSIGNED);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
     public void taskStart() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();
@@ -211,7 +211,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Передать исправление на приёмку", dependsOnMethods = "taskStart")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Передать исправление на приёмку", dependsOnMethods = "taskStart")
     public void taskToAcceptanceBug() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();
@@ -253,7 +253,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectSubTasksUser("submitterUser", handlerUser.getLogin());
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Отредактировать CAT_BUGTASK", dependsOnMethods = "taskToAcceptanceBug")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Отредактировать CAT_BUGTASK", dependsOnMethods = "taskToAcceptanceBug")
     public void updateTask() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         task.refreshTask();
@@ -283,7 +283,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE, REQBYCONRTOLLER.getId());
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Передать исправление на приёмку 2", dependsOnMethods = "updateTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Передать исправление на приёмку 2", dependsOnMethods = "updateTask")
     public void taskToAcceptanceBug2() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();
@@ -327,7 +327,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectSubTasksUser("submitterUser", handlerUser.getLogin());
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "В первой задаче CAT_ACCEPTWORK выполнить Принять и закрыть", dependsOnMethods = "taskToAcceptanceBug2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "В первой задаче CAT_ACCEPTWORK выполнить Принять и закрыть", dependsOnMethods = "taskToAcceptanceBug2")
     public void subtaskAcceptAndClose() {
         var firstTask = getFirstTask(subTasksAcceptWork);
         apiController.updateToken(generateAuthToken(firstTask.getHandlerUser()));
@@ -350,7 +350,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE_STATUS, UDF_CDP_ACCEPTANCE_STATUS_ACCEPTED.getId());
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Проверить CAT_BUGTASK", dependsOnMethods = "subtaskAcceptAndClose")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Проверить CAT_BUGTASK", dependsOnMethods = "subtaskAcceptAndClose")
     public void checkBugTask() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();
@@ -362,7 +362,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE_STATUS, UDF_CDP_ACCEPTANCE_STATUS_ACCEPTANCE.getId());
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Во второй задаче CAT_ACCEPTWORK выполнить Отклонить изменения", dependsOnMethods = "checkBugTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Во второй задаче CAT_ACCEPTWORK выполнить Отклонить изменения", dependsOnMethods = "checkBugTask")
     public void subtaskDecline() {
         var lastTask = getLastTask(subTasksAcceptWork);
         apiController.updateToken(generateAuthToken(lastTask.getHandlerUser()));
@@ -384,7 +384,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE_STATUS, UDF_CDP_ACCEPTANCE_STATUS_REJECTED.getId());
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Проверить CAT_BUGTASK 2", dependsOnMethods = "subtaskDecline")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Проверить CAT_BUGTASK 2", dependsOnMethods = "subtaskDecline")
     public void checkBugTask2() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();
@@ -396,7 +396,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE_STATUS, UDF_CDP_ACCEPTANCE_STATUS_REJECTED.getId());
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Передать исправление на приёмку", dependsOnMethods = "checkBugTask2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Передать исправление на приёмку", dependsOnMethods = "checkBugTask2")
     public void taskToAcceptanceBug3() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();
@@ -439,7 +439,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectSubTasksUser("submitterUser", handlerUser.getLogin());
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "В отркытой CAT_ACCEPTWORK выполнить \"Принять и закрыть\"", dependsOnMethods = "taskToAcceptanceBug3")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "В отркытой CAT_ACCEPTWORK выполнить \"Принять и закрыть\"", dependsOnMethods = "taskToAcceptanceBug3")
     public void subtaskAcceptAndClose2() {
         var lastTask = getLastTask(subTasksAcceptWork);
         apiController.updateToken(generateAuthToken(lastTask.getHandlerUser()));
@@ -462,7 +462,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE_STATUS, UDF_CDP_ACCEPTANCE_STATUS_ACCEPTED.getId());
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "Проверить CAT_BUGTASK 3", dependsOnMethods = "subtaskAcceptAndClose2")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Проверить CAT_BUGTASK 3", dependsOnMethods = "subtaskAcceptAndClose2")
     public void checkBugTask3() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();
@@ -474,7 +474,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE_STATUS, UDF_CDP_ACCEPTANCE_STATUS_ACCEPTED.getId());
     }
 
-    @Test(groups = {"BugTask", "Regression"}, description = "В CAT_BUGTASK выполнить Закончить исправление ошибки", dependsOnMethods = "checkBugTask3")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "В CAT_BUGTASK выполнить Закончить исправление ошибки", dependsOnMethods = "checkBugTask3")
     public void taskFinishBug() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();

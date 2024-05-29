@@ -14,13 +14,6 @@ public class AppConfigProvider {
     public static final int IMPLICITLY_WAIT_SEC = get().implicitlyWait();
     public static final int IMPLICITLY_SLEEP_MS = get().implicitlySleep();
 
-    private static UiConfig uiConfig;
-
-    public static void main(String[] args) {
-        System.out.println(DB_URL);
-        System.out.println(STAND_URL);
-    }
-
     private AppConfigProvider() {
         throw new IllegalStateException("AppConfigProvider should never be instantiated");
     }
@@ -62,12 +55,5 @@ public class AppConfigProvider {
             userConfig = ConfigFactory.create(AppUserConfig.class, System.getProperties());
         }
         return userConfig;
-    }
-
-    public static UiConfig getUiConfig() {
-        if (uiConfig == null) {
-            uiConfig = ConfigFactory.create(UiConfig.class, System.getProperties());
-        }
-        return uiConfig;
     }
 }

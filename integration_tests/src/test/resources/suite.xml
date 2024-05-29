@@ -36,12 +36,12 @@
             <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureToFinalAccountTest"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelp1Test"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelp2Test"/>
-            <class name="com.ts.integration.tests.proc_potential_gap.PotentialGap1Test"/>
-            <class name="com.ts.integration.tests.proc_potential_gap.PotentialGap2Test"/>
-            <class name="com.ts.integration.tests.proc_potential_gap.PotentialGap3Test"/>
+            <class name="com.ts.integration.tests.proc_gap.GapBaseTest"/>
+            <class name="com.ts.integration.tests.proc_gap.GapPrivateBaseTest"/>
+            <class name="com.ts.integration.tests.proc_gap.PotentialGapBaseTest"/>
             <class name="com.ts.integration.tests.proc_gap_solution.GapSolution1Test"/>
             <!--            <class name="com.ts.integration.tests.proc_gap_solution.GapSolution2Test"/>-->
-            <class name="com.ts.integration.tests.proc_release_module.Release1Test"/>
+            <class name="com.ts.integration.tests.proc_release.Release1Test"/>
             <class name="com.ts.integration.tests.proc_advice.cat_advice.CatAdvice1Test"/>
             <class name="com.ts.integration.tests.proc_advice.cat_sanction.CatSanction1Test"/>
             <class name="com.ts.integration.tests.proc_advice.cat_confirmation.CatConfirmation1Test"/>
@@ -85,9 +85,9 @@
             <class name="com.ts.integration.tests.proc_sd_bug.sd_improve.SdImproveBaseStaticTest"/>
             <class name="com.ts.integration.tests.proc_sd_bug.sd_optimization.SdOptimizationBaseDynamicTest"/>
             <class name="com.ts.integration.tests.proc_sd_bug.sd_optimization.SdOptimizationBaseStaticTest"/>
-            <class name="com.ts.integration.tests.proc_release.cat_release.CatReleaseTest"/>
-            <class name="com.ts.integration.tests.sd_dev.SdDevBaseDynamicTest"/>
-            <class name="com.ts.integration.tests.sd_dev.SdDevBaseStaticTest"/>
+            <class name="com.ts.integration.tests.proc_release.CatReleaseTest"/>
+            <class name="com.ts.integration.tests.proc_sd_dev.SdDevBaseDynamicTest"/>
+            <class name="com.ts.integration.tests.proc_sd_dev.SdDevBaseStaticTest"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelpBaseDynamicTest"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelpBaseStaticTest"/>
             <class name="com.ts.integration.tests.proc_sd_help.sdhelp.SdHelpBaseDynamicTest"/>
@@ -98,9 +98,9 @@
             <class name="com.ts.integration.tests.proc_sd_help.sdTechAssist.SdTechAssistBaseStaticTest"/>
             <class name="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseDynamicTest"/>
             <class name="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseStaticTest"/>
-            <class name="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapPotentialQuestion1Test"/>
-            <class name="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapPrivateQuestion1Test"/>
-            <class name="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapQuestion1Test"/>
+            <class name="com.ts.integration.tests.proc_gap.TP_1541680.TM_01.GapPotentialQuestion1Test"/>
+            <class name="com.ts.integration.tests.proc_gap.TP_1541680.TM_01.GapPrivateQuestion1Test"/>
+            <class name="com.ts.integration.tests.proc_gap.TP_1541680.TM_01.GapQuestion1Test"/>
         </classes>
     </test>
 </suite>

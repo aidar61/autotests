@@ -4,7 +4,6 @@ import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.asserts.CommonAssert;
 import com.ts.common.asserts.TaskAsserts;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.advice.AdviceController;
@@ -52,7 +51,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
         task = InitEntities.getGeneralTask(TaskType.ADVICE, Operations.CAT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Создание запроса на консультацию")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Создание запроса на консультацию")
     public void catAdvice() {
         apiController.updateToken(InitEntities.generateAuthToken(HANDLER_USER_FROM_PARENT));
         task.setParent(parent);
@@ -76,7 +75,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Комментарий", dependsOnMethods = "catAdvice")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Комментарий", dependsOnMethods = "catAdvice")
     public void comment() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -90,7 +89,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
                 .isNotEmpty(generalTask.getDescription());
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Изменить крайний срок ответа", dependsOnMethods = "comment")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Изменить крайний срок ответа", dependsOnMethods = "comment")
     public void changePlanTime() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -111,7 +110,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
 //                .isCorrectUdfDate(UDF_ADVICE_PLANTD, planTime2);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Предоставить консультацию", dependsOnMethods = "changePlanTime")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Предоставить консультацию", dependsOnMethods = "changePlanTime")
     public void provideConsult() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -126,7 +125,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
                 .isCorrectStatus(TaskStatuses.STATUS_ADVICE_ANSWERED);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Задать дополнительный вопрос", dependsOnMethods = "provideConsult")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Задать дополнительный вопрос", dependsOnMethods = "provideConsult")
     public void askFurther() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -142,7 +141,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_AWAIT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Отклонить запрос", dependsOnMethods = "provideConsult")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Отклонить запрос", dependsOnMethods = "provideConsult")
     public void reject() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -157,7 +156,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_DECLINED);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Запросить консультацию повторно", dependsOnMethods = "reject")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Запросить консультацию повторно", dependsOnMethods = "reject")
     public void askExtraConsult() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -174,7 +173,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_AWAIT);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Предоставить консультацию", dependsOnMethods = "askExtraConsult")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Предоставить консультацию", dependsOnMethods = "askExtraConsult")
     public void provideConsultRetry() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();
@@ -191,7 +190,7 @@ public class CatAdvice1Test extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_ADVICE_ANSWERED);
     }
 
-    @Test(groups = {"Advice", "Regression"}, description = "Закрыть запрос", dependsOnMethods = "provideConsultRetry")
+    @Test(groups = {"PROC_ADVICE", "Regression"}, description = "Закрыть запрос", dependsOnMethods = "provideConsultRetry")
     public void close() {
         apiController.updateToken(generateAuthToken(HANDLER_USER_FROM_PARENT));
         udf = refreshUdf();

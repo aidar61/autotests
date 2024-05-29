@@ -73,7 +73,7 @@ public class SdQuestionBaseTest2 extends BaseIntegrationTest {
         members.put("Клиент", handler);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "создание CAT_SDQUESTION")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "создание CAT_SDQUESTION")
     public void createSdQuestion() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер клиента")));
         task.setParent(parent);
@@ -93,7 +93,7 @@ public class SdQuestionBaseTest2 extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, "818182d33920daa3013920dde2800028");
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Изменить автора", dependsOnMethods = "createSdQuestion")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Изменить автора", dependsOnMethods = "createSdQuestion")
     public void changeAuthor() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер клиента")));
         var comment = generateString();
@@ -109,7 +109,7 @@ public class SdQuestionBaseTest2 extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectSubmitterUser(ABDULLAEV_BAHODIR.login);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Изменить автора", dependsOnMethods = "createSdQuestion")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Изменить автора", dependsOnMethods = "createSdQuestion")
     public void changeAuthor2() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер клиента2")));
         var comment = generateString();
@@ -125,7 +125,7 @@ public class SdQuestionBaseTest2 extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectSubmitterUser(members.get("Менеджер клиента").getLogin());
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Снять вопрос", dependsOnMethods = "changeAuthor2")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Снять вопрос", dependsOnMethods = "changeAuthor2")
     public void closeTask() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер клиента")));
         task.refreshTask();
@@ -139,7 +139,7 @@ public class SdQuestionBaseTest2 extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, nobody);
     }
 
-    @Test(groups = {"SdQuestion", "Regression"}, description = "Задать уточняющий вопрос", dependsOnMethods = "closeTask")
+    @Test(groups = {"PROC_SDQUESTION", "Regression"}, description = "Задать уточняющий вопрос", dependsOnMethods = "closeTask")
     public void askMore() {
         apiController.updateToken(generateAuthToken(members.get("Менеджер клиента")));
         var client = "818182d33920daa3013920dde2800028";

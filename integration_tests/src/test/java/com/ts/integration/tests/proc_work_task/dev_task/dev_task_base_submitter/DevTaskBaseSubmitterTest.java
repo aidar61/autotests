@@ -78,7 +78,7 @@ public class DevTaskBaseSubmitterTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Создание запроса на разработку")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Создание запроса на разработку")
     public void devTask() {
         udf = refreshUdf();
         task.refreshTask();
@@ -124,7 +124,7 @@ public class DevTaskBaseSubmitterTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, COLVIR_MODERN_PRODUCT).isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, SERVICE_DESK).isCorrectUdfTask(UDF_WORKTASK_DEPENDTASKFNC, REQUIREMENTS);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "devTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Коррекция плана", dependsOnMethods = "devTask")
     public void changePlan() {
         udf = refreshUdf();
         task.refreshTask();
@@ -147,7 +147,7 @@ public class DevTaskBaseSubmitterTest extends BaseIntegrationTest {
         CommonAssert.assertThat(response).isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, awaitBudgetValue).isCorrectUdfDouble("Трудоемкость по нормам", UDF_CDP_NORMBUDGET, normBudgetValue).isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Принять в работу", dependsOnMethods = "changePlan")
     public void taskStart() {
         udf = refreshUdf();
         task.refreshTask();
@@ -161,7 +161,7 @@ public class DevTaskBaseSubmitterTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(devTaskController.getResponse()).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK).isParseableBody(TaskResponseBody.class).assertTask().isCorrectStatus(STATUS_WORKTASK_INWORK);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Изменить участников", dependsOnMethods = "taskStart")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить участников", dependsOnMethods = "taskStart")
     public void changeMembers() {
         udf = refreshUdf();
         task.refreshTask();
@@ -176,14 +176,14 @@ public class DevTaskBaseSubmitterTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfUSer(UDF_PARTICIPANTS, ARUTYANIN_YURIY.getLogin()).isCorrectUdfUSer(UDF_PARTICIPANTS, ARTEMEVA_MARINA.getLogin()).isCorrectUdfUSer(UDF_PARTICIPANTS, BABUSHKIN_IVAN.getLogin());
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Проверить форму операции MSG_WORKTASK_CHNGTASKALLOCATION", dependsOnMethods = "changeMembers")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Проверить форму операции MSG_WORKTASK_CHNGTASKALLOCATION", dependsOnMethods = "changeMembers")
     public void changeForm() {
         var response = devTaskController.receiveContextByOperation(InitEntities.generateOperationID(WORK_TASK, CHNGTASKAL_LOCATION).getId(), task.getNumber());
         ApiAsserts.assertThat(response).isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
         CommonAssert.assertThat(response).isCorrectUdfDate(UDF_WORKTASK_PLANTD, expectedCompletionDate);
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Изменить способ обзора кода", dependsOnMethods = "changeForm")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить способ обзора кода", dependsOnMethods = "changeForm")
     public void changeCodeReview() {
         udf = refreshUdf();
         task.refreshTask();
@@ -198,7 +198,7 @@ public class DevTaskBaseSubmitterTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfList(UDF_WORKTASK_WAYCODEREVIEW, WAY_CODE_REVIEW_BLOCKING.getId());
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Изменить уровень сложности", dependsOnMethods = "changeCodeReview")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить уровень сложности", dependsOnMethods = "changeCodeReview")
     public void changeLevel() {
         udf = refreshUdf();
         task.refreshTask();
@@ -212,7 +212,7 @@ public class DevTaskBaseSubmitterTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectUdfList(UDF_WORKTASK_COMPLEXITYLEVEL, TASK_LEVEL_10.getId());
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Изменить автора", dependsOnMethods = "changeLevel")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить автора", dependsOnMethods = "changeLevel")
     public void changeSubmitter() {
         udf = refreshUdf();
         task.refreshTask();
@@ -226,7 +226,7 @@ public class DevTaskBaseSubmitterTest extends BaseIntegrationTest {
         CommonAssert.assertThat(taskDetail).isCorrectSubmitterUser(handlerUser.getLogin());
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Изменить автора", dependsOnMethods = "changeSubmitter")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить автора", dependsOnMethods = "changeSubmitter")
     public void taskClose() {
         udf = refreshUdf();
         task.refreshTask();

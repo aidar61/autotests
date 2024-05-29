@@ -2,6 +2,7 @@ package com.ts.common.entitites.commonEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.BaseEntity;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
@@ -22,6 +23,9 @@ import lombok.extern.slf4j.Slf4j;
 public class Role extends BaseEntity {
     String id;
     String name;
+    @JsonProperty(value = "owner")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    User owner;
 
     public enum Constants {
         ANALYTIC("Аналитик"),
@@ -37,5 +41,22 @@ public class Role extends BaseEntity {
         Constants(String role) {
             this.role = role;
         }
+    }
+
+    @Getter
+    public enum RoleConstants {
+        ROLE_ORGANIZATION("ROLE_ORGANIZATION", "Организация"),
+        ROLE_DEP("ROLE_DEP", "Подразделение"),
+        ROLE_WORKER("ROLE_WORKER", "Сотрудник"),
+        ROLE_CLIENT("ROLE_CLIENT", "Клиент");
+
+        private final String id;
+        private final String name;
+
+        RoleConstants(String id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
     }
 }

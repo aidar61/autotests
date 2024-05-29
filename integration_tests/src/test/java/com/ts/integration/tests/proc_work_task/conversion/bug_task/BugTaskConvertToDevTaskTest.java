@@ -76,7 +76,7 @@ public class BugTaskConvertToDevTaskTest extends BaseIntegrationTest {
     }
 
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "создание Исправление ошибки")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "создание Исправление ошибки")
     public void createTask() {
         apiController.updateToken(InitEntities.generateAuthToken(creator));
         udf = refreshUdf();
@@ -112,7 +112,7 @@ public class BugTaskConvertToDevTaskTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"WorkTask", "Regression"}, description = "Изменить категорию на доработку", dependsOnMethods = "createTask")
+    @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Изменить категорию на доработку", dependsOnMethods = "createTask")
     public void changeCategory() {
         udf = refreshUdf();
         task.refreshTask();

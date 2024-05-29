@@ -77,7 +77,7 @@ public class SlaBugCloseUnfixableAnalizeTest extends BaseIntegrationTest {
         WaitManager.pause(5);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Создание CAT_SLABUG")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Создание CAT_SLABUG")
     public void slaBugCat() {
         apiController.updateToken(InitEntities.generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -106,7 +106,7 @@ public class SlaBugCloseUnfixableAnalizeTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_NEW);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Принять на анализ", dependsOnMethods = "slaBugCat")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Принять на анализ", dependsOnMethods = "slaBugCat")
     public void msgAnalyze() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -134,7 +134,7 @@ public class SlaBugCloseUnfixableAnalizeTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_FIRST_LINE, CLIENT_MANAGER.getLogin());
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Закрыть как неустранимую"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Закрыть как неустранимую"
             , dependsOnMethods = "msgAnalyze")
     public void closeUnfixable() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));

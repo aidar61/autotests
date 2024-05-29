@@ -40,7 +40,7 @@ public class SlaBug5Test extends BaseIntegrationTest {
                 .isParseableBody(TaskResponseBody.class);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "создание задачи")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "создание задачи")
     public void slaBugCat() {
         udf = refreshUdf();
         udf.setUdfTask(InitEntities.generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -54,7 +54,7 @@ public class SlaBug5Test extends BaseIntegrationTest {
         slaBugController.createSlaBugTask(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "принятие на анализ", dependsOnMethods = "slaBugCat")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "принятие на анализ", dependsOnMethods = "slaBugCat")
     public void slaBugMsgAnalize() {
         udf = refreshUdf();
         udf.setUdfUser(generateUdfUser(UDF_SD_TRUSTEDWATCHER, ABDULLAEV_BAHODIR));
@@ -66,48 +66,48 @@ public class SlaBug5Test extends BaseIntegrationTest {
         slaBugController.msgAnalize(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "начать работу", dependsOnMethods = "slaBugMsgAnalize")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "начать работу", dependsOnMethods = "slaBugMsgAnalize")
     public void slaBugMsgStart() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, START);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "предоставить временное решение", dependsOnMethods = "slaBugMsgStart")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "предоставить временное решение", dependsOnMethods = "slaBugMsgStart")
     public void slaBugMsgProvideTemporaryFixed() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, PROVIDETEMPORARYFIXED);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "вернуть в работу", dependsOnMethods = "slaBugMsgProvideTemporaryFixed")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "вернуть в работу", dependsOnMethods = "slaBugMsgProvideTemporaryFixed")
     public void slaBugMsgReturn() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(CLIENT));
         slaBugController.performCommonOperation(task, RETURN);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "начать работу", dependsOnMethods = "slaBugMsgReturn")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "начать работу", dependsOnMethods = "slaBugMsgReturn")
     public void slaBugMsgStartRetry() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, START);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "предоставить временное решение", dependsOnMethods = "slaBugMsgStartRetry")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "предоставить временное решение", dependsOnMethods = "slaBugMsgStartRetry")
     public void slaBugMsgProvideTemporaryFixedRetry() {
         task.refreshUdf();
         apiController.updateToken(generateAuthToken(EMPLOYEE));
         slaBugController.performCommonOperation(task, PROVIDETEMPORARYFIXED);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "подтвердить исправление", dependsOnMethods = "slaBugMsgProvideTemporaryFixedRetry")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "подтвердить исправление", dependsOnMethods = "slaBugMsgProvideTemporaryFixedRetry")
     public void slaBugMsgAcceptHotFix() {
         apiController.updateToken(generateAuthToken(CLIENT));
         slaBugController.performCommonOperation(task, ACCEPTHOTFIX);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "предоставить решение", dependsOnMethods = "slaBugMsgAcceptHotFix")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "предоставить решение", dependsOnMethods = "slaBugMsgAcceptHotFix")
     public void slaBugMsgHotFix() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, NO));
@@ -117,13 +117,13 @@ public class SlaBug5Test extends BaseIntegrationTest {
         slaBugController.performCommonOperation(task, HOTFIX);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "вернуть в работу", dependsOnMethods = "slaBugMsgHotFix")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "вернуть в работу", dependsOnMethods = "slaBugMsgHotFix")
     public void slaBugMsgReturnRetry() {
         apiController.updateToken(generateAuthToken(CLIENT));
         slaBugController.performCommonOperation(task, RETURN);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "предоставить решение", dependsOnMethods = "slaBugMsgReturnRetry")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "предоставить решение", dependsOnMethods = "slaBugMsgReturnRetry")
     public void slaBugMsgHotFixRetry() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, NO));
@@ -133,7 +133,7 @@ public class SlaBug5Test extends BaseIntegrationTest {
         slaBugController.performCommonOperation(task, HOTFIX);
     }
 
-    @Test(groups = {"SlaBug", "Regression"},description = "закрыть", dependsOnMethods = "slaBugMsgHotFixRetry")
+    @Test(groups = {"PROC_SLABUG", "Regression"},description = "закрыть", dependsOnMethods = "slaBugMsgHotFixRetry")
     public void slaBugMsgClose() {
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_EVALUATING_REQUEST_EXECUTION, FIVE));

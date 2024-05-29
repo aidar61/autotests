@@ -69,7 +69,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
         task = InitEntities.getGeneralTask(TaskType.SD_HELP, Operations.CAT);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Создание CAT_SDHELP (КЛИЕНТ)")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Создание CAT_SDHELP (КЛИЕНТ)")
     void catSdHelp() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -96,7 +96,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Задать вопрос (КЛИЕНТ)", dependsOnMethods = "catSdHelp")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Задать вопрос (КЛИЕНТ)", dependsOnMethods = "catSdHelp")
     void cliComment() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -111,7 +111,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
 
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Сообщить информацию (КЛИЕНТ)", dependsOnMethods = "cliComment")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Сообщить информацию (КЛИЕНТ)", dependsOnMethods = "cliComment")
     void ourComment() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -125,7 +125,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Изменить аттрибуты запроса (КЛИЕНТ)", dependsOnMethods = "ourComment")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Изменить аттрибуты запроса (КЛИЕНТ)", dependsOnMethods = "ourComment")
     void changeAttrs() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -144,7 +144,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Назначить наблюдателей клиента (КЛИЕНТ)", dependsOnMethods = "changeAttrs")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Назначить наблюдателей клиента (КЛИЕНТ)", dependsOnMethods = "changeAttrs")
     void appointClientWatchers() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -162,7 +162,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Изменить автора (КЛИЕНТ)", dependsOnMethods = "appointClientWatchers")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Изменить автора (КЛИЕНТ)", dependsOnMethods = "appointClientWatchers")
     void changeAuthor() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -181,7 +181,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Изменить модуль системы (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "changeAuthor")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Изменить модуль системы (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "changeAuthor")
     void changeSdModule() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -198,7 +198,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Сообщить информацию (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "changeSdModule")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Сообщить информацию (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "changeSdModule")
     void ourCommentClientManager() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -212,7 +212,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Сообщить срок оказания консультации (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "ourCommentClientManager")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Сообщить срок оказания консультации (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "ourCommentClientManager")
     void provideDeadline() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -229,7 +229,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Изменить список связанных задач (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Изменить список связанных задач (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "provideDeadline")
     void changeLinkedTasks() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -250,7 +250,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Назначить доверенного наблюдателя (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Назначить доверенного наблюдателя (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "changeLinkedTasks")
     void addTrustedWatcher() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -268,7 +268,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Назначить наблюдателя (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Назначить наблюдателя (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "addTrustedWatcher")
     void appointWatcher() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -286,7 +286,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Приватный комментарий (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Приватный комментарий (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "appointWatcher")
     void privateComment() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -301,7 +301,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Изменить автора (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Изменить автора (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "privateComment")
     void changeAuthorClientManager() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -322,7 +322,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Изменить ответственного (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Изменить ответственного (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "changeAuthorClientManager")
     void reassign() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -343,7 +343,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Снять запрос (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Снять запрос (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "reassign")
     void removeRequest() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -361,7 +361,7 @@ public class SdHelpBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Оценить выполнение запроса (КЛИЕНТ)"
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Оценить выполнение запроса (КЛИЕНТ)"
             , dependsOnMethods = "removeRequest")
     void evaluateRequestExe() {
         apiController.updateToken(generateAuthToken(CLIENT));

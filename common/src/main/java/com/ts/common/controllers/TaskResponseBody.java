@@ -36,7 +36,6 @@ public class TaskResponseBody extends com.ts.common.request.ResponseBody {
     @JsonProperty("message")
     GeneralTask message;
     Resolution resolution;
-//    String udfs;
 
     @Override
     public Object receiveTaskStatus() {
@@ -53,6 +52,7 @@ public class TaskResponseBody extends com.ts.common.request.ResponseBody {
         return getFinishStatus();
     }
 
+    @Override
     public String receiveMTaskStatusName() {
         return getMessage().getMstatusName();
     }
@@ -62,14 +62,9 @@ public class TaskResponseBody extends com.ts.common.request.ResponseBody {
         return this.message.getHandlerUser();
     }
 
-
     @Override
     public Object receiveTaskResolution() {
         return this.message.getResolution().getId();
     }
 
-//    @Override
-//    public Object receiveUdf() {
-//        return this.getUdfs();
-//    }
 }

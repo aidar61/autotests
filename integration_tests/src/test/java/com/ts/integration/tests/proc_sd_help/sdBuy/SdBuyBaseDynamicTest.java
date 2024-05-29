@@ -73,7 +73,7 @@ public class SdBuyBaseDynamicTest extends BaseIntegrationTest {
         WaitManager.pause(5);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Создание CAT_SDBUY (КЛИЕНТ)")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Создание CAT_SDBUY (КЛИЕНТ)")
     void catSdBuy() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -100,7 +100,7 @@ public class SdBuyBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Принять на анализ (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "catSdBuy")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Принять на анализ (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "catSdBuy")
     void analize() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -124,7 +124,7 @@ public class SdBuyBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfTask(UDF_BDKU_CONFIGURATION, SENAGAT_BANK);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Запросить информацию (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "analize")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Запросить информацию (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "analize")
     void requestInfo() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -142,7 +142,7 @@ public class SdBuyBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Предоставить информацию (КЛИЕНТ)", dependsOnMethods = "requestInfo")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Предоставить информацию (КЛИЕНТ)", dependsOnMethods = "requestInfo")
     void provideInfo() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -159,7 +159,7 @@ public class SdBuyBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Оказать консультацию (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "provideInfo")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Оказать консультацию (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "provideInfo")
     void consult() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -177,7 +177,7 @@ public class SdBuyBaseDynamicTest extends BaseIntegrationTest {
 
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Запросить информацию (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "consult")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Запросить информацию (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "consult")
     void requestInfoReply() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -194,7 +194,7 @@ public class SdBuyBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Отменить запрос информации (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "requestInfoReply")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Отменить запрос информации (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "requestInfoReply")
     void undoRequestInfo() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -212,7 +212,7 @@ public class SdBuyBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Вернуть в работу (КЛИЕНТ)", dependsOnMethods = "undoRequestInfo")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Вернуть в работу (КЛИЕНТ)", dependsOnMethods = "undoRequestInfo")
     void msgReturn() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -232,7 +232,7 @@ public class SdBuyBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Оказать консультацию (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Оказать консультацию (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "msgReturn")
     void consultReply() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -251,7 +251,7 @@ public class SdBuyBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_CLIENT);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Закрыть (КЛИЕНТ)", dependsOnMethods = "consultReply")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Закрыть (КЛИЕНТ)", dependsOnMethods = "consultReply")
     void close() {
         apiController.updateToken(generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -276,7 +276,7 @@ public class SdBuyBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_NOBODY);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Отменить закрытие (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "close")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Отменить закрытие (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "close")
     void undoClose() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();
@@ -300,7 +300,7 @@ public class SdBuyBaseDynamicTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER);
     }
 
-    @Test(groups = {"SD_HELP", "Regression"}, description = "Снять запрос (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "undoClose")
+    @Test(groups = {"PROC_SDHELP", "Regression"}, description = "Снять запрос (МЕНЕДЖЕР КЛИЕНТА)", dependsOnMethods = "undoClose")
     void removeRequest() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
         udf = refreshUdf();

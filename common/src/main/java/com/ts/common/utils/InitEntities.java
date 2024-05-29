@@ -9,10 +9,9 @@ import com.ts.common.enums.*;
 
 import java.util.Arrays;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.MSG;
-//import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_LIST_AFFCTD_SYS;
+import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_LIST_AFFCTD_SYS;
 import static com.ts.common.enums.Parents.MTB;
 import static com.ts.common.enums.Parents.RYSGAL_BANK;
 import static com.ts.common.utils.RandomUtils.generateName;
@@ -440,8 +439,37 @@ public class InitEntities {
                 .build();
     }
 
-//    public static void main(String[] args) {
-//        System.out.println(generateUdfMultiList(UDF_LIST_AFFCTD_SYS, List.Constants.COLVIR_V4, List.Constants.AFS));
-//    }
+    public static Locale generateLocale(Locale.Constants locale) {
+        return Locale.builder()
+                .key(locale.getKey())
+                .value(locale.getValue())
+                .build();
+    }
+
+    public static Role generateRole(Role.RoleConstants role) {
+        return Role.builder()
+                .id(role.getId())
+                .name(role.getName())
+                .owner(User.builder().id("1").build())
+                .build();
+    }
+
+    public static User getUser(String username, Role.RoleConstants role) {
+        return User.builder()
+                .login(username)
+                .name(username)
+                .active(true)
+                .role(generateRole(role))
+                .udfs(new Udfs[]{})
+                .build();
+    }
+
+    public static Task generateTask(Task.Constants constants) {
+        return new Task(constants.id, constants.number);
+    }
+
+    public static void main(String[] args) {
+        System.out.println(generateUdfMultiList(UDF_LIST_AFFCTD_SYS, List.Constants.COLVIR_V4, List.Constants.AFS));
+    }
 
 }

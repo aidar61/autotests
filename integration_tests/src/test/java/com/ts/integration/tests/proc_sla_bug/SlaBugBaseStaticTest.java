@@ -65,7 +65,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
         task = InitEntities.getGeneralTask(TaskType.SLA_BUG, Operations.CAT);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Создание CAT_SLABUG (КЛИЕНТ)")
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Создание CAT_SLABUG (КЛИЕНТ)")
     public void slaBugCat() {
         apiController.updateToken(InitEntities.generateAuthToken(CLIENT));
         udf = refreshUdf();
@@ -94,7 +94,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectStatus(STATUS_SLABUG_NEW);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Принять на анализ (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Принять на анализ (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "slaBugCat")
     public void msgAnalyze() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -123,7 +123,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isCorrectUdfUSer(UDF_ROLE_FIRST_LINE, CLIENT_MANAGER.getLogin());
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Сообщить информацию (КЛИЕНТ)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Сообщить информацию (КЛИЕНТ)"
             , dependsOnMethods = "msgAnalyze")
     public void ourComment() {
         apiController.updateToken(generateAuthToken(CLIENT));
@@ -138,7 +138,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить наличие удаленного доступа (КЛИЕНТ)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить наличие удаленного доступа (КЛИЕНТ)"
             , dependsOnMethods = "ourComment")
     public void changeRemoteAccess() {
         apiController.updateToken(generateAuthToken(CLIENT));
@@ -156,7 +156,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить приоритет (КЛИЕНТ)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить приоритет (КЛИЕНТ)"
             , dependsOnMethods = "changeRemoteAccess")
     public void changePriority() {
         apiController.updateToken(generateAuthToken(CLIENT));
@@ -174,7 +174,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить аттрибуты запроса (КЛИЕНТ)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить аттрибуты запроса (КЛИЕНТ)"
             , dependsOnMethods = "changePriority")
     public void changeAttrs() {
         apiController.updateToken(generateAuthToken(CLIENT));
@@ -194,7 +194,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Назначить наблюдателей клиента (КЛИЕНТ)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Назначить наблюдателей клиента (КЛИЕНТ)"
             , dependsOnMethods = "changeAttrs")
     public void appointClientWatchers() {
         apiController.updateToken(generateAuthToken(CLIENT));
@@ -212,7 +212,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить автора (КЛИЕНТ)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить автора (КЛИЕНТ)"
             , dependsOnMethods = "appointClientWatchers")
     public void changeAuthor() {
         apiController.updateToken(generateAuthToken(CLIENT));
@@ -231,7 +231,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить модуль системы (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить модуль системы (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "changeAuthor")
     public void changeSdModule() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -249,7 +249,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Сообщить информацию (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Сообщить информацию (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "changeSdModule")
     public void ourCommentManager() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -265,7 +265,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить первую линию (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить первую линию (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "ourCommentManager")
     public void changeFirstLine() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -285,7 +285,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить разработчика (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить разработчика (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "changeFirstLine")
     public void changeDeveloper() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -305,7 +305,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить тестировщика (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить тестировщика (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "changeDeveloper")
     public void changeTester() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -325,7 +325,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить наличие удаленного доступа (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить наличие удаленного доступа (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "changeTester")
     public void changeRemoteAccessManager() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -344,7 +344,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить приоритет (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить приоритет (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "changeRemoteAccessManager")
     public void changePriorityManager() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -363,7 +363,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Корректировка сроков SLA (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Корректировка сроков SLA (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "changePriorityManager")
     public void correctSlaDates() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -384,7 +384,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить автора (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить автора (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "correctSlaDates")
     public void changeAuthorManager() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -404,7 +404,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить ответственную роль (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить ответственную роль (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "changeAuthorManager")
     public void changeCurrentRole() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -425,7 +425,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Изменить список связанных задач (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Изменить список связанных задач (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "changeCurrentRole")
     public void changeLinkedTask() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -447,7 +447,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Назначить доверенного наблюдателя (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Назначить доверенного наблюдателя (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "changeLinkedTask")
     public void addTrustedWatcher() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -467,7 +467,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Назначить наблюдателя (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Назначить наблюдателя (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "addTrustedWatcher")
     public void appointWatcher() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -487,7 +487,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Приватный комментарий (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Приватный комментарий (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "appointWatcher")
     public void privateComment() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -504,7 +504,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Приватный комментарий (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Приватный комментарий (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "privateComment")
     public void reassign() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -527,7 +527,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Снять запрос (МЕНЕДЖЕР КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Снять запрос (МЕНЕДЖЕР КЛИЕНТА)"
             , dependsOnMethods = "reassign")
     public void removeRequest() {
         apiController.updateToken(generateAuthToken(CLIENT_MANAGER));
@@ -543,7 +543,7 @@ public class SlaBugBaseStaticTest extends BaseIntegrationTest {
                 .isEquals(task);
     }
 
-    @Test(groups = {"SlaBug", "Regression"}, description = "Оценить выполнение запроса (КЛИЕНТА)"
+    @Test(groups = {"PROC_SLABUG", "Regression"}, description = "Оценить выполнение запроса (КЛИЕНТА)"
             , dependsOnMethods = "removeRequest")
     public void evaluateRequestExe() {
         apiController.updateToken(generateAuthToken(CLIENT));

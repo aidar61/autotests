@@ -9,6 +9,7 @@ import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.TaskType;
+import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
 import io.qameta.allure.Step;
 import io.restassured.path.json.JsonPath;
@@ -22,7 +23,6 @@ import static com.ts.common.controllers.TaskRequestBody.Fields.ID;
 import static com.ts.common.controllers.TaskRequestBody.Fields.OPERATION;
 import static com.ts.common.controllers.TaskRequestBody.Fields.*;
 import static com.ts.common.enums.Operations.*;
-import static com.ts.common.enums.TaskType.SD_FEATURE;
 import static com.ts.common.enums.TaskType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.generateOperationID;
 import static com.ts.common.utils.InitEntities.generateUser;
@@ -116,7 +116,7 @@ public class SlaFeatureController extends BaseController {
         }};
         slaTask.setOperation(generateOperationID(this.taskType, START));
         slaTask.setDescription(generateDescriptionForOperation(START));
-        slaTask.setHandlerUser(generateUser(User.Constants.BABUSHKIN_IVAN));
+        slaTask.setHandlerUser(InitEntities.generateUser(User.Constants.BABUSHKIN_IVAN));
         TaskRequestBody slaRequestBody = new TaskRequestBody(slaTask);
         return this.response = super.post(getEndpoint(REST, TrackStudioEndPoints.OPERATION, slaTask.getNumber(), CREATE
                         , formatParameters(params))

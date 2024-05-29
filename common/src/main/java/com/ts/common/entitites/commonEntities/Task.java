@@ -22,58 +22,10 @@ import lombok.extern.slf4j.Slf4j;
 public class Task extends BaseEntity {
     @Mandatory
     String id;
-    //    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    int abudget;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    int actualBudget;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    String name;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     String number;
     @JsonInclude(JsonInclude.Include.NON_NULL)
     String userdata0;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    String shortname;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    String categoryLink;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    Category category;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    Status status;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    String statusName;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    int childrenCount;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    boolean hasChildren;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    int messageCount;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    boolean hasAttachments;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    boolean onSight;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    String stateLink;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    String statusColor;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    String taskLink;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    boolean sortMessageAsc;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    boolean selectable;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    boolean canEditHandler;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    String $$key;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    boolean $visible;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    boolean $firstInGroup;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    boolean $selected;
-//    @JsonInclude(JsonInclude.Include.NON_NULL)
-//    boolean invalid;
 
     public Task(String id, String number) {
         this.id = id;
@@ -87,6 +39,7 @@ public class Task extends BaseEntity {
     }
 
     public enum Constants {
+        COLVIR("1", "1"),
         COLVIR_MODERN_PRODUCT("818181df62d0f2270162d349b44e5695", "757947"),
         REQUIREMENTS("818181b03c614903013c6dc6a6105c5f", "186231"),
         CORE("818181b03c7fc013013c7fca70500413", "186615"),
