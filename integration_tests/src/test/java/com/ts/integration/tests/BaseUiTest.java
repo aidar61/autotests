@@ -22,21 +22,19 @@ import static com.codeborne.selenide.Selenide.open;
 @Slf4j
 @Listeners({SoftAsserts.class, TextReport.class})
 public class BaseUiTest extends AbstractBaseTest {
-    protected FormPage formPage;
+
 
     @BeforeTest(alwaysRun = true)
     public void setupUi() {
         Configuration.browserCapabilities = Driver.initBrowserCapabilities();
         apiController = new TrackStudioApiControllers(InitEntities.generateAuthToken(Users.ROOT));
         trackStudioPages = new Pages();
-        formPage = new FormPage();
         dbHelper = new DbHelper();
         log.warn("=====================UI TESTS IS STARTED=====================");
     }
 
     public static void auth(String url, String userLogin) {
         LoginPage loginPage = trackStudioPages.getLoginPage(); //TODO использовать LoginPage как поле и добавить инициализацию в setupUi()
-
         open(url);
         loginPage.loginNoToken(userLogin);
     }

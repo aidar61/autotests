@@ -7,6 +7,7 @@ import com.ts.common.controllers.installation.InstallationController;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.tasks.GeneralTask;
+import com.ts.common.ui.pages.FormPage;
 import com.ts.common.ui.pages.LoginPage;
 import com.ts.common.ui.pages.portlets.PatchPage;
 import com.ts.common.utils.DateUtils;
@@ -22,6 +23,7 @@ import static com.ts.common.utils.InitEntities.generateUdfString;
 public class EditPatchFormTest extends BaseUiTest {
     LoginPage loginPage;
     PatchPage patchPage;
+    FormPage formPage;
     InstallationController installationController;
     SdPatchFolderController sdPatchFolderController;
     GeneralTask generalTask;
@@ -39,6 +41,7 @@ public class EditPatchFormTest extends BaseUiTest {
     public void beforeClass() {
         loginPage = trackStudioPages.getLoginPage();
         patchPage = trackStudioPages.getPatchPage();
+        formPage = trackStudioPages.getFormPage();
 
 //        grTaskTable = dbHelper.getGrTaskTable();
 //        GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskName("AT_INSTALLATION");
