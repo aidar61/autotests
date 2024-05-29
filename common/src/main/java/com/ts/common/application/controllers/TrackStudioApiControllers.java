@@ -2,6 +2,8 @@ package com.ts.common.application.controllers;
 
 import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.TaskResponseBody;
+import com.ts.common.controllers.project.ProjectController;
+import com.ts.common.controllers.settings.UdfController;
 import com.ts.common.controllers.user.UserController;
 import com.ts.common.controllers.advice.AdviceController;
 import com.ts.common.controllers.advice.CodeReviewController;
@@ -71,6 +73,8 @@ public class TrackStudioApiControllers {
     private ReleaseController releaseController;
     private SdDevController sdDevController;
     private SdHelpController sdHelpController;
+    private ProjectController projectController;
+    private UdfController udfController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {

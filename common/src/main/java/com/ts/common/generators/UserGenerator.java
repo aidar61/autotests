@@ -1,13 +1,10 @@
 package com.ts.common.generators;
 
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.config.AppConfigProvider;
-import com.ts.common.config.AppUserConfig;
 import com.ts.common.controllers.user.UserController;
 import com.ts.common.entitites.commonEntities.Role;
 import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.utils.InitEntities;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.HashMap;

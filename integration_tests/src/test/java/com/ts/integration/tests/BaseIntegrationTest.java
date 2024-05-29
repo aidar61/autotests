@@ -6,10 +6,9 @@ import com.ts.common.application.controllers.TrackStudioApiControllers;
 import com.ts.common.application.database.DbHelper;
 import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.user.UserController;
-import com.ts.common.entitites.commonEntities.Role;
-import com.ts.common.entitites.commonEntities.Udfs;
-import com.ts.common.entitites.commonEntities.User;
+import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.enums.Users;
+import com.ts.common.generators.TaskGenerator;
 import com.ts.common.generators.UserGenerator;
 import com.ts.common.listeners.TestListener;
 import com.ts.common.tests.AbstractBaseTest;
@@ -53,7 +52,11 @@ public class BaseIntegrationTest extends AbstractBaseTest {
 
     @Test()
     void test() {
-
+        TaskGenerator taskGenerator = TaskGenerator.create(apiController, dbHelper);
+        taskGenerator.generateTasks("758009");
+        System.err.println(taskGenerator.getUdfCdpCustomer());
+        System.err.println(taskGenerator.getGroupTask());
+        System.err.println(taskGenerator.getGenPlan());
     }
 
 }
