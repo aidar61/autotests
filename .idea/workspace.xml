@@ -4,13 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="add workspace">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/gap_question">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/Pages.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/Pages.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/experimental/CheckOperationPermission.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/experimental/CheckOperationPermission.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/CreatePatchFormTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/CreatePatchFormTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/EditPatchFormTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/tc1563098/EditPatchFormTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,7 +24,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="origin/qa" />
+    <option name="BRANCH" value="origin/main" />
   </component>
   <component name="Git.Rebase.Settings">
     <option name="NEW_BASE" value="origin/master" />
@@ -37,7 +32,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="test" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -63,42 +58,59 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;qa&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/aidarka61/IdeaProjects/autotests&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.09375&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.32876712&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;,
-    &quot;settings.editor.splitter.proportion&quot;: &quot;0.39143732&quot;,
-    &quot;spring.configuration.checksum&quot;: &quot;f0a48e2334f1b84f98a2595c6f1cd1ef&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Application.MemoStringValue.executor": "Run",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Git.Branch.Popup.ShowAllRemotes": "true",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TestNG.BugTaskAcceptanceTest.executor": "Run",
+    "TestNG.GapPotentialQuestion1Test.executor": "Run",
+    "TestNG.GapPrivateQuestion1Test.executor": "Run",
+    "TestNG.GapPrivateQuestion1Test.passForApproval.executor": "Run",
+    "TestNG.GapQuestion1Test.catSdQuestion.executor": "Run",
+    "TestNG.GapQuestion1Test.executor": "Run",
+    "TestNG.GapQuestion1Test.passForApproval.executor": "Run",
+    "TestNG.GapSolutionQuestion1Test.executor": "Run",
+    "TestNG.GapSolutionQuestion1Test.passForApproval.executor": "Run",
+    "TestNG.SdQuestionBaseTest.createSdQuestion.executor": "Run",
+    "TestNG.SlaFeatureBase2Test.executor": "Run",
+    "TestNG.SlaFeatureByAccountTest.executor": "Run",
+    "TestNG.SlaFeatureNoPrecostTest.executor": "Run",
+    "TestNG.SlaFeatureToFinalAccountTest.executor": "Run",
+    "TestNG.com.ts.integration.tests.proc_potential_gap.sdQuestion.executor": "Run",
+    "ToolWindowRun.ShowToolbar": "false",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/aidarka61/IdeaProjects/autotests",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.09375",
+    "project.structure.side.proportion": "0.32876712",
+    "settings.editor.selected.configurable": "configurable.group.appearance",
+    "settings.editor.splitter.proportion": "0.39143732",
+    "spring.configuration.checksum": "f0a48e2334f1b84f98a2595c6f1cd1ef",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;DatabaseDriversLRU&quot;: [
-      &quot;oracle&quot;
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "oracle"
     ]
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -112,24 +124,24 @@
       <recent name="$PROJECT_DIR$/common/src/main/java/com/ts/common/services" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.ts.integration.tests.ui.tc1563098" />
       <recent name="com.ts.integration.tests.proc_work_task.dev_task_base_submitter" />
       <recent name="com.ts.integration.tests.proc_sd_question" />
       <recent name="com.ts.common.controllers" />
       <recent name="com.ts.common.entitites.commonEntities" />
+      <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.CheckOperationPermission.checkMsgSdpatchWatchPermissions">
-    <configuration name="CatReleaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.com.ts.integration.tests.proc_potential_gap.sdQuestion">
+    <configuration name="GapPotentialQuestion1Test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_release.cat_release.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_release.cat_release" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_release.cat_release.CatReleaseTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_potential_gap.sd_question" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapPotentialQuestion1Test" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -137,34 +149,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CheckOperationPermission.checkMsgSdpatchWatchPermissions" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="GapPrivateQuestion1Test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.ui.experimental.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.experimental" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.experimental.CheckOperationPermission" />
-      <option name="METHOD_NAME" value="checkMsgSdpatchWatchPermissions" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="CheckPatchFormTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.ui.tc1563098.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.patches" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.patches.CheckPatchFormTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_potential_gap.sd_question" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapPrivateQuestion1Test" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -172,17 +166,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CheckPatchFormTest.createByAdmin" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="GapPrivateQuestion1Test.passForApproval" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.ui.tc1563098.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.patches" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.patches.CheckPatchFormTest" />
-      <option name="METHOD_NAME" value="createByAdmin" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_potential_gap.sd_question.analytic" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapPrivateQuestion1Test" />
+      <option name="METHOD_NAME" value="passForApproval" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -190,18 +184,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="EditPatchFormTest.formByAdmin" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="GapQuestion1Test" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.ui.tc1563098.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.ui.tc1563098" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.ui.tc1563098.EditPatchFormTest" />
-      <option name="METHOD_NAME" value="formByAdmin" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_potential_gap.sd_question" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapQuestion1Test" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
       <method v="2">
@@ -253,22 +246,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="com.ts.integration.tests.proc_potential_gap.sdQuestion" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.proc_potential_gap.sdQuestion.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_potential_gap.sdQuestion" />
+      <option name="TEST_OBJECT" value="PACKAGE" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
-      <item itemvalue="TestNG.CheckOperationPermission.checkMsgSdpatchWatchPermissions" />
-      <item itemvalue="TestNG.EditPatchFormTest.formByAdmin" />
-      <item itemvalue="TestNG.CheckPatchFormTest" />
-      <item itemvalue="TestNG.CheckPatchFormTest.createByAdmin" />
-      <item itemvalue="TestNG.CatReleaseTest" />
+      <item itemvalue="TestNG.GapPotentialQuestion1Test" />
+      <item itemvalue="TestNG.GapPrivateQuestion1Test" />
+      <item itemvalue="TestNG.GapPrivateQuestion1Test.passForApproval" />
+      <item itemvalue="TestNG.GapQuestion1Test" />
+      <item itemvalue="TestNG.com.ts.integration.tests.proc_potential_gap.sdQuestion" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.CheckOperationPermission.checkMsgSdpatchWatchPermissions" />
-        <item itemvalue="TestNG.EditPatchFormTest.formByAdmin" />
-        <item itemvalue="TestNG.CheckPatchFormTest" />
-        <item itemvalue="TestNG.CheckPatchFormTest.createByAdmin" />
-        <item itemvalue="TestNG.CatReleaseTest" />
+        <item itemvalue="TestNG.com.ts.integration.tests.proc_potential_gap.sdQuestion" />
+        <item itemvalue="TestNG.GapQuestion1Test" />
+        <item itemvalue="TestNG.GapPrivateQuestion1Test" />
+        <item itemvalue="TestNG.GapPotentialQuestion1Test" />
+        <item itemvalue="TestNG.GapPrivateQuestion1Test.passForApproval" />
       </list>
     </recent_temporary>
   </component>
@@ -276,6 +285,14 @@
     <option name="lastFrameworkName" value="Selenium" />
     <option name="lastLanguageId" value="JAVA" />
     <option name="lastUrl" value="http://url/" />
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
+        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -364,6 +381,11 @@
       <workItem from="1713242973013" duration="4507000" />
       <workItem from="1713440090328" duration="19980000" />
       <workItem from="1713939306550" duration="8158000" />
+      <workItem from="1714365372513" duration="4242000" />
+      <workItem from="1714463758234" duration="4374000" />
+      <workItem from="1714565653048" duration="18451000" />
+      <workItem from="1714998680658" duration="12531000" />
+      <workItem from="1715427516983" duration="15990000" />
     </task>
     <task id="LOCAL-00038" summary="feature/Sla negative scenarios, Errors">
       <created>1701675904063</created>
@@ -680,43 +702,46 @@
       <option name="project" value="LOCAL" />
       <updated>1713342603322</updated>
     </task>
-    <task id="LOCAL-00091" summary="add edit form test">
+    <task id="LOCAL-00087" summary="feature/sla feature">
       <option name="closed" value="true" />
-      <created>1715957315973</created>
-      <option name="number" value="00091" />
-      <option name="presentableId" value="LOCAL-00091" />
+      <created>1714996267577</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
       <option name="project" value="LOCAL" />
-      <updated>1715957315973</updated>
+      <updated>1714996267577</updated>
     </task>
-    <task id="LOCAL-00092" summary="fix divided and rename">
+    <task id="LOCAL-00088" summary="feature/sla feature">
       <option name="closed" value="true" />
-      <created>1716554503296</created>
-      <option name="number" value="00092" />
-      <option name="presentableId" value="LOCAL-00092" />
+      <created>1715060629216</created>
+      <option name="number" value="00088" />
+      <option name="presentableId" value="LOCAL-00088" />
       <option name="project" value="LOCAL" />
-      <updated>1716554503296</updated>
+      <updated>1715060629216</updated>
     </task>
-    <task id="LOCAL-00093" summary="add permissin test">
+    <task id="LOCAL-00089" summary="feature/gap_question">
       <option name="closed" value="true" />
-      <created>1716791356788</created>
-      <option name="number" value="00093" />
-      <option name="presentableId" value="LOCAL-00093" />
+      <created>1715594527942</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
       <option name="project" value="LOCAL" />
-      <updated>1716791356789</updated>
+      <updated>1715594527942</updated>
     </task>
-    <task id="LOCAL-00094" summary="add workspace">
+    <task id="LOCAL-00090" summary="feature/gap_question">
       <option name="closed" value="true" />
-      <created>1716792080486</created>
-      <option name="number" value="00094" />
-      <option name="presentableId" value="LOCAL-00094" />
+      <created>1715594894549</created>
+      <option name="number" value="00090" />
+      <option name="presentableId" value="LOCAL-00090" />
       <option name="project" value="LOCAL" />
-      <updated>1716792080486</updated>
+      <updated>1715594894549</updated>
     </task>
-    <option name="localTasksCounter" value="95" />
+    <option name="localTasksCounter" value="91" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="app.properties" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="OPEN_GENERIC_TABS">
@@ -749,7 +774,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="qa" />
+                        <option value="origin/main" />
                       </list>
                     </value>
                   </entry>
@@ -768,6 +793,12 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="feature/ts-int Jenkinsfile" />
+    <MESSAGE value="fix/DevTaskAcceptance" />
+    <MESSAGE value="feature/Sla negative scenarios, Errors" />
+    <MESSAGE value="feature/ui test settings" />
+    <MESSAGE value="feature/Contingent" />
+    <MESSAGE value="fix/dev task acceptance 2" />
     <MESSAGE value="fix/access prod" />
     <MESSAGE value="fix/retries" />
     <MESSAGE value="fix/dev task accepted" />
@@ -785,15 +816,9 @@
     <MESSAGE value="fix/test&#10;&#10;(cherry picked from commit d2c630871c938a1f7ae64a9078513b931d92b75c)" />
     <MESSAGE value="fix/ui-clear" />
     <MESSAGE value="feature/slaFeatureTest" />
-    <MESSAGE value="add patch admin test" />
-    <MESSAGE value="fix update admin test" />
-    <MESSAGE value="update db connection" />
-    <MESSAGE value="fix errors" />
-    <MESSAGE value="add edit form test" />
-    <MESSAGE value="fix divided and rename" />
-    <MESSAGE value="add permissin test" />
-    <MESSAGE value="add workspace" />
-    <option name="LAST_COMMIT_MESSAGE" value="add workspace" />
+    <MESSAGE value="feature/sla feature" />
+    <MESSAGE value="feature/gap_question" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/gap_question" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -832,16 +857,6 @@
           <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/CreateFromExcelTaskController.java</url>
           <line>48</line>
           <option name="timeStamp" value="129" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/common/src/main/java/com/ts/common/request/RequestBody.java</url>
-          <line>73</line>
-          <option name="timeStamp" value="132" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_question/SdQuestionBaseTest2.java</url>
-          <line>78</line>
-          <option name="timeStamp" value="136" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

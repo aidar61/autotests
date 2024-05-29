@@ -24,18 +24,21 @@ import java.util.List;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
+import static com.ts.common.entitites.commonEntities.List.Constants.RESPONSIBLE_PARTY_NOBODY;
 import static com.ts.common.entitites.commonEntities.Task.Constants.MTBANK;
 import static com.ts.common.entitites.commonEntities.Task.Constants.NOTIFICATION_SERVICE2;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_IMPL_BUDGET;
 import static com.ts.common.enums.MemoPlan.*;
 import static com.ts.common.enums.Operations.*;
+import static com.ts.common.enums.Operations.CLOSE;
 import static com.ts.common.enums.TaskStatuses.*;
 import static com.ts.common.enums.TaskType.SLA_FEATURE;
 import static com.ts.common.utils.InitEntities.*;
+import static com.ts.common.utils.InitEntities.generateUdfList;
 import static com.ts.common.utils.RandomUtils.*;
+import static com.ts.common.utils.RandomUtils.generateString;
 
-public class SlaFeatureBase2Test extends BaseIntegrationTest {
+public class SlaFeatureByAccountTest extends BaseIntegrationTest {
     private SlaFeatureController slaFeatureController;
     private GeneralTask task;
     private Parent parent;
@@ -138,10 +141,10 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
     }
 
     @Test(groups = {"SlaFeature", "Regression"}
-            , description = "Передать на предварительное согласование менеджеру по анализу доработок (АНАЛИТИК)"
+            , description = "Передать на предварительное согласование менеджеру по анализу доработок (ACCOUNT-MANAGER)"
             , dependsOnMethods = "toprecost")
     void toAnlsmgprlmapr() {
-        apiController.updateToken(ANALYTIC);
+        apiController.updateToken(ACCOUNT_MANAGER);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -202,10 +205,10 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
     }
 
     @Test(groups = {"SlaFeature", "Regression"}
-            , description = "Передать на предварительное планирование менеджеру запроса (МЕНЕДЖЕР ПО АНАЛИЗУ ДОРАБОТОК)"
+            , description = "Передать на предварительное планирование менеджеру запроса (ACCOUNT-MANAGER)"
             , dependsOnMethods = "toAnlsmgprlmapr")
     void toImplmgrprlmapr() {
-        apiController.updateToken(MANAGER_ANALYZE_FEATURE);
+        apiController.updateToken(ACCOUNT_MANAGER);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -264,10 +267,10 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
     }
 
     @Test(groups = {"SlaFeature", "Regression"}
-            , description = "Передать на предварительную оценку аккаунт менеджеру (МЕНЕДЖЕР ЗАПРОСА)"
+            , description = "Передать на предварительную оценку аккаунт менеджеру (ACCOUNT-MANAGER)"
             , dependsOnMethods = "toImplmgrprlmapr")
     void beginCostPre() {
-        apiController.updateToken(generateAuthToken(MANAGER_REQUEST));
+        apiController.updateToken(generateAuthToken(ACCOUNT_MANAGER));
         udf = refreshUdf();
         task.refreshTask();
 
@@ -424,10 +427,10 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
     }
 
     @Test(groups = {"SlaFeature", "Regression"}
-            , description = "Передать на окончательное согласование менеджеру по анализу доработок (АНАЛИТИК)"
+            , description = "Передать на окончательное согласование менеджеру по анализу доработок (ACCOUNT-MANAGER)"
             , dependsOnMethods = "returnToAnal")
     void submitToAgrAnls() {
-        apiController.updateToken(ANALYTIC);
+        apiController.updateToken(ACCOUNT_MANAGER);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -494,10 +497,10 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
     }
 
     @Test(groups = {"SlaFeature", "Regression"}
-            , description = "Передать на окончательное планирование менеджеру запроса (МЕНЕДЖЕР ПО АНАЛИЗУ ДОРАБОТОК)"
+            , description = "Передать на окончательное планирование менеджеру запроса (ACCOUNT-MANAGER)"
             , dependsOnMethods = "submitToAgrAnls")
     void assignFinPlnimp() {
-        apiController.updateToken(MANAGER_ANALYZE_FEATURE);
+        apiController.updateToken(ACCOUNT_MANAGER);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -561,10 +564,10 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
     }
 
     @Test(groups = {"SlaFeature", "Regression"}
-            , description = "Передать на окончательную оценку аккаунт-менеджеру (МЕНЕДЖЕР ЗАПРОСА)"
+            , description = "Передать на окончательную оценку аккаунт-менеджеру (ACCOUNT-MANAGER)"
             , dependsOnMethods = "assignFinPlnimp")
     void beginCostFinal() {
-        apiController.updateToken(MANAGER_REQUEST);
+        apiController.updateToken(ACCOUNT_MANAGER);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -752,10 +755,10 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
     }
 
     @Test(groups = {"SlaFeature", "Regression"}
-            , description = "Передать на проверку клиенту (Менеджер клиента)"
+            , description = "Передать на проверку клиенту (ACCOUNT-MANAGER)"
             , dependsOnMethods = "finish")
     void toClientTest() {
-        apiController.updateToken(MANAGER_CLIENT);
+        apiController.updateToken(ACCOUNT_MANAGER);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -796,10 +799,10 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
     }
 
     @Test(groups = {"SlaFeature", "Regression"}
-            , description = "Отправить патч (Менеджер клиента)"
+            , description = "Отправить патч (ACCOUNT-MANAGER)"
             , dependsOnMethods = "acceptFeature")
     void send() {
-        apiController.updateToken(MANAGER_CLIENT);
+        apiController.updateToken(ACCOUNT_MANAGER);
         udf = refreshUdf();
         task.refreshTask();
 

@@ -1,7 +1,6 @@
-package com.ts.common.entitites.commonEntities.udf;
+package com.ts.common.entitites.commonEntities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.ts.common.entitites.BaseEntity;
 import lombok.*;
@@ -10,19 +9,22 @@ import lombok.extern.jackson.Jacksonized;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Builder
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UdfDouble extends BaseEntity {
-    @JsonProperty("udfid")
-    String udfId;
-    String type;
-    @JsonInclude(JsonInclude.Include.NON_NULL)
-    Double numberValue;
+public class CostString extends BaseEntity {
+    @JsonProperty(value = "cost")
+    Integer cost;
+    @JsonProperty(value = "budget1cat")
+    Integer budgetFirst;
+    @JsonProperty(value = "budget2cat")
+    Integer budgetSecond;
+    @JsonProperty(value = "budget3cat")
+    Integer budgetThird;
 }

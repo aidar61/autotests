@@ -53,6 +53,10 @@ public class TaskResponseBody extends com.ts.common.request.ResponseBody {
         return getFinishStatus();
     }
 
+    public String receiveMTaskStatusName() {
+        return getMessage().getMstatusName();
+    }
+
     @Override
     public Object receiveHandlerUser() {
         return this.message.getHandlerUser();

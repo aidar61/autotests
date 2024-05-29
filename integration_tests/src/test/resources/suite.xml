@@ -30,6 +30,10 @@
             <!--            <class name="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative1Test"/>-->
             <!--            <class name="com.ts.integration.tests.proc_sla_feature.negative.SlaFeatureNegative2Test"/>-->
             <!--            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureBaseTest"/>-->
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureBase2Test"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureByAccountTest"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureNoPrecostTest"/>
+            <class name="com.ts.integration.tests.proc_sla_feature.SlaFeatureToFinalAccountTest"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelp1Test"/>
             <class name="com.ts.integration.tests.proc_sla_help.SlaHelp2Test"/>
             <class name="com.ts.integration.tests.proc_potential_gap.PotentialGap1Test"/>
@@ -94,6 +98,9 @@
             <class name="com.ts.integration.tests.proc_sd_help.sdTechAssist.SdTechAssistBaseStaticTest"/>
             <class name="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseDynamicTest"/>
             <class name="com.ts.integration.tests.proc_sd_help.sdBuy.SdBuyBaseStaticTest"/>
+            <class name="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapPotentialQuestion1Test"/>
+            <class name="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapPrivateQuestion1Test"/>
+            <class name="com.ts.integration.tests.proc_potential_gap.sdQuestion.GapQuestion1Test"/>
         </classes>
     </test>
 </suite>

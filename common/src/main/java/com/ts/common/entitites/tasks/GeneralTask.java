@@ -6,6 +6,7 @@ import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.*;
+import com.ts.common.entitites.commonEntities.Task;
 import com.ts.common.enums.TaskType;
 import com.ts.common.utils.InitEntities;
 import lombok.*;
@@ -41,6 +42,7 @@ public class GeneralTask extends BaseEntity {
     Status priority;
     Resolution resolution;
     String statusName;
+    @JsonProperty("mstatusName")
     String mstatusName;
     String priorityName;
     Boolean confirmed;
@@ -76,6 +78,13 @@ public class GeneralTask extends BaseEntity {
         this.udfs = null;
         this.shortName = null;
         this.name = null;
+    }
+
+    public com.ts.common.entitites.commonEntities.Task to() {
+        return Task.builder()
+                .id(this.id)
+                .number(this.number)
+                .build();
     }
 
     @Override

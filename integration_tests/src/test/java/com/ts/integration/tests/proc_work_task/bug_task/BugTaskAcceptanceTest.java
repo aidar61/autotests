@@ -166,7 +166,7 @@ public class BugTaskAcceptanceTest extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_CDP_ACCEPTANCE, REQBYAUTHOR.getId());
     }
 
-    @Test(groups = {"DevTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "bugTask")
+    @Test(groups = {"BugTask", "Regression"}, description = "Коррекция плана", dependsOnMethods = "bugTask")
     public void changePlan() {
         apiController.updateToken(generateAuthToken(handlerUser));
         task.refreshTask();

@@ -31,9 +31,19 @@ public class List extends BaseEntity {
 
     @Getter
     public enum Constants {
+        PAID("818181b03cd282b1013cd3477c683a5c"),
+        APPRVD_REQUEST("8181816d8a78fa1b018aa6d979f503c0"),
+        APPRVD("8181816d8a78fa1b018aa6c137d903ba"),
+        STAGE_COST("8181817e3cb3b662013cb3e9599a0107"),
+        STAGE_IMPL("8181817e3cb3b662013cb3e95bf90108"),
+        STAGE_PRESHIP("8181817e3cb3b662013cb3e95ea20109"),
+        ACCOUNT_MANAGER_LIST("8181817e3da7928a013dac470f0c3c20"),
         ADDREQ("ff8081813874cb210138752a75e20246"),
         COLVIR_V4("818181708d35a20c018d417165500841"),
         AFS("818181708d35a20c018d41720eb40842"),
+        STAGE_FINISH("8181817e3cb3b662013cb447f23801aa"),
+        STAGE_PAY("8181817e3cb3b662013cb3e964cf010b"),
+        STAGE_ACCEPT("8181817e3cb3b662013cb3e96192010a"),
         STAGE_PRE_COST("8181817e3cb3b662013cb3e957720106"),
         STAGE_AWAIT("8181817e3cb3b662013cb3e952fa0105"),
         OWN("ff8081813874cb210138752a757f0243"),
@@ -48,6 +58,7 @@ public class List extends BaseEntity {
         NOTCUSTOM("402889da5ec3af21015ec3d025ac02b3"),
         USERDATA_WIKI("{\"username\":\"wiki\",\"name\":\"wiki\"}"),
         USERDATA_ARUTYANIN("{\"username\":\"yarutyunyan\",\"name\":\"Арутюнян Юрий\"}"),
+        NO_MUST("8181817e3b6147ad013b614bc4d0004b"),
         NO("ff8081813874cb21013875e34e910b7c"),
         YES("8181817e3e0c780d013e0cf949df0250"),
         YES_GAP("8181817e3f9f1ab5013f9f3a6543001b"),
@@ -71,7 +82,8 @@ public class List extends BaseEntity {
         LESSONS_PRACTICE("a7264df2b0911c4fe040007f01000d2c"),
         SOFTWARE_DESIGN("a7264df2b0d41c4fe040007f01000d2c"),
         B("653DCD851491460AA75355A235B1FB18"),
-
+        YES_LEGAL("818181b035ae14970135ba224b532a2d"),
+        YES_DEV("818181b036182fcc01362b10c90e5e6c"),
         WAY_CODE_REVIEW_BLOCKING("ff80808135a473d10135a4e56b5201f7"),
         INVESTMENTS_IN_PRODUCTS("c7264df2ae951c4fe040007f01000d2c"),
         WAY_CODE_REVIEW_OFF("ff80808135a473d10135a4e3088f01f6"),
@@ -114,6 +126,9 @@ public class List extends BaseEntity {
         SDDEV_GENUSE_GENERAL("818181b035ae14970135bdb791db3ecf"),
         DOC_REVISION_YES("ff8081813874cb21013875e34e720b7b"),
         DOC_REVISION_NO("ff8081813874cb21013875e34e910b7c"),
+        FAST("ff8080813128bcbe013128e09fce0028"),
+        FAST_WORK("ff8080813128bcbe013128ebb96b0164"),
+        GOOD("ff8080813128bcbe013128ef6c5f01ff"),
         UDF_CDP_ACCEPTANCE_STATUS_ACCEPTED("ff8081813fd1da8f013fd20b4dfd000d"), //Статус приёмки - Принята
         UDF_CDP_ACCEPTANCE_STATUS_ACCEPTANCE("4028818452e166ab0152e1831e4c0057"), //Статус приёмки - На приемке
         UDF_CDP_ACCEPTANCE_STATUS_REJECTED("ff8081813fd1da8f013fd20c7d64000e"), //Статус приёмки - Отклонена
@@ -153,6 +168,7 @@ public class List extends BaseEntity {
         RESPONSIBLE_PARTY_NOBODY("818182d33920daa3013920dde2b30029"),//
         URGANCYHELP_YES("ff80808157d2440a0157d40cc5b50000"),//
         FIRST_LINE("4028b88162a9a6e30162aa525f5a1f6f"), // первая линия
+        MANAGER_CLIENT_ROLE_CURRENT("8181817e3da7928a013dac471b673c25"),
         CLIENT_ROLE_CURRENT("8181817e3da7928a013dac4716743c23"), // CLI
         DEVELOPER_ROLE_CURRENT("8181817e3da7928a013dac4711ad3c21"),
         ANALYSIS_MANAGER("8181816d897dbf3b018981ff477d0001"),// Менеджер по анализу доработок

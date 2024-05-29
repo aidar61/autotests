@@ -108,7 +108,8 @@ public class Task extends BaseEntity {
         CURRENCY_MARKET("818181b03c7fc013013c7fca7f9104c2", "186640"),
         SENAGAT_BANK("818180a050c582480150c9522c794871", "463883"),
         CUSTOMER_REQUEST("8a8181df879af7cb01879d663123091e", "1441326"), //Двойное начисление штрафа по гарантиям в первый день просрочки
-        AKKREDITIVES("818181b03c7fc013013c7fca7130041d", "186616");
+        AKKREDITIVES("818181b03c7fc013013c7fca7130041d", "186616"),
+        ALOQA_BANK("8a8181df7234231801723c596b726d46", "1042946");
         public final String id;
         public final String number;
 

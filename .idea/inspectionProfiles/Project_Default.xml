@@ -6,14 +6,25 @@
         <language minSize="77" name="Java" />
       </Languages>
     </inspection_tool>
+    <inspection_tool class="LoggingSimilarMessage" enabled="false" level="WEAK WARNING" enabled_by_default="false" />
     <inspection_tool class="groupsTestNG" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="groups">
         <value>
-          <list size="4">
+          <list size="14">
             <item index="0" class="java.lang.String" itemvalue="Regression" />
             <item index="1" class="java.lang.String" itemvalue="SlaFeature" />
             <item index="2" class="java.lang.String" itemvalue="SlaBug" />
             <item index="3" class="java.lang.String" itemvalue="SlaHelp" />
+            <item index="4" class="java.lang.String" itemvalue="GapSolution" />
+            <item index="5" class="java.lang.String" itemvalue="BugTask" />
+            <item index="6" class="java.lang.String" itemvalue="DevTask" />
+            <item index="7" class="java.lang.String" itemvalue="ProcSdDev" />
+            <item index="8" class="java.lang.String" itemvalue="GapSoltion" />
+            <item index="9" class="java.lang.String" itemvalue="SdQuestion" />
+            <item index="10" class="java.lang.String" itemvalue="WorkTask" />
+            <item index="11" class="java.lang.String" itemvalue="PotentialGap" />
+            <item index="12" class="java.lang.String" itemvalue="Gap_Solution" />
+            <item index="13" class="java.lang.String" itemvalue="Gap_Question" />
           </list>
         </value>
       </option>
