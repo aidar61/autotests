@@ -39,6 +39,7 @@ public class Task extends BaseEntity {
     }
 
     public enum Constants {
+        COLVIR("1", "1"),
         COLVIR_MODERN_PRODUCT("818181df62d0f2270162d349b44e5695", "757947"),
         REQUIREMENTS("818181b03c614903013c6dc6a6105c5f", "186231"),
         CORE("818181b03c7fc013013c7fca70500413", "186615"),

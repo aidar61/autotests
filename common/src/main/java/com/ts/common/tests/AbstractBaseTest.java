@@ -1,6 +1,6 @@
 package com.ts.common.tests;
 
-import com.ts.common.application.Pages;
+import com.ts.common.application.ui.Pages;
 import com.ts.common.application.controllers.TrackStudioApiControllers;
 import com.ts.common.application.database.DbHelper;
 import lombok.Getter;
