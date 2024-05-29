@@ -61,7 +61,7 @@ public class UserController extends ApiRequest {
         return JsonUtils.deserialize(this.response, User.class);
     }
 
-    public User getUserBy(Map<Role.RoleConstants, List<User>> userByRoles, String username, Role.RoleConstants role) {
+    public User getUserBy(Map<Role.RoleConstants, List<User>> userByRoles, Role.RoleConstants role, String username) {
         return userByRoles.get(role).stream().filter(u -> u.getLogin().equals(username)).findFirst().orElse(null);
     }
 
