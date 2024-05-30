@@ -21,11 +21,11 @@ import java.util.Arrays;
 
 import static com.ts.common.entitites.commonEntities.List.Constants.NO_PROJECT_MANAGING;
 import static com.ts.common.entitites.commonEntities.List.Constants.PROJECT_VIEWERS;
+import static com.ts.common.entitites.commonEntities.Status.Priority.PRIORITY;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.enums.TaskType.GENPLAN;
 import static com.ts.common.enums.TaskType.GROUP_TASKS;
-import static com.ts.common.utils.InitEntities.generateUdfList;
-import static com.ts.common.utils.InitEntities.refreshUdf;
+import static com.ts.common.utils.InitEntities.*;
 
 public class TaskGenerator {
     @Getter
@@ -51,7 +51,7 @@ public class TaskGenerator {
     public void generateTasks(String project) {
         setUdfValue();
         createGroupTask(project);
-        createGenPlan(groupTask);
+        createGenPlan();
     }
 
     private void createGroupTask(String project) {
@@ -60,7 +60,7 @@ public class TaskGenerator {
         if (grTaskDbEntity == null) {
             GrTaskDbEntity projectTask = (GrTaskDbEntity) grTaskTable.receiveByTaskNumber(project);
             Parent groupTaskParent = projectTask.mapToParent();
-            groupTask = InitEntities.getGeneralTask(GROUP_TASKS, Operations.CAT);
+            groupTask = getGeneralTask(GROUP_TASKS, Operations.CAT);
 
             Udfs udf = refreshUdf();
             udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, udfCdpCustomer.getId()));
@@ -68,7 +68,7 @@ public class TaskGenerator {
 
             groupTask.setName(taskName);
             groupTask.setParent(groupTaskParent);
-            groupTask.setPriority(Status.builder().id("ff8081812ebde328012ebe063858000b").build());
+            groupTask.setPriority(generatePriority(PRIORITY));
 
             projectController.createProject(groupTask);
             ApiAsserts.assertThat(projectController.getResponse())
@@ -78,11 +78,11 @@ public class TaskGenerator {
         }
     }
 
-    private void createGenPlan(GeneralTask groupTask) {
+    private void createGenPlan() {
         String taskName = "AT_GENPLAN";
         GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskName(taskName);
         if (grTaskDbEntity == null) {
-            genPlan = InitEntities.getGeneralTask(GENPLAN, Operations.CAT);
+            genPlan = getGeneralTask(GENPLAN, Operations.CAT);
             Parent genPlanParent = InitEntities.generateParent(groupTask.getId(), groupTask.getNumber());
 
             genPlan.setParent(genPlanParent);

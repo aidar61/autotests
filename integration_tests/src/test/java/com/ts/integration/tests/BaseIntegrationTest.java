@@ -46,17 +46,21 @@ public class BaseIntegrationTest extends AbstractBaseTest {
         log.warn("=====================BEFORE TEST INITIALIZING=====================");
         baseController = apiController.getBaseController();
         userController = apiController.getUserController();
+
+        log.warn("=====================GENERATOR IS STARTING=====================");
         //Generator
         userRoles = UserGenerator.create(userController).generateUsers();
+        TaskGenerator taskGenerator = TaskGenerator.create(apiController, dbHelper);
+        taskGenerator.generateTasks("758009");
+
+        System.err.println(taskGenerator.getUdfCdpCustomer());
+        System.err.println(taskGenerator.getGroupTask());
+        System.err.println(taskGenerator.getGenPlan());
     }
 
     @Test()
     void test() {
-        TaskGenerator taskGenerator = TaskGenerator.create(apiController, dbHelper);
-        taskGenerator.generateTasks("758009");
-        System.err.println(taskGenerator.getUdfCdpCustomer());
-        System.err.println(taskGenerator.getGroupTask());
-        System.err.println(taskGenerator.getGenPlan());
+
     }
 
 }

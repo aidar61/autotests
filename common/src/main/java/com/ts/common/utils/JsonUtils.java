@@ -54,7 +54,8 @@ public class JsonUtils {
         try {
             String originalJsonString = response.then()
                     .extract()
-                    .body().asString();
+                    .body()
+                    .asString();
             String jsonString = originalJsonString.replaceAll("&", "\\\\u0026");
             return objectMapper.readValue(jsonString, type);
         } catch (Exception e) {
