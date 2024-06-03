@@ -6,11 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/task generate">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Status.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppUserConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppUserConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/user/AssignRoleRequestBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/user/AssignRoleRequestBody.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/user/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/TaskGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/TaskGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/JsonUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/JsonUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/CommonWorkTaskProcessTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/CommonWorkTaskProcessTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +62,7 @@
   <component name="GitLabMergeRequestsSettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;first&quot;: &quot;https://gitlab.colvir.ru/trackstudio/autotests.git&quot;,
-    &quot;second&quot;: &quot;aad8a9fb-bc4a-45ab-a473-ad5fd22b4748&quot;
+    &quot;second&quot;: &quot;5bc4426d-3f96-4676-8ec8-eb5eceacc8ce&quot;
   }
 }</component>
   <component name="JpbToolWindowState">
@@ -99,6 +102,7 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "TestNG.BaseIntegrationTest.test.executor": "Run",
     "TestNG.BugTaskAcceptanceTest.executor": "Run",
+    "TestNG.CommonWorkTaskProcessTest.executor": "Run",
     "TestNG.GapPotentialQuestion1Test.executor": "Run",
     "TestNG.GapPrivateQuestion1Test.executor": "Run",
     "TestNG.GapPrivateQuestion1Test.passForApproval.executor": "Run",
@@ -161,7 +165,7 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.BaseIntegrationTest.test">
+  <component name="RunManager" selected="TestNG.CommonWorkTaskProcessTest">
     <configuration name="UserController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ts.common.controllers.user.UserController" />
       <module name="common" />
@@ -193,16 +197,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SdDevBaseStaticTest" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="CommonWorkTaskProcessTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sd_dev.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.sd_dev" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sd_dev.SdDevBaseStaticTest" />
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.CommonWorkTaskProcessTest" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -292,18 +296,18 @@
       <item itemvalue="Application.UserController" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
       <item itemvalue="TestNG.BaseIntegrationTest.test" />
-      <item itemvalue="TestNG.SdDevBaseStaticTest" />
       <item itemvalue="TestNG.SlaFeatureBase2Test" />
       <item itemvalue="TestNG.com.ts.integration.tests.proc_gap.TP1541680" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
         <item itemvalue="TestNG.BaseIntegrationTest.test" />
         <item itemvalue="Application.UserController" />
         <item itemvalue="TestNG.com.ts.integration.tests.proc_gap.TP1541680" />
         <item itemvalue="TestNG.SlaFeatureBase2Test" />
-        <item itemvalue="TestNG.SdDevBaseStaticTest" />
       </list>
     </recent_temporary>
   </component>
@@ -315,8 +319,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-9f38398b9061-18abd8497189-intellij.indexing.shared.core-IU-241.14494.240" />
-        <option value="bundled-js-predefined-1d06a55b98c1-74d2a5396914-JavaScript-IU-241.14494.240" />
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.17011.79" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.17011.79" />
       </set>
     </attachedChunks>
   </component>
@@ -419,6 +423,10 @@
       <workItem from="1715925929108" duration="603000" />
       <workItem from="1715928407059" duration="605000" />
       <workItem from="1716187897856" duration="24041000" />
+      <workItem from="1717048170408" duration="55000" />
+      <workItem from="1717048300482" duration="9000" />
+      <workItem from="1717048521397" duration="104000" />
+      <workItem from="1717048680413" duration="20340000" />
     </task>
     <task id="LOCAL-00038" summary="feature/Sla negative scenarios, Errors">
       <created>1701675904063</created>
@@ -735,14 +743,6 @@
       <option name="project" value="LOCAL" />
       <updated>1713342603322</updated>
     </task>
-    <task id="LOCAL-00100" summary="feature/user create">
-      <option name="closed" value="true" />
-      <created>1716793374905</created>
-      <option name="number" value="00100" />
-      <option name="presentableId" value="LOCAL-00100" />
-      <option name="project" value="LOCAL" />
-      <updated>1716793374905</updated>
-    </task>
     <task id="LOCAL-00101" summary="feature/user generate">
       <option name="closed" value="true" />
       <created>1716973777414</created>
@@ -767,7 +767,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716994701466</updated>
     </task>
-    <option name="localTasksCounter" value="104" />
+    <task id="LOCAL-00104" summary="feature/task generate">
+      <option name="closed" value="true" />
+      <created>1717044560985</created>
+      <option name="number" value="00104" />
+      <option name="presentableId" value="LOCAL-00104" />
+      <option name="project" value="LOCAL" />
+      <updated>1717044560985</updated>
+    </task>
+    <option name="localTasksCounter" value="105" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

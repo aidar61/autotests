@@ -48,6 +48,8 @@ public class Role extends BaseEntity {
         ROLE_ORGANIZATION("ROLE_ORGANIZATION", "Организация"),
         ROLE_DEP("ROLE_DEP", "Подразделение"),
         ROLE_WORKER("ROLE_WORKER", "Сотрудник"),
+        ROLE_TASK_MANAGER("ROLE_TASK_MANAGER", "Менеджер проекта"),
+        ROLE_TASK_PARTICIPANT("ROLE_TASK_PARTICIPANT", "Участник проекта"),
         ROLE_CLIENT("ROLE_CLIENT", "Клиент");
 
         private final String id;

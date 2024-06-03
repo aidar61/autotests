@@ -31,6 +31,7 @@ public class BaseIntegrationTest extends AbstractBaseTest {
     protected UserController userController;
     protected Udfs udf;
     protected Map<Role.RoleConstants, List<User>> userRoles;
+    protected TaskGenerator taskGenerator;
 
     @BeforeSuite(alwaysRun = true)
     public void setUp() {
@@ -50,10 +51,10 @@ public class BaseIntegrationTest extends AbstractBaseTest {
         log.warn("=====================GENERATOR IS STARTING=====================");
         //Generator
         userRoles = UserGenerator.create(userController).generateUsers();
-        TaskGenerator taskGenerator = TaskGenerator.create(apiController, dbHelper);
+        taskGenerator = TaskGenerator.create(apiController, dbHelper);
         taskGenerator.generateTasks("758009");
 
-        System.err.println(taskGenerator.getUdfCdpCustomer());
+        System.err.println(taskGenerator.getAtCdpCustomer());
         System.err.println(taskGenerator.getGroupTask());
         System.err.println(taskGenerator.getGenPlan());
     }

@@ -10,7 +10,6 @@ import com.ts.common.controllers.project.ProjectController;
 import com.ts.common.controllers.settings.UdfController;
 import com.ts.common.entitites.commonEntities.List;
 import com.ts.common.entitites.commonEntities.Parent;
-import com.ts.common.entitites.commonEntities.Status;
 import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
@@ -33,7 +32,7 @@ public class TaskGenerator {
     @Getter
     private GeneralTask groupTask;
     @Getter
-    private List udfCdpCustomer;
+    private List atCdpCustomer;
     private final ProjectController projectController;
     private final UdfController udfController;
     private final GrTaskTable grTaskTable;
@@ -49,7 +48,8 @@ public class TaskGenerator {
     }
 
     public void generateTasks(String project) {
-        setUdfValue();
+        atCdpCustomer = generateList("AT_CDP_CUSTOMER", "000");
+        atCdpCustomer = setValueToList(atCdpCustomer, UDF_CDP_CUSTOMER);
         createGroupTask(project);
         createGenPlan();
     }
@@ -63,7 +63,7 @@ public class TaskGenerator {
             groupTask = getGeneralTask(GROUP_TASKS, Operations.CAT);
 
             Udfs udf = refreshUdf();
-            udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, udfCdpCustomer.getId()));
+            udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, atCdpCustomer.getId()));
             groupTask.refreshUdf(udf);
 
             groupTask.setName(taskName);
@@ -89,7 +89,7 @@ public class TaskGenerator {
             genPlan.setName(taskName);
 
             Udfs udf = refreshUdf();
-            udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, udfCdpCustomer.getId()));
+            udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, atCdpCustomer.getId()));
             udf.setSecondUdfList(generateUdfList(UDF_PROJECT_MANAGING, NO_PROJECT_MANAGING));
             udf.setThirdUdfList(generateUdfList(UDF_PROJECT_MEMBERCODEREVIEW, PROJECT_VIEWERS));
 
@@ -103,21 +103,16 @@ public class TaskGenerator {
         }
     }
 
-    private void setUdfValue() {
-        udfCdpCustomer = new List();
-        udfCdpCustomer.setOrder("1");
-        udfCdpCustomer.setSelectable(true);
-        udfCdpCustomer.setName("AT_CDP_CUSTOMER");
-        udfCdpCustomer.setCode("000");
-        udfCdpCustomer.setUserData("{\"selectable\":true}");
-        List value = Arrays.stream(udfController.getListValuesOf(UDF_CDP_CUSTOMER))
-                .filter(u -> u.getName().equals(udfCdpCustomer.getName()) && u.getCode().equals(udfCdpCustomer.getCode()))
+    private List setValueToList(List list, Udfs.UdfSd udf) {
+        List value = Arrays.stream(udfController.getListValuesOf(udf))
+                .filter(u -> u.getName().equals(list.getName()) && u.getCode().equals(list.getCode()))
                 .findAny()
                 .orElse(null);
         if (value == null) {
-            udfController.newListValueFor(UDF_CDP_CUSTOMER, udfCdpCustomer);
+            udfController.newListValueFor(udf, list);
+            return list;
         } else {
-            udfCdpCustomer = value;
+            return value;
         }
     }
 
