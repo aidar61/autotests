@@ -468,6 +468,16 @@ public class InitEntities {
         return new Task(constants.id, constants.number);
     }
 
+    public static List generateList(String value, String code) {
+        return List.builder()
+                .name(value)
+                .code(code)
+                .order("1")
+                .selectable(true)
+                .userData("{\"selectable\":true}")
+                .build();
+    }
+
     public static void main(String[] args) {
         System.out.println(generateUdfMultiList(UDF_LIST_AFFCTD_SYS, List.Constants.COLVIR_V4, List.Constants.AFS));
     }

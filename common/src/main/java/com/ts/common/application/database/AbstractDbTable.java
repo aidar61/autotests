@@ -24,6 +24,7 @@ public abstract class AbstractDbTable {
     public static final String SELECT_WHERE_COUNT_QUERY = SELECT_COUNT_QUERY + " WHERE %s = '%s'";
     public static final String SELECT_WHERE_AND_COUNT = SELECT_WHERE_COUNT_QUERY + " AND %s = '%s'";
     public static final String SELECT_WHERE_QUERY = SELECT_QUERY + " WHERE %s = '%s'";
+    public static final String SELECT_WHERE_QUERY_LIKE = SELECT_QUERY + " WHERE %s like '%s'";
     public static final String SELECT_WHERE_AND = SELECT_WHERE_QUERY + " AND %s = '%s'";
     public static final String SELECT_WHERE_ID = SELECT_QUERY + " WHERE id = '%s'";
     public static final String SELECT_WHERE_AND_OFFSET = SELECT_WHERE_AND + " OFFSET %s ROWS FETCH NEXT %s ROWS ONLY";
@@ -75,6 +76,18 @@ public abstract class AbstractDbTable {
             throw new NullPointerException(e.getMessage());
         }
     }
+
+    public List<BaseEntity> receiveEntitiesWhere(Class clazz, String... parameters) {
+        return query(String.format(SELECT_WHERE_QUERY, this.name
+                , parameters[0], parameters[1]), new BeanPropertyRowMapper<>(clazz));
+    }
+
+
+    public List<BaseEntity> receiveEntitiesWhereLike(Class clazz, String... parameters) {
+        return query(String.format(SELECT_WHERE_QUERY_LIKE, this.name
+                , parameters[0], parameters[1]), new BeanPropertyRowMapper<>(clazz));
+    }
+
 
     public <T extends BaseEntity> T getRandomEntity(Class type, String... parameters) {
         StringBuilder conditionBuilder = new StringBuilder();

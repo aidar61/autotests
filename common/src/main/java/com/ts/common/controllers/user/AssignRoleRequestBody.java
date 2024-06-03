@@ -27,10 +27,10 @@ public class AssignRoleRequestBody extends RequestBody {
     AssignRole assignedRole;
     Boolean override;
 
-    public AssignRoleRequestBody(GeneralTask task, User user, Role.Constants role) {
+    public AssignRoleRequestBody(GeneralTask task, User user, Role.RoleConstants role) {
         this.toTask = AssignRole.builder().toTaskNumber(task.getNumber()).build();
         this.forUser = AssignRole.builder().forUserLogin(user.getLogin()).build();
-        this.assignedRole = AssignRole.builder().roleId(role.getRole()).build();
+        this.assignedRole = AssignRole.builder().roleId(role.getId()).build();
         this.override = false;
     }
 }

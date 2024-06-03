@@ -1,12 +1,11 @@
 package com.ts.common.application.database.dbEntities;
 
+import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.Task;
+import com.ts.common.entitites.tasks.GeneralTask;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
-
-import java.net.URISyntaxException;
-import java.util.Arrays;
 
 @Builder
 @Getter
@@ -36,6 +35,23 @@ public class GrTaskDbEntity extends DbEntity {
                 .id(this.task_parent)
                 .number(extractParentTaskFromTaskPath())
                 .build();
+    }
+
+    public Parent mapToParent() {
+        return Parent.builder()
+                .id(this.task_id)
+                .number(this.task_number)
+                .build();
+    }
+
+    public GeneralTask mapToGeneralTask() {
+        GeneralTask build = GeneralTask.builder()
+                .name(this.task_name)
+                .id(this.task_id)
+                .number(this.task_number)
+                .build();
+        log.info("Mapped to general task {}", build.toString());
+        return build;
     }
 
     public String extractParentTaskFromTaskPath() {

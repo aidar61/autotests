@@ -29,29 +29,29 @@ public interface AppUserConfig extends Config {
     String roleDep();
 
     @Key("project.manager")
-    String projectManager();
+    String projectManager(); //Менеджер проекта
 
     @Key("project.participant")
-    String projectParticipant();
+    String projectParticipant(); //Участник проекта
 
     @Key("manager.client")
-    String managerClient();
+    String managerClient(); // менеджер клиента
 
     @Key("manager.supplier")
-    String managerSupplier();
+    String managerSupplier();// Менеджер по взаимодействию с поставщиком
 
     @Key("analytic")
-    String analytic();
+    String analytic(); //Аналитик
 
     @Key("manager.account")
-    String managerAccount();
+    String managerAccount(); //Account-менеджер
 
     @Key("manager.feature")
-    String managerFeature();
+    String managerFeature();//Менеджер по анализу доработок
 
     @Key("manager.request")
-    String managerRequest();
+    String managerRequest();// Менеджер запроса
 
     @Key("manager.emp")
-    String managerEmp();
+    String managerEmp(); // Ведение контрактов
 }

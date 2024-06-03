@@ -52,11 +52,12 @@ public class JsonUtils {
 
     public static <T> T deserialize(Response response, Class<T> type) {
         try {
-            return response
-                    .then()
+            String originalJsonString = response.then()
                     .extract()
                     .body()
-                    .as(type);
+                    .asString();
+            String jsonString = originalJsonString.replaceAll("&", "\\\\u0026");
+            return objectMapper.readValue(jsonString, type);
         } catch (Exception e) {
             log.error("Can not parse object", e);
             return null;
