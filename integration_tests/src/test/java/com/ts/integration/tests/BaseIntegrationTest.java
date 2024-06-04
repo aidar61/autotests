@@ -52,11 +52,7 @@ public class BaseIntegrationTest extends AbstractBaseTest {
         //Generator
         userRoles = UserGenerator.create(userController).generateUsers();
         taskGenerator = TaskGenerator.create(apiController, dbHelper);
-        taskGenerator.generateTasks("758009");
-
-        System.err.println(taskGenerator.getAtCdpCustomer());
-        System.err.println(taskGenerator.getGroupTask());
-        System.err.println(taskGenerator.getGenPlan());
+        taskGenerator.generateTasks("758009", "758008", "758007");
     }
 
     @Test()

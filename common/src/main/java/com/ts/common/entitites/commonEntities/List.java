@@ -45,6 +45,9 @@ public class List extends BaseEntity {
 
     @Getter
     public enum Constants {
+        NULL_1("919191b03a0bbc53013a0bd3e97104c7"),
+        NULL_2("8181839e61e1114d0161e135671c0001"),
+        STANDARD("ff80818138bd32c90138bd8c05200051"),
         NO_PROJECT_MANAGING("ff808081304b66e601304b6e010f002c"),
         PROJECT_VIEWERS("818181b03a315124013a413ea7f42f92"),
         PAID("818181b03cd282b1013cd3477c683a5c"),

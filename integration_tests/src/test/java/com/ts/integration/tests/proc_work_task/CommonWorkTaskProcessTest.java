@@ -7,9 +7,7 @@ import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.workTask.WorkTaskController;
 import com.ts.common.entitites.commonEntities.Parent;
-import com.ts.common.entitites.commonEntities.Role;
 import com.ts.common.entitites.commonEntities.User;
-import com.ts.common.entitites.commonEntities.UserRole;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Resolutions;
 import com.ts.common.enums.TaskType;
@@ -76,7 +74,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 "task_path", LIKE.operator, "%/2405/758009%");
 //        parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
 
-        GeneralTask genPlan = taskGenerator.getGenPlan();
+        GeneralTask genPlan = taskGenerator.getAt_genplan();
         parent = generateParent(genPlan.getId(), genPlan.getNumber());
         slaBugTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
 
