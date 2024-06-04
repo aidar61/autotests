@@ -53,6 +53,9 @@ public class BaseIntegrationTest extends AbstractBaseTest {
         userRoles = UserGenerator.create(userController).generateUsers();
         taskGenerator = TaskGenerator.create(apiController, dbHelper);
         taskGenerator.generateTasks("758009", "758008", "758007");
+        log.info("Users created\n{}", userRoles.values());
+        log.info("Task structure created\n{}", taskGenerator.toString());
+        log.warn("=====================GENERATOR IS ENDING=====================");
     }
 
     @Test(groups = {"GENERATOR"}, description = "Generating tasks and user for precondition")
