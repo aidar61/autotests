@@ -55,8 +55,8 @@ public class BaseIntegrationTest extends AbstractBaseTest {
         taskGenerator.generateTasks("758009", "758008", "758007");
     }
 
-    @Test()
-    void test() {
+    @Test(groups = {"GENERATOR"}, description = "Generating tasks and user for precondition")
+    void generator() {
 
     }
 

@@ -160,7 +160,7 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.BaseIntegrationTest.test">
+  <component name="RunManager" selected="TestNG.BaseIntegrationTest.generator">
     <configuration name="UserController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ts.common.controllers.user.UserController" />
       <module name="common" />
@@ -174,7 +174,7 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BaseIntegrationTest.test" type="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration name="BaseIntegrationTest.generator" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
@@ -184,7 +184,7 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.BaseIntegrationTest" />
-      <option name="METHOD_NAME" value="test" />
+      <option name="METHOD_NAME" value="generator" />
       <option name="TEST_OBJECT" value="METHOD" />
       <properties />
       <listeners />
@@ -292,13 +292,13 @@
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
       <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
-      <item itemvalue="TestNG.BaseIntegrationTest.test" />
       <item itemvalue="TestNG.SlaFeatureBase2Test" />
       <item itemvalue="TestNG.com.ts.integration.tests.proc_gap.TP1541680" />
+      <item itemvalue="TestNG.BaseIntegrationTest.generator" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="TestNG.BaseIntegrationTest.test" />
+        <item itemvalue="TestNG.BaseIntegrationTest.generator" />
         <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
         <item itemvalue="Application.UserController" />
         <item itemvalue="TestNG.com.ts.integration.tests.proc_gap.TP1541680" />
