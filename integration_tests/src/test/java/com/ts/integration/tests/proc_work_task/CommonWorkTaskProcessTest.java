@@ -82,10 +82,10 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
 //        AUTHOR = userController.receiveUserByRole(userRoles, "Менеджер проекта", "root").getForUser();
 //        HANDLER_USER = userController.receiveUserByRole(userRoles, "Участник проекта", AUTHOR.getLogin()).getForUser();
 
-        AUTHOR = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().projectManager());
+        AUTHOR = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_manager());
         userController.assignRoleToTask(genPlan, AUTHOR, ROLE_TASK_MANAGER);
 
-        HANDLER_USER = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().projectParticipant());
+        HANDLER_USER = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_participant());
         userController.assignRoleToTask(genPlan, HANDLER_USER, ROLE_TASK_PARTICIPANT);
 
         allCategoriesOfWorkTaskProcess = new HashMap<>();

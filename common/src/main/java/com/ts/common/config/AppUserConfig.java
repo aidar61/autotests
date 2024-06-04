@@ -20,38 +20,38 @@ public interface AppUserConfig extends Config {
     String clientUsername();
 
     @Key("role.organization")
-    String roleOrganization();
+    String role_organization();
 
     @Key("role.client")
-    String roleClient();
+    String role_client();
 
     @Key("role.dep")
-    String roleDep();
+    String role_dep();
 
-    @Key("project.manager")
-    String projectManager(); //Менеджер проекта
+    @Key("at.task.manager")
+    String at_task_manager(); //Менеджер проекта
 
-    @Key("project.participant")
-    String projectParticipant(); //Участник проекта
+    @Key("at.task.participant")
+    String at_task_participant(); //Участник проекта
 
-    @Key("manager.client")
-    String managerClient(); // менеджер клиента
+    @Key("at.support.manager")
+    String at_support_manager(); // менеджер клиента
 
-    @Key("manager.supplier")
-    String managerSupplier();// Менеджер по взаимодействию с поставщиком
+    @Key("at.suppliermanager")
+    String at_suppliermanager();// Менеджер по взаимодействию с поставщиком
 
-    @Key("analytic")
-    String analytic(); //Аналитик
+    @Key("at.task.analitic")
+    String at_task_analitic(); //Аналитик
 
-    @Key("manager.account")
-    String managerAccount(); //Account-менеджер
+    @Key("at.support.costmanager")
+    String at_support_costmanager(); //Account-менеджер
 
-    @Key("manager.feature")
-    String managerFeature();//Менеджер по анализу доработок
+    @Key("at.sdfeature.analysis.manager")
+    String at_sdfeature_analysis_manager();//Менеджер по анализу доработок
 
-    @Key("manager.request")
-    String managerRequest();// Менеджер запроса
+    @Key("at.sdfeature.impl.manager")
+    String at_sdfeature_impl_manager();// Менеджер запроса
 
-    @Key("manager.emp")
-    String managerEmp(); // Ведение контрактов
+    @Key("at_contract_emp")
+    String at_contract_emp(); // Ведение контрактов
 }
