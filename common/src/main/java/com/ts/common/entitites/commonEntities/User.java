@@ -37,6 +37,7 @@ public class User extends BaseEntity {
     Task defaultTask;
     String emailTemplate;
     User parent;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     Udfs[] udfs;
 
     public User(String id, String login, String name) {

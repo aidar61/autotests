@@ -90,6 +90,10 @@ public class TaskGenerator {
             udf.setSecondUdfList(generateUdfList(UDF_MIS_TPRJ, NULL_2));
 
             at_regproject.refreshUdf(udf);
+            projectController.createProject(at_regproject);
+
+            ApiAsserts.assertThat(projectController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
         } else {
             at_regproject = grTaskDbEntity.mapToGeneralTask();
             logExist(task_name, grTaskDbEntity);
@@ -103,6 +107,7 @@ public class TaskGenerator {
             GrTaskDbEntity projectTask = (GrTaskDbEntity) grTaskTable.receiveByTaskNumber(project);
             Parent projectParent = projectTask.mapToParent();
             at_regfolder = getGeneralTask(REGFOLDER, Operations.CAT);
+            at_regfolder.setName(task_name);
 
             Udfs udf = refreshUdf();
             udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, atCdpCustomer.getId()));
