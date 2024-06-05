@@ -83,6 +83,10 @@ public class GeneralTask extends BaseEntity {
                 .build();
     }
 
+    public boolean fromDatabase() {
+        return this.getParent() == null && this.getDescription() == null;
+    }
+
     @Override
     public Object receiveTaskStatus() {
         return getFinishStatus().getId();

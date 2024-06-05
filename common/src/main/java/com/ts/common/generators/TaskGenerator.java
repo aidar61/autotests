@@ -14,6 +14,7 @@ import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.RandomUtils;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,6 +25,7 @@ import static com.ts.common.entitites.commonEntities.Status.Priority.PRIORITY;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.enums.TaskType.*;
 import static com.ts.common.utils.InitEntities.*;
+import static com.ts.common.utils.RandomUtils.generateComment;
 
 @Slf4j
 public class TaskGenerator {
@@ -67,10 +69,73 @@ public class TaskGenerator {
 
         AT_REGFOLDER(reg_project_home);
         AT_REGPROJECT();
+
+        setGENPLANtoSDPROJECT();
+        setREGPROJECTtoGENPLAN();
     }
 
     private void logExist(String name, GrTaskDbEntity taskDbEntity) {
         log.info("{} is exist, take from database next object {}", name, taskDbEntity.toString());
+    }
+
+    private void setREGPROJECTtoGENPLAN() {
+        if (at_genplan == null) {
+            throw new RuntimeException("Call first AT_GENPLAN");
+        }
+        GeneralTask edit_at_genplan = at_genplan;
+        Parent genPlanParent = InitEntities.generateParent(at_grouptasks.getId(), at_grouptasks.getNumber());
+
+        edit_at_genplan.setId(null);
+        edit_at_genplan.setCategory(generateCategory(GENPLAN));
+        edit_at_genplan.setParent(genPlanParent);
+        edit_at_genplan.setNumber(at_genplan.getNumber());
+        edit_at_genplan.setName(at_genplan.getName());
+        edit_at_genplan.setDescription(generateComment());
+
+        Udfs udf = refreshUdf();
+        udf.setUdfList(generateUdfList(UDF_PROJECT_MANAGING, NO_PROJECT_MANAGING));
+        udf.setUdfTask(generateUdfTask(UDF_REGPROJECT, at_regproject.to()));
+        udf.setSecondUdfList(generateUdfList(UDF_CDP_CUSTOMER, atCdpCustomer.getId()));
+        udf.setThirdUdfList(generateUdfList(UDF_PROJECT_MEMBERCODEREVIEW, PROJECT_VIEWERS));
+
+        edit_at_genplan.refreshUdf(udf);
+
+        projectController.editProject(edit_at_genplan);
+        ApiAsserts.assertThat(projectController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+
+    }
+
+    private void setGENPLANtoSDPROJECT() {
+        if (at_sdproject == null) {
+            throw new RuntimeException("Call first AT_SDPROJECT");
+        }
+
+        GeneralTask edit_ad_sdproject = at_sdproject;
+
+        Parent projectTaskParent = InitEntities.generateParent(at_sdprojectgroup.getId(), at_sdprojectgroup.getNumber());
+
+        edit_ad_sdproject.setId(null);
+        edit_ad_sdproject.setCategory(generateCategory(SDPROJECT));
+        edit_ad_sdproject.setParent(projectTaskParent);
+        edit_ad_sdproject.setNumber(at_sdproject.getNumber());
+        edit_ad_sdproject.setName(at_sdproject.getName());
+        edit_ad_sdproject.setDescription(generateComment());
+
+        Udfs udf = refreshUdf();
+        udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, atCdpCustomer.getId()));
+        udf.setSecondUdfList(generateUdfList(UDF_SDPROJECT_SUPPORTTYPE, STANDARD));
+        udf.setUdfTask(generateUdfTask(UDF_SD_INTERNPROJECT, at_genplan.to()));
+        udf.setUdfInteger(generateUdfInteger(UDF_SD_COST1CAT, 100));
+        udf.setSecondUdfInteger(generateUdfInteger(UDF_SD_COST2CAT, 200));
+        udf.setThirdUdfInteger(generateUdfInteger(UDF_SD_COST3CAT, 300));
+
+        edit_ad_sdproject.refreshUdf(udf);
+
+        projectController.editProject(edit_ad_sdproject);
+        ApiAsserts.assertThat(projectController.getResponse())
+                .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+
     }
 
     private void AT_REGPROJECT() {

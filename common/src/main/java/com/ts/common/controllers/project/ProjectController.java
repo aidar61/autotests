@@ -8,7 +8,7 @@ import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.utils.JsonUtils;
 import io.restassured.response.Response;
 
-import static com.ts.common.controllers.TaskRequestBody.Fields.PRIORITY;
+import static com.ts.common.controllers.TaskRequestBody.Fields.*;
 
 public class ProjectController extends BaseController {
     public ProjectController(String url, AuthToken authToken) {
@@ -34,5 +34,10 @@ public class ProjectController extends BaseController {
             project.setFinishStatus(projectResponseBody.getFinishStatus());
         }
         return project;
+    }
+
+    public void editProject(GeneralTask project) {
+        TaskRequestBody requestBody = new TaskRequestBody(project);
+        this.response = createTask(requestBody.keepFields(CATEGORY, PARENT, NUMBER, NAME, DESCRIPTION, UDFS));
     }
 }
