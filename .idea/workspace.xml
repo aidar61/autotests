@@ -5,11 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/task generate settings">
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppUserConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppUserConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/UserGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/UserGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/user.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/user.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/project/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/project/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/TaskGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/TaskGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/RandomUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/RandomUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/CommonWorkTaskProcessTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/CommonWorkTaskProcessTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,6 +99,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "TestNG.BaseIntegrationTest.generator.executor": "Run",
     "TestNG.BaseIntegrationTest.test.executor": "Run",
     "TestNG.BugTaskAcceptanceTest.executor": "Run",
     "TestNG.CommonWorkTaskProcessTest.executor": "Run",
@@ -422,7 +426,7 @@
       <workItem from="1717048170408" duration="55000" />
       <workItem from="1717048300482" duration="9000" />
       <workItem from="1717048521397" duration="104000" />
-      <workItem from="1717048680413" duration="37085000" />
+      <workItem from="1717048680413" duration="43504000" />
     </task>
     <task id="LOCAL-00038" summary="feature/Sla negative scenarios, Errors">
       <created>1701675904063</created>
@@ -739,22 +743,6 @@
       <option name="project" value="LOCAL" />
       <updated>1713342603322</updated>
     </task>
-    <task id="LOCAL-00106" summary="feature/task generate settings">
-      <option name="closed" value="true" />
-      <created>1717478703549</created>
-      <option name="number" value="00106" />
-      <option name="presentableId" value="LOCAL-00106" />
-      <option name="project" value="LOCAL" />
-      <updated>1717478703549</updated>
-    </task>
-    <task id="LOCAL-00107" summary="feature/task generate settings">
-      <option name="closed" value="true" />
-      <created>1717479528105</created>
-      <option name="number" value="00107" />
-      <option name="presentableId" value="LOCAL-00107" />
-      <option name="project" value="LOCAL" />
-      <updated>1717479528105</updated>
-    </task>
     <task id="LOCAL-00108" summary="feature/task generate settings">
       <option name="closed" value="true" />
       <created>1717479632891</created>
@@ -771,7 +759,23 @@
       <option name="project" value="LOCAL" />
       <updated>1717479636088</updated>
     </task>
-    <option name="localTasksCounter" value="110" />
+    <task id="LOCAL-00110" summary="feature/task generate settings">
+      <option name="closed" value="true" />
+      <created>1717481294702</created>
+      <option name="number" value="00110" />
+      <option name="presentableId" value="LOCAL-00110" />
+      <option name="project" value="LOCAL" />
+      <updated>1717481294703</updated>
+    </task>
+    <task id="LOCAL-00111" summary="feature/task generate settings">
+      <option name="closed" value="true" />
+      <created>1717481297071</created>
+      <option name="number" value="00111" />
+      <option name="presentableId" value="LOCAL-00111" />
+      <option name="project" value="LOCAL" />
+      <updated>1717481297071</updated>
+    </task>
+    <option name="localTasksCounter" value="112" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

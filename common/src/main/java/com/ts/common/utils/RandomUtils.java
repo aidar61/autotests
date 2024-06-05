@@ -13,7 +13,7 @@ public class RandomUtils {
     }
 
     public static String generateComment() {
-        return faker.commerce().productName();
+        return "AUTOTEST " + faker.commerce().productName();
     }
 
     public static String generateStringWithLength(int length) {
