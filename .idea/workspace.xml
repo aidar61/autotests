@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/task generate settings">
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/settings/SettingsController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/helpers/OperationsAccess.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/helpers/Permissions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/helpers/Transition.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/project/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/project/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioApiControllers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioEndPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioEndPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Category.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/GeneralSlaId.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/GeneralSlaId.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/TaskGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/TaskGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/RandomUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/RandomUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/request/ResponseBody.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/request/ResponseBody.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/InitEntities.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -89,6 +95,7 @@
   "keyToString": {
     "ASKED_ADD_EXTERNAL_FILES": "true",
     "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Application.BaseIntegrationTest.executor": "Run",
     "Application.MemoStringValue.executor": "Run",
     "Application.UserController.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
@@ -165,7 +172,20 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="TestNG.BaseIntegrationTest.generator">
+  <component name="RunManager" selected="Application.BaseIntegrationTest">
+    <configuration name="BaseIntegrationTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.BaseIntegrationTest" />
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="UserController" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.ts.common.controllers.user.UserController" />
       <module name="common" />
@@ -207,23 +227,6 @@
       </extension>
       <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task" />
       <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.CommonWorkTaskProcessTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="SlaFeatureBase2Test" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_sla_feature.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_sla_feature" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_sla_feature.SlaFeatureBase2Test" />
       <option name="TEST_OBJECT" value="CLASS" />
       <properties />
       <listeners />
@@ -293,21 +296,21 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.BaseIntegrationTest" />
       <item itemvalue="Application.UserController" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
       <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
       <item itemvalue="TestNG.BaseIntegrationTest.generator" />
-      <item itemvalue="TestNG.SlaFeatureBase2Test" />
       <item itemvalue="TestNG.com.ts.integration.tests.proc_gap.TP1541680" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.BaseIntegrationTest" />
         <item itemvalue="TestNG.BaseIntegrationTest.generator" />
         <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
         <item itemvalue="Application.UserController" />
         <item itemvalue="TestNG.com.ts.integration.tests.proc_gap.TP1541680" />
-        <item itemvalue="TestNG.SlaFeatureBase2Test" />
       </list>
     </recent_temporary>
   </component>
@@ -426,7 +429,7 @@
       <workItem from="1717048170408" duration="55000" />
       <workItem from="1717048300482" duration="9000" />
       <workItem from="1717048521397" duration="104000" />
-      <workItem from="1717048680413" duration="43504000" />
+      <workItem from="1717048680413" duration="67979000" />
     </task>
     <task id="LOCAL-00038" summary="feature/Sla negative scenarios, Errors">
       <created>1701675904063</created>
@@ -743,14 +746,6 @@
       <option name="project" value="LOCAL" />
       <updated>1713342603322</updated>
     </task>
-    <task id="LOCAL-00108" summary="feature/task generate settings">
-      <option name="closed" value="true" />
-      <created>1717479632891</created>
-      <option name="number" value="00108" />
-      <option name="presentableId" value="LOCAL-00108" />
-      <option name="project" value="LOCAL" />
-      <updated>1717479632891</updated>
-    </task>
     <task id="LOCAL-00109" summary="feature/task generate settings">
       <option name="closed" value="true" />
       <created>1717479636088</created>
@@ -775,7 +770,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717481297071</updated>
     </task>
-    <option name="localTasksCounter" value="112" />
+    <task id="LOCAL-00112" summary="feature/task generate settings">
+      <option name="closed" value="true" />
+      <created>1717564676551</created>
+      <option name="number" value="00112" />
+      <option name="presentableId" value="LOCAL-00112" />
+      <option name="project" value="LOCAL" />
+      <updated>1717564676551</updated>
+    </task>
+    <option name="localTasksCounter" value="113" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

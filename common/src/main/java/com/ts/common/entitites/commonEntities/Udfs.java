@@ -153,6 +153,7 @@ public class Udfs extends BaseEntity {
     UdfInteger thirdUdfInteger;
 
     public enum UdfSd {
+        UDF_WORKTASK_CUSTOMTYPE("UDF_WORKTASK_CUSTOMTYPE", LIST),
         UDF_CDP_CUSTOMER("UDF_CDP_CUSTOMER", LIST),
         UDF_REGISTRY_FOLDER("UDF_REGISTRY_FOLDER", TASK),
         UDF_REGISTRY_SUPPORT("UDF_REGISTRY_SUPPORT", TASK),
