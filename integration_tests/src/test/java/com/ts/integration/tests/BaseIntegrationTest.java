@@ -68,10 +68,6 @@ public class BaseIntegrationTest extends AbstractBaseTest {
         log.warn("=====================GENERATOR IS ENDING=====================");
     }
 
-    public static void main(String[] args) {
-
-    }
-
     @Test(groups = {"GENERATOR"}, description = "Generating tasks and user for precondition")
     void generator() {
 
