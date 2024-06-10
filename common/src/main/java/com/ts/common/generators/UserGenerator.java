@@ -51,6 +51,8 @@ public class UserGenerator {
                 , organizationParent.getLogin()
                 , organizationParent.getName());
         createUserRoleClient(getUserConfig().role_client(), clientParent);
+        createUserRoleClient(getUserConfig().role_client_2(), clientParent);
+        createUserRoleClient(getUserConfig().at_suppliermanager(), clientParent);
         userMap.put(ROLE_CLIENT, clients);
 
         createUserRoleDep(getUserConfig().role_dep());
@@ -61,9 +63,10 @@ public class UserGenerator {
                 , depParent.getLogin()
                 , depParent.getName());
         createUserRoleWorker(getUserConfig().at_task_manager(), workerParent);
+        createUserRoleWorker(getUserConfig().at_task_manager_2(), workerParent);
         createUserRoleWorker(getUserConfig().at_task_participant(), workerParent);
+        createUserRoleWorker(getUserConfig().at_task_participant_2(), workerParent);
         createUserRoleWorker(getUserConfig().at_support_manager(), workerParent);
-        createUserRoleWorker(getUserConfig().at_suppliermanager(), workerParent);
         createUserRoleWorker(getUserConfig().at_task_analitic(), workerParent);
         createUserRoleWorker(getUserConfig().at_support_costmanager(), workerParent);
         createUserRoleWorker(getUserConfig().at_sdfeature_analysis_manager(), workerParent);

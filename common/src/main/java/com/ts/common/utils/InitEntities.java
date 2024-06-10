@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.Map;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.MSG;
+import static com.ts.common.config.AppConfigProvider.getUserConfig;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_LIST_AFFCTD_SYS;
 import static com.ts.common.enums.Parents.MTB;
 import static com.ts.common.enums.Parents.RYSGAL_BANK;
@@ -373,6 +374,13 @@ public class InitEntities {
                 .build();
     }
 
+    public static AuthToken generateAuthToken(String login) {
+        return AuthToken.builder()
+                .user(login)
+                .password(getUserConfig().password())
+                .build();
+    }
+
     public static User generateUser(String id, String login, String name) {
         return User.builder()
                 .id(id)
@@ -399,7 +407,7 @@ public class InitEntities {
     public static AuthToken generateAuthToken(User user) {
         return AuthToken.builder()
                 .user(user.getLogin())
-                .password(AppConfigProvider.getUserConfig().password())
+                .password(getUserConfig().password())
                 .build();
     }
 
