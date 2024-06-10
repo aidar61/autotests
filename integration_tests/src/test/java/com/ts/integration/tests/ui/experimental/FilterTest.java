@@ -1,8 +1,6 @@
 package com.ts.integration.tests.ui.experimental;
 
-import com.ts.common.config.UiConfig;
-import com.ts.common.enums.Users;
-import com.ts.common.request.ApiRequest;
+import com.ts.common.config.AppConfigProvider;
 import com.ts.common.ui.pages.FilterPage;
 import com.ts.common.ui.pages.HomePage;
 import com.ts.common.ui.pages.LoginPage;
@@ -13,9 +11,9 @@ import org.testng.annotations.Test;
 import java.util.UUID;
 
 import static com.codeborne.selenide.Selenide.open;
-import static com.ts.common.application.controllers.TrackStudioEndPoints.APP;
+
 import static com.ts.common.config.AppConfigProvider.STAND_URL;
-import static com.ts.common.config.AppConfigProvider.getUiConfig;
+import static com.ts.common.config.AppConfigProvider.getUi;
 import static com.ts.common.request.ApiRequest.getEndpoint;
 
 public class FilterTest extends BaseUiTest {
@@ -38,7 +36,7 @@ public class FilterTest extends BaseUiTest {
     @Test
     public void editFilter() {
         open(getEndpoint(STAND_URL, "app"));
-        loginPage.loginNoToken(getUiConfig().baseUser());
+        loginPage.loginNoToken(getUi().baseUser());
         homePage.openFilterSetting();
 
         filterPage.setFilterName(filterpName)

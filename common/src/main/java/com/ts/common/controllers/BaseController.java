@@ -321,9 +321,4 @@ public class BaseController extends ApiRequest {
         }
         return null;
     }
-
-    public Response getOpretionPermission(String operationName){
-        return super.get(getEndpoint(REST, WORKFLOW, MSTATUS, operationName, PERMISSIONS));
-
-    }
 }

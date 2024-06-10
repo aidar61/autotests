@@ -6,6 +6,7 @@ public class AppConfigProvider {
     private static AppConfig config;
     private static AppDb db;
     private static AppUserConfig userConfig;
+    private static AppUiConfig uiConfig;
     public static final String STAND = get().stand();
     private static String BASE_URL = get().baseUrl();
     public static final String STAND_URL = formIntegrationUrl();
@@ -55,5 +56,12 @@ public class AppConfigProvider {
             userConfig = ConfigFactory.create(AppUserConfig.class, System.getProperties());
         }
         return userConfig;
+    }
+
+    public static AppUiConfig getUi() {
+        if (uiConfig == null) {
+            uiConfig = ConfigFactory.create(AppUiConfig.class, System.getProperties());
+        }
+        return uiConfig;
     }
 }
