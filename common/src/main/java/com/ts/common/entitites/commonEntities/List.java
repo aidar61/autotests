@@ -45,6 +45,7 @@ public class List extends BaseEntity {
 
     @Getter
     public enum Constants {
+        VIEW_PROCESS_05("8181839e61e1114d0161e1a78aad0047"),
         NULL_1("919191b03a0bbc53013a0bd3e97104c7"),
         NULL_2("8181839e61e1114d0161e135671c0001"),
         STANDARD("ff80818138bd32c90138bd8c05200051"),

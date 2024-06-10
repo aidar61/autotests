@@ -42,6 +42,8 @@ public class TaskGenerator {
     @Getter
     private GeneralTask at_regproject;
     @Getter
+    private GeneralTask at_service;
+    @Getter
     private List atCdpCustomer;
     private final ProjectController projectController;
     private final UdfController udfController;
@@ -72,6 +74,8 @@ public class TaskGenerator {
 
         setGENPLANtoSDPROJECT();
         setREGPROJECTtoGENPLAN();
+
+        AT_SERVICE();
     }
 
     private void logExist(String name, GrTaskDbEntity taskDbEntity) {
@@ -292,6 +296,30 @@ public class TaskGenerator {
                     .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
         } else {
             at_genplan = grTaskDbEntity.mapToGeneralTask();
+            logExist(task_name, grTaskDbEntity);
+        }
+    }
+
+    private void AT_SERVICE() {
+        String task_name = "AT_SERVICE";
+        GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskName(task_name);
+        if (grTaskDbEntity == null) {
+            at_service = getGeneralTask(SERVICE, Operations.CAT);
+            Parent serviceParent = generateParent(at_genplan.getId(), at_genplan.getNumber());
+
+            at_service.setParent(serviceParent);
+            at_service.setName(task_name);
+
+            Udfs udf = refreshUdf();
+            udf.setUdfList(generateUdfList(UDF_MIS_SERVICE, VIEW_PROCESS_05));
+
+            at_service.refreshUdf(udf);
+
+            projectController.createProject(at_service);
+            ApiAsserts.assertThat(projectController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        } else {
+            at_service = grTaskDbEntity.mapToGeneralTask();
             logExist(task_name, grTaskDbEntity);
         }
     }

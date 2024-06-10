@@ -25,14 +25,23 @@ public interface AppUserConfig extends Config {
     @Key("role.client")
     String role_client();
 
+    @Key("role.client.2")
+    String role_client_2();
+
     @Key("role.dep")
     String role_dep();
 
     @Key("at.task.manager")
     String at_task_manager(); //Менеджер проекта
 
+    @Key("at.task.manager.2")
+    String at_task_manager_2(); //Менеджер проекта
+
     @Key("at.task.participant")
     String at_task_participant(); //Участник проекта
+
+    @Key("at.task.participant.2")
+    String at_task_participant_2(); //Участник проекта
 
     @Key("at.support.manager")
     String at_support_manager(); // менеджер клиента
