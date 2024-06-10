@@ -1,13 +1,10 @@
 package com.ts.common.generators;
 
 import com.ts.common.asserts.ApiAsserts;
-import com.ts.common.config.AppConfigProvider;
-import com.ts.common.config.AppUserConfig;
 import com.ts.common.controllers.user.UserController;
 import com.ts.common.entitites.commonEntities.Role;
 import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.utils.InitEntities;
-import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,32 +43,35 @@ public class UserGenerator {
     }
 
     public Map<Role.RoleConstants, List<User>> generateUsers() {
-        createUserRoleOrganization(getUserConfig().roleOrganization());
+        createUserRoleOrganization(getUserConfig().role_organization());
         userMap.put(ROLE_ORGANIZATION, organizations);
 
-        User organizationParent = userController.getUserBy(userMap, ROLE_ORGANIZATION, getUserConfig().roleOrganization());
+        User organizationParent = userController.getUserBy(userMap, ROLE_ORGANIZATION, getUserConfig().role_organization());
         User clientParent = generateUser(organizationParent.getId()
                 , organizationParent.getLogin()
                 , organizationParent.getName());
-        createUserRoleClient(getUserConfig().roleClient(), clientParent);
+        createUserRoleClient(getUserConfig().role_client(), clientParent);
+        createUserRoleClient(getUserConfig().role_client_2(), clientParent);
+        createUserRoleClient(getUserConfig().at_suppliermanager(), clientParent);
         userMap.put(ROLE_CLIENT, clients);
 
-        createUserRoleDep(getUserConfig().roleDep());
+        createUserRoleDep(getUserConfig().role_dep());
         userMap.put(ROLE_DEP, deps);
 
-        User depParent = userController.getUserBy(userMap, ROLE_DEP, getUserConfig().roleDep());
+        User depParent = userController.getUserBy(userMap, ROLE_DEP, getUserConfig().role_dep());
         User workerParent = generateUser(depParent.getId()
                 , depParent.getLogin()
                 , depParent.getName());
-        createUserRoleWorker(getUserConfig().projectManager(), workerParent);
-        createUserRoleWorker(getUserConfig().projectParticipant(), workerParent);
-        createUserRoleWorker(getUserConfig().managerClient(), workerParent);
-        createUserRoleWorker(getUserConfig().managerSupplier(), workerParent);
-        createUserRoleWorker(getUserConfig().analytic(), workerParent);
-        createUserRoleWorker(getUserConfig().managerAccount(), workerParent);
-        createUserRoleWorker(getUserConfig().managerFeature(), workerParent);
-        createUserRoleWorker(getUserConfig().managerRequest(), workerParent);
-        createUserRoleWorker(getUserConfig().managerEmp(), workerParent);
+        createUserRoleWorker(getUserConfig().at_task_manager(), workerParent);
+        createUserRoleWorker(getUserConfig().at_task_manager_2(), workerParent);
+        createUserRoleWorker(getUserConfig().at_task_participant(), workerParent);
+        createUserRoleWorker(getUserConfig().at_task_participant_2(), workerParent);
+        createUserRoleWorker(getUserConfig().at_support_manager(), workerParent);
+        createUserRoleWorker(getUserConfig().at_task_analitic(), workerParent);
+        createUserRoleWorker(getUserConfig().at_support_costmanager(), workerParent);
+        createUserRoleWorker(getUserConfig().at_sdfeature_analysis_manager(), workerParent);
+        createUserRoleWorker(getUserConfig().at_sdfeature_impl_manager(), workerParent);
+        createUserRoleWorker(getUserConfig().at_contract_emp(), workerParent);
         userMap.put(ROLE_WORKER, workers);
         return userMap;
     }

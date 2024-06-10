@@ -1,30 +1,25 @@
-package com.ts.common.entitites.commonEntities;
+package com.ts.common.entitites.helpers;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.ts.common.entitites.BaseEntity;
+import com.ts.common.entitites.commonEntities.Role;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-import lombok.extern.jackson.Jacksonized;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
-@Builder
 @Getter
 @Setter
+@Builder
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Category extends BaseEntity {
-    String id;
-    String name;
-    String workFlowId;
-    String icon;
-    boolean handlerRequired;
-    boolean groupHandlerAllowed;
-    boolean canManage;
+public class Permissions extends BaseEntity {
+    Role role;
+    String[] permissions;
+    String viewOperation; //Разрешен просмотр
+    String processOperation; //Может выполнить
+    String handleOperation; //Разрешено быть ответственным
 }

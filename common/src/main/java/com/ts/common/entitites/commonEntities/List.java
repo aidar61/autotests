@@ -18,9 +18,18 @@ import lombok.extern.slf4j.Slf4j;
 @NoArgsConstructor
 @Jacksonized
 @JsonIgnoreProperties(ignoreUnknown = true)
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class List extends BaseEntity {
     String id;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    String name;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    String code;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    Boolean selectable;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    String order;
     @JsonProperty("userdata0")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     String userData;
@@ -29,8 +38,19 @@ public class List extends BaseEntity {
         this.id = id;
     }
 
+    public List(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     @Getter
     public enum Constants {
+        VIEW_PROCESS_05("8181839e61e1114d0161e1a78aad0047"),
+        NULL_1("919191b03a0bbc53013a0bd3e97104c7"),
+        NULL_2("8181839e61e1114d0161e135671c0001"),
+        STANDARD("ff80818138bd32c90138bd8c05200051"),
+        NO_PROJECT_MANAGING("ff808081304b66e601304b6e010f002c"),
+        PROJECT_VIEWERS("818181b03a315124013a413ea7f42f92"),
         PAID("818181b03cd282b1013cd3477c683a5c"),
         APPRVD_REQUEST("8181816d8a78fa1b018aa6d979f503c0"),
         APPRVD("8181816d8a78fa1b018aa6c137d903ba"),

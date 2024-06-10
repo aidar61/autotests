@@ -8,7 +8,6 @@ import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.workTask.WorkTaskController;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.User;
-import com.ts.common.entitites.commonEntities.UserRole;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Resolutions;
 import com.ts.common.enums.TaskType;
@@ -23,7 +22,9 @@ import java.util.*;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
 import static com.ts.common.application.database.DbQueryHelper.Operators.*;
+import static com.ts.common.config.AppConfigProvider.getUserConfig;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
+import static com.ts.common.entitites.commonEntities.Role.RoleConstants.*;
 import static com.ts.common.entitites.commonEntities.Status.Priority.NORMAL;
 import static com.ts.common.entitites.commonEntities.Task.Constants.AKKREDITIVES;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
@@ -71,12 +72,22 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
                 AND.operator,
                 "task_path", LIKE.operator, "%/2405/758009%");
-        parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
+//        parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
+
+        GeneralTask genPlan = taskGenerator.getAt_genplan();
+        parent = generateParent(genPlan.getId(), genPlan.getNumber());
         slaBugTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
 
-        List<UserRole> userRoles = userController.receiveUserByTask(parent.getNumber());
-        AUTHOR = userController.receiveUserByRole(userRoles, "Менеджер проекта", "root").getForUser();
-        HANDLER_USER = userController.receiveUserByRole(userRoles, "Участник проекта", AUTHOR.getLogin()).getForUser();
+//        List<UserRole> userRoles = userController.receiveUserByTask(parent.getNumber());
+//        AUTHOR = userController.receiveUserByRole(userRoles, "Менеджер проекта", "root").getForUser();
+//        HANDLER_USER = userController.receiveUserByRole(userRoles, "Участник проекта", AUTHOR.getLogin()).getForUser();
+
+        AUTHOR = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_manager());
+        userController.assignRoleToTask(genPlan, AUTHOR, ROLE_TASK_MANAGER);
+
+        HANDLER_USER = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_participant());
+        userController.assignRoleToTask(genPlan, HANDLER_USER, ROLE_TASK_PARTICIPANT);
+
         allCategoriesOfWorkTaskProcess = new HashMap<>();
     }
 

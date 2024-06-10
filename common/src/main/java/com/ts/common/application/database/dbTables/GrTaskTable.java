@@ -4,10 +4,12 @@ import com.ts.common.application.database.AbstractDbTable;
 import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.enums.TaskStatuses;
+import com.ts.common.utils.RandomUtils;
 import io.qameta.allure.Step;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.testng.AssertJUnit.assertNotNull;
@@ -25,6 +27,17 @@ public class GrTaskTable extends AbstractDbTable {
     }
     public BaseEntity receiveByTaskName(String name) {
         return super.getEntityWhere(GrTaskDbEntity.class, "task_name", name);
+    }
+
+
+    public BaseEntity receiveByTaskName(String taskName) {
+        try {
+            List<BaseEntity> tasks = super
+                    .receiveEntitiesWhere(GrTaskDbEntity.class, "task_name", taskName);
+            return tasks.get(RandomUtils.generateRandomNumberBetween(0, tasks.size() - 1));
+        } catch (Exception e) {
+            return null;
+        }
     }
 
 

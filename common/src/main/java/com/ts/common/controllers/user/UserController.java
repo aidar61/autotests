@@ -65,7 +65,7 @@ public class UserController extends ApiRequest {
         return userByRoles.get(role).stream().filter(u -> u.getLogin().equals(username)).findFirst().orElse(null);
     }
 
-    public void assignRoleToTask(GeneralTask task, User user, Role.Constants role) {
+    public void assignRoleToTask(GeneralTask task, User user, Role.RoleConstants role) {
         AssignRoleRequestBody assignRoleRequestBody = new AssignRoleRequestBody(task, user, role);
         this.response = super.post(getEndpoint(REST, ACL, CREATE), assignRoleRequestBody.removeFields());
     }
