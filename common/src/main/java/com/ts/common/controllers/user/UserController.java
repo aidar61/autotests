@@ -70,6 +70,13 @@ public class UserController extends ApiRequest {
         this.response = super.post(getEndpoint(REST, ACL, CREATE), assignRoleRequestBody.removeFields());
     }
 
+    public void assignRoleToTask(GeneralTask task, User user, Role.RoleConstants... role) {
+        for (Role.RoleConstants roleConstants : role) {
+            AssignRoleRequestBody assignRoleRequestBody = new AssignRoleRequestBody(task, user, roleConstants);
+            this.response = super.post(getEndpoint(REST, ACL, CREATE), assignRoleRequestBody.removeFields());
+        }
+    }
+
     private List<UserRole> receiveAllUserForProject(Parents parents) {
         HashMap<String, String> queryParam = new LinkedHashMap<>() {{
             put(TO_TASK, parents.tuskNumber);

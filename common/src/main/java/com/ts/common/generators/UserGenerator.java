@@ -4,6 +4,7 @@ import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.user.UserController;
 import com.ts.common.entitites.commonEntities.Role;
 import com.ts.common.entitites.commonEntities.User;
+import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.utils.InitEntities;
 
 import java.util.ArrayList;
@@ -59,9 +60,11 @@ public class UserGenerator {
         userMap.put(ROLE_DEP, deps);
 
         User depParent = userController.getUserBy(userMap, ROLE_DEP, getUserConfig().role_dep());
-        User workerParent = generateUser(depParent.getId()
-                , depParent.getLogin()
-                , depParent.getName());
+        User workerParent = generateUser(
+                depParent.getId(),
+                depParent.getLogin(),
+                depParent.getName()
+        );
         createUserRoleWorker(getUserConfig().at_task_manager(), workerParent);
         createUserRoleWorker(getUserConfig().at_task_manager_2(), workerParent);
         createUserRoleWorker(getUserConfig().at_task_participant(), workerParent);
@@ -72,9 +75,11 @@ public class UserGenerator {
         createUserRoleWorker(getUserConfig().at_sdfeature_analysis_manager(), workerParent);
         createUserRoleWorker(getUserConfig().at_sdfeature_impl_manager(), workerParent);
         createUserRoleWorker(getUserConfig().at_contract_emp(), workerParent);
+        createUserRoleWorker(getUserConfig().at_group_technologyservice(), workerParent);
         userMap.put(ROLE_WORKER, workers);
         return userMap;
     }
+
 
     private void createUserRoleOrganization(String username) {
         if (organizations == null || organizations.isEmpty()) {

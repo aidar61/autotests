@@ -61,6 +61,9 @@ public interface AppUserConfig extends Config {
     @Key("at.sdfeature.impl.manager")
     String at_sdfeature_impl_manager();// Менеджер запроса
 
-    @Key("at_contract_emp")
+    @Key("at.contract.emp")
     String at_contract_emp(); // Ведение контрактов
+
+    @Key("at.group.technologyservice")
+    String at_group_technologyservice(); // Технолог
 }

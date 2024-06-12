@@ -44,6 +44,10 @@ public class TaskGenerator {
     @Getter
     private GeneralTask at_service;
     @Getter
+    private GeneralTask at_bdku_installation;
+    @Getter
+    private GeneralTask at_sdpatchfolder;
+    @Getter
     private List atCdpCustomer;
     private final ProjectController projectController;
     private final UdfController udfController;
@@ -59,7 +63,12 @@ public class TaskGenerator {
         return new TaskGenerator(apiController, dbHelper);
     }
 
-    public void generateTasks(String tasks_home, String sd_tasks_home, String reg_project_home) {
+    public void generateTasks(
+            String tasks_home,
+            String sd_tasks_home,
+            String reg_project_home,
+            String installation_home
+    ) {
         atCdpCustomer = generateList("AT_CDP_CUSTOMER", "000");
         atCdpCustomer = setValueToList(atCdpCustomer, UDF_CDP_CUSTOMER);
 
@@ -76,6 +85,9 @@ public class TaskGenerator {
         setREGPROJECTtoGENPLAN();
 
         AT_SERVICE();
+
+        AT_BDKU_INSTALLATION(installation_home);
+        AT_SDPATCHFOLDER();
     }
 
     private void logExist(String name, GrTaskDbEntity taskDbEntity) {
@@ -141,6 +153,57 @@ public class TaskGenerator {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
 
     }
+
+    private void AT_SDPATCHFOLDER() {
+        String task_name = "AT_SDPATCHFOLDER";
+        GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskName(task_name);
+        if (grTaskDbEntity == null) {
+            Parent sdPatchFolderParent = InitEntities.generateParent(at_bdku_installation.getId(), at_bdku_installation.getNumber());
+            at_sdpatchfolder = getGeneralTask(SDPATCHFOLDER, Operations.CAT);
+            at_sdpatchfolder.setParent(sdPatchFolderParent);
+            at_sdpatchfolder.setName(task_name);
+            at_sdpatchfolder.setPriority(generatePriority(2));
+
+            Udfs udf = refreshUdf();
+            udf.setUdfTask(generateUdfTask(UDF_REGPROJECT, at_regproject.to()));
+
+            at_sdpatchfolder.refreshUdf(udf);
+
+            projectController.createProject(at_sdpatchfolder);
+            ApiAsserts.assertThat(projectController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        } else {
+            at_sdpatchfolder = grTaskDbEntity.mapToGeneralTask();
+            logExist(task_name, grTaskDbEntity);
+        }
+    }
+
+    private void AT_BDKU_INSTALLATION(String installation_home) {
+        String task_name = "AT_BDKU_INSTALLATION";
+        GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskName(task_name);
+        if (grTaskDbEntity == null) {
+            GrTaskDbEntity installationHome = (GrTaskDbEntity) grTaskTable.receiveByTaskNumber(installation_home);
+            Parent bdkuInstallationParent = installationHome.mapToParent();
+            at_bdku_installation = getGeneralTask(BDKU_INSTALLATION, Operations.CAT);
+            at_bdku_installation.setParent(bdkuInstallationParent);
+            at_bdku_installation.setName(task_name);
+
+            Udfs udf = refreshUdf();
+            udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, atCdpCustomer.getId()));
+            udf.setUdfTask(generateUdfTask(UDF_INSTALLATION_SDPROJECT, at_sdproject.to()));
+            udf.setSecondUdfTask(generateUdfTask(UDF_REGPROJECT, at_regproject.to()));
+
+            at_bdku_installation.refreshUdf(udf);
+            projectController.createProject(at_bdku_installation);
+
+            ApiAsserts.assertThat(projectController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        } else {
+            at_bdku_installation = grTaskDbEntity.mapToGeneralTask();
+            logExist(task_name, grTaskDbEntity);
+        }
+    }
+
 
     private void AT_REGPROJECT() {
         String task_name = "AT_REGPROJECT";

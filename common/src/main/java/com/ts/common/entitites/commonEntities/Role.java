@@ -45,11 +45,19 @@ public class Role extends BaseEntity {
 
     @Getter
     public enum RoleConstants {
+        ROLE_SUPPORT_MANAGER("ROLE_SUPPORT_MANAGER", "Менеджер клиента"),
+        ROLE_SUPPORT_MEMBER("ROLE_SUPPORT_MEMBER", "Участник проекта сопровождения"),
+        ROLE_SDFEATURE_ANALYSIS_MANAGER("ROLE_SDFEATURE_ANALYSIS_MANAGER", "Менеджер по анализу доработок"),
+        ROLE_SDFEATURE_IMPL_MANAGER("ROLE_SDFEATURE_IMPL_MANAGER", "Менеджер запроса"),
+        ROLE_CONTRACT_EMP("ROLE_CONTRACT_EMP", "Ведение контрактов"),
+        ROLE_TASK_ANALITIC("ROLE_TASK_ANALITIC", "Аналитик"),
         ROLE_ORGANIZATION("ROLE_ORGANIZATION", "Организация"),
         ROLE_DEP("ROLE_DEP", "Подразделение"),
         ROLE_WORKER("ROLE_WORKER", "Сотрудник"),
+        ROLE_SUPPORT_COSTMANAGER("ROLE_SUPPORT_COSTMANAGER", "Account-Manager"),
         ROLE_TASK_MANAGER("ROLE_TASK_MANAGER", "Менеджер проекта"),
         ROLE_TASK_PARTICIPANT("ROLE_TASK_PARTICIPANT", "Участник проекта"),
+        ROLE_GROUP_TECHNOLOGYSERVICE("ROLE_GROUP_TECHNOLOGYSERVICE", "Технолог"),
         ROLE_CLIENT("ROLE_CLIENT", "Клиент");
 
         private final String id;
