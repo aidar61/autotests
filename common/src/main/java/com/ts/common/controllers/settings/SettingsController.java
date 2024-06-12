@@ -1,25 +1,17 @@
 package com.ts.common.controllers.settings;
 
 import com.ts.common.application.controllers.AuthToken;
-import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.application.errors.ErrorResponseBody;
-import com.ts.common.application.errors.TrackStudioErrors;
 import com.ts.common.controllers.BaseController;
 import com.ts.common.entitites.commonEntities.GeneralSlaId;
 import com.ts.common.entitites.commonEntities.Status;
 import com.ts.common.entitites.commonEntities.Udfs;
-import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.helpers.OperationsAccess;
 import com.ts.common.entitites.helpers.Permissions;
 import com.ts.common.entitites.helpers.Transition;
-import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
-import com.ts.common.request.ResponseBody;
-import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
-import io.restassured.response.Response;
-
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.utils.InitEntities.generateAuthToken;

@@ -8,6 +8,7 @@ import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.workTask.WorkTaskController;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.User;
+import com.ts.common.entitites.commonEntities.UserRole;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Resolutions;
 import com.ts.common.enums.TaskType;
@@ -78,15 +79,15 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
         parent = generateParent(genPlan.getId(), genPlan.getNumber());
         slaBugTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
 
-//        List<UserRole> userRoles = userController.receiveUserByTask(parent.getNumber());
-//        AUTHOR = userController.receiveUserByRole(userRoles, "Менеджер проекта", "root").getForUser();
-//        HANDLER_USER = userController.receiveUserByRole(userRoles, "Участник проекта", AUTHOR.getLogin()).getForUser();
+        List<UserRole> userRoles = userController.receiveUserByTask(parent.getNumber());
+        AUTHOR = userController.receiveUserByRole(userRoles, "Менеджер проекта", "root").getForUser();
+        HANDLER_USER = userController.receiveUserByRole(userRoles, "Участник проекта", AUTHOR.getLogin()).getForUser();
 
-        AUTHOR = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_manager());
-        userController.assignRoleToTask(genPlan, AUTHOR, ROLE_TASK_MANAGER);
+//        AUTHOR = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_manager());
+//        userController.assignRoleToTask(genPlan, AUTHOR, ROLE_TASK_MANAGER);
 
-        HANDLER_USER = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_participant());
-        userController.assignRoleToTask(genPlan, HANDLER_USER, ROLE_TASK_PARTICIPANT);
+//        HANDLER_USER = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_participant());
+//        userController.assignRoleToTask(genPlan, HANDLER_USER, ROLE_TASK_PARTICIPANT);
 
         allCategoriesOfWorkTaskProcess = new HashMap<>();
     }
