@@ -20,13 +20,11 @@ import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static com.ts.common.config.AppConfigProvider.getUserConfig;
 import static com.ts.common.entitites.commonEntities.Role.RoleConstants.*;
-import static com.ts.common.entitites.commonEntities.Role.RoleConstants.ROLE_WORKER;
 import static com.ts.common.utils.InitEntities.generateAuthToken;
 
 @Slf4j

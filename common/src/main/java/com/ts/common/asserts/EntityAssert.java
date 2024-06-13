@@ -3,13 +3,25 @@ package com.ts.common.asserts;
 import com.ts.common.entitites.BaseEntity;
 import com.ts.common.entitites.commonEntities.Status;
 
+import java.util.Arrays;
+
 import static org.testng.Assert.*;
 
 public class EntityAssert {
     protected BaseEntity entity;
+    protected BaseEntity[] entities;
 
     public EntityAssert(BaseEntity entity) {
         this.entity = entity;
+    }
+
+    public EntityAssert(BaseEntity[] entities) {
+        this.entities = entities;
+    }
+
+    public void isContainsInList(BaseEntity expectedEntity) {
+        boolean contains = Arrays.stream(this.entities).anyMatch(a -> a.isEqualsNoLog(expectedEntity));
+        assertTrue(contains, "Entity [" + expectedEntity + "] is not in " + Arrays.toString(this.entities));
     }
 
     public void isExist() {

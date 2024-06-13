@@ -64,7 +64,7 @@ public class ContingentTaskController extends BaseController {
 
     public List<String> getMisService(String parentDetailInString) {
         var misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValue.id", String.class);
-        if (misServiceListValue.size() > 0) {
+        if (!misServiceListValue.isEmpty()) {
             return misServiceListValue;
         }
         misServiceListValue = new JsonPath(parentDetailInString).getList("udfs.UDF_MIS_SERVICE.listValueSelector.id", String.class);

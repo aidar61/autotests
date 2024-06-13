@@ -27,11 +27,9 @@ import java.util.List;
 
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
 import static com.ts.common.entitites.commonEntities.Task.Constants.CORE;
-import static com.ts.common.entitites.commonEntities.Task.Constants.SERVICE_DESK;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.TaskStatuses.*;
-import static com.ts.common.enums.TaskStatuses.STATUS_SDBUG_INWORK;
 import static com.ts.common.utils.InitEntities.*;
 import static com.ts.common.utils.RandomUtils.*;
 

@@ -4,22 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/resolve conflicts">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/SettingsAssert.java" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/techonologyservice user added, bdku installation, sd patch folder">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppUserConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppUserConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/settings/SettingsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/settings/SettingsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/user/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/user/UserController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/GeneralSlaId.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/GeneralSlaId.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/TaskType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/TaskGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/TaskGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/EntityAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/EntityAssert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/SettingsAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/SettingsAssert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/workTask/ContingentTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/workTask/ContingentTaskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/workTask/TechTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/workTask/TechTaskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/workTask/WorkTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/workTask/WorkTaskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/BaseEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/UserGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/UserGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/user.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/user.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/request/ApiRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/request/ApiRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/resources/.json" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/GeneratorTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/GeneratorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_bug/sd_doc_improve/SdDocImproveBaseDynamicTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sd_bug/sd_doc_improve/SdDocImproveBaseDynamicTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/CommonWorkTaskProcessTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/CommonWorkTaskProcessTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -754,14 +752,6 @@
       <option name="project" value="LOCAL" />
       <updated>1713342603322</updated>
     </task>
-    <task id="LOCAL-00113" summary="feature/task generate settings">
-      <option name="closed" value="true" />
-      <created>1718000131775</created>
-      <option name="number" value="00113" />
-      <option name="presentableId" value="LOCAL-00113" />
-      <option name="project" value="LOCAL" />
-      <updated>1718000131775</updated>
-    </task>
     <task id="LOCAL-00114" summary="feature/task generate settings">
       <option name="closed" value="true" />
       <created>1718000153111</created>
@@ -786,7 +776,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718007347098</updated>
     </task>
-    <option name="localTasksCounter" value="117" />
+    <task id="LOCAL-00117" summary="feature/techonologyservice user added, bdku installation, sd patch folder">
+      <option name="closed" value="true" />
+      <created>1718180108878</created>
+      <option name="number" value="00117" />
+      <option name="presentableId" value="LOCAL-00117" />
+      <option name="project" value="LOCAL" />
+      <updated>1718180108878</updated>
+    </task>
+    <option name="localTasksCounter" value="118" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -840,7 +838,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="fix/dev task accepted" />
     <MESSAGE value="feature/sd bug" />
     <MESSAGE value="feature/release" />
     <MESSAGE value="feature/sddev" />
@@ -865,7 +862,8 @@
     <MESSAGE value="feature/task generate" />
     <MESSAGE value="feature/task generate settings" />
     <MESSAGE value="fix/resolve conflicts" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix/resolve conflicts" />
+    <MESSAGE value="feature/techonologyservice user added, bdku installation, sd patch folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/techonologyservice user added, bdku installation, sd patch folder" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -889,15 +887,6 @@
           <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/dev_task/dev_task_acceptance/DevTaskAcceptanceTest.java</url>
           <line>144</line>
           <option name="timeStamp" value="104" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/GeneratorTest.java</url>
-          <line>7</line>
-          <properties class="com.ts.integration.tests.GeneratorTest" method="generator">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="130" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

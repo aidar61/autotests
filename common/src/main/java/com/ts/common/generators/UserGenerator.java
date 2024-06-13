@@ -4,7 +4,6 @@ import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.user.UserController;
 import com.ts.common.entitites.commonEntities.Role;
 import com.ts.common.entitites.commonEntities.User;
-import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.utils.InitEntities;
 
 import java.util.ArrayList;
@@ -48,9 +47,11 @@ public class UserGenerator {
         userMap.put(ROLE_ORGANIZATION, organizations);
 
         User organizationParent = userController.getUserBy(userMap, ROLE_ORGANIZATION, getUserConfig().role_organization());
-        User clientParent = generateUser(organizationParent.getId()
-                , organizationParent.getLogin()
-                , organizationParent.getName());
+        User clientParent = generateUser(
+                organizationParent.getId(),
+                organizationParent.getLogin(),
+                organizationParent.getName()
+        );
         createUserRoleClient(getUserConfig().role_client(), clientParent);
         createUserRoleClient(getUserConfig().role_client_2(), clientParent);
         createUserRoleClient(getUserConfig().at_suppliermanager(), clientParent);

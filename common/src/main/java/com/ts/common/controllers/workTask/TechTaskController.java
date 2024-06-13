@@ -18,7 +18,6 @@ import java.util.Map;
 
 import static com.ts.common.application.controllers.TrackStudioEndPoints.*;
 import static com.ts.common.controllers.TaskRequestBody.Fields.HANDLER_USER;
-import static com.ts.common.enums.TaskType.CAT_TECHTASK;
 import static com.ts.common.enums.TaskType.WORK_TASK;
 
 public class TechTaskController extends BaseController {

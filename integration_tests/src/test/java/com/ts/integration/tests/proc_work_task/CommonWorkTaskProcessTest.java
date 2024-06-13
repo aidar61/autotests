@@ -73,10 +73,10 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
                 "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
                 AND.operator,
                 "task_path", LIKE.operator, "%/2405/758009%");
-//        parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
+        parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
 
-        GeneralTask genPlan = taskGenerator.getAt_genplan();
-        parent = generateParent(genPlan.getId(), genPlan.getNumber());
+//        GeneralTask genPlan = taskGenerator.getAt_genplan();
+//        parent = generateParent(genPlan.getId(), genPlan.getNumber());
         slaBugTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
 
         List<UserRole> userRoles = userController.receiveUserByTask(parent.getNumber());
