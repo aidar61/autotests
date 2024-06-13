@@ -51,7 +51,8 @@ public abstract class BaseEntity implements Serializable {
         try {
             Assertions.assertThat(this)
                     .usingRecursiveComparison()
-                    .ignoringFields(IGNORING_FIELDS)
+                    .ignoringActualNullFields()
+                    .ignoringExpectedNullFields()
                     .isEqualTo(obj);
             return true;
         } catch (AssertionError e) {

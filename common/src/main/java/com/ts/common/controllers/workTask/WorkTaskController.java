@@ -1,29 +1,22 @@
 package com.ts.common.controllers.workTask;
 
 import com.ts.common.application.controllers.AuthToken;
-import com.ts.common.application.controllers.TrackStudioHttpStatusCodes;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.TaskRequestBody;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.entitites.tasks.GeneralTask;
-import com.ts.common.enums.Operations;
 import com.ts.common.enums.TaskType;
-import com.ts.common.utils.InitEntities;
 import com.ts.common.utils.JsonUtils;
-import com.ts.common.utils.RandomUtils;
 import io.restassured.response.Response;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.TreeMap;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
 import static com.ts.common.controllers.TaskRequestBody.Fields.HANDLER_USER;
 import static com.ts.common.controllers.TaskRequestBody.Fields.PRIORITY;
 import static com.ts.common.enums.TaskType.WORK_TASK;
-import static com.ts.common.utils.InitEntities.generateCategory;
 import static com.ts.common.utils.InitEntities.generateCategoryForWorkTask;
 
 public class WorkTaskController extends BaseController {
