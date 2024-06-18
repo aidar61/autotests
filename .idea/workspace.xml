@@ -4,24 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/techonologyservice user added, bdku installation, sd patch folder">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/enums/Permission.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/utils/EntityMapper.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/settings/SettingsTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Разработка API теста проверки прав на операцию &quot;Назначить наблюдателя&quot; в патче">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/SettingsAssert.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/asserts/SettingsAssert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppUserConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/config/AppUserConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/BaseEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/BaseEntity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/helpers/Permissions.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/helpers/Permissions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/helpers/Transition.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/helpers/Transition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/UserGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/UserGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/.json" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/resources/user.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/user.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -445,7 +429,7 @@
       <workItem from="1717048300482" duration="9000" />
       <workItem from="1717048521397" duration="104000" />
       <workItem from="1717048680413" duration="69903000" />
-      <workItem from="1718686557613" duration="6913000" />
+      <workItem from="1718686557613" duration="11368000" />
     </task>
     <task id="LOCAL-00038" summary="feature/Sla negative scenarios, Errors">
       <created>1701675904063</created>
@@ -762,22 +746,6 @@
       <option name="project" value="LOCAL" />
       <updated>1713342603322</updated>
     </task>
-    <task id="LOCAL-00115" summary="fix/resolve conflicts">
-      <option name="closed" value="true" />
-      <created>1718003157015</created>
-      <option name="number" value="00115" />
-      <option name="presentableId" value="LOCAL-00115" />
-      <option name="project" value="LOCAL" />
-      <updated>1718003157015</updated>
-    </task>
-    <task id="LOCAL-00116" summary="fix/resolve conflicts">
-      <option name="closed" value="true" />
-      <created>1718007347098</created>
-      <option name="number" value="00116" />
-      <option name="presentableId" value="LOCAL-00116" />
-      <option name="project" value="LOCAL" />
-      <updated>1718007347098</updated>
-    </task>
     <task id="LOCAL-00117" summary="feature/techonologyservice user added, bdku installation, sd patch folder">
       <option name="closed" value="true" />
       <created>1718180108878</created>
@@ -794,7 +762,23 @@
       <option name="project" value="LOCAL" />
       <updated>1718269569521</updated>
     </task>
-    <option name="localTasksCounter" value="119" />
+    <task id="LOCAL-00119" summary="feature/Разработка API теста проверки прав на операцию &quot;Назначить наблюдателя&quot; в патче">
+      <option name="closed" value="true" />
+      <created>1718694476046</created>
+      <option name="number" value="00119" />
+      <option name="presentableId" value="LOCAL-00119" />
+      <option name="project" value="LOCAL" />
+      <updated>1718694476046</updated>
+    </task>
+    <task id="LOCAL-00120" summary="feature/Разработка API теста проверки прав на операцию &quot;Назначить наблюдателя&quot; в патче">
+      <option name="closed" value="true" />
+      <created>1718694509902</created>
+      <option name="number" value="00120" />
+      <option name="presentableId" value="LOCAL-00120" />
+      <option name="project" value="LOCAL" />
+      <updated>1718694509902</updated>
+    </task>
+    <option name="localTasksCounter" value="121" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -848,7 +832,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feature/sd bug" />
     <MESSAGE value="feature/release" />
     <MESSAGE value="feature/sddev" />
     <MESSAGE value="feature/performance tests" />
@@ -873,7 +856,8 @@
     <MESSAGE value="feature/task generate settings" />
     <MESSAGE value="fix/resolve conflicts" />
     <MESSAGE value="feature/techonologyservice user added, bdku installation, sd patch folder" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/techonologyservice user added, bdku installation, sd patch folder" />
+    <MESSAGE value="feature/Разработка API теста проверки прав на операцию &quot;Назначить наблюдателя&quot; в патче" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/Разработка API теста проверки прав на операцию &quot;Назначить наблюдателя&quot; в патче" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
