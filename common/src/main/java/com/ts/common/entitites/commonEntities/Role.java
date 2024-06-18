@@ -45,6 +45,7 @@ public class Role extends BaseEntity {
 
     @Getter
     public enum RoleConstants {
+        ROLE_MAIN_ADMINISTRATOR("ROLE_MAIN_ADMINISTRATOR", "Administrator"),
         ROLE_SUPPORT_MANAGER("ROLE_SUPPORT_MANAGER", "Менеджер клиента"),
         ROLE_SUPPORT_MEMBER("ROLE_SUPPORT_MEMBER", "Участник проекта сопровождения"),
         ROLE_SDFEATURE_ANALYSIS_MANAGER("ROLE_SDFEATURE_ANALYSIS_MANAGER", "Менеджер по анализу доработок"),

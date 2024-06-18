@@ -30,4 +30,9 @@ public class Transition extends BaseEntity {
     Category[] tasks;
     Status start;
     Status finish;
+
+    @Override
+    public Object receiveTaskStatus() {
+        return this.start.getName();
+    }
 }

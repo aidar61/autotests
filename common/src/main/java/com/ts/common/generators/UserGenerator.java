@@ -71,6 +71,7 @@ public class UserGenerator {
         createUserRoleWorker(getUserConfig().at_task_participant(), workerParent);
         createUserRoleWorker(getUserConfig().at_task_participant_2(), workerParent);
         createUserRoleWorker(getUserConfig().at_support_manager(), workerParent);
+        createUserRoleWorker(getUserConfig().at_support_manager_2(), workerParent);
         createUserRoleWorker(getUserConfig().at_task_analitic(), workerParent);
         createUserRoleWorker(getUserConfig().at_support_costmanager(), workerParent);
         createUserRoleWorker(getUserConfig().at_sdfeature_analysis_manager(), workerParent);

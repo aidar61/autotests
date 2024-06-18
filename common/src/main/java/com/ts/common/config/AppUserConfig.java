@@ -46,6 +46,9 @@ public interface AppUserConfig extends Config {
     @Key("at.support.manager")
     String at_support_manager(); // менеджер клиента
 
+    @Key("at.support.manager_2")
+    String at_support_manager_2(); // менеджер клиента
+
     @Key("at.suppliermanager")
     String at_suppliermanager();// Менеджер по взаимодействию с поставщиком
 

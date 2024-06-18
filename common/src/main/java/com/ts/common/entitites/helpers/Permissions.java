@@ -22,4 +22,9 @@ public class Permissions extends BaseEntity {
     String viewOperation; //Разрешен просмотр
     String processOperation; //Может выполнить
     String handleOperation; //Разрешено быть ответственным
+
+    @Override
+    public Permissions receivePermissions() {
+        return this;
+    }
 }
