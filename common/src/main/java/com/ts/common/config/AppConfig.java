@@ -19,6 +19,9 @@ public interface AppConfig extends Config {
     @Key("headless")
     String headless();
 
+    @Key("generator.on")
+    Boolean generator();
+
     @Key("retry.number")
     int retriesNumber();
 }

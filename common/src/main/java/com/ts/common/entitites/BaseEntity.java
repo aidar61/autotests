@@ -2,6 +2,7 @@ package com.ts.common.entitites;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.ts.common.annotations.TypeId;
+import com.ts.common.entitites.helpers.Permissions;
 import com.ts.common.utils.JsonUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
@@ -170,6 +171,10 @@ public abstract class BaseEntity implements Serializable {
     }
 
     public Object receiveUdf() {
+        return null;
+    }
+
+    public Permissions receivePermissions() {
         return null;
     }
 }

@@ -4,6 +4,7 @@ import com.ts.common.application.controllers.AuthToken;
 import com.ts.common.application.controllers.TrackStudioApiControllers;
 import com.ts.common.application.database.DbHelper;
 import com.ts.common.application.ui.Pages;
+import com.ts.common.config.AppConfigProvider;
 import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.user.UserController;
 import com.ts.common.entitites.commonEntities.Role;
@@ -23,6 +24,7 @@ import org.testng.annotations.Listeners;
 import java.util.List;
 import java.util.Map;
 
+import static com.ts.common.config.AppConfigProvider.get;
 import static com.ts.common.config.AppConfigProvider.getUserConfig;
 import static com.ts.common.entitites.commonEntities.Role.RoleConstants.*;
 import static com.ts.common.utils.InitEntities.generateAuthToken;
@@ -52,18 +54,21 @@ public class BaseIntegrationTest extends AbstractBaseTest {
         baseController = apiController.getBaseController();
         userController = apiController.getUserController();
 
-        log.warn("=====================GENERATOR IS STARTING=====================");
-        //Generator
-        userRoles = UserGenerator.create(userController).generateUsers();
-        taskGenerator = TaskGenerator.create(apiController, dbHelper);
-        taskGenerator.generateTasks(
-                "758009",
-                "758008",
-                "758007",
-                "462311"
-        );
-        assignRoles();
-        log.warn("=====================GENERATOR IS ENDING=====================");
+        if (get().generator()) {
+            log.warn("=====================GENERATOR IS STARTING=====================");
+            //Generator
+
+            userRoles = UserGenerator.create(userController).generateUsers();
+            taskGenerator = TaskGenerator.create(apiController, dbHelper);
+            taskGenerator.generateTasks(
+                    "758009",
+                    "758008",
+                    "758007",
+                    "462311"
+            );
+            assignRoles();
+            log.warn("=====================GENERATOR IS ENDING=====================");
+        }
     }
 
     private void assignRoles() {
@@ -71,6 +76,9 @@ public class BaseIntegrationTest extends AbstractBaseTest {
 
         User at_support_manager = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_support_manager());
         userController.assignRoleToTask(at_sdproject, at_support_manager, ROLE_SUPPORT_MANAGER, ROLE_SUPPORT_MEMBER);
+
+        User at_support_manager_2 = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_support_manager());
+        userController.assignRoleToTask(at_sdproject, at_support_manager_2, ROLE_SUPPORT_MANAGER, ROLE_SUPPORT_MEMBER);
 
         User at_task_analitic = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_analitic());
         userController.assignRoleToTask(at_sdproject, at_task_analitic, ROLE_TASK_ANALITIC, ROLE_SUPPORT_MEMBER);
