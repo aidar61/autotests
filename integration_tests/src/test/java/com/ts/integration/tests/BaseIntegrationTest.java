@@ -58,15 +58,15 @@ public class BaseIntegrationTest extends AbstractBaseTest {
             log.warn("=====================GENERATOR IS STARTING=====================");
             //Generator
 
-            userRoles = UserGenerator.create(userController).generateUsers();
-            taskGenerator = TaskGenerator.create(apiController, dbHelper);
-            taskGenerator.generateTasks(
-                    "758009",
-                    "758008",
-                    "758007",
-                    "462311"
-            );
-            assignRoles();
+//            userRoles = UserGenerator.create(userController).generateUsers();
+//            taskGenerator = TaskGenerator.create(apiController, dbHelper);
+//            taskGenerator.generateTasks(
+//                    "758009",
+//                    "758008",
+//                    "758007",
+//                    "462311"
+//            );
+//            assignRoles();
             log.warn("=====================GENERATOR IS ENDING=====================");
         }
     }
