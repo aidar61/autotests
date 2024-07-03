@@ -83,6 +83,13 @@ public class GeneralTask extends BaseEntity {
                 .build();
     }
 
+    public Parent toParent() {
+        return Parent.builder()
+                .id(this.id)
+                .number(this.number)
+                .build();
+    }
+
     public boolean fromDatabase() {
         return this.getParent() == null && this.getDescription() == null;
     }

@@ -1,7 +1,5 @@
 package com.ts.integration.tests.proc_sla_feature;
 
-import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
-import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
@@ -9,7 +7,6 @@ import com.ts.common.controllers.sla.SlaFeatureController;
 import com.ts.common.entitites.commonEntities.CostString;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.User;
-import com.ts.common.entitites.commonEntities.UserRole;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Tables;
 import com.ts.common.utils.DateUtils;
@@ -20,14 +17,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
+import static com.ts.common.config.AppConfigProvider.getUserConfig;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
+import static com.ts.common.entitites.commonEntities.Role.RoleConstants.ROLE_CLIENT;
+import static com.ts.common.entitites.commonEntities.Role.RoleConstants.ROLE_WORKER;
 import static com.ts.common.entitites.commonEntities.Task.Constants.MTBANK;
 import static com.ts.common.entitites.commonEntities.Task.Constants.NOTIFICATION_SERVICE2;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
-import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.UDF_IMPL_BUDGET;
 import static com.ts.common.enums.MemoPlan.*;
 import static com.ts.common.enums.Operations.*;
 import static com.ts.common.enums.TaskStatuses.*;
@@ -39,14 +36,12 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
     private SlaFeatureController slaFeatureController;
     private GeneralTask task;
     private Parent parent;
-    private User CLIENT;
-    private User ANALYTIC;
-    private User ACCOUNT_MANAGER;
-    private User MANAGER_ANALYZE_FEATURE;
-    private User MANAGER_REQUEST;
-    private User MANAGER_CLIENT;
-    private List<UserRole> USER_ROLES;
-    private final String parentTaskNumber = "928666"; // 928666 // 1537204
+    private User role_client;
+    private User at_task_analitic;
+    private User at_support_costmanager;
+    private User at_sdfeature_analysis_manager;
+    private User at_sdfeature_impl_manager;
+    private User at_support_manager;
 
     @BeforeClass(alwaysRun = true)
     public void beforeCLass() {
@@ -54,24 +49,14 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         userController = apiController.getUserController();
         baseController = apiController.getBaseController();
 
-        GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
-        GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskNumber(parentTaskNumber);
-        parent = InitEntities.generateParent(grTaskDbEntity.getTask_id(), grTaskDbEntity.getTask_number());
+        parent = taskGenerator.getAt_sdproject().toParent();
 
-        USER_ROLES = userController.receiveUserByTask(parentTaskNumber);
-
-        CLIENT = userController.receiveUserByLogin(USER_ROLES, "vvoskobovich@mtb.minsk.by");
-//        CLIENT = userController.receiveUserByLogin(USER_ROLES, "AT_CLIENT@test.ru");
-        ANALYTIC = userController.receiveUserByLogin(USER_ROLES, "azubov");
-//        ANALYTIC = userController.receiveUserByLogin(USER_ROLES, "AT_TASK_ANALITIC");
-        ACCOUNT_MANAGER = userController.receiveUserByLogin(USER_ROLES, "vvolskiy");
-//        ACCOUNT_MANAGER = userController.receiveUserByLogin(USER_ROLES, "AT_SUPPORT_COSTMANAGER");
-        MANAGER_ANALYZE_FEATURE = userController.receiveUserByLogin(USER_ROLES, "nsolovey");
-//        MANAGER_ANALYZE_FEATURE = userController.receiveUserByLogin(USER_ROLES, "AT_SDFEATURE_ANALYSIS_MANAGER");
-        MANAGER_REQUEST = userController.receiveUserByLogin(USER_ROLES, "ibabushkin");
-//        MANAGER_REQUEST = userController.receiveUserByLogin(USER_ROLES, "AT_SDFEATURE_IMPL_MANAGER");
-        MANAGER_CLIENT = userController.receiveUserByLogin(USER_ROLES, "lkorennaya");
-//        MANAGER_CLIENT = userController.receiveUserByLogin(USER_ROLES, "AT_SUPPORT_MANAGER");
+        role_client = userController.getUserBy(userRoles, ROLE_CLIENT, getUserConfig().role_client());
+        at_task_analitic = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_analitic());
+        at_support_costmanager = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_support_costmanager());
+        at_sdfeature_analysis_manager = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_sdfeature_analysis_manager());
+        at_sdfeature_impl_manager = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_sdfeature_impl_manager());
+        at_support_manager = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_support_manager());
 
         task = InitEntities.getGeneralTask(SLA_FEATURE, CAT);
     }
@@ -84,7 +69,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
     @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Создать Запрос на доработку ЛПО (new) (КЛИЕНТ)")
     void cat() {
-        apiController.updateToken(generateAuthToken(CLIENT));
+        apiController.updateToken(generateAuthToken(role_client));
         udf = refreshUdf();
         task.refreshTask();
 
@@ -120,13 +105,13 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
             , description = "Начать предварительную оценку (ACCOUNT-MANAGER)"
             , dependsOnMethods = "cat")
     void toprecost() {
-        apiController.updateToken(ACCOUNT_MANAGER);
+        apiController.updateToken(at_support_costmanager);
         udf = refreshUdf();
         task.refreshTask();
 
-        task.setHandlerUser(ANALYTIC);
+        task.setHandlerUser(at_task_analitic);
         udf.setUdfString(generateUdfString(UDF_SDFEATURE_OVERLIMITREASON, generateString()));
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ANALYTIC));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_task_analitic));
         task.refreshUdf(udf);
 
         slaFeatureController.performCommonOperation(task, TOPRECOST);
@@ -147,11 +132,11 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
             , description = "Передать на предварительное согласование менеджеру по анализу доработок (АНАЛИТИК)"
             , dependsOnMethods = "toprecost")
     void toAnlsmgprlmapr() {
-        apiController.updateToken(ANALYTIC);
+        apiController.updateToken(at_task_analitic);
         udf = refreshUdf();
         task.refreshTask();
 
-        task.setHandlerUser(MANAGER_ANALYZE_FEATURE);
+        task.setHandlerUser(at_sdfeature_analysis_manager);
         udf.setUdfDouble(generateUdfDouble(UDF_ACTUAL_PRELIM_BUDGET, 100));
         udf.setSecondUdfDouble(generateUdfDouble(UDF_BUDGET_FORMANAGE, 100));
 
@@ -187,7 +172,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         udf.setNinethUdfMemo(generateUdfMemo(UDF_SDFEATURE_AGREEDDECISION, generateString()));
         udf.setTenthUdfMemo(generateUdfMemo(UDF_SDFEATURE_NOTE, generateString()));
 
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, MANAGER_ANALYZE_FEATURE));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_sdfeature_analysis_manager));
 
         task.refreshUdf(udf);
 
@@ -204,18 +189,18 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SDFEATURE_STAGE, STAGE_PRE_COST)
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, ANALYSIS_MANAGER)
-                .isCorrectUdfUSer(UDF_ROLE_WORKER, MANAGER_ANALYZE_FEATURE);
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, at_sdfeature_analysis_manager);
     }
 
     @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Передать на предварительное планирование менеджеру запроса (МЕНЕДЖЕР ПО АНАЛИЗУ ДОРАБОТОК)"
             , dependsOnMethods = "toAnlsmgprlmapr")
     void toImplmgrprlmapr() {
-        apiController.updateToken(MANAGER_ANALYZE_FEATURE);
+        apiController.updateToken(at_sdfeature_analysis_manager);
         udf = refreshUdf();
         task.refreshTask();
 
-        task.setHandlerUser(MANAGER_REQUEST);
+        task.setHandlerUser(at_sdfeature_impl_manager);
         udf.setUdfDouble(generateUdfDouble(UDF_ACTUAL_PRELIM_BUDGET, 110));
         udf.setSecondUdfDouble(generateUdfDouble(UDF_BUDGET_FORMANAGE, 110));
 
@@ -250,7 +235,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         udf.setNinethUdfMemo(generateUdfMemo(UDF_SDFEATURE_GENUSEOTHER, generateString()));
         udf.setTenthUdfMemo(generateUdfMemo(UDF_SDFEATURE_AGREEDDECISION, generateString()));
         udf.setEleventhUdfMemo(generateUdfMemo(UDF_SDFEATURE_NOTE, generateString()));
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, MANAGER_REQUEST));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_sdfeature_impl_manager));
 
         task.refreshUdf(udf);
         slaFeatureController.performCommonOperation(task, TO_IMPLMGRPRLMAPR);
@@ -266,18 +251,18 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SDFEATURE_STAGE, STAGE_PRE_COST)
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, IMPLMANAGER)
-                .isCorrectUdfUSer(UDF_ROLE_WORKER, MANAGER_REQUEST);
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, at_sdfeature_impl_manager);
     }
 
     @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Передать на предварительную оценку аккаунт менеджеру (МЕНЕДЖЕР ЗАПРОСА)"
             , dependsOnMethods = "toImplmgrprlmapr")
     void beginCostPre() {
-        apiController.updateToken(generateAuthToken(MANAGER_REQUEST));
+        apiController.updateToken(generateAuthToken(at_sdfeature_impl_manager));
         udf = refreshUdf();
         task.refreshTask();
 
-        task.setHandlerUser(ACCOUNT_MANAGER);
+        task.setHandlerUser(at_support_costmanager);
 
         udf.setUdfDouble(generateUdfDouble(UDF_ACTUAL_PRELIM_BUDGET, 115));
         udf.setSecondUdfDouble(generateUdfDouble(UDF_BUDGET_FORMANAGE, 115));
@@ -315,7 +300,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         udf.setTenthUdfMemo(generateUdfMemo(UDF_SDFEATURE_AGREEDDECISION, generateString()));
         udf.setEleventhUdfMemo(generateUdfMemo(UDF_SDFEATURE_NOTE, generateString()));
 
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ACCOUNT_MANAGER));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_support_costmanager));
 
         task.refreshUdf(udf);
 
@@ -332,20 +317,20 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SDFEATURE_STAGE, STAGE_PRE_COST)
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, ACCOUNT_MANAGER_LIST)
-                .isCorrectUdfUSer(UDF_ROLE_WORKER, ACCOUNT_MANAGER);
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, at_support_costmanager);
     }
 
     @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Сообщить предварительные условия реализации (ACCOUNT-MANAGER)"
             , dependsOnMethods = "beginCostPre")
     void sendCostPre() {
-        apiController.updateToken(ACCOUNT_MANAGER);
+        apiController.updateToken(at_support_costmanager);
         udf = refreshUdf();
         task.refreshTask();
 
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_PAYDCS, PAID));
 
-        udf.setUdfUser(generateUdfUser(UDF_SDFEATURE_PAYLPR, ACCOUNT_MANAGER));
+        udf.setUdfUser(generateUdfUser(UDF_SDFEATURE_PAYLPR, at_support_costmanager));
 
         udf.setUdfMemo(generateUdfMemo(UDF_SDFEATURE_PAYDCSREASON, generateString()));
 
@@ -384,7 +369,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
             , description = "Принять предварительные условия реализации (CLIENT)"
             , dependsOnMethods = "sendCostPre")
     void acceptPreCost() {
-        apiController.updateToken(CLIENT);
+        apiController.updateToken(role_client);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -407,14 +392,14 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
             , description = "Передать аналитику (ACCOUNT_MANAGER)"
             , dependsOnMethods = "acceptPreCost")
     void returnToAnal() {
-        apiController.updateToken(ACCOUNT_MANAGER);
+        apiController.updateToken(at_support_costmanager);
         udf = refreshUdf();
         task.refreshTask();
 
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ANALYTIC));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_task_analitic));
 
         task.refreshUdf(udf);
-        task.setHandlerUser(ANALYTIC);
+        task.setHandlerUser(at_task_analitic);
 
         slaFeatureController.performCommonOperation(task, RETURN_TO_ANAL);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
@@ -426,14 +411,14 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         apiController.receiveTask(task.getNumber());
         CommonAssert.assertThat(apiController.getResponse())
                 .isCorrectUdfList(UDF_ROLE_CURRENT, ANALYST)
-                .isCorrectUdfUSer(UDF_ROLE_WORKER, ANALYTIC);
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, at_task_analitic);
     }
 
     @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Передать на окончательное согласование менеджеру по анализу доработок (АНАЛИТИК)"
             , dependsOnMethods = "returnToAnal")
     void submitToAgrAnls() {
-        apiController.updateToken(ANALYTIC);
+        apiController.updateToken(at_task_analitic);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -476,10 +461,10 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         udf.setEleventhUdfMemo(generateUdfMemo(UDF_SDFEATURE_TESTCASE, generateString()));
         udf.setTwelvethUdfMemo(generateUdfMemo(UDF_SDFEATURE_NOTE, generateString()));
 
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, MANAGER_ANALYZE_FEATURE));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_sdfeature_analysis_manager));
 
         task.refreshUdf(udf);
-        task.setHandlerUser(MANAGER_ANALYZE_FEATURE);
+        task.setHandlerUser(at_sdfeature_analysis_manager);
 
         slaFeatureController.performCommonOperation(task, SUBMIT_TO_AGR_ANLS);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
@@ -494,7 +479,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SDFEATURE_STAGE, STAGE_COST)
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, ANALYSIS_MANAGER)
-                .isCorrectUdfUSer(UDF_ROLE_WORKER, MANAGER_ANALYZE_FEATURE)
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, at_sdfeature_analysis_manager)
                 .isCorrectUdfString(UDF_REALIZATION_DECISION, expectedDecision)
                 .isCorrectUdfString(UDF_SDFEATURE_IMPLSTATEMENT, expectedImplstatement);
     }
@@ -503,7 +488,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
             , description = "Передать на окончательное планирование менеджеру запроса (МЕНЕДЖЕР ПО АНАЛИЗУ ДОРАБОТОК)"
             , dependsOnMethods = "submitToAgrAnls")
     void assignFinPlnimp() {
-        apiController.updateToken(MANAGER_ANALYZE_FEATURE);
+        apiController.updateToken(at_sdfeature_analysis_manager);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -544,10 +529,10 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         udf.setTenthUdfMemo(generateUdfMemo(UDF_SDFEATURE_TESTCASE, generateString()));
         udf.setEleventhUdfMemo(generateUdfMemo(UDF_SDFEATURE_NOTE, generateString()));
 
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, MANAGER_REQUEST));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_sdfeature_impl_manager));
 
         task.refreshUdf(udf);
-        task.setHandlerUser(MANAGER_REQUEST);
+        task.setHandlerUser(at_sdfeature_impl_manager);
 
         slaFeatureController.performCommonOperation(task, ASSIGN_FIN_PLNIMP);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
@@ -563,14 +548,14 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SDFEATURE_STAGE, STAGE_COST)
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, IMPLMANAGER)
-                .isCorrectUdfUSer(UDF_ROLE_WORKER, MANAGER_REQUEST);
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, at_sdfeature_impl_manager);
     }
 
     @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Передать на окончательную оценку аккаунт-менеджеру (МЕНЕДЖЕР ЗАПРОСА)"
             , dependsOnMethods = "assignFinPlnimp")
     void beginCostFinal() {
-        apiController.updateToken(MANAGER_REQUEST);
+        apiController.updateToken(at_sdfeature_impl_manager);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -612,9 +597,9 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         udf.setTenthUdfMemo(generateUdfMemo(UDF_SDFEATURE_TESTCASE, generateString()));
         udf.setEleventhUdfMemo(generateUdfMemo(UDF_SDFEATURE_NOTE, generateString()));
 
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ACCOUNT_MANAGER));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_support_costmanager));
 
-        task.setHandlerUser(ACCOUNT_MANAGER);
+        task.setHandlerUser(at_support_costmanager);
         task.refreshUdf(udf);
 
         slaFeatureController.performCommonOperation(task, BEGINCOST_FINAL);
@@ -631,14 +616,14 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SDFEATURE_STAGE, STAGE_COST)
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, ACCOUNT_MANAGER_LIST)
-                .isCorrectUdfUSer(UDF_ROLE_WORKER, ACCOUNT_MANAGER);
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, at_support_costmanager);
     }
 
     @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Сообщить окончательные условия реализации (ACCOUNT-MANAGER)"
             , dependsOnMethods = "beginCostFinal")
     void sendCostFinal() {
-        apiController.updateToken(ACCOUNT_MANAGER);
+        apiController.updateToken(at_support_costmanager);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -646,7 +631,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
 
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_PAYDCS, PAID));
 
-        udf.setUdfUser(generateUdfUser(UDF_SDFEATURE_PAYLPR, ACCOUNT_MANAGER));
+        udf.setUdfUser(generateUdfUser(UDF_SDFEATURE_PAYLPR, at_support_costmanager));
 
         udf.setUdfMemo(generateUdfMemo(UDF_SDFEATURE_PAYDCSREASON, generateString()));
 
@@ -681,7 +666,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
             , description = "Принять на окончательные условия реализации (КЛИЕНТ)"
             , dependsOnMethods = "sendCostFinal")
     void acceptConditions() {
-        apiController.updateToken(CLIENT);
+        apiController.updateToken(role_client);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -704,7 +689,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
             , description = "Передать в разработку (ACCOUNT-MANAGER)"
             , dependsOnMethods = "acceptConditions")
     void start() {
-        apiController.updateToken(ACCOUNT_MANAGER);
+        apiController.updateToken(at_support_costmanager);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -713,10 +698,10 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_LEGALREQ, YES_LEGAL));
         udf.setSecondUdfList(generateUdfList(UDF_SDFEATURE_CUSTOMDEV, YES_DEV));
 
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, ACCOUNT_MANAGER));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_support_costmanager));
 
         task.refreshUdf(udf);
-        task.setHandlerUser(ACCOUNT_MANAGER);
+        task.setHandlerUser(at_support_costmanager);
 
         slaFeatureController.performCommonOperation(task, START);
         ApiAsserts.assertThat(slaFeatureController.getResponse())
@@ -731,14 +716,14 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
                 .isCorrectUdfList(UDF_SDFEATURE_STAGE, STAGE_IMPL)
                 .isCorrectUdfList(UDF_SD_RESPONSIBLE_PARTY, RESPONSIBLE_PARTY_SUPPLIER)
                 .isCorrectUdfList(UDF_ROLE_CURRENT, ACCOUNT_MANAGER_LIST)
-                .isCorrectUdfUSer(UDF_ROLE_WORKER, ACCOUNT_MANAGER);
+                .isCorrectUdfUSer(UDF_ROLE_WORKER, at_support_costmanager);
     }
 
     @Test(groups = {"PROC_SLAFEATURE", "Regression"}
             , description = "Завершить выполнение работы (ACCOUNT-MANAGER)"
             , dependsOnMethods = "start")
     void finish() {
-        apiController.updateToken(ACCOUNT_MANAGER);
+        apiController.updateToken(at_support_costmanager);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -761,7 +746,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
             , description = "Передать на проверку клиенту (Менеджер клиента)"
             , dependsOnMethods = "finish")
     void toClientTest() {
-        apiController.updateToken(MANAGER_CLIENT);
+        apiController.updateToken(at_support_manager);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -782,7 +767,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
             , description = "Утвердить доработку (КЛИЕНТ)"
             , dependsOnMethods = "toClientTest")
     void acceptFeature() {
-        apiController.updateToken(CLIENT);
+        apiController.updateToken(role_client);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -805,7 +790,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
             , description = "Отправить патч (Менеджер клиента)"
             , dependsOnMethods = "acceptFeature")
     void send() {
-        apiController.updateToken(MANAGER_CLIENT);
+        apiController.updateToken(at_support_manager);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -833,7 +818,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
             , description = "Установить в производственную среду (КЛИЕНТ)"
             , dependsOnMethods = "send")
     void install() {
-        apiController.updateToken(CLIENT);
+        apiController.updateToken(role_client);
         udf = refreshUdf();
         task.refreshTask();
 
@@ -862,7 +847,7 @@ public class SlaFeatureBase2Test extends BaseIntegrationTest {
             , description = "Закрыть (ACCOUNT-MANAGER)"
             , dependsOnMethods = "install")
     void close() {
-        apiController.updateToken(ACCOUNT_MANAGER);
+        apiController.updateToken(at_support_costmanager);
         udf = refreshUdf();
         task.refreshTask();
 

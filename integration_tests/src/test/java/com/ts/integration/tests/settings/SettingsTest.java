@@ -2,19 +2,16 @@ package com.ts.integration.tests.settings;
 
 import com.ts.common.asserts.SettingsAssert;
 import com.ts.common.controllers.settings.SettingsController;
-import com.ts.common.entitites.commonEntities.Role;
 import com.ts.common.entitites.helpers.Permissions;
 import com.ts.common.entitites.helpers.Transition;
-import com.ts.common.enums.Permission;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-
 import static com.ts.common.entitites.commonEntities.Role.RoleConstants.*;
 import static com.ts.common.enums.Operations.WATCH;
-import static com.ts.common.enums.Permission.*;
+import static com.ts.common.enums.Permission.PROCESS_OPERATION;
+import static com.ts.common.enums.Permission.VIEW_OPERATION;
 import static com.ts.common.enums.TaskType.SDPATCH;
 
 public class SettingsTest extends BaseIntegrationTest {
@@ -55,6 +52,5 @@ public class SettingsTest extends BaseIntegrationTest {
                 .isCorrectTransitionStatusName("Технологическое тестирование")
                 .isCorrectTransitionStatusName("Поставка (отправлен)")
                 .isCorrectTransitionStatusName("Эксплуатация");
-
     }
 }

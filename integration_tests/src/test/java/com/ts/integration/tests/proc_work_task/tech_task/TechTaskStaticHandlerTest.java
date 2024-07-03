@@ -23,6 +23,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,6 +91,8 @@ public class TechTaskStaticHandlerTest extends BaseIntegrationTest {
 
     @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Создание CAT_TECHTASK")
     public void techTask() {
+        String[] arr;
+
         udf = refreshUdf();
         task.refreshTask();
         apiController.updateToken(InitEntities.generateAuthToken(creator));

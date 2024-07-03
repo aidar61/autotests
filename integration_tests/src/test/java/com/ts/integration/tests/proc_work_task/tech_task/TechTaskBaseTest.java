@@ -7,10 +7,7 @@ import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.workTask.TechTaskController;
-import com.ts.common.entitites.commonEntities.Parent;
-import com.ts.common.entitites.commonEntities.Task;
-import com.ts.common.entitites.commonEntities.User;
-import com.ts.common.entitites.commonEntities.UserData;
+import com.ts.common.entitites.commonEntities.*;
 import com.ts.common.entitites.commonEntities.udf.UdfTask;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
@@ -29,7 +26,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.ts.common.application.database.DbQueryHelper.Operators.*;
+import static com.ts.common.config.AppConfigProvider.getUserConfig;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
+import static com.ts.common.entitites.commonEntities.Role.RoleConstants.ROLE_WORKER;
 import static com.ts.common.entitites.commonEntities.Task.Constants.*;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
 import static com.ts.common.entitites.commonEntities.User.Constants.ABDULLAEV_BAHODIR;
@@ -46,7 +45,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
     private Parent parent;
     private String expectedCompletionDate;
     private UdfTask customerRequest;
-    private User creator;
+    private User at_task_manager;
     private User handlerUser;
     private Integer awaitBudgetValue;
     private String awaitDate;
@@ -60,13 +59,14 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
     public void beforeClass() {
         techTaskController = apiController.getTechTaskController();
         userController = apiController.getUserController();
+        parent = taskGenerator.getAt_genplan().toParent();
+
         GrTaskTable grTaskTable = dbHelper.getGrTaskTable();
-        GrTaskDbEntity parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_GENPLAN", AND.operator, "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(), AND.operator, "task_path", LIKE.operator, "%/2405/758009%");
-        parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
-        task = InitEntities.getGeneralTask(TaskType.CAT_TECHTASK, Operations.CAT);
-        var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_SLABUG", AND.operator, "task_status", NOT_EQUAL.operator, STATUS_PROJECT_PLANNED.name());
+        var taskSlaBug = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator,
+                "CAT_SLABUG", AND.operator, "task_status", NOT_EQUAL.operator, STATUS_PROJECT_PLANNED.name());
         customerRequest = InitEntities.generateUdfTask(UDF_WORKTASK_SDREQUEST, new Task(taskSlaBug.getTask_id(), taskSlaBug.getTask_number()));
-        var dependTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator, "CAT_DEVTASK", AND.operator, "task_status", EQUAL.operator, STATUS_WORKTASK_INWORK.name());
+        var dependTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask("task_category", EQUAL.operator,
+                "CAT_DEVTASK", AND.operator, "task_status", EQUAL.operator, STATUS_WORKTASK_INWORK.name());
         dependTask = new Task(dependTaskFromDb.getTask_id(), dependTaskFromDb.getTask_number());
 
         var parentPayloadResponse = techTaskController.getParentPayload(parent.getNumber(), "CAT_TECHTASK");
@@ -76,13 +76,10 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         CDP_BL = techTaskController.getParent_UDF_CDP_BL(parentPayload).get(0);
         PRODUCT = techTaskController.getParent_UDF_PRODUCT(parentPayload);
 
-        //Employees
-        var employees = userController.receiveUserByTask(parent.getNumber());
-        Collections.shuffle(employees);
-        var creators = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Менеджер проекта") && f.getForUser().getActive()).collect(Collectors.toList());
-        var handlers = employees.stream().filter(f -> f.getAssignedRole().getName().equals("Участник проекта") && f.getForUser().getActive()).collect(Collectors.toList());
-        creator = creators.get(0).getForUser();
-        handlerUser = handlers.get(0).getForUser();
+        at_task_manager = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_manager());
+        handlerUser = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_participant());
+
+        task = InitEntities.getGeneralTask(TaskType.CAT_TECHTASK, Operations.CAT);
         awaitDate = DateUtils.getCurrentDate(0);
         // TODO: 29.11.2023 Check await date
     }
@@ -92,7 +89,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
     public void techTask() {
         udf = refreshUdf();
         task.refreshTask();
-        apiController.updateToken(InitEntities.generateAuthToken(creator));
+        apiController.updateToken(InitEntities.generateAuthToken(at_task_manager));
         task.setParent(parent);
         task.setName("Новая задача категории Технологическая задача" + LocalDateTime.now().getNano());
         task.setDescription(task.getDescription() + generateString());
@@ -208,14 +205,14 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
         CommonAssert.assertThat(acceptTask).isCorrectTaskCategory("CAT_ACCEPTTASK")
                 .isCorrectTaskStatus(STATUS_WORKTASK_ASSIGNED)
                 .isCorrectSubmitterUser(handlerUser.getLogin())
-                .isCorrectHandlerUser(creator.getLogin())
+                .isCorrectHandlerUser(at_task_manager.getLogin())
                 .isCorrectUdfList(UDF_WORKTASK_ANALYSIS, "ff8080812f8cd356012f908c2bd8005a")//Не требуется
                 .isCorrectUdfDouble("Оценка трудоемкости", UDF_WORKTASK_PLANBUDGET, 8);
     }
 
     @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskAcceptance")
     public void taskReturn() {
-        apiController.updateToken(generateAuthToken(creator));
+        apiController.updateToken(generateAuthToken(at_task_manager));
         udf = refreshUdf();
         task.setHandlerUser(handlerUser);
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
@@ -240,7 +237,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Вернуть в работу 2", dependsOnMethods = "taskDecline")
     public void taskReturn2() {
-        apiController.updateToken(generateAuthToken(creator));
+        apiController.updateToken(generateAuthToken(at_task_manager));
         udf = refreshUdf();
         task.setHandlerUser(handlerUser);
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
@@ -294,7 +291,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Снять задачу", dependsOnMethods = "checkDependTaskExistReference")
     public void taskCancel() {
-        apiController.updateToken(generateAuthToken(creator));
+        apiController.updateToken(generateAuthToken(at_task_manager));
         udf = refreshUdf();
         task.refreshTask();
         task.setResolution(generateResolution(WILL_NOT_BE_IMPLEMENTED_V2));
@@ -323,7 +320,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Снять задачу CAT_TECHTASK", dependsOnMethods = "cancelChildTechTask")
     public void taskCancel2() {
-        apiController.updateToken(generateAuthToken(creator));
+        apiController.updateToken(generateAuthToken(at_task_manager));
         udf = refreshUdf();
         task.refreshTask();
         task.setResolution(generateResolution(WILL_NOT_BE_IMPLEMENTED_V2));
@@ -336,7 +333,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Вернуть в работу", dependsOnMethods = "taskCancel2")
     public void taskReturn3() {
-        apiController.updateToken(generateAuthToken(creator));
+        apiController.updateToken(generateAuthToken(at_task_manager));
         udf = refreshUdf();
         task.setHandlerUser(handlerUser);
         udf.setUdfUser(generateUdfUser(STDT_HANDLER, handlerUser));
@@ -347,7 +344,7 @@ public class TechTaskBaseTest extends BaseIntegrationTest {
 
     @Test(groups = {"PROC_WORKTASK", "Regression"}, description = "Отменить назначение", dependsOnMethods = "taskReturn3")
     public void taskAssignCancel() {
-        apiController.updateToken(generateAuthToken(creator));
+        apiController.updateToken(generateAuthToken(at_task_manager));
         udf = refreshUdf();
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, "[{\"id\":\"818181698c1b5016018c1ea5127713e0\",\"name\":\"Предварительный анализ\",\"order\":0,\"taskId\":\"" + task.getId() + "\",\"progress\":0,\"description\":\"\",\"status\":\"DELETE\",\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeDraftAsString\":\"-\"," + "\"workTypeAsString\":\"-\",\"draftChanged\":true},{\"id\":\"818181698c1b5016018c1ea53a331412\",\"name\":\"Предварительный анализ 1\",\"order\":1,\"taskId\":\"818181698c1b5016018c1ea5042f13b5\",\"weight\":1,\"budget\":7200,\"progress\":0,\"description\":\"\",\"status\":\"ACTUAL\",\"workTypeId\":\"402881c2516c220101516c711ff80024\",\"workTypeNorm\":2.0,\"hrs\":0,\"deletable\":true,\"actualBudget\":0,\"planby\":\"budget\",\"workTypeDraftAsString\":\"-\",\"workTypeAsString\":\"[0701] Иное\",\"draftChanged\":true}]"));
         task.refreshUdf(udf);

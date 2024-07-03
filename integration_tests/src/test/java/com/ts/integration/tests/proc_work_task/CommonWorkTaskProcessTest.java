@@ -8,7 +8,6 @@ import com.ts.common.controllers.TaskResponseBody;
 import com.ts.common.controllers.workTask.WorkTaskController;
 import com.ts.common.entitites.commonEntities.Parent;
 import com.ts.common.entitites.commonEntities.User;
-import com.ts.common.entitites.commonEntities.UserRole;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Resolutions;
 import com.ts.common.enums.TaskType;
@@ -19,13 +18,13 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.ts.common.application.controllers.TrackStudioHttpStatusCodes.HTTP_OK;
-import static com.ts.common.application.database.DbQueryHelper.Operators.*;
 import static com.ts.common.config.AppConfigProvider.getUserConfig;
 import static com.ts.common.entitites.commonEntities.List.Constants.*;
-import static com.ts.common.entitites.commonEntities.Role.RoleConstants.*;
+import static com.ts.common.entitites.commonEntities.Role.RoleConstants.ROLE_WORKER;
 import static com.ts.common.entitites.commonEntities.Status.Priority.NORMAL;
 import static com.ts.common.entitites.commonEntities.Task.Constants.AKKREDITIVES;
 import static com.ts.common.entitites.commonEntities.Udfs.UdfSd.*;
@@ -42,12 +41,9 @@ import static com.ts.common.utils.InitEntities.*;
 public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
     public WorkTaskController workTaskController;
     private GeneralTask task;
-    private User AUTHOR;
-    private User HANDLER_USER;
-    private GrTaskDbEntity parentTaskFromDb;
-    private GrTaskDbEntity slaBugTaskFromDb;
+    private User at_task_manager;
+    private User at_task_participant;
     private Parent parent;
-    private GrTaskTable grTaskTable;
     private Map<TaskType.WorkTask, GeneralTask> allCategoriesOfWorkTaskProcess;
     private static final Integer expectedDoubleValue = 2;
     private static final String expectedDate = DateUtils.getCurrentDate(1);
@@ -65,29 +61,12 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
     @BeforeClass(alwaysRun = true)
     public void beforeClass() {
         workTaskController = apiController.getWorkTaskController();
-        grTaskTable = dbHelper.getGrTaskTable();
         userController = apiController.getUserController();
-        parentTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveRandomTask(
-                "task_category", EQUAL.operator, "CAT_GENPLAN",
-                AND.operator,
-                "task_status", EQUAL.operator, STATUS_PROJECT_PLANNED.name(),
-                AND.operator,
-                "task_path", LIKE.operator, "%/2405/758009%");
-        parent = InitEntities.generateParent(parentTaskFromDb.getTask_id(), parentTaskFromDb.getTask_number());
 
-//        GeneralTask genPlan = taskGenerator.getAt_genplan();
-//        parent = generateParent(genPlan.getId(), genPlan.getNumber());
-        slaBugTaskFromDb = (GrTaskDbEntity) grTaskTable.receiveByCategory("CAT_SLABUG");
+        parent = taskGenerator.getAt_genplan().toParent();
 
-        List<UserRole> userRoles = userController.receiveUserByTask(parent.getNumber());
-        AUTHOR = userController.receiveUserByRole(userRoles, "Менеджер проекта", "root").getForUser();
-        HANDLER_USER = userController.receiveUserByRole(userRoles, "Участник проекта", AUTHOR.getLogin()).getForUser();
-
-//        AUTHOR = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_manager());
-//        userController.assignRoleToTask(genPlan, AUTHOR, ROLE_TASK_MANAGER);
-
-//        HANDLER_USER = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_participant());
-//        userController.assignRoleToTask(genPlan, HANDLER_USER, ROLE_TASK_PARTICIPANT);
+        at_task_manager = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_manager());
+        at_task_participant = userController.getUserBy(userRoles, ROLE_WORKER, getUserConfig().at_task_participant());
 
         allCategoriesOfWorkTaskProcess = new HashMap<>();
     }
@@ -98,11 +77,11 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
             , dataProvider = "workTaskCategories")
     public void createTask(TaskType.WorkTask category) {
 
-        apiController.updateToken(generateAuthToken(AUTHOR));
+        apiController.updateToken(generateAuthToken(at_task_manager));
         task = InitEntities.getGeneralTask(WORK_TASK, CAT);
         task.setParent(parent);
         task.setPriority(generatePriority(NORMAL));
-        task.setHandlerUser(HANDLER_USER);
+        task.setHandlerUser(at_task_participant);
 
         udf = refreshUdf();
         udf.setUdfTask(generateUdfTask(UDF_SD_MODULE, AKKREDITIVES));
@@ -136,7 +115,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
     public void changePlan(TaskType.WorkTask category) {
 
 
-        apiController.updateToken(generateAuthToken(HANDLER_USER));
+        apiController.updateToken(generateAuthToken(at_task_participant));
         task = allCategoriesOfWorkTaskProcess.get(category);
         task.setConfirmed(true);
 
@@ -184,16 +163,16 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
             , dependsOnMethods = "changePlan"
             , dataProvider = "workTaskCategories")
     public void acceptInWork(TaskType.WorkTask category) {
-        apiController.updateToken(generateAuthToken(HANDLER_USER));
+        apiController.updateToken(generateAuthToken(at_task_participant));
 
         task = allCategoriesOfWorkTaskProcess.get(category);
-        task.setHandlerUser(HANDLER_USER);
+        task.setHandlerUser(at_task_participant);
 
         udf = refreshUdf();
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, expectedDate));
         udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, expectedDoubleValue));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, ANALYZE.value));
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, HANDLER_USER));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_task_participant));
         task.refreshUdf(udf);
         workTaskController.performCommonOperation(task, ACCEPT_IN_WORK);
 
@@ -212,7 +191,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
         final String expectedStartDate = DateUtils.getCurrentDate(2);
         final Resolutions expectedResolution = RESOLUTION_AWAITS_UNTIL_DATE;
 
-        apiController.updateToken(generateAuthToken(HANDLER_USER));
+        apiController.updateToken(generateAuthToken(at_task_participant));
 
         task = allCategoriesOfWorkTaskProcess.get(category);
         task.setResolution(generateResolution(expectedResolution));
@@ -238,16 +217,16 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
             , dependsOnMethods = "postPone"
             , dataProvider = "workTaskCategories")
     public void acceptInWorkRetry(TaskType.WorkTask category) {
-        apiController.updateToken(generateAuthToken(HANDLER_USER));
+        apiController.updateToken(generateAuthToken(at_task_participant));
 
         task = allCategoriesOfWorkTaskProcess.get(category);
-        task.setHandlerUser(HANDLER_USER);
+        task.setHandlerUser(at_task_participant);
 
         udf = refreshUdf();
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, expectedDate));
         udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, expectedDoubleValue));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, ANALYZE.value));
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, HANDLER_USER));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_task_participant));
         task.refreshUdf(udf);
         workTaskController.performCommonOperation(task, ACCEPT_IN_WORK);
 
@@ -275,7 +254,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
             , dataProvider = "workTaskCategories")
     public void decline(TaskType.WorkTask category) {
         final Resolutions expectedResolution = NOT_IN_MY_PROFESSIONAL_SKILL;
-        apiController.updateToken(generateAuthToken(HANDLER_USER));
+        apiController.updateToken(generateAuthToken(at_task_participant));
 
         task = allCategoriesOfWorkTaskProcess.get(category);
         task.setResolution(generateResolution(expectedResolution));
@@ -288,7 +267,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
         ApiAsserts.assertThat(workTaskController.getResponse())
                 .isCorrectResponseCode(HTTP_OK).isParseableBody(TaskResponseBody.class)
                 .assertTask()
-                .isCorrectStatus(STATUS_WORKTASK_DECLINED).isCorrectResolution(expectedResolution).isCorrectHandlerUser(AUTHOR);
+                .isCorrectStatus(STATUS_WORKTASK_DECLINED).isCorrectResolution(expectedResolution).isCorrectHandlerUser(at_task_manager);
     }
 
     @Test(groups = {"PROC_WORKTASK", "Regression"}
@@ -296,20 +275,20 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
             , dependsOnMethods = "decline"
             , dataProvider = "workTaskCategories")
     public void returnTask(TaskType.WorkTask category) {
-        apiController.updateToken(generateAuthToken(AUTHOR));
+        apiController.updateToken(generateAuthToken(at_task_manager));
 
         task = allCategoriesOfWorkTaskProcess.get(category);
-        task.setHandlerUser(HANDLER_USER);
+        task.setHandlerUser(at_task_participant);
 
         udf = refreshUdf();
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, HANDLER_USER));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_task_participant));
         task.refreshUdf(udf);
         workTaskController.performCommonOperation(task, RETURN);
 
         ApiAsserts.assertThat(workTaskController.getResponse())
                 .isCorrectResponseCode(HTTP_OK).isParseableBody(TaskResponseBody.class)
                 .assertTask()
-                .isCorrectStatus(STATUS_WORKTASK_ASSIGNED).isCorrectHandlerUser(HANDLER_USER);
+                .isCorrectStatus(STATUS_WORKTASK_ASSIGNED).isCorrectHandlerUser(at_task_participant);
     }
 
     @Test(groups = {"PROC_WORKTASK", "Regression"}
@@ -318,7 +297,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
             , dataProvider = "workTaskCategories")
     public void superVice(TaskType.WorkTask category) {
         final User.Constants expectedControllerUser = ABDULLAEV_BAHODIR;
-        apiController.updateToken(generateAuthToken(HANDLER_USER));
+        apiController.updateToken(generateAuthToken(at_task_participant));
         task = allCategoriesOfWorkTaskProcess.get(category);
 
         udf = refreshUdf();
@@ -342,7 +321,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
     public void watch(TaskType.WorkTask category) {
         final User.Constants expectedWatcherUser = ABDULLAEV_BAHODIR;
 
-        apiController.updateToken(generateAuthToken(HANDLER_USER));
+        apiController.updateToken(generateAuthToken(at_task_participant));
         task = allCategoriesOfWorkTaskProcess.get(category);
 
         udf = refreshUdf();
@@ -366,7 +345,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
     public void changeService(TaskType.WorkTask category) {
         com.ts.common.entitites.commonEntities.List.Constants expectedListValue = UDF_MIS_SERVICE_1;
 
-        apiController.updateToken(generateAuthToken(HANDLER_USER));
+        apiController.updateToken(generateAuthToken(at_task_participant));
         task = allCategoriesOfWorkTaskProcess.get(category);
 
         udf = refreshUdf();
@@ -386,16 +365,16 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
             , dependsOnMethods = "changeService"
             , dataProvider = "workTaskCategories")
     public void acceptInWorkRetrySecondTime(TaskType.WorkTask category) {
-        apiController.updateToken(generateAuthToken(HANDLER_USER));
+        apiController.updateToken(generateAuthToken(at_task_participant));
 
         task = allCategoriesOfWorkTaskProcess.get(category);
-        task.setHandlerUser(HANDLER_USER);
+        task.setHandlerUser(at_task_participant);
 
         udf = refreshUdf();
         udf.setUdfDate(generateUdfDate(UDF_WORKTASK_PLANTD, expectedDate));
         udf.setUdfDouble(generateUdfDouble(UDF_WORKTASK_PLANBUDGET, expectedDoubleValue));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, ANALYZE.value));
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, HANDLER_USER));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_task_participant));
         task.refreshUdf(udf);
         workTaskController.performCommonOperation(task, ACCEPT_IN_WORK);
 
@@ -410,15 +389,15 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
             , dependsOnMethods = "acceptInWorkRetrySecondTime"
             , dataProvider = "workTaskCategories")
     public void toAcceptance(TaskType.WorkTask category) {
-        apiController.updateToken(generateAuthToken(HANDLER_USER));
+        apiController.updateToken(generateAuthToken(at_task_participant));
 
         task = allCategoriesOfWorkTaskProcess.get(category);
-        task.setHandlerUser(AUTHOR);
+        task.setHandlerUser(at_task_manager);
 
         udf = refreshUdf();
         udf.setUdfList(generateUdfList(UDF_SDFEATURE_DOCREVISION, NO));
         udf.setUdfMemo(generateUdfMemo(UDF_CDP_STEPPROGRESS, ANALYZE.value));
-        udf.setUdfUser(generateUdfUser(STDT_HANDLER, AUTHOR));
+        udf.setUdfUser(generateUdfUser(STDT_HANDLER, at_task_manager));
         task.refreshUdf(udf);
         if (category.equals(TaskType.WorkTask.ACCEPT_TASK)) {
             udf = refreshUdf();

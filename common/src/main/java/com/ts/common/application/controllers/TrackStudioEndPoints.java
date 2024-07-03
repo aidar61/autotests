@@ -65,6 +65,7 @@ public class TrackStudioEndPoints {
     public static final String PERMISSIONS = "permissions";
     public static final String TRANSITION = "transition";
     public static final String PORTLET = "portlet";
+    public static final String PATCH = "patch";
     public static final String PERSONAL_QUEUE = "personalqueue";
     public static final String SLA_FEATURE_CONTROL = "slafeaturescontrol";
     public static final String GET_SLA_FEATURE_CONTROL = "getFeaturesControl";
