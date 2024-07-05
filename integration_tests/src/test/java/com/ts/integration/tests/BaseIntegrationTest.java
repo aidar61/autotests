@@ -63,6 +63,7 @@ public class BaseIntegrationTest extends AbstractBaseTest {
             taskGenerator.generateTasks(
                     "758009",
                     "758008",
+                    "757947",
                     "758007",
                     "462311"
             );

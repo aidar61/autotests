@@ -24,6 +24,8 @@ public class ProjectController extends BaseController {
         TaskRequestBody requestBody = new TaskRequestBody(project);
         if (project.getPriority() != null) {
             this.response = createTask(requestBody.keepMandatoryAndCreateFieldsAnd(PRIORITY));
+        } else if (project.getShortName() != null) {
+            this.response = createTask(requestBody.keepMandatoryAndCreateFieldsAnd(SHORT_NAME));
         } else {
             this.response = createTask(requestBody.keepMandatoryAndCreateFields());
         }

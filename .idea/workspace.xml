@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Разработка API теста проверки прав на операцию &quot;Назначить наблюдателя&quot; в патче">
-      <change afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/tests/Main.java" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="fix/pipeline">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioEndPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/application/controllers/TrackStudioEndPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/tasks/GeneralTask.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseUiTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeatureBase2Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_sla_feature/SlaFeatureBase2Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/project/ProjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/project/ProjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/entitites/commonEntities/Udfs.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/TaskGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/TaskGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/resources/.json" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/BaseIntegrationTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/CommonWorkTaskProcessTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/CommonWorkTaskProcessTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/tech_task/TechTaskBaseTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/tech_task/TechTaskBaseTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/tech_task/TechTaskStaticHandlerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/tech_task/TechTaskStaticHandlerTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/settings/SettingsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/settings/SettingsTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +38,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="qa" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -87,73 +84,73 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showModules" value="false" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "Application.ArrayReverser.executor": "Run",
-    "Application.BaseIntegrationTest.executor": "Run",
-    "Application.Main.executor": "Run",
-    "Application.MemoStringValue.executor": "Run",
-    "Application.TechTaskStaticHandlerTest.executor": "Debug",
-    "Application.UserController.executor": "Run",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Git.Branch.Popup.ShowAllRemotes": "true",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "TestNG.BaseIntegrationTest.generator.executor": "Run",
-    "TestNG.BaseIntegrationTest.test.executor": "Run",
-    "TestNG.BugTaskAcceptanceTest.executor": "Run",
-    "TestNG.CommonWorkTaskProcessTest.executor": "Run",
-    "TestNG.GapPotentialQuestion1Test.executor": "Run",
-    "TestNG.GapPrivateQuestion1Test.executor": "Run",
-    "TestNG.GapPrivateQuestion1Test.passForApproval.executor": "Run",
-    "TestNG.GapQuestion1Test.catSdQuestion.executor": "Run",
-    "TestNG.GapQuestion1Test.executor": "Run",
-    "TestNG.GapQuestion1Test.passForApproval.executor": "Run",
-    "TestNG.GapSolutionQuestion1Test.executor": "Run",
-    "TestNG.GapSolutionQuestion1Test.passForApproval.executor": "Run",
-    "TestNG.GeneratorTest.generator.executor": "Run",
-    "TestNG.SdDevBaseDynamicTest.executor": "Run",
-    "TestNG.SdDevBaseStaticTest.executor": "Run",
-    "TestNG.SdQuestionBaseTest.createSdQuestion.executor": "Run",
-    "TestNG.SettingsTest.settingMsgSdPatchWatch.executor": "Run",
-    "TestNG.SlaBug1Test.slaBugCat.executor": "Run",
-    "TestNG.SlaFeatureBase2Test.executor": "Run",
-    "TestNG.SlaFeatureByAccountTest.executor": "Run",
-    "TestNG.SlaFeatureNoPrecostTest.executor": "Run",
-    "TestNG.SlaFeatureToFinalAccountTest.executor": "Run",
-    "TestNG.TechTaskBaseTest.executor": "Run",
-    "TestNG.com.ts.integration.tests.proc_potential_gap.sdQuestion.executor": "Run",
-    "ToolWindowRun.ShowToolbar": "false",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "generators",
-    "ignore.virus.scanning.warn.message": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/aidarka61/IdeaProjects/autotests",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.09375",
-    "project.structure.side.proportion": "0.32876712",
-    "settings.editor.selected.configurable": "org.jetbrains.plugins.gitlab.GitLabSettingsConfigurable",
-    "settings.editor.splitter.proportion": "0.39143732",
-    "spring.configuration.checksum": "f0a48e2334f1b84f98a2595c6f1cd1ef",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Application.ArrayReverser.executor&quot;: &quot;Run&quot;,
+    &quot;Application.BaseIntegrationTest.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MemoStringValue.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TechTaskStaticHandlerTest.executor&quot;: &quot;Debug&quot;,
+    &quot;Application.UserController.executor&quot;: &quot;Run&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Git.Branch.Popup.ShowAllRemotes&quot;: &quot;true&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;TestNG.BaseIntegrationTest.generator.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.BaseIntegrationTest.test.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.BugTaskAcceptanceTest.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.CommonWorkTaskProcessTest.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.GapPotentialQuestion1Test.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.GapPrivateQuestion1Test.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.GapPrivateQuestion1Test.passForApproval.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.GapQuestion1Test.catSdQuestion.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.GapQuestion1Test.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.GapQuestion1Test.passForApproval.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.GapSolutionQuestion1Test.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.GapSolutionQuestion1Test.passForApproval.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.GeneratorTest.generator.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.SdDevBaseDynamicTest.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.SdDevBaseStaticTest.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.SdQuestionBaseTest.createSdQuestion.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.SettingsTest.settingMsgSdPatchWatch.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.SlaBug1Test.slaBugCat.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.SlaFeatureBase2Test.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.SlaFeatureByAccountTest.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.SlaFeatureNoPrecostTest.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.SlaFeatureToFinalAccountTest.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.TechTaskBaseTest.executor&quot;: &quot;Run&quot;,
+    &quot;TestNG.com.ts.integration.tests.proc_potential_gap.sdQuestion.executor&quot;: &quot;Run&quot;,
+    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;generators&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/aidarka61/IdeaProjects/autotests&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.09375&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.32876712&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.gitlab.GitLabSettingsConfigurable&quot;,
+    &quot;settings.editor.splitter.proportion&quot;: &quot;0.39143732&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;f0a48e2334f1b84f98a2595c6f1cd1ef&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "oracle"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;oracle&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
@@ -174,7 +171,7 @@
       <recent name="com.ts.common.entitites.commonEntities.udf" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="TestNG.SlaFeatureBase2Test">
     <configuration name="ArrayReverser" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ArrayReverser" />
       <module name="integration_tests" />
@@ -195,15 +192,37 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TechTaskStaticHandlerTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.tech_task.TechTaskStaticHandlerTest" />
+    <configuration name="CommonWorkTaskProcessTest" type="TestNG" temporary="true" nameIsGenerated="true">
       <module name="integration_tests" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.tech_task.*" />
+          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.CommonWorkTaskProcessTest" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GeneratorTest.generator" type="TestNG" temporary="true" nameIsGenerated="true">
+      <module name="integration_tests" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.ts.integration.tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.ts.integration.tests" />
+      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.GeneratorTest" />
+      <option name="METHOD_NAME" value="generator" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -253,23 +272,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TechTaskBaseTest" type="TestNG" temporary="true" nameIsGenerated="true">
-      <module name="integration_tests" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.ts.integration.tests.proc_work_task.tech_task.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.ts.integration.tests.proc_work_task.tech_task" />
-      <option name="MAIN_CLASS_NAME" value="com.ts.integration.tests.proc_work_task.tech_task.TechTaskBaseTest" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="Unnamed" type="TestNG" nameIsGenerated="true">
       <shortenClasspath name="NONE" />
       <option name="SUITE_NAME" value="" />
@@ -290,19 +292,19 @@
     <list>
       <item itemvalue="Application.Main" />
       <item itemvalue="Application.ArrayReverser" />
-      <item itemvalue="Application.TechTaskStaticHandlerTest" />
       <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
       <item itemvalue="TestNG.SlaFeatureBase2Test" />
-      <item itemvalue="TestNG.TechTaskBaseTest" />
+      <item itemvalue="TestNG.GeneratorTest.generator" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="TestNG.SlaFeatureBase2Test" />
+        <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
+        <item itemvalue="TestNG.GeneratorTest.generator" />
         <item itemvalue="Application.Main" />
         <item itemvalue="Application.ArrayReverser" />
-        <item itemvalue="Application.TechTaskStaticHandlerTest" />
-        <item itemvalue="TestNG.TechTaskBaseTest" />
-        <item itemvalue="TestNG.SlaFeatureBase2Test" />
       </list>
     </recent_temporary>
   </component>
@@ -428,6 +430,7 @@
       <workItem from="1718948491500" duration="30000" />
       <workItem from="1718948528097" duration="6804000" />
       <workItem from="1719494917792" duration="13459000" />
+      <workItem from="1719994627437" duration="13038000" />
     </task>
     <task id="LOCAL-00038" summary="feature/Sla negative scenarios, Errors">
       <created>1701675904063</created>
@@ -830,7 +833,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feature/release" />
     <MESSAGE value="feature/sddev" />
     <MESSAGE value="feature/performance tests" />
     <MESSAGE value="feature/Sla Bug" />
@@ -855,7 +857,8 @@
     <MESSAGE value="fix/resolve conflicts" />
     <MESSAGE value="feature/techonologyservice user added, bdku installation, sd patch folder" />
     <MESSAGE value="feature/Разработка API теста проверки прав на операцию &quot;Назначить наблюдателя&quot; в патче" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/Разработка API теста проверки прав на операцию &quot;Назначить наблюдателя&quot; в патче" />
+    <MESSAGE value="fix/pipeline" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix/pipeline" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

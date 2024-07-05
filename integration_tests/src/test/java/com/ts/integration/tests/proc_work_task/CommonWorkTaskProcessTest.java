@@ -1,7 +1,5 @@
 package com.ts.integration.tests.proc_work_task;
 
-import com.ts.common.application.database.dbEntities.GrTaskDbEntity;
-import com.ts.common.application.database.dbTables.GrTaskTable;
 import com.ts.common.asserts.ApiAsserts;
 import com.ts.common.asserts.CommonAssert;
 import com.ts.common.controllers.TaskResponseBody;

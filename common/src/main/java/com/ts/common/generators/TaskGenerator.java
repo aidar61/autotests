@@ -14,7 +14,6 @@ import com.ts.common.entitites.commonEntities.Udfs;
 import com.ts.common.entitites.tasks.GeneralTask;
 import com.ts.common.enums.Operations;
 import com.ts.common.utils.InitEntities;
-import com.ts.common.utils.RandomUtils;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +34,10 @@ public class TaskGenerator {
     private GeneralTask at_grouptasks;
     @Getter
     private GeneralTask at_sdprojectgroup;
+    @Getter
+    private GeneralTask at_sdprojectgroup_sla;
+    @Getter
+    private GeneralTask at_sdproject_sla;
     @Getter
     private GeneralTask at_sdproject;
     @Getter
@@ -65,6 +68,7 @@ public class TaskGenerator {
 
     public void generateTasks(
             String tasks_home,
+            String sd_tasks_home_sla,
             String sd_tasks_home,
             String reg_project_home,
             String installation_home
@@ -77,6 +81,9 @@ public class TaskGenerator {
 
         AT_SDPROJECTGROUP(sd_tasks_home);
         AT_SDPROJECT();
+
+        AT_SDPROJECTGROUP_SLA(sd_tasks_home_sla);
+        AT_SDPROJECT_SLA();
 
         AT_REGFOLDER(reg_project_home);
         AT_REGPROJECT();
@@ -166,6 +173,7 @@ public class TaskGenerator {
 
             Udfs udf = refreshUdf();
             udf.setUdfTask(generateUdfTask(UDF_REGPROJECT, at_regproject.to()));
+            udf.setUdfString(generateUdfString(UDF_BDKU_CSCCLIENT, "AT_CSC"));
 
             at_sdpatchfolder.refreshUdf(udf);
 
@@ -192,6 +200,7 @@ public class TaskGenerator {
             udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, atCdpCustomer.getId()));
             udf.setUdfTask(generateUdfTask(UDF_INSTALLATION_SDPROJECT, at_sdproject.to()));
             udf.setSecondUdfTask(generateUdfTask(UDF_REGPROJECT, at_regproject.to()));
+            udf.setUdfString(generateUdfString(UDF_BDKU_CSCCLIENT, "AT_CSC"));
 
             at_bdku_installation.refreshUdf(udf);
             projectController.createProject(at_bdku_installation);
@@ -252,6 +261,62 @@ public class TaskGenerator {
                     .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
         } else {
             at_regfolder = grTaskDbEntity.mapToGeneralTask();
+            logExist(task_name, grTaskDbEntity);
+        }
+    }
+
+    private void AT_SDPROJECTGROUP_SLA(String project) {
+        String task_name = "AT_SDPROJECTGROUP_SLA";
+        GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskName(task_name);
+        if (grTaskDbEntity == null) {
+            GrTaskDbEntity projectTask = (GrTaskDbEntity) grTaskTable.receiveByTaskNumber(project);
+            Parent projectParent = projectTask.mapToParent();
+            at_sdprojectgroup_sla = getGeneralTask(SDPROJECTGROUP, Operations.CAT);
+
+            at_sdprojectgroup_sla.setName(task_name);
+            at_sdprojectgroup_sla.setPriority(generatePriority(2));
+            at_sdprojectgroup_sla.setParent(projectParent);
+
+            Udfs udf = refreshUdf();
+            udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, atCdpCustomer.getId()));
+            udf.setUdfInteger(generateUdfInteger(UDF_SD_COST1CAT, 100));
+            udf.setSecondUdfInteger(generateUdfInteger(UDF_SD_COST2CAT, 200));
+            udf.setThirdUdfInteger(generateUdfInteger(UDF_SD_COST3CAT, 300));
+
+            at_sdprojectgroup_sla.refreshUdf(udf);
+            projectController.createProject(at_sdprojectgroup_sla);
+            ApiAsserts.assertThat(projectController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        } else {
+            at_sdprojectgroup_sla = grTaskDbEntity.mapToGeneralTask();
+            logExist(task_name, grTaskDbEntity);
+        }
+    }
+
+    private void AT_SDPROJECT_SLA() {
+        String task_name = "AT_SDPROJECT_SLA";
+        GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskName(task_name);
+        if (grTaskDbEntity == null) {
+            at_sdproject_sla = getGeneralTask(SDPROJECT, Operations.CAT);
+            Parent projectTaskParent = InitEntities.generateParent(at_sdprojectgroup_sla.getId(), at_sdprojectgroup_sla.getName());
+
+            at_sdproject_sla.setParent(projectTaskParent);
+            at_sdproject_sla.setName(task_name);
+
+            Udfs udf = refreshUdf();
+            udf.setUdfList(generateUdfList(UDF_CDP_CUSTOMER, atCdpCustomer.getId()));
+            udf.setSecondUdfList(generateUdfList(UDF_SDPROJECT_SUPPORTTYPE, STANDARD));
+            udf.setUdfInteger(generateUdfInteger(UDF_SD_COST1CAT, 100));
+            udf.setSecondUdfInteger(generateUdfInteger(UDF_SD_COST2CAT, 200));
+            udf.setThirdUdfInteger(generateUdfInteger(UDF_SD_COST3CAT, 300));
+
+            at_sdproject_sla.refreshUdf(udf);
+
+            projectController.createProject(at_sdproject_sla);
+            ApiAsserts.assertThat(projectController.getResponse())
+                    .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
+        } else {
+            at_sdproject_sla = grTaskDbEntity.mapToGeneralTask();
             logExist(task_name, grTaskDbEntity);
         }
     }
@@ -364,7 +429,7 @@ public class TaskGenerator {
     }
 
     private void AT_SERVICE() {
-        String task_name = "AT_SERVICE";
+        String task_name = "[01] Устранение ошибок";
         GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskName(task_name);
         if (grTaskDbEntity == null) {
             at_service = getGeneralTask(SERVICE, Operations.CAT);
@@ -372,9 +437,10 @@ public class TaskGenerator {
 
             at_service.setParent(serviceParent);
             at_service.setName(task_name);
+            at_service.setShortName("SRV-02_01");
 
             Udfs udf = refreshUdf();
-            udf.setUdfList(generateUdfList(UDF_MIS_SERVICE, VIEW_PROCESS_05));
+            udf.setUdfList(generateUdfList(UDF_MIS_SERVICE, UDF_MIS_SERVICE_1));
 
             at_service.refreshUdf(udf);
 
