@@ -2,6 +2,7 @@ package com.ts.common.application.controllers;
 
 import com.ts.common.controllers.BaseController;
 import com.ts.common.controllers.TaskResponseBody;
+import com.ts.common.controllers.portlet.PortletController;
 import com.ts.common.controllers.project.ProjectController;
 import com.ts.common.controllers.settings.SettingsController;
 import com.ts.common.controllers.settings.UdfController;
@@ -77,6 +78,7 @@ public class TrackStudioApiControllers {
     private ProjectController projectController;
     private UdfController udfController;
     private SettingsController settingsController;
+    private PortletController portletController;
 
 
     public TrackStudioApiControllers(AuthToken authToken) {

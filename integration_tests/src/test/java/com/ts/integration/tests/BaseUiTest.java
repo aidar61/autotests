@@ -5,10 +5,13 @@ import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.testng.SoftAsserts;
 import com.codeborne.selenide.testng.TextReport;
 import com.ts.common.ui.driver.Driver;
+import com.ts.common.ui.pages.LoginPage;
 import lombok.extern.slf4j.Slf4j;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
+
+import static com.codeborne.selenide.Selenide.open;
 
 @Slf4j
 @Listeners({SoftAsserts.class, TextReport.class})
@@ -18,6 +21,13 @@ public class BaseUiTest extends BaseIntegrationTest {
         Configuration.browserCapabilities = Driver.initBrowserCapabilities();
         log.warn("=====================UI TESTS IS STARTED=====================");
     }
+    public static void auth(String url, String userLogin) {
+        LoginPage loginPage = trackStudioPages.getLoginPage(); //TODO использовать LoginPage как поле и добавить инициализацию в setupUi()
+        open(url);
+        loginPage.loginNoToken(userLogin);
+    }
+
+
 
     @AfterTest(alwaysRun = true)
     public void tearDownUi() {

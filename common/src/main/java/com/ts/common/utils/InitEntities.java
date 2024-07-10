@@ -486,6 +486,17 @@ public class InitEntities {
                 .build();
     }
 
+    public static UserProjectAssign generateProjectAssign(User user,String projectCode, String stageId, Integer occupancy) {
+        return UserProjectAssign.builder()
+                .user(user)
+                .projectCode(projectCode)
+                .stageId(stageId)
+                .fromStr(DateUtils.getCurrentDate(1))
+                .toStr(DateUtils.getCurrentDate(7))
+                .occupancy(occupancy)
+                .build();
+    }
+
     public static void main(String[] args) {
         System.out.println(generateUdfMultiList(UDF_LIST_AFFCTD_SYS, List.Constants.COLVIR_V4, List.Constants.AFS));
     }

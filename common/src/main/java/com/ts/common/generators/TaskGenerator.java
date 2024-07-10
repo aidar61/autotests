@@ -79,11 +79,11 @@ public class TaskGenerator {
         AT_GROUPTASKS(tasks_home);
         AT_GENPLAN();
 
-        AT_SDPROJECTGROUP(sd_tasks_home);
-        AT_SDPROJECT();
-
         AT_SDPROJECTGROUP_SLA(sd_tasks_home_sla);
         AT_SDPROJECT_SLA();
+
+        AT_SDPROJECTGROUP(sd_tasks_home);
+        AT_SDPROJECT();
 
         AT_REGFOLDER(reg_project_home);
         AT_REGPROJECT();
