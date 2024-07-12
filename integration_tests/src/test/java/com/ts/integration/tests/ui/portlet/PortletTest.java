@@ -10,8 +10,10 @@ import com.ts.common.entitites.commonEntities.User;
 import com.ts.common.entitites.commonEntities.UserProjectAssign;
 import com.ts.common.ui.pages.PortletPage;
 import com.ts.common.utils.InitEntities;
+import com.ts.common.utils.WaitManager;
 import com.ts.integration.tests.BaseUiTest;
 import org.assertj.core.api.Assertions;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -40,8 +42,12 @@ public class PortletTest extends BaseUiTest {
                 .isCorrectResponseCode(TrackStudioHttpStatusCodes.HTTP_OK);
 
         GetUserProjectResponseBody assignedUserProjects = portletController.getAssignedUserProjects(userProjectAssign);
-        Assertions.assertThat(assignedUserProjects.getProjectsData())
-                .isNotNull();
+        Assertions.assertThat(assignedUserProjects.getProjectsData()).isNotNull();
+    }
+
+    @AfterClass(alwaysRun = true)
+    void afterClass() {
+        portletController.deleteUserAssign(userProjectAssign);
     }
 
     @Test(groups = {"UI", "PORTLET"}, description = "Сценарий для демонстрации фреймворка")
@@ -52,7 +58,13 @@ public class PortletTest extends BaseUiTest {
                 .refresh()
                 .edit();
 
-        assertTrue(portletPage.getDeleteButton().shouldBe(Condition.visible).isDisplayed(), "Delete button is not displayed");
+        portletPage.getDeleteButton()
+                .forEach(
+                        p -> assertTrue(p.shouldBe(Condition.visible).isDisplayed(), "Delete button is not displayed")
+                );
+//        assertTrue(portletPage.getDeleteButton().shouldBe(Condition.visible).isDisplayed(), "Delete button is not displayed");
         assertTrue(portletPage.getSaveButton().shouldBe(Condition.visible).isDisplayed(), "Save button is not displayed");
+
+        WaitManager.pause(10);
     }
 }

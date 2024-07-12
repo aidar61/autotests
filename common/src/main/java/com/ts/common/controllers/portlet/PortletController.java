@@ -20,6 +20,10 @@ public class PortletController extends BaseController {
         this.response = super.post(getEndpoint(REST, PORTLET, CONTROL_PLAN, USER_PROJECT_ASSIGMENT), userProjectAssignRequestBody.removeFields());
     }
 
+    public void deleteUserAssign(UserProjectAssign userProjectAssign) {
+
+    }
+
     public GetUserProjectResponseBody getAssignedUserProjects(UserProjectAssign userProjectAssign) {
         Map<String, String> params = new HashMap<>() {{
             put("userLogin", userProjectAssign.getUser().getLogin());

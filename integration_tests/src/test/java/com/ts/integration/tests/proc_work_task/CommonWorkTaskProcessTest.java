@@ -13,6 +13,7 @@ import com.ts.common.utils.DateUtils;
 import com.ts.common.utils.InitEntities;
 import com.ts.integration.tests.BaseIntegrationTest;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -93,6 +94,7 @@ public class CommonWorkTaskProcessTest extends BaseIntegrationTest {
 
         task.setCategory(generateCategoryForWorkTask(category));
         workTaskController.createAbstractWorkTask(task);
+
 
         ApiAsserts.assertThat(workTaskController.getResponse())
                 .isCorrectResponseCode(HTTP_OK)

@@ -429,7 +429,7 @@ public class TaskGenerator {
     }
 
     private void AT_SERVICE() {
-        String task_name = "[01] Устранение ошибок";
+        String task_name = "AT_MIS_SERVICE";
         GrTaskDbEntity grTaskDbEntity = (GrTaskDbEntity) grTaskTable.receiveByTaskName(task_name);
         if (grTaskDbEntity == null) {
             at_service = getGeneralTask(SERVICE, Operations.CAT);
