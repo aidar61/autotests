@@ -4,19 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/Portlet test">
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/generator new structure">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/portlet/PortletController.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/controllers/portlet/PortletController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/TaskGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/generators/TaskGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/PortletPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/com/ts/common/ui/pages/PortletPage.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/resources/app.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/app.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/CommonWorkTaskProcessTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/proc_work_task/CommonWorkTaskProcessTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/portlet/PortletTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/ui/portlet/PortletTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/resources/db.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/db.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/resources/user.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/user.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -309,12 +309,12 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="TestNG.Unnamed" />
       <item itemvalue="TestNG.SlaHelp1Test.msgSlaHelpAnalize" />
+      <item itemvalue="TestNG.Unnamed" />
+      <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
       <item itemvalue="TestNG.CommonWorkTaskProcessTest.createTask" />
       <item itemvalue="TestNG.PortletTest" />
       <item itemvalue="TestNG.PortletTest.checkAvailabilityEditSaveButtonOnPortletTest" />
-      <item itemvalue="TestNG.CommonWorkTaskProcessTest" />
       <item itemvalue="TestNG.SlaFeatureBase2Test" />
     </list>
     <recent_temporary>
@@ -454,7 +454,20 @@
       <workItem from="1720502065712" duration="16610000" />
       <workItem from="1720590828627" duration="8740000" />
       <workItem from="1720688868547" duration="2705000" />
-      <workItem from="1720714736922" duration="1376000" />
+      <workItem from="1720714736922" duration="5525000" />
+      <workItem from="1720790771381" duration="2000" />
+      <workItem from="1721020182900" duration="2000" />
+      <workItem from="1721633954008" duration="629000" />
+      <workItem from="1721662611730" duration="7126000" />
+      <workItem from="1721740284609" duration="678000" />
+      <workItem from="1722945877557" duration="11000" />
+      <workItem from="1722946477378" duration="365000" />
+      <workItem from="1723542968518" duration="8000" />
+      <workItem from="1723564128385" duration="652000" />
+      <workItem from="1726057000628" duration="2888000" />
+      <workItem from="1727630296153" duration="601000" />
+      <workItem from="1736922510578" duration="178000" />
+      <workItem from="1737998322637" duration="1227000" />
     </task>
     <task id="LOCAL-00038" summary="feature/Sla negative scenarios, Errors">
       <created>1701675904063</created>
@@ -771,14 +784,6 @@
       <option name="project" value="LOCAL" />
       <updated>1713342603322</updated>
     </task>
-    <task id="LOCAL-00120" summary="feature/Разработка API теста проверки прав на операцию &quot;Назначить наблюдателя&quot; в патче">
-      <option name="closed" value="true" />
-      <created>1718694509902</created>
-      <option name="number" value="00120" />
-      <option name="presentableId" value="LOCAL-00120" />
-      <option name="project" value="LOCAL" />
-      <updated>1718694509902</updated>
-    </task>
     <task id="LOCAL-00121" summary="feature/Разработка API теста проверки прав на операцию &quot;Назначить наблюдателя&quot; в патче">
       <option name="closed" value="true" />
       <created>1718712261521</created>
@@ -803,7 +808,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720592223100</updated>
     </task>
-    <option name="localTasksCounter" value="124" />
+    <task id="LOCAL-00124" summary="feature/generator new structure">
+      <option name="closed" value="true" />
+      <created>1720767672075</created>
+      <option name="number" value="00124" />
+      <option name="presentableId" value="LOCAL-00124" />
+      <option name="project" value="LOCAL" />
+      <updated>1720767672076</updated>
+    </task>
+    <option name="localTasksCounter" value="125" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -857,7 +870,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="feature/performance tests" />
     <MESSAGE value="feature/Sla Bug" />
     <MESSAGE value="fix/responsibility party wait manager" />
     <MESSAGE value="fix/sla bug dynamic test" />
@@ -882,7 +894,8 @@
     <MESSAGE value="feature/Разработка API теста проверки прав на операцию &quot;Назначить наблюдателя&quot; в патче" />
     <MESSAGE value="fix/pipeline" />
     <MESSAGE value="feature/Portlet test" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/Portlet test" />
+    <MESSAGE value="feature/generator new structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/generator new structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
