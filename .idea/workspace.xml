@@ -4,13 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/generator">
-      <change beforePath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/performance_tests/GeneratorTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/integration_tests/src/test/java/com/ts/integration/tests/performance_tests/GeneratorTests.java" afterDir="false" />
+    <list default="true" id="da4d84ce-57fc-4d72-8aba-a1a7fba7fd9a" name="Changes" comment="feature/generator new structure">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -32,7 +35,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -475,14 +478,6 @@
       <option name="project" value="LOCAL" />
       <updated>1706251344828</updated>
     </task>
-    <task id="LOCAL-00050" summary="feature/sd bug">
-      <option name="closed" value="true" />
-      <created>1707211203485</created>
-      <option name="number" value="00050" />
-      <option name="presentableId" value="LOCAL-00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1707211203485</updated>
-    </task>
     <task id="LOCAL-00051" summary="feature/release">
       <option name="closed" value="true" />
       <created>1707215560600</created>
@@ -696,7 +691,15 @@
       <option name="project" value="LOCAL" />
       <updated>1710335085875</updated>
     </task>
-    <option name="localTasksCounter" value="81" />
+    <task id="LOCAL-00081" summary="feature/generator new structure">
+      <option name="closed" value="true" />
+      <created>1738000043288</created>
+      <option name="number" value="00081" />
+      <option name="presentableId" value="LOCAL-00081" />
+      <option name="project" value="LOCAL" />
+      <updated>1738000043288</updated>
+    </task>
+    <option name="localTasksCounter" value="82" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -752,7 +755,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-    <MESSAGE value="create task from excel file." />
     <MESSAGE value="added sd question test." />
     <MESSAGE value="added sd question test 2." />
     <MESSAGE value="suite.xml" />
@@ -777,7 +779,8 @@
     <MESSAGE value="fix/sla help" />
     <MESSAGE value="fix/tests" />
     <MESSAGE value="feature/generator" />
-    <option name="LAST_COMMIT_MESSAGE" value="feature/generator" />
+    <MESSAGE value="feature/generator new structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="feature/generator new structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
